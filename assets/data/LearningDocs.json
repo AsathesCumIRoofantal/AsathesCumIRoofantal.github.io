@@ -1,0 +1,52 @@
+[
+  {
+    "id": "d_001",
+    "categoryId": "lm_001",
+    "title": "The Solar System Origins",
+    "description": "A deep dive into how planets coalesce from stellar dust.",
+    "type": "PDF",
+    "classCategory": "Class 8",
+    "targetAge": "12-14",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_002",
+    "categoryId": "lm_001",
+    "title": "Quantum Physics for Beginners",
+    "description": "Simple diagram explaining photons and waves.",
+    "type": "Image",
+    "classCategory": "Class 10",
+    "targetAge": "15-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_003",
+    "categoryId": "lm_002",
+    "title": "Timeline of the Renaissance",
+    "description": "Text document mapping all major cultural shifts.",
+    "type": "TXT",
+    "classCategory": "Class 7",
+    "targetAge": "10-12",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_004",
+    "categoryId": "lm_003",
+    "title": "Penrose Triangle Model",
+    "description": "Visual artifact of the impossible object.",
+    "type": "Image",
+    "classCategory": "All",
+    "targetAge": "Any",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_005",
+    "categoryId": "lm_001",
+    "title": "Genetics & DNA Transcription",
+    "description": "Complete textbook excerpt on genetic mutation.",
+    "type": "PDF",
+    "classCategory": "Class 12",
+    "targetAge": "16-18",
+    "url": "local_or_remote_url_here"
+  }
+]

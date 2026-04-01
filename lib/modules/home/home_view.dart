@@ -79,7 +79,7 @@ class HomeView extends GetView<HomeController> {
                   vertical: 8.0,
                 ),
                 child: Text(
-                  'EXPLORE',
+                  'EXPLORE - ALIFIYAS',
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyMedium?.color,
                     fontSize: 12,
@@ -100,12 +100,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  Get.snackbar(
-                    'Learn And Fun',
-                    'Interactive modules coming soon for the offsprings!',
-                    backgroundColor: Theme.of(context).colorScheme.surface,
-                    colorText: Theme.of(context).textTheme.bodyLarge?.color,
-                  );
+                  Get.toNamed(AppRoutes.LEARN_FUN);
                 },
               ),
               ListTile(
@@ -121,12 +116,54 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  Get.snackbar(
-                    'Ask Any Thing',
-                    'The wisdom engine is initializing...',
-                    backgroundColor: Theme.of(context).colorScheme.surface,
-                    colorText: Theme.of(context).textTheme.bodyLarge?.color,
-                  );
+                  Get.toNamed(AppRoutes.QUERIES);
+                },
+              ),
+              Divider(color: Theme.of(context).dividerColor, height: 32),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 8.0,
+                ),
+                child: Text(
+                  'RULE - MAZEASTA',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                    fontSize: 12,
+                    letterSpacing: 2,
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.book,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Wisdom',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.WISDOM);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.question_answer,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                title: Text(
+                  'Ask Any Thing',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.QUERIES);
                 },
               ),
               Divider(color: Theme.of(context).dividerColor, height: 32),
