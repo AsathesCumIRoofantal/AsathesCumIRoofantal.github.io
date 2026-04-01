@@ -32,6 +32,8 @@ class HomeView extends GetView<HomeController> {
           ),
         ),
         drawer: Drawer(
+          width: 330,
+          // height: MediaQuery.of(context).size.height * 0.6,
           backgroundColor: Theme.of(context).colorScheme.surface,
           child: ListView(
             padding: EdgeInsets.zero,
@@ -164,7 +166,29 @@ class HomeView extends GetView<HomeController> {
                   color: Theme.of(context).textTheme.bodyMedium?.color,
                 ),
                 title: Text(
-                  'About AIR_APP',
+                  'About AIR-APP',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyMedium?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.snackbar(
+                    'AIR App',
+                    'Mapping all-apps. Ensuring absolute transparency.',
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    colorText: Colors.white,
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.info,
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                ),
+                title: Text(
+                  'About AIR Organization',
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyMedium?.color,
                   ),
