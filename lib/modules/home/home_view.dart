@@ -195,7 +195,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                  Get.toNamed(AppRoutes.SHARE_EXPERIENCE);
                 },
               ),
               ListTile(
@@ -211,7 +211,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                  Get.toNamed(AppRoutes.RECORD_POST);
                 },
               ),
               ListTile(
@@ -227,7 +227,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                  Get.toNamed(AppRoutes.IDENTITIES_EARNINGS);
                 },
               ),
               // ListTile(
@@ -275,7 +275,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                  Get.toNamed(AppRoutes.KNOWLEDGE_CENTER);
                 },
               ),
               ListTile(
@@ -291,7 +291,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                  Get.toNamed(AppRoutes.PRODUCTS_SERVICES);
                 },
               ),
               ListTile(
@@ -307,7 +307,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                  Get.toNamed(AppRoutes.QUERY_DISCUSSION);
                 },
               ),
               ListTile(

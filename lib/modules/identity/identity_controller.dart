@@ -8,6 +8,7 @@ class IdentityController extends GetxController {
   var currentQuestionIndex = 0.obs;
   var answers = <String, String>{}.obs; // question id to selected option
   var isCompleted = false.obs;
+  var isIdentityExpanded = false.obs;
 
   final DataProvider _dataProvider = DataProvider();
 

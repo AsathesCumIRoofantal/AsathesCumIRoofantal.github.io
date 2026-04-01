@@ -13,6 +13,18 @@ import '../modules/wisdom/wisdom_binding.dart';
 import '../modules/wisdom/wisdom_view.dart';
 import '../modules/air_vision/air_vision_binding.dart';
 import '../modules/air_vision/air_vision_view.dart';
+import '../modules/share_experience/share_experience_binding.dart';
+import '../modules/share_experience/share_experience_view.dart';
+import '../modules/record_post/record_post_binding.dart';
+import '../modules/record_post/record_post_view.dart';
+import '../modules/identities_earnings/identities_earnings_binding.dart';
+import '../modules/identities_earnings/identities_earnings_view.dart';
+import '../modules/knowledge_center/knowledge_center_binding.dart';
+import '../modules/knowledge_center/knowledge_center_view.dart';
+import '../modules/products_services/products_services_binding.dart';
+import '../modules/products_services/products_services_view.dart';
+import '../modules/query_discussion/query_discussion_binding.dart';
+import '../modules/query_discussion/query_discussion_view.dart';
 
 class AppRoutes {
   static const HOME = '/';
@@ -22,6 +34,12 @@ class AppRoutes {
   static const QUERIES = '/queries';
   static const WISDOM = '/wisdom';
   static const AIR_VISION = '/air-vision';
+  static const SHARE_EXPERIENCE = '/share-experience';
+  static const RECORD_POST = '/record-post';
+  static const IDENTITIES_EARNINGS = '/identities-earnings';
+  static const KNOWLEDGE_CENTER = '/knowledge-center';
+  static const PRODUCTS_SERVICES = '/products-services';
+  static const QUERY_DISCUSSION = '/query-discussion';
 }
 
 class AppPages {
@@ -65,6 +83,42 @@ class AppPages {
       name: AppRoutes.AIR_VISION,
       page: () => const AirVisionView(),
       binding: AirVisionBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.SHARE_EXPERIENCE,
+      page: () => const ShareExperienceView(),
+      binding: ShareExperienceBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.RECORD_POST,
+      page: () => const RecordPostView(),
+      binding: RecordPostBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.IDENTITIES_EARNINGS,
+      page: () => const IdentitiesEarningsView(),
+      binding: IdentitiesEarningsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.KNOWLEDGE_CENTER,
+      page: () => const KnowledgeCenterView(),
+      binding: KnowledgeCenterBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.PRODUCTS_SERVICES,
+      page: () => const ProductsServicesView(),
+      binding: ProductsServicesBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.QUERY_DISCUSSION,
+      page: () => const QueryDiscussionView(),
+      binding: QueryDiscussionBinding(),
       transition: Transition.rightToLeft,
     ),
   ];

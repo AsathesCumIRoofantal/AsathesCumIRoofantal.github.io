@@ -16,6 +16,9 @@ class _AirVisionViewState extends State<AirVisionView> {
   static const double _maxScale = 4.0;
   static const double _scaleStep = 0.3;
 
+  // Collapsible section states
+  bool _entitiesExpanded = false;
+
   @override
   void dispose() {
     _transformationController.dispose();
@@ -162,13 +165,21 @@ class _AirVisionViewState extends State<AirVisionView> {
                       'An Entity is any discrete, identifiable node in all-space. This includes:',
                       inkColor,
                     ),
-                    const SizedBox(height: 8),
-                    ...['• Living beings — Humans, Animals, Plants, Microorganisms',
+                    const SizedBox(height: 12),
+                    _collapsibleTile(
+                      title: "Entities are 'Building blocks of individual Identities'",
+                      accent: Colors.tealAccent,
+                      inkColor: inkColor,
+                      isExpanded: _entitiesExpanded,
+                      onTap: () => setState(() => _entitiesExpanded = !_entitiesExpanded),
+                      children: [
+                        '• Living beings — Humans, Animals, Plants, Microorganisms',
                         '• Non-living objects — Planets, Machines, Materials',
                         '• Abstract nodes — Emotions, Concepts, Theorems',
                         '• Phenomena — Gravity, Light, Sound, Time',
-                        '• Digital entities — Software, AI, Data Structures']
-                        .map((s) => _bulletLine(s, inkColor)),
+                        '• Digital entities — Software, AI, Data Structures',
+                      ].map((s) => _bulletLine(s, inkColor)).toList(),
+                    ),
                     const SizedBox(height: 16),
                     _sectionHeader('UNIONS', Colors.tealAccent, inkColor),
                     const SizedBox(height: 8),
@@ -889,6 +900,102 @@ class _AirVisionViewState extends State<AirVisionView> {
           ),
         ],
       ),
+    );
+  }
+
+  // ─── Collapsible Tile ─────────────────────────────────────────────────────
+
+  Widget _collapsibleTile({
+    required String title,
+    required Color accent,
+    required Color inkColor,
+    required bool isExpanded,
+    required VoidCallback onTap,
+    required List<Widget> children,
+  }) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            curve: Curves.easeInOut,
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
+            decoration: BoxDecoration(
+              color: accent.withValues(alpha: isExpanded ? 0.14 : 0.07),
+              borderRadius: BorderRadius.only(
+                topLeft: const Radius.circular(10),
+                topRight: const Radius.circular(10),
+                bottomLeft: Radius.circular(isExpanded ? 0 : 10),
+                bottomRight: Radius.circular(isExpanded ? 0 : 10),
+              ),
+              border: Border.all(
+                color: accent.withValues(alpha: isExpanded ? 0.5 : 0.25),
+                width: 1.2,
+              ),
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.layers_rounded,
+                  color: accent,
+                  size: 18,
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      color: inkColor,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      height: 1.4,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                AnimatedRotation(
+                  turns: isExpanded ? 0.5 : 0.0,
+                  duration: const Duration(milliseconds: 250),
+                  curve: Curves.easeInOut,
+                  child: Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: accent,
+                    size: 22,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        AnimatedSize(
+          duration: const Duration(milliseconds: 280),
+          curve: Curves.easeInOut,
+          child: isExpanded
+              ? Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+                  decoration: BoxDecoration(
+                    color: accent.withValues(alpha: 0.05),
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                    border: Border(
+                      left: BorderSide(color: accent.withValues(alpha: 0.5), width: 1.2),
+                      right: BorderSide(color: accent.withValues(alpha: 0.5), width: 1.2),
+                      bottom: BorderSide(color: accent.withValues(alpha: 0.5), width: 1.2),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: children,
+                  ),
+                )
+              : const SizedBox.shrink(),
+        ),
+      ],
     );
   }
 

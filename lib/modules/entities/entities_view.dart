@@ -1,68 +1,407 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'entities_controller.dart';
+import '../../data/models/entity_model.dart';
 
 class EntitiesView extends GetView<EntitiesController> {
   EntitiesView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (controller.isLoading.value) {
-        return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
-      }
-      return ListView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        itemCount: controller.entities.length,
-        itemBuilder: (context, index) {
-          final entity = controller.entities[index];
-          return Container(
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor.withValues(alpha: 0.8),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3)),
-              boxShadow: [
-                BoxShadow(
-                  color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
-                  blurRadius: 10,
-                  spreadRadius: 2,
-                )
-              ],
-            ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5)),
-                ),
-                child: Icon(Icons.hub, color: Theme.of(context).colorScheme.primary),
-              ),
-              title: Text(entity.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Theme.of(context).textTheme.bodyLarge?.color)),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 8),
-                  Text(entity.description, style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color)),
-                  const SizedBox(height: 12),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Theme.of(context).colorScheme.primary),
-                    ),
-                    child: Text(entity.category, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.primary)),
-                  ),
-                ],
-              ),
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _showAddEntityModal(context),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        icon: const Icon(Icons.add_rounded, color: Colors.white),
+        label: const Text(
+          "Add New Entity",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1,
+          ),
+        ),
+      ),
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.primary,
             ),
           );
-        },
+        }
+        return SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildCollapsibleHeader(context),
+              Obx(() => AnimatedSize(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: controller.isEntitiesExpanded.value
+                        ? ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.only(top: 12, bottom: 80),
+                            itemCount: controller.entities.length,
+                            itemBuilder: (context, index) {
+                              final entity = controller.entities[index];
+                              return _buildEntityCard(context, entity);
+                            },
+                          )
+                        : const SizedBox.shrink(),
+                  )),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+
+  void _showAddEntityModal(BuildContext context) {
+    final titleController = TextEditingController();
+    final descController = TextEditingController();
+    final theme = Theme.of(context);
+    final accent = theme.colorScheme.primary;
+
+    controller.selectedCategory.value = ""; // Reset selection
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+          top: 24,
+          left: 24,
+          right: 24,
+        ),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 20,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: theme.dividerColor.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Icon(Icons.add_chart_rounded, color: accent),
+                const SizedBox(width: 12),
+                Text(
+                  "Catalogue New Entity",
+                  style: theme.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Text(
+              "Add a new node to the all-space knowledge map.",
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6),
+              ),
+            ),
+            const SizedBox(height: 24),
+            TextField(
+              controller: titleController,
+              decoration: _inputDecoration("Entity Title / Name", Icons.title_rounded, context),
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: descController,
+              maxLines: 3,
+              decoration: _inputDecoration("Description of Existence", Icons.description_rounded, context),
+            ),
+            const SizedBox(height: 24),
+            Text(
+              "META DATA TYPE",
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2,
+                color: accent.withOpacity(0.8),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Obx(() => Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  children: controller.categories.map((cat) {
+                    final isSelected = controller.selectedCategory.value == cat;
+                    return ChoiceChip(
+                      label: Text(cat),
+                      selected: isSelected,
+                      onSelected: (selected) {
+                        controller.selectedCategory.value = selected ? cat : "";
+                      },
+                      selectedColor: accent.withOpacity(0.2),
+                      backgroundColor: theme.cardColor,
+                      labelStyle: TextStyle(
+                        color: isSelected ? accent : theme.textTheme.bodyMedium?.color,
+                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        side: BorderSide(
+                          color: isSelected ? accent : theme.dividerColor.withOpacity(0.1),
+                        ),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    );
+                  }).toList(),
+                )),
+            const SizedBox(height: 40),
+            SizedBox(
+              width: double.infinity,
+              height: 56,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (titleController.text.isNotEmpty && controller.selectedCategory.value.isNotEmpty) {
+                    final newEntity = EntityModel(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      name: titleController.text,
+                      description: descController.text.isEmpty ? "No description provided." : descController.text,
+                      category: controller.selectedCategory.value,
+                      imageUrl: '',
+                    );
+                    controller.addEntity(newEntity);
+                  } else {
+                    Get.snackbar(
+                      "Missing Info",
+                      "Please provide at least a title and a category.",
+                      backgroundColor: Colors.orange.withOpacity(0.1),
+                      colorText: Colors.orange,
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: accent,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  elevation: 8,
+                  shadowColor: accent.withOpacity(0.4),
+                ),
+                child: const Text(
+                  "ADD TO ALL-SPACE",
+                  style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 2),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  InputDecoration _inputDecoration(String label, IconData icon, BuildContext context) {
+    final theme = Theme.of(context);
+    return InputDecoration(
+      labelText: label,
+      prefixIcon: Icon(icon, size: 20),
+      labelStyle: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
+      floatingLabelStyle: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.bold),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: theme.dividerColor.withOpacity(0.15)),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: theme.colorScheme.primary, width: 2),
+      ),
+      filled: true,
+      fillColor: theme.cardColor.withOpacity(0.5),
+    );
+  }
+
+  Widget _buildCollapsibleHeader(BuildContext context) {
+    final theme = Theme.of(context);
+    final accent = theme.colorScheme.primary;
+
+    return Obx(() {
+      final isExpanded = controller.isEntitiesExpanded.value;
+      return GestureDetector(
+        onTap: () => controller.isEntitiesExpanded.toggle(),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: isExpanded
+                  ? [accent.withOpacity(0.15), accent.withOpacity(0.05)]
+                  : [accent.withOpacity(0.08), accent.withOpacity(0.03)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: accent.withOpacity(isExpanded ? 0.5 : 0.2),
+              width: 1.5,
+            ),
+            boxShadow: [
+              if (isExpanded)
+                BoxShadow(
+                  color: accent.withOpacity(0.1),
+                  blurRadius: 12,
+                  offset: const Offset(0, 4),
+                ),
+            ],
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: accent.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.layers_rounded, color: accent, size: 22),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Entities are 'Building blocks of individual Identities'",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: theme.textTheme.bodyLarge?.color,
+                        height: 1.3,
+                      ),
+                    ),
+                    if (!isExpanded)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          "Tap to explore all-space nodes",
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: theme.textTheme.bodyMedium?.color
+                                ?.withOpacity(0.6),
+                            letterSpacing: 0.5,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              AnimatedRotation(
+                turns: isExpanded ? 0.5 : 0.0,
+                duration: const Duration(milliseconds: 250),
+                child: Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  color: accent,
+                  size: 28,
+                ),
+              ),
+            ],
+          ),
+        ),
       );
     });
+  }
+
+  Widget _buildEntityCard(BuildContext context, dynamic entity) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor.withValues(alpha: 0.8),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+            blurRadius: 10,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16),
+        leading: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+            ),
+          ),
+          child: Icon(
+            Icons.hub,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
+        title: Text(
+          entity.name,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
+          ),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 8),
+            Text(
+              entity.description,
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 4,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              child: Text(
+                entity.category,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
