@@ -1,0 +1,42 @@
+[
+  {
+    "id": "u_001",
+    "name": "Auto-Parts Service Center",
+    "description": "A union of entities organized to repair kinetic transportation machines.",
+    "category": "Service Economy",
+    "unionedEntities": ["Mechanic", "Tools", "Capital", "Vehicles"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_002",
+    "name": "Smartphone",
+    "description": "A complex union of quantum mechanics, computing, and chemistry enabling global instantaneous information transfer.",
+    "category": "Technology Ecosystem",
+    "unionedEntities": ["CPU", "Battery", "Screen", "OS", "Photons"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_003",
+    "name": "Solar System",
+    "description": "A grand gravitational union centering around a nucleosynthetic star.",
+    "category": "Cosmology",
+    "unionedEntities": ["Star", "Planets", "Asteroids", "Gravity"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_004",
+    "name": "The AIR Organization",
+    "description": "The meta-structural entity designed to classify, trace, and manage all lesser entities and unions to ensure absolute operational transparency.",
+    "category": "Governance Framework",
+    "unionedEntities": ["Data Servers", "Analysts", "Regulations", "Users", "Wisdom Nodes"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_005",
+    "name": "Biological Brain",
+    "description": "An intricate union of billions of cells creating localized consciousness.",
+    "category": "Cognitive System",
+    "unionedEntities": ["Neurons", "Synapses", "Neurotransmitters", "Blood Vessels"],
+    "imageUrl": ""
+  }
+]

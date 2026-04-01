@@ -1,0 +1,32 @@
+[
+  {
+    "id": "q_001",
+    "question": "What is your core response to the chaos of the universe?",
+    "options": ["Analyze and understand it", "Organize and control it", "Observe and accept it", "Create art within it"],
+    "traitMapped": "Fundamental Reaction"
+  },
+  {
+    "id": "q_002",
+    "question": "If you could manifest as a fundamental entity, what would you be?",
+    "options": ["A stabilizing gravitational field", "A rapidly mutating biological cell", "A burst of pure photon energy", "An abstract sequence of code"],
+    "traitMapped": "Entity Affinity"
+  },
+  {
+    "id": "q_003",
+    "question": "How do you view your role within the 'AIR Organization'?",
+    "options": ["Establishing foundational laws", "Connecting disparate nodes", "Expanding the boundaries of known space", "Maintaining harmony within the system"],
+    "traitMapped": "Systemic Function"
+  },
+  {
+    "id": "q_004",
+    "question": "When examining a complex Union (like a Smartphone or a Solar System), what captivates you first?",
+    "options": ["The individual parts that make it up", "The emergent properties of the whole", "Its origin and history", "Its potential future evolution"],
+    "traitMapped": "Analytical Lens"
+  },
+  {
+    "id": "q_005",
+    "question": "What defines the ultimate version of 'Wisdom' for you?",
+    "options": ["Knowing the precise mechanics of reality", "Experiencing profound emotional connection", "Accepting the unknowable void", "Creating a legacy of information"],
+    "traitMapped": "Philosophical Zenith"
+  }
+]
