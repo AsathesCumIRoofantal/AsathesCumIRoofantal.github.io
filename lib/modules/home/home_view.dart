@@ -595,7 +595,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 onTap: () {
                   Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                  Get.toNamed(AppRoutes.AIR_VISION);
                 },
               ),
               ListTile(

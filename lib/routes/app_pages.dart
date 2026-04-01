@@ -11,6 +11,8 @@ import '../modules/queries/queries_binding.dart';
 import '../modules/queries/queries_view.dart';
 import '../modules/wisdom/wisdom_binding.dart';
 import '../modules/wisdom/wisdom_view.dart';
+import '../modules/air_vision/air_vision_binding.dart';
+import '../modules/air_vision/air_vision_view.dart';
 
 class AppRoutes {
   static const HOME = '/';
@@ -19,6 +21,7 @@ class AppRoutes {
   static const LEARN_DOCS = '/learn-docs';
   static const QUERIES = '/queries';
   static const WISDOM = '/wisdom';
+  static const AIR_VISION = '/air-vision';
 }
 
 class AppPages {
@@ -56,6 +59,12 @@ class AppPages {
       name: AppRoutes.WISDOM,
       page: () => const WisdomView(),
       binding: WisdomBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.AIR_VISION,
+      page: () => const AirVisionView(),
+      binding: AirVisionBinding(),
       transition: Transition.rightToLeft,
     ),
   ];
