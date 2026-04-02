@@ -810,11 +810,11 @@ class HomeView extends GetView<HomeController> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.work_outline_rounded,
+                  Icons.computer_sharp,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
-                  "AIR at Work",
+                  "Outcome of Processed",
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
