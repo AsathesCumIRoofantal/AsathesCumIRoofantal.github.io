@@ -808,6 +808,39 @@ class HomeView extends GetView<HomeController> {
                   Get.toNamed(AppRoutes.AIR_VISION);
                 },
               ),
+
+              ListTile(
+                leading: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Input in Process",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.gavel_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Process",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
               ListTile(
                 leading: Icon(
                   Icons.computer_sharp,
@@ -815,6 +848,22 @@ class HomeView extends GetView<HomeController> {
                 ),
                 title: Text(
                   "Outcome of Processed",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.all_inclusive_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "System All Together",
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
