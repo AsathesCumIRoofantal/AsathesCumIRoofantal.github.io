@@ -310,13 +310,14 @@ class HomeView extends GetView<HomeController> {
                   Get.toNamed(AppRoutes.QUERY_DISCUSSION);
                 },
               ),
+
               ListTile(
                 leading: Icon(
-                  Icons.login,
+                  Icons.diamond,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
-                  'Sign In / Sign Up',
+                  'Rewards/Credits',
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
@@ -328,11 +329,27 @@ class HomeView extends GetView<HomeController> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.person_outline,
+                  Icons.api,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
-                  'Utilities as Guest',
+                  'Plea(APIs) Appeals',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.login,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Sign In / Sign Up',
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
