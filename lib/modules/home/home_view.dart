@@ -907,6 +907,22 @@ class HomeView extends GetView<HomeController> {
               ),
               ListTile(
                 leading: Icon(
+                  Icons.handshake_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Share & Care",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
+              ListTile(
+                leading: Icon(
                   Icons.visibility_outlined,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
