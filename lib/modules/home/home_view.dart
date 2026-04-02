@@ -1034,6 +1034,22 @@ class HomeView extends GetView<HomeController> {
                   // Get.toNamed(AppRoutes.LEARN_FUN);
                 },
               ),
+              ListTile(
+                leading: Icon(
+                  Icons.elderly_sharp,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "A Word of Motivation",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
               Divider(color: Theme.of(context).dividerColor, height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(
