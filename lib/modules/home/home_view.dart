@@ -1168,7 +1168,7 @@ class HomeView extends GetView<HomeController> {
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
-                  "All Greeteengs",
+                  "All Greetings",
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
@@ -1176,6 +1176,38 @@ class HomeView extends GetView<HomeController> {
                 onTap: () {
                   Get.back();
                   // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.home_work_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Be Liable to Responsibilities",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.question_answer,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+                title: Text(
+                  'Ask Any Thing',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.QUERIES);
                 },
               ),
               Divider(color: Theme.of(context).dividerColor, height: 32),
