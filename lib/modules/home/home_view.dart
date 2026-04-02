@@ -313,38 +313,6 @@ class HomeView extends GetView<HomeController> {
 
               ListTile(
                 leading: Icon(
-                  Icons.diamond,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                title: Text(
-                  'Rewards/Credits',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyLarge?.color,
-                  ),
-                ),
-                onTap: () {
-                  Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
-                },
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.api,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                title: Text(
-                  'Plea(APIs) Appeals',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyLarge?.color,
-                  ),
-                ),
-                onTap: () {
-                  Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
-                },
-              ),
-              ListTile(
-                leading: Icon(
                   Icons.login,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
@@ -478,6 +446,38 @@ class HomeView extends GetView<HomeController> {
                 ),
                 title: Text(
                   'Your Business',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.diamond,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Rewards/Credits',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.api,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Plea(APIs) Appeals',
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
