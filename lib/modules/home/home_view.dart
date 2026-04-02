@@ -1100,7 +1100,7 @@ class HomeView extends GetView<HomeController> {
               ),
               ListTile(
                 leading: Icon(
-                  Icons.heat_pump_rounded,
+                  Icons.favorite,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
