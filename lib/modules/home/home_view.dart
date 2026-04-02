@@ -782,7 +782,39 @@ class HomeView extends GetView<HomeController> {
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
-                  "AIR at Training",
+                  "Training",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.build_circle_outlined,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Service & Production",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.work_outline_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "AIR at Work",
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
