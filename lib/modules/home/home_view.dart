@@ -1018,6 +1018,22 @@ class HomeView extends GetView<HomeController> {
                   // Get.toNamed(AppRoutes.LEARN_FUN);
                 },
               ),
+              ListTile(
+                leading: Icon(
+                  Icons.widgets,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Finnally All is Blessings",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
               Divider(color: Theme.of(context).dividerColor, height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(
