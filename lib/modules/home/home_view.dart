@@ -730,6 +730,38 @@ class HomeView extends GetView<HomeController> {
               ),
               ListTile(
                 leading: Icon(
+                  Icons.play_circle_outline_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Entertainment',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.star_border_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Skills & Talents',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
                   Icons.visibility_outlined,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
