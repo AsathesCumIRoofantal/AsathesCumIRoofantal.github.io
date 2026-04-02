@@ -976,7 +976,7 @@ class HomeView extends GetView<HomeController> {
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
-                  "Let's Windup",
+                  "Let's Windup Else",
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
