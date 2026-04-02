@@ -1050,6 +1050,70 @@ class HomeView extends GetView<HomeController> {
                   // Get.toNamed(AppRoutes.LEARN_FUN);
                 },
               ),
+              ListTile(
+                leading: Icon(
+                  Icons.window,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Never Give Up",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.lightbulb_outline,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Innovation is Key",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.account_balance_wallet,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "You Got All of it Accountable",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.heat_pump_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Live Life to the Fullest",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
               Divider(color: Theme.of(context).dividerColor, height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(
