@@ -473,11 +473,59 @@ class HomeView extends GetView<HomeController> {
               ),
               ListTile(
                 leading: Icon(
+                  Icons.approval,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Approval of Appeals',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
                   Icons.api,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
                 title: Text(
-                  'Plea(APIs) Appeals',
+                  'Network(APIs) Stuff',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.public_off,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Private/Confidential Stuff',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.public,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Public Stuff',
                   style: TextStyle(
                     color: Theme.of(context).textTheme.bodyLarge?.color,
                   ),
