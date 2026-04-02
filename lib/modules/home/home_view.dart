@@ -311,22 +311,6 @@ class HomeView extends GetView<HomeController> {
                 },
               ),
 
-              ListTile(
-                leading: Icon(
-                  Icons.login,
-                  color: Theme.of(context).colorScheme.tertiary,
-                ),
-                title: Text(
-                  'Sign In / Sign Up',
-                  style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyLarge?.color,
-                  ),
-                ),
-                onTap: () {
-                  Get.back();
-                  // Get.toNamed(AppRoutes.LEARN_FUN);
-                },
-              ),
               Divider(color: Theme.of(context).dividerColor, height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(
@@ -787,6 +771,24 @@ class HomeView extends GetView<HomeController> {
                   );
                 },
               ),
+              Divider(color: Theme.of(context).dividerColor, height: 32),
+              ListTile(
+                leading: Icon(
+                  Icons.login,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  'Sign In / Sign Up',
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  // Get.toNamed(AppRoutes.LEARN_FUN);
+                },
+              ),
+              Divider(color: Theme.of(context).dividerColor, height: 32),
             ],
           ),
         ),
