@@ -875,6 +875,38 @@ class HomeView extends GetView<HomeController> {
               ),
               ListTile(
                 leading: Icon(
+                  Icons.icecream_rounded,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Revise & Improve",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.hail_outlined,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+                title: Text(
+                  "Practice & Expertise",
+                  style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                  ),
+                ),
+                onTap: () {
+                  Get.back();
+                  Get.toNamed(AppRoutes.AIR_VISION);
+                },
+              ),
+              ListTile(
+                leading: Icon(
                   Icons.visibility_outlined,
                   color: Theme.of(context).colorScheme.tertiary,
                 ),
