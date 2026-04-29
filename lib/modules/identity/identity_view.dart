@@ -9,21 +9,23 @@ class IdentityView extends GetView<IdentityController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      floatingActionButton: Obx(() => controller.isLoading.value || controller.questionnaires.isEmpty
-          ? const SizedBox.shrink()
-          : FloatingActionButton.extended(
-              onPressed: controller.reset,
-              backgroundColor: Theme.of(context).colorScheme.tertiary,
-              icon: const Icon(Icons.refresh_rounded, color: Colors.black87),
-              label: Text(
-                controller.isCompleted.value ? "RE-MAP" : "RECALIBRATE",
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5,
+      floatingActionButton: Obx(
+        () => controller.isLoading.value || controller.questionnaires.isEmpty
+            ? const SizedBox.shrink()
+            : FloatingActionButton.extended(
+                onPressed: controller.reset,
+                backgroundColor: Theme.of(context).colorScheme.tertiary,
+                icon: Icon(Icons.refresh_rounded, color: Colors.white54),
+                label: Text(
+                  controller.isCompleted.value ? "RE-MAP" : "RECALIBRATE",
+                  style: TextStyle(
+                    color: Colors.white54,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                  ),
                 ),
               ),
-            )),
+      ),
       body: Obx(() {
         if (controller.isLoading.value) {
           return Center(
@@ -37,7 +39,9 @@ class IdentityView extends GetView<IdentityController> {
           return Center(
             child: Text(
               "No questionnaires available.",
-              style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color,
+              ),
             ),
           );
         }
@@ -99,7 +103,11 @@ class IdentityView extends GetView<IdentityController> {
                   color: accent.withOpacity(0.1),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.remove_red_eye_rounded, color: accent, size: 22),
+                child: Icon(
+                  Icons.remove_red_eye_rounded,
+                  color: accent,
+                  size: 22,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -150,20 +158,24 @@ class IdentityView extends GetView<IdentityController> {
 
   Widget _buildQuestionView(BuildContext context) {
     if (controller.questionnaires.isEmpty) return const SizedBox.shrink();
-    
-    final question = controller.questionnaires[controller.currentQuestionIndex.value];
+
+    final question =
+        controller.questionnaires[controller.currentQuestionIndex.value];
     final accent = Theme.of(context).colorScheme.tertiary;
 
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 400),
       transitionBuilder: (Widget child, Animation<double> animation) {
         return FadeTransition(
-            opacity: animation,
-            child: SlideTransition(
-              position: Tween<Offset>(begin: const Offset(0.0, 0.2), end: Offset.zero)
-                  .animate(animation),
-              child: child,
-            ));
+          opacity: animation,
+          child: SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0.0, 0.2),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        );
       },
       child: Container(
         key: ValueKey<String>(question.id),
@@ -181,10 +193,11 @@ class IdentityView extends GetView<IdentityController> {
               child: Text(
                 "PHASE ${controller.currentQuestionIndex.value + 1} // ${controller.questionnaires.length}",
                 style: TextStyle(
-                    fontSize: 12,
-                    color: accent,
-                    letterSpacing: 2,
-                    fontWeight: FontWeight.bold),
+                  fontSize: 12,
+                  color: accent,
+                  letterSpacing: 2,
+                  fontWeight: FontWeight.bold,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -192,45 +205,58 @@ class IdentityView extends GetView<IdentityController> {
             Text(
               question.question,
               style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).textTheme.bodyLarge?.color,
-                  height: 1.4),
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+                height: 1.4,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 48),
-            ...question.options.map((option) => Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
-                  child: InkWell(
-                    onTap: () => controller.answerQuestion(question.id, option),
-                    borderRadius: BorderRadius.circular(16),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(color: accent.withOpacity(0.3)),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 8,
-                              offset: const Offset(0, 4),
-                            )
-                          ]),
-                      child: Row(
-                        children: [
-                          Icon(Icons.radio_button_unchecked, color: accent),
-                          const SizedBox(width: 16),
-                          Expanded(
-                              child: Text(option,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      color: Theme.of(context).textTheme.bodyMedium?.color))),
-                        ],
-                      ),
+            ...question.options.map(
+              (option) => Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: InkWell(
+                  onTap: () => controller.answerQuestion(question.id, option),
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: accent.withOpacity(0.3)),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.radio_button_unchecked, color: accent),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Text(
+                            option,
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                )),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -250,35 +276,38 @@ class IdentityView extends GetView<IdentityController> {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: accent.withOpacity(0.1),
-                  border: Border.all(color: accent, width: 2),
-                  boxShadow: [
-                    BoxShadow(
-                      color: accent.withOpacity(0.2),
-                      blurRadius: 30,
-                      spreadRadius: 10,
-                    )
-                  ]),
+                shape: BoxShape.circle,
+                color: accent.withOpacity(0.1),
+                border: Border.all(color: accent, width: 2),
+                boxShadow: [
+                  BoxShadow(
+                    color: accent.withOpacity(0.2),
+                    blurRadius: 30,
+                    spreadRadius: 10,
+                  ),
+                ],
+              ),
               child: Icon(Icons.hub_rounded, size: 80, color: accent),
             ),
             const SizedBox(height: 40),
             Text(
               "IDENTITY MAPPED",
               style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).textTheme.bodyLarge?.color,
-                  letterSpacing: 3),
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+                letterSpacing: 3,
+              ),
             ),
             const SizedBox(height: 16),
             Text(
               "Your answers point to a highly organized systemic node. The AIR Organization has logged your coordinates effectively.",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context).textTheme.bodyMedium?.color,
-                  height: 1.5),
+                fontSize: 14,
+                color: Theme.of(context).textTheme.bodyMedium?.color,
+                height: 1.5,
+              ),
             ),
             const SizedBox(height: 48),
           ],

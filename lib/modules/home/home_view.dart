@@ -58,7 +58,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 accountEmail: const Text(
-                  'AlifiyasCumIRoofantal',
+                  'AsathesCumIRoofantal',
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
