@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'unions_controller.dart';
 import '../entities/entities_controller.dart';
 import '../../data/models/union_model.dart';
+import '../../core/utils/content_reviser.dart';
+import '../../data/auth_service.dart';
 
 class UnionsView extends GetView<UnionsController> {
   UnionsView({Key? key}) : super(key: key);
@@ -420,27 +422,27 @@ class UnionsView extends GetView<UnionsController> {
                 Icon(Icons.bubble_chart, color: secondary, size: 28),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Text(
-                    union.name,
+                  child: Obx(() => Text(
+                    ContentReviser.reviseTitle(union.name),
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: theme.textTheme.bodyLarge?.color,
                       letterSpacing: 1,
                     ),
-                  ),
+                  )),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            Text(
-              union.description,
+            Obx(() => Text(
+              ContentReviser.revise(union.description),
               style: TextStyle(
                 color: theme.textTheme.bodyMedium?.color,
                 fontSize: 14,
                 height: 1.4,
               ),
-            ),
+            )),
             const SizedBox(height: 16),
             Text(
               'COMPOSED OF:',

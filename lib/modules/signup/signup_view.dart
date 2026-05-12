@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../routes/app_pages.dart';
-import 'login_controller.dart';
+import 'signup_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class SignupView extends GetView<SignupController> {
+  const SignupView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +31,13 @@ class LoginView extends GetView<LoginController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Center(
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: tertiary.withOpacity(0.5), width: 2),
-                        color: tertiary.withOpacity(0.05),
-                        boxShadow: [
-                          BoxShadow(
-                            color: tertiary.withOpacity(0.2),
-                            blurRadius: 30,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Icon(Icons.air, color: tertiary, size: 64),
-                    ),
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: Icon(Icons.arrow_back_ios_new, color: tertiary),
                   ),
-                  const SizedBox(height: 48),
+                  const SizedBox(height: 24),
                   Text(
-                    'Welcome to AIR',
+                    'Create Identity',
                     style: theme.textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1,
@@ -60,16 +45,16 @@ class LoginView extends GetView<LoginController> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Sign in to access your all-space node.',
+                    'Join the AIR network and explore the all-space.',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: theme.dividerColor,
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 32),
                   
                   // Role Selection
                   Text(
-                    'CHOOSE YOUR PATH',
+                    'CHOOSE YOUR INITIAL PATH',
                     style: theme.textTheme.labelSmall?.copyWith(
                       color: tertiary.withOpacity(0.7),
                       letterSpacing: 2,
@@ -121,7 +106,12 @@ class LoginView extends GetView<LoginController> {
                   const SizedBox(height: 32),
                   TextField(
                     controller: controller.usernameController,
-                    decoration: _inputDecoration('Username / Identity ID', Icons.person_outline, context),
+                    decoration: _inputDecoration('Username', Icons.person_outline, context),
+                  ),
+                  const SizedBox(height: 20),
+                  TextField(
+                    controller: controller.emailController,
+                    decoration: _inputDecoration('Email Address', Icons.email_outlined, context),
                   ),
                   const SizedBox(height: 20),
                   Obx(() => TextField(
@@ -140,23 +130,12 @@ class LoginView extends GetView<LoginController> {
                       ),
                     ),
                   )),
-                  const SizedBox(height: 12),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Forgot Identity?',
-                        style: TextStyle(color: tertiary),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 40),
                   Obx(() => SizedBox(
                     width: double.infinity,
                     height: 56,
                     child: ElevatedButton(
-                      onPressed: controller.isLoading.value ? null : controller.login,
+                      onPressed: controller.isLoading.value ? null : controller.signup,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: tertiary,
                         shape: RoundedRectangleBorder(
@@ -168,7 +147,7 @@ class LoginView extends GetView<LoginController> {
                       child: controller.isLoading.value
                           ? const CircularProgressIndicator(color: Colors.white)
                           : const Text(
-                              'ENTER ALL-SPACE',
+                              'REQUEST IDENTITY',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
@@ -178,24 +157,25 @@ class LoginView extends GetView<LoginController> {
                     ),
                   )),
                   const SizedBox(height: 40),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        "Don't have a node? ",
-                        style: TextStyle(color: theme.dividerColor),
-                      ),
-                      GestureDetector(
-                        onTap: () => Get.toNamed(AppRoutes.SIGNUP),
-                        child: Text(
-                          "Request Identity",
-                          style: TextStyle(
-                            color: tertiary,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () => Get.back(),
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Already have a node? ",
+                          style: TextStyle(color: theme.dividerColor),
+                          children: [
+                            TextSpan(
+                              text: "Sign In",
+                              style: TextStyle(
+                                color: tertiary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),

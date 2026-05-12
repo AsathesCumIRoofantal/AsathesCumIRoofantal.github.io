@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'entities_controller.dart';
 import '../../data/models/entity_model.dart';
+import '../../core/utils/content_reviser.dart';
+import '../../data/auth_service.dart';
 
 class EntitiesView extends GetView<EntitiesController> {
   EntitiesView({Key? key}) : super(key: key);
@@ -360,24 +362,24 @@ class EntitiesView extends GetView<EntitiesController> {
             color: Theme.of(context).colorScheme.primary,
           ),
         ),
-        title: Text(
-          entity.name,
+        title: Obx(() => Text(
+          ContentReviser.reviseTitle(entity.name),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
             color: Theme.of(context).textTheme.bodyLarge?.color,
           ),
-        ),
+        )),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            Text(
-              entity.description,
+            Obx(() => Text(
+              ContentReviser.revise(entity.description),
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyMedium?.color,
               ),
-            ),
+            )),
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.symmetric(

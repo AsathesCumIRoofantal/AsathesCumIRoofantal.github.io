@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'identity_controller.dart';
+import '../../core/utils/content_reviser.dart';
+import '../../data/auth_service.dart';
 
 class IdentityView extends GetView<IdentityController> {
   IdentityView({Key? key}) : super(key: key);
@@ -300,15 +302,15 @@ class IdentityView extends GetView<IdentityController> {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
-              "Your answers point to a highly organized systemic node. The AIR Organization has logged your coordinates effectively.",
+            Obx(() => Text(
+              ContentReviser.revise("Your answers point to a highly organized systemic node. The AIR Organization has logged your coordinates effectively."),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 14,
                 color: Theme.of(context).textTheme.bodyMedium?.color,
                 height: 1.5,
               ),
-            ),
+            )),
             const SizedBox(height: 48),
           ],
         ),

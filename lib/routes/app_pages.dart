@@ -1,4 +1,6 @@
 import 'package:air_app/modules/digitalize_records/digitalize_records_binding.dart';
+import 'package:air_app/modules/signup/signup_binding.dart';
+import 'package:air_app/modules/signup/signup_view.dart';
 import 'package:get/get.dart';
 import '../modules/home/home_binding.dart';
 import '../modules/home/home_view.dart';
@@ -151,6 +153,8 @@ import '../modules/about_org/about_org_binding.dart';
 import '../modules/about_org/about_org_view.dart';
 
 class AppRoutes {
+  static const LOGIN = '/login';
+  static const SIGNUP = '/signup';
   static const HOME = '/';
   static const SETTINGS = '/settings';
   static const LEARN_FUN = '/learn-fun';
@@ -236,6 +240,16 @@ class AppRoutes {
 
 class AppPages {
   static final pages = [
+    GetPage(
+      name: AppRoutes.LOGIN,
+      page: () => const LoginView(),
+      binding: LoginBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SIGNUP,
+      page: () => const SignupView(),
+      binding: SignupBinding(),
+    ),
     GetPage(
       name: AppRoutes.HOME,
       page: () => HomeView(),

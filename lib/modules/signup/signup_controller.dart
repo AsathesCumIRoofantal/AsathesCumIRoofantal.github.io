@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../data/auth_service.dart';
 
-class LoginController extends GetxController {
+class SignupController extends GetxController {
   final isLoading = false.obs;
   final isObscure = true.obs;
   
   final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
   
-  final selectedRole = 'Alifiyas'.obs; // Default role
+  final selectedRole = 'Alifiyas'.obs;
   final roles = ['Alifiyas', 'Mazeasta'];
   final roleDescriptions = {
     'Alifiyas': 'The new beginner',
@@ -17,12 +18,11 @@ class LoginController extends GetxController {
   };
 
   void toggleObscure() => isObscure.value = !isObscure.value;
-
   void setRole(String role) => selectedRole.value = role;
 
-  void login() async {
-    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
-      Get.snackbar('Error', 'Please enter username and password',
+  void signup() async {
+    if (usernameController.text.isEmpty || emailController.text.isEmpty || passwordController.text.isEmpty) {
+      Get.snackbar('Error', 'Please fill all fields',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.redAccent.withOpacity(0.1),
           colorText: Colors.redAccent);
@@ -36,13 +36,14 @@ class LoginController extends GetxController {
     AuthService.to.login(usernameController.text, selectedRole.value);
     
     Get.offAllNamed('/');
-    Get.snackbar('Success', 'Welcome back, ${usernameController.text} (${selectedRole.value})!',
+    Get.snackbar('Success', 'Welcome to AIR, ${usernameController.text}!',
         snackPosition: SnackPosition.BOTTOM);
   }
 
   @override
   void onClose() {
     usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.onClose();
   }
