@@ -9,6 +9,8 @@ import 'package:air_app/modules/commerce/commerce_binding.dart';
 import 'package:air_app/modules/commerce/commerce_view.dart';
 import 'package:air_app/modules/social/social_binding.dart';
 import 'package:air_app/modules/social/social_view.dart';
+import 'package:air_app/modules/research_development/research_development_binding.dart';
+import 'package:air_app/modules/research_development/research_development_view.dart';
 import 'package:air_app/modules/signup/signup_binding.dart';
 import 'package:air_app/modules/signup/signup_view.dart';
 import 'package:get/get.dart';
@@ -269,6 +271,7 @@ class AppRoutes {
   static const UTILITY_FACILITIES = '/utility-facilities';
   static const COMMERCE = '/commerce';
   static const SOCIAL = '/social';
+  static const RESEARCH_DEVELOPMENT = '/research-development';
 }
 
 class AppPages {
@@ -765,6 +768,12 @@ class AppPages {
       name: AppRoutes.SOCIAL,
       page: () => const SocialView(),
       binding: SocialBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.RESEARCH_DEVELOPMENT,
+      page: () => const ResearchDevelopmentView(),
+      binding: ResearchDevelopmentBinding(),
       transition: Transition.rightToLeft,
     ),
   ];

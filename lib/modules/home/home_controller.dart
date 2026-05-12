@@ -435,6 +435,11 @@ class HomeController extends GetxController {
           icon: Icons.social_distance,
           route: AppRoutes.SOCIAL,
         ),
+        DrawerItem(
+          title: "Research & Development",
+          icon: Icons.science_outlined,
+          route: AppRoutes.RESEARCH_DEVELOPMENT,
+        ),
       ],
     ),
     DrawerSection(
