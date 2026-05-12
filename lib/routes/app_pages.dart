@@ -151,6 +151,10 @@ import '../modules/about_app/about_app_binding.dart';
 import '../modules/about_app/about_app_view.dart';
 import '../modules/about_org/about_org_binding.dart';
 import '../modules/about_org/about_org_view.dart';
+import '../modules/category_tree/category_tree_binding.dart';
+import '../modules/category_tree/category_tree_view.dart';
+import '../modules/ease_tools/ease_tools_binding.dart';
+import '../modules/ease_tools/ease_tools_view.dart';
 
 class AppRoutes {
   static const LOGIN = '/login';
@@ -236,6 +240,8 @@ class AppRoutes {
   static const ABOUT_ORG = '/about-org';
   static const digitalize_records = '/digitalize-records';
   static const projects_assessments = '/projects-assessments';
+  static const category_tree = '/category-tree';
+  static const ease_tools = '/ease-tools';
 }
 
 class AppPages {
@@ -671,6 +677,18 @@ class AppPages {
       name: AppRoutes.projects_assessments,
       page: () => const ProjectsAssessmentsView(),
       binding: ProjectsAssessmentsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.category_tree,
+      page: () => const CategoryTreeView(),
+      binding: CategoryTreeBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.ease_tools,
+      page: () => const EaseToolsView(),
+      binding: EaseToolsBinding(),
       transition: Transition.rightToLeft,
     ),
   ];

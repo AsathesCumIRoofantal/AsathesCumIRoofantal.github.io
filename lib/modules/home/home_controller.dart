@@ -385,6 +385,16 @@ class HomeController extends GetxController {
           icon: Icons.assessment,
           route: AppRoutes.projects_assessments,
         ),
+        DrawerItem(
+          title: "Category Tree",
+          icon: Icons.local_florist,
+          route: AppRoutes.category_tree,
+        ),
+        DrawerItem(
+          title: "Ease Tools",
+          icon: Icons.handyman,
+          route: AppRoutes.ease_tools,
+        ),
       ],
     ),
     DrawerSection(
