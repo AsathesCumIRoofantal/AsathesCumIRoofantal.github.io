@@ -30,8 +30,23 @@ class HomeController extends GetxController {
       items: [
         DrawerItem(
           title: 'Learn And Fun',
-          icon: Icons.school,
+          icon: Icons.lightbulb_outline,
           route: AppRoutes.LEARN_FUN,
+        ),
+        DrawerItem(
+          title: 'Heigher Studies',
+          icon: Icons.school_outlined,
+          route: AppRoutes.HEIGHER_STUDIES,
+        ),
+        DrawerItem(
+          title: 'Doctorate',
+          icon: Icons.local_hospital,
+          route: AppRoutes.DOCTORATE,
+        ),
+        DrawerItem(
+          title: 'Life Hacks',
+          icon: Icons.heat_pump_rounded,
+          route: AppRoutes.LIFE_HACKS,
         ),
         DrawerItem(
           title: 'Ask Any Thing',
@@ -439,6 +454,72 @@ class HomeController extends GetxController {
           title: "Research & Development",
           icon: Icons.science_outlined,
           route: AppRoutes.RESEARCH_DEVELOPMENT,
+        ),
+        DrawerItem(
+          title: "Travel & Transport",
+          icon: Icons.flight_land_outlined,
+          route: AppRoutes.TRAVEL_TRANSPORT,
+        ),
+        DrawerItem(
+          title: "Loop Hole",
+          icon: Icons.loop,
+          route: AppRoutes.LOOP_HOLE,
+        ),
+        DrawerItem(
+          title: "Advantage",
+          icon: Icons.star_border_rounded,
+          route: AppRoutes.ADVANTAGE,
+        ),
+        DrawerItem(
+          title: "Challenge",
+          icon: Icons.flag_outlined,
+          route: AppRoutes.CHALLENGE,
+        ),
+        DrawerItem(
+          title: "Solution",
+          icon: Icons.lightbulb_outline,
+          route: AppRoutes.SOLUTION,
+        ),
+        DrawerItem(
+          title: "Innovation",
+          icon: Icons.new_label,
+          route: AppRoutes.INNOVATION,
+        ),
+        DrawerItem(
+          title: "Discovery",
+          icon: Icons.search,
+          route: AppRoutes.DISCOVERY,
+        ),
+        DrawerItem(
+          title: "Enhancement",
+          icon: Icons.auto_fix_high,
+          route: AppRoutes.ENHANCEMENT,
+        ),
+        DrawerItem(
+          title: "Hope",
+          icon: Icons.cloud_rounded,
+          route: AppRoutes.HOPE,
+        ),
+        DrawerItem(
+          title: "Success & Failure",
+          icon: Icons.star,
+          route: AppRoutes.SUCCESS_FAILURE,
+        ),
+        DrawerItem(
+          title: "Religion & Prayer",
+          icon: Icons.auto_fix_high,
+          route: AppRoutes.RELIGION_PRAYER,
+        ),
+
+        DrawerItem(
+          title: "Feedback",
+          icon: Icons.feedback,
+          route: AppRoutes.FEEDBACK,
+        ),
+        DrawerItem(
+          title: "Serve",
+          icon: Icons.volunteer_activism,
+          route: AppRoutes.serve,
         ),
       ],
     ),

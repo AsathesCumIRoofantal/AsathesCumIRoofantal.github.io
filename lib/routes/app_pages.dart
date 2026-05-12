@@ -11,6 +11,38 @@ import 'package:air_app/modules/social/social_binding.dart';
 import 'package:air_app/modules/social/social_view.dart';
 import 'package:air_app/modules/research_development/research_development_binding.dart';
 import 'package:air_app/modules/research_development/research_development_view.dart';
+import 'package:air_app/modules/travel_transport/travel_transport_binding.dart';
+import 'package:air_app/modules/travel_transport/travel_transport_view.dart';
+import 'package:air_app/modules/loop_hole/loop_hole_binding.dart';
+import 'package:air_app/modules/loop_hole/loop_hole_view.dart';
+import 'package:air_app/modules/advantage/advantage_binding.dart';
+import 'package:air_app/modules/advantage/advantage_view.dart';
+import 'package:air_app/modules/challenge/challenge_binding.dart';
+import 'package:air_app/modules/challenge/challenge_view.dart';
+import 'package:air_app/modules/solution/solution_binding.dart';
+import 'package:air_app/modules/solution/solution_view.dart';
+import 'package:air_app/modules/innovation/innovation_binding.dart';
+import 'package:air_app/modules/innovation/innovation_view.dart';
+import 'package:air_app/modules/discovery/discovery_binding.dart';
+import 'package:air_app/modules/discovery/discovery_view.dart';
+import 'package:air_app/modules/enhancement/enhancement_binding.dart';
+import 'package:air_app/modules/enhancement/enhancement_view.dart';
+import 'package:air_app/modules/hope/hope_binding.dart';
+import 'package:air_app/modules/hope/hope_view.dart';
+import 'package:air_app/modules/success_failure/success_failure_binding.dart';
+import 'package:air_app/modules/success_failure/success_failure_view.dart';
+import 'package:air_app/modules/religion_prayer/religion_prayer_binding.dart';
+import 'package:air_app/modules/religion_prayer/religion_prayer_view.dart';
+import 'package:air_app/modules/feedback/feedback_binding.dart';
+import 'package:air_app/modules/feedback/feedback_view.dart';
+import 'package:air_app/modules/heigher_studies/heigher_studies_binding.dart';
+import 'package:air_app/modules/heigher_studies/heigher_studies_view.dart';
+import 'package:air_app/modules/doctorate/doctorate_binding.dart';
+import 'package:air_app/modules/doctorate/doctorate_view.dart';
+import 'package:air_app/modules/life_hacks/life_hacks_binding.dart';
+import 'package:air_app/modules/life_hacks/life_hacks_view.dart';
+import 'package:air_app/modules/serve/serve_binding.dart';
+import 'package:air_app/modules/serve/serve_view.dart';
 import 'package:air_app/modules/signup/signup_binding.dart';
 import 'package:air_app/modules/signup/signup_view.dart';
 import 'package:get/get.dart';
@@ -272,6 +304,22 @@ class AppRoutes {
   static const COMMERCE = '/commerce';
   static const SOCIAL = '/social';
   static const RESEARCH_DEVELOPMENT = '/research-development';
+  static const TRAVEL_TRANSPORT = '/travel-transport';
+  static const LOOP_HOLE = '/loop-hole';
+  static const ADVANTAGE = '/advantage';
+  static const CHALLENGE = '/challenge';
+  static const SOLUTION = '/solution';
+  static const INNOVATION = '/innovation';
+  static const DISCOVERY = '/discovery';
+  static const ENHANCEMENT = '/enhancement';
+  static const HOPE = '/hope';
+  static const SUCCESS_FAILURE = '/success-failure';
+  static const RELIGION_PRAYER = '/religion-prayer';
+  static const FEEDBACK = '/feedback';
+  static const HEIGHER_STUDIES = '/heigher-studies';
+  static const DOCTORATE = '/doctorate';
+  static const LIFE_HACKS = '/life-hacks';
+  static const serve = '/serve';
 }
 
 class AppPages {
@@ -774,6 +822,102 @@ class AppPages {
       name: AppRoutes.RESEARCH_DEVELOPMENT,
       page: () => const ResearchDevelopmentView(),
       binding: ResearchDevelopmentBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.TRAVEL_TRANSPORT,
+      page: () => const TravelTransportView(),
+      binding: TravelTransportBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.LOOP_HOLE,
+      page: () => const LoopHoleView(),
+      binding: LoopHoleBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.ADVANTAGE,
+      page: () => const AdvantageView(),
+      binding: AdvantageBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.CHALLENGE,
+      page: () => const ChallengeView(),
+      binding: ChallengeBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.SOLUTION,
+      page: () => const SolutionView(),
+      binding: SolutionBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.INNOVATION,
+      page: () => const InnovationView(),
+      binding: InnovationBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.DISCOVERY,
+      page: () => const DiscoveryView(),
+      binding: DiscoveryBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.ENHANCEMENT,
+      page: () => const EnhancementView(),
+      binding: EnhancementBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.HOPE,
+      page: () => const HopeView(),
+      binding: HopeBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.SUCCESS_FAILURE,
+      page: () => const SuccessFailureView(),
+      binding: SuccessFailureBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.RELIGION_PRAYER,
+      page: () => const ReligionPrayerView(),
+      binding: ReligionPrayerBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.FEEDBACK,
+      page: () => const FeedbackView(),
+      binding: FeedbackBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.HEIGHER_STUDIES,
+      page: () => const HeigherStudiesView(),
+      binding: HeigherStudiesBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.DOCTORATE,
+      page: () => const DoctorateView(),
+      binding: DoctorateBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.LIFE_HACKS,
+      page: () => const LifeHacksView(),
+      binding: LifeHacksBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.serve,
+      page: () => const ServeView(),
+      binding: ServeBinding(),
       transition: Transition.rightToLeft,
     ),
   ];
