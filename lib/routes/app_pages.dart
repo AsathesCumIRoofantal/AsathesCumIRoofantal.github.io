@@ -43,6 +43,8 @@ import 'package:air_app/modules/life_hacks/life_hacks_binding.dart';
 import 'package:air_app/modules/life_hacks/life_hacks_view.dart';
 import 'package:air_app/modules/serve/serve_binding.dart';
 import 'package:air_app/modules/serve/serve_view.dart';
+import 'package:air_app/modules/marketing_promotion/marketing_promotion_binding.dart';
+import 'package:air_app/modules/marketing_promotion/marketing_promotion_view.dart';
 import 'package:air_app/modules/signup/signup_binding.dart';
 import 'package:air_app/modules/signup/signup_view.dart';
 import 'package:get/get.dart';
@@ -320,6 +322,7 @@ class AppRoutes {
   static const DOCTORATE = '/doctorate';
   static const LIFE_HACKS = '/life-hacks';
   static const serve = '/serve';
+  static const marketing_promotion = '/marketing-promotion';
 }
 
 class AppPages {
@@ -918,6 +921,12 @@ class AppPages {
       name: AppRoutes.serve,
       page: () => const ServeView(),
       binding: ServeBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.marketing_promotion,
+      page: () => const MarketingPromotionView(),
+      binding: MarketingPromotionBinding(),
       transition: Transition.rightToLeft,
     ),
   ];

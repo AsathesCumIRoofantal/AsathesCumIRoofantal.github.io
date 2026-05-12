@@ -517,6 +517,11 @@ class HomeController extends GetxController {
           route: AppRoutes.FEEDBACK,
         ),
         DrawerItem(
+          title: "Marketing & Promotion",
+          icon: Icons.shop,
+          route: AppRoutes.marketing_promotion,
+        ),
+        DrawerItem(
           title: "Serve",
           icon: Icons.volunteer_activism,
           route: AppRoutes.serve,
