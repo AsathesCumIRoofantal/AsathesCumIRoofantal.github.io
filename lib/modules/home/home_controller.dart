@@ -410,6 +410,21 @@ class HomeController extends GetxController {
           icon: Icons.video_collection,
           route: AppRoutes.script_strategy,
         ),
+        DrawerItem(
+          title: "Safety",
+          icon: Icons.safety_check,
+          route: AppRoutes.SAFETY,
+        ),
+        DrawerItem(
+          title: "Hospitality & Care",
+          icon: Icons.self_improvement_rounded,
+          route: AppRoutes.HOSPITALITY_CARE,
+        ),
+        DrawerItem(
+          title: "Utility & Facilities",
+          icon: Icons.amp_stories_rounded,
+          route: AppRoutes.UTILITY_FACILITIES,
+        ),
       ],
     ),
     DrawerSection(

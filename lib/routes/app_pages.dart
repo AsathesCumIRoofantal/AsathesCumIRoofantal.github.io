@@ -1,4 +1,10 @@
 import 'package:air_app/modules/digitalize_records/digitalize_records_binding.dart';
+import 'package:air_app/modules/hospitality_care/hospitality_care_binding.dart';
+import 'package:air_app/modules/hospitality_care/hospitality_care_view.dart';
+import 'package:air_app/modules/safety/safety_binding.dart';
+import 'package:air_app/modules/safety/safety_view.dart';
+import 'package:air_app/modules/utility_facilities/utility_facilities_binding.dart';
+import 'package:air_app/modules/utility_facilities/utility_facilities_view.dart';
 import 'package:air_app/modules/signup/signup_binding.dart';
 import 'package:air_app/modules/signup/signup_view.dart';
 import 'package:get/get.dart';
@@ -254,6 +260,9 @@ class AppRoutes {
   static const vocabulary = '/vocabulary';
   static const script_strategy = '/script-strategy';
   static const code_conduct = '/code-conduct';
+  static const SAFETY = '/safety';
+  static const HOSPITALITY_CARE = '/hospitality-care';
+  static const UTILITY_FACILITIES = '/utility-facilities';
 }
 
 class AppPages {
@@ -719,6 +728,25 @@ class AppPages {
       name: AppRoutes.code_conduct,
       page: () => const CodeConductView(),
       binding: CodeConductBinding(),
+      transition: Transition.rightToLeft,
+    ),
+
+    GetPage(
+      name: AppRoutes.SAFETY,
+      page: () => const SafetyView(),
+      binding: SafetyBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.HOSPITALITY_CARE,
+      page: () => const HospitalityCareView(),
+      binding: HospitalityCareBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.UTILITY_FACILITIES,
+      page: () => const UtilityFacilitiesView(),
+      binding: UtilityFacilitiesBinding(),
       transition: Transition.rightToLeft,
     ),
   ];
