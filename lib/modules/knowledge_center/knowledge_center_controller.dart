@@ -37,8 +37,8 @@ class KnowledgeCenterController extends GetxController {
     final query = searchQuery.value.toLowerCase();
     return historyList.where((entry) {
       return entry.title.toLowerCase().contains(query) ||
-             (entry.query?.toLowerCase().contains(query) ?? false) ||
-             entry.detail.toLowerCase().contains(query);
+          (entry.query?.toLowerCase().contains(query) ?? false) ||
+          entry.detail.toLowerCase().contains(query);
     }).toList();
   }
 
@@ -54,14 +54,16 @@ class KnowledgeCenterController extends GetxController {
         id: '1',
         title: 'Mission of AIR',
         query: 'What is the primary mission of the AIR Organization?',
-        solution: 'The AIR Organization aims to establish absolute transparency in all-space by mapping every entity and union, ensuring accountability through a decentralized ecosystem.',
+        solution:
+            'The AIR Organization aims to establish absolute transparency in all-space by mapping every entity and union, ensuring accountability through a decentralized ecosystem.',
         status: KnowledgeStatus.approved,
         timestamp: DateTime.now().subtract(const Duration(days: 5)),
       ),
       KnowledgeEntry(
         id: '2',
         title: 'Alifiyas Mapping Specs',
-        detail: 'Technical specifications for mapping dormant entities in the Alifiyas sector.',
+        detail:
+            'Technical specifications for mapping dormant entities in the Alifiyas sector.',
         status: KnowledgeStatus.approved,
         timestamp: DateTime.now().subtract(const Duration(days: 2)),
       ),
@@ -72,21 +74,22 @@ class KnowledgeCenterController extends GetxController {
     if (text.isEmpty) return;
 
     isThinking.value = true;
-    
+
     // Simulate AI processing
     await Future.delayed(const Duration(seconds: 2));
 
     final newEntry = KnowledgeEntry(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       query: text,
-      solution: 'Based on the AIR Knowledge Graph, your query regarding "$text" indicates a high correlation with decentralized mapping protocols. We suggest cross-referencing with the Alifiyas Atlas for deeper context.',
+      solution:
+          'Based on the AIR Knowledge Graph, your query regarding "$text" indicates a high correlation with decentralized mapping protocols. We suggest cross-referencing with the Alifiyas Atlas for deeper context.',
       status: KnowledgeStatus.approved,
       timestamp: DateTime.now(),
     );
 
     historyList.insert(0, newEntry);
     isThinking.value = false;
-    
+
     Get.snackbar(
       'AI Solution Generated',
       'The AIR intelligence node has processed your query.',
@@ -121,7 +124,7 @@ class KnowledgeCenterController extends GetxController {
 
     historyList.insert(0, newEntry);
     Get.back(); // Close modal
-    
+
     Get.snackbar(
       'Submitted',
       'Knowledge entry logged for Administrative Review.',
