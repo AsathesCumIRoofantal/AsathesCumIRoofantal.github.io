@@ -31,7 +31,7 @@ class CountingReportsView extends GetView<CountingReportsController> {
         SampleContentItem(
           title: 'Localised View',
           subtitle: 'View reports side-by-side in any languages.',
-          icon: Icons.view_agenda,
+          icon: Icons.language,
         ),
       ],
     );
