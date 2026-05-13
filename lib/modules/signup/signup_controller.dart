@@ -22,6 +22,8 @@ class SignupController extends GetxController {
     'God',
     'Meritorious',
     'Perfect',
+    'Media',
+    'Celebrity',
   ];
   final roleDescriptions = <String, String>{
     'Alifiyas': 'The New Beginner',
@@ -34,6 +36,8 @@ class SignupController extends GetxController {
     'God': 'The Supreme Being',
     'Meritorious': 'The Meritorious',
     'Perfect': 'The Perfect One',
+    'Media': 'The Media Specialist',
+    'Celebrity': 'The atrist',
   };
 
   void toggleObscure() => isObscure.value = !isObscure.value;
