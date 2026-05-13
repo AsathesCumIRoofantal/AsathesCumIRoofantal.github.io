@@ -5,15 +5,17 @@ import '../../data/auth_service.dart';
 class LoginController extends GetxController {
   final isLoading = false.obs;
   final isObscure = true.obs;
-  
+
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  
+
   final selectedRole = 'Alifiyas'.obs; // Default role
-  final roles = ['Alifiyas', 'Mazeasta'];
-  final roleDescriptions = {
-    'Alifiyas': 'The new beginner',
+  final roles = ['Alifiyas', 'Mazeasta', 'Roofantal', 'Asathes'];
+  final roleDescriptions = <String, String>{
+    'Alifiyas': 'The New Beginner',
     'Mazeasta': 'The Expert',
+    'Roofantal': 'The Peace Agent',
+    'Asathes': 'The Field Agent',
   };
 
   void toggleObscure() => isObscure.value = !isObscure.value;
@@ -22,22 +24,28 @@ class LoginController extends GetxController {
 
   void login() async {
     if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
-      Get.snackbar('Error', 'Please enter username and password',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.redAccent.withOpacity(0.1),
-          colorText: Colors.redAccent);
+      Get.snackbar(
+        'Error',
+        'Please enter username and password',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withOpacity(0.1),
+        colorText: Colors.redAccent,
+      );
       return;
     }
 
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 2));
     isLoading.value = false;
-    
+
     AuthService.to.login(usernameController.text, selectedRole.value);
-    
+
     Get.offAllNamed('/');
-    Get.snackbar('Success', 'Welcome back, ${usernameController.text} (${selectedRole.value})!',
-        snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar(
+      'Success',
+      'Welcome back, ${usernameController.text} (${selectedRole.value})!',
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   @override

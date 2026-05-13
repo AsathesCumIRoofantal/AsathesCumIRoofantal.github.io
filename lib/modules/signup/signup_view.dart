@@ -26,7 +26,10 @@ class SignupView extends GetView<SignupController> {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 48.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 32.0,
+                vertical: 48.0,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -51,7 +54,7 @@ class SignupView extends GetView<SignupController> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  
+
                   // Role Selection
                   Text(
                     'CHOOSE YOUR INITIAL PATH',
@@ -62,100 +65,205 @@ class SignupView extends GetView<SignupController> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Obx(() => Row(
-                    children: controller.roles.map((role) {
-                      final isSelected = controller.selectedRole.value == role;
-                      return Expanded(
-                        child: GestureDetector(
-                          onTap: () => controller.setRole(role),
-                          child: Container(
-                            margin: EdgeInsets.only(right: role == 'Alifiyas' ? 8 : 0, left: role == 'Mazeasta' ? 8 : 0),
-                            padding: const EdgeInsets.symmetric(vertical: 12),
-                            decoration: BoxDecoration(
-                              color: isSelected ? tertiary.withOpacity(0.1) : Colors.transparent,
-                              borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: isSelected ? tertiary : theme.dividerColor.withOpacity(0.2),
-                                width: 2,
-                              ),
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  role,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: isSelected ? tertiary : theme.dividerColor,
+                  Obx(
+                    () => Column(
+                      children: [
+                        Row(
+                          children: controller.roles
+                              .where((e) => e == 'Alifiyas' || e == 'Mazeasta')
+                              .map((role) {
+                                final isSelected =
+                                    controller.selectedRole.value == role;
+                                return Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => controller.setRole(role),
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        right: role == 'Alifiyas' ? 8 : 0,
+                                        left: role == 'Mazeasta' ? 8 : 0,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? tertiary.withOpacity(0.1)
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: isSelected
+                                              ? tertiary
+                                              : theme.dividerColor.withOpacity(
+                                                  0.2,
+                                                ),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            role,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: isSelected
+                                                  ? tertiary
+                                                  : theme.dividerColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            controller.roleDescriptions[role]!,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: isSelected
+                                                  ? tertiary.withOpacity(0.7)
+                                                  : theme.dividerColor
+                                                        .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  controller.roleDescriptions[role]!,
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: isSelected ? tertiary.withOpacity(0.7) : theme.dividerColor.withOpacity(0.5),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                );
+                              })
+                              .toList(),
                         ),
-                      );
-                    }).toList(),
-                  )),
-                  
+                        SizedBox(height: 12),
+                        Row(
+                          children: controller.roles
+                              .where((e) => e == 'Roofantal' || e == 'Asathes')
+                              .map((role) {
+                                final isSelected =
+                                    controller.selectedRole.value == role;
+                                return Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => controller.setRole(role),
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        right: role == 'Roofantal' ? 8 : 0,
+                                        left: role == 'Asathes' ? 8 : 0,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? tertiary.withOpacity(0.1)
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: isSelected
+                                              ? tertiary
+                                              : theme.dividerColor.withOpacity(
+                                                  0.2,
+                                                ),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            role,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: isSelected
+                                                  ? tertiary
+                                                  : theme.dividerColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            controller.roleDescriptions[role]!,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: isSelected
+                                                  ? tertiary.withOpacity(0.7)
+                                                  : theme.dividerColor
+                                                        .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              })
+                              .toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+
                   const SizedBox(height: 32),
                   TextField(
                     controller: controller.usernameController,
-                    decoration: _inputDecoration('Username', Icons.person_outline, context),
+                    decoration: _inputDecoration(
+                      'Username',
+                      Icons.person_outline,
+                      context,
+                    ),
                   ),
                   const SizedBox(height: 20),
                   TextField(
                     controller: controller.emailController,
-                    decoration: _inputDecoration('Email Address', Icons.email_outlined, context),
+                    decoration: _inputDecoration(
+                      'Email Address',
+                      Icons.email_outlined,
+                      context,
+                    ),
                   ),
                   const SizedBox(height: 20),
-                  Obx(() => TextField(
-                    controller: controller.passwordController,
-                    obscureText: controller.isObscure.value,
-                    decoration: _inputDecoration(
-                      'Secret Code',
-                      Icons.lock_outline,
-                      context,
-                      suffix: IconButton(
-                        icon: Icon(
-                          controller.isObscure.value ? Icons.visibility_off : Icons.visibility,
-                          color: theme.dividerColor,
+                  Obx(
+                    () => TextField(
+                      controller: controller.passwordController,
+                      obscureText: controller.isObscure.value,
+                      decoration: _inputDecoration(
+                        'Secret Code',
+                        Icons.lock_outline,
+                        context,
+                        suffix: IconButton(
+                          icon: Icon(
+                            controller.isObscure.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: theme.dividerColor,
+                          ),
+                          onPressed: controller.toggleObscure,
                         ),
-                        onPressed: controller.toggleObscure,
                       ),
                     ),
-                  )),
+                  ),
                   const SizedBox(height: 40),
-                  Obx(() => SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: controller.isLoading.value ? null : controller.signup,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: tertiary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
+                  Obx(
+                    () => SizedBox(
+                      width: double.infinity,
+                      height: 56,
+                      child: ElevatedButton(
+                        onPressed: controller.isLoading.value
+                            ? null
+                            : controller.signup,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: tertiary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          elevation: 8,
+                          shadowColor: tertiary.withOpacity(0.5),
                         ),
-                        elevation: 8,
-                        shadowColor: tertiary.withOpacity(0.5),
-                      ),
-                      child: controller.isLoading.value
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
-                              'REQUEST IDENTITY',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                        child: controller.isLoading.value
+                            ? const CircularProgressIndicator(
                                 color: Colors.white,
-                                letterSpacing: 2,
+                              )
+                            : const Text(
+                                'REQUEST IDENTITY',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  letterSpacing: 2,
+                                ),
                               ),
-                            ),
+                      ),
                     ),
-                  )),
+                  ),
                   const SizedBox(height: 40),
                   Center(
                     child: GestureDetector(
@@ -186,12 +294,20 @@ class SignupView extends GetView<SignupController> {
     );
   }
 
-  InputDecoration _inputDecoration(String label, IconData icon, BuildContext context, {Widget? suffix}) {
+  InputDecoration _inputDecoration(
+    String label,
+    IconData icon,
+    BuildContext context, {
+    Widget? suffix,
+  }) {
     final theme = Theme.of(context);
     return InputDecoration(
       labelText: label,
       labelStyle: TextStyle(color: theme.dividerColor),
-      prefixIcon: Icon(icon, color: theme.colorScheme.tertiary.withOpacity(0.7)),
+      prefixIcon: Icon(
+        icon,
+        color: theme.colorScheme.tertiary.withOpacity(0.7),
+      ),
       suffixIcon: suffix,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
