@@ -531,6 +531,227 @@ class HomeController extends GetxController {
           icon: Icons.group,
           route: AppRoutes.RELATIONSHIPS,
         ),
+        DrawerItem(
+          title: "Obligations",
+          icon: Icons.rule,
+          route: AppRoutes.OBLIGATIONS,
+        ),
+        DrawerItem(
+          title: "Punctuality",
+          icon: Icons.watch_later_outlined,
+          route: AppRoutes.PUNCTUALITY,
+        ),
+        DrawerItem(
+          title: "Loyalty",
+          icon: Icons.verified_user,
+          route: AppRoutes.LOYALTY,
+        ),
+        DrawerItem(
+          title: "Appreciations & Thanks",
+          icon: Icons.wallet_giftcard,
+          route: AppRoutes.APPRECIATIONS_THANKS,
+        ),
+        DrawerItem(
+          title: "Empathy & Sympathy",
+          icon: Icons.heart_broken,
+          route: AppRoutes.EMPATHY_SYMPATHY,
+        ),
+        DrawerItem(
+          title: "Forgivness",
+          icon: Icons.forest,
+          route: AppRoutes.FORGIVNESS,
+        ),
+        DrawerItem(
+          title: "Kindness & Politeness",
+          icon: Icons.face,
+          route: AppRoutes.KINDNESS,
+        ),
+        DrawerItem(
+          title: "Respect",
+          icon: Icons.account_circle_sharp,
+          route: AppRoutes.RESPECT,
+        ),
+        DrawerItem(
+          title: "Discipline",
+          icon: Icons.architecture,
+          route: AppRoutes.SELF_DISCIPLINE,
+        ),
+        DrawerItem(
+          title: "Affection & Love",
+          icon: Icons.favorite,
+          route: AppRoutes.AFFECTION_LOVE,
+        ),
+        DrawerItem(
+          title: "Family",
+          icon: Icons.family_restroom,
+          route: AppRoutes.FAMILY,
+        ),
+        DrawerItem(
+          title: "Friendship",
+          icon: Icons.people_outline,
+          route: AppRoutes.FRIENDSHIP,
+        ),
+        DrawerItem(
+          title: "Rivalry And War",
+          icon: Icons.military_tech,
+          route: AppRoutes.RIVALRY,
+        ),
+        DrawerItem(
+          title: "Competition",
+          icon: Icons.flag,
+          route: AppRoutes.COMPITITION,
+        ),
+        DrawerItem(
+          title: "Technology",
+          icon: Icons.computer,
+          route: AppRoutes.TECHNOLOGY,
+        ),
+        DrawerItem(
+          title: "Language & Translation",
+          icon: Icons.language,
+          route: AppRoutes.LANGUAGE_TRANSLATION,
+        ),
+        DrawerItem(
+          title: "Monitorship",
+          icon: Icons.remove_red_eye,
+          route: AppRoutes.MONITORSHIP,
+        ),
+        DrawerItem(
+          title: "Survellence & Investigation",
+          icon: Icons.security,
+          route: AppRoutes.SURVELLENCE_INVESTIGATION,
+        ),
+        DrawerItem(
+          title: "Leadership",
+          icon: Icons.co_present_rounded,
+          route: AppRoutes.LEADERSHIP,
+        ),
+        DrawerItem(
+          title: "Control & Coordination",
+          icon: Icons.pan_tool_alt_outlined,
+          route: AppRoutes.CONTROL_COORDINATION,
+        ),
+        DrawerItem(
+          title: "The Present ,The Only One Way",
+          icon: Icons.currency_rupee,
+          route: AppRoutes.ONLY_ONE_WAY,
+        ),
+        DrawerItem(
+          title: "Trade Import-Export",
+          icon: Icons.import_export,
+          route: AppRoutes.TRADE_IMPORT_EXPORT,
+        ),
+        DrawerItem(
+          title: "Ranking Orders",
+          icon: Icons.format_list_numbered,
+          route: AppRoutes.RANKING_ORDERS,
+        ),
+        DrawerItem(
+          title: "Statistics",
+          icon: Icons.show_chart,
+          route: AppRoutes.STATISTICS,
+        ),
+        DrawerItem(
+          title: "Peace and Prosperity",
+          icon: Icons.landscape_rounded,
+          route: AppRoutes.PEACE_PROSPERITY,
+        ),
+        DrawerItem(title: "World", icon: Icons.public, route: AppRoutes.WORLD),
+        DrawerItem(
+          title: "Universal Peace Rule",
+          icon: Icons.gavel,
+          route: AppRoutes.UNIVERSAL_PEACE_RULE,
+        ),
+        DrawerItem(
+          title: "Keep Adding With Patience",
+          icon: Icons.add,
+          route: AppRoutes.KEEP_ADDING_WITH_PATIENCE,
+        ),
+        DrawerItem(
+          title: "Media & News",
+          icon: Icons.newspaper,
+          route: AppRoutes.MEDIA_NEWS,
+        ),
+        DrawerItem(
+          title: "Engagements",
+          icon: Icons.energy_savings_leaf,
+          route: AppRoutes.ENGAGEMENTS,
+        ),
+        DrawerItem(
+          title: "Demonstration",
+          icon: Icons.engineering,
+          route: AppRoutes.DEMONSTRATION,
+        ),
+        DrawerItem(
+          title: "Group Discussions",
+          icon: Icons.chat,
+          route: AppRoutes.GROUP_DISCUSSIONS,
+        ),
+        DrawerItem(
+          title: "Situation & Reaction",
+          icon: Icons.announcement,
+          route: AppRoutes.SITUATION_REACTION,
+        ),
+        DrawerItem(
+          title: "Ground Task",
+          icon: Icons.task_alt,
+          route: AppRoutes.GROUND_TASK,
+        ),
+        DrawerItem(
+          title: "Interviews",
+          icon: Icons.record_voice_over,
+          route: AppRoutes.INTERVIEWS,
+        ),
+        DrawerItem(
+          title: "Merits and Demerits",
+          icon: Icons.list_alt_rounded,
+          route: AppRoutes.MERITS_DEMERITS,
+        ),
+        DrawerItem(
+          title: "Medical Test",
+          icon: Icons.medical_services,
+          route: AppRoutes.MEDICAL,
+        ),
+        DrawerItem(
+          title: "Joining Services",
+          icon: Icons.join_right_rounded,
+          route: AppRoutes.JOINING_SERVICES,
+        ),
+        DrawerItem(
+          title: "Rules & Regulations",
+          icon: Icons.rule_folder_rounded,
+          route: AppRoutes.RULES_REGULATIONS,
+        ),
+        DrawerItem(
+          title: "Court & Cases",
+          icon: Icons.balance,
+          route: AppRoutes.COURT_CASES,
+        ),
+        DrawerItem(
+          title: "Elections",
+          icon: Icons.how_to_vote,
+          route: AppRoutes.ELECTIONS,
+        ),
+        DrawerItem(
+          title: "Ruling & Heart Winning",
+          icon: Icons.emoji_flags,
+          route: AppRoutes.HEART_WINNING,
+        ),
+        DrawerItem(
+          title: "Spirituality & Lord-Shiva",
+          icon: Icons.temple_hindu,
+          route: AppRoutes.SPIRITUALITY_LORD_SHIVA,
+        ),
+        DrawerItem(
+          title: "Prayer For All",
+          icon: Icons.volunteer_activism,
+          route: AppRoutes.PRAYER_FOR_ALL,
+        ),
+        DrawerItem(
+          title: "Fingers Are Crossed",
+          icon: Icons.cruelty_free,
+          route: AppRoutes.FINGERS_ARE_CROSSED,
+        ),
       ],
     ),
     DrawerSection(

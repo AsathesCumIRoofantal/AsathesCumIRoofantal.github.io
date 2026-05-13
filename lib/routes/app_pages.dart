@@ -1,6 +1,7 @@
 import 'package:air_app/modules/digitalize_records/digitalize_records_binding.dart';
 import 'package:air_app/modules/hospitality_care/hospitality_care_binding.dart';
 import 'package:air_app/modules/hospitality_care/hospitality_care_view.dart';
+import 'package:air_app/modules/relationships/relationships_binding.dart';
 import 'package:air_app/modules/safety/safety_binding.dart';
 import 'package:air_app/modules/safety/safety_view.dart';
 import 'package:air_app/modules/utility_facilities/utility_facilities_binding.dart';
@@ -45,8 +46,9 @@ import 'package:air_app/modules/serve/serve_binding.dart';
 import 'package:air_app/modules/serve/serve_view.dart';
 import 'package:air_app/modules/marketing_promotion/marketing_promotion_binding.dart';
 import 'package:air_app/modules/marketing_promotion/marketing_promotion_view.dart';
-import 'package:air_app/modules/relationships/relationships_binding.dart';
 import 'package:air_app/modules/relationships/relationships_view.dart';
+import 'package:air_app/modules/obligations/obligations_binding.dart';
+import 'package:air_app/modules/obligations/obligations_view.dart';
 import 'package:air_app/modules/signup/signup_binding.dart';
 import 'package:air_app/modules/signup/signup_view.dart';
 import 'package:get/get.dart';
@@ -213,6 +215,96 @@ import '../modules/vocabulary/vocabulary_view.dart';
 import '../modules/code_conduct/code_conduct_binding.dart';
 import '../modules/code_conduct/code_conduct_view.dart';
 
+import '../modules/punctuality/punctuality_binding.dart';
+import '../modules/punctuality/punctuality_view.dart';
+import '../modules/loyalty/loyalty_binding.dart';
+import '../modules/loyalty/loyalty_view.dart';
+import '../modules/appreciations_thanks/appreciations_thanks_binding.dart';
+import '../modules/appreciations_thanks/appreciations_thanks_view.dart';
+import '../modules/empathy_sympathy/empathy_sympathy_binding.dart';
+import '../modules/empathy_sympathy/empathy_sympathy_view.dart';
+import '../modules/forgivness/forgivness_binding.dart';
+import '../modules/forgivness/forgivness_view.dart';
+import '../modules/kindness/kindness_binding.dart';
+import '../modules/kindness/kindness_view.dart';
+import '../modules/respect/respect_binding.dart';
+import '../modules/respect/respect_view.dart';
+import '../modules/self_discipline/self_discipline_binding.dart';
+import '../modules/self_discipline/self_discipline_view.dart';
+import '../modules/affection_love/affection_love_binding.dart';
+import '../modules/affection_love/affection_love_view.dart';
+import '../modules/family/family_binding.dart';
+import '../modules/family/family_view.dart';
+import '../modules/friendship/friendship_binding.dart';
+import '../modules/friendship/friendship_view.dart';
+import '../modules/rivalry/rivalry_binding.dart';
+import '../modules/rivalry/rivalry_view.dart';
+import '../modules/compitition/compitition_binding.dart';
+import '../modules/compitition/compitition_view.dart';
+import '../modules/technology/technology_binding.dart';
+import '../modules/technology/technology_view.dart';
+import '../modules/language_translation/language_translation_binding.dart';
+import '../modules/language_translation/language_translation_view.dart';
+import '../modules/monitorship/monitorship_binding.dart';
+import '../modules/monitorship/monitorship_view.dart';
+import '../modules/survellence_investigation/survellence_investigation_binding.dart';
+import '../modules/survellence_investigation/survellence_investigation_view.dart';
+import '../modules/leadership/leadership_binding.dart';
+import '../modules/leadership/leadership_view.dart';
+import '../modules/control_coordination/control_coordination_binding.dart';
+import '../modules/control_coordination/control_coordination_view.dart';
+import '../modules/only_one_way/only_one_way_binding.dart';
+import '../modules/only_one_way/only_one_way_view.dart';
+import '../modules/trade_import_export/trade_import_export_binding.dart';
+import '../modules/trade_import_export/trade_import_export_view.dart';
+import '../modules/ranking_orders/ranking_orders_binding.dart';
+import '../modules/ranking_orders/ranking_orders_view.dart';
+import '../modules/statistics/statistics_binding.dart';
+import '../modules/statistics/statistics_view.dart';
+import '../modules/peace_prosperity/peace_prosperity_binding.dart';
+import '../modules/peace_prosperity/peace_prosperity_view.dart';
+import '../modules/world/world_binding.dart';
+import '../modules/world/world_view.dart';
+import '../modules/universal_peace_rule/universal_peace_rule_binding.dart';
+import '../modules/universal_peace_rule/universal_peace_rule_view.dart';
+import '../modules/keep_adding_with_patience/keep_adding_with_patience_binding.dart';
+import '../modules/keep_adding_with_patience/keep_adding_with_patience_view.dart';
+
+import '../modules/media_news/media_news_binding.dart';
+import '../modules/media_news/media_news_view.dart';
+import '../modules/engagements/engagements_binding.dart';
+import '../modules/engagements/engagements_view.dart';
+import '../modules/demonstration/demonstration_binding.dart';
+import '../modules/demonstration/demonstration_view.dart';
+import '../modules/group_discussions/group_discussions_binding.dart';
+import '../modules/group_discussions/group_discussions_view.dart';
+import '../modules/situation_reaction/situation_reaction_binding.dart';
+import '../modules/situation_reaction/situation_reaction_view.dart';
+import '../modules/ground_task/ground_task_binding.dart';
+import '../modules/ground_task/ground_task_view.dart';
+import '../modules/interviews/interviews_binding.dart';
+import '../modules/interviews/interviews_view.dart';
+import '../modules/merits_demerits/merits_demerits_binding.dart';
+import '../modules/merits_demerits/merits_demerits_view.dart';
+import '../modules/medical/medical_binding.dart';
+import '../modules/medical/medical_view.dart';
+import '../modules/joining_services/joining_services_binding.dart';
+import '../modules/joining_services/joining_services_view.dart';
+import '../modules/rules_regulations/rules_regulations_binding.dart';
+import '../modules/rules_regulations/rules_regulations_view.dart';
+import '../modules/court_cases/court_cases_binding.dart';
+import '../modules/court_cases/court_cases_view.dart';
+import '../modules/elections/elections_binding.dart';
+import '../modules/elections/elections_view.dart';
+import '../modules/heart_winning/heart_winning_binding.dart';
+import '../modules/heart_winning/heart_winning_view.dart';
+import '../modules/spirituality_lord_shiva/spirituality_lord_shiva_binding.dart';
+import '../modules/spirituality_lord_shiva/spirituality_lord_shiva_view.dart';
+import '../modules/prayer_for_all/prayer_for_all_binding.dart';
+import '../modules/prayer_for_all/prayer_for_all_view.dart';
+import '../modules/fingers_are_crossed/fingers_are_crossed_binding.dart';
+import '../modules/fingers_are_crossed/fingers_are_crossed_view.dart';
+
 class AppRoutes {
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
@@ -326,6 +418,51 @@ class AppRoutes {
   static const serve = '/serve';
   static const marketing_promotion = '/marketing-promotion';
   static const RELATIONSHIPS = '/relationships';
+  static const OBLIGATIONS = '/obligations';
+  static const PUNCTUALITY = '/punctuality';
+  static const LOYALTY = '/loyalty';
+  static const APPRECIATIONS_THANKS = '/appreciations-thanks';
+  static const EMPATHY_SYMPATHY = '/empathy-sympathy';
+  static const FORGIVNESS = '/forgivness';
+  static const KINDNESS = '/kindness';
+  static const RESPECT = '/respect';
+  static const SELF_DISCIPLINE = '/self-discipline';
+  static const AFFECTION_LOVE = '/affection-love';
+  static const FAMILY = '/family';
+  static const FRIENDSHIP = '/friendship';
+  static const RIVALRY = '/rivalry';
+  static const COMPITITION = '/compitition';
+  static const TECHNOLOGY = '/technology';
+  static const LANGUAGE_TRANSLATION = '/language-translation';
+  static const MONITORSHIP = '/monitorship';
+  static const SURVELLENCE_INVESTIGATION = '/survellence-investigation';
+  static const LEADERSHIP = '/leadership';
+  static const CONTROL_COORDINATION = '/control-coordination';
+  static const ONLY_ONE_WAY = '/only-one-way';
+  static const TRADE_IMPORT_EXPORT = '/trade-import-export';
+  static const RANKING_ORDERS = '/ranking-orders';
+  static const STATISTICS = '/statistics';
+  static const PEACE_PROSPERITY = '/peace-prosperity';
+  static const WORLD = '/world';
+  static const UNIVERSAL_PEACE_RULE = '/universal-peace-rule';
+  static const KEEP_ADDING_WITH_PATIENCE = '/keep-adding';
+  static const MEDIA_NEWS = '/media-news';
+  static const ENGAGEMENTS = '/engagements';
+  static const DEMONSTRATION = '/demonstration';
+  static const GROUP_DISCUSSIONS = '/group-discussions';
+  static const SITUATION_REACTION = '/situation-reaction';
+  static const GROUND_TASK = '/ground-task';
+  static const INTERVIEWS = '/interviews';
+  static const MERITS_DEMERITS = '/merits-demerits';
+  static const MEDICAL = '/medical';
+  static const JOINING_SERVICES = '/joining-services';
+  static const RULES_REGULATIONS = '/rules-regulations';
+  static const COURT_CASES = '/court-cases';
+  static const ELECTIONS = '/elections';
+  static const HEART_WINNING = '/heart-winning';
+  static const SPIRITUALITY_LORD_SHIVA = '/spirituality-lord-shiva';
+  static const PRAYER_FOR_ALL = '/prayer-for-all';
+  static const FINGERS_ARE_CROSSED = '/fingers-are-crossed';
 }
 
 class AppPages {
@@ -801,6 +938,12 @@ class AppPages {
       transition: Transition.rightToLeft,
     ),
     GetPage(
+      name: AppRoutes.OBLIGATIONS,
+      page: () => const ObligationsView(),
+      binding: ObligationsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
       name: AppRoutes.HOSPITALITY_CARE,
       page: () => const HospitalityCareView(),
       binding: HospitalityCareBinding(),
@@ -936,6 +1079,270 @@ class AppPages {
       name: AppRoutes.RELATIONSHIPS,
       page: () => const RelationshipsView(),
       binding: RelationshipsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.PUNCTUALITY,
+      page: () => const PunctualityView(),
+      binding: PunctualityBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.LOYALTY,
+      page: () => const LoyaltyView(),
+      binding: LoyaltyBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.APPRECIATIONS_THANKS,
+      page: () => const AppreciationsThanksView(),
+      binding: AppreciationsThanksBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.EMPATHY_SYMPATHY,
+      page: () => const EmpathySympathyView(),
+      binding: EmpathySympathyBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.FORGIVNESS,
+      page: () => const ForgivnessView(),
+      binding: ForgivnessBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.KINDNESS,
+      page: () => const KindnessView(),
+      binding: KindnessBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.RESPECT,
+      page: () => const RespectView(),
+      binding: RespectBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.SELF_DISCIPLINE,
+      page: () => const SelfDisciplineView(),
+      binding: SelfDisciplineBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.AFFECTION_LOVE,
+      page: () => const AffectionLoveView(),
+      binding: AffectionLoveBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.FAMILY,
+      page: () => const FamilyView(),
+      binding: FamilyBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.FRIENDSHIP,
+      page: () => const FriendshipView(),
+      binding: FriendshipBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.RIVALRY,
+      page: () => const RivalryView(),
+      binding: RivalryBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.COMPITITION,
+      page: () => const CompititionView(),
+      binding: CompititionBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.TECHNOLOGY,
+      page: () => const TechnologyView(),
+      binding: TechnologyBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.LANGUAGE_TRANSLATION,
+      page: () => const LanguageTranslationView(),
+      binding: LanguageTranslationBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.MONITORSHIP,
+      page: () => const MonitorshipView(),
+      binding: MonitorshipBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.SURVELLENCE_INVESTIGATION,
+      page: () => const SurvellenceInvestigationView(),
+      binding: SurvellenceInvestigationBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.LEADERSHIP,
+      page: () => const LeadershipView(),
+      binding: LeadershipBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.CONTROL_COORDINATION,
+      page: () => const ControlCoordinationView(),
+      binding: ControlCoordinationBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.ONLY_ONE_WAY,
+      page: () => const OnlyOneWayView(),
+      binding: OnlyOneWayBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.TRADE_IMPORT_EXPORT,
+      page: () => const TradeImportExportView(),
+      binding: TradeImportExportBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.RANKING_ORDERS,
+      page: () => const RankingOrdersView(),
+      binding: RankingOrdersBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.STATISTICS,
+      page: () => const StatisticsView(),
+      binding: StatisticsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.PEACE_PROSPERITY,
+      page: () => const PeaceProsperityView(),
+      binding: PeaceProsperityBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.WORLD,
+      page: () => const WorldView(),
+      binding: WorldBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.UNIVERSAL_PEACE_RULE,
+      page: () => const UniversalPeaceRuleView(),
+      binding: UniversalPeaceRuleBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.KEEP_ADDING_WITH_PATIENCE,
+      page: () => const KeepAddingWithPatiencView(),
+      binding: KeepAddingWithPatienceBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.MEDIA_NEWS,
+      page: () => const MediaNewsView(),
+      binding: MediaNewsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.ENGAGEMENTS,
+      page: () => const EngagementsView(),
+      binding: EngagementsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.DEMONSTRATION,
+      page: () => const DemonstrationView(),
+      binding: DemonstrationBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.GROUP_DISCUSSIONS,
+      page: () => const GroupDiscussionsView(),
+      binding: GroupDiscussionsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.SITUATION_REACTION,
+      page: () => const SituationReactionView(),
+      binding: SituationReactionBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.GROUND_TASK,
+      page: () => const GroundTaskView(),
+      binding: GroundTaskBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.INTERVIEWS,
+      page: () => const InterviewsView(),
+      binding: InterviewsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.MERITS_DEMERITS,
+      page: () => const MeritsDemeritsView(),
+      binding: MeritsDemeritsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.MEDICAL,
+      page: () => const MedicalView(),
+      binding: MedicalBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.JOINING_SERVICES,
+      page: () => const JoiningServicesView(),
+      binding: JoiningServicesBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.RULES_REGULATIONS,
+      page: () => const RulesRegulationsView(),
+      binding: RulesRegulationsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.COURT_CASES,
+      page: () => const CourtCasesView(),
+      binding: CourtCasesBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.ELECTIONS,
+      page: () => const ElectionsView(),
+      binding: ElectionsBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.HEART_WINNING,
+      page: () => const HeartWinningView(),
+      binding: HeartWinningBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.SPIRITUALITY_LORD_SHIVA,
+      page: () => const SpiritualityLordShivaView(),
+      binding: SpiritualityLordShivaBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.PRAYER_FOR_ALL,
+      page: () => const PrayerForAllView(),
+      binding: PrayerForAllBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.FINGERS_ARE_CROSSED,
+      page: () => const FingersAreCrossedView(),
+      binding: FingersAreCrossedBinding(),
       transition: Transition.rightToLeft,
     ),
   ];

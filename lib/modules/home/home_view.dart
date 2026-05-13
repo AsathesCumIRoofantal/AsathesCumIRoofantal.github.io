@@ -35,6 +35,7 @@ class HomeView extends GetView<HomeController> {
           width: 330,
           backgroundColor: Theme.of(context).colorScheme.surface,
           child: ListView(
+            physics: BouncingScrollPhysics(),
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
