@@ -752,6 +752,11 @@ class HomeController extends GetxController {
           icon: Icons.cruelty_free,
           route: AppRoutes.FINGERS_ARE_CROSSED,
         ),
+        DrawerItem(
+          title: "Counting Reports- Both Hindi & English",
+          icon: Icons.read_more,
+          route: AppRoutes.COUNTING_REPORTS,
+        ),
       ],
     ),
     DrawerSection(

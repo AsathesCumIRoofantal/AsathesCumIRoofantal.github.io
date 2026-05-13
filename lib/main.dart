@@ -1,9 +1,10 @@
+import 'package:air_app/modules/splash/spash_binding.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'routes/app_pages.dart';
-import 'modules/login/login_binding.dart';
+
 import 'core/theme/app_theme.dart';
 import 'data/auth_service.dart';
+import 'routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +22,9 @@ class AirApp extends StatelessWidget {
       theme: AppTheme.etherealLight,
       darkTheme: AppTheme.cosmicDark,
       themeMode: ThemeMode.system, // Defaults to system but managed by Settings
-      initialRoute: AppRoutes.LOGIN,
+      initialRoute: AppRoutes.SPLASH,
       getPages: AppPages.pages,
-      initialBinding: LoginBinding(),
+      initialBinding: SplashBinding(),
       debugShowCheckedModeBanner: false,
     );
   }

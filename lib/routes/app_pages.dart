@@ -4,6 +4,8 @@ import 'package:air_app/modules/hospitality_care/hospitality_care_view.dart';
 import 'package:air_app/modules/relationships/relationships_binding.dart';
 import 'package:air_app/modules/safety/safety_binding.dart';
 import 'package:air_app/modules/safety/safety_view.dart';
+import 'package:air_app/modules/splash/spash_binding.dart';
+import 'package:air_app/modules/splash/splash_screen.dart';
 import 'package:air_app/modules/utility_facilities/utility_facilities_binding.dart';
 import 'package:air_app/modules/utility_facilities/utility_facilities_view.dart';
 import 'package:air_app/modules/commerce/commerce_binding.dart';
@@ -304,8 +306,11 @@ import '../modules/prayer_for_all/prayer_for_all_binding.dart';
 import '../modules/prayer_for_all/prayer_for_all_view.dart';
 import '../modules/fingers_are_crossed/fingers_are_crossed_binding.dart';
 import '../modules/fingers_are_crossed/fingers_are_crossed_view.dart';
+import '../modules/counting_reports/counting_reports_binding.dart';
+import '../modules/counting_reports/counting_reports_view.dart';
 
 class AppRoutes {
+  static const SPLASH = '/splash';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
   static const HOME = '/';
@@ -463,10 +468,16 @@ class AppRoutes {
   static const SPIRITUALITY_LORD_SHIVA = '/spirituality-lord-shiva';
   static const PRAYER_FOR_ALL = '/prayer-for-all';
   static const FINGERS_ARE_CROSSED = '/fingers-are-crossed';
+  static const COUNTING_REPORTS = '/counting-reports';
 }
 
 class AppPages {
   static final pages = [
+    GetPage(
+      name: AppRoutes.SPLASH,
+      page: () => const SplashScreen(),
+      binding: SplashBinding(),
+    ),
     GetPage(
       name: AppRoutes.LOGIN,
       page: () => const LoginView(),
@@ -1343,6 +1354,12 @@ class AppPages {
       name: AppRoutes.FINGERS_ARE_CROSSED,
       page: () => const FingersAreCrossedView(),
       binding: FingersAreCrossedBinding(),
+      transition: Transition.rightToLeft,
+    ),
+    GetPage(
+      name: AppRoutes.COUNTING_REPORTS,
+      page: () => const CountingReportsView(),
+      binding: CountingReportsBinding(),
       transition: Transition.rightToLeft,
     ),
   ];

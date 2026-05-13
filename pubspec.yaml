@@ -1,6 +1,6 @@
 name: air_app
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -11,12 +11,13 @@ dependencies:
     sdk: flutter
   get: ^4.7.3
   intl: ^0.20.2
+  flutter_native_splash: ^2.2.10+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  flutter_launcher_icons: ^0.13.1 
+  flutter_launcher_icons: ^0.13.1
 
 flutter_icons:
   android: true
@@ -25,6 +26,23 @@ flutter_icons:
   min_sdk_android: 21
   remove_alpha_ios: true # android min sdk min:16, default 21
 
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/air_splash_logo.png
+  # branding: assets/images/webPinoBrand.png
+  color_dark: "#121212"
+  image_dark: assets/images/air_splash_logo.png
+  # branding_dark: assets/images/webPinoBrand.png
+  # fill: true
+
+  android_12:
+    image: assets/images/air_splash_logo.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/images/air_splash_logo.png
+    icon_background_color_dark: "#121212"
+    # fill: true
+
+  web: false
 
 flutter:
   uses-material-design: true
