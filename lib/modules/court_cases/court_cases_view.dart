@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'court_cases_controller.dart';
 
 class CourtCasesView extends GetView<CourtCasesController> {
@@ -7,35 +8,27 @@ class CourtCasesView extends GetView<CourtCasesController> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final onSurface = theme.colorScheme.onSurface;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('CourtCases'),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-        iconTheme: IconThemeData(color: onSurface),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
-                : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
-          ),
+    return SampleContentPage(
+      title: 'Court Cases',
+      subtitle: 'Explore placeholder content for Court Cases in AIR.',
+      icon: Icons.article_outlined,
+      items: const [
+        SampleContentItem(
+          title: 'Overview',
+          subtitle: 'Learn about how Court Cases works inside AIR.',
+          icon: Icons.info_outline,
         ),
-        child: SafeArea(
-          child: Center(
-            child: Text('CourtCases is working'),
-          ),
+        SampleContentItem(
+          title: 'Experience',
+          subtitle: 'Browse the sample concepts and usage examples.',
+          icon: Icons.auto_stories_outlined,
         ),
-      ),
+        SampleContentItem(
+          title: 'Action',
+          subtitle: 'Add your first entry or expand this module later.',
+          icon: Icons.play_circle_outline,
+        ),
+      ],
     );
   }
 }

@@ -189,6 +189,191 @@ class SignupView extends GetView<SignupController> {
                               })
                               .toList(),
                         ),
+                        SizedBox(height: 12),
+                        Row(
+                          children: controller.roles
+                              .where((e) => e == 'Parvati' || e == 'Laxmi')
+                              .map((role) {
+                                final isSelected =
+                                    controller.selectedRole.value == role;
+                                return Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => controller.setRole(role),
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        right: role == 'Parvati' ? 8 : 0,
+                                        left: role == 'Laxmi' ? 8 : 0,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? tertiary.withOpacity(0.1)
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: isSelected
+                                              ? tertiary
+                                              : theme.dividerColor.withOpacity(
+                                                  0.2,
+                                                ),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            role,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: isSelected
+                                                  ? tertiary
+                                                  : theme.dividerColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            controller.roleDescriptions[role]!,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: isSelected
+                                                  ? tertiary.withOpacity(0.7)
+                                                  : theme.dividerColor
+                                                        .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              })
+                              .toList(),
+                        ),
+                        SizedBox(height: 12),
+                        Row(
+                          children: controller.roles
+                              .where((e) => e == 'Devotee' || e == 'God')
+                              .map((role) {
+                                final isSelected =
+                                    controller.selectedRole.value == role;
+                                return Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => controller.setRole(role),
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        right: role == 'Devotee' ? 8 : 0,
+                                        left: role == 'God' ? 8 : 0,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? tertiary.withOpacity(0.1)
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: isSelected
+                                              ? tertiary
+                                              : theme.dividerColor.withOpacity(
+                                                  0.2,
+                                                ),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            role,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: isSelected
+                                                  ? tertiary
+                                                  : theme.dividerColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            controller.roleDescriptions[role]!,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: isSelected
+                                                  ? tertiary.withOpacity(0.7)
+                                                  : theme.dividerColor
+                                                        .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              })
+                              .toList(),
+                        ),
+                        SizedBox(height: 12),
+                        Row(
+                          children: controller.roles
+                              .where(
+                                (e) => e == 'Meritorious' || e == 'Perfect',
+                              )
+                              .map((role) {
+                                final isSelected =
+                                    controller.selectedRole.value == role;
+                                return Expanded(
+                                  child: GestureDetector(
+                                    onTap: () => controller.setRole(role),
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                        right: role == 'Meritorious' ? 8 : 0,
+                                        left: role == 'Perfect' ? 8 : 0,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 12,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: isSelected
+                                            ? tertiary.withOpacity(0.1)
+                                            : Colors.transparent,
+                                        borderRadius: BorderRadius.circular(12),
+                                        border: Border.all(
+                                          color: isSelected
+                                              ? tertiary
+                                              : theme.dividerColor.withOpacity(
+                                                  0.2,
+                                                ),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            role,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: isSelected
+                                                  ? tertiary
+                                                  : theme.dividerColor,
+                                            ),
+                                          ),
+                                          Text(
+                                            controller.roleDescriptions[role]!,
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: isSelected
+                                                  ? tertiary.withOpacity(0.7)
+                                                  : theme.dividerColor
+                                                        .withOpacity(0.5),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              })
+                              .toList(),
+                        ),
                       ],
                     ),
                   ),

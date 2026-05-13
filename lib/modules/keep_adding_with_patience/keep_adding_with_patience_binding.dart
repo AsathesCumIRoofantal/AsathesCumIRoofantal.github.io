@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
-import 'keep_adding_controller.dart';
+import 'keep_adding_with_patiencecontroller.dart';
 
 class KeepAddingWithPatienceBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<KeepAddingController>(() => KeepAddingController());
+    Get.lazyPut<KeepAddingWithPatienceController>(
+      () => KeepAddingWithPatienceController(),
+    );
   }
 }

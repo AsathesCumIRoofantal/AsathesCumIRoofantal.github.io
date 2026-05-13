@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'control_coordination_controller.dart';
 
 class ControlCoordinationView extends GetView<ControlCoordinationController> {
@@ -7,35 +8,27 @@ class ControlCoordinationView extends GetView<ControlCoordinationController> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final onSurface = theme.colorScheme.onSurface;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('ControlCoordination'),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-        iconTheme: IconThemeData(color: onSurface),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
-                : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
-          ),
+    return SampleContentPage(
+      title: 'Control Coordination',
+      subtitle: 'Explore placeholder content for Control Coordination in AIR.',
+      icon: Icons.article_outlined,
+      items: const [
+        SampleContentItem(
+          title: 'Overview',
+          subtitle: 'Learn about how Control Coordination works inside AIR.',
+          icon: Icons.info_outline,
         ),
-        child: SafeArea(
-          child: Center(
-            child: Text('ControlCoordination is working'),
-          ),
+        SampleContentItem(
+          title: 'Experience',
+          subtitle: 'Browse the sample concepts and usage examples.',
+          icon: Icons.auto_stories_outlined,
         ),
-      ),
+        SampleContentItem(
+          title: 'Action',
+          subtitle: 'Add your first entry or expand this module later.',
+          icon: Icons.play_circle_outline,
+        ),
+      ],
     );
   }
 }

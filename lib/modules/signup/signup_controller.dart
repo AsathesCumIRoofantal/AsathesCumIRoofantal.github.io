@@ -11,12 +11,29 @@ class SignupController extends GetxController {
   final passwordController = TextEditingController();
 
   final selectedRole = 'Alifiyas'.obs;
-  final roles = ['Alifiyas', 'Mazeasta', 'Roofantal', 'Asathes'];
+  final roles = [
+    'Alifiyas',
+    'Mazeasta',
+    'Roofantal',
+    'Asathes',
+    'Parvati',
+    'Laxmi',
+    'Devotee',
+    'God',
+    'Meritorious',
+    'Perfect',
+  ];
   final roleDescriptions = <String, String>{
     'Alifiyas': 'The New Beginner',
     'Mazeasta': 'The Expert',
     'Roofantal': 'The Peace Agent',
     'Asathes': 'The Field Agent',
+    'Parvati': 'Politics and Diplomacy',
+    'Laxmi': 'Development and Economy',
+    'Devotee': 'The Devoted One',
+    'God': 'The Supreme Being',
+    'Meritorious': 'The Meritorious',
+    'Perfect': 'The Perfect One',
   };
 
   void toggleObscure() => isObscure.value = !isObscure.value;

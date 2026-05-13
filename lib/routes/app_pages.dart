@@ -1239,7 +1239,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.KEEP_ADDING_WITH_PATIENCE,
-      page: () => const KeepAddingWithPatiencView(),
+      page: () => const KeepAddingWithPatienceView(),
       binding: KeepAddingWithPatienceBinding(),
       transition: Transition.rightToLeft,
     ),
