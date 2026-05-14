@@ -24,6 +24,12 @@ class SignupController extends GetxController {
     'Perfect',
     'Media',
     'Celebrity',
+    'Advocate',
+    'Judge',
+    'Jobist',
+    'Bussnessman',
+    'Teacher',
+    'Student',
   ];
   final roleDescriptions = <String, String>{
     'Alifiyas': 'The New Beginner',
@@ -38,6 +44,12 @@ class SignupController extends GetxController {
     'Perfect': 'The Perfect One',
     'Media': 'The Media Specialist',
     'Celebrity': 'The atrist',
+    'Advocate': 'The Lawyer',
+    'Judge': 'The Judge',
+    'Jobist': 'The Jobist',
+    'Bussnessman': 'The Bussnessman',
+    'Teacher': 'The Teacher',
+    'Student': 'The Student',
   };
 
   void toggleObscure() => isObscure.value = !isObscure.value;
