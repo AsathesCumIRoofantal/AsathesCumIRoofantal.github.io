@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
 
     for (final section in controller.drawerSections) {
       for (final item in section.items) {
-        if (!item.title.contains(query)) {
+        if (!item.title.toLowerCase().contains(query)) {
           break;
         }
 
