@@ -547,7 +547,7 @@ class _HomeViewState extends State<HomeView> {
 
               ...entry.value.map((e) {
                 String route = e.item.route ?? '';
-                (e).item.route = null;
+
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
 

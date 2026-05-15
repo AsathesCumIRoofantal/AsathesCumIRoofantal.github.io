@@ -43,7 +43,9 @@ class HomeController extends GetxController {
     for (final section in drawerSections) {
       for (final item in section.items) {
         if (item.route == null) {
-          itemKeys[item.route!] = GlobalKey(debugLabel: "${item.route}");
+          itemKeys[item.route!] = GlobalKey(
+            debugLabel: "FilterItems_${item.title}",
+          );
         } else {
           itemKeys[item.route!] = GlobalKey(
             debugLabel: "${section.title}_${item.route}",
