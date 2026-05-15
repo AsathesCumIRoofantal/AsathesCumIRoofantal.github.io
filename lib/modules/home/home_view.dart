@@ -41,19 +41,6 @@ class HomeView extends StatelessWidget {
               ),
             ),
           );
-          for (final resultItem in controller.results.value ?? []) {
-            for (final item in resultItem.items) {
-              // if (item.route == null) {
-              //   // itemKeys[item.route!] = GlobalKey(
-              //   //   debugLabel: "FilterItems_${item.title}",
-              //   // ); //wont come to this
-              // } else {
-              controller.itemResultKeys[item.route!] = GlobalKey(
-                debugLabel: "${item.route}",
-              );
-              // }
-            }
-          }
         }
       }
     }
@@ -64,6 +51,7 @@ class HomeView extends StatelessWidget {
   Future<void> scrollToItem({
     required String sectionTitle,
     required String routeTemp,
+    required GlobalKey key,
   }) async {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
@@ -71,17 +59,22 @@ class HomeView extends StatelessWidget {
 
     /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 800));
+    GlobalKey? keyActual = controller.drawerSections
+        .firstWhere((s) => s.title == sectionTitle)
+        .items
+        .firstWhere((i) => i.route == routeTemp)
+        .key;
 
     /// BUILD UNIQUE KEY
 
-    BuildContext? ctx = controller.itemActualKeys[routeTemp]?.currentContext;
+    BuildContext? ctx = keyActual?.currentContext;
     if (ctx == null) {
       debugPrint("Context NULL -> $routeTemp");
       return;
     }
 
     /// GET SAFE GLOBAL KEY
-    final GlobalKey? globalKey = controller.itemActualKeys[routeTemp];
+    final GlobalKey? globalKey = keyActual;
 
     if (globalKey == null) {
       debugPrint("GlobalKey NOT FOUND -> $routeTemp");
@@ -559,7 +552,7 @@ class HomeView extends StatelessWidget {
 
               ...entry.value.map((e) {
                 return Padding(
-                  key: controller.itemResultKeys[e.item.route],
+                  key: e.item.key,
                   padding: const EdgeInsets.only(bottom: 10),
 
                   child: InkWell(
@@ -569,6 +562,7 @@ class HomeView extends StatelessWidget {
                       scrollToItem(
                         sectionTitle: e.sectionTitle,
                         routeTemp: e.item.route,
+                        key: e.item.key!,
                       );
                       controller.isDrawerSearchVisible.refresh();
                     },
@@ -656,7 +650,7 @@ class HomeView extends StatelessWidget {
 
               children: [
                 Container(
-                  key: controller.itemActualKeys[item.route],
+                  key: item.key,
                   padding: const EdgeInsets.all(10),
 
                   decoration: const BoxDecoration(

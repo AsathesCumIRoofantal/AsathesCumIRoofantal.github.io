@@ -7,34 +7,40 @@ class DrawerItem {
   final String title;
   final IconData icon;
   final String route;
-
-  DrawerItem({required this.title, required this.icon, required this.route});
+  GlobalKey? key;
+  DrawerItem({required this.title, required this.icon, required this.route}) {
+    key:
+    GlobalKey(debugLabel: "Actual_${route}");
+  }
 }
 
 class DrawerResultItem {
   final String title;
   final IconData icon;
   final String route;
-
+  GlobalKey? key;
   DrawerResultItem({
     required this.title,
     required this.icon,
     required this.route,
-  });
+  }) {
+    key:
+    GlobalKey(debugLabel: "${route}");
+  }
 }
 
 class DrawerSection {
   final String title;
   final List<DrawerItem> items;
 
-  DrawerSection({required this.title, required this.items});
+  DrawerSection({required this.title, required this.items}) {}
 }
 
 class DrawerSearchResult {
   final String sectionTitle;
   final DrawerResultItem item;
 
-  DrawerSearchResult({required this.sectionTitle, required this.item});
+  DrawerSearchResult({required this.sectionTitle, required this.item}) {}
 }
 
 class HomeController extends GetxController {
@@ -53,29 +59,9 @@ class HomeController extends GetxController {
 
   final ScrollController drawerScrollController = ScrollController();
 
-  /// SAFE KEYS
-  final Map<String, GlobalKey> itemActualKeys = {};
-
-  /// SAFE KEYS
-  final Map<String, GlobalKey> itemResultKeys = {};
-
   @override
   void onInit() {
     super.onInit();
-
-    for (final section in drawerSections) {
-      for (final item in section.items) {
-        // if (item.route == null) {
-        //   // itemKeys[item.route!] = GlobalKey(
-        //   //   debugLabel: "FilterItems_${item.title}",
-        //   // ); //wont come to this
-        // } else {
-        itemActualKeys[item.route!] = GlobalKey(
-          debugLabel: "Actual_${item.route}",
-        );
-        // }
-      }
-    }
   }
 
   /// =====================================================
