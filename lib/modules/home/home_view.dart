@@ -38,6 +38,7 @@ class HomeView extends StatelessWidget {
                     title: item.title,
                     icon: item.icon,
                     route: item.route,
+                    key: GlobalKey(debugLabel: "${item.route}"),
                   ),
                 )
                 .toList(),

@@ -74,7 +74,7 @@ class HomeController extends GetxController {
                     title: item.title,
                     icon: item.icon,
                     route: item.route,
-                    key: item.key,
+                    key: GlobalKey(debugLabel: "${item.route}"),
                   ),
                 )
                 .toList(),
