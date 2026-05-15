@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 
 import '../../routes/app_pages.dart';
 
-class DrawerItem {
+class DrawerActualItem {
   final String title;
   final IconData icon;
   final String route;
   GlobalKey? key;
-  DrawerItem({required this.title, required this.icon, required this.route}) {
+  DrawerActualItem({
+    required this.title,
+    required this.icon,
+    required this.route,
+  }) {
     key:
     GlobalKey(debugLabel: "Actual_${route}");
   }
@@ -29,11 +33,18 @@ class DrawerResultItem {
   }
 }
 
-class DrawerSection {
+class DrawerActualSection {
   final String title;
-  final List<DrawerItem> items;
+  final List<DrawerActualItem> items;
 
-  DrawerSection({required this.title, required this.items}) {}
+  DrawerActualSection({required this.title, required this.items}) {}
+}
+
+class DrawerResultSection {
+  final String title;
+  final List<DrawerResultItem> items;
+
+  DrawerResultSection({required this.title, required this.items}) {}
 }
 
 class DrawerSearchResult {
@@ -68,765 +79,777 @@ class HomeController extends GetxController {
   /// DRAWER DATA
   /// =====================================================
 
-  final List<DrawerSection> drawerSections = [
-    DrawerSection(
+  final List<DrawerActualSection> drawerSections = [
+    DrawerActualSection(
       title: "EXPLORE - ALIFIYAS",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: 'Learn And Fun',
           icon: Icons.lightbulb_outline,
           route: AppRoutes.LEARN_FUN,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Learn Docs (by category)',
           icon: Icons.menu_book_outlined,
           route: AppRoutes.LEARN_DOCS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Heigher Studies',
           icon: Icons.school_outlined,
           route: AppRoutes.HEIGHER_STUDIES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Doctorate',
           icon: Icons.local_hospital,
           route: AppRoutes.DOCTORATE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Life Hacks',
           icon: Icons.heat_pump_rounded,
           route: AppRoutes.LIFE_HACKS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Ask Any Thing',
           icon: Icons.question_answer,
           route: AppRoutes.QUERIES,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "RULE - MAZEASTA",
       items: [
-        DrawerItem(title: 'Wisdom', icon: Icons.book, route: AppRoutes.WISDOM),
-        DrawerItem(
+        DrawerActualItem(
+          title: 'Wisdom',
+          icon: Icons.book,
+          route: AppRoutes.WISDOM,
+        ),
+        DrawerActualItem(
           title: 'Ask Any Thing',
           icon: Icons.question_answer,
           route: AppRoutes.QUERIES,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "BE-YOU & EARN LIVING",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: 'Share Experience',
           icon: Icons.share,
           route: AppRoutes.SHARE_EXPERIENCE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Record Your Post',
           icon: Icons.post_add,
           route: AppRoutes.RECORD_POST,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Identities Cum Earnings',
           icon: Icons.format_list_numbered,
           route: AppRoutes.IDENTITIES_EARNINGS,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "Use AIR's Space & Resources",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: 'Knowledge Center',
           icon: Icons.unarchive,
           route: AppRoutes.KNOWLEDGE_CENTER,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Products & Services',
           icon: Icons.output,
           route: AppRoutes.PRODUCTS_SERVICES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Query & Discussion',
           icon: Icons.question_answer,
           route: AppRoutes.QUERY_DISCUSSION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Utilities as Guest',
           icon: Icons.extension_outlined,
           route: AppRoutes.UTILITIES_GUEST,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "Your Profile Specifics",
       items: [
-        DrawerItem(title: 'Events', icon: Icons.event, route: AppRoutes.EVENTS),
-        DrawerItem(
+        DrawerActualItem(
+          title: 'Events',
+          icon: Icons.event,
+          route: AppRoutes.EVENTS,
+        ),
+        DrawerActualItem(
           title: 'Managements',
           icon: Icons.manage_accounts,
           route: AppRoutes.MANAGEMENTS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Maintenance',
           icon: Icons.build_outlined,
           route: AppRoutes.MAINTENANCE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Connect & Collaborate',
           icon: Icons.connect_without_contact,
           route: AppRoutes.CONNECT_COLLABORATE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Notices',
           icon: Icons.notifications_none,
           route: AppRoutes.NOTICES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Tracks & Traces',
           icon: Icons.track_changes,
           route: AppRoutes.TRACKS_TRACES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Your Business',
           icon: Icons.business_sharp,
           route: AppRoutes.YOUR_BUSINESS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Rewards/Credits',
           icon: Icons.diamond,
           route: AppRoutes.REWARDS_CREDITS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Approval of Appeals',
           icon: Icons.approval,
           route: AppRoutes.APPROVAL_APPEALS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Network(APIs) Stuff',
           icon: Icons.api,
           route: AppRoutes.NETWORK_APIS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Private/Confidential Stuff',
           icon: Icons.public_off,
           route: AppRoutes.PRIVATE_CONFIDENTIAL,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Public Stuff',
           icon: Icons.public,
           route: AppRoutes.PUBLIC_STUFF,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "AIR's - Aspects",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: "Let's resume your tour",
           icon: Icons.travel_explore,
           route: AppRoutes.RESUME_TOUR,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Be the part of AIR",
           icon: Icons.grade,
           route: AppRoutes.BE_PART_OF_AIR,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Contribute to AIR",
           icon: Icons.add_box,
           route: AppRoutes.CONTRIBUTE_TO_AIR,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Timeline of AIR",
           icon: Icons.timeline,
           route: AppRoutes.TIMELINE_OF_AIR,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "New in AIR",
           icon: Icons.new_releases,
           route: AppRoutes.NEW_IN_AIR,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Checked Space Anomalies',
           icon: Icons.check_circle_outline_rounded,
           route: AppRoutes.CHECKED_ANOMALIES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Un-Checked Space Anomalies',
           icon: Icons.question_mark_outlined,
           route: AppRoutes.UNCHECKED_ANOMALIES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Limits (0 or 1)',
           icon: Icons.calculate_outlined,
           route: AppRoutes.LIMITS_0_1,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Communication',
           icon: Icons.transform_rounded,
           route: AppRoutes.COMMUNICATION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Imagination & Features',
           icon: Icons.featured_play_list_outlined,
           route: AppRoutes.IMAGINATION_FEATURES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Beliefs & Values',
           icon: Icons.flag_outlined,
           route: AppRoutes.BELIEFS_VALUES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Entertainment',
           icon: Icons.play_circle_outline_rounded,
           route: AppRoutes.ENTERTAINMENT,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Skills & Talents',
           icon: Icons.star_border_rounded,
           route: AppRoutes.SKILLS_TALENTS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Being Recorded & Rewarded",
           icon: Icons.data_object_rounded,
           route: AppRoutes.BEING_RECORDED_REWARDED,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Training",
           icon: Icons.lens_blur_rounded,
           route: AppRoutes.TRAINING,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "System All Together",
           icon: Icons.all_inclusive_rounded,
           route: AppRoutes.SYSTEM_ALL_TOGETHER,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "SERVICE & PRODUCTION",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: "Input in Process",
           icon: Icons.arrow_forward_ios_rounded,
           route: AppRoutes.INPUT_IN_PROCESS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Process",
           icon: Icons.gavel_rounded,
           route: AppRoutes.PROCESS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Outcome of Processed",
           icon: Icons.computer_sharp,
           route: AppRoutes.OUTCOME_PROCESSED,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "AIR'S VISION",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: "AIR's Vision",
           icon: Icons.visibility_outlined,
           route: AppRoutes.AIR_VISION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "AIR's Mission",
           icon: Icons.music_note_sharp,
           route: AppRoutes.AIRS_MISSION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "AIR's Show Case",
           icon: Icons.show_chart,
           route: AppRoutes.AIRS_SHOWCASE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Let's Windup Else",
           icon: Icons.wrap_text,
           route: AppRoutes.WINDUP_ELSE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Follow like Calender",
           icon: Icons.calendar_month_outlined,
           route: AppRoutes.FOLLOW_CALENDAR,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Pick Your Good Going",
           icon: Icons.golf_course,
           route: AppRoutes.PICK_GOOD_GOING,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "MOTIVATION & CONNECTIVITY",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: "Revise & Improve",
           icon: Icons.icecream_rounded,
           route: AppRoutes.REVISE_IMPROVE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Practice & Expertise",
           icon: Icons.hail_outlined,
           route: AppRoutes.PRACTICE_EXPERTISE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Share & Care",
           icon: Icons.handshake_rounded,
           route: AppRoutes.SHARE_CARE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Finnally All is Blessings",
           icon: Icons.widgets,
           route: AppRoutes.FINALLY_BLESSINGS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "A Word of Motivation",
           icon: Icons.elderly_sharp,
           route: AppRoutes.MOTIVATION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Never Give Up",
           icon: Icons.window,
           route: AppRoutes.NEVER_GIVE_UP,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Innovation is Key",
           icon: Icons.lightbulb_outline,
           route: AppRoutes.INNOVATION_KEY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "You Got All of it Accountable",
           icon: Icons.account_balance_wallet,
           route: AppRoutes.ACCOUNTABLE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Live Life to the Fullest",
           icon: Icons.favorite,
           route: AppRoutes.LIVE_FULLEST,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Get Connected",
           icon: Icons.groups_2_rounded,
           route: AppRoutes.GET_CONNECTED_SOCIAL,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Being Together is Unison",
           icon: Icons.compare_arrows,
           route: AppRoutes.TOGETHER_UNISON,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Great to Have You Onboard",
           icon: Icons.airplanemode_active,
           route: AppRoutes.ONBOARD,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "All Greetings",
           icon: Icons.waving_hand,
           route: AppRoutes.GREETINGS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Be Liable to Responsibilities",
           icon: Icons.home_work_rounded,
           route: AppRoutes.RESPONSIBILITIES,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "SETUP A-ONE",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: "Product & Record (DIGITALIZE)",
           icon: Icons.all_inclusive_rounded,
           route: AppRoutes.digitalize_records,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Projects & Assessments",
           icon: Icons.assessment,
           route: AppRoutes.projects_assessments,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Category Tree",
           icon: Icons.local_florist,
           route: AppRoutes.category_tree,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Ease Tools",
           icon: Icons.handyman,
           route: AppRoutes.ease_tools,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Vocabulary",
           icon: Icons.wordpress,
           route: AppRoutes.vocabulary,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Code & Conduct",
           icon: Icons.code,
           route: AppRoutes.code_conduct,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Script & Strategy",
           icon: Icons.video_collection,
           route: AppRoutes.script_strategy,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Safety",
           icon: Icons.safety_check,
           route: AppRoutes.SAFETY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Hospitality & Care",
           icon: Icons.self_improvement_rounded,
           route: AppRoutes.HOSPITALITY_CARE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Utility & Facilities",
           icon: Icons.amp_stories_rounded,
           route: AppRoutes.UTILITY_FACILITIES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Commerce",
           icon: Icons.cabin,
           route: AppRoutes.COMMERCE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Social",
           icon: Icons.social_distance,
           route: AppRoutes.SOCIAL,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Research & Development",
           icon: Icons.science_outlined,
           route: AppRoutes.RESEARCH_DEVELOPMENT,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Travel & Transport",
           icon: Icons.flight_land_outlined,
           route: AppRoutes.TRAVEL_TRANSPORT,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Loop Hole",
           icon: Icons.loop,
           route: AppRoutes.LOOP_HOLE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Advantage",
           icon: Icons.star_border_rounded,
           route: AppRoutes.ADVANTAGE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Challenge",
           icon: Icons.flag_outlined,
           route: AppRoutes.CHALLENGE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Solution",
           icon: Icons.lightbulb_outline,
           route: AppRoutes.SOLUTION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Innovation",
           icon: Icons.new_label,
           route: AppRoutes.INNOVATION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Discovery",
           icon: Icons.search,
           route: AppRoutes.DISCOVERY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Enhancement",
           icon: Icons.auto_fix_high,
           route: AppRoutes.ENHANCEMENT,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Hope",
           icon: Icons.cloud_rounded,
           route: AppRoutes.HOPE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Success & Failure",
           icon: Icons.star,
           route: AppRoutes.SUCCESS_FAILURE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Religion & Prayer",
           icon: Icons.auto_fix_high,
           route: AppRoutes.RELIGION_PRAYER,
         ),
 
-        DrawerItem(
+        DrawerActualItem(
           title: "Feedback",
           icon: Icons.feedback,
           route: AppRoutes.FEEDBACK,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Marketing & Promotion",
           icon: Icons.shop,
           route: AppRoutes.marketing_promotion,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Serve",
           icon: Icons.volunteer_activism,
           route: AppRoutes.serve,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Relationships",
           icon: Icons.group,
           route: AppRoutes.RELATIONSHIPS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Obligations",
           icon: Icons.rule,
           route: AppRoutes.OBLIGATIONS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Punctuality",
           icon: Icons.watch_later_outlined,
           route: AppRoutes.PUNCTUALITY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Loyalty",
           icon: Icons.verified_user,
           route: AppRoutes.LOYALTY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Appreciations & Thanks",
           icon: Icons.wallet_giftcard,
           route: AppRoutes.APPRECIATIONS_THANKS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Empathy & Sympathy",
           icon: Icons.heart_broken,
           route: AppRoutes.EMPATHY_SYMPATHY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Forgivness",
           icon: Icons.forest,
           route: AppRoutes.FORGIVNESS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Kindness & Politeness",
           icon: Icons.face,
           route: AppRoutes.KINDNESS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Respect",
           icon: Icons.account_circle_sharp,
           route: AppRoutes.RESPECT,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Discipline",
           icon: Icons.architecture,
           route: AppRoutes.SELF_DISCIPLINE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Affection & Love",
           icon: Icons.favorite,
           route: AppRoutes.AFFECTION_LOVE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Family",
           icon: Icons.family_restroom,
           route: AppRoutes.FAMILY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Friendship",
           icon: Icons.people_outline,
           route: AppRoutes.FRIENDSHIP,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Rivalry And War",
           icon: Icons.military_tech,
           route: AppRoutes.RIVALRY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Competition",
           icon: Icons.flag,
           route: AppRoutes.COMPITITION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Technology",
           icon: Icons.computer,
           route: AppRoutes.TECHNOLOGY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Language & Translation",
           icon: Icons.language,
           route: AppRoutes.LANGUAGE_TRANSLATION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Monitorship",
           icon: Icons.remove_red_eye,
           route: AppRoutes.MONITORSHIP,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Survellence & Investigation",
           icon: Icons.security,
           route: AppRoutes.SURVELLENCE_INVESTIGATION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Leadership",
           icon: Icons.co_present_rounded,
           route: AppRoutes.LEADERSHIP,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Control & Coordination",
           icon: Icons.pan_tool_alt_outlined,
           route: AppRoutes.CONTROL_COORDINATION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "The Present - The Only One Way",
           icon: Icons.currency_rupee,
           route: AppRoutes.ONLY_ONE_WAY,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Trade Import-Export",
           icon: Icons.import_export,
           route: AppRoutes.TRADE_IMPORT_EXPORT,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Ranking Orders",
           icon: Icons.format_list_numbered,
           route: AppRoutes.RANKING_ORDERS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Statistics",
           icon: Icons.show_chart,
           route: AppRoutes.STATISTICS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Peace and Prosperity",
           icon: Icons.landscape_rounded,
           route: AppRoutes.PEACE_PROSPERITY,
         ),
-        DrawerItem(title: "World", icon: Icons.public, route: AppRoutes.WORLD),
-        DrawerItem(
+        DrawerActualItem(
+          title: "World",
+          icon: Icons.public,
+          route: AppRoutes.WORLD,
+        ),
+        DrawerActualItem(
           title: "Universal Peace Rule",
           icon: Icons.gavel,
           route: AppRoutes.UNIVERSAL_PEACE_RULE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Keep Adding With Patience",
           icon: Icons.add,
           route: AppRoutes.KEEP_ADDING_WITH_PATIENCE,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Media & News",
           icon: Icons.newspaper,
           route: AppRoutes.MEDIA_NEWS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Engagements",
           icon: Icons.energy_savings_leaf,
           route: AppRoutes.ENGAGEMENTS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Demonstration",
           icon: Icons.engineering,
           route: AppRoutes.DEMONSTRATION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Group Discussions",
           icon: Icons.chat,
           route: AppRoutes.GROUP_DISCUSSIONS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Situation & Reaction",
           icon: Icons.announcement,
           route: AppRoutes.SITUATION_REACTION,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Ground Task",
           icon: Icons.task_alt,
           route: AppRoutes.GROUND_TASK,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Interviews",
           icon: Icons.record_voice_over,
           route: AppRoutes.INTERVIEWS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Merits and Demerits",
           icon: Icons.list_alt_rounded,
           route: AppRoutes.MERITS_DEMERITS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Medical Test",
           icon: Icons.medical_services,
           route: AppRoutes.MEDICAL,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Joining Services",
           icon: Icons.join_right_rounded,
           route: AppRoutes.JOINING_SERVICES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Rules & Regulations",
           icon: Icons.rule_folder_rounded,
           route: AppRoutes.RULES_REGULATIONS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Court & Cases",
           icon: Icons.balance,
           route: AppRoutes.COURT_CASES,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Elections",
           icon: Icons.how_to_vote,
           route: AppRoutes.ELECTIONS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Ruling & Heart Winning",
           icon: Icons.emoji_flags,
           route: AppRoutes.HEART_WINNING,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Spirituality & Lord-Shiva",
           icon: Icons.temple_hindu,
           route: AppRoutes.SPIRITUALITY_LORD_SHIVA,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Prayer For All",
           icon: Icons.volunteer_activism,
           route: AppRoutes.PRAYER_FOR_ALL,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Fingers Are Crossed",
           icon: Icons.cruelty_free,
           route: AppRoutes.FINGERS_ARE_CROSSED,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: "Counting Reports- Both Hindi & English",
           icon: Icons.read_more,
           route: AppRoutes.COUNTING_REPORTS,
         ),
       ],
     ),
-    DrawerSection(
+    DrawerActualSection(
       title: "SYSTEM CORE",
       items: [
-        DrawerItem(
+        DrawerActualItem(
           title: 'App Setting',
           icon: Icons.settings,
           route: AppRoutes.SETTINGS,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'About AIR-APP',
           icon: Icons.air,
           route: AppRoutes.ABOUT_APP,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'About AIR Organization',
           icon: Icons.info,
           route: AppRoutes.ABOUT_ORG,
         ),
-        DrawerItem(
+        DrawerActualItem(
           title: 'Sign Out',
           icon: Icons.logout_rounded,
           route: AppRoutes.LOGOUT,

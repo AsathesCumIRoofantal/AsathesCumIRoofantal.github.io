@@ -552,7 +552,7 @@ class HomeView extends StatelessWidget {
 
               ...entry.value.map((e) {
                 return Padding(
-                  key: e.item.key,
+                  key: e.item.key!,
                   padding: const EdgeInsets.only(bottom: 10),
 
                   child: InkWell(
@@ -616,7 +616,7 @@ class HomeView extends StatelessWidget {
 
   Widget buildDrawerActualItem({
     required BuildContext context,
-    required DrawerItem item,
+    required DrawerActualItem item,
     required Color onSurface,
   }) {
     return Padding(
