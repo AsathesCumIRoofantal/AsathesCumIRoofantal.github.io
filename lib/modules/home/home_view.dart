@@ -5,6 +5,7 @@ import '../entities/entities_view.dart';
 import '../unions/unions_view.dart';
 import '../identity/identity_view.dart';
 import '../../routes/app_pages.dart';
+import 'drawer_navigation_copy.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
@@ -65,6 +66,49 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.surfaceContainerHighest.withOpacity(0.35),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: const Color(0xFFD4AF37).withOpacity(0.35),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.map_outlined,
+                          size: 22,
+                          color: const Color(0xFFD4AF37).withOpacity(0.9),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: Text(
+                            DrawerNavigationCopy.drawerPreamble,
+                            style: TextStyle(
+                              fontSize: 12,
+                              height: 1.35,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodyMedium?.color?.withOpacity(0.85),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
               ...controller.drawerSections
                   .map(
                     (section) => Column(
@@ -86,8 +130,22 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 6),
+                          child: Text(
+                            DrawerNavigationCopy.sectionBlurb(section.title),
+                            style: TextStyle(
+                              fontSize: 11,
+                              height: 1.35,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.bodySmall?.color?.withOpacity(0.9),
+                            ),
+                          ),
+                        ),
                         ...section.items.map(
                           (item) => ListTile(
+                            titleAlignment: ListTileTitleAlignment.center,
                             leading: Icon(item.icon, color: Color(0xFFD4AF37)),
                             title: Text(
                               item.title,
@@ -96,6 +154,22 @@ class HomeView extends GetView<HomeController> {
                                 fontSize: 14,
                               ),
                             ),
+                            subtitle: Text(
+                              DrawerNavigationCopy.linkSubtitle(
+                                item.route,
+                                item.title,
+                              ),
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 11,
+                                height: 1.3,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.bodySmall?.color?.withOpacity(0.88),
+                              ),
+                            ),
+                            isThreeLine: true,
                             onTap: () {
                               // Get.back();
                               Get.toNamed(item.route);

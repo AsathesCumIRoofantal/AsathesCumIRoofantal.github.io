@@ -52,6 +52,7 @@ class IdentityView extends GetView<IdentityController> {
           child: Column(
             children: [
               _buildCollapsibleHeader(context),
+              _buildIdentityInfoCard(context),
               controller.isCompleted.value
                   ? _buildResultView(context)
                   : _buildQuestionView(context),
@@ -156,6 +157,98 @@ class IdentityView extends GetView<IdentityController> {
         ),
       );
     });
+  }
+
+  Widget _buildIdentityInfoCard(BuildContext context) {
+    final theme = Theme.of(context);
+    final accent = theme.colorScheme.tertiary;
+    final bodyColor = theme.textTheme.bodyMedium?.color;
+
+    Widget bullet(String text) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('• ', style: TextStyle(color: accent, fontWeight: FontWeight.bold)),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(fontSize: 13, height: 1.35, color: bodyColor?.withOpacity(0.9)),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: theme.cardColor.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: accent.withOpacity(0.25)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.info_outline_rounded, size: 20, color: accent),
+                const SizedBox(width: 8),
+                Text(
+                  'GET-AS-IDENTIFIED',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                    color: accent.withOpacity(0.9),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'This tab locates you within the all-space map. Through a guided philosophical questionnaire, your cognitive and existential coordinates are determined.',
+              style: TextStyle(
+                fontSize: 13,
+                height: 1.4,
+                color: bodyColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'HOW IT WORKS',
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2,
+                color: accent.withOpacity(0.85),
+              ),
+            ),
+            const SizedBox(height: 8),
+            bullet('You answer a sequence of reflective questions (phases).'),
+            bullet('Each answer steers the system toward your unique identity node.'),
+            bullet('When complete, your identity is mapped and logged by the AIR Organisation.'),
+            bullet('Use Recalibrate or Re-map anytime as your perspective evolves.'),
+            const SizedBox(height: 10),
+            Text(
+              'Your identity node anchors learning pathways and connects you to relevant entities and unions.',
+              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.65)),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Drawer tip: after mapping here, use the menu (☰) for BE-YOU & EARN LIVING, motivation, and profile specifics so your inner coordinates meet outward programmes in one flow.',
+              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.72)),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildQuestionView(BuildContext context) {

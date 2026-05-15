@@ -34,6 +34,11 @@ class HomeController extends GetxController {
           route: AppRoutes.LEARN_FUN,
         ),
         DrawerItem(
+          title: 'Learn Docs (by category)',
+          icon: Icons.menu_book_outlined,
+          route: AppRoutes.LEARN_DOCS,
+        ),
+        DrawerItem(
           title: 'Heigher Studies',
           icon: Icons.school_outlined,
           route: AppRoutes.HEIGHER_STUDIES,

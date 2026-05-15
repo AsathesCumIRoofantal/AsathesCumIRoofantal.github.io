@@ -36,6 +36,7 @@ class UnionsView extends GetView<UnionsController> {
           child: Column(
             children: [
               _buildCollapsibleHeader(context),
+              _buildUnionsInfoCard(context),
               Obx(() => AnimatedSize(
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
@@ -388,6 +389,88 @@ class UnionsView extends GetView<UnionsController> {
         ),
       );
     });
+  }
+
+  Widget _buildUnionsInfoCard(BuildContext context) {
+    final theme = Theme.of(context);
+    final accent = theme.colorScheme.secondary;
+    final bodyColor = theme.textTheme.bodyMedium?.color;
+
+    Widget bullet(String text) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('• ', style: TextStyle(color: accent, fontWeight: FontWeight.bold)),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(fontSize: 13, height: 1.35, color: bodyColor?.withOpacity(0.9)),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: theme.cardColor.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: accent.withOpacity(0.25)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.info_outline_rounded, size: 20, color: accent),
+                const SizedBox(width: 8),
+                Text(
+                  'RELATIONSHIPS',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                    color: accent.withOpacity(0.9),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'A Union is a relationship, grouping, or binding between two or more Entities. Types include:',
+              style: TextStyle(
+                fontSize: 13,
+                height: 1.4,
+                color: bodyColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 10),
+            bullet('Pairs — Father & Child, Teacher & Student, Planet & Moon'),
+            bullet('Groups — Families, Teams, Ecosystems, Galaxies'),
+            bullet('Organisations — Companies, Governments, AIR itself'),
+            bullet('Conceptual Unions — Marriage, Partnership, Alliance'),
+            const SizedBox(height: 8),
+            Text(
+              'Use Catalogue Union to record how entities connect in your map.',
+              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.65)),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Drawer tip: the same menu (☰) lists collaborations, notices, rewards, and long-form SETUP lanes—use it when a union needs policy, learning, or services beyond this relationship list.',
+              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.72)),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildUnionCard(BuildContext context, dynamic union) {

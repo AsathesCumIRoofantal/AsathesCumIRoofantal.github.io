@@ -37,6 +37,7 @@ class EntitiesView extends GetView<EntitiesController> {
           child: Column(
             children: [
               _buildCollapsibleHeader(context),
+              _buildEntitiesInfoCard(context),
               Obx(() => AnimatedSize(
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
@@ -327,6 +328,90 @@ class EntitiesView extends GetView<EntitiesController> {
         ),
       );
     });
+  }
+
+  /// Short orientation card (AIR Vision–aligned); does not replace the header tagline.
+  Widget _buildEntitiesInfoCard(BuildContext context) {
+    final theme = Theme.of(context);
+    final accent = theme.colorScheme.primary;
+    final bodyColor = theme.textTheme.bodyMedium?.color;
+
+    Widget bullet(String text) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('• ', style: TextStyle(color: accent, fontWeight: FontWeight.bold)),
+            Expanded(
+              child: Text(
+                text,
+                style: TextStyle(fontSize: 13, height: 1.35, color: bodyColor?.withOpacity(0.9)),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(18),
+        decoration: BoxDecoration(
+          color: theme.cardColor.withOpacity(0.6),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: accent.withOpacity(0.25)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.info_outline_rounded, size: 20, color: accent),
+                const SizedBox(width: 8),
+                Text(
+                  'IN ALL-SPACE',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                    color: accent.withOpacity(0.9),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'An Entity is any discrete, identifiable node in all-space. This includes:',
+              style: TextStyle(
+                fontSize: 13,
+                height: 1.4,
+                color: bodyColor,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 10),
+            bullet('Living beings — Humans, Animals, Plants, Microorganisms'),
+            bullet('Non-living objects — Planets, Machines, Materials'),
+            bullet('Abstract nodes — Emotions, Concepts, Theorems'),
+            bullet('Phenomena — Gravity, Light, Sound, Time'),
+            bullet('Digital entities — Software, AI, Data Structures'),
+            const SizedBox(height: 8),
+            Text(
+              'Every entity can be catalogued here and linked through Unions.',
+              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.65)),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Drawer tip: open the menu (☰) from this screen for AIR-wide programmes—explore, profile, vision, motivation, setup, and system—without leaving your entity map.',
+              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.72)),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildEntityCard(BuildContext context, dynamic entity) {
