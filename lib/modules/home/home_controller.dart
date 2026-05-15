@@ -53,9 +53,6 @@ class HomeController extends GetxController {
 
   final ScrollController drawerScrollController = ScrollController();
 
-  /// SAFE KEYS
-  final Map<String, GlobalKey> itemKeys = {};
-
   @override
   void onInit() {
     super.onInit();
