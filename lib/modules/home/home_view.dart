@@ -7,13 +7,6 @@ import '../unions/unions_view.dart';
 import 'drawer_navigation_copy.dart';
 import 'home_controller.dart';
 
-class DrawerSearchResult {
-  final String sectionTitle;
-  final DrawerItem item;
-
-  DrawerSearchResult({required this.sectionTitle, required this.item});
-}
-
 class HomeView extends StatelessWidget {
   HomeView({super.key});
 
@@ -25,12 +18,12 @@ class HomeView extends StatelessWidget {
   /// FILTERED RESULTS
   /// =========================================================
 
-  List<DrawerSearchResult> getFilteredResults() {
+  void getFilteredResults() {
     final query = controller.drawerSearchText.value.trim().toLowerCase();
 
-    if (query.isEmpty) return [];
-
-    final List<DrawerSearchResult> results = [];
+    if (query.isEmpty) {
+      controller.results.value = [];
+    }
 
     for (final section in controller.drawerSections) {
       for (final item in section.items) {
@@ -40,14 +33,17 @@ class HomeView extends StatelessWidget {
             .toLowerCase();
 
         if (combined.contains(query)) {
-          results.add(
-            DrawerSearchResult(sectionTitle: section.title, item: item),
+          controller.results.value.add(
+            DrawerSearchResult(
+              sectionTitle: section.title,
+              item: DrawerItem(title: item.title, icon: item.icon, route: null),
+            ),
           );
         }
       }
     }
 
-    return results;
+    // return results;
   }
 
   Future<void> scrollToItem({
@@ -491,9 +487,9 @@ class HomeView extends StatelessWidget {
   }
 
   Widget getFilterResultsUIComponent() {
-    final results = getFilteredResults();
+    getFilteredResults();
 
-    if (results.isEmpty) {
+    if (controller.results.value.isEmpty) {
       return const Center(
         child: Text(
           "No Results Found",
@@ -505,7 +501,7 @@ class HomeView extends StatelessWidget {
 
     final grouped = <String, List<DrawerSearchResult>>{};
 
-    for (var r in results) {
+    for (var r in controller.results.value) {
       grouped.putIfAbsent(r.sectionTitle, () => []);
 
       grouped[r.sectionTitle]!.add(r);
