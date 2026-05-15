@@ -63,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
     controller.isDrawerSearchVisible.value = false;
 
     /// WAIT FOR UI REBUILD
-    await Future.delayed(const Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 900));
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "${sectionTitle}_$route";

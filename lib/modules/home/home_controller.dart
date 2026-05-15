@@ -42,15 +42,15 @@ class HomeController extends GetxController {
 
     for (final section in drawerSections) {
       for (final item in section.items) {
-        if (item.route == null) {
-          // itemKeys[item.route!] = GlobalKey(
-          //   debugLabel: "FilterItems_${item.title}",
-          // ); //wont come to this
-        } else {
-          itemKeys[item.route!] = GlobalKey(
-            debugLabel: "${section.title}_${item.route}",
-          );
-        }
+        // if (item.route == null) {
+        //   // itemKeys[item.route!] = GlobalKey(
+        //   //   debugLabel: "FilterItems_${item.title}",
+        //   // ); //wont come to this
+        // } else {
+        itemKeys[item.route!] = GlobalKey(
+          debugLabel: "${section.title}_${item.route}",
+        );
+        // }
       }
     }
   }
