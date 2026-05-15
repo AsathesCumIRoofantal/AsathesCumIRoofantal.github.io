@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'notices_controller.dart';
 
 class NoticesView extends GetView<NoticesController> {
@@ -8,65 +8,56 @@ class NoticesView extends GetView<NoticesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('NOTICES', style: TextStyle(letterSpacing: 2))),
-      body: Obx(() => ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: controller.notices.length,
-        itemBuilder: (context, index) {
-          final notice = controller.notices[index];
-          return Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Theme.of(context).dividerColor.withOpacity(0.1)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(notice.category.toUpperCase(), style: const TextStyle(color: Colors.red, fontSize: 10, fontWeight: FontWeight.bold)),
-                    Text(DateFormat('MMM dd').format(notice.date), style: const TextStyle(color: Colors.grey, fontSize: 10)),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(notice.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 4),
-                Text(notice.content, style: TextStyle(color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.7))),
-              ],
-            ),
-          );
-        },
-      )),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showCreateNoticeSheet(context),
-        label: const Text("CREATE NOTICE"),
-        icon: const Icon(Icons.notification_add_outlined),
-      ),
-    );
-  }
-
-  void _showCreateNoticeSheet(BuildContext context) {
-    Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text("NEW BROADCAST NOTICE", style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            TextField(controller: controller.titleController, decoration: const InputDecoration(labelText: "Notice Title")),
-            TextField(controller: controller.contentController, maxLines: 3, decoration: const InputDecoration(labelText: "Content")),
-            const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => controller.createNotice(), child: const Text("PUBLISH NOTICE")),
-          ],
+    return const SampleContentPage(
+      title: 'Notices',
+      subtitle:
+          'Stay on top of official notices that affect you — read them, acknowledge receipt, and archive them so you always have a record of what you were informed and when. '
+          'Notices in AIR carry weight; they are not marketing messages but formal communications that may require action, compliance, or a documented response.',
+      icon: Icons.announcement_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Unread Notices',
+          subtitle:
+              'View all notices that have been issued to you and not yet read — sorted by urgency, with the most time-sensitive items surfaced at the top. '
+              'Unread notices are flagged prominently because missing an official communication is never a neutral act in AIR.',
+          icon: Icons.mark_email_unread_rounded,
         ),
-      ),
+        SampleContentItem(
+          title: 'Acknowledgement Required',
+          subtitle:
+              'See notices that require a formal acknowledgement — your confirmation that you have read, understood, and accepted the content. '
+              'Acknowledgement creates a mutual record; it protects you as much as it protects the issuing party by establishing a clear baseline of shared understanding.',
+          icon: Icons.how_to_reg_rounded,
+        ),
+        SampleContentItem(
+          title: 'Action Items from Notices',
+          subtitle:
+              'Track any actions required by notices you have received — deadlines, forms to complete, decisions to make, or responses to submit. '
+              'Action items are extracted automatically from notice content and added to your task list so nothing falls through the cracks.',
+          icon: Icons.checklist_rounded,
+        ),
+        SampleContentItem(
+          title: 'Notice Archive',
+          subtitle:
+              'Browse your complete archive of past notices — searchable by date, category, issuer, and keyword — so you can always retrieve the original communication. '
+              'The archive is your permanent record of what you were told and when; it is the first place to look when a dispute arises about prior communication.',
+          icon: Icons.archive_rounded,
+        ),
+        SampleContentItem(
+          title: 'Notice Categories',
+          subtitle:
+              'Filter notices by category — policy updates, compliance requirements, system changes, community announcements, and personal notifications — to find what is relevant quickly. '
+              'Categories help you triage your inbox and ensure that high-priority notice types never get buried under lower-stakes communications.',
+          icon: Icons.category_rounded,
+        ),
+        SampleContentItem(
+          title: 'Issue a Notice',
+          subtitle:
+              'Compose and issue official notices to individuals, teams, or the broader AIR community — with delivery confirmation, read tracking, and acknowledgement requests. '
+              'Issuing a notice through AIR creates a formal record that is harder to dispute and easier to reference than an informal message.',
+          icon: Icons.notification_add_rounded,
+        ),
+      ],
     );
   }
 }

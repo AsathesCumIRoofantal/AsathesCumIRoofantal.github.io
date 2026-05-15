@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'be_part_of_air_controller.dart';
 
 class BePartOfAirView extends GetView<BePartOfAirController> {
@@ -7,66 +8,56 @@ class BePartOfAirView extends GetView<BePartOfAirController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text("BE PART OF AIR", style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            const Text(
-              "Join the revolution. Choose your path to become an integral part of the Automated Industrial Registry.",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.5),
-            ),
-            const SizedBox(height: 32),
-            Obx(() => Column(
-              children: controller.paths.map((path) => _buildPathCard(context, path)).toList(),
-            )),
-          ],
+    return const SampleContentPage(
+      title: 'Be Part of AIR',
+      subtitle:
+          'Discover the pathways to genuine belonging in AIR — the roles available, the expectations attached to each, and how to plug in at the level that fits your life right now. '
+          'Membership is not a status; it is an active practice of showing up, contributing, and growing alongside the community.',
+      icon: Icons.group_add_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Membership Tiers Explained',
+          subtitle:
+              'Understand the different levels of AIR membership — Observer, Participant, Contributor, and Steward — and what each one asks of you and offers in return. '
+              'Tiers are not a hierarchy of worth; they are a map of commitment levels so you can choose the depth of involvement that is honest and sustainable.',
+          icon: Icons.layers_rounded,
         ),
-      ),
-    );
-  }
-
-  Widget _buildPathCard(BuildContext context, ParticipationPath path) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Theme.of(context).colorScheme.primary.withOpacity(0.05), Colors.white],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        SampleContentItem(
+          title: 'Role Finder',
+          subtitle:
+              'Answer a short set of questions about your skills, interests, and available time to receive a personalised list of roles where you would add the most value. '
+              'The right role is the one where your strengths meet the community\'s needs — the finder makes that match explicit.',
+          icon: Icons.manage_search_rounded,
         ),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Theme.of(context).colorScheme.primary.withOpacity(0.1)),
-      ),
-      child: Column(
-        children: [
-          Icon(path.icon, size: 48, color: Theme.of(context).colorScheme.primary),
-          const SizedBox(height: 16),
-          Text(
-            path.title,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20, letterSpacing: 1),
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () => controller.handleAction(path.title),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-              ),
-              child: Text(path.action),
-            ),
-          ),
-        ],
-      ),
+        SampleContentItem(
+          title: 'Community Expectations Charter',
+          subtitle:
+              'Read the clear, honest charter of what AIR expects from every member — in terms of conduct, communication, and contribution. '
+              'Expectations are not restrictions; they are the shared agreements that make a community worth belonging to.',
+          icon: Icons.gavel_rounded,
+        ),
+        SampleContentItem(
+          title: 'Joining Ceremony',
+          subtitle:
+              'Complete a brief, meaningful joining ceremony that marks your formal entry into AIR and introduces you to the community. '
+              'The ceremony is designed to feel significant without being burdensome — a moment of intention-setting that anchors your commitment.',
+          icon: Icons.celebration_rounded,
+        ),
+        SampleContentItem(
+          title: 'Active Participation Guide',
+          subtitle:
+              'Learn the practical habits of active AIR membership — how to engage in discussions, support others, flag issues, and grow your influence over time. '
+              'Participation is a skill that improves with practice; the guide gives you the specific behaviours that make membership feel alive.',
+          icon: Icons.record_voice_over_rounded,
+        ),
+        SampleContentItem(
+          title: 'Membership Benefits Overview',
+          subtitle:
+              'See the full range of benefits that come with active AIR membership — access, recognition, learning resources, and network effects. '
+              'Benefits are not the reason to join, but understanding them helps you take full advantage of what the community has built.',
+          icon: Icons.card_membership_rounded,
+        ),
+      ],
     );
   }
 }

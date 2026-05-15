@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'maintenance_controller.dart';
 
 class MaintenanceView extends GetView<MaintenanceController> {
@@ -8,140 +8,56 @@ class MaintenanceView extends GetView<MaintenanceController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('MAINTENANCE', style: TextStyle(letterSpacing: 2))),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              onChanged: (val) => controller.searchQuery.value = val,
-              decoration: InputDecoration(
-                hintText: "Search assets or issues...",
-                prefixIcon: const Icon(Icons.search),
-                filled: true,
-                fillColor: Theme.of(context).colorScheme.surface,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: Obx(() => ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: controller.filteredRequests.length,
-              itemBuilder: (context, index) {
-                final request = controller.filteredRequests[index];
-                return Card(
-                  elevation: 2,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  margin: const EdgeInsets.only(bottom: 16),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              request.id,
-                              style: const TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
-                              ),
-                            ),
-                            _buildPriorityBadge(request.priority),
-                          ],
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          request.assetName,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          request.issue,
-                          style: TextStyle(
-                            color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.7),
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Row(
-                          children: [
-                            Icon(Icons.schedule, size: 14, color: Colors.grey),
-                            const SizedBox(width: 4),
-                            Text(
-                              DateFormat('MMM dd, HH:mm').format(request.requestedAt),
-                              style: const TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
-                            const Spacer(),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.blue.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Text(
-                                request.status.toUpperCase(),
-                                style: const TextStyle(
-                                  color: Colors.blue,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            )),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddRequestSheet(context),
-        label: const Text("ADD MAINTENANCE REQUEST"),
-        icon: const Icon(Icons.build_circle_outlined),
-      ),
-    );
-  }
-
-  Widget _buildPriorityBadge(String priority) {
-    Color color = priority == "High" ? Colors.red : (priority == "Medium" ? Colors.orange : Colors.green);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(color: color.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
-      child: Text(priority, style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold)),
-    );
-  }
-
-  void _showAddRequestSheet(BuildContext context) {
-    Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text("NEW MAINTENANCE REQUEST", style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            TextField(controller: controller.assetController, decoration: const InputDecoration(labelText: "Asset Name")),
-            TextField(controller: controller.issueController, decoration: const InputDecoration(labelText: "Issue Description")),
-            const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => controller.addRequest(), child: const Text("SUBMIT REQUEST")),
-          ],
+    return const SampleContentPage(
+      title: 'Maintenance',
+      subtitle:
+          'Run health checks, schedule upkeep tasks, and set reminders so nothing in your AIR environment silently drifts into disrepair. '
+          'Maintenance is the discipline of keeping things working well before they break — and AIR makes it easy to stay ahead of the curve rather than always reacting to it.',
+      icon: Icons.build_circle_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Health Check Dashboard',
+          subtitle:
+              'View the current health status of all systems, assets, and processes under your care — green for healthy, amber for attention needed, red for immediate action required. '
+              'The dashboard is updated in real time and designed to surface problems at the earliest possible stage, when they are still cheap to fix.',
+          icon: Icons.monitor_heart_rounded,
         ),
-      ),
+        SampleContentItem(
+          title: 'Scheduled Upkeep Tasks',
+          subtitle:
+              'Browse and manage all scheduled maintenance tasks — routine checks, periodic reviews, software updates, and physical inspections — with due dates and assigned owners. '
+              'Scheduled tasks are the backbone of preventive maintenance; they exist precisely so you do not have to remember everything yourself.',
+          icon: Icons.event_repeat_rounded,
+        ),
+        SampleContentItem(
+          title: 'Maintenance Requests',
+          subtitle:
+              'Log and track maintenance requests raised by you or your team — each with a priority level, description, assigned technician, and current status. '
+              'Requests are never lost in a chat thread; they live in a structured queue that is visible to everyone with a stake in the outcome.',
+          icon: Icons.report_problem_rounded,
+        ),
+        SampleContentItem(
+          title: 'Drift Alerts',
+          subtitle:
+              'Receive proactive alerts when AIR detects that a system, process, or asset is drifting from its expected baseline — before the drift becomes a failure. '
+              'Drift alerts are the early-warning system that turns reactive maintenance into proactive stewardship.',
+          icon: Icons.notifications_active_rounded,
+        ),
+        SampleContentItem(
+          title: 'Maintenance History',
+          subtitle:
+              'Review the complete maintenance history for every asset and system — what was done, when, by whom, and what the outcome was — in a searchable, timestamped log. '
+              'History is the foundation of good maintenance planning; patterns in past failures predict where future attention is most needed.',
+          icon: Icons.history_rounded,
+        ),
+        SampleContentItem(
+          title: 'Vendor & Service Contacts',
+          subtitle:
+              'Keep a curated directory of vendors, service providers, and technical contacts relevant to your maintenance responsibilities — with response-time ratings and contract details. '
+              'Having the right contact at your fingertips when something breaks is the difference between a two-hour fix and a two-day outage.',
+          icon: Icons.contacts_rounded,
+        ),
+      ],
     );
   }
 }

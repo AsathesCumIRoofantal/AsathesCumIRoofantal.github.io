@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'unions_controller.dart';
 import '../entities/entities_controller.dart';
 import '../../data/models/union_model.dart';
@@ -35,6 +36,15 @@ class UnionsView extends GetView<UnionsController> {
         return SingleChildScrollView(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: AirHomeContextStrip(
+                  compact: true,
+                  placement: AirHomeContextPlacement.homeTab,
+                  extraLine:
+                      'UNIONS tab: record bindings between entities; keep names consistent with the ENTITIES tab and your IDENTITY map.',
+                ),
+              ),
               _buildCollapsibleHeader(context),
               _buildUnionsInfoCard(context),
               Obx(() => AnimatedSize(

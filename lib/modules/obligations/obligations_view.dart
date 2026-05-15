@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'obligations_controller.dart';
 
 class ObligationsView extends GetView<ObligationsController> {
@@ -7,98 +8,63 @@ class ObligationsView extends GetView<ObligationsController> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final onSurface = theme.colorScheme.onSurface;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Obligations',
-          style: TextStyle(
-            letterSpacing: 1.5,
-            fontWeight: FontWeight.bold,
-            color: onSurface,
-          ),
+    return SampleContentPage(
+      title: 'Obligations',
+      subtitle:
+          'Track every legal, moral, and contractual commitment so nothing slips through the cracks. '
+          'AIR surfaces due dates, counterparties, and breach risks in one accountable view.',
+      icon: Icons.gavel,
+      items: const [
+        SampleContentItem(
+          title: 'Active Commitments',
+          subtitle:
+              'List every obligation currently in force — contracts, promises, regulatory duties, and court orders. '
+              'Each entry carries a due date, responsible party, and current status so you always know what is outstanding.',
+          icon: Icons.checklist_rtl,
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-        iconTheme: IconThemeData(color: onSurface),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
-                : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
-          ),
+        SampleContentItem(
+          title: 'Counterparty Registry',
+          subtitle:
+              'Record who holds each obligation against you and who you hold obligations against. '
+              'Linking counterparties to commitments makes it easy to spot conflicts of interest or overlapping duties.',
+          icon: Icons.handshake_outlined,
         ),
-        child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            children: [
-              _buildHeader(context, isDark, onSurface),
-              const SizedBox(height: 20),
-              // More content will be added here
-            ],
-          ),
+        SampleContentItem(
+          title: 'Breach & Risk Alerts',
+          subtitle:
+              'Set thresholds that trigger warnings before a deadline is missed or a condition is violated. '
+              'Early alerts give you time to renegotiate, escalate, or remediate before a breach becomes costly.',
+          icon: Icons.warning_amber_rounded,
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context, bool isDark, Color onSurface) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.teal.withOpacity(0.15), Colors.green.withOpacity(0.05)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        SampleContentItem(
+          title: 'Compliance Evidence',
+          subtitle:
+              'Attach documents, receipts, and audit trails that prove each obligation has been met. '
+              'Structured evidence chains make regulatory reviews and legal disputes far less stressful.',
+          icon: Icons.folder_copy_outlined,
         ),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.teal.withOpacity(0.25)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.teal.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Icon(Icons.rule, color: Colors.teal, size: 28),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Obligations',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: onSurface)),
-                    const SizedBox(height: 4),
-                    Text('Rules and Commitments',
-                        style: TextStyle(fontSize: 13, color: onSurface.withOpacity(0.6))),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Keep track of your obligations, rules, and commitments within the ecosystem. '
-            'Fulfilling obligations is key to continuous growth.',
-            style: TextStyle(fontSize: 14, color: onSurface.withOpacity(0.75), height: 1.6),
-          ),
-        ],
-      ),
+        SampleContentItem(
+          title: 'Obligation Lifecycle',
+          subtitle:
+              'Track how each commitment was created, amended, fulfilled, or discharged over time. '
+              'A full lifecycle view prevents disputes about what was agreed and when changes were made.',
+          icon: Icons.timeline,
+        ),
+        SampleContentItem(
+          title: 'Moral & Informal Duties',
+          subtitle:
+              'Capture non-legal obligations — personal promises, community commitments, and ethical pledges. '
+              'Treating informal duties with the same rigor as contracts builds trust and personal integrity.',
+          icon: Icons.volunteer_activism,
+        ),
+        SampleContentItem(
+          title: 'Obligation Dashboard',
+          subtitle:
+              'See all commitments ranked by urgency, risk level, and counterparty importance on a single screen. '
+              'The dashboard highlights overdue items in red and upcoming deadlines in amber so nothing is overlooked.',
+          icon: Icons.dashboard_outlined,
+        ),
+      ],
     );
   }
 }

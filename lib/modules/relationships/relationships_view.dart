@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'relationships_controller.dart';
 
 class RelationshipsView extends GetView<RelationshipsController> {
@@ -7,203 +8,63 @@ class RelationshipsView extends GetView<RelationshipsController> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final onSurface = theme.colorScheme.onSurface;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Relationships',
-          style: TextStyle(
-            letterSpacing: 1.5,
-            fontWeight: FontWeight.bold,
-            color: onSurface,
-          ),
+    return SampleContentPage(
+      title: 'Relationships',
+      subtitle:
+          'Map every important tie — mentors, peers, dependents, allies, and adversaries — so you understand your full network. '
+          'AIR helps you nurture high-value connections and spot gaps before they become liabilities.',
+      icon: Icons.hub_outlined,
+      items: const [
+        SampleContentItem(
+          title: 'Relationship Map',
+          subtitle:
+              'Visualise your network as a graph of nodes and edges, colour-coded by relationship type and strength. '
+              'Seeing the whole picture at once reveals clusters, bridges, and isolated contacts that need attention.',
+          icon: Icons.account_tree_outlined,
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-        iconTheme: IconThemeData(color: onSurface),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
-                : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
-          ),
+        SampleContentItem(
+          title: 'Mentors & Sponsors',
+          subtitle:
+              'Record the people who invest in your growth — their areas of expertise, how often you connect, and what you owe them. '
+              'Tracking mentor relationships ensures you reciprocate value and keep the connection alive.',
+          icon: Icons.school_outlined,
         ),
-        child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            children: [
-              _buildHeader(context, isDark, onSurface),
-              const SizedBox(height: 20),
-              ..._relationshipsSections.map((s) => _buildSection(context, s, isDark, onSurface)),
-            ],
-          ),
+        SampleContentItem(
+          title: 'Peers & Collaborators',
+          subtitle:
+              'Log colleagues and co-creators you work alongside regularly, including shared projects and communication cadence. '
+              'Strong peer ties are often the fastest path to new opportunities and honest feedback.',
+          icon: Icons.group_outlined,
         ),
-      ),
-    );
-  }
-
-  Widget _buildHeader(BuildContext context, bool isDark, Color onSurface) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.pink.withOpacity(0.15), Colors.purpleAccent.withOpacity(0.05)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+        SampleContentItem(
+          title: 'Dependents & Responsibilities',
+          subtitle:
+              'Identify people who rely on you — team members, family, or community members — and what they need from you. '
+              'Clarity about dependents helps you allocate time and energy without dropping anyone.',
+          icon: Icons.family_restroom,
         ),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.pink.withOpacity(0.25)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Colors.pink.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Icon(Icons.group, color: Colors.pink, size: 28),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Relationships',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: onSurface)),
-                    const SizedBox(height: 4),
-                    Text('Building meaningful connections',
-                        style: TextStyle(fontSize: 13, color: onSurface.withOpacity(0.6))),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Explore strategies for building and maintaining strong interpersonal, '
-            'professional, and community relationships. We believe connection '
-            'is the core of any successful endeavor.',
-            style: TextStyle(fontSize: 14, color: onSurface.withOpacity(0.75), height: 1.6),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSection(BuildContext context, _RelationshipsSection section, bool isDark, Color onSurface) {
-    final theme = Theme.of(context);
-    return Container(
-      margin: const EdgeInsets.only(bottom: 14),
-      decoration: BoxDecoration(
-        color: isDark ? theme.cardColor.withOpacity(0.35) : theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
+        SampleContentItem(
+          title: 'Allies & Advocates',
+          subtitle:
+              'Track individuals who actively champion your work or share your goals in different arenas. '
+              'Allies amplify your reach; knowing who they are lets you coordinate and support them in return.',
+          icon: Icons.diversity_3,
         ),
-        boxShadow: isDark
-            ? []
-            : [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 3))],
-      ),
-      child: Theme(
-        data: theme.copyWith(dividerColor: Colors.transparent),
-        child: ExpansionTile(
-          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-          childrenPadding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-          leading: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(section.icon, color: section.color, size: 20),
-          ),
-          title: Text(section.title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: onSurface)),
-          iconColor: onSurface.withOpacity(0.5),
-          collapsedIconColor: onSurface.withOpacity(0.4),
-          children: section.points
-              .map((p) => _buildPoint(p, onSurface, section.color))
-              .toList(),
+        SampleContentItem(
+          title: 'Relationship Health Score',
+          subtitle:
+              'Rate each relationship on recency, reciprocity, and depth to surface connections that are fading or one-sided. '
+              'A health score nudges you to reach out before a valuable tie goes cold.',
+          icon: Icons.favorite_border,
         ),
-      ),
-    );
-  }
-
-  Widget _buildPoint(String point, Color onSurface, Color accent) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 6),
-            width: 6,
-            height: 6,
-            decoration: BoxDecoration(color: accent, shape: BoxShape.circle),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(point,
-                style: TextStyle(fontSize: 14, color: onSurface.withOpacity(0.75), height: 1.5)),
-          ),
-        ],
-      ),
+        SampleContentItem(
+          title: 'Interaction Log',
+          subtitle:
+              'Keep a timestamped record of meaningful conversations, favours exchanged, and commitments made with each contact. '
+              'The log becomes invaluable context before important meetings or when resolving misunderstandings.',
+          icon: Icons.chat_bubble_outline,
+        ),
+      ],
     );
   }
 }
-
-class _RelationshipsSection {
-  final String title;
-  final IconData icon;
-  final Color color;
-  final List<String> points;
-  const _RelationshipsSection({required this.title, required this.icon, required this.color, required this.points});
-}
-
-final List<_RelationshipsSection> _relationshipsSections = [
-  _RelationshipsSection(
-    title: 'Professional Networking',
-    icon: Icons.work_outline,
-    color: Colors.blue,
-    points: [
-      'Building your industry connections.',
-      'Mentorship programs and shadowing.',
-      'Effective communication in the workplace.',
-    ],
-  ),
-  _RelationshipsSection(
-    title: 'Interpersonal Dynamics',
-    icon: Icons.people_outline,
-    color: Colors.pink,
-    points: [
-      'Conflict resolution techniques.',
-      'Developing emotional intelligence.',
-      'Fostering trust and empathy.',
-    ],
-  ),
-  _RelationshipsSection(
-    title: 'Community Building',
-    icon: Icons.diversity_3,
-    color: Colors.purple,
-    points: [
-      'Organizing local events and meetups.',
-      'Inclusivity and diversity training.',
-      'Creating safe spaces for dialogue.',
-    ],
-  ),
-];

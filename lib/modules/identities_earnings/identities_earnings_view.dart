@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'identities_earnings_controller.dart';
 import 'package:intl/intl.dart';
 
@@ -42,6 +43,14 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
           child: Column(
             children: [
               _buildSummaryHeader(context),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                child: AirHomeContextStrip(
+                  compact: true,
+                  extraLine:
+                      'What you log here should agree with the IDENTITY tab and the ENTITIES / UNIONS you already catalogue—those tabs stay on the home screen underneath this route.',
+                ),
+              ),
               _buildSearchBar(context),
               Expanded(
                 child: Obx(() {

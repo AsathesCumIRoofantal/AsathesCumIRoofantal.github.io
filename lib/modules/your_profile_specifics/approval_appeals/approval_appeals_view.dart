@@ -31,7 +31,7 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _showFileAppealSheet(context),
-        label: const Text("CREATE APPEAL STUFF"),
+        label: const Text("FILE NEW APPEAL"),
         icon: const Icon(Icons.gavel_rounded),
         backgroundColor: Colors.purple[700],
       ),

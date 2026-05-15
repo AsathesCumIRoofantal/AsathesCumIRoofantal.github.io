@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'your_business_controller.dart';
 
 class YourBusinessView extends GetView<YourBusinessController> {
@@ -7,49 +8,56 @@ class YourBusinessView extends GetView<YourBusinessController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('YOUR BUSINESS', style: TextStyle(letterSpacing: 2))),
-      body: Obx(() => ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: controller.deals.length,
-        itemBuilder: (context, index) {
-          final deal = controller.deals[index];
-          return Card(
-            margin: const EdgeInsets.only(bottom: 16),
-            child: ListTile(
-              title: Text(deal.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text("${deal.client} • Value: ${deal.value}"),
-              trailing: Chip(label: Text(deal.status, style: const TextStyle(fontSize: 10))),
-            ),
-          );
-        },
-      )),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddDealSheet(context),
-        label: const Text("CREATE BUSINESS STUFF"),
-        icon: const Icon(Icons.business_center_outlined),
-      ),
-    );
-  }
-
-  void _showAddDealSheet(BuildContext context) {
-    Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: const BorderRadius.vertical(top: Radius.circular(20))),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text("REGISTER NEW BUSINESS DEAL", style: TextStyle(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 16),
-            TextField(controller: controller.titleController, decoration: const InputDecoration(labelText: "Deal Title")),
-            TextField(controller: controller.clientController, decoration: const InputDecoration(labelText: "Client Entity")),
-            TextField(controller: controller.valueController, decoration: const InputDecoration(labelText: "Estimated Value")),
-            const SizedBox(height: 24),
-            ElevatedButton(onPressed: () => controller.addDeal(), child: const Text("SAVE PROSPECT")),
-          ],
+    return const SampleContentPage(
+      title: 'Your Business',
+      subtitle:
+          'Declare your commercial or side-project footprint to AIR so the platform can surface matching services, relevant partners, and opportunities aligned with what you are building. '
+          'Your business profile is the lens through which AIR understands your entrepreneurial identity — the more clearly you define it, the more precisely AIR can serve it.',
+      icon: Icons.business_center_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Business Profile',
+          subtitle:
+              'Define your business — its name, sector, stage, core offering, and target market — in a structured profile that AIR uses to match you with relevant opportunities and partners. '
+              'A clear profile is not just for others to read; it forces you to articulate what you are actually building, which is clarifying in itself.',
+          icon: Icons.storefront_rounded,
         ),
-      ),
+        SampleContentItem(
+          title: 'Service & Product Catalogue',
+          subtitle:
+              'List the services or products you offer — with descriptions, pricing models, and availability — so AIR can surface you to members who need exactly what you provide. '
+              'A well-maintained catalogue turns your profile into an active business development tool rather than a static biography.',
+          icon: Icons.inventory_rounded,
+        ),
+        SampleContentItem(
+          title: 'Partnership Interests',
+          subtitle:
+              'Declare the types of partnerships you are open to — distribution, co-development, investment, advisory, or referral — so AIR can match you with the right kind of interest. '
+              'Being specific about what you want attracts better-fit partners and filters out the noise of misaligned approaches.',
+          icon: Icons.handshake_rounded,
+        ),
+        SampleContentItem(
+          title: 'Business Milestones',
+          subtitle:
+              'Log your business milestones — first customer, first revenue, product launch, team hire, funding round — to build a credible track record that others can see and trust. '
+              'Milestones are evidence of momentum; they signal to potential partners and customers that you are building something real.',
+          icon: Icons.flag_rounded,
+        ),
+        SampleContentItem(
+          title: 'Market Intelligence',
+          subtitle:
+              'Access AIR-curated market intelligence relevant to your sector — trends, competitor activity, regulatory changes, and emerging opportunities. '
+              'Intelligence is only useful when it is timely and specific; AIR filters the noise to surface what actually matters for your business.',
+          icon: Icons.insights_rounded,
+        ),
+        SampleContentItem(
+          title: 'Business Compliance',
+          subtitle:
+              'Declare the regulatory and compliance frameworks your business operates under — licences held, standards met, and jurisdictions covered — so AIR can match you with partners who require that level of assurance. '
+              'Compliance declarations build trust faster than any pitch; they show that you operate with integrity and understand your obligations.',
+          icon: Icons.verified_rounded,
+        ),
+      ],
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'managements_controller.dart';
 
 class ManagementsView extends GetView<ManagementsController> {
@@ -8,358 +8,56 @@ class ManagementsView extends GetView<ManagementsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text(
-          'MANAGEMENTS',
-          style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold),
+    return const SampleContentPage(
+      title: 'Managements',
+      subtitle:
+          'Exercise operational control over everything you steward — teams, assets, programmes, and processes — from a single, structured interface. '
+          'Managements gives you the oversight tools to delegate clearly, track progress honestly, and intervene early when something is drifting off course.',
+      icon: Icons.manage_accounts_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Team Oversight',
+          subtitle:
+              'View the current status of every team under your stewardship — active members, open assignments, blockers, and recent activity — in a single consolidated view. '
+              'Oversight is not micromanagement; it is the situational awareness that lets you support your team without hovering over them.',
+          icon: Icons.groups_rounded,
         ),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          _buildSummaryCards(context),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: TextField(
-              onChanged: (val) => controller.searchQuery.value = val,
-              decoration: InputDecoration(
-                hintText: "Search tasks, IDs, or assignees...",
-                prefixIcon: const Icon(Icons.search),
-                filled: true,
-                fillColor: Theme.of(context).colorScheme.surface,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide.none,
-                ),
-                contentPadding: const EdgeInsets.symmetric(vertical: 0),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  "MANAGEMENT ASSIGNMENTS",
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
-                    color: Colors.grey,
-                  ),
-                ),
-                Obx(
-                  () => Text(
-                    "${controller.filteredTasks.length} ITEMS",
-                    style: const TextStyle(
-                      fontSize: 10,
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                itemCount: controller.filteredTasks.length,
-                itemBuilder: (context, index) {
-                  final task = controller.filteredTasks[index];
-                  return _buildTaskCard(context, task);
-                },
-              ),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showCreateTaskBottomSheet(context),
-        label: const Text("CREATE MANAGEMENT STUFF"),
-        icon: const Icon(Icons.add_task),
-      ),
-    );
-  }
-
-  Widget _buildSummaryCards(BuildContext context) {
-    return Container(
-      height: 100,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          _buildSummaryItem(
-            context,
-            "Total",
-            controller.tasks.length.toString(),
-            Icons.assessment,
-            Colors.blue,
-          ),
-          const SizedBox(width: 12),
-          _buildSummaryItem(
-            context,
-            "High Pri",
-            controller.tasks
-                .where((t) => t.priority == "High")
-                .length
-                .toString(),
-            Icons.priority_high,
-            Colors.red,
-          ),
-          const SizedBox(width: 12),
-          _buildSummaryItem(
-            context,
-            "Done",
-            "0",
-            Icons.check_circle_outline,
-            Colors.green,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSummaryItem(
-    BuildContext context,
-    String label,
-    String value,
-    IconData icon,
-    Color color,
-  ) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: Theme.of(context).dividerColor.withOpacity(0.1),
-          ),
+        SampleContentItem(
+          title: 'Asset Registry',
+          subtitle:
+              'Maintain a live registry of all assets you are responsible for — physical, digital, or financial — with current status, assigned custodians, and maintenance schedules. '
+              'A well-kept asset registry prevents the silent drift that turns manageable problems into expensive surprises.',
+          icon: Icons.inventory_2_rounded,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, color: color, size: 20),
-            const SizedBox(height: 4),
-            Text(
-              value,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              label,
-              style: const TextStyle(fontSize: 10, color: Colors.grey),
-            ),
-          ],
+        SampleContentItem(
+          title: 'Programme Dashboard',
+          subtitle:
+              'Track the health of every programme you manage — milestones reached, risks flagged, resources consumed, and outcomes delivered — against the original plan. '
+              'The dashboard is designed for honest reporting, not optimistic spin; it shows what is actually happening so you can act on reality.',
+          icon: Icons.dashboard_rounded,
         ),
-      ),
-    );
-  }
-
-  Widget _buildTaskCard(BuildContext context, ManagementTask task) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Theme.of(context).dividerColor.withOpacity(0.1),
+        SampleContentItem(
+          title: 'Delegation Log',
+          subtitle:
+              'Record every task, decision, or responsibility you have delegated — to whom, with what authority, by what deadline, and with what expected outcome. '
+              'A clear delegation log prevents the ambiguity that causes dropped balls and makes accountability conversations straightforward rather than contentious.',
+          icon: Icons.assignment_ind_rounded,
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                task.id,
-                style: const TextStyle(
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 12,
-                ),
-              ),
-              Row(
-                children: [
-                  _buildCategoryBadge(task.category),
-                  const SizedBox(width: 8),
-                  _buildPriorityBadge(task.priority),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            task.title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              const Icon(Icons.person_outline, size: 14, color: Colors.grey),
-              const SizedBox(width: 4),
-              Text(
-                task.assignedTo,
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              const Spacer(),
-              const Icon(
-                Icons.calendar_month_outlined,
-                size: 14,
-                color: Colors.grey,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                DateFormat('MMM dd').format(task.dueDate),
-                style: const TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPriorityBadge(String priority) {
-    Color color = priority == "High"
-        ? Colors.red
-        : (priority == "Medium" ? Colors.orange : Colors.green);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        priority,
-        style: TextStyle(
-          color: color,
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
+        SampleContentItem(
+          title: 'Escalation Pathways',
+          subtitle:
+              'Define and document the escalation pathways for issues that exceed your authority or require cross-functional input — so your team always knows where to go when something is beyond their scope. '
+              'Clear escalation paths reduce decision paralysis and ensure problems reach the right level without unnecessary delay.',
+          icon: Icons.escalator_warning_rounded,
         ),
-      ),
-    );
-  }
-
-  Widget _buildCategoryBadge(String category) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        category.toUpperCase(),
-        style: const TextStyle(
-          color: Colors.blue,
-          fontSize: 10,
-          fontWeight: FontWeight.bold,
+        SampleContentItem(
+          title: 'Performance Reviews',
+          subtitle:
+              'Schedule, conduct, and document performance reviews for the people and programmes you manage — with structured templates, historical context, and forward-looking development plans. '
+              'Reviews are most valuable when they are regular and honest; AIR makes the logistics easy so the conversation can stay focused on substance.',
+          icon: Icons.rate_review_rounded,
         ),
-      ),
-    );
-  }
-
-  void _showCreateTaskBottomSheet(BuildContext context) {
-    Get.bottomSheet(
-      Container(
-        padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                "CREATE MANAGEMENT TASK",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2,
-                ),
-              ),
-              const SizedBox(height: 24),
-              TextField(
-                controller: controller.titleController,
-                decoration: InputDecoration(
-                  labelText: "Task Title",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: controller.assignedController,
-                decoration: InputDecoration(
-                  labelText: "Assign To",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: controller.categoryController,
-                decoration: InputDecoration(
-                  labelText: "Category (e.g. HR, Tech, Dev)",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                "Priority",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              ),
-              Obx(
-                () => Row(
-                  children: ["Low", "Medium", "High"]
-                      .map(
-                        (p) => Expanded(
-                          child: RadioListTile<String>(
-                            contentPadding: EdgeInsets.zero,
-                            title: Text(
-                              p,
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                            value: p,
-                            groupValue: controller.selectedPriority.value,
-                            onChanged: (val) =>
-                                controller.selectedPriority.value = val!,
-                          ),
-                        ),
-                      )
-                      .toList(),
-                ),
-              ),
-              const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () => controller.createTask(),
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.all(16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text("REGISTER ASSIGNMENT"),
-                ),
-              ),
-              const SizedBox(height: 16),
-            ],
-          ),
-        ),
-      ),
-      isScrollControlled: true,
+      ],
     );
   }
 }

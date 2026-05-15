@@ -100,7 +100,7 @@ class HeigherStudiesView extends GetView<HeigherStudiesController> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Advance your academic career',
+                      'Navigate your post-graduate journey inside AIR',
                       style: TextStyle(
                         fontSize: 13,
                         color: onSurface.withOpacity(0.6),
@@ -113,8 +113,8 @@ class HeigherStudiesView extends GetView<HeigherStudiesController> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Explore pathways to Masters degrees, professional certifications, and other '
-            'advanced academic pursuits tailored for lifelong learners.',
+            'AIR\'s Higher Studies lane maps every step from entrance prep to graduation — '
+            'curating programs, scholarships, and mentors so your academic climb stays on track.',
             style: TextStyle(
               fontSize: 14,
               color: onSurface.withOpacity(0.75),
@@ -219,74 +219,73 @@ class _Section {
 
 final List<_Section> _sections = [
   _Section(
-    title: 'Specialization Options',
-    icon: Icons.menu_book,
+    title: 'Program Discovery',
+    icon: Icons.travel_explore,
     color: Colors.blue,
     points: [
-      'Master\'s degree programs.',
-      'Professional certifications.',
-      'Interdisciplinary studies.',
+      'Browse curated Masters, MBA, and PG Diploma programs matched to your AIR profile and career goals.',
+      'Filter by mode — full-time, part-time, online, or hybrid — so you find a format that fits your life.',
+      'Compare tuition, duration, and alumni outcomes side-by-side before shortlisting.',
     ],
   ),
   _Section(
-    title: 'Learning Resources',
-    icon: Icons.library_books,
-    color: Colors.purple,
-    points: [
-      'Digital library access.',
-      'Research databases.',
-      'Expert webinar series.',
-    ],
-  ),
-  _Section(
-    title: 'Faculty Excellence',
-    icon: Icons.supervised_user_circle,
-    color: Colors.green,
-    points: [
-      'Industry-leading professors.',
-      'Accessible mentorship.',
-      'Research guidance.',
-    ],
-  ),
-  _Section(
-    title: 'Global Opportunities',
-    icon: Icons.public,
-    color: Colors.cyan,
-    points: [
-      'International exchange programs.',
-      'Study abroad scholarships.',
-      'Global network access.',
-    ],
-  ),
-  _Section(
-    title: 'Career Development',
-    icon: Icons.trending_up,
-    color: Colors.amber,
-    points: [
-      'Job placement assistance.',
-      'Industry partnerships.',
-      'Alumni success stories.',
-    ],
-  ),
-
-  _Section(
-    title: 'Masters Programs',
-    icon: Icons.workspace_premium,
-    color: Colors.blue,
-    points: [
-      'University partnerships.',
-      'Online remote courses.',
-      'Scholarship opportunities.',
-    ],
-  ),
-  _Section(
-    title: 'Certifications',
-    icon: Icons.verified,
+    title: 'Entrance Exam Prep',
+    icon: Icons.quiz_outlined,
     color: Colors.indigo,
     points: [
-      'Industry-recognized credentials.',
-      'Bootcamps & short courses.',
-      'Corporate sponsorship paths.',
+      'Access topic-wise practice sets for GRE, GMAT, CAT, GATE, and other major entrance exams.',
+      'Track mock-test scores over time and let AIR surface the weak areas that need the most attention.',
+      'Set a target exam date and receive a personalised daily study schedule inside the app.',
+    ],
+  ),
+  _Section(
+    title: 'Scholarships & Funding',
+    icon: Icons.workspace_premium,
+    color: Colors.amber,
+    points: [
+      'Discover merit-based, need-based, and domain-specific scholarships from universities and foundations worldwide.',
+      'AIR alerts you to upcoming deadlines and auto-fills common application fields from your profile.',
+      'Track application status and required documents in one consolidated funding dashboard.',
+    ],
+  ),
+  _Section(
+    title: 'Statement of Purpose',
+    icon: Icons.edit_note,
+    color: Colors.teal,
+    points: [
+      'Use AIR\'s guided SOP builder to craft a compelling narrative around your academic and professional journey.',
+      'Get structured feedback on clarity, tone, and alignment with the program\'s stated values.',
+      'Save multiple SOP drafts tailored to different universities without losing version history.',
+    ],
+  ),
+  _Section(
+    title: 'Recommendation Letters',
+    icon: Icons.mark_email_read_outlined,
+    color: Colors.green,
+    points: [
+      'Manage your recommender list and send polite reminder nudges directly from AIR.',
+      'Share a context brief with each recommender so they can write a targeted, evidence-rich letter.',
+      'Track submission status per university so nothing slips through the cracks at deadline time.',
+    ],
+  ),
+  _Section(
+    title: 'Visa & Relocation',
+    icon: Icons.flight_takeoff_outlined,
+    color: Colors.cyan,
+    points: [
+      'Step-by-step visa checklists for popular study destinations — US, UK, Canada, Germany, and Australia.',
+      'Connect with AIR community members who have recently relocated to your target country for first-hand tips.',
+      'Budget planner for tuition, living costs, and travel so you arrive financially prepared.',
+    ],
+  ),
+  _Section(
+    title: 'Alumni & Mentors',
+    icon: Icons.people_alt_outlined,
+    color: Colors.purple,
+    points: [
+      'Browse verified alumni from your target programs who have opted in to mentor prospective students.',
+      'Book 30-minute Q&A sessions to get candid insights about campus life, placements, and coursework.',
+      'Join cohort groups for your intake year and start building your network before classes begin.',
     ],
   ),
 ];

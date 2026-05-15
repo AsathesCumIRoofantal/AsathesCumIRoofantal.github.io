@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'air_home_context_strip.dart';
+
 class SampleContentItem {
   final String title;
   final String subtitle;
@@ -17,6 +19,9 @@ class SampleContentPage extends StatelessWidget {
   final String subtitle;
   final IconData icon;
   final List<SampleContentItem> items;
+  /// When true, adds an all-space / home-tabs strip and (if [items] is non-empty)
+  /// one extra list card linking this module back to Identity and the drawer.
+  final bool showHomeContextBridge;
 
   const SampleContentPage({
     super.key,
@@ -24,6 +29,7 @@ class SampleContentPage extends StatelessWidget {
     required this.subtitle,
     required this.icon,
     this.items = const [],
+    this.showHomeContextBridge = true,
   });
 
   @override
@@ -32,6 +38,17 @@ class SampleContentPage extends StatelessWidget {
     final isDark = theme.brightness == Brightness.dark;
     final surface = theme.colorScheme.surface;
     final background = theme.scaffoldBackgroundColor;
+
+    final listItems = <SampleContentItem>[
+      ...items,
+      if (showHomeContextBridge && items.isNotEmpty)
+        SampleContentItem(
+          title: 'All-space home & Identity',
+          subtitle:
+              'Return to the All-Space home to refine ENTITIES and UNIONS, finish the IDENTITY questionnaire, or open the menu (☰) for another lane. This screen is "$title"—keep it coherent with what you catalogue and how you map yourself.',
+          icon: Icons.home_work_outlined,
+        ),
+    ];
 
     return Scaffold(
       appBar: AppBar(
@@ -101,57 +118,78 @@ class SampleContentPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(height: 24),
+                if (showHomeContextBridge) ...[
+                  const SizedBox(height: 14),
+                  const AirHomeContextStrip(),
+                ],
+                const SizedBox(height: 16),
                 Expanded(
-                  child: items.isEmpty
+                  child: listItems.isEmpty
                       ? Center(
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 20,
-                              vertical: 14,
-                            ),
-                            decoration: BoxDecoration(
-                              color: theme.colorScheme.surface.withOpacity(0.9),
-                              borderRadius: BorderRadius.circular(18),
-                              border: Border.all(
-                                color: theme.dividerColor.withOpacity(0.15),
+                          child: SingleChildScrollView(
+                            padding: const EdgeInsets.only(bottom: 24),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 14,
                               ),
-                            ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.hourglass_empty,
-                                  size: 42,
-                                  color: theme.colorScheme.primary,
+                              decoration: BoxDecoration(
+                                color: theme.colorScheme.surface.withOpacity(0.9),
+                                borderRadius: BorderRadius.circular(18),
+                                border: Border.all(
+                                  color: theme.dividerColor.withOpacity(0.15),
                                 ),
-                                const SizedBox(height: 12),
-                                Text(
-                                  'Empty sample content',
-                                  style: theme.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.hourglass_empty,
+                                    size: 42,
+                                    color: theme.colorScheme.primary,
                                   ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  'This page is ready to receive real AIR content.',
-                                  style: theme.textTheme.bodyMedium?.copyWith(
-                                    color: theme.textTheme.bodyMedium?.color
-                                        ?.withOpacity(0.7),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    'Empty sample content',
+                                    style: theme.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'This page is ready to receive real AIR content.',
+                                    style: theme.textTheme.bodyMedium?.copyWith(
+                                      color: theme.textTheme.bodyMedium?.color
+                                          ?.withOpacity(0.7),
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  if (showHomeContextBridge) ...[
+                                    const SizedBox(height: 16),
+                                    const AirHomeContextStrip(),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      'When real content ships for "$title", it will still sit beside your Identity map and entity catalogue on the home screen.',
+                                      style: theme.textTheme.bodySmall?.copyWith(
+                                        height: 1.35,
+                                        color: theme.textTheme.bodySmall?.color
+                                            ?.withOpacity(0.85),
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ],
+                              ),
                             ),
                           ),
                         )
                       : ListView.separated(
                           physics: const BouncingScrollPhysics(),
-                          itemCount: items.length,
+                          itemCount: listItems.length,
                           separatorBuilder: (context, index) =>
                               const SizedBox(height: 16),
                           itemBuilder: (context, index) {
-                            final item = items[index];
+                            final item = listItems[index];
                             return _buildCard(context, item);
                           },
                         ),

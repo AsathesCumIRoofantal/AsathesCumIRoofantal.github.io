@@ -80,7 +80,7 @@ class DoctorateView extends GetView<DoctorateController> {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Icon(
-                  Icons.local_hospital,
+                  Icons.biotech_outlined,
                   color: Colors.teal,
                   size: 28,
                 ),
@@ -100,7 +100,7 @@ class DoctorateView extends GetView<DoctorateController> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Ph.D and post-doctoral research',
+                      'Advanced study lane for researchers and scholars',
                       style: TextStyle(
                         fontSize: 13,
                         color: onSurface.withOpacity(0.6),
@@ -113,8 +113,8 @@ class DoctorateView extends GetView<DoctorateController> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Guidance for attaining the highest academic degrees. Resources '
-            'for thesis writing, research fellowships, and defending dissertations.',
+            'AIR\'s Doctorate lane supports the full scholarly arc — from deep reading habits and proposal writing '
+            'to publication pipelines and viva preparation — so your research rhythm compounds over time.',
             style: TextStyle(
               fontSize: 14,
               color: onSurface.withOpacity(0.75),
@@ -219,74 +219,73 @@ class _Section {
 
 final List<_Section> _sections = [
   _Section(
-    title: 'Research Excellence',
-    icon: Icons.school,
+    title: 'Research Rhythm',
+    icon: Icons.schedule_outlined,
+    color: Colors.teal,
+    points: [
+      'Design a weekly deep-work schedule that protects long reading blocks from meeting creep and notifications.',
+      'Log daily research hours in AIR so you can spot patterns — when you\'re most productive and when you drift.',
+      'Set milestone targets (chapters drafted, papers read, experiments run) and review them in weekly retrospectives.',
+    ],
+  ),
+  _Section(
+    title: 'Literature & Deep Reading',
+    icon: Icons.menu_book_outlined,
     color: Colors.indigo,
     points: [
-      'Advanced degree programs.',
-      'Thesis supervision excellence.',
-      'Publication in top journals.',
+      'Build a structured reading list organised by theme, methodology, and citation weight in your field.',
+      'Use AIR\'s annotation layer to capture key arguments, counter-arguments, and your own critical notes per paper.',
+      'Track which papers you\'ve read, skimmed, or queued so your literature review stays comprehensive and honest.',
     ],
   ),
   _Section(
-    title: 'Academic Community',
-    icon: Icons.people,
-    color: Colors.pink,
+    title: 'Thesis Architecture',
+    icon: Icons.account_tree_outlined,
+    color: Colors.blue,
     points: [
-      'Collaborations with peers.',
-      'Seminar and conference participation.',
-      'Networking opportunities.',
+      'Map your thesis structure — chapters, sub-sections, and argument flow — in a visual outline before writing.',
+      'Link each section to the supporting literature and data sources so gaps become visible early.',
+      'Version-control your drafts inside AIR and leave timestamped notes for your advisor review cycles.',
     ],
   ),
   _Section(
-    title: 'Career Pathways',
-    icon: Icons.pattern,
-    color: Colors.orange,
-    points: [
-      'Academia career track.',
-      'Industry research positions.',
-      'Think tank opportunities.',
-    ],
-  ),
-  _Section(
-    title: 'Knowledge Contribution',
-    icon: Icons.lightbulb,
-    color: Colors.amber,
-    points: [
-      'Advancing frontier research.',
-      'Solving complex problems.',
-      'Publishing groundbreaking work.',
-    ],
-  ),
-  _Section(
-    title: 'Mentorship & Legacy',
-    icon: Icons.waving_hand,
-    color: Colors.teal,
-    points: [
-      'Guiding next generation scholars.',
-      'Building research legacy.',
-      'Creating knowledge foundations.',
-    ],
-  ),
-
-  _Section(
-    title: 'Research Proposals',
-    icon: Icons.edit_document,
-    color: Colors.teal,
-    points: [
-      'Crafting a winning proposal.',
-      'Selecting an advisor.',
-      'Funding and grant writing.',
-    ],
-  ),
-  _Section(
-    title: 'Publications',
-    icon: Icons.menu_book,
+    title: 'Research Proposals & Grants',
+    icon: Icons.description_outlined,
     color: Colors.green,
     points: [
-      'Submitting to peer-reviewed journals.',
-      'Conference presentations.',
-      'Networking with scholars.',
+      'Use AIR\'s proposal template to articulate research questions, methodology, and expected contributions clearly.',
+      'Track grant deadlines, funding bodies, and submission requirements in one consolidated calendar.',
+      'Store reviewer feedback from past proposals and use it to sharpen future applications.',
+    ],
+  ),
+  _Section(
+    title: 'Publication Pipeline',
+    icon: Icons.publish_outlined,
+    color: Colors.purple,
+    points: [
+      'Manage your manuscript pipeline — from draft to submission to revision — with status tags per journal.',
+      'Log peer-review feedback and track response letters so revision cycles stay organised and timely.',
+      'Celebrate accepted papers in your AIR profile and link them to your public scholarly identity.',
+    ],
+  ),
+  _Section(
+    title: 'Advisor & Peer Collaboration',
+    icon: Icons.group_work_outlined,
+    color: Colors.orange,
+    points: [
+      'Schedule regular advisor check-ins and log action items so nothing agreed in meetings gets forgotten.',
+      'Share chapter drafts with trusted peers for pre-submission critique using AIR\'s secure sharing links.',
+      'Join or form a doctoral writing group inside AIR to maintain accountability and reduce isolation.',
+    ],
+  ),
+  _Section(
+    title: 'Viva & Defence Prep',
+    icon: Icons.record_voice_over_outlined,
+    color: Colors.red,
+    points: [
+      'Compile a list of likely examiner questions based on your thesis and practice structured responses.',
+      'Record mock defence sessions and review them to improve clarity, pacing, and confidence under pressure.',
+      'Prepare a concise 10-minute summary of your contribution that you can deliver fluently from memory.',
     ],
   ),
 ];

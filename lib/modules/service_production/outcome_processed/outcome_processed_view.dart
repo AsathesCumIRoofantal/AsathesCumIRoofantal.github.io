@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'outcome_processed_controller.dart';
 
 class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
@@ -8,71 +8,56 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text("OUTCOME PROCESSED", style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: Obx(() => ListView.builder(
-        padding: const EdgeInsets.all(24),
-        itemCount: controller.outcomes.length,
-        itemBuilder: (context, index) {
-          final outcome = controller.outcomes[index];
-          return _buildOutcomeCard(context, outcome);
-        },
-      )),
+    return const SampleContentPage(
+      title: 'Outcome Processed',
+      subtitle:
+          'Access the finished artefacts, receipts, and verified records produced once a work item completes processing. '
+          'Every outcome is signed, timestamped, and stored so stakeholders can retrieve proof of completion at any time.',
+      icon: Icons.task_alt_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Completed Artefact Library',
+          subtitle:
+              'Browse all processed outputs — reports, datasets, certificates, and documents — organised by date and category. '
+              'Full-text search and tag filters make it fast to locate any specific artefact across thousands of records.',
+          icon: Icons.folder_special_rounded,
+        ),
+        SampleContentItem(
+          title: 'Completion Receipts',
+          subtitle:
+              'Every finished job generates a tamper-evident receipt capturing who processed it, when, and what the output was. '
+              'Receipts can be shared with clients or auditors as proof of service delivery without exposing raw data.',
+          icon: Icons.receipt_long_rounded,
+        ),
+        SampleContentItem(
+          title: 'Output Quality Score',
+          subtitle:
+              'Each processed outcome is automatically scored against predefined quality criteria before it is released. '
+              'Items that fall below the threshold are flagged for human review rather than silently passed downstream.',
+          icon: Icons.verified_rounded,
+        ),
+        SampleContentItem(
+          title: 'Delivery Confirmation',
+          subtitle:
+              'Track whether each completed output has been delivered to its intended recipient and acknowledged. '
+              'Unacknowledged deliveries trigger a follow-up reminder after a configurable grace period.',
+          icon: Icons.mark_email_read_rounded,
+        ),
+        SampleContentItem(
+          title: 'Export & Download Centre',
+          subtitle:
+              'Download processed artefacts in PDF, CSV, JSON, or XML format with a single tap. '
+              'Bulk export lets authorised users package an entire date range of outcomes for archival or handover.',
+          icon: Icons.download_for_offline_rounded,
+        ),
+        SampleContentItem(
+          title: 'Outcome Analytics',
+          subtitle:
+              'Review aggregate statistics on processed volumes, average turnaround times, and quality pass rates. '
+              'Trend charts reveal whether output quality is improving or degrading across successive processing cycles.',
+          icon: Icons.bar_chart_rounded,
+        ),
+      ],
     );
-  }
-
-  Widget _buildOutcomeCard(BuildContext context, ProcessedOutcome outcome) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 20),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.green.withOpacity(0.1)),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 10, offset: const Offset(0, 4)),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.green.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(_getFileIcon(outcome.type), color: Colors.green, size: 28),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(outcome.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-                const SizedBox(height: 4),
-                Text("${outcome.type} • ${outcome.size}", style: TextStyle(color: Colors.grey[600], fontSize: 12)),
-              ],
-            ),
-          ),
-          IconButton(
-            onPressed: () => controller.downloadOutcome(outcome.title),
-            icon: const Icon(Icons.download_for_offline_outlined, color: Colors.blue),
-          ),
-        ],
-      ),
-    );
-  }
-
-  IconData _getFileIcon(String type) {
-    switch (type) {
-      case "PDF": return Icons.picture_as_pdf_outlined;
-      case "JSON": return Icons.code_rounded;
-      case "CSV": return Icons.table_chart_outlined;
-      default: return Icons.insert_drive_file_outlined;
-    }
   }
 }

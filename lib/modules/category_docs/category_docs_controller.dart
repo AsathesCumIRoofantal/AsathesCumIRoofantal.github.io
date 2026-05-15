@@ -3,8 +3,8 @@ import '../../data/models/learning_doc_model.dart';
 import '../../data/providers/data_provider.dart';
 
 class CategoryDocsController extends GetxController {
-  final categoryId = Get.arguments['categoryId'] ?? '';
-  final title = Get.arguments['title'] ?? 'Category';
+  final categoryId = Get.arguments?['categoryId'] ?? '';
+  final title = Get.arguments?['title'] ?? 'Category';
 
   var docs = <LearningDocModel>[].obs;
   var filteredDocs = <LearningDocModel>[].obs;
@@ -27,7 +27,7 @@ class CategoryDocsController extends GetxController {
       var result = await _dataProvider.getLearningDocs();
       docs.assignAll(result.where((d) => d.categoryId == categoryId).toList());
       filteredDocs.assignAll(docs);
-      
+
       // dynamically generate filters based on available docs
       Set<String> dynamicFilters = {'All'};
       for (var d in docs) {
@@ -35,7 +35,6 @@ class CategoryDocsController extends GetxController {
         dynamicFilters.add(d.type);
       }
       filterTypes.assignAll(dynamicFilters.toList());
-
     } finally {
       isLoading(false);
     }
@@ -46,9 +45,16 @@ class CategoryDocsController extends GetxController {
     if (filter == 'All') {
       filteredDocs.assignAll(docs);
     } else {
-      filteredDocs.assignAll(docs.where((d) => 
-        d.classCategory == filter || d.type == filter || d.targetAge == filter
-      ).toList());
+      filteredDocs.assignAll(
+        docs
+            .where(
+              (d) =>
+                  d.classCategory == filter ||
+                  d.type == filter ||
+                  d.targetAge == filter,
+            )
+            .toList(),
+      );
     }
   }
 }

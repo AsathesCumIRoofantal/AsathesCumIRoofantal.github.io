@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'identity_controller.dart';
 import '../../core/utils/content_reviser.dart';
 import '../../data/auth_service.dart';
@@ -39,10 +40,37 @@ class IdentityView extends GetView<IdentityController> {
 
         if (controller.questionnaires.isEmpty) {
           return Center(
-            child: Text(
-              "No questionnaires available.",
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyMedium?.color,
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "No questionnaires available.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyMedium?.color,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    'When questionnaires arrive, this tab becomes your guided map of cognitive and existential coordinates. Until then, catalogue ENTITIES and UNIONS on the home screen, and skim drawer topics so the organisation can still learn your posture.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 13,
+                      height: 1.4,
+                      color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.75),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  AirHomeContextStrip(
+                    compact: true,
+                    placement: AirHomeContextPlacement.homeTab,
+                    extraLine:
+                        'IDENTITY is the third home tab—once questionnaires load, answers here should align with ENTITIES and UNIONS and with drawer programmes you open from the menu (☰).',
+                  ),
+                ],
               ),
             ),
           );
@@ -51,6 +79,15 @@ class IdentityView extends GetView<IdentityController> {
         return SingleChildScrollView(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: AirHomeContextStrip(
+                  compact: true,
+                  placement: AirHomeContextPlacement.homeTab,
+                  extraLine:
+                      'IDENTITY tab: answers layer on top of ENTITIES and UNIONS—keep all three tabs truthful together.',
+                ),
+              ),
               _buildCollapsibleHeader(context),
               _buildIdentityInfoCard(context),
               controller.isCompleted.value
@@ -98,7 +135,10 @@ class IdentityView extends GetView<IdentityController> {
                 ),
             ],
           ),
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
@@ -152,6 +192,40 @@ class IdentityView extends GetView<IdentityController> {
                   size: 28,
                 ),
               ),
+            ],
+          ),
+              if (isExpanded) ...[
+                const SizedBox(height: 14),
+                Divider(height: 1, color: accent.withOpacity(0.25)),
+                const SizedBox(height: 12),
+                Text(
+                  'Expanded view — how this tab meets the drawer',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                    color: accent.withOpacity(0.95),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Answers you give here do not replace entity or union records; they explain the observer behind those records. Drawer lanes such as BE-YOU & EARN LIVING, Motivation, and Profile Specifics assume this coordinate layer stays honest.',
+                  style: TextStyle(
+                    fontSize: 12,
+                    height: 1.4,
+                    color: theme.textTheme.bodyMedium?.color?.withOpacity(0.82),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'If you change your mind later, use Recalibrate / Re-map—the FAB keeps your philosophical trail current without erasing earlier honesty.',
+                  style: TextStyle(
+                    fontSize: 12,
+                    height: 1.4,
+                    color: theme.textTheme.bodyMedium?.color?.withOpacity(0.72),
+                  ),
+                ),
+              ],
             ],
           ),
         ),
@@ -296,7 +370,14 @@ class IdentityView extends GetView<IdentityController> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 12),
+            AirHomeContextStrip(
+              compact: true,
+              placement: AirHomeContextPlacement.homeTab,
+              extraLine:
+                  'Each choice advances this home tab only; swipe ENTITIES or UNIONS to check your catalogue, then use the menu (☰) for drawer programmes that consume a completed map.',
+            ),
+            const SizedBox(height: 24),
             Text(
               question.question,
               style: TextStyle(
@@ -404,7 +485,14 @@ class IdentityView extends GetView<IdentityController> {
                 height: 1.5,
               ),
             )),
-            const SizedBox(height: 48),
+            const SizedBox(height: 16),
+            AirHomeContextStrip(
+              compact: true,
+              placement: AirHomeContextPlacement.homeTab,
+              extraLine:
+                  'Next: open Identities Cum Earnings or Profile Specifics from the menu (☰) when you attach outward work and credits to this mapped node.',
+            ),
+            const SizedBox(height: 32),
           ],
         ),
       ),

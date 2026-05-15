@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'entities_controller.dart';
 import '../../data/models/entity_model.dart';
 import '../../core/utils/content_reviser.dart';
@@ -36,6 +37,15 @@ class EntitiesView extends GetView<EntitiesController> {
         return SingleChildScrollView(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                child: AirHomeContextStrip(
+                  compact: true,
+                  placement: AirHomeContextPlacement.homeTab,
+                  extraLine:
+                      'ENTITIES tab: catalogue discrete nodes first; UNIONS and IDENTITY explain how they connect and who observes them.',
+                ),
+              ),
               _buildCollapsibleHeader(context),
               _buildEntitiesInfoCard(context),
               Obx(() => AnimatedSize(

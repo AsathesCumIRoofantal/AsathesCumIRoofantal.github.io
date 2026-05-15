@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'contribute_to_air_controller.dart';
 
 class ContributeToAirView extends GetView<ContributeToAirController> {
@@ -7,85 +8,56 @@ class ContributeToAirView extends GetView<ContributeToAirController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text("CONTRIBUTE TO AIR", style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: Obx(() => ListView.builder(
-        padding: const EdgeInsets.all(24),
-        itemCount: controller.types.length,
-        itemBuilder: (context, index) {
-          final type = controller.types[index];
-          return _buildContributionCard(context, type);
-        },
-      )),
-    );
-  }
-
-  Widget _buildContributionCard(BuildContext context, ContributionType type) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.amber.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(type.icon, color: Colors.amber[800], size: 28),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(type.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-                      const SizedBox(height: 4),
-                      Text(type.reward, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 12)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              type.description,
-              style: TextStyle(color: Colors.grey[600], fontSize: 14, height: 1.5),
-            ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () => controller.startContribution(type.title),
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                ),
-                child: const Text("START CONTRIBUTION"),
-              ),
-            ),
-          ),
-        ],
-      ),
+    return const SampleContentPage(
+      title: 'Contribute to AIR',
+      subtitle:
+          'Channel your ideas, skills, content, or time into AIR through structured pathways that ensure every contribution lands responsibly and creates real value. '
+          'Great communities are built by contributors who give thoughtfully — this module shows you how to do exactly that.',
+      icon: Icons.volunteer_activism_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Idea Submission Portal',
+          subtitle:
+              'Submit ideas for new features, content, or community initiatives through a structured form that captures context, rationale, and expected impact. '
+              'Structured submissions are more likely to be acted on — the form helps you think through your idea before sharing it.',
+          icon: Icons.lightbulb_rounded,
+        ),
+        SampleContentItem(
+          title: 'Content Contribution Guidelines',
+          subtitle:
+              'Understand the standards for contributing articles, guides, templates, and media to the AIR knowledge base. '
+              'Guidelines exist to protect quality and consistency — they are not gatekeeping, they are the shared craft standards of the community.',
+          icon: Icons.article_rounded,
+        ),
+        SampleContentItem(
+          title: 'Code & Patch Submissions',
+          subtitle:
+              'Contribute technical improvements — bug fixes, feature patches, or performance enhancements — through the AIR development workflow. '
+              'Technical contributions are reviewed by maintainers who provide constructive feedback, making the process a learning opportunity as well as a contribution.',
+          icon: Icons.code_rounded,
+        ),
+        SampleContentItem(
+          title: 'Time & Skill Volunteering',
+          subtitle:
+              'Offer your time and expertise to specific AIR projects, working groups, or community support roles that need your particular skills. '
+              'Volunteering your time is one of the most direct ways to shape AIR — and it builds relationships that outlast any single project.',
+          icon: Icons.access_time_rounded,
+        ),
+        SampleContentItem(
+          title: 'Contribution Impact Tracker',
+          subtitle:
+              'See the downstream impact of your contributions — how many people used your content, which ideas were implemented, and what changed as a result. '
+              'Impact visibility is a powerful motivator; knowing your work matters makes it easier to keep contributing.',
+          icon: Icons.insights_rounded,
+        ),
+        SampleContentItem(
+          title: 'Responsible Contribution Principles',
+          subtitle:
+              'Learn the principles that guide responsible contribution — accuracy, attribution, scope awareness, and the discipline of finishing what you start. '
+              'Responsible contribution is what separates a thriving community from a chaotic one; these principles are the shared contract.',
+          icon: Icons.verified_rounded,
+        ),
+      ],
     );
   }
 }

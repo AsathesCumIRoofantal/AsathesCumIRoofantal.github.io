@@ -80,7 +80,7 @@ class LifeHacksView extends GetView<LifeHacksController> {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Icon(
-                  Icons.heat_pump_rounded,
+                  Icons.tips_and_updates_outlined,
                   color: Colors.orange,
                   size: 28,
                 ),
@@ -100,7 +100,7 @@ class LifeHacksView extends GetView<LifeHacksController> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Optimize your daily routine',
+                      'Practical shortcuts for busy learners',
                       style: TextStyle(
                         fontSize: 13,
                         color: onSurface.withOpacity(0.6),
@@ -113,8 +113,8 @@ class LifeHacksView extends GetView<LifeHacksController> {
           ),
           const SizedBox(height: 16),
           Text(
-            'Smart shortcuts, productivity tips, and everyday tricks to make '
-            'your life easier. Work smarter, not harder.',
+            'AIR curates battle-tested shortcuts and everyday efficiencies so busy learners reclaim time '
+            'without sacrificing quality — small tweaks that compound into big gains over weeks.',
             style: TextStyle(
               fontSize: 14,
               color: onSurface.withOpacity(0.75),
@@ -219,53 +219,73 @@ class _Section {
 
 final List<_Section> _sections = [
   _Section(
-    title: 'Productivity',
-    icon: Icons.timer,
+    title: 'Time Reclamation',
+    icon: Icons.timer_outlined,
     color: Colors.orange,
     points: [
-      'Time-blocking techniques.',
-      'Automating repetitive tasks.',
-      'Inbox zero strategies.',
+      'Apply time-blocking to protect deep-work hours — assign every hour a job the night before so mornings start with clarity.',
+      'Use the two-minute rule: if a task takes less than two minutes, do it immediately rather than scheduling it.',
+      'Batch similar tasks (emails, calls, admin) into dedicated slots to cut the hidden cost of context-switching.',
     ],
   ),
   _Section(
-    title: 'Well-being',
-    icon: Icons.self_improvement,
-    color: Colors.amber,
+    title: 'Focus & Flow',
+    icon: Icons.center_focus_strong_outlined,
+    color: Colors.deepOrange,
     points: [
-      'Ergonomic desk setups.',
-      'Quick 5-minute workouts.',
-      'Hydration trackers.',
-    ],
-  ),
-  _Section(
-    title: 'Financial Tips',
-    icon: Icons.savings,
-    color: Colors.green,
-    points: [
-      'Budget optimization strategies.',
-      'Smart spending habits.',
-      'Investment basics.',
+      'Set up a distraction-free environment — phone in another room, notifications off, a single browser tab open.',
+      'Use the Pomodoro technique (25 min on, 5 min off) and track completed cycles in AIR to build a focus streak.',
+      'Identify your peak cognitive hours and guard them for your hardest, highest-value work every day.',
     ],
   ),
   _Section(
     title: 'Learning Shortcuts',
-    icon: Icons.school,
-    color: Colors.blue,
+    icon: Icons.bolt_outlined,
+    color: Colors.amber,
     points: [
-      'Speed reading techniques.',
-      'Memory improvement methods.',
-      'Active learning strategies.',
+      'Use active recall instead of re-reading — close the book and write down everything you remember, then check.',
+      'Apply spaced repetition: review material at increasing intervals (1 day, 3 days, 1 week) to lock it in long-term.',
+      'Teach what you\'ve just learned to someone else or write a one-page summary — the gaps reveal themselves instantly.',
     ],
   ),
   _Section(
-    title: 'Daily Efficiency',
-    icon: Icons.trending_up,
+    title: 'Digital Declutter',
+    icon: Icons.phonelink_erase_outlined,
     color: Colors.teal,
     points: [
-      'Morning routine optimization.',
-      'Decision-making frameworks.',
-      'Energy management.',
+      'Audit your app home screen monthly — keep only tools you use daily and move the rest to a secondary folder.',
+      'Set up email filters and labels so your inbox shows only items that need a decision, not every notification.',
+      'Use a single trusted task manager and capture everything there — a clear head beats a cluttered one every time.',
+    ],
+  ),
+  _Section(
+    title: 'Energy Management',
+    icon: Icons.battery_charging_full_outlined,
+    color: Colors.green,
+    points: [
+      'Treat sleep as a performance input — consistent 7-8 hours improves memory consolidation and decision quality.',
+      'Schedule short movement breaks every 90 minutes to reset focus and prevent the afternoon energy crash.',
+      'Front-load your most demanding tasks before lunch when willpower and glucose levels are naturally higher.',
+    ],
+  ),
+  _Section(
+    title: 'Financial Quick Wins',
+    icon: Icons.savings_outlined,
+    color: Colors.blue,
+    points: [
+      'Automate savings on payday so the money moves before you can spend it — pay yourself first, always.',
+      'Do a monthly subscription audit: cancel anything you haven\'t used in 30 days and redirect that money.',
+      'Use the 24-hour rule for non-essential purchases over a set threshold to eliminate impulse spending.',
+    ],
+  ),
+  _Section(
+    title: 'Relationship Efficiency',
+    icon: Icons.handshake_outlined,
+    color: Colors.purple,
+    points: [
+      'Send a brief weekly check-in message to three important contacts — it takes five minutes and keeps bonds warm.',
+      'Prepare a clear agenda before any meeting and share it in advance so everyone arrives ready to decide.',
+      'Say no to low-priority requests with a short, kind explanation — protecting your time respects theirs too.',
     ],
   ),
 ];

@@ -10,23 +10,52 @@ class CourtCasesView extends GetView<CourtCasesController> {
   Widget build(BuildContext context) {
     return SampleContentPage(
       title: 'Court Cases',
-      subtitle: 'Explore placeholder content for Court Cases in AIR.',
-      icon: Icons.article_outlined,
+      subtitle:
+          'Maintain informational case files covering dockets, hearing schedules, and counsel coordination. '
+          'This module provides a structured reference — not legal advice — to keep all parties informed.',
+      icon: Icons.account_balance,
       items: const [
         SampleContentItem(
-          title: 'Overview',
-          subtitle: 'Learn about how Court Cases works inside AIR.',
-          icon: Icons.info_outline,
+          title: 'Case Docket',
+          subtitle:
+              'View the full docket for each case including case number, parties involved, and current status. '
+              'Docket entries are updated as new filings and orders are received from the court.',
+          icon: Icons.folder_open,
         ),
         SampleContentItem(
-          title: 'Experience',
-          subtitle: 'Browse the sample concepts and usage examples.',
-          icon: Icons.auto_stories_outlined,
+          title: 'Hearing Schedule',
+          subtitle:
+              'Track upcoming hearing dates, venues, and required attendees for each active case. '
+              'Calendar reminders are sent to relevant personnel well in advance of each hearing.',
+          icon: Icons.event,
         ),
         SampleContentItem(
-          title: 'Action',
-          subtitle: 'Add your first entry or expand this module later.',
-          icon: Icons.play_circle_outline,
+          title: 'Document Repository',
+          subtitle:
+              'Store and organise all case-related documents including pleadings, affidavits, and orders. '
+              'Documents are version-controlled and access is restricted to authorised personnel only.',
+          icon: Icons.folder_special,
+        ),
+        SampleContentItem(
+          title: 'Counsel Coordination',
+          subtitle:
+              'Log communications and instructions exchanged with legal counsel for each case. '
+              'Coordination records help ensure continuity when personnel or counsel changes occur.',
+          icon: Icons.connect_without_contact,
+        ),
+        SampleContentItem(
+          title: 'Case Timeline',
+          subtitle:
+              'Visualise the full chronological history of a case from filing through to resolution. '
+              'Timelines make it easy to brief new team members and prepare for upcoming hearings.',
+          icon: Icons.timeline,
+        ),
+        SampleContentItem(
+          title: 'Outcome & Closure',
+          subtitle:
+              'Record the final judgement or settlement outcome and close the case file formally. '
+              'Closed cases are archived with all documents intact for future reference and appeals.',
+          icon: Icons.gavel,
         ),
       ],
     );

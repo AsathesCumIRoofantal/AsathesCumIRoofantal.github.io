@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'projects_assessments_controller.dart';
 
 class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
@@ -95,11 +96,22 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
   Widget _buildProjectsList(BuildContext context) {
     return Obx(
       () => ListView.builder(
-        padding: const EdgeInsets.fromLTRB(16, 120, 16, 100),
-        itemCount: controller.projects.length,
+        padding: const EdgeInsets.fromLTRB(16, 100, 16, 100),
+        itemCount: controller.projects.length + 1,
         itemBuilder: (context, index) {
-          final project = controller.projects[index];
-          return _buildProjectCard(context, project, index);
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: AirHomeContextStrip(
+                compact: true,
+                placement: AirHomeContextPlacement.nestedModuleTab,
+                extraLine:
+                    'PROJECTS tab — timelines here should reference entities and unions you keep current on the All-Space home tabs.',
+              ),
+            );
+          }
+          final project = controller.projects[index - 1];
+          return _buildProjectCard(context, project, index - 1);
         },
       ),
     );
@@ -281,11 +293,22 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
   Widget _buildAssessmentsList(BuildContext context) {
     return Obx(
       () => ListView.builder(
-        padding: const EdgeInsets.fromLTRB(16, 120, 16, 100),
-        itemCount: controller.assessments.length,
+        padding: const EdgeInsets.fromLTRB(16, 100, 16, 100),
+        itemCount: controller.assessments.length + 1,
         itemBuilder: (context, index) {
-          final assessment = controller.assessments[index];
-          return _buildAssessmentCard(context, assessment, index);
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: AirHomeContextStrip(
+                compact: true,
+                placement: AirHomeContextPlacement.nestedModuleTab,
+                extraLine:
+                    'ASSESSMENTS tab — scores should match evidence you can trace to projects, entities, or unions on the home map.',
+              ),
+            );
+          }
+          final assessment = controller.assessments[index - 1];
+          return _buildAssessmentCard(context, assessment, index - 1);
         },
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'never_give_up_controller.dart';
 
 class NeverGiveUpView extends GetView<NeverGiveUpController> {
@@ -7,47 +8,63 @@ class NeverGiveUpView extends GetView<NeverGiveUpController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text("NEVER GIVE UP", style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: Obx(() => ListView.builder(
-        padding: const EdgeInsets.all(24),
-        itemCount: controller.stories.length,
-        itemBuilder: (context, index) {
-          final story = controller.stories[index];
-          return _buildStoryCard(context, story);
-        },
-      )),
-    );
-  }
-
-  Widget _buildStoryCard(BuildContext context, SuccessStory story) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(story.icon, color: Colors.amber, size: 32),
-          const SizedBox(height: 16),
-          Text(story.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18, letterSpacing: 1)),
-          const SizedBox(height: 12),
-          Text(
-            story.content,
-            style: TextStyle(color: Colors.grey[600], fontSize: 14, height: 1.5),
-          ),
-        ],
-      ),
+    return const SampleContentPage(
+      title: 'Never Give Up',
+      subtitle:
+          'Build the mental frameworks and practical tools to hold the line when progress is hard — and to pivot smartly when holding the line becomes stubbornness. '
+          'Persistence is a skill, not a personality trait, and it can be trained with the right framing.',
+      icon: Icons.shield_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Hold vs. Pivot Decision',
+          subtitle:
+              'When you feel like quitting, use the structured hold-or-pivot framework to distinguish genuine resilience from sunk-cost thinking. '
+              'The framework asks three questions: Is the goal still valid? Is the path still viable? Is the cost still acceptable?',
+          icon: Icons.fork_right_rounded,
+        ),
+        SampleContentItem(
+          title: 'Obstacle Reframe Tool',
+          subtitle:
+              'Transform the way you interpret setbacks by reframing obstacles as data points rather than verdicts on your worth. '
+              'Each reframe is logged so you can look back and see how many "impossible" moments you actually moved through.',
+          icon: Icons.psychology_rounded,
+        ),
+        SampleContentItem(
+          title: 'Resilience Evidence Bank',
+          subtitle:
+              'Build a personal bank of evidence — past challenges you overcame, hard things you finished, moments you did not quit. '
+              'When doubt strikes, the evidence bank provides concrete proof that you have been here before and made it through.',
+          icon: Icons.savings_rounded,
+        ),
+        SampleContentItem(
+          title: 'Persistence Streak Tracker',
+          subtitle:
+              'Track consecutive days of showing up for your most important commitments, even imperfectly. '
+              'The streak is not about perfection — it is about the identity-building power of consistent effort over time.',
+          icon: Icons.local_fire_department_rounded,
+        ),
+        SampleContentItem(
+          title: 'Smart Pivot Planner',
+          subtitle:
+              'When a genuine pivot is the right call, plan it deliberately rather than reactively — preserving what was learned and redirecting energy wisely. '
+              'A smart pivot is not giving up; it is applying hard-won insight to a better path.',
+          icon: Icons.pivot_table_chart_rounded,
+        ),
+        SampleContentItem(
+          title: 'Inspiration Archive',
+          subtitle:
+              'Curate quotes, stories, and personal memories that reliably reignite your motivation when the tank runs low. '
+              'The archive is searchable by mood and context so you can find the right fuel for the specific challenge you face.',
+          icon: Icons.bookmark_rounded,
+        ),
+        SampleContentItem(
+          title: 'Accountability Partner Link',
+          subtitle:
+              'Connect with an accountability partner who will check in on your persistence commitments without judgment. '
+              'Partners are matched by domain and communication style to maximise the quality of the support exchange.',
+          icon: Icons.people_alt_rounded,
+        ),
+      ],
     );
   }
 }

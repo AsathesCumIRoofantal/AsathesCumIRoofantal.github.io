@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'responsibilities_controller.dart';
 
 class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
@@ -7,110 +8,63 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0F0F0F),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text('LIABILITY & ETHICS', style: TextStyle(color: Colors.redAccent, letterSpacing: 3, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          _buildLiabilityHeader(context),
-          Expanded(
-            child: Obx(() => ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              itemCount: controller.liabilities.length,
-              itemBuilder: (context, index) {
-                final item = controller.liabilities[index];
-                return _buildLiabilityCard(context, item);
-              },
-            )),
-          ),
-          _buildAgreementFooter(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLiabilityHeader(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(40),
-      child: const Column(
-        children: [
-          Icon(Icons.balance_rounded, size: 60, color: Colors.redAccent),
-          SizedBox(height: 16),
-          Text(
-            "BE LIABLE",
-            style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold, letterSpacing: 4),
-          ),
-          SizedBox(height: 12),
-          Text(
-            "Accountability is the bedrock of AIR's systemic trust.",
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey, fontSize: 13, height: 1.5),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLiabilityCard(BuildContext context, LiabilityItem item) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1A1A1A),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.redAccent.withOpacity(0.2)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(item.icon, color: Colors.redAccent, size: 28),
-          const SizedBox(width: 20),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(item.title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
-                const SizedBox(height: 8),
-                Text(
-                  "CONSEQUENCE:",
-                  style: TextStyle(color: Colors.redAccent.withOpacity(0.7), fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  item.consequence,
-                  style: const TextStyle(color: Colors.grey, fontSize: 13, height: 1.4),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAgreementFooter(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(32),
-      decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border(top: BorderSide(color: Colors.redAccent.withOpacity(0.1))),
-      ),
-      child: const Row(
-        children: [
-          Icon(Icons.info_outline, color: Colors.grey, size: 16),
-          SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              "By continuing to use AIR, you acknowledge and accept these liabilities.",
-              style: TextStyle(color: Colors.grey, fontSize: 11),
-            ),
-          ),
-        ],
-      ),
+    return const SampleContentPage(
+      title: 'Responsibilities',
+      subtitle:
+          'Map the full landscape of what you owe — to yourself, your family, your work, and your community — so nothing important falls through the cracks. '
+          'Duty mapping is not about guilt or obligation; it is about living with integrity by knowing your commitments and honouring them deliberately.',
+      icon: Icons.assignment_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Self-Responsibility Inventory',
+          subtitle:
+              'Identify the core duties you hold toward your own health, growth, finances, and mental wellbeing — the foundation everything else rests on. '
+              'You cannot reliably fulfil responsibilities to others if the responsibilities to yourself are chronically neglected.',
+          icon: Icons.person_rounded,
+        ),
+        SampleContentItem(
+          title: 'Family Duty Map',
+          subtitle:
+              'Clarify the specific responsibilities you carry within your family — care, presence, financial contribution, emotional support, and shared decisions. '
+              'Making these explicit prevents the resentment that builds when family members have different assumptions about who owes what.',
+          icon: Icons.family_restroom_rounded,
+        ),
+        SampleContentItem(
+          title: 'Professional Obligations Tracker',
+          subtitle:
+              'List your active professional commitments — deliverables, relationships, and role-specific duties — and track their status in one place. '
+              'Professional responsibilities are often the most visible, but they are also the most likely to expand beyond sustainable limits without active management.',
+          icon: Icons.work_rounded,
+        ),
+        SampleContentItem(
+          title: 'Community Contribution Planner',
+          subtitle:
+              'Define how you will contribute to your community — AIR, local, or broader — in ways that are meaningful, sustainable, and matched to your capacity. '
+              'Community responsibility is the outermost ring of duty, and it is where individual integrity becomes collective strength.',
+          icon: Icons.groups_rounded,
+        ),
+        SampleContentItem(
+          title: 'Responsibility Conflict Resolver',
+          subtitle:
+              'When duties in different domains collide — work versus family, self versus community — use the resolver to make a principled choice and communicate it clearly. '
+              'Conflicts between responsibilities are inevitable; having a framework for resolving them prevents paralysis and preserves relationships.',
+          icon: Icons.balance_rounded,
+        ),
+        SampleContentItem(
+          title: 'Duty Delegation Guide',
+          subtitle:
+              'Identify responsibilities that can be shared, delegated, or renegotiated without abandoning your core obligations. '
+              'Carrying every duty alone is not virtue — it is a path to burnout that ultimately harms the people who depend on you.',
+          icon: Icons.share_rounded,
+        ),
+        SampleContentItem(
+          title: 'Responsibility Review Cycle',
+          subtitle:
+              'Schedule a quarterly review of your full duty map to add new responsibilities, retire completed ones, and rebalance as your life evolves. '
+              'Responsibilities change as circumstances change — a regular review keeps your map accurate and your commitments realistic.',
+          icon: Icons.loop_rounded,
+        ),
+      ],
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'category_docs_controller.dart';
 import '../../data/models/learning_doc_model.dart';
 
@@ -76,7 +77,15 @@ class CategoryDocsView extends GetView<CategoryDocsController> {
               },
             )),
           ),
-          
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: AirHomeContextStrip(
+              compact: true,
+              extraLine:
+                  'These documents pair with Learn & Fun tiles; your IDENTITY tab still names who is reading.',
+            ),
+          ),
+
           // Documents List
           Expanded(
             child: Obx(() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'share_care_controller.dart';
 
 class ShareCareView extends GetView<ShareCareController> {
@@ -7,76 +8,56 @@ class ShareCareView extends GetView<ShareCareController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text("SHARE & CARE", style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: Obx(() => ListView.builder(
-        padding: const EdgeInsets.all(24),
-        itemCount: controller.activeTickets.length,
-        itemBuilder: (context, index) {
-          final ticket = controller.activeTickets[index];
-          return _buildTicketCard(context, ticket);
-        },
-      )),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.provideSupport(),
-        label: const Text("CONTACT SUPPORT"),
-        icon: const Icon(Icons.support_agent_rounded),
-      ),
-    );
-  }
-
-  Widget _buildTicketCard(BuildContext context, SupportTicket ticket) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 24),
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(ticket.user, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.blue)),
-              _buildUrgencyBadge(ticket.urgency),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(ticket.issue, style: const TextStyle(fontSize: 16)),
-          const SizedBox(height: 16),
-          Row(
-            children: [
-              const Icon(Icons.chat_bubble_outline_rounded, size: 14, color: Colors.grey),
-              const SizedBox(width: 6),
-              Text("RESPOND TO REQUEST", style: TextStyle(color: Colors.grey[600], fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 1)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildUrgencyBadge(String urgency) {
-    Color color = urgency == "High" ? Colors.red : Colors.orange;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        urgency.toUpperCase(),
-        style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.bold),
-      ),
+    return const SampleContentPage(
+      title: 'Share & Care',
+      subtitle:
+          'Cultivate a mutual-aid posture by sharing resources, knowledge, and support with the people in your circle. '
+          'Care loops — regular check-ins and acts of generosity — strengthen the trust that makes every AIR collaboration more resilient.',
+      icon: Icons.volunteer_activism_rounded,
+      items: [
+        SampleContentItem(
+          title: 'Resource Sharing Board',
+          subtitle:
+              'Post tools, templates, contacts, or capacity that you are willing to share with your network. '
+              'Others can request access directly, and the board keeps a transparent record of what has been exchanged.',
+          icon: Icons.share_rounded,
+        ),
+        SampleContentItem(
+          title: 'Care Check-In Scheduler',
+          subtitle:
+              'Set up recurring check-ins with key people in your circle so no relationship drifts through neglect. '
+              'Check-ins are lightweight — a single question or a brief voice note — designed to fit into a busy schedule.',
+          icon: Icons.favorite_border_rounded,
+        ),
+        SampleContentItem(
+          title: 'Support Request Hub',
+          subtitle:
+              'Raise a support request when you need help, and browse open requests from others you can assist. '
+              'Requests are matched by skill and availability so the right person is connected to the right need quickly.',
+          icon: Icons.support_agent_rounded,
+        ),
+        SampleContentItem(
+          title: 'Generosity Ledger',
+          subtitle:
+              'Track acts of giving and receiving within your circle to maintain a healthy balance of mutual aid over time. '
+              'The ledger is private by default but can be shared selectively to acknowledge contributions publicly.',
+          icon: Icons.balance_rounded,
+        ),
+        SampleContentItem(
+          title: 'Knowledge Gift Library',
+          subtitle:
+              'Contribute articles, guides, or recorded walkthroughs to a shared library that your circle can draw from freely. '
+              'Contributions are attributed to the author and rated by usefulness so the best content rises to the top.',
+          icon: Icons.menu_book_rounded,
+        ),
+        SampleContentItem(
+          title: 'Circle Wellbeing Pulse',
+          subtitle:
+              'Run anonymous wellbeing pulse surveys across your circle to surface stress, burnout risk, or unmet needs. '
+              'Aggregate results guide where to direct care energy without exposing any individual\'s private responses.',
+          icon: Icons.monitor_heart_rounded,
+        ),
+      ],
     );
   }
 }

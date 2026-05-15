@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'system_all_together_controller.dart';
 
 class SystemAllTogetherView extends GetView<SystemAllTogetherController> {
@@ -7,94 +8,63 @@ class SystemAllTogetherView extends GetView<SystemAllTogetherController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text("SYSTEM ALL TOGETHER", style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            _buildGlobalHealthIndicator(context),
-            const SizedBox(height: 32),
-            Obx(() => GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                childAspectRatio: 1.1,
-              ),
-              itemCount: controller.components.length,
-              itemBuilder: (context, index) {
-                final component = controller.components[index];
-                return _buildComponentCard(context, component);
-              },
-            )),
-          ],
+    return const SampleContentPage(
+      title: 'System All Together',
+      subtitle:
+          'Step back and see the entire AIR operation as one interconnected system — inputs, processes, outcomes, people, and feedback loops all in one view. '
+          'Understanding how every part interlocks is the foundation for making changes that improve the whole rather than just one corner.',
+      icon: Icons.hub_rounded,
+      items: [
+        SampleContentItem(
+          title: 'System Health Overview',
+          subtitle:
+              'A single-screen health score aggregates the status of every AIR component — pipeline, people, data, and delivery. '
+              'Drill into any component to see its individual metrics without losing sight of the overall picture.',
+          icon: Icons.monitor_heart_rounded,
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.restartSystem(),
-        label: const Text("SYNC GLOBAL CORE"),
-        icon: const Icon(Icons.sync_rounded),
-      ),
-    );
-  }
-
-  Widget _buildGlobalHealthIndicator(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(32),
-      decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.05),
-        shape: BoxShape.circle,
-        border: Border.all(color: Colors.blue.withOpacity(0.1), width: 2),
-      ),
-      child: Column(
-        children: [
-          const Text("SYSTEM HEALTH", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 2, color: Colors.grey)),
-          const SizedBox(height: 8),
-          Text(
-            "${(controller.components.fold(0.0, (sum, c) => sum + c.health) / controller.components.length * 100).toInt()}%",
-            style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.blue),
-          ),
-          const Text("OPERATIONAL", style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.green)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildComponentCard(BuildContext context, SystemComponent component) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 5)),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(component.icon, color: Colors.blue, size: 32),
-          const SizedBox(height: 12),
-          Text(component.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
-          const SizedBox(height: 4),
-          Text(component.status, style: TextStyle(color: Colors.grey[600], fontSize: 10)),
-          const SizedBox(height: 12),
-          LinearProgressIndicator(
-            value: component.health,
-            backgroundColor: Colors.blue.withOpacity(0.1),
-            valueColor: AlwaysStoppedAnimation<Color>(component.health > 0.9 ? Colors.green : Colors.blue),
-            minHeight: 4,
-            borderRadius: BorderRadius.circular(2),
-          ),
-        ],
-      ),
+        SampleContentItem(
+          title: 'Component Dependency Map',
+          subtitle:
+              'Visualise how each module depends on others so you can predict the blast radius of any change or failure. '
+              'Dependency paths are automatically updated whenever a new integration or workflow is added.',
+          icon: Icons.account_tree_rounded,
+        ),
+        SampleContentItem(
+          title: 'Cross-Module Data Flow',
+          subtitle:
+              'Trace how a single input travels through classification, processing, and delivery across multiple modules. '
+              'Flow diagrams highlight handoff points where delays or data loss most commonly occur.',
+          icon: Icons.swap_horiz_rounded,
+        ),
+        SampleContentItem(
+          title: 'Global Sync Control',
+          subtitle:
+              'Trigger a coordinated synchronisation across all AIR subsystems to resolve drift and ensure consistency. '
+              'Sync events are scheduled during low-traffic windows and logged for post-sync verification.',
+          icon: Icons.sync_rounded,
+        ),
+        SampleContentItem(
+          title: 'Capacity & Load Balance',
+          subtitle:
+              'View aggregate resource utilisation across all active components and identify where headroom is thin. '
+              'Automated load-balancing recommendations help distribute work before any single node becomes a bottleneck.',
+          icon: Icons.balance_rounded,
+        ),
+        SampleContentItem(
+          title: 'Incident Impact Analyser',
+          subtitle:
+              'When something goes wrong, instantly see which downstream components are affected and in what order. '
+              'Impact scores help prioritise the recovery sequence so the most critical services are restored first.',
+          icon: Icons.crisis_alert_rounded,
+        ),
+        SampleContentItem(
+          title: 'System Changelog',
+          subtitle:
+              'A chronological record of every structural change made to the AIR system — new integrations, rule updates, and configuration edits. '
+              'Each entry links to the responsible operator and the business reason behind the change.',
+          icon: Icons.history_rounded,
+        ),
+      ],
     );
   }
 }
