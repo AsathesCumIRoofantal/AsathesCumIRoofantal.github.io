@@ -277,7 +277,7 @@ class HomeView extends StatelessWidget {
                               // );
 
                               return Container(
-                                child: buildDrawerItem(
+                                child: buildDrawerActualItem(
                                   context: context,
 
                                   item: item,
@@ -554,6 +554,7 @@ class HomeView extends StatelessWidget {
 
               ...entry.value.map((e) {
                 return Padding(
+                  key: GlobalKey(debugLabel: "Filter${item.route}"),
                   padding: const EdgeInsets.only(bottom: 10),
 
                   child: InkWell(
@@ -614,7 +615,7 @@ class HomeView extends StatelessWidget {
   /// DRAWER ITEM
   /// =========================================================
 
-  Widget buildDrawerItem({
+  Widget buildDrawerActualItem({
     required BuildContext context,
     required DrawerItem item,
     required Color onSurface,
@@ -650,7 +651,7 @@ class HomeView extends StatelessWidget {
 
               children: [
                 Container(
-                  key: controller.itemKeys[item.route],
+                  key: GlobalKey(debugLabel: "Actual_${item.route}"),
                   padding: const EdgeInsets.all(10),
 
                   decoration: const BoxDecoration(
