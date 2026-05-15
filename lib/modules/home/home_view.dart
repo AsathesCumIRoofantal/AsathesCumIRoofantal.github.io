@@ -57,24 +57,9 @@ class HomeView extends StatelessWidget {
 
     /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 900));
-    String? route = "";
-    for (final section in controller.drawerSections) {
-      for (final item in section.items) {
-        if (!routeTemp.contains("FilterItems_")) {
-          route = item.route;
-          break;
-        }
-      }
-      if (route != null && route.isNotEmpty) {
-        break;
-      }
-    }
-    if (route == null || route.isEmpty) {
-      return;
-    }
 
     /// BUILD UNIQUE KEY
-    final uniqueKey = "${sectionTitle}_$route";
+    final uniqueKey = "${sectionTitle}_$routeTemp";
     BuildContext? ctx = controller.itemKeys[uniqueKey]?.currentContext;
     if (ctx == null) {
       debugPrint("Context NULL -> $uniqueKey");
