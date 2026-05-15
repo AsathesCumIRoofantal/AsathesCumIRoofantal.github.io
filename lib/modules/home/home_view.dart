@@ -24,26 +24,28 @@ class HomeView extends StatelessWidget {
     if (query.isNotEmpty) {}
 
     for (final section in controller.drawerSections) {
+      List<DrawerResultItem> existingItemsPerSection = [];
       for (final item in section.items) {
-        if (!item.title.toLowerCase().contains(query)) {
-          break;
+        if (item.title.toLowerCase().contains(query)) {
+          existingItemsPerSection = [
+            ...existingItemsPerSection,
+            DrawerResultItem(
+              title: item.title,
+              icon: item.icon,
+              route: item.route,
+              key: item.key,
+            ),
+          ];
         }
-
-        controller.results.value.add(
-          DrawerResultSection(
-            title: section.title,
-            items: section.items
-                .map<DrawerResultItem>(
-                  (item) => DrawerResultItem(
-                    title: item.title,
-                    icon: item.icon,
-                    route: item.route,
-                    key: GlobalKey(debugLabel: "${item.route}"),
-                  ),
-                )
-                .toList(),
+      }
+      if (existingItemsPerSection.isNotEmpty) {
+        controller.results.value = [
+          ...controller.results.value,
+          DrawerSearchResult(
+            section: section.title,
+            items: existingItemsPerSection,
           ),
-        );
+        ];
       }
     }
 

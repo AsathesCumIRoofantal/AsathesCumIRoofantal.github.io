@@ -28,7 +28,7 @@ class DrawerResultItem {
     required this.icon,
     required this.route,
     this.key,
-  }) {}
+  });
 }
 
 class DrawerActualSection {
