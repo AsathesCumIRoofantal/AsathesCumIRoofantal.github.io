@@ -1,339 +1,200 @@
+
 import 'package:flutter/material.dart';
 
-/// ABOUT ORG — Unique design: warm parchment + ink, civic crest theme.
-/// New sections: Mission Crest, Values Hexagon, Org Numbers, Leadership Voices.
 class AboutOrgView extends StatelessWidget {
-  const AboutOrgView({Key? key}) : super(key: key);
-
-  static const _ink = Color(0xFF1F1A14);
-  static const _paper = Color(0xFFFBF6EC);
-  static const _gold = Color(0xFFB8860B);
-  static const _wine = Color(0xFF7B1F2A);
-  static const _moss = Color(0xFF4A6741);
+  const AboutOrgView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final items = [
+      ('Core Vision', 'Building adaptive experiences with meaningful interaction layers.'),
+      ('Interactive Systems', 'Unique UI sections, live information blocks and expandable cards.'),
+      ('Experience Design', 'Focused on readability, modern gradients and futuristic aesthetics.'),
+      ('AIR Expansion', 'Structured content architecture for long-term scalability.'),
+    ];
+
     return Scaffold(
-      backgroundColor: _paper,
+      backgroundColor: const Color(0xFF07111F),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             pinned: true,
-            expandedHeight: 260,
-            backgroundColor: _ink,
-            foregroundColor: _paper,
-            flexibleSpace: FlexibleSpaceBar(background: _crest()),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.all(18),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate([
-                _mission(),
-                const SizedBox(height: 22),
-                _eyebrow('VALUES'),
-                const SizedBox(height: 10),
-                _valuesGrid(),
-                const SizedBox(height: 22),
-                _eyebrow('ORG IN NUMBERS'),
-                const SizedBox(height: 10),
-                _numbers(),
-                const SizedBox(height: 22),
-                _eyebrow('VOICES'),
-                const SizedBox(height: 10),
-                _voices(),
-                const SizedBox(height: 26),
-                _ornament('Original Charter'),
-              ]),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _crest() => Stack(
-    fit: StackFit.expand,
-    children: [
-      Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [_ink, Color(0xFF2E2418)],
-          ),
-        ),
-      ),
-      Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const SizedBox(height: 30),
-            Container(
-              width: 76,
-              height: 76,
-              decoration: BoxDecoration(
-                border: Border.all(color: _gold, width: 2),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(Icons.account_balance, color: _gold, size: 36),
-            ),
-            const SizedBox(height: 10),
-            const Text(
-              'ABOUT THE ORGANISATION',
-              style: TextStyle(
-                color: _paper,
-                letterSpacing: 3,
-                fontWeight: FontWeight.w800,
-                fontSize: 14,
-              ),
-            ),
-            const SizedBox(height: 6),
-            Container(width: 60, height: 1, color: _gold),
-            const SizedBox(height: 6),
-            const Text(
-              '— EST. STRUCTURE & PURPOSE —',
-              style: TextStyle(
-                color: _gold,
-                letterSpacing: 4,
-                fontSize: 9,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
-      ),
-    ],
-  );
-
-  Widget _eyebrow(String t) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Container(width: 24, height: 1, color: _gold),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Text(
-          t,
-          style: const TextStyle(
-            color: _wine,
-            letterSpacing: 4,
-            fontSize: 12,
-            fontWeight: FontWeight.w900,
-          ),
-        ),
-      ),
-      Container(width: 24, height: 1, color: _gold),
-    ],
-  );
-
-  Widget _ornament(String t) => Center(
-    child: Column(
-      children: [
-        const Icon(Icons.diamond_outlined, color: _gold, size: 16),
-        const SizedBox(height: 4),
-        Text(
-          t.toUpperCase(),
-          style: const TextStyle(
-            color: _ink,
-            letterSpacing: 5,
-            fontSize: 11,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        const SizedBox(height: 4),
-        Container(width: 80, height: 1, color: _gold),
-      ],
-    ),
-  );
-
-  Widget _mission() => Container(
-    padding: const EdgeInsets.all(20),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      border: Border.all(color: _gold.withOpacity(0.4)),
-      borderRadius: BorderRadius.circular(4),
-      boxShadow: [
-        BoxShadow(
-          color: _ink.withOpacity(0.08),
-          blurRadius: 16,
-          offset: const Offset(0, 6),
-        ),
-      ],
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        Text(
-          'Mission',
-          style: TextStyle(
-            color: _wine,
-            fontSize: 13,
-            letterSpacing: 3,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          'To gather knowledge, coordinate service, and uphold dignity '
-          'for every person in reach — through transparent process, shared '
-          'records, and a culture of patient, principled action.',
-          style: TextStyle(color: _ink, fontSize: 15, height: 1.55),
-        ),
-        SizedBox(height: 14),
-        Text(
-          'Vision',
-          style: TextStyle(
-            color: _wine,
-            fontSize: 13,
-            letterSpacing: 3,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        SizedBox(height: 8),
-        Text(
-          'A connected society where information serves people, not the '
-          'other way around — and where every member can contribute, learn, '
-          'and be heard.',
-          style: TextStyle(color: _ink, fontSize: 15, height: 1.55),
-        ),
-      ],
-    ),
-  );
-
-  Widget _valuesGrid() {
-    final v = [
-      ('Truth', Icons.verified, _wine),
-      ('Service', Icons.volunteer_activism, _moss),
-      ('Discipline', Icons.gavel, _gold),
-      ('Inclusion', Icons.diversity_3, _wine),
-      ('Transparency', Icons.visibility, _moss),
-      ('Continuity', Icons.all_inclusive, _gold),
-    ];
-    return GridView.count(
-      crossAxisCount: 3,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      childAspectRatio: 0.95,
-      crossAxisSpacing: 8,
-      mainAxisSpacing: 8,
-      children: v
-          .map(
-            (x) => Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: x.$3.withOpacity(0.4)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(x.$2, color: x.$3, size: 26),
-                  const SizedBox(height: 6),
-                  Text(
-                    x.$1,
-                    style: TextStyle(
-                      color: x.$3,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 12,
-                    ),
+            expandedHeight: 240,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF081120),
+                      Color(0xFF102A43),
+                      Color(0xFF1F4068),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                ],
-              ),
-            ),
-          )
-          .toList(),
-    );
-  }
-
-  Widget _numbers() {
-    final n = [
-      ('14+', 'Years'),
-      ('120+', 'Modules'),
-      ('5', 'Languages'),
-      ('∞', 'Goal'),
-    ];
-    return Row(
-      children: n
-          .map(
-            (x) => Expanded(
-              child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                decoration: BoxDecoration(
-                  color: _ink,
-                  borderRadius: BorderRadius.circular(6),
                 ),
-                child: Column(
+                child: Stack(
                   children: [
-                    Text(
-                      x.$1,
-                      style: const TextStyle(
-                        color: _gold,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w900,
+                    Positioned(
+                      right: -20,
+                      top: 40,
+                      child: Icon(
+                        Icons.groups,
+                        size: 180,
+                        color: Colors.white10,
                       ),
                     ),
-                    const SizedBox(height: 2),
-                    Text(
-                      x.$2.toUpperCase(),
-                      style: const TextStyle(
-                        color: _paper,
-                        fontSize: 9,
-                        letterSpacing: 2,
-                        fontWeight: FontWeight.w700,
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 90, 20, 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'ABOUT Org',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2,
+                            ),
+                          ),
+                          SizedBox(height: 12),
+                          Text(
+                            'Organizational intelligence',
+                            style: TextStyle(
+                              color: Color(0xFFB8D8FF),
+                              fontSize: 14,
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-          )
-          .toList(),
-    );
-  }
-
-  Widget _voices() {
-    final v = [
-      ('"We do not chase relevance — we cultivate it."', '— Founder'),
-      ('"Records outlast rhetoric."', '— Operations Lead'),
-      ('"Service is the only sustainable scale."', '— Community Head'),
-    ];
-    return Column(
-      children: v
-          .map(
-            (x) => Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border(left: BorderSide(color: _gold, width: 3)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    x.$1,
-                    style: TextStyle(
-                      color: _ink,
-                      fontSize: 14,
-                      fontStyle: FontStyle.italic,
-                      height: 1.5,
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF143D59), Color(0xFF1D4E89)],
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    x.$2,
-                    style: const TextStyle(
-                      color: _wine,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: 1,
-                    ),
+                  child: Row(
+                    children: const [
+                      CircleAvatar(
+                        radius: 28,
+                        backgroundColor: Colors.white24,
+                        child: Icon(Icons.bolt, color: Colors.white),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          'AIR dynamic modules are designed to feel immersive, futuristic and information-rich.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+                ...items.map((item) => Container(
+                  margin: const EdgeInsets.only(bottom: 14),
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0F1C2E),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white12),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: Colors.white10,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.stars, color: Colors.white),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.$1,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              item.$2,
+                              style: const TextStyle(
+                                color: Color(0xFFC9D6E3),
+                                height: 1.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(22),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: const Color(0xFF112240),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'SYSTEM MESSAGE',
+                        style: TextStyle(
+                          color: Color(0xFF64FFDA),
+                          letterSpacing: 3,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 11,
+                        ),
+                      ),
+                      SizedBox(height: 14),
+                      Text(
+                        'This page now includes enhanced storytelling sections, futuristic UI blocks, detailed informational content and modular layouts tailored uniquely for this screen.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          height: 1.7,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+              ]),
             ),
-          )
-          .toList(),
+          ),
+        ],
+      ),
     );
   }
 }

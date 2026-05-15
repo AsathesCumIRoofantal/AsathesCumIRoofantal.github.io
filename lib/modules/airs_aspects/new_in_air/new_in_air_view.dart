@@ -1,63 +1,200 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
-import 'new_in_air_controller.dart';
 
-class NewInAirView extends GetView<NewInAirController> {
-  const NewInAirView({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+
+class NewInAirView extends StatelessWidget {
+  const NewInAirView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
-      title: 'New in AIR',
-      subtitle:
-          'Stay current with the latest releases, feature additions, and capability upgrades — skim what changed recently and decide what to explore first. '
-          'Release notes are written for humans, not engineers: plain language, clear impact, and a direct link to try each new thing.',
-      icon: Icons.new_releases_rounded,
-      items: [
-        SampleContentItem(
-          title: 'Latest Release Highlights',
-          subtitle:
-              'Read a plain-language summary of the most recent AIR release — what changed, what improved, and what was removed and why. '
-              'Highlights are curated to surface the changes most likely to affect your daily use, not every technical detail.',
-          icon: Icons.star_rounded,
-        ),
-        SampleContentItem(
-          title: 'Feature Spotlight',
-          subtitle:
-              'Dive deep into one newly released feature each cycle — with a walkthrough, use cases, and tips for getting the most out of it immediately. '
-              'Spotlights are designed to take under five minutes and leave you ready to use the feature confidently.',
-          icon: Icons.tips_and_updates_rounded,
-        ),
-        SampleContentItem(
-          title: 'Changelog Browser',
-          subtitle:
-              'Browse the full, searchable changelog to find specific changes, track the evolution of a feature, or verify when a bug was fixed. '
-              'The changelog is the authoritative record of every change made to AIR — complete, timestamped, and permanently accessible.',
-          icon: Icons.history_rounded,
-        ),
-        SampleContentItem(
-          title: 'Upcoming Preview',
-          subtitle:
-              'Get an early look at features currently in development — what is coming, when it is expected, and how to join the beta if one is available. '
-              'Previews are shared to invite community feedback before features are finalised, not to generate hype.',
-          icon: Icons.preview_rounded,
-        ),
-        SampleContentItem(
-          title: 'Deprecation Notices',
-          subtitle:
-              'Stay informed about features and workflows that are being retired — with clear timelines, migration paths, and the reasoning behind each decision. '
-              'Deprecation notices are published well in advance so you have time to adapt without disruption.',
-          icon: Icons.warning_amber_rounded,
-        ),
-        SampleContentItem(
-          title: 'Community Feedback Loop',
-          subtitle:
-              'React to new features, report issues, and suggest improvements directly from the release notes — closing the loop between what AIR ships and what the community needs. '
-              'Feedback submitted here is reviewed by the product team and influences the next release cycle.',
-          icon: Icons.feedback_rounded,
-        ),
-      ],
+    final items = [
+      ('Core Vision', 'Building adaptive experiences with meaningful interaction layers.'),
+      ('Interactive Systems', 'Unique UI sections, live information blocks and expandable cards.'),
+      ('Experience Design', 'Focused on readability, modern gradients and futuristic aesthetics.'),
+      ('AIR Expansion', 'Structured content architecture for long-term scalability.'),
+    ];
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF07111F),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 240,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF081120),
+                      Color(0xFF102A43),
+                      Color(0xFF1F4068),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      right: -20,
+                      top: 40,
+                      child: Icon(
+                        Icons.rocket_launch,
+                        size: 180,
+                        color: Colors.white10,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 90, 20, 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'NEW IN AIR',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2,
+                            ),
+                          ),
+                          SizedBox(height: 12),
+                          Text(
+                            'Latest AIR innovations',
+                            style: TextStyle(
+                              color: Color(0xFFB8D8FF),
+                              fontSize: 14,
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF143D59), Color(0xFF1D4E89)],
+                    ),
+                  ),
+                  child: Row(
+                    children: const [
+                      CircleAvatar(
+                        radius: 28,
+                        backgroundColor: Colors.white24,
+                        child: Icon(Icons.bolt, color: Colors.white),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          'AIR dynamic modules are designed to feel immersive, futuristic and information-rich.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ...items.map((item) => Container(
+                  margin: const EdgeInsets.only(bottom: 14),
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0F1C2E),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white12),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: Colors.white10,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.stars, color: Colors.white),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.$1,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              item.$2,
+                              style: const TextStyle(
+                                color: Color(0xFFC9D6E3),
+                                height: 1.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(22),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: const Color(0xFF112240),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'SYSTEM MESSAGE',
+                        style: TextStyle(
+                          color: Color(0xFF64FFDA),
+                          letterSpacing: 3,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 11,
+                        ),
+                      ),
+                      SizedBox(height: 14),
+                      Text(
+                        'This page now includes enhanced storytelling sections, futuristic UI blocks, detailed informational content and modular layouts tailored uniquely for this screen.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          height: 1.7,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+              ]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

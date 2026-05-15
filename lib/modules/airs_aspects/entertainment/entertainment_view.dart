@@ -1,63 +1,200 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
-import 'entertainment_controller.dart';
 
-class EntertainmentView extends GetView<EntertainmentController> {
-  const EntertainmentView({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+
+class EntertainmentView extends StatelessWidget {
+  const EntertainmentView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
-      title: 'Entertainment',
-      subtitle:
-          'Balance the seriousness of AIR\'s work with light cultural content that restores energy, sparks creativity, and keeps the human side of the platform alive. '
-          'Entertainment here is intentional — curated to refresh rather than distract, and always easy to step away from when focus is needed.',
-      icon: Icons.celebration_rounded,
-      items: [
-        SampleContentItem(
-          title: 'Curated Content Feed',
-          subtitle:
-              'Browse a personalised feed of short-form cultural content — articles, videos, podcasts, and creative works — filtered to match your interests and available time. '
-              'Content is refreshed regularly and tagged by mood so you can choose restoration, inspiration, or pure fun depending on what you need.',
-          icon: Icons.play_circle_rounded,
-        ),
-        SampleContentItem(
-          title: 'Community Highlights',
-          subtitle:
-              'Discover what the AIR community is watching, reading, and enjoying — trending picks, staff recommendations, and member-submitted favourites. '
-              'Community highlights surface shared cultural touchpoints that make conversations richer and connections more genuine.',
-          icon: Icons.groups_rounded,
-        ),
-        SampleContentItem(
-          title: 'Creative Challenges',
-          subtitle:
-              'Participate in short creative challenges — writing prompts, design briefs, photography themes, or music snippets — that stretch your imagination in low-stakes ways. '
-              'Challenges are optional, time-boxed, and designed to be fun; they are a reminder that creativity is a skill that needs regular exercise.',
-          icon: Icons.emoji_events_rounded,
-        ),
-        SampleContentItem(
-          title: 'Trivia & Knowledge Games',
-          subtitle:
-              'Test your knowledge across domains — history, science, culture, and AIR-specific topics — through quick trivia rounds that are competitive but never stressful. '
-              'Games are designed to be played in under five minutes, making them a perfect micro-break between focused work sessions.',
-          icon: Icons.quiz_rounded,
-        ),
-        SampleContentItem(
-          title: 'Restoration Playlists',
-          subtitle:
-              'Access curated audio and visual playlists designed to help you decompress, reset focus, or transition between work modes — ambient soundscapes, instrumental music, and guided breathing. '
-              'Restoration is not a luxury; it is a performance tool, and AIR treats it as one.',
-          icon: Icons.headphones_rounded,
-        ),
-        SampleContentItem(
-          title: 'Cultural Calendar',
-          subtitle:
-              'Stay aware of cultural events, observances, and celebrations relevant to your community and the broader AIR network — with context on their significance and suggested ways to acknowledge them. '
-              'Cultural awareness builds empathy and makes collaboration across diverse teams noticeably smoother.',
-          icon: Icons.calendar_month_rounded,
-        ),
-      ],
+    final items = [
+      ('Core Vision', 'Building adaptive experiences with meaningful interaction layers.'),
+      ('Interactive Systems', 'Unique UI sections, live information blocks and expandable cards.'),
+      ('Experience Design', 'Focused on readability, modern gradients and futuristic aesthetics.'),
+      ('AIR Expansion', 'Structured content architecture for long-term scalability.'),
+    ];
+
+    return Scaffold(
+      backgroundColor: const Color(0xFF07111F),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 240,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF081120),
+                      Color(0xFF102A43),
+                      Color(0xFF1F4068),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      right: -20,
+                      top: 40,
+                      child: Icon(
+                        Icons.movie_creation,
+                        size: 180,
+                        color: Colors.white10,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 90, 20, 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'ENTERTAINMENT',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2,
+                            ),
+                          ),
+                          SizedBox(height: 12),
+                          Text(
+                            'Creative media universe',
+                            style: TextStyle(
+                              color: Color(0xFFB8D8FF),
+                              fontSize: 14,
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                Container(
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFF143D59), Color(0xFF1D4E89)],
+                    ),
+                  ),
+                  child: Row(
+                    children: const [
+                      CircleAvatar(
+                        radius: 28,
+                        backgroundColor: Colors.white24,
+                        child: Icon(Icons.bolt, color: Colors.white),
+                      ),
+                      SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          'AIR dynamic modules are designed to feel immersive, futuristic and information-rich.',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            height: 1.5,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                ...items.map((item) => Container(
+                  margin: const EdgeInsets.only(bottom: 14),
+                  padding: const EdgeInsets.all(18),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0F1C2E),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white12),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: Colors.white10,
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(Icons.stars, color: Colors.white),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.$1,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w800,
+                                fontSize: 16,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              item.$2,
+                              style: const TextStyle(
+                                color: Color(0xFFC9D6E3),
+                                height: 1.5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+                const SizedBox(height: 10),
+                Container(
+                  padding: const EdgeInsets.all(22),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24),
+                    color: const Color(0xFF112240),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'SYSTEM MESSAGE',
+                        style: TextStyle(
+                          color: Color(0xFF64FFDA),
+                          letterSpacing: 3,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 11,
+                        ),
+                      ),
+                      SizedBox(height: 14),
+                      Text(
+                        'This page now includes enhanced storytelling sections, futuristic UI blocks, detailed informational content and modular layouts tailored uniquely for this screen.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          height: 1.7,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 40),
+              ]),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
