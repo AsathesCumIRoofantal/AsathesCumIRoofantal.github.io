@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
               title: item.title,
               icon: item.icon,
               route: item.route,
-              key: item.key,
+              key: GlobalKey(debugLabel: "${item.route}"),
             ),
           ];
         }
