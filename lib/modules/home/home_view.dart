@@ -259,27 +259,15 @@ class HomeView extends StatelessWidget {
                             ),
 
                             /// ITEMS
-                            ...section.items.map((item) {
-                              // controller.itemKeys.putIfAbsent(
-                              //   item.route,
-                              //   () => GlobalKey(
-                              //     debugLabel: "${section.title}_${item.route}",
-                              //   ),
-                              // );
-
-                              return Container(
-                                key: (item.route == null)
-                                    ? GlobalKey(
-                                        debugLabel: "FilterItems_${item.title}",
-                                      )
-                                    : controller.itemKeys[item.route],
-                                child: buildDrawerItem(
-                                  context: context,
-
-                                  item: item,
-
-                                  onSurface: onSurface,
-                                ),
+                            Obx(() {
+                              return ListView(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                children: section.items.map((item) {
+                                  return Container(
+                                    // ...
+                                  );
+                                }).toList(),
                               );
                             }),
 
