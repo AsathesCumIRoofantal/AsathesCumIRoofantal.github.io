@@ -37,7 +37,7 @@ class HomeView extends StatelessWidget {
               item: DrawerResultItem(
                 title: item.title,
                 icon: item.icon,
-                route: "Fiter_${item.route}",
+                route: "${item.route}",
               ),
             ),
           );
@@ -54,10 +54,10 @@ class HomeView extends StatelessWidget {
   }) async {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
-    routeTemp = routeTemp.replaceFirst("Fiter_", "");
+    routeTemp = routeTemp.replaceFirst("", "");
 
     /// WAIT FOR UI REBUILD
-    await Future.delayed(const Duration(milliseconds: 900));
+    await Future.delayed(const Duration(milliseconds: 300));
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "Actual_$routeTemp";
@@ -96,7 +96,7 @@ class HomeView extends StatelessWidget {
       /// SCROLL
       await Scrollable.ensureVisible(
         itemContext,
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(milliseconds: 600),
         curve: Curves.easeInOutCubic,
         alignment: 0.45,
       );
