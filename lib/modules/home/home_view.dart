@@ -60,7 +60,7 @@ class HomeView extends StatelessWidget {
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "${sectionTitle}_$routeTemp";
-    BuildContext? ctx = controller.itemKeys[routeTemp]?.currentContext;
+    BuildContext? ctx = controller.itemKeys[uniqueKey]?.currentContext;
     if (ctx == null) {
       debugPrint("Context NULL -> $uniqueKey");
       return;
@@ -75,7 +75,7 @@ class HomeView extends StatelessWidget {
     );
 
     /// GET SAFE GLOBAL KEY
-    final GlobalKey? globalKey = controller.itemKeys[routeTemp];
+    final GlobalKey? globalKey = controller.itemKeys[uniqueKey];
 
     if (globalKey == null) {
       debugPrint("GlobalKey NOT FOUND -> $uniqueKey");
