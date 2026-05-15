@@ -48,13 +48,19 @@ class HomeView extends StatelessWidget {
 
   Future<void> scrollToItem({
     required String sectionTitle,
-    required String route,
+    required String itemTitle,
   }) async {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
 
     /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 900));
+    String? route = "";
+    for (final section in controller.drawerSections) {
+      for (final item in section.items) {
+        item.title == itemTitle ? route = item.route : null;
+      }
+    }
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "${sectionTitle}_$route";
@@ -543,8 +549,6 @@ class HomeView extends StatelessWidget {
               const SizedBox(height: 14),
 
               ...entry.value.map((e) {
-                String route = e.item.route ?? '';
-
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
 
@@ -552,7 +556,10 @@ class HomeView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(18),
 
                     onTap: () {
-                      scrollToItem(sectionTitle: e.sectionTitle, route: route);
+                      scrollToItem(
+                        sectionTitle: e.sectionTitle,
+                        itemTitle: e.item.title,
+                      );
                       controller.isDrawerSearchVisible.refresh();
                     },
 
