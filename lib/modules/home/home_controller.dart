@@ -12,10 +12,7 @@ class DrawerActualItem {
     required this.title,
     required this.icon,
     required this.route,
-  }) {
-    key:
-    GlobalKey(debugLabel: "Actual_${route}");
-  }
+  });
 }
 
 class DrawerResultItem {
@@ -65,6 +62,7 @@ class HomeController extends GetxController {
     super.onReady();
     for (final section in drawerSections) {
       for (final item in section.items) {
+        item.key = GlobalKey(debugLabel: "Actual_${item.route}");
         results.value.add(
           DrawerResultSection(
             title: section.title,
