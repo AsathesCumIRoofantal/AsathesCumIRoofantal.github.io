@@ -59,24 +59,39 @@ class _HomeViewState extends State<HomeView> {
     required String sectionTitle,
     required String route,
   }) async {
+    /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
 
+    /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 400));
 
+    /// BUILD UNIQUE KEY
+    final uniqueKey = "${sectionTitle}_$route";
+
+    /// GET SAFE GLOBAL KEY
+    final GlobalKey? globalKey = controller.itemKeys[uniqueKey];
+
+    if (globalKey == null) {
+      debugPrint("GlobalKey NOT FOUND -> $uniqueKey");
+      return;
+    }
+
+    /// WAIT NEXT FRAME
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final GlobalKey? key = controller.itemKeys["${sectionTitle}_$route"];
+      /// SAFE CONTEXT
+      final BuildContext? itemContext = globalKey.currentContext;
 
-      if (key == null) return;
+      if (itemContext == null) {
+        debugPrint("Context NULL -> $uniqueKey");
+        return;
+      }
 
-      final context = key.currentContext;
-
-      if (context == null) return;
-
+      /// SCROLL
       await Scrollable.ensureVisible(
-        context,
-        duration: const Duration(milliseconds: 1000),
+        itemContext,
+        duration: const Duration(milliseconds: 800),
         curve: Curves.easeInOutCubic,
-        alignment: 0.35,
+        alignment: 0.45,
       );
     });
   }
@@ -254,7 +269,7 @@ class _HomeViewState extends State<HomeView> {
                               // );
 
                               return Container(
-                                // key: controller.itemKeys[item.route],
+                                key: controller.itemKeys[item.route],
                                 child: buildDrawerItem(
                                   context: context,
 
@@ -531,6 +546,8 @@ class _HomeViewState extends State<HomeView> {
               const SizedBox(height: 14),
 
               ...entry.value.map((e) {
+                String route = e.item.route ?? '';
+                (e).item.route = null;
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 10),
 
@@ -538,10 +555,7 @@ class _HomeViewState extends State<HomeView> {
                     borderRadius: BorderRadius.circular(18),
 
                     onTap: () {
-                      scrollToItem(
-                        sectionTitle: e.sectionTitle,
-                        route: e.item.route,
-                      );
+                      scrollToItem(sectionTitle: e.sectionTitle, route: route);
                       controller.isDrawerSearchVisible.refresh();
                     },
 
@@ -607,7 +621,9 @@ class _HomeViewState extends State<HomeView> {
           borderRadius: BorderRadius.circular(18),
 
           onTap: () {
-            Get.toNamed(item.route);
+            if (item.route != null) {
+              Get.toNamed(item.route!);
+            }
           },
 
           child: Ink(
@@ -664,7 +680,7 @@ class _HomeViewState extends State<HomeView> {
 
                       Text(
                         DrawerNavigationCopy.linkSubtitle(
-                          item.route,
+                          item.route ?? item.title,
                           item.title,
                         ),
 

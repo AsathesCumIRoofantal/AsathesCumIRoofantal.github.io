@@ -6,7 +6,7 @@ import '../../routes/app_pages.dart';
 class DrawerItem {
   final String title;
   final IconData icon;
-  final String route;
+  String? route;
 
   DrawerItem({required this.title, required this.icon, required this.route});
 }
@@ -42,9 +42,13 @@ class HomeController extends GetxController {
 
     for (final section in drawerSections) {
       for (final item in section.items) {
-        itemKeys[item.route] = GlobalKey(
-          debugLabel: "${section.title}_${item.route}",
-        );
+        if (item.route == null) {
+          itemKeys[item.route!] = GlobalKey(debugLabel: "${item.route}");
+        } else {
+          itemKeys[item.route!] = GlobalKey(
+            debugLabel: "${section.title}_${item.route}",
+          );
+        }
       }
     }
   }
