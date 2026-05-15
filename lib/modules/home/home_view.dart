@@ -61,7 +61,7 @@ class HomeView extends StatelessWidget {
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "Actual_$routeTemp";
-    BuildContext? ctx = controller.itemKeys[routeTemp]?.currentContext;
+    BuildContext? ctx = controller.itemKeys[uniqueKey]?.currentContext;
     if (ctx == null) {
       debugPrint("Context NULL -> $uniqueKey");
       return;
