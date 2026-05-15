@@ -60,7 +60,7 @@ class HomeView extends StatelessWidget {
     String? route = "";
     for (final section in controller.drawerSections) {
       for (final item in section.items) {
-        if (routeTemp.contains("FilterItems_")) {
+        if (!routeTemp.contains("FilterItems_")) {
           route = item.route;
           break;
         }
