@@ -268,7 +268,9 @@ class HomeView extends StatelessWidget {
                               // );
 
                               return Container(
-                                key: (item.route == null)
+                                key:
+                                    (item.route == null &&
+                                        controller.results.value.isNotEmpty)
                                     ? GlobalKey(
                                         debugLabel:
                                             "FilterItems_${item.icon}_${item.title}",
