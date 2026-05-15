@@ -63,45 +63,44 @@ class HomeView extends StatelessWidget {
 
     /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 800));
-    String? keyActual = ((controller.drawerSections.firstWhere(
+    GlobalKey? keyActual = ((controller.drawerSections.firstWhere(
       (s) => s.title == sectionTitle,
-    )).items.firstWhere((i) => i.route == routeTemp)).title;
+    )).items.firstWhere((i) => i.route == routeTemp)).key;
 
-    // /// BUILD UNIQUE KEY
+    /// BUILD UNIQUE KEY
 
-    // BuildContext? ctx = keyActual?.currentContext;
-    // if (ctx == null) {
-    //   debugPrint("Context NULL -> $routeTemp");
-    //   return;
-    // }
+    BuildContext? ctx = keyActual?.currentContext;
+    if (ctx == null) {
+      debugPrint("Context NULL -> $routeTemp");
+      return;
+    }
 
-    // /// GET SAFE GLOBAL KEY
-    // final GlobalKey? globalKey = keyActual;
+    /// GET SAFE GLOBAL KEY
+    final GlobalKey? globalKey = keyActual;
 
-    // if (globalKey == null) {
-    //   debugPrint("GlobalKey NOT FOUND -> $routeTemp");
-    //   return;
-    // }
+    if (globalKey == null) {
+      debugPrint("GlobalKey NOT FOUND -> $routeTemp");
+      return;
+    }
 
-    // /// WAIT NEXT FRAME
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   /// SAFE CONTEXT
-    //   final BuildContext? itemContext = globalKey.currentContext;
+    /// WAIT NEXT FRAME
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      /// SAFE CONTEXT
+      final BuildContext? itemContext = globalKey.currentContext;
 
-    //   if (itemContext == null) {
-    //     debugPrint("Context NULL -> $routeTemp");
-    //     return;
-    //   }
+      if (itemContext == null) {
+        debugPrint("Context NULL -> $routeTemp");
+        return;
+      }
 
-    //   /// SCROLL
-    //   await Scrollable.ensureVisible(
-    //     itemContext,
-    //     duration: const Duration(milliseconds: 1000),
-    //     curve: Curves.easeInOutCubic,
-    //     alignment: 0.45,
-    //   );
-    // });
-    print("h");
+      /// SCROLL
+      await Scrollable.ensureVisible(
+        itemContext,
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.easeInOutCubic,
+        alignment: 0.45,
+      );
+    });
   }
 
   @override
