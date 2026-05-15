@@ -57,6 +57,21 @@ class HomeView extends StatelessWidget {
 
     /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 900));
+    bool isRouteToBeScrolledToCenter = false;
+    for (final section in controller.drawerSections) {
+      for (final item in section.items) {
+        if (routeTemp.contains("FilterItems_")) {
+          isRouteToBeScrolledToCenter = true;
+          break;
+        }
+      }
+      if (isRouteToBeScrolledToCenter) {
+        break;
+      }
+    }
+    if (!isRouteToBeScrolledToCenter) {
+      return;
+    }
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "${sectionTitle}_$routeTemp";
