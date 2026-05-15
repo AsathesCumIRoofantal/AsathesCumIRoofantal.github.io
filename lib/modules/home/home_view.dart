@@ -61,22 +61,14 @@ class HomeView extends StatelessWidget {
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "Actual_$routeTemp";
-    BuildContext? ctx = GlobalKey(debugLabel: uniqueKey)?.currentContext;
+    BuildContext? ctx = controller.itemActualKeys[uniqueKey]?.currentContext;
     if (ctx == null) {
       debugPrint("Context NULL -> $uniqueKey");
       return;
     }
 
-    // /// SCROLL
-    // await Scrollable.ensureVisible(
-    //   ctx,
-    //   duration: const Duration(milliseconds: 800),
-    //   curve: Curves.easeInOutCubic,
-    //   alignment: 0.45,
-    // );
-
     /// GET SAFE GLOBAL KEY
-    final GlobalKey? globalKey = GlobalKey(debugLabel: uniqueKey);
+    final GlobalKey? globalKey = controller.itemActualKeys[uniqueKey];
 
     if (globalKey == null) {
       debugPrint("GlobalKey NOT FOUND -> $uniqueKey");
@@ -554,7 +546,7 @@ class HomeView extends StatelessWidget {
 
               ...entry.value.map((e) {
                 return Padding(
-                  key: GlobalKey(debugLabel: "Filter_${e.item.route}"),
+                  key: controller.itemResultKeys[e.item.route],
                   padding: const EdgeInsets.only(bottom: 10),
 
                   child: InkWell(
@@ -651,7 +643,7 @@ class HomeView extends StatelessWidget {
 
               children: [
                 Container(
-                  key: GlobalKey(debugLabel: "Actual_${item.route}"),
+                  key: controller.itemActualKeys[item.route],
                   padding: const EdgeInsets.all(10),
 
                   decoration: const BoxDecoration(

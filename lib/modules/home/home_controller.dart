@@ -53,9 +53,29 @@ class HomeController extends GetxController {
 
   final ScrollController drawerScrollController = ScrollController();
 
+  /// SAFE KEYS
+  final Map<String, GlobalKey> itemActualKeys = {};
+
+  /// SAFE KEYS
+  final Map<String, GlobalKey> itemResultKeys = {};
+
   @override
   void onInit() {
     super.onInit();
+
+    for (final section in drawerSections) {
+      for (final item in section.items) {
+        // if (item.route == null) {
+        //   // itemKeys[item.route!] = GlobalKey(
+        //   //   debugLabel: "FilterItems_${item.title}",
+        //   // ); //wont come to this
+        // } else {
+        itemActualKeys[item.route!] = GlobalKey(
+          debugLabel: "Actual_${item.route}",
+        );
+        // }
+      }
+    }
   }
 
   /// =====================================================
