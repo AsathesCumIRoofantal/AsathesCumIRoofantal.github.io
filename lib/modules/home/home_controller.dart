@@ -40,13 +40,6 @@ class DrawerActualSection {
   DrawerActualSection({required this.title, required this.items}) {}
 }
 
-class DrawerResultSection {
-  final String title;
-  final List<DrawerResultItem> items;
-
-  DrawerResultSection({required this.title, required this.items}) {}
-}
-
 class DrawerSearchResult {
   final String sectionTitle;
   final DrawerResultItem item;
