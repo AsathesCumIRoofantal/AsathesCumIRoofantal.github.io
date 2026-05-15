@@ -89,236 +89,239 @@ class _HomeViewState extends State<HomeView> {
 
     final onSurface = theme.colorScheme.onSurface;
 
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('All-Space', style: TextStyle(letterSpacing: 3)),
+    return Obx(
+      () => DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('All-Space', style: TextStyle(letterSpacing: 3)),
 
-          bottom: const TabBar(
-            tabs: [
-              Tab(icon: Icon(Icons.category), text: 'ENTITIES'),
-              Tab(icon: Icon(Icons.account_tree), text: 'UNIONS'),
-              Tab(icon: Icon(Icons.fingerprint), text: 'IDENTITY'),
-            ],
+            bottom: const TabBar(
+              tabs: [
+                Tab(icon: Icon(Icons.category), text: 'ENTITIES'),
+                Tab(icon: Icon(Icons.account_tree), text: 'UNIONS'),
+                Tab(icon: Icon(Icons.fingerprint), text: 'IDENTITY'),
+              ],
+            ),
           ),
-        ),
 
-        /// =========================================================
-        /// DRAWER
-        /// =========================================================
-        drawer: Drawer(
-          width: 330,
+          /// =========================================================
+          /// DRAWER
+          /// =========================================================
+          drawer: Drawer(
+            width: 330,
 
-          backgroundColor: theme.colorScheme.surface,
+            backgroundColor: theme.colorScheme.surface,
 
-          child: Stack(
-            children: [
-              /// =========================================================
-              /// MAIN LIST
-              /// =========================================================
-              ListView(
-                controller: controller.drawerScrollController,
+            child: Stack(
+              children: [
+                /// =========================================================
+                /// MAIN LIST
+                /// =========================================================
+                ListView(
+                  controller: controller.drawerScrollController,
 
-                physics: const BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
 
-                padding: EdgeInsets.zero,
+                  padding: EdgeInsets.zero,
 
-                children: [
-                  /// HEADER
-                  UserAccountsDrawerHeader(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/AIR_Picture.png'),
+                  children: [
+                    /// HEADER
+                    UserAccountsDrawerHeader(
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/AIR_Picture.png'),
 
-                        fit: BoxFit.fill,
+                          fit: BoxFit.fill,
 
-                        colorFilter: ColorFilter.mode(
-                          Colors.black54,
-                          BlendMode.darken,
+                          colorFilter: ColorFilter.mode(
+                            Colors.black54,
+                            BlendMode.darken,
+                          ),
                         ),
                       ),
+
+                      accountName: const Text('Alifiyas-Mazeasta'),
+
+                      accountEmail: const Text('AsathesCumIRoofantal'),
                     ),
 
-                    accountName: const Text('Alifiyas-Mazeasta'),
+                    /// =========================================================
+                    /// ORIGINAL DRAWER DESIGN
+                    /// =========================================================
+                    ...controller.drawerSections.map((section) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(vertical: 0),
 
-                    accountEmail: const Text('AsathesCumIRoofantal'),
-                  ),
+                        padding: const EdgeInsets.symmetric(vertical: 4),
 
-                  /// =========================================================
-                  /// ORIGINAL DRAWER DESIGN
-                  /// =========================================================
-                  ...controller.drawerSections.map((section) {
-                    return Container(
-                      margin: const EdgeInsets.symmetric(vertical: 0),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
 
-                      padding: const EdgeInsets.symmetric(vertical: 4),
+                            end: Alignment.bottomRight,
 
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
+                            colors: isDark
+                                ? [
+                                    theme.scaffoldBackgroundColor,
 
-                          end: Alignment.bottomRight,
+                                    theme.colorScheme.surface,
+                                  ]
+                                : [
+                                    theme.colorScheme.surface,
 
-                          colors: isDark
-                              ? [
-                                  theme.scaffoldBackgroundColor,
-
-                                  theme.colorScheme.surface,
-                                ]
-                              : [
-                                  theme.colorScheme.surface,
-
-                                  theme.scaffoldBackgroundColor,
-                                ],
+                                    theme.scaffoldBackgroundColor,
+                                  ],
+                          ),
                         ),
-                      ),
 
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
 
-                        children: [
-                          /// SECTION TITLE
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
+                          children: [
+                            /// SECTION TITLE
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
 
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 5,
-                                  height: 32,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 5,
+                                    height: 32,
 
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
 
-                                    gradient: const LinearGradient(
-                                      colors: [
-                                        Color(0xFFFFE8A3),
+                                      gradient: const LinearGradient(
+                                        colors: [
+                                          Color(0xFFFFE8A3),
 
-                                        Color(0xFFD4AF37),
+                                          Color(0xFFD4AF37),
 
-                                        Color(0xFF8C6A16),
-                                      ],
+                                          Color(0xFF8C6A16),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
 
-                                const SizedBox(width: 12),
+                                  const SizedBox(width: 12),
 
-                                Expanded(
-                                  child: Text(
-                                    section.title.toUpperCase(),
+                                  Expanded(
+                                    child: Text(
+                                      section.title.toUpperCase(),
 
-                                    style: const TextStyle(
-                                      color: Color(0xFFFFD369),
+                                      style: const TextStyle(
+                                        color: Color(0xFFFFD369),
 
-                                      fontSize: 13,
+                                        fontSize: 13,
 
-                                      fontWeight: FontWeight.w700,
+                                        fontWeight: FontWeight.w700,
 
-                                      letterSpacing: 2.2,
+                                        letterSpacing: 2.2,
+                                      ),
                                     ),
                                   ),
+                                ],
+                              ),
+                            ),
+
+                            /// SECTION DESCRIPTION
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
+
+                              child: Text(
+                                DrawerNavigationCopy.sectionBlurb(
+                                  section.title,
                                 ),
-                              ],
-                            ),
-                          ),
 
-                          /// SECTION DESCRIPTION
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
+                                style: TextStyle(
+                                  fontSize: 11.2,
 
-                            child: Text(
-                              DrawerNavigationCopy.sectionBlurb(section.title),
+                                  height: 1.45,
 
-                              style: TextStyle(
-                                fontSize: 11.2,
-
-                                height: 1.45,
-
-                                color: onSurface,
+                                  color: onSurface,
+                                ),
                               ),
                             ),
-                          ),
 
-                          /// ITEMS
-                          ...section.items.map((item) {
-                            controller.itemKeys.putIfAbsent(
-                              item.route,
-                              () => GlobalKey(),
-                            );
+                            /// ITEMS
+                            ...section.items.map((item) {
+                              // controller.itemKeys.putIfAbsent(
+                              //   item.route,
+                              //   () => GlobalKey(
+                              //     debugLabel: "${section.title}_${item.route}",
+                              //   ),
+                              // );
 
-                            return Container(
-                              key: controller.itemKeys[item.route],
+                              return Container(
+                                // key: controller.itemKeys[item.route],
+                                child: buildDrawerItem(
+                                  context: context,
 
-                              child: buildDrawerItem(
-                                context: context,
+                                  item: item,
 
-                                item: item,
+                                  onSurface: onSurface,
+                                ),
+                              );
+                            }),
 
-                                onSurface: onSurface,
-                              ),
-                            );
-                          }),
+                            const SizedBox(height: 10),
+                          ],
+                        ),
+                      );
+                    }),
 
-                          const SizedBox(height: 10),
-                        ],
-                      ),
-                    );
-                  }),
+                    const SizedBox(height: 120),
+                  ],
+                ),
 
-                  const SizedBox(height: 120),
-                ],
-              ),
+                /// =========================================================
+                /// FLOATING SEARCH BUTTON
+                /// =========================================================
+                Positioned(
+                  bottom: 20,
+                  right: 18,
 
-              /// =========================================================
-              /// FLOATING SEARCH BUTTON
-              /// =========================================================
-              Positioned(
-                bottom: 20,
-                right: 18,
+                  child: Material(
+                    color: Colors.transparent,
 
-                child: Material(
-                  color: Colors.transparent,
+                    elevation: 12,
 
-                  elevation: 12,
-
-                  borderRadius: BorderRadius.circular(100),
-
-                  child: InkWell(
                     borderRadius: BorderRadius.circular(100),
 
-                    onTap: () {
-                      controller.isDrawerSearchVisible.value = true;
-                    },
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(100),
 
-                    child: Ink(
-                      width: 62,
-                      height: 62,
+                      onTap: () {
+                        controller.isDrawerSearchVisible.value = true;
+                      },
 
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
+                      child: Ink(
+                        width: 62,
+                        height: 62,
 
-                        gradient: LinearGradient(
-                          colors: [Color(0xFF00C6FF), Color(0xFF0072FF)],
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+
+                          gradient: LinearGradient(
+                            colors: [Color(0xFF00C6FF), Color(0xFF0072FF)],
+                          ),
                         ),
-                      ),
 
-                      child: const Icon(
-                        Icons.search_rounded,
-                        color: Colors.white,
-                        size: 28,
+                        child: const Icon(
+                          Icons.search_rounded,
+                          color: Colors.white,
+                          size: 28,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
 
-              /// =========================================================
-              /// SEARCH OVERLAY
-              /// =========================================================
-              Obx(
-                () => controller.isDrawerSearchVisible.value
+                /// =========================================================
+                /// SEARCH OVERLAY
+                /// =========================================================
+                controller.isDrawerSearchVisible.value
                     ? Positioned.fill(
                         child: GestureDetector(
                           behavior: HitTestBehavior.opaque,
@@ -451,7 +454,27 @@ class _HomeViewState extends State<HomeView> {
                                     child: GestureDetector(
                                       onTap: () {},
 
-                                      child: Obx(() {
+                                      child: getFilterResultsUIComponent()),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              ],
+            ),
+          ),
+
+          body: TabBarView(children: pages),
+        ),
+      ),
+    );
+  }
+
+ Widget getFilterResultsUIComponent() {
                                         final results = getFilteredResults();
 
                                         if (results.isEmpty) {
@@ -552,6 +575,9 @@ class _HomeViewState extends State<HomeView> {
                                                                 e.sectionTitle,
                                                             route: e.item.route,
                                                           );
+                                                          controller
+                                                              .isDrawerSearchVisible
+                                                              .refresh();
                                                         },
 
                                                         child: Ink(
@@ -615,25 +641,7 @@ class _HomeViewState extends State<HomeView> {
                                             );
                                           }).toList(),
                                         );
-                                      }),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
-              ),
-            ],
-          ),
-        ),
-
-        body: TabBarView(children: pages),
-      ),
-    );
-  }
+                                      }
 
   /// =========================================================
   /// DRAWER ITEM
