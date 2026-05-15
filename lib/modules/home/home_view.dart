@@ -22,6 +22,19 @@ class HomeView extends StatelessWidget {
     final query = controller.drawerSearchText.value.trim().toLowerCase();
     controller.results.value = [];
     if (query.isNotEmpty) {}
+    for (final resultItem in controller.results.value ?? []) {
+      for (final item in resultItem.items) {
+        // if (item.route == null) {
+        //   // itemKeys[item.route!] = GlobalKey(
+        //   //   debugLabel: "FilterItems_${item.title}",
+        //   // ); //wont come to this
+        // } else {
+        controller.itemResultKeys[item.route!] = GlobalKey(
+          debugLabel: "${item.route}",
+        );
+        // }
+      }
+    }
 
     for (final section in controller.drawerSections) {
       for (final item in section.items) {
@@ -60,18 +73,18 @@ class HomeView extends StatelessWidget {
     await Future.delayed(const Duration(milliseconds: 800));
 
     /// BUILD UNIQUE KEY
-    final uniqueKey = "Actual_$routeTemp";
-    BuildContext? ctx = controller.itemActualKeys[uniqueKey]?.currentContext;
+
+    BuildContext? ctx = controller.itemActualKeys[routeTemp]?.currentContext;
     if (ctx == null) {
-      debugPrint("Context NULL -> $uniqueKey");
+      debugPrint("Context NULL -> $routeTemp");
       return;
     }
 
     /// GET SAFE GLOBAL KEY
-    final GlobalKey? globalKey = controller.itemActualKeys[uniqueKey];
+    final GlobalKey? globalKey = controller.itemActualKeys[routeTemp];
 
     if (globalKey == null) {
-      debugPrint("GlobalKey NOT FOUND -> $uniqueKey");
+      debugPrint("GlobalKey NOT FOUND -> $routeTemp");
       return;
     }
 
@@ -81,7 +94,7 @@ class HomeView extends StatelessWidget {
       final BuildContext? itemContext = globalKey.currentContext;
 
       if (itemContext == null) {
-        debugPrint("Context NULL -> $uniqueKey");
+        debugPrint("Context NULL -> $routeTemp");
         return;
       }
 
