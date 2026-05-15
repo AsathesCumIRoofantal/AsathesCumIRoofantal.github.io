@@ -11,6 +11,18 @@ class DrawerItem {
   DrawerItem({required this.title, required this.icon, required this.route});
 }
 
+class DrawerResultItem {
+  final String title;
+  final IconData icon;
+  final String route;
+
+  DrawerResultItem({
+    required this.title,
+    required this.icon,
+    required this.route,
+  });
+}
+
 class DrawerSection {
   final String title;
   final List<DrawerItem> items;
@@ -20,7 +32,7 @@ class DrawerSection {
 
 class DrawerSearchResult {
   final String sectionTitle;
-  final DrawerItem item;
+  final DrawerResultItem item;
 
   DrawerSearchResult({required this.sectionTitle, required this.item});
 }

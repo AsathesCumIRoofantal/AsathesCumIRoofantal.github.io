@@ -34,10 +34,10 @@ class HomeView extends StatelessWidget {
           controller.results.value.add(
             DrawerSearchResult(
               sectionTitle: section.title,
-              item: DrawerItem(
+              item: DrawerResultItem(
                 title: item.title,
                 icon: item.icon,
-                route: item.route,
+                route: "Fiter_${item.route}",
               ),
             ),
           );
@@ -54,6 +54,7 @@ class HomeView extends StatelessWidget {
   }) async {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
+    routeTemp = routeTemp.replaceFirst("Fiter_", "");
 
     /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 900));
@@ -276,17 +277,7 @@ class HomeView extends StatelessWidget {
                               // );
 
                               return Container(
-                                key:
-                                    (controller
-                                            .drawerSearchController
-                                            .text
-                                            .isEmpty ||
-                                        controller.results.value.isNotEmpty)
-                                    ? GlobalKey(
-                                        debugLabel:
-                                            "FilterItems_${item.icon}_${item.title}",
-                                      )
-                                    : controller.itemKeys[item.route],
+                                key: controller.itemKeys[item.route],
                                 child: buildDrawerItem(
                                   context: context,
 
