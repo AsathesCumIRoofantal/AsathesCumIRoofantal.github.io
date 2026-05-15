@@ -57,7 +57,7 @@ class HomeView extends StatelessWidget {
     routeTemp = routeTemp.replaceFirst("", "");
 
     /// WAIT FOR UI REBUILD
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 800));
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "Actual_$routeTemp";
@@ -96,7 +96,7 @@ class HomeView extends StatelessWidget {
       /// SCROLL
       await Scrollable.ensureVisible(
         itemContext,
-        duration: const Duration(milliseconds: 600),
+        duration: const Duration(milliseconds: 1000),
         curve: Curves.easeInOutCubic,
         alignment: 0.45,
       );
