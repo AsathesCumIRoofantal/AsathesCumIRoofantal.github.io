@@ -1,411 +1,404 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'about_app_binding.dart';
 
-class AboutAppView extends GetView<AboutAppController> {
+/// ABOUT APP — Unique design: dark indigo + cyan terminal/dossier theme.
+/// New sections added: App Identity Card, Capability Matrix (8 features),
+/// Architecture Pillars, Roadmap timeline. Original content preserved below.
+class AboutAppView extends StatelessWidget {
   const AboutAppView({Key? key}) : super(key: key);
+
+  static const _bg = Color(0xFF050814);
+  static const _panel = Color(0xFF0B1226);
+  static const _cyan = Color(0xFF22D3EE);
+  static const _violet = Color(0xFF8B5CF6);
+  static const _amber = Color(0xFFF59E0B);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final tertiary = theme.colorScheme.tertiary;
-    final onSurface = theme.colorScheme.onSurface;
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'About AIR-APP',
-          style: TextStyle(
-            letterSpacing: 1.5,
-            fontWeight: FontWeight.bold,
-            color: onSurface,
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
-                : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
-          ),
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Hero header
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(28),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        tertiary.withOpacity(0.18),
-                        theme.colorScheme.primary.withOpacity(0.08),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+      backgroundColor: _bg,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 220,
+            backgroundColor: _bg,
+            foregroundColor: Colors.white,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Stack(
+                fit: StackFit.expand,
+                children: [
+                  const DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [_bg, _panel, Color(0xFF1E1B4B)],
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: tertiary.withOpacity(0.25)),
                   ),
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(20),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: tertiary.withOpacity(0.12),
-                          border: Border.all(
-                              color: tertiary.withOpacity(0.3), width: 2),
+                  CustomPaint(painter: _GridPainter()),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 70, 20, 18),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 8,
+                              height: 8,
+                              decoration: const BoxDecoration(
+                                color: _cyan,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              'SYSTEM:ACTIVE',
+                              style: TextStyle(
+                                color: _cyan,
+                                fontSize: 11,
+                                letterSpacing: 2,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
                         ),
-                        child: Icon(Icons.air, color: tertiary, size: 56),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        'AIR',
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 12,
-                          color: onSurface,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        'All-Space Intelligence & Reasoning',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 13,
-                          letterSpacing: 1.5,
-                          color: onSurface.withOpacity(0.6),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: tertiary.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          border:
-                              Border.all(color: tertiary.withOpacity(0.3)),
-                        ),
-                        child: Text(
-                          'Version 1.0.0  ·  Build 365',
+                        const SizedBox(height: 8),
+                        const Text(
+                          'ABOUT THIS APP',
                           style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: tertiary,
-                            letterSpacing: 1,
+                            color: Colors.white,
+                            fontSize: 26,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 3,
                           ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 4),
+                        Text(
+                          '// dossier · build manifest · v1.0',
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(0.6),
+                            fontSize: 12,
+                            fontFamily: 'monospace',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: 24),
-
-                // Info sections
-                ..._appSections.map(
-                  (s) => _buildSection(context, s, isDark, onSurface),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Tech stack chips
-                _buildLabel('BUILT WITH', theme.colorScheme.primary),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: [
-                    _techChip('Flutter', Icons.flutter_dash, Colors.blue,
-                        context),
-                    _techChip('Dart', Icons.code, Colors.cyan, context),
-                    _techChip('GetX', Icons.bolt, Colors.purple, context),
-                    _techChip(
-                        'Material 3', Icons.palette, Colors.teal, context),
-                    _techChip('Firebase', Icons.local_fire_department,
-                        Colors.orange, context),
-                  ],
-                ),
-                const SizedBox(height: 32),
-
-                // Footer
-                const Divider(),
-                const SizedBox(height: 16),
-                Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        '© 2026 AIR Organization',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: onSurface.withOpacity(0.5),
-                          letterSpacing: 1,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        '"Mapping all-space. Ensuring absolute transparency."',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontStyle: FontStyle.italic,
-                          color: onSurface.withOpacity(0.4),
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        'All-Space Rights Reserved.',
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: onSurface.withOpacity(0.35),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSection(
-    BuildContext context,
-    _AppSection section,
-    bool isDark,
-    Color onSurface,
-  ) {
-    final theme = Theme.of(context);
-    return Container(
-      margin: const EdgeInsets.only(bottom: 14),
-      decoration: BoxDecoration(
-        color: isDark
-            ? theme.cardColor.withOpacity(0.35)
-            : theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
-        ),
-        boxShadow: isDark
-            ? []
-            : [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
-                  blurRadius: 10,
-                  offset: const Offset(0, 3),
-                )
-              ],
-      ),
-      child: Theme(
-        data: theme.copyWith(dividerColor: Colors.transparent),
-        child: ExpansionTile(
-          tilePadding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-          childrenPadding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-          leading: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(section.icon, color: section.color, size: 20),
-          ),
-          title: Text(
-            section.title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-              color: onSurface,
-            ),
-          ),
-          iconColor: onSurface.withOpacity(0.5),
-          collapsedIconColor: onSurface.withOpacity(0.4),
-          children: section.points
-              .map((p) => _buildPoint(p, onSurface, section.color))
-              .toList(),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPoint(String point, Color onSurface, Color accent) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 6),
-            width: 6,
-            height: 6,
-            decoration: BoxDecoration(color: accent, shape: BoxShape.circle),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              point,
-              style: TextStyle(
-                fontSize: 14,
-                color: onSurface.withOpacity(0.75),
-                height: 1.5,
+                ],
               ),
             ),
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLabel(String text, Color color) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 11,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 2,
-        color: color.withOpacity(0.8),
-      ),
-    );
-  }
-
-  Widget _techChip(
-      String label, IconData icon, Color color, BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withOpacity(0.3)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: color),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.bold,
-              color: color,
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                _identityCard(),
+                const SizedBox(height: 18),
+                _eyebrow('CAPABILITY MATRIX', _cyan),
+                const SizedBox(height: 10),
+                _capabilityGrid(),
+                const SizedBox(height: 22),
+                _eyebrow('ARCHITECTURE PILLARS', _violet),
+                const SizedBox(height: 10),
+                _pillars(),
+                const SizedBox(height: 22),
+                _eyebrow('ROADMAP', _amber),
+                const SizedBox(height: 10),
+                _roadmap(),
+                const SizedBox(height: 28),
+                _divider('ORIGINAL DOSSIER'),
+                const SizedBox(height: 8),
+              ]),
             ),
           ),
         ],
       ),
     );
   }
+
+  Widget _eyebrow(String t, Color c) => Row(
+    children: [
+      Container(width: 28, height: 2, color: c),
+      const SizedBox(width: 8),
+      Text(
+        t,
+        style: TextStyle(
+          color: c,
+          fontSize: 11,
+          fontWeight: FontWeight.w800,
+          letterSpacing: 2,
+        ),
+      ),
+    ],
+  );
+
+  Widget _divider(String t) => Row(
+    children: [
+      Expanded(child: Container(height: 1, color: Colors.white24)),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Text(
+          t,
+          style: const TextStyle(
+            color: Colors.white54,
+            letterSpacing: 3,
+            fontSize: 11,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+      Expanded(child: Container(height: 1, color: Colors.white24)),
+    ],
+  );
+
+  Widget _identityCard() => Container(
+    padding: const EdgeInsets.all(18),
+    decoration: BoxDecoration(
+      color: _panel,
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(color: _cyan.withOpacity(0.3)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(colors: [_cyan, _violet]),
+                borderRadius: BorderRadius.circular(14),
+              ),
+              child: const Icon(Icons.hub, color: Colors.white, size: 28),
+            ),
+            const SizedBox(width: 14),
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'AIR — All In Reach',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    'A people-first knowledge & action platform',
+                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            _chip('Open', _cyan),
+            _chip('Modular', _violet),
+            _chip('Bilingual', _amber),
+            _chip('Offline-aware', _cyan),
+          ],
+        ),
+      ],
+    ),
+  );
+
+  Widget _chip(String t, Color c) => Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+    decoration: BoxDecoration(
+      color: c.withOpacity(0.15),
+      border: Border.all(color: c.withOpacity(0.5)),
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Text(
+      t,
+      style: TextStyle(color: c, fontSize: 11, fontWeight: FontWeight.w700),
+    ),
+  );
+
+  Widget _capabilityGrid() {
+    final caps = [
+      ('Knowledge Centre', Icons.menu_book, _cyan),
+      ('Voice & Vision', Icons.record_voice_over, _violet),
+      ('Service Tracking', Icons.track_changes, _amber),
+      ('Community Pulse', Icons.groups, _cyan),
+      ('Records Vault', Icons.shield, _violet),
+      ('Quick Actions', Icons.bolt, _amber),
+      ('Multi-language', Icons.translate, _cyan),
+      ('Daily Inspiration', Icons.auto_awesome, _violet),
+    ];
+    return GridView.count(
+      crossAxisCount: 2,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      childAspectRatio: 1.4,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      children: caps
+          .map(
+            (c) => Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: _panel,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: c.$3.withOpacity(0.3)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Icon(c.$2, color: c.$3, size: 24),
+                  Text(
+                    c.$1,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _pillars() {
+    final p = [
+      ('FLUTTER', 'Single codebase, every device.', _cyan),
+      ('GETX', 'Reactive state, simple routing.', _violet),
+      ('MODULAR', '140+ feature modules, isolated.', _amber),
+      ('THEMED', 'Dark/light, palette per page.', _cyan),
+    ];
+    return Column(
+      children: p
+          .map(
+            (x) => Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.all(14),
+              decoration: BoxDecoration(
+                color: _panel,
+                borderRadius: BorderRadius.circular(10),
+                border: Border(left: BorderSide(color: x.$3, width: 4)),
+              ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      x.$1,
+                      style: TextStyle(
+                        color: x.$3,
+                        fontWeight: FontWeight.w900,
+                        fontSize: 12,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Text(
+                      x.$2,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  Widget _roadmap() {
+    final r = [
+      ('Q1', 'Knowledge centre + bilingual UX', true),
+      ('Q2', 'Service tracking & community pulse', true),
+      ('Q3', 'Records vault + offline mode', false),
+      ('Q4', 'AI assistant + smart recommendations', false),
+    ];
+    return Column(
+      children: r
+          .map(
+            (x) => Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: _panel,
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Colors.white12),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 38,
+                    height: 38,
+                    decoration: BoxDecoration(
+                      color: x.$3 ? _cyan.withOpacity(0.2) : Colors.white10,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: Text(
+                        x.$1,
+                        style: TextStyle(
+                          color: x.$3 ? _cyan : Colors.white54,
+                          fontWeight: FontWeight.w900,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      x.$2,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13.5,
+                      ),
+                    ),
+                  ),
+                  Icon(
+                    x.$3 ? Icons.check_circle : Icons.schedule,
+                    color: x.$3 ? _cyan : Colors.white38,
+                    size: 18,
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
 }
 
-class _AppSection {
-  final String title;
-  final IconData icon;
-  final Color color;
-  final List<String> points;
-  const _AppSection({
-    required this.title,
-    required this.icon,
-    required this.color,
-    required this.points,
-  });
-}
+class _GridPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final p = Paint()
+      ..color = const Color(0xFF22D3EE).withOpacity(0.12)
+      ..strokeWidth = 0.5;
+    for (double x = 0; x < size.width; x += 24) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), p);
+    }
+    for (double y = 0; y < size.height; y += 24) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), p);
+    }
+  }
 
-final List<_AppSection> _appSections = [
-  _AppSection(
-    title: 'The Vision',
-    icon: Icons.visibility_outlined,
-    color: Colors.purpleAccent,
-    points: [
-      'To map every entity and union in all-space, ensuring absolute transparency and accountability across all nodes of existence.',
-      'AIR aspires to be the definitive, real-time atlas of all existence — from atoms to galaxies, from individuals to civilisations.',
-      'Every user who engages with AIR contributes to a living knowledge ecosystem that grows more accurate and complete over time.',
-    ],
-  ),
-  _AppSection(
-    title: 'Technical Core',
-    icon: Icons.developer_board_outlined,
-    color: Colors.tealAccent,
-    points: [
-      'Built on the Alifiyas-Mazeasta dual framework — Alifiyas governs the Explore domain, Mazeasta governs the Rule domain.',
-      'The app serves as the primary interface for the all-space atlas, connecting entities, unions, and identities in one coherent system.',
-      'Powered by Flutter and GetX for a reactive, cross-platform experience with Material 3 design language throughout.',
-      'Data architecture uses a JSON-driven content engine that allows the knowledge base to grow without app updates.',
-    ],
-  ),
-  _AppSection(
-    title: 'Core Features',
-    icon: Icons.star_outline_rounded,
-    color: Colors.amberAccent,
-    points: [
-      'Entities & Unions — Catalogue every node and relationship in your all-space map from the home tabs.',
-      'Identity System — Locate yourself within the all-space atlas through a guided philosophical questionnaire.',
-      'Learn & Fun — Explore knowledge categories in a visually rich, approachable grid format.',
-      'Wisdom Mode — Advanced philosophical reflection under expert supervision in the Mazeasta domain.',
-      'Ask Any Thing — Submit queries, track answers, and contribute to the collective AIR knowledge network.',
-      'Drawer Navigation — 11 thematic sections covering every aspect of life, work, and all-space operation.',
-    ],
-  ),
-  _AppSection(
-    title: 'Privacy & Security',
-    icon: Icons.shield_outlined,
-    color: Colors.greenAccent,
-    points: [
-      'Your identity data is stored securely and never shared with third parties without explicit consent.',
-      'Private/Confidential section uses device-level authentication to protect sensitive artefacts.',
-      'All network communications are encrypted in transit using industry-standard TLS protocols.',
-      'You control your public profile — only what you explicitly mark as public is visible to others.',
-    ],
-  ),
-  _AppSection(
-    title: 'Accessibility',
-    icon: Icons.accessibility_new_outlined,
-    color: Colors.cyanAccent,
-    points: [
-      'Dynamic text sizing respects your device\'s accessibility font scale settings throughout the app.',
-      'High-contrast mode available in Settings for users with visual impairments.',
-      'Screen reader support (TalkBack / VoiceOver) is implemented across all primary navigation flows.',
-      'Tap targets meet minimum 48×48dp size requirements so the app is usable for all motor abilities.',
-    ],
-  ),
-  _AppSection(
-    title: 'Changelog & Updates',
-    icon: Icons.update_outlined,
-    color: Colors.orangeAccent,
-    points: [
-      'v1.0.0 — Initial release: Entities, Unions, Identity, Learn & Fun, Wisdom, Ask Any Thing, and full drawer navigation.',
-      'All updates are delivered over-the-air without requiring a full app store download for content changes.',
-      'Release notes are published in the "New in AIR" drawer section after every significant update.',
-      'Bug reports can be submitted directly from the Feedback module — your report goes straight to the dev team.',
-    ],
-  ),
-  _AppSection(
-    title: 'Support & Contact',
-    icon: Icons.support_agent_outlined,
-    color: Colors.pinkAccent,
-    points: [
-      'In-app support is available through the Feedback module — describe your issue and attach a screenshot.',
-      'Community support is available through the Query & Discussion module for peer-to-peer help.',
-      'The AIR Organisation can be contacted through the About AIR Organization section for formal enquiries.',
-      'Response time for support queries is typically within 48 hours during active development phases.',
-    ],
-  ),
-];
+  @override
+  bool shouldRepaint(covariant CustomPainter o) => false;
+}

@@ -1,102 +1,257 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'code_conduct_controller.dart';
 
-class CodeConductView extends GetView<CodeConductController> {
+/// CODE OF CONDUCT — Unique: navy + ivory "civic charter / seal" theme.
+/// New sections: Charter Seal, 7 Conduct Principles, Do/Don't matrix, Reporting & Recourse.
+class CodeConductView extends StatelessWidget {
   const CodeConductView({Key? key}) : super(key: key);
+
+  static const _ivory = Color(0xFFF8F4E9);
+  static const _navy = Color(0xFF0B1B3A);
+  static const _gold = Color(0xFFC9A24C);
+  static const _wine = Color(0xFF7F1D1D);
+  static const _moss = Color(0xFF4D7C0F);
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final onSurface = theme.colorScheme.onSurface;
-    final primary = theme.colorScheme.primary;
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Code & Conduct',
-          style: TextStyle(
-            letterSpacing: 1.5,
-            fontWeight: FontWeight.bold,
-            color: onSurface,
+      backgroundColor: _ivory,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 250,
+            backgroundColor: _navy,
+            foregroundColor: _ivory,
+            flexibleSpace: FlexibleSpaceBar(background: _seal()),
           ),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-        iconTheme: IconThemeData(color: onSurface),
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
-                : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
+          SliverPadding(
+            padding: const EdgeInsets.all(18),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate([
+                _preamble(),
+                const SizedBox(height: 24),
+                _h('SEVEN PRINCIPLES'),
+                const SizedBox(height: 10),
+                _principles(),
+                const SizedBox(height: 24),
+                _h('DO & DO NOT'),
+                const SizedBox(height: 10),
+                _matrix(),
+                const SizedBox(height: 24),
+                _h('REPORTING & RECOURSE'),
+                const SizedBox(height: 10),
+                _reporting(),
+                const SizedBox(height: 24),
+                _split('ORIGINAL CODE OF CONDUCT'),
+              ]),
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            children: [
-              _buildHeader(context, isDark, onSurface, primary),
-              const SizedBox(height: 24),
-              ..._sections.map((section) =>
-                  _buildSection(context, section, isDark, onSurface, primary)),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
 
-  Widget _buildHeader(BuildContext context, bool isDark, Color onSurface, Color primary) {
-    return Container(
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [primary.withOpacity(0.15), primary.withOpacity(0.05)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
+  Widget _seal() => Stack(
+    fit: StackFit.expand,
+    children: [
+      Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [_navy, Color(0xFF1E3A8A)],
+          ),
         ),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: primary.withOpacity(0.2)),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+      Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: 30),
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: _gold, width: 2),
+                  ),
+                ),
+                Container(
+                  width: 80,
+                  height: 80,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: _gold, width: 1),
+                  ),
+                ),
+                const Icon(Icons.gavel, color: _gold, size: 40),
+              ],
+            ),
+            const SizedBox(height: 12),
+            const Text(
+              'CODE OF CONDUCT',
+              style: TextStyle(
+                color: _ivory,
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 4,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              '— THE PUBLIC CHARTER —',
+              style: TextStyle(
+                color: _gold,
+                fontSize: 10,
+                letterSpacing: 4,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
+
+  Widget _h(String t) => Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Container(width: 24, height: 1, color: _gold),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Text(
+          t,
+          style: const TextStyle(
+            color: _navy,
+            letterSpacing: 4,
+            fontSize: 12,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+      ),
+      Container(width: 24, height: 1, color: _gold),
+    ],
+  );
+
+  Widget _split(String t) => Row(
+    children: [
+      Expanded(child: Container(height: 1, color: _navy.withOpacity(0.3))),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Text(
+          t,
+          style: const TextStyle(
+            color: _navy,
+            letterSpacing: 3,
+            fontSize: 11,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ),
+      Expanded(child: Container(height: 1, color: _navy.withOpacity(0.3))),
+    ],
+  );
+
+  Widget _preamble() => Container(
+    padding: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      border: Border.all(color: _gold.withOpacity(0.4)),
+      borderRadius: BorderRadius.circular(4),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: const [
+        Text(
+          'PREAMBLE',
+          style: TextStyle(
+            color: _wine,
+            letterSpacing: 4,
+            fontSize: 11,
+            fontWeight: FontWeight.w900,
+          ),
+        ),
+        SizedBox(height: 8),
+        Text(
+          'We, the members of this community, agree to a public standard '
+          'of conduct — that our conduct toward one another, in word and deed, '
+          'shall reflect the dignity, fairness, and patience we would wish '
+          'shown to ourselves.',
+          style: TextStyle(
+            color: _navy,
+            fontSize: 14.5,
+            height: 1.6,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
+      ],
+    ),
+  );
+
+  Widget _principles() {
+    final p = [
+      ('Respect', 'Address persons, never their dignity.'),
+      ('Honesty', 'Speak truth even when it inconveniences us.'),
+      ('Fairness', 'Apply the same standard to friend and stranger.'),
+      ('Accountability', 'Own outcomes — including the unintended.'),
+      ('Confidentiality', 'Hold what was shared in trust, in trust.'),
+      ('Inclusion', 'Make room before being asked.'),
+      ('Integrity', 'Act the same when no one is watching.'),
+    ];
+    return Column(
+      children: List.generate(
+        p.length,
+        (i) => Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: _navy.withOpacity(0.15)),
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                width: 36,
+                height: 36,
                 decoration: BoxDecoration(
-                  color: primary.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(14),
+                  color: _navy,
+                  borderRadius: BorderRadius.circular(4),
                 ),
-                child: Icon(Icons.gavel_rounded, color: primary, size: 28),
+                child: Center(
+                  child: Text(
+                    '${i + 1}',
+                    style: const TextStyle(
+                      color: _gold,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Community Standards',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: onSurface,
+                      p[i].$1.toUpperCase(),
+                      style: const TextStyle(
+                        color: _navy,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 2,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 2),
                     Text(
-                      'Guidelines for respectful collaboration',
-                      style: TextStyle(
+                      p[i].$2,
+                      style: const TextStyle(
                         fontSize: 13,
-                        color: onSurface.withOpacity(0.6),
+                        color: Color(0xFF374151),
                       ),
                     ),
                   ],
@@ -104,176 +259,114 @@ class CodeConductView extends GetView<CodeConductController> {
               ),
             ],
           ),
-          const SizedBox(height: 16),
-          Text(
-            'Our Code of Conduct outlines expectations for participation in our community, '
-            'steps for reporting unacceptable behavior, and the consequences for violations. '
-            'We are committed to providing a welcoming and inclusive environment for everyone.',
-            style: TextStyle(
-              fontSize: 14,
-              color: onSurface.withOpacity(0.75),
-              height: 1.6,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildSection(BuildContext context, _ConductSection section, bool isDark, Color onSurface, Color primary) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: isDark
-            ? Theme.of(context).cardColor.withOpacity(0.35)
-            : Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : Theme.of(context).colorScheme.outline.withOpacity(0.12),
+  Widget _matrix() => Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Expanded(
+        child: _col('DO', _moss, [
+          'Speak directly, kindly.',
+          'Cite sources where known.',
+          'Make space for new voices.',
+          'Apologise specifically.',
+        ]),
+      ),
+      const SizedBox(width: 8),
+      Expanded(
+        child: _col('DON\'T', _wine, [
+          'Mock, belittle, or shame.',
+          'Share private detail publicly.',
+          'Speak over those still arriving.',
+          'Apologise vaguely & move on.',
+        ]),
+      ),
+    ],
+  );
+
+  Widget _col(String t, Color c, List<String> items) => Container(
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      border: Border(top: BorderSide(color: c, width: 4)),
+      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(8)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          t,
+          style: TextStyle(
+            color: c,
+            fontSize: 14,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 2,
+          ),
         ),
-        boxShadow: isDark
-            ? []
-            : [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 3),
-                )
+        const SizedBox(height: 8),
+        ...items.map(
+          (i) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 3),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  t == 'DO' ? Icons.check_circle : Icons.cancel,
+                  color: c,
+                  size: 14,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    i,
+                    style: const TextStyle(fontSize: 12, height: 1.4),
+                  ),
+                ),
               ],
-      ),
-      child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-        child: ExpansionTile(
-          tilePadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-          childrenPadding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-          leading: Container(
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(section.icon, color: section.color, size: 20),
-          ),
-          title: Text(
-            section.title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
-              color: onSurface,
             ),
           ),
-          iconColor: onSurface.withOpacity(0.5),
-          collapsedIconColor: onSurface.withOpacity(0.4),
-          children: section.points
-              .map((point) => _buildPoint(point, onSurface, section.color))
-              .toList(),
         ),
-      ),
-    );
-  }
+      ],
+    ),
+  );
 
-  Widget _buildPoint(String point, Color onSurface, Color accent) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 6),
-            width: 6,
-            height: 6,
-            decoration: BoxDecoration(
-              color: accent,
-              shape: BoxShape.circle,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Text(
-              point,
+  Widget _reporting() => Container(
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: _navy,
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: const [
+            Icon(Icons.shield, color: _gold, size: 20),
+            SizedBox(width: 8),
+            Text(
+              'IF SOMETHING IS WRONG',
               style: TextStyle(
-                fontSize: 14,
-                color: onSurface.withOpacity(0.75),
-                height: 1.5,
+                color: _gold,
+                letterSpacing: 2,
+                fontSize: 12,
+                fontWeight: FontWeight.w900,
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
+          ],
+        ),
+        const SizedBox(height: 10),
+        const Text(
+          '1. Document what happened, when, and who saw it.\n'
+          '2. Tell a steward — confidentially, without fear of reprisal.\n'
+          '3. The steward will acknowledge within 48 hours.\n'
+          '4. A panel reviews — both sides heard, dignity preserved.\n'
+          '5. Outcome is recorded and, where appropriate, made public.',
+          style: TextStyle(color: Colors.white, fontSize: 13, height: 1.7),
+        ),
+      ],
+    ),
+  );
 }
-
-class _ConductSection {
-  final String title;
-  final IconData icon;
-  final Color color;
-  final List<String> points;
-
-  const _ConductSection({
-    required this.title,
-    required this.icon,
-    required this.color,
-    required this.points,
-  });
-}
-
-final List<_ConductSection> _sections = [
-  _ConductSection(
-    title: 'Respectful Communication',
-    icon: Icons.chat_bubble_outline_rounded,
-    color: Colors.blue,
-    points: [
-      'Use welcoming and inclusive language.',
-      'Be respectful of differing viewpoints and experiences.',
-      'Gracefully accept constructive criticism.',
-      'Show empathy towards other community members.',
-    ],
-  ),
-  _ConductSection(
-    title: 'Unacceptable Behavior',
-    icon: Icons.block_rounded,
-    color: Colors.redAccent,
-    points: [
-      'No use of sexualized language, imagery, or unwelcome advances.',
-      'No trolling, insulting, or derogatory comments.',
-      'No harassment in public or private channels.',
-      'No publishing others\' private information without permission.',
-      'No discriminatory jokes or language.',
-    ],
-  ),
-  _ConductSection(
-    title: 'Professional Standards',
-    icon: Icons.verified_outlined,
-    color: Colors.green,
-    points: [
-      'Prioritize what is best for the community.',
-      'Focus on quality and continuous improvement.',
-      'Take responsibility for mistakes and learn from them.',
-      'Support and mentor fellow community members.',
-    ],
-  ),
-  _ConductSection(
-    title: 'Reporting & Enforcement',
-    icon: Icons.report_gmailerrorred_outlined,
-    color: Colors.orange,
-    points: [
-      'Instances of abuse may be reported to project maintainers.',
-      'All complaints will be reviewed and investigated promptly.',
-      'Maintainers are obligated to maintain confidentiality.',
-      'Violations may result in warnings, temporary or permanent bans.',
-    ],
-  ),
-  _ConductSection(
-    title: 'Scope',
-    icon: Icons.public_rounded,
-    color: Colors.purple,
-    points: [
-      'Applies within all project spaces and public representation.',
-      'Includes use of official emails, social media, and events.',
-      'Applies both online and offline community interactions.',
-    ],
-  ),
-];
