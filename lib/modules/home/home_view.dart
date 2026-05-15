@@ -22,19 +22,6 @@ class HomeView extends StatelessWidget {
     final query = controller.drawerSearchText.value.trim().toLowerCase();
     controller.results.value = [];
     if (query.isNotEmpty) {}
-    for (final resultItem in controller.results.value ?? []) {
-      for (final item in resultItem.items) {
-        // if (item.route == null) {
-        //   // itemKeys[item.route!] = GlobalKey(
-        //   //   debugLabel: "FilterItems_${item.title}",
-        //   // ); //wont come to this
-        // } else {
-        controller.itemResultKeys[item.route!] = GlobalKey(
-          debugLabel: "${item.route}",
-        );
-        // }
-      }
-    }
 
     for (final section in controller.drawerSections) {
       for (final item in section.items) {
@@ -54,6 +41,19 @@ class HomeView extends StatelessWidget {
               ),
             ),
           );
+          for (final resultItem in controller.results.value ?? []) {
+            for (final item in resultItem.items) {
+              // if (item.route == null) {
+              //   // itemKeys[item.route!] = GlobalKey(
+              //   //   debugLabel: "FilterItems_${item.title}",
+              //   // ); //wont come to this
+              // } else {
+              controller.itemResultKeys[item.route!] = GlobalKey(
+                debugLabel: "${item.route}",
+              );
+              // }
+            }
+          }
         }
       }
     }
