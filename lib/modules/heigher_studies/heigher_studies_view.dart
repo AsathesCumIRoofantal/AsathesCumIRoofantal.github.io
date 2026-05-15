@@ -288,4 +288,62 @@ final List<_Section> _sections = [
       'Join cohort groups for your intake year and start building your network before classes begin.',
     ],
   ),
+  _Section(
+    title: 'Interview Preparation',
+    icon: Icons.record_voice_over_outlined,
+    color: Colors.deepOrange,
+    points: [
+      'Access domain-specific interview question banks — technical, HR, and case-study formats — curated for top graduate programmes.',
+      'Practice with timed mock interviews and receive AI-assisted feedback on structure, clarity, and keyword density.',
+      'Review real anonymised interview experiences shared by successful admits inside the AIR community.',
+      'Build a personal answer library for recurring themes: leadership experience, failure lessons, and long-term vision narratives.',
+    ],
+  ),
+  _Section(
+    title: 'Thesis & Research Guide',
+    icon: Icons.menu_book_outlined,
+    color: Colors.brown,
+    points: [
+      'Navigate topic selection with a structured funnel — from broad research domain down to a specific, defensible question.',
+      'Use the citation manager integration to organise references, avoid plagiarism, and format bibliographies automatically.',
+      'Access thesis templates aligned with major international style guides: APA, MLA, Chicago, and Harvard.',
+      'Connect with faculty volunteers who offer one-off thesis direction reviews to first-time researchers.',
+      'Track chapter milestones and submission deadlines inside the AIR study planner so nothing falls behind.',
+    ],
+  ),
+  _Section(
+    title: 'Career After Graduation',
+    icon: Icons.work_outline,
+    color: Colors.blueGrey,
+    points: [
+      'Map the career trajectories of graduates from your target programme using anonymised alumni outcome data.',
+      'Identify the roles, industries, and companies that most frequently absorb your degree type within the first two years.',
+      'Use the salary benchmarking tool to negotiate your first role with real data rather than guesswork.',
+      'Access a 90-day post-graduation action plan template used by successful AIR community members.',
+      'Set up automatic job-alert feeds filtered by degree relevance and geographic preference.',
+    ],
+  ),
+  _Section(
+    title: 'Digital Learning Resources',
+    icon: Icons.devices_outlined,
+    color: Colors.teal,
+    points: [
+      'Access a curated library of MOOCs, recorded lectures, and open courseware from top universities — free and paid options included.',
+      'Build a personal learning stack aligned with the prerequisites and electives of your shortlisted programmes.',
+      'Track online course completions and generate a verified digital credential record shareable on your AIR profile.',
+      'Subscribe to subject-specific newsletters and paper digests so you arrive at your programme already engaged with current research.',
+    ],
+  ),
+  _Section(
+    title: 'Academic Writing Workshop',
+    icon: Icons.edit_outlined,
+    color: Colors.deepPurple,
+    points: [
+      'Understand the structural anatomy of strong academic writing: argument, evidence, synthesis, and citation.',
+      'Practice paragraph construction using scaffolded exercises that progressively reduce guidance.',
+      'Learn to distinguish between descriptive, analytical, critical, and evaluative writing modes — and when each is required.',
+      'Use the peer-review pairing feature to exchange drafts with a community member for structured feedback.',
+      'Access a vocabulary bank of academic connective phrases to replace colloquial language in formal submissions.',
+    ],
+  ),
 ];
