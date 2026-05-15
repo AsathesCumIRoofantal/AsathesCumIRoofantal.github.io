@@ -60,23 +60,23 @@ class HomeView extends StatelessWidget {
     await Future.delayed(const Duration(milliseconds: 900));
 
     /// BUILD UNIQUE KEY
-    final uniqueKey = "${sectionTitle}_$routeTemp";
+    final uniqueKey = "Actual_$routeTemp";
     BuildContext? ctx = controller.itemKeys[routeTemp]?.currentContext;
     if (ctx == null) {
       debugPrint("Context NULL -> $uniqueKey");
       return;
     }
 
-    /// SCROLL
-    await Scrollable.ensureVisible(
-      ctx,
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.easeInOutCubic,
-      alignment: 0.45,
-    );
+    // /// SCROLL
+    // await Scrollable.ensureVisible(
+    //   ctx,
+    //   duration: const Duration(milliseconds: 800),
+    //   curve: Curves.easeInOutCubic,
+    //   alignment: 0.45,
+    // );
 
     /// GET SAFE GLOBAL KEY
-    final GlobalKey? globalKey = controller.itemKeys[routeTemp];
+    final GlobalKey? globalKey = controller.itemKeys[uniqueKey];
 
     if (globalKey == null) {
       debugPrint("GlobalKey NOT FOUND -> $uniqueKey");
