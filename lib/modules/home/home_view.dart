@@ -59,7 +59,7 @@ class HomeView extends StatelessWidget {
   }) async {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
-    routeTemp = routeTemp.replaceFirst("", "");
+    routeTemp = "Actual_${routeTemp}";
 
     /// WAIT FOR UI REBUILD
     await Future.delayed(const Duration(milliseconds: 800));
