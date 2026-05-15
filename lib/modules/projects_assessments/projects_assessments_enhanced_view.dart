@@ -8,7 +8,7 @@ import 'projects_assessments_view.dart';
 ///
 /// Theme: Twilight Lilac | Layout: burst
 class ProjectsAssessmentsEnhancedView extends StatelessWidget {
-  const ProjectsAssessmentsEnhancedView({Key? key}) : super(key: key);
+  const ProjectsAssessmentsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0f2e);
   static const Color _bg2    = Color(0xff2d1b4e);

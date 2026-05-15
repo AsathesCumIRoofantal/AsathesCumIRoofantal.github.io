@@ -8,7 +8,7 @@ import 'keep_adding_with_patience_view.dart';
 ///
 /// Theme: Clay Earth | Layout: grid
 class KeepAddingWithPatienceEnhancedView extends StatelessWidget {
-  const KeepAddingWithPatienceEnhancedView({Key? key}) : super(key: key);
+  const KeepAddingWithPatienceEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1810);
   static const Color _bg2    = Color(0xff4a2d1f);

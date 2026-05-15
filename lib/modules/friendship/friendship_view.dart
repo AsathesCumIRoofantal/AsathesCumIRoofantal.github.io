@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'friendship_controller.dart';
 
 class FriendshipView extends GetView<FriendshipController> {
-  const FriendshipView({Key? key}) : super(key: key);
+  const FriendshipView({super.key});
 
   static const _peach = Color(0xFFFB923C);
   static const _warm = Color(0xFFEA580C);

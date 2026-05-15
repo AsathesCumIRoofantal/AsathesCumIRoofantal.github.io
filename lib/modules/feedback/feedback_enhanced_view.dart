@@ -8,7 +8,7 @@ import 'feedback_view.dart';
 ///
 /// Theme: Neon Iris | Layout: burst
 class FeedbackEnhancedView extends StatelessWidget {
-  const FeedbackEnhancedView({Key? key}) : super(key: key);
+  const FeedbackEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a0826);
   static const Color _bg2    = Color(0xff14104a);

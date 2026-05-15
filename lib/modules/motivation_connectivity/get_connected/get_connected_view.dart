@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'get_connected_controller.dart';
 
 class GetConnectedView extends GetView<GetConnectedController> {
-  const GetConnectedView({Key? key}) : super(key: key);
+  const GetConnectedView({super.key});
 
   @override
   Widget build(BuildContext context) {

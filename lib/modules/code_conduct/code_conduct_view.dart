@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// CODE OF CONDUCT — Unique: navy + ivory "civic charter / seal" theme.
 /// New sections: Charter Seal, 7 Conduct Principles, Do/Don't matrix, Reporting & Recourse.
 class CodeConductView extends StatelessWidget {
-  const CodeConductView({Key? key}) : super(key: key);
+  const CodeConductView({super.key});
 
   static const _ivory = Color(0xFFF8F4E9);
   static const _navy = Color(0xFF0B1B3A);

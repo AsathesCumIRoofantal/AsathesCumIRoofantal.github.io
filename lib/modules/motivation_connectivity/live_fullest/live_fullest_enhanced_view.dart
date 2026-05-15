@@ -8,7 +8,7 @@ import 'live_fullest_view.dart';
 ///
 /// Theme: Forest Moss | Layout: rings
 class LiveFullestEnhancedView extends StatelessWidget {
-  const LiveFullestEnhancedView({Key? key}) : super(key: key);
+  const LiveFullestEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff052e1b);
   static const Color _bg2    = Color(0xff0f3d2a);

@@ -8,7 +8,7 @@ import 'interviews_view.dart';
 ///
 /// Theme: Ember Forge | Layout: burst
 class InterviewsEnhancedView extends StatelessWidget {
-  const InterviewsEnhancedView({Key? key}) : super(key: key);
+  const InterviewsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0a05);
   static const Color _bg2    = Color(0xff3b1c0e);

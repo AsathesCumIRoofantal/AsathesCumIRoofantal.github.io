@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'obligations_controller.dart';
 
 class ObligationsView extends GetView<ObligationsController> {
-  const ObligationsView({Key? key}) : super(key: key);
+  const ObligationsView({super.key});
 
   static const _law = Color(0xFF1E40AF);
   static const _blue = Color(0xFF3B82F6);

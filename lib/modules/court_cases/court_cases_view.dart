@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'court_cases_controller.dart';
 
 class CourtCasesView extends GetView<CourtCasesController> {
-  const CourtCasesView({Key? key}) : super(key: key);
+  const CourtCasesView({super.key});
 
   @override
   Widget build(BuildContext context) {

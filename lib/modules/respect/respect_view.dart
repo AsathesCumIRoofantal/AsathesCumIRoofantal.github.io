@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'respect_controller.dart';
 
 class RespectView extends GetView<RespectController> {
-  const RespectView({Key? key}) : super(key: key);
+  const RespectView({super.key});
 
   static const _gold = Color(0xFFD97706);
   static const _amber = Color(0xFFF59E0B);

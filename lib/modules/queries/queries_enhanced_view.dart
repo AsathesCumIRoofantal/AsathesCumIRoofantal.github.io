@@ -8,7 +8,7 @@ import 'queries_view.dart';
 ///
 /// Theme: Rose Petal | Layout: grid
 class QueriesEnhancedView extends StatelessWidget {
-  const QueriesEnhancedView({Key? key}) : super(key: key);
+  const QueriesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0814);
   static const Color _bg2    = Color(0xff4a0e26);

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'being_recorded_rewarded_controller.dart';
 
 class BeingRecordedRewardedView extends GetView<BeingRecordedRewardedController> {
-  const BeingRecordedRewardedView({Key? key}) : super(key: key);
+  const BeingRecordedRewardedView({super.key});
 
   @override
   Widget build(BuildContext context) {

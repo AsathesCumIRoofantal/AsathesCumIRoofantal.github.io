@@ -8,7 +8,7 @@ import 'pick_good_going_view.dart';
 ///
 /// Theme: Saffron Sun | Layout: diagonal
 class PickGoodGoingEnhancedView extends StatelessWidget {
-  const PickGoodGoingEnhancedView({Key? key}) : super(key: key);
+  const PickGoodGoingEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1a05);
   static const Color _bg2    = Color(0xff4a2d0a);

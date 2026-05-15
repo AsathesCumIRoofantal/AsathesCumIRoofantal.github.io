@@ -4,7 +4,7 @@ import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'projects_assessments_controller.dart';
 
 class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
-  const ProjectsAssessmentsView({Key? key}) : super(key: key);
+  const ProjectsAssessmentsView({super.key});
 
   @override
   Widget build(BuildContext context) {

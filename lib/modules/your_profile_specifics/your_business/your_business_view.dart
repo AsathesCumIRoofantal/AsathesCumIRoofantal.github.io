@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'your_business_controller.dart';
 
 class YourBusinessView extends GetView<YourBusinessController> {
-  const YourBusinessView({Key? key}) : super(key: key);
+  const YourBusinessView({super.key});
 
   @override
   Widget build(BuildContext context) {

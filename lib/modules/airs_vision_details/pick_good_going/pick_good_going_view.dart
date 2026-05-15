@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'pick_good_going_controller.dart';
 
 class PickGoodGoingView extends GetView<PickGoodGoingController> {
-  const PickGoodGoingView({Key? key}) : super(key: key);
+  const PickGoodGoingView({super.key});
 
   @override
   Widget build(BuildContext context) {

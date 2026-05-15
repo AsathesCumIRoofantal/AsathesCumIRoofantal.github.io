@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'share_experience_controller.dart';
 
 class ShareExperienceView extends GetView<ShareExperienceController> {
-  const ShareExperienceView({Key? key}) : super(key: key);
+  const ShareExperienceView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +201,7 @@ class ShareExperienceView extends GetView<ShareExperienceController> {
                           onDeleted: () => controller.removeAttachment(entry.key),
                           deleteIcon: const Icon(Icons.close, size: 14),
                           backgroundColor: primary.withOpacity(0.1),
-                        )).toList(),
+                        )),
                         ActionChip(
                           avatar: const Icon(Icons.add, size: 14),
                           label: const Text('Add File'),

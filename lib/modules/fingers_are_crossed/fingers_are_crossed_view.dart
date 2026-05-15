@@ -220,7 +220,7 @@ const List<Map<String, dynamic>> _featureSections = [
 //  MAIN VIEW
 // ─────────────────────────────────────────────
 class FingersAreCrossedView extends GetView<FingersAreCrossedController> {
-  const FingersAreCrossedView({Key? key}) : super(key: key);
+  const FingersAreCrossedView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -584,20 +584,20 @@ class _StatusFilterRow extends StatelessWidget {
             decoration: BoxDecoration(
               color: isFirst
                   ? Colors.amber.withOpacity(0.15)
-                  : (color as Color).withOpacity(isDark ? 0.12 : 0.08),
+                  : (color).withOpacity(isDark ? 0.12 : 0.08),
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
-                  color: isFirst ? Colors.amber.withOpacity(0.5) : (color as Color).withOpacity(0.3)),
+                  color: isFirst ? Colors.amber.withOpacity(0.5) : (color).withOpacity(0.3)),
             ),
             child: Row(children: [
-              Icon(icon as IconData, size: 13,
-                  color: isFirst ? Colors.amber : color as Color),
+              Icon(icon, size: 13,
+                  color: isFirst ? Colors.amber : color),
               const SizedBox(width: 5),
               Text(label,
                   style: TextStyle(
                       fontSize: 11,
                       fontWeight: isFirst ? FontWeight.bold : FontWeight.normal,
-                      color: isFirst ? Colors.amber : color as Color)),
+                      color: isFirst ? Colors.amber : color)),
             ]),
           );
         },

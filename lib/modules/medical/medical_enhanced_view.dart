@@ -8,7 +8,7 @@ import 'medical_view.dart';
 ///
 /// Theme: Clay Earth | Layout: grid
 class MedicalEnhancedView extends StatelessWidget {
-  const MedicalEnhancedView({Key? key}) : super(key: key);
+  const MedicalEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1810);
   static const Color _bg2    = Color(0xff4a2d1f);

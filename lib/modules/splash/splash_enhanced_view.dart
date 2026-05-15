@@ -8,7 +8,7 @@ import 'splash_screen.dart';
 ///
 /// Theme: Twilight Lilac | Layout: burst
 class SplashEnhancedView extends StatelessWidget {
-  const SplashEnhancedView({Key? key}) : super(key: key);
+  const SplashEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0f2e);
   static const Color _bg2    = Color(0xff2d1b4e);

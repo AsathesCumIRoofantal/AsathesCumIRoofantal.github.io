@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'rivalry_controller.dart';
 
 class RivalryView extends GetView<RivalryController> {
-  const RivalryView({Key? key}) : super(key: key);
+  const RivalryView({super.key});
 
   static const _fire = Color(0xFFDC2626);
   static const _orange = Color(0xFFEA580C);

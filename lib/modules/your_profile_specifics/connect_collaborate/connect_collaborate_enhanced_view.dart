@@ -8,7 +8,7 @@ import 'connect_collaborate_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: stripes
 class ConnectCollaborateEnhancedView extends StatelessWidget {
-  const ConnectCollaborateEnhancedView({Key? key}) : super(key: key);
+  const ConnectCollaborateEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a1a0a);
   static const Color _bg2    = Color(0xff14361f);

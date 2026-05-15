@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'events_controller.dart';
 
 class EventsView extends GetView<EventsController> {
-  const EventsView({Key? key}) : super(key: key);
+  const EventsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'windup_else_controller.dart';
 
 class WindupElseView extends GetView<WindupElseController> {
-  const WindupElseView({Key? key}) : super(key: key);
+  const WindupElseView({super.key});
 
   @override
   Widget build(BuildContext context) {

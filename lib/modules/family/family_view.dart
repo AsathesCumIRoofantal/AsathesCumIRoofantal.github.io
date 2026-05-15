@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'family_controller.dart';
 
 class FamilyView extends GetView<FamilyController> {
-  const FamilyView({Key? key}) : super(key: key);
+  const FamilyView({super.key});
 
   static const _warm = Color(0xFFEA580C);
   static const _amber = Color(0xFFF59E0B);

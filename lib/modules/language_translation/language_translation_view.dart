@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'language_translation_controller.dart';
 
 class LanguageTranslationView extends GetView<LanguageTranslationController> {
-  const LanguageTranslationView({Key? key}) : super(key: key);
+  const LanguageTranslationView({super.key});
 
   @override
   Widget build(BuildContext context) {

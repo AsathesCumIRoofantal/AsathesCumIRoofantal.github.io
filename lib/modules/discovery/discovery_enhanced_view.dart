@@ -8,7 +8,7 @@ import 'discovery_view.dart';
 ///
 /// Theme: Magenta Pulse | Layout: grid
 class DiscoveryEnhancedView extends StatelessWidget {
-  const DiscoveryEnhancedView({Key? key}) : super(key: key);
+  const DiscoveryEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff260a1f);
   static const Color _bg2    = Color(0xff4a0e3d);

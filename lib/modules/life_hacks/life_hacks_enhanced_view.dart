@@ -8,7 +8,7 @@ import 'life_hacks_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: diagonal
 class LifeHacksEnhancedView extends StatelessWidget {
-  const LifeHacksEnhancedView({Key? key}) : super(key: key);
+  const LifeHacksEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

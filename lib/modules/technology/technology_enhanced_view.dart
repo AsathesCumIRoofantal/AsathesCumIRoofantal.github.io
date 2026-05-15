@@ -8,7 +8,7 @@ import 'technology_view.dart';
 ///
 /// Theme: Mint Spring | Layout: blocks
 class TechnologyEnhancedView extends StatelessWidget {
-  const TechnologyEnhancedView({Key? key}) : super(key: key);
+  const TechnologyEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff052e2a);
   static const Color _bg2    = Color(0xff0f4d45);

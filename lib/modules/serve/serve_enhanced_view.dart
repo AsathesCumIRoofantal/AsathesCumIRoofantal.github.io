@@ -8,7 +8,7 @@ import 'serve_view.dart';
 ///
 /// Theme: Ocean Deep | Layout: blocks
 class ServeEnhancedView extends StatelessWidget {
-  const ServeEnhancedView({Key? key}) : super(key: key);
+  const ServeEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051e2e);
   static const Color _bg2    = Color(0xff0c3a5c);

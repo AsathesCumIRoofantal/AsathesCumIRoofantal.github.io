@@ -8,7 +8,7 @@ import 'be_part_of_air_view.dart';
 ///
 /// Theme: Indigo Night | Layout: burst
 class BePartOfAirEnhancedView extends StatelessWidget {
-  const BePartOfAirEnhancedView({Key? key}) : super(key: key);
+  const BePartOfAirEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

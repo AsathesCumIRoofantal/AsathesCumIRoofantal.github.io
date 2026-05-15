@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'process_controller.dart';
 
 class ProcessView extends GetView<ProcessController> {
-  const ProcessView({Key? key}) : super(key: key);
+  const ProcessView({super.key});
 
   static const _orange = Color(0xFFEA580C);
   static const _amber = Color(0xFFF59E0B);

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'engagements_controller.dart';
 
 class EngagementsView extends GetView<EngagementsController> {
-  const EngagementsView({Key? key}) : super(key: key);
+  const EngagementsView({super.key});
 
   @override
   Widget build(BuildContext context) {

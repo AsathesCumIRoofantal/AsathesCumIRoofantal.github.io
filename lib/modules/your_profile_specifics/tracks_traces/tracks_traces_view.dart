@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'tracks_traces_controller.dart';
 
 class TracksTracesView extends GetView<TracksTracesController> {
-  const TracksTracesView({Key? key}) : super(key: key);
+  const TracksTracesView({super.key});
 
   @override
   Widget build(BuildContext context) {

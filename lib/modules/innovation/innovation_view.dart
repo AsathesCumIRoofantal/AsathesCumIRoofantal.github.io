@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'innovation_controller.dart';
 
 class InnovationView extends GetView<InnovationController> {
-  const InnovationView({Key? key}) : super(key: key);
+  const InnovationView({super.key});
 
   @override
   Widget build(BuildContext context) {

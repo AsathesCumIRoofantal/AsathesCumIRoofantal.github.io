@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../routes/app_pages.dart';
 
 class DrawerItem {
@@ -23,6 +24,32 @@ class HomeController extends GetxController {
   void changePage(int index) {
     currentIndex.value = index;
   }
+
+  final RxBool isDrawerSearchVisible = false.obs;
+
+  final RxString drawerSearchText = ''.obs;
+
+  final TextEditingController drawerSearchController = TextEditingController();
+
+  final ScrollController drawerScrollController = ScrollController();
+
+  /// SAFE KEYS
+  final Map<String, Key> itemKeys = {};
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    for (final section in drawerSections) {
+      for (final item in section.items) {
+        itemKeys[item.route] = ValueKey(item.route);
+      }
+    }
+  }
+
+  /// =====================================================
+  /// DRAWER DATA
+  /// =====================================================
 
   final List<DrawerSection> drawerSections = [
     DrawerSection(

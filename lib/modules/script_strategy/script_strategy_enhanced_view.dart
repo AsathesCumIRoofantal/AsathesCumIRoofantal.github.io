@@ -8,7 +8,7 @@ import 'script_strategy_view.dart';
 ///
 /// Theme: Forest Moss | Layout: blocks
 class ScriptStrategyEnhancedView extends StatelessWidget {
-  const ScriptStrategyEnhancedView({Key? key}) : super(key: key);
+  const ScriptStrategyEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff052e1b);
   static const Color _bg2    = Color(0xff0f3d2a);

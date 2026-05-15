@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'together_unison_controller.dart';
 
 class TogetherUnisonView extends GetView<TogetherUnisonController> {
-  const TogetherUnisonView({Key? key}) : super(key: key);
+  const TogetherUnisonView({super.key});
 
   static const _rose = Color(0xFFE11D48);
   static const _pink = Color(0xFFDB2777);

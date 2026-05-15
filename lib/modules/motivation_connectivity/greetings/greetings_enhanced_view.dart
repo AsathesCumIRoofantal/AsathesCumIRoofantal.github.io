@@ -8,7 +8,7 @@ import 'greetings_view.dart';
 ///
 /// Theme: Rose Petal | Layout: grid
 class GreetingsEnhancedView extends StatelessWidget {
-  const GreetingsEnhancedView({Key? key}) : super(key: key);
+  const GreetingsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0814);
   static const Color _bg2    = Color(0xff4a0e26);

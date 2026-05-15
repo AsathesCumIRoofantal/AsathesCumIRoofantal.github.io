@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// CHALLENGE — Unique: crimson + slate "battle map / arena" theme.
 /// New sections: Challenge Tracker, 6 Types of Challenge, Battle Plan, Mindset Mantras.
 class ChallengeView extends StatelessWidget {
-  const ChallengeView({Key? key}) : super(key: key);
+  const ChallengeView({super.key});
 
   static const _bg = Color(0xFF0E0B0B);
   static const _slate = Color(0xFF1F2937);

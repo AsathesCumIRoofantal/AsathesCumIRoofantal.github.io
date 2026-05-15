@@ -5,10 +5,9 @@ import 'unions_controller.dart';
 import '../entities/entities_controller.dart';
 import '../../data/models/union_model.dart';
 import '../../core/utils/content_reviser.dart';
-import '../../data/auth_service.dart';
 
 class UnionsView extends GetView<UnionsController> {
-  UnionsView({Key? key}) : super(key: key);
+  const UnionsView({super.key});
 
   @override
   Widget build(BuildContext context) {

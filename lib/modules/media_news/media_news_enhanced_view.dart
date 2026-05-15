@@ -8,7 +8,7 @@ import 'media_news_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: rings
 class MediaNewsEnhancedView extends StatelessWidget {
-  const MediaNewsEnhancedView({Key? key}) : super(key: key);
+  const MediaNewsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f0606);
   static const Color _bg2    = Color(0xff3d0c0c);

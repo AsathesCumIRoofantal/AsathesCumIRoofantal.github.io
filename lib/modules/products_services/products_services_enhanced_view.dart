@@ -8,7 +8,7 @@ import 'products_services_view.dart';
 ///
 /// Theme: Neon Iris | Layout: rings
 class ProductsServicesEnhancedView extends StatelessWidget {
-  const ProductsServicesEnhancedView({Key? key}) : super(key: key);
+  const ProductsServicesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a0826);
   static const Color _bg2    = Color(0xff14104a);

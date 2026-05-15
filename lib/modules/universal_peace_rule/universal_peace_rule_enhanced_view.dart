@@ -8,7 +8,7 @@ import 'universal_peace_rule_view.dart';
 ///
 /// Theme: Indigo Night | Layout: stripes
 class UniversalPeaceRuleEnhancedView extends StatelessWidget {
-  const UniversalPeaceRuleEnhancedView({Key? key}) : super(key: key);
+  const UniversalPeaceRuleEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

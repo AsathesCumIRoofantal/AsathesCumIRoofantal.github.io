@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'trade_import_export_controller.dart';
 
 class TradeImportExportView extends GetView<TradeImportExportController> {
-  const TradeImportExportView({Key? key}) : super(key: key);
+  const TradeImportExportView({super.key});
 
   @override
   Widget build(BuildContext context) {

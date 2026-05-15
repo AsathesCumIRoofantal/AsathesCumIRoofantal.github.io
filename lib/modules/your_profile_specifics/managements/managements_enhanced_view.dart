@@ -8,7 +8,7 @@ import 'managements_view.dart';
 ///
 /// Theme: Olive Grove | Layout: rings
 class ManagementsEnhancedView extends StatelessWidget {
-  const ManagementsEnhancedView({Key? key}) : super(key: key);
+  const ManagementsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a1f0a);
   static const Color _bg2    = Color(0xff2e380f);

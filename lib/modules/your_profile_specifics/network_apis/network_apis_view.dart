@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'network_apis_controller.dart';
 
 class NetworkApisView extends GetView<NetworkApisController> {
-  const NetworkApisView({Key? key}) : super(key: key);
+  const NetworkApisView({super.key});
 
   @override
   Widget build(BuildContext context) {

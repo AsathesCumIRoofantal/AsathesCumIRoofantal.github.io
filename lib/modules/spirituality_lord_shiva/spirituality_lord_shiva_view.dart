@@ -461,7 +461,7 @@ const List<_Jyotirlinga> _jyotirlingas = [
 // ─────────────────────────────────────────────
 class SpiritualityLordShivaView
     extends GetView<SpiritualityLordShivaController> {
-  const SpiritualityLordShivaView({Key? key}) : super(key: key);
+  const SpiritualityLordShivaView({super.key});
 
   @override
   Widget build(BuildContext context) {

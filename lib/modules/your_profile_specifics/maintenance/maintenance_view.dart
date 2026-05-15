@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'maintenance_controller.dart';
 
 class MaintenanceView extends GetView<MaintenanceController> {
-  const MaintenanceView({Key? key}) : super(key: key);
+  const MaintenanceView({super.key});
 
   @override
   Widget build(BuildContext context) {

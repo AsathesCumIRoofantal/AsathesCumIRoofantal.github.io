@@ -8,7 +8,7 @@ import 'about_app_view.dart';
 ///
 /// Theme: Slate Steel | Layout: wave
 class AboutEnhancedView extends StatelessWidget {
-  const AboutEnhancedView({Key? key}) : super(key: key);
+  const AboutEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e293b);

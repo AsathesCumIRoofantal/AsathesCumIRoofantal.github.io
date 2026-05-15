@@ -6,7 +6,7 @@ import '../../data/models/entity_model.dart';
 import '../../core/utils/content_reviser.dart';
 
 class EntitiesView extends GetView<EntitiesController> {
-  EntitiesView({Key? key}) : super(key: key);
+  const EntitiesView({super.key});
 
   @override
   Widget build(BuildContext context) {

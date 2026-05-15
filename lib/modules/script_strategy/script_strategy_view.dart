@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'script_strategy_controller.dart';
 
 class ScriptStrategyView extends GetView<ScriptStrategyController> {
-  const ScriptStrategyView({Key? key}) : super(key: key);
+  const ScriptStrategyView({super.key});
 
   @override
   Widget build(BuildContext context) {

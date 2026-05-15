@@ -8,7 +8,7 @@ import 'signup_view.dart';
 ///
 /// Theme: Bronze Age | Layout: burst
 class SignupEnhancedView extends StatelessWidget {
-  const SignupEnhancedView({Key? key}) : super(key: key);
+  const SignupEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f1408);
   static const Color _bg2    = Color(0xff3d2614);

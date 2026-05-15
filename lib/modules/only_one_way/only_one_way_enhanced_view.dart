@@ -8,7 +8,7 @@ import 'only_one_way_view.dart';
 ///
 /// Theme: Rose Petal | Layout: blocks
 class OnlyOneWayEnhancedView extends StatelessWidget {
-  const OnlyOneWayEnhancedView({Key? key}) : super(key: key);
+  const OnlyOneWayEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0814);
   static const Color _bg2    = Color(0xff4a0e26);

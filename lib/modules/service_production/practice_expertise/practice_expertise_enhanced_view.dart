@@ -8,7 +8,7 @@ import 'practice_expertise_view.dart';
 ///
 /// Theme: Coral Reef | Layout: stripes
 class PracticeExpertiseEnhancedView extends StatelessWidget {
-  const PracticeExpertiseEnhancedView({Key? key}) : super(key: key);
+  const PracticeExpertiseEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0f0a);
   static const Color _bg2    = Color(0xff4a1f14);

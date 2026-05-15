@@ -5,7 +5,7 @@ import 'survellence_investigation_controller.dart';
 
 class SurvellenceInvestigationView
     extends GetView<SurvellenceInvestigationController> {
-  const SurvellenceInvestigationView({Key? key}) : super(key: key);
+  const SurvellenceInvestigationView({super.key});
 
   @override
   Widget build(BuildContext context) {

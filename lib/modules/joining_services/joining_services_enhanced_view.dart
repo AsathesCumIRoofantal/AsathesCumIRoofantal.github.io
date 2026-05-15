@@ -8,7 +8,7 @@ import 'joining_services_view.dart';
 ///
 /// Theme: Indigo Night | Layout: diagonal
 class JoiningServicesEnhancedView extends StatelessWidget {
-  const JoiningServicesEnhancedView({Key? key}) : super(key: key);
+  const JoiningServicesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

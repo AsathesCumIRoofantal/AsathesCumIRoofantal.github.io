@@ -8,7 +8,7 @@ import 'unchecked_anomalies_view.dart';
 ///
 /// Theme: Neon Iris | Layout: wave
 class UncheckedAnomaliesEnhancedView extends StatelessWidget {
-  const UncheckedAnomaliesEnhancedView({Key? key}) : super(key: key);
+  const UncheckedAnomaliesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a0826);
   static const Color _bg2    = Color(0xff14104a);

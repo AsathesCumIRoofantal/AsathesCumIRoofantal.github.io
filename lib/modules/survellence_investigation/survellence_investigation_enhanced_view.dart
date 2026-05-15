@@ -8,7 +8,7 @@ import 'survellence_investigation_view.dart';
 ///
 /// Theme: Royal Plum | Layout: circles
 class SurvellenceInvestigationEnhancedView extends StatelessWidget {
-  const SurvellenceInvestigationEnhancedView({Key? key}) : super(key: key);
+  const SurvellenceInvestigationEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1e0a2e);
   static const Color _bg2    = Color(0xff3b0f5c);

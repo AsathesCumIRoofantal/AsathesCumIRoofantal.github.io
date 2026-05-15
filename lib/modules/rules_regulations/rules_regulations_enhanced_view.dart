@@ -8,7 +8,7 @@ import 'rules_regulations_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: burst
 class RulesRegulationsEnhancedView extends StatelessWidget {
-  const RulesRegulationsEnhancedView({Key? key}) : super(key: key);
+  const RulesRegulationsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

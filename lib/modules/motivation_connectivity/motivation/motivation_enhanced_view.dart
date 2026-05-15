@@ -8,7 +8,7 @@ import 'motivation_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: rings
 class MotivationEnhancedView extends StatelessWidget {
-  const MotivationEnhancedView({Key? key}) : super(key: key);
+  const MotivationEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

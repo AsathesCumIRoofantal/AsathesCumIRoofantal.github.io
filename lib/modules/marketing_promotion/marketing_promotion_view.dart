@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'marketing_promotion_controller.dart';
 
 class MarketingPromotionView extends GetView<MarketingPromotionController> {
-  const MarketingPromotionView({Key? key}) : super(key: key);
+  const MarketingPromotionView({super.key});
 
   @override
   Widget build(BuildContext context) {

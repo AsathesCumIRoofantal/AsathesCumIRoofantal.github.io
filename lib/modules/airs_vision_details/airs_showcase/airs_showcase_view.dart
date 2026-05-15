@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'airs_showcase_controller.dart';
 
 class AirsShowcaseView extends GetView<AirsShowcaseController> {
-  const AirsShowcaseView({Key? key}) : super(key: key);
+  const AirsShowcaseView({super.key});
 
   static const _violet = Color(0xFF7C3AED);
   static const _indigo = Color(0xFF4F46E5);

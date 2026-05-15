@@ -8,7 +8,7 @@ import 'utility_facilities_view.dart';
 ///
 /// Theme: Bronze Age | Layout: wave
 class UtilityFacilitiesEnhancedView extends StatelessWidget {
-  const UtilityFacilitiesEnhancedView({Key? key}) : super(key: key);
+  const UtilityFacilitiesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f1408);
   static const Color _bg2    = Color(0xff3d2614);

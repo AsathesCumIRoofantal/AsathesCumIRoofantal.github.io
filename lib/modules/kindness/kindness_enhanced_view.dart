@@ -8,7 +8,7 @@ import 'kindness_view.dart';
 ///
 /// Theme: Royal Plum | Layout: wave
 class KindnessEnhancedView extends StatelessWidget {
-  const KindnessEnhancedView({Key? key}) : super(key: key);
+  const KindnessEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1e0a2e);
   static const Color _bg2    = Color(0xff3b0f5c);

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'innovation_key_controller.dart';
 
 class InnovationKeyView extends GetView<InnovationKeyController> {
-  const InnovationKeyView({Key? key}) : super(key: key);
+  const InnovationKeyView({super.key});
 
   static const _yellow = Color(0xFFEAB308);
   static const _amber = Color(0xFFF59E0B);

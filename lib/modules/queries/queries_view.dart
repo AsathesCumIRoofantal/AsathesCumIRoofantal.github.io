@@ -4,7 +4,7 @@ import 'queries_controller.dart';
 import 'package:intl/intl.dart';
 
 class QueriesView extends GetView<QueriesController> {
-  const QueriesView({Key? key}) : super(key: key);
+  const QueriesView({super.key});
 
   void _showSubmissionSheet(BuildContext context) {
     Get.bottomSheet(

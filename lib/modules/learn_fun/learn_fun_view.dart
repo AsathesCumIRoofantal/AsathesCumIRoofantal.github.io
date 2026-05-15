@@ -4,7 +4,7 @@ import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'learn_fun_controller.dart';
 
 class LearnFunView extends GetView<LearnFunController> {
-  const LearnFunView({Key? key}) : super(key: key);
+  const LearnFunView({super.key});
 
   IconData _getIcon(String identifier) {
     switch (identifier) {

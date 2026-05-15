@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// CATEGORY TREE — Unique: forest green "living tree / mind-map" theme.
 /// New sections: Tree Health, Visual Branch Map, How to Navigate, Naming Rules.
 class CategoryTreeView extends StatelessWidget {
-  const CategoryTreeView({Key? key}) : super(key: key);
+  const CategoryTreeView({super.key});
 
   static const _bg = Color(0xFFF1F8F2);
   static const _forest = Color(0xFF14532D);

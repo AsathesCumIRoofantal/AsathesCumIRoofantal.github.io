@@ -8,7 +8,7 @@ import 'loop_hole_view.dart';
 ///
 /// Theme: Aurora Teal | Layout: wave
 class LoopHoleEnhancedView extends StatelessWidget {
-  const LoopHoleEnhancedView({Key? key}) : super(key: key);
+  const LoopHoleEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051f26);
   static const Color _bg2    = Color(0xff0f3d45);

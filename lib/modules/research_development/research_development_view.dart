@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'research_development_controller.dart';
 
 class ResearchDevelopmentView extends GetView<ResearchDevelopmentController> {
-  const ResearchDevelopmentView({Key? key}) : super(key: key);
+  const ResearchDevelopmentView({super.key});
 
   @override
   Widget build(BuildContext context) {

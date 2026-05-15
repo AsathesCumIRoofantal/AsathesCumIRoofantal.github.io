@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'private_confidential_controller.dart';
 
 class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
-  const PrivateConfidentialView({Key? key}) : super(key: key);
+  const PrivateConfidentialView({super.key});
 
   @override
   Widget build(BuildContext context) {

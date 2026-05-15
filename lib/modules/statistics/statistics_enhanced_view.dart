@@ -8,7 +8,7 @@ import 'statistics_view.dart';
 ///
 /// Theme: Ember Forge | Layout: wave
 class StatisticsEnhancedView extends StatelessWidget {
-  const StatisticsEnhancedView({Key? key}) : super(key: key);
+  const StatisticsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0a05);
   static const Color _bg2    = Color(0xff3b1c0e);

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'timeline_of_air_controller.dart';
 
 class TimelineOfAirView extends GetView<TimelineOfAirController> {
-  const TimelineOfAirView({Key? key}) : super(key: key);
+  const TimelineOfAirView({super.key});
 
   static const _gold = Color(0xFFD4AF37);
   static const _teal = Color(0xFF009688);

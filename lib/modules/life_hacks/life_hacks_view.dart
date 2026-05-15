@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'life_hacks_controller.dart';
 
 class LifeHacksView extends GetView<LifeHacksController> {
-  const LifeHacksView({Key? key}) : super(key: key);
+  const LifeHacksView({super.key});
 
   @override
   Widget build(BuildContext context) {

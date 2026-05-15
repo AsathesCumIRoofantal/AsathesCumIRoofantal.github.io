@@ -8,7 +8,7 @@ import 'obligations_view.dart';
 ///
 /// Theme: Saffron Sun | Layout: circles
 class ObligationsEnhancedView extends StatelessWidget {
-  const ObligationsEnhancedView({Key? key}) : super(key: key);
+  const ObligationsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1a05);
   static const Color _bg2    = Color(0xff4a2d0a);

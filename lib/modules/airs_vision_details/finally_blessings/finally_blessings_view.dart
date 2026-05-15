@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'finally_blessings_controller.dart';
 
 class FinallyBlessingsView extends GetView<FinallyBlessingsController> {
-  const FinallyBlessingsView({Key? key}) : super(key: key);
+  const FinallyBlessingsView({super.key});
 
   @override
   Widget build(BuildContext context) {

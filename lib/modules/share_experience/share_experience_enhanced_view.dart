@@ -8,7 +8,7 @@ import 'share_experience_view.dart';
 ///
 /// Theme: Royal Plum | Layout: burst
 class ShareExperienceEnhancedView extends StatelessWidget {
-  const ShareExperienceEnhancedView({Key? key}) : super(key: key);
+  const ShareExperienceEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1e0a2e);
   static const Color _bg2    = Color(0xff3b0f5c);

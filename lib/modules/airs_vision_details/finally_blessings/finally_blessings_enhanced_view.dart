@@ -8,7 +8,7 @@ import 'finally_blessings_view.dart';
 ///
 /// Theme: Coral Reef | Layout: diagonal
 class FinallyBlessingsEnhancedView extends StatelessWidget {
-  const FinallyBlessingsEnhancedView({Key? key}) : super(key: key);
+  const FinallyBlessingsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0f0a);
   static const Color _bg2    = Color(0xff4a1f14);

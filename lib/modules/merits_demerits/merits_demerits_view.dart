@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'merits_demerits_controller.dart';
 
 class MeritsDemeritsView extends GetView<MeritsDemeritsController> {
-  const MeritsDemeritsView({Key? key}) : super(key: key);
+  const MeritsDemeritsView({super.key});
 
   @override
   Widget build(BuildContext context) {

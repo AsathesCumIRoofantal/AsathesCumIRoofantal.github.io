@@ -8,7 +8,7 @@ import 'compitition_view.dart';
 ///
 /// Theme: Mint Spring | Layout: circles
 class CompititionEnhancedView extends StatelessWidget {
-  const CompititionEnhancedView({Key? key}) : super(key: key);
+  const CompititionEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff052e2a);
   static const Color _bg2    = Color(0xff0f4d45);

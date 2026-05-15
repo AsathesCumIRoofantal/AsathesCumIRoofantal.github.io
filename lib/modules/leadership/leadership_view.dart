@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'leadership_controller.dart';
 
 class LeadershipView extends GetView<LeadershipController> {
-  const LeadershipView({Key? key}) : super(key: key);
+  const LeadershipView({super.key});
 
   static const _navy = Color(0xFF1E3A5F);
   static const _blue = Color(0xFF2563EB);

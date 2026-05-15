@@ -8,7 +8,7 @@ import 'digitalize_records_view.dart';
 ///
 /// Theme: Royal Plum | Layout: burst
 class DigitalizeRecordsEnhancedView extends StatelessWidget {
-  const DigitalizeRecordsEnhancedView({Key? key}) : super(key: key);
+  const DigitalizeRecordsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1e0a2e);
   static const Color _bg2    = Color(0xff3b0f5c);

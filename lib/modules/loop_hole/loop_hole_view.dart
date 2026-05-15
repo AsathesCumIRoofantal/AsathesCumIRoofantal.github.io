@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'loop_hole_controller.dart';
 
 class LoopHoleView extends GetView<LoopHoleController> {
-  const LoopHoleView({Key? key}) : super(key: key);
+  const LoopHoleView({super.key});
 
   @override
   Widget build(BuildContext context) {

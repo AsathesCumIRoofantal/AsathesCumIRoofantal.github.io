@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'punctuality_controller.dart';
 
 class PunctualityView extends GetView<PunctualityController> {
-  const PunctualityView({Key? key}) : super(key: key);
+  const PunctualityView({super.key});
 
   static const _steel = Color(0xFF475569);
   static const _blue = Color(0xFF2563EB);

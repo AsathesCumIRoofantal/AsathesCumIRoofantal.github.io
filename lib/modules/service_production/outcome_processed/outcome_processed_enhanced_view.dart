@@ -8,7 +8,7 @@ import 'outcome_processed_view.dart';
 ///
 /// Theme: Ember Forge | Layout: diagonal
 class OutcomeProcessedEnhancedView extends StatelessWidget {
-  const OutcomeProcessedEnhancedView({Key? key}) : super(key: key);
+  const OutcomeProcessedEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0a05);
   static const Color _bg2    = Color(0xff3b1c0e);

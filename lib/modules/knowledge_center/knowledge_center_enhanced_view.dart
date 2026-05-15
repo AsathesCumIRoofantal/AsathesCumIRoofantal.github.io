@@ -8,7 +8,7 @@ import 'knowledge_center_view.dart';
 ///
 /// Theme: Saffron Sun | Layout: wave
 class KnowledgeCenterEnhancedView extends StatelessWidget {
-  const KnowledgeCenterEnhancedView({Key? key}) : super(key: key);
+  const KnowledgeCenterEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1a05);
   static const Color _bg2    = Color(0xff4a2d0a);

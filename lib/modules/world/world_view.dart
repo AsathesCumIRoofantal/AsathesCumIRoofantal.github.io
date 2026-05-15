@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'world_controller.dart';
 
 class WorldView extends GetView<WorldController> {
-  const WorldView({Key? key}) : super(key: key);
+  const WorldView({super.key});
 
   static const _earth = Color(0xFF1D4ED8);
   static const _sky = Color(0xFF0EA5E9);

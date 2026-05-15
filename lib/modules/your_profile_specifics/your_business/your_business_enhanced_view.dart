@@ -8,7 +8,7 @@ import 'your_business_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: grid
 class YourBusinessEnhancedView extends StatelessWidget {
-  const YourBusinessEnhancedView({Key? key}) : super(key: key);
+  const YourBusinessEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

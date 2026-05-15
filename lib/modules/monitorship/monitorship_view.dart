@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'monitorship_controller.dart';
 
 class MonitorshipView extends GetView<MonitorshipController> {
-  const MonitorshipView({Key? key}) : super(key: key);
+  const MonitorshipView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'connect_collaborate_controller.dart';
 
 class ConnectCollaborateView extends GetView<ConnectCollaborateController> {
-  const ConnectCollaborateView({Key? key}) : super(key: key);
+  const ConnectCollaborateView({super.key});
 
   @override
   Widget build(BuildContext context) {

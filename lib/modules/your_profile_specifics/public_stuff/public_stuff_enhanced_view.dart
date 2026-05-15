@@ -8,7 +8,7 @@ import 'public_stuff_view.dart';
 ///
 /// Theme: Rose Petal | Layout: wave
 class PublicStuffEnhancedView extends StatelessWidget {
-  const PublicStuffEnhancedView({Key? key}) : super(key: key);
+  const PublicStuffEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0814);
   static const Color _bg2    = Color(0xff4a0e26);

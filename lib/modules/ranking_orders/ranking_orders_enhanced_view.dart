@@ -8,7 +8,7 @@ import 'ranking_orders_view.dart';
 ///
 /// Theme: Slate Steel | Layout: diagonal
 class RankingOrdersEnhancedView extends StatelessWidget {
-  const RankingOrdersEnhancedView({Key? key}) : super(key: key);
+  const RankingOrdersEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e293b);

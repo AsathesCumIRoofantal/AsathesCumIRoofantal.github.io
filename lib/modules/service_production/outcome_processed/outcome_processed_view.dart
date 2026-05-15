@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'outcome_processed_controller.dart';
 
 class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
-  const OutcomeProcessedView({Key? key}) : super(key: key);
+  const OutcomeProcessedView({super.key});
 
   static const _emerald = Color(0xFF059669);
   static const _mint = Color(0xFF10B981);

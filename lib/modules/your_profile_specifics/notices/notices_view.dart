@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'notices_controller.dart';
 
 class NoticesView extends GetView<NoticesController> {
-  const NoticesView({Key? key}) : super(key: key);
+  const NoticesView({super.key});
 
   @override
   Widget build(BuildContext context) {

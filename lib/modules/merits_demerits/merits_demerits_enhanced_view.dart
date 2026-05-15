@@ -8,7 +8,7 @@ import 'merits_demerits_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: stripes
 class MeritsDemeritsEnhancedView extends StatelessWidget {
-  const MeritsDemeritsEnhancedView({Key? key}) : super(key: key);
+  const MeritsDemeritsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

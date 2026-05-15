@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'public_stuff_controller.dart';
 
 class PublicStuffView extends GetView<PublicStuffController> {
-  const PublicStuffView({Key? key}) : super(key: key);
+  const PublicStuffView({super.key});
 
   @override
   Widget build(BuildContext context) {

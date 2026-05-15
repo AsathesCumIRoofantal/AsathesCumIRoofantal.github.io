@@ -1,170 +1,195 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'home_controller.dart';
+
 import '../entities/entities_view.dart';
-import '../unions/unions_view.dart';
 import '../identity/identity_view.dart';
-import '../../routes/app_pages.dart';
+import '../unions/unions_view.dart';
 import 'drawer_navigation_copy.dart';
+import 'home_controller.dart';
+
+class DrawerSearchResult {
+  final String sectionTitle;
+  final DrawerItem item;
+
+  DrawerSearchResult({required this.sectionTitle, required this.item});
+}
 
 class HomeView extends GetView<HomeController> {
-  HomeView({Key? key}) : super(key: key);
+  HomeView({super.key});
 
   final List<Widget> pages = [EntitiesView(), UnionsView(), IdentityView()];
+
+  /// =========================================================
+  /// FILTERED RESULTS
+  /// =========================================================
+
+  List<DrawerSearchResult> getFilteredResults() {
+    final query = controller.drawerSearchText.value.trim().toLowerCase();
+
+    if (query.isEmpty) return [];
+
+    final List<DrawerSearchResult> results = [];
+
+    for (final section in controller.drawerSections) {
+      for (final item in section.items) {
+        final combined = "${item.title} "
+            // "${item.route} "
+            // "${DrawerNavigationCopy.linkSubtitle(item.route, item.title)}"
+            .toLowerCase();
+
+        if (combined.contains(query)) {
+          results.add(
+            DrawerSearchResult(sectionTitle: section.title, item: item),
+          );
+        }
+      }
+    }
+
+    return results;
+  }
+
+  Future<void> scrollToItem({
+    required String sectionTitle,
+    required String route,
+  }) async {
+    controller.isDrawerSearchVisible.value = false;
+
+    await Future.delayed(const Duration(milliseconds: 400));
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   final GlobalKey? key = controller.itemKeys["${sectionTitle}_$route"];
+
+    //   if (key == null) return;
+
+    //   final context = key.currentContext;
+
+    //   if (context == null) return;
+
+    //   await Scrollable.ensureVisible(
+    //     context,
+    //     duration: const Duration(milliseconds: 1000),
+    //     curve: Curves.easeInOutCubic,
+    //     alignment: 0.35,
+    //   );
+    // });
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     final isDark = theme.brightness == Brightness.dark;
+
     final onSurface = theme.colorScheme.onSurface;
+
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('All-Space', style: TextStyle(letterSpacing: 3)),
-          bottom: TabBar(
-            indicatorColor: Theme.of(context).colorScheme.primary,
-            labelColor: Theme.of(context).colorScheme.primary,
-            unselectedLabelColor: Theme.of(
-              context,
-            ).dividerColor.withOpacity(0.5),
-            tabs: const [
+
+          bottom: const TabBar(
+            tabs: [
               Tab(icon: Icon(Icons.category), text: 'ENTITIES'),
               Tab(icon: Icon(Icons.account_tree), text: 'UNIONS'),
               Tab(icon: Icon(Icons.fingerprint), text: 'IDENTITY'),
             ],
           ),
         ),
+
+        /// =========================================================
+        /// DRAWER
+        /// =========================================================
         drawer: Drawer(
           width: 330,
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          child: ListView(
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.zero,
+
+          backgroundColor: theme.colorScheme.surface,
+
+          child: Stack(
             children: [
-              UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/AIR_Picture.png'),
-                    fit: BoxFit.fill,
-                    colorFilter: ColorFilter.mode(
-                      Colors.black54,
-                      BlendMode.darken,
-                    ),
-                  ),
-                ),
-                accountName: const Text(
-                  'Alifiyas-Mazeasta',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1,
-                    color: Colors.white24,
-                  ),
-                ),
-                accountEmail: const Text(
-                  'AsathesCumIRoofantal',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Theme.of(
-                      context,
-                    ).colorScheme.surfaceContainerHighest.withOpacity(0.35),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: const Color(0xFFD4AF37).withOpacity(0.35),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 12,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.map_outlined,
-                          size: 22,
-                          color: const Color(0xFFD4AF37).withOpacity(0.9),
+              /// =========================================================
+              /// MAIN LIST
+              /// =========================================================
+              ListView(
+                controller: controller.drawerScrollController,
+
+                physics: const BouncingScrollPhysics(),
+
+                padding: EdgeInsets.zero,
+
+                children: [
+                  /// HEADER
+                  UserAccountsDrawerHeader(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/AIR_Picture.png'),
+
+                        fit: BoxFit.fill,
+
+                        colorFilter: ColorFilter.mode(
+                          Colors.black54,
+                          BlendMode.darken,
                         ),
-                        const SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            DrawerNavigationCopy.drawerPreamble,
-                            style: TextStyle(
-                              fontSize: 12,
-                              height: 1.35,
-                              color: Theme.of(
-                                context,
-                              ).textTheme.bodyMedium?.color?.withOpacity(0.85),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              ...controller.drawerSections
-                  .map(
-                    (section) => Container(
-                      margin: const EdgeInsets.symmetric(
-                        horizontal: 0,
-                        vertical: 0,
                       ),
+                    ),
+
+                    accountName: const Text('Alifiyas-Mazeasta'),
+
+                    accountEmail: const Text('AsathesCumIRoofantal'),
+                  ),
+
+                  /// =========================================================
+                  /// ORIGINAL DRAWER DESIGN
+                  /// =========================================================
+                  ...controller.drawerSections.map((section) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(vertical: 0),
+
                       padding: const EdgeInsets.symmetric(vertical: 4),
+
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(0),
                         gradient: LinearGradient(
                           begin: Alignment.topLeft,
+
                           end: Alignment.bottomRight,
+
                           colors: isDark
                               ? [
                                   theme.scaffoldBackgroundColor,
+
                                   theme.colorScheme.surface,
                                 ]
                               : [
                                   theme.colorScheme.surface,
+
                                   theme.scaffoldBackgroundColor,
                                 ],
                         ),
-                        // border: Border.all(
-                        //   color: const Color(0xFFD4AF37).withOpacity(0.35),
-                        //   width: 0,
-                        // ),
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: const Color(0xFFD4AF37).withOpacity(0.08),
-                        //     blurRadius: 18,
-                        //     spreadRadius: 1,
-                        //     offset: const Offset(0, 6),
-                        //   ),
-                        // ],
                       ),
+
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+
                         children: [
                           /// SECTION TITLE
                           Padding(
                             padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
+
                             child: Row(
                               children: [
                                 Container(
                                   width: 5,
                                   height: 32,
+
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(100),
+
                                     gradient: const LinearGradient(
                                       colors: [
                                         Color(0xFFFFE8A3),
+
                                         Color(0xFFD4AF37),
+
                                         Color(0xFF8C6A16),
                                       ],
                                     ),
@@ -176,10 +201,14 @@ class HomeView extends GetView<HomeController> {
                                 Expanded(
                                   child: Text(
                                     section.title.toUpperCase(),
+
                                     style: const TextStyle(
                                       color: Color(0xFFFFD369),
+
                                       fontSize: 13,
+
                                       fontWeight: FontWeight.w700,
+
                                       letterSpacing: 2.2,
                                     ),
                                   ),
@@ -191,139 +220,521 @@ class HomeView extends GetView<HomeController> {
                           /// SECTION DESCRIPTION
                           Padding(
                             padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
+
                             child: Text(
                               DrawerNavigationCopy.sectionBlurb(section.title),
+
                               style: TextStyle(
                                 fontSize: 11.2,
+
                                 height: 1.45,
+
                                 color: onSurface,
                               ),
                             ),
                           ),
 
-                          /// MENU ITEMS
-                          ...section.items.map(
-                            (item) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 3,
-                                vertical: 5,
+                          /// ITEMS
+                          ...section.items.map((item) {
+                            controller.itemKeys.putIfAbsent(
+                              item.route,
+                              () => GlobalKey(),
+                            );
+
+                            return Container(
+                              key: controller.itemKeys[item.route],
+
+                              child: buildDrawerItem(
+                                context: context,
+
+                                item: item,
+
+                                onSurface: onSurface,
                               ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(18),
-                                  onTap: () {
-                                    Get.toNamed(item.route);
-                                  },
-                                  child: Ink(
-                                    padding: const EdgeInsets.all(14),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(0),
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .surfaceContainerHighest
-                                          .withOpacity(0.22),
-                                      // border: Border.all(
-                                      //   color: const Color(
-                                      //     0xFFD4AF37,
-                                      //   ).withOpacity(0.18),
-                                      // ),
-                                      // boxShadow: [
-                                      //   BoxShadow(
-                                      //     color: Colors.black.withOpacity(0.22),
-                                      //     blurRadius: 10,
-                                      //     offset: const Offset(0, 4),
-                                      //   ),
-                                      // ],
-                                    ),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        /// ICON
-                                        Container(
-                                          padding: const EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            gradient: LinearGradient(
-                                              colors: [
-                                                const Color(0xFFFFE082),
-                                                const Color(0xFFD4AF37),
-                                              ],
-                                            ),
-                                          ),
-                                          child: Icon(
-                                            item.icon,
-                                            color: Colors.black,
-                                            size: 20,
-                                          ),
-                                        ),
-
-                                        const SizedBox(width: 14),
-
-                                        /// TEXTS
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                item.title,
-                                                style: const TextStyle(
-                                                  color: Color(0xFFFFD369),
-                                                  fontSize: 14.5,
-                                                  fontWeight: FontWeight.w700,
-                                                  letterSpacing: 0.4,
-                                                ),
-                                              ),
-
-                                              const SizedBox(height: 5),
-
-                                              Text(
-                                                DrawerNavigationCopy.linkSubtitle(
-                                                  item.route,
-                                                  item.title,
-                                                ),
-                                                maxLines: 3,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  height: 1.4,
-                                                  color: onSurface.withOpacity(
-                                                    0.75,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-
-                                        /// ARROW
-                                        Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          size: 15,
-                                          color: const Color(
-                                            0xFFD4AF37,
-                                          ).withOpacity(0.7),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                            );
+                          }),
 
                           const SizedBox(height: 10),
                         ],
                       ),
+                    );
+                  }),
+
+                  const SizedBox(height: 120),
+                ],
+              ),
+
+              /// =========================================================
+              /// FLOATING SEARCH BUTTON
+              /// =========================================================
+              Positioned(
+                bottom: 20,
+                right: 18,
+
+                child: Material(
+                  color: Colors.transparent,
+
+                  elevation: 12,
+
+                  borderRadius: BorderRadius.circular(100),
+
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(100),
+
+                    onTap: () {
+                      controller.isDrawerSearchVisible.value = true;
+                    },
+
+                    child: Ink(
+                      width: 62,
+                      height: 62,
+
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF00C6FF), Color(0xFF0072FF)],
+                        ),
+                      ),
+
+                      child: const Icon(
+                        Icons.search_rounded,
+                        color: Colors.white,
+                        size: 28,
+                      ),
                     ),
-                  )
-                  .toList(),
+                  ),
+                ),
+              ),
+
+              /// =========================================================
+              /// SEARCH OVERLAY
+              /// =========================================================
+              Obx(
+                () => controller.isDrawerSearchVisible.value
+                    ? Positioned.fill(
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+
+                          onTap: () {
+                            controller.drawerSearchController.clear();
+
+                            controller.drawerSearchText.value = '';
+
+                            controller.isDrawerSearchVisible.value = false;
+                          },
+
+                          child: Container(
+                            color: Colors.black.withOpacity(0.72),
+
+                            child: SafeArea(
+                              child: Column(
+                                children: [
+                                  /// SEARCH BAR
+                                  GestureDetector(
+                                    onTap: () {},
+
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(14),
+
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                        ),
+
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            22,
+                                          ),
+
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFF182848),
+
+                                              Color(0xFF4B6CB7),
+                                            ],
+                                          ),
+                                        ),
+
+                                        child: Row(
+                                          children: [
+                                            const Icon(
+                                              Icons.search,
+                                              color: Colors.white,
+                                            ),
+
+                                            const SizedBox(width: 10),
+
+                                            Expanded(
+                                              child: TextField(
+                                                autofocus: true,
+
+                                                controller: controller
+                                                    .drawerSearchController,
+
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+
+                                                onChanged: (value) {
+                                                  controller
+                                                          .drawerSearchText
+                                                          .value =
+                                                      value;
+                                                },
+
+                                                decoration:
+                                                    const InputDecoration(
+                                                      border: InputBorder.none,
+
+                                                      hintText:
+                                                          'Search anything...',
+
+                                                      hintStyle: TextStyle(
+                                                        color: Colors.white70,
+                                                      ),
+                                                    ),
+                                              ),
+                                            ),
+
+                                            GestureDetector(
+                                              onTap: () {
+                                                controller
+                                                    .drawerSearchController
+                                                    .clear();
+
+                                                controller
+                                                        .drawerSearchText
+                                                        .value =
+                                                    '';
+
+                                                controller
+                                                        .isDrawerSearchVisible
+                                                        .value =
+                                                    false;
+                                              },
+
+                                              child: Container(
+                                                padding: const EdgeInsets.all(
+                                                  7,
+                                                ),
+
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.12),
+
+                                                  shape: BoxShape.circle,
+                                                ),
+
+                                                child: const Icon(
+                                                  Icons.close_rounded,
+                                                  color: Colors.white,
+                                                  size: 18,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  /// RESULTS
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {},
+
+                                      child: Obx(() {
+                                        final results = getFilteredResults();
+
+                                        if (results.isEmpty) {
+                                          return const Center(
+                                            child: Text(
+                                              "No Results Found",
+
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          );
+                                        }
+
+                                        final grouped =
+                                            <
+                                              String,
+                                              List<DrawerSearchResult>
+                                            >{};
+
+                                        for (var r in results) {
+                                          grouped.putIfAbsent(
+                                            r.sectionTitle,
+                                            () => [],
+                                          );
+
+                                          grouped[r.sectionTitle]!.add(r);
+                                        }
+
+                                        return ListView(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            14,
+                                            0,
+                                            14,
+                                            120,
+                                          ),
+
+                                          children: grouped.entries.map((
+                                            entry,
+                                          ) {
+                                            return Container(
+                                              margin: const EdgeInsets.only(
+                                                bottom: 18,
+                                              ),
+
+                                              padding: const EdgeInsets.all(16),
+
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(24),
+
+                                                gradient: const LinearGradient(
+                                                  colors: [
+                                                    Color(0xFF16222A),
+
+                                                    Color(0xFF3A6073),
+                                                  ],
+                                                ),
+                                              ),
+
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+
+                                                children: [
+                                                  Text(
+                                                    entry.key,
+
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+
+                                                      fontSize: 15,
+
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+
+                                                  const SizedBox(height: 14),
+
+                                                  ...entry.value.map((e) {
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                            bottom: 10,
+                                                          ),
+
+                                                      child: InkWell(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              18,
+                                                            ),
+
+                                                        onTap: () {
+                                                          scrollToItem(
+                                                            sectionTitle:
+                                                                e.sectionTitle,
+                                                            route: e.item.route,
+                                                          );
+                                                        },
+
+                                                        child: Ink(
+                                                          padding:
+                                                              const EdgeInsets.all(
+                                                                14,
+                                                              ),
+
+                                                          decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  18,
+                                                                ),
+
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                                  0.08,
+                                                                ),
+                                                          ),
+
+                                                          child: Row(
+                                                            children: [
+                                                              Icon(
+                                                                e.item.icon,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+
+                                                              const SizedBox(
+                                                                width: 14,
+                                                              ),
+
+                                                              Expanded(
+                                                                child: Text(
+                                                                  e.item.title,
+
+                                                                  style: const TextStyle(
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                ),
+                                                              ),
+
+                                                              const Icon(
+                                                                Icons
+                                                                    .arrow_forward_ios_rounded,
+
+                                                                color: Colors
+                                                                    .white70,
+
+                                                                size: 14,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }),
+                                                ],
+                                              ),
+                                            );
+                                          }).toList(),
+                                        );
+                                      }),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              ),
             ],
           ),
         ),
+
         body: TabBarView(children: pages),
+      ),
+    );
+  }
+
+  /// =========================================================
+  /// DRAWER ITEM
+  /// =========================================================
+
+  Widget buildDrawerItem({
+    required BuildContext context,
+    required DrawerItem item,
+    required Color onSurface,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 5),
+
+      child: Material(
+        color: Colors.transparent,
+
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+
+          onTap: () {
+            Get.toNamed(item.route);
+          },
+
+          child: Ink(
+            padding: const EdgeInsets.all(14),
+
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(0),
+
+              color: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest.withOpacity(0.22),
+            ),
+
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFFFE082), Color(0xFFD4AF37)],
+                    ),
+                  ),
+
+                  child: Icon(item.icon, color: Colors.black, size: 20),
+                ),
+
+                const SizedBox(width: 14),
+
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+
+                    children: [
+                      Text(
+                        item.title,
+
+                        style: const TextStyle(
+                          color: Color(0xFFFFD369),
+
+                          fontSize: 14.5,
+
+                          fontWeight: FontWeight.w700,
+
+                          letterSpacing: 0.4,
+                        ),
+                      ),
+
+                      const SizedBox(height: 5),
+
+                      Text(
+                        DrawerNavigationCopy.linkSubtitle(
+                          item.route,
+                          item.title,
+                        ),
+
+                        maxLines: 3,
+
+                        overflow: TextOverflow.ellipsis,
+
+                        style: TextStyle(
+                          fontSize: 11,
+
+                          height: 1.4,
+
+                          color: onSurface.withOpacity(0.75),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+
+                  size: 15,
+
+                  color: const Color(0xFFD4AF37).withOpacity(0.7),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'training_controller.dart';
 
 class TrainingView extends GetView<TrainingController> {
-  const TrainingView({Key? key}) : super(key: key);
+  const TrainingView({super.key});
 
   @override
   Widget build(BuildContext context) {

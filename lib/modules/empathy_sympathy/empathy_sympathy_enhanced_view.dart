@@ -8,7 +8,7 @@ import 'empathy_sympathy_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: blocks
 class EmpathySympathyEnhancedView extends StatelessWidget {
-  const EmpathySympathyEnhancedView({Key? key}) : super(key: key);
+  const EmpathySympathyEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f0606);
   static const Color _bg2    = Color(0xff3d0c0c);

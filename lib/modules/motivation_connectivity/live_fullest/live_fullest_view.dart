@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'live_fullest_controller.dart';
 
 class LiveFullestView extends GetView<LiveFullestController> {
-  const LiveFullestView({Key? key}) : super(key: key);
+  const LiveFullestView({super.key});
 
   static const _sky = Color(0xFF0EA5E9);
   static const _teal = Color(0xFF0D9488);

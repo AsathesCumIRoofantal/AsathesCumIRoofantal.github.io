@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'peace_prosperity_controller.dart';
 
 class PeaceProsperityView extends GetView<PeaceProsperityController> {
-  const PeaceProsperityView({Key? key}) : super(key: key);
+  const PeaceProsperityView({super.key});
 
   static const _sage = Color(0xFF16A34A);
   static const _sky = Color(0xFF0EA5E9);

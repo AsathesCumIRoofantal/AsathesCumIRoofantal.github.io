@@ -8,7 +8,7 @@ import 'relationships_view.dart';
 ///
 /// Theme: Indigo Night | Layout: diagonal
 class RelationshipsEnhancedView extends StatelessWidget {
-  const RelationshipsEnhancedView({Key? key}) : super(key: key);
+  const RelationshipsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

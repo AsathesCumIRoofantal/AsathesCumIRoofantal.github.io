@@ -8,7 +8,7 @@ import 'checked_anomalies_view.dart';
 ///
 /// Theme: Forest Moss | Layout: circles
 class CheckedAnomaliesEnhancedView extends StatelessWidget {
-  const CheckedAnomaliesEnhancedView({Key? key}) : super(key: key);
+  const CheckedAnomaliesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff052e1b);
   static const Color _bg2    = Color(0xff0f3d2a);

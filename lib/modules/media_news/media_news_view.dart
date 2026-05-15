@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'media_news_controller.dart';
 
 class MediaNewsView extends GetView<MediaNewsController> {
-  const MediaNewsView({Key? key}) : super(key: key);
+  const MediaNewsView({super.key});
 
   @override
   Widget build(BuildContext context) {

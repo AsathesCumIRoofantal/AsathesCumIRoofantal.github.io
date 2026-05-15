@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'hospitality_care_controller.dart';
 
 class HospitalityCareView extends GetView<HospitalityCareController> {
-  const HospitalityCareView({Key? key}) : super(key: key);
+  const HospitalityCareView({super.key});
 
   @override
   Widget build(BuildContext context) {

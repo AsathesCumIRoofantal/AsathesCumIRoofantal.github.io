@@ -8,7 +8,7 @@ import 'network_apis_view.dart';
 ///
 /// Theme: Neon Iris | Layout: diagonal
 class NetworkApisEnhancedView extends StatelessWidget {
-  const NetworkApisEnhancedView({Key? key}) : super(key: key);
+  const NetworkApisEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a0826);
   static const Color _bg2    = Color(0xff14104a);

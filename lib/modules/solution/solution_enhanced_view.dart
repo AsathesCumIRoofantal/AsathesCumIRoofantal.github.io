@@ -8,7 +8,7 @@ import 'solution_view.dart';
 ///
 /// Theme: Indigo Night | Layout: diagonal
 class SolutionEnhancedView extends StatelessWidget {
-  const SolutionEnhancedView({Key? key}) : super(key: key);
+  const SolutionEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

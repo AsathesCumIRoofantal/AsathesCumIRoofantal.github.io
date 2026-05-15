@@ -8,7 +8,7 @@ import 'enhancement_view.dart';
 ///
 /// Theme: Slate Steel | Layout: grid
 class EnhancementEnhancedView extends StatelessWidget {
-  const EnhancementEnhancedView({Key? key}) : super(key: key);
+  const EnhancementEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e293b);

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'input_in_process_controller.dart';
 
 class InputInProcessView extends GetView<InputInProcessController> {
-  const InputInProcessView({Key? key}) : super(key: key);
+  const InputInProcessView({super.key});
 
   static const _electric = Color(0xFF2563EB);
   static const _sky = Color(0xFF0EA5E9);

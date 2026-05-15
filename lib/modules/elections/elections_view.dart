@@ -315,7 +315,7 @@ const List<_Faq> _faqs = [
 ];
 
 class ElectionsView extends GetView<ElectionsController> {
-  const ElectionsView({Key? key}) : super(key: key);
+  const ElectionsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -720,7 +720,7 @@ class _PillarCardState extends State<_PillarCard> {
                     ),
                     child: Center(
                       child: Text(
-                        '${(widget.index + 1).toString().padLeft(2, '0')}',
+                        (widget.index + 1).toString().padLeft(2, '0'),
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w900,

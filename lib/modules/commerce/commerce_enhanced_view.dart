@@ -8,7 +8,7 @@ import 'commerce_view.dart';
 ///
 /// Theme: Slate Steel | Layout: wave
 class CommerceEnhancedView extends StatelessWidget {
-  const CommerceEnhancedView({Key? key}) : super(key: key);
+  const CommerceEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e293b);

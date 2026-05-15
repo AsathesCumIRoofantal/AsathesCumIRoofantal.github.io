@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// AIR VISION — Unique design: cosmic indigo + neon cyan blueprint theme.
 /// New sections: Vision Beacon, 6 Vision Pillars, 5-stage Roadmap, Manifesto.
 class AirVisionView extends StatelessWidget {
-  const AirVisionView({Key? key}) : super(key: key);
+  const AirVisionView({super.key});
 
   static const _bg = Color(0xFF030318);
   static const _ink = Color(0xFF0A0A2E);

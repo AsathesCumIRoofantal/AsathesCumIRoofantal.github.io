@@ -8,7 +8,7 @@ import 'training_view.dart';
 ///
 /// Theme: Clay Earth | Layout: wave
 class TrainingEnhancedView extends StatelessWidget {
-  const TrainingEnhancedView({Key? key}) : super(key: key);
+  const TrainingEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1810);
   static const Color _bg2    = Color(0xff4a2d1f);

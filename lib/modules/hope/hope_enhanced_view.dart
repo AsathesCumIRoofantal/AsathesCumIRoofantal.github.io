@@ -8,7 +8,7 @@ import 'hope_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: burst
 class HopeEnhancedView extends StatelessWidget {
-  const HopeEnhancedView({Key? key}) : super(key: key);
+  const HopeEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

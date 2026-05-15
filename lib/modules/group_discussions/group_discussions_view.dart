@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'group_discussions_controller.dart';
 
 class GroupDiscussionsView extends GetView<GroupDiscussionsController> {
-  const GroupDiscussionsView({Key? key}) : super(key: key);
+  const GroupDiscussionsView({super.key});
 
   @override
   Widget build(BuildContext context) {

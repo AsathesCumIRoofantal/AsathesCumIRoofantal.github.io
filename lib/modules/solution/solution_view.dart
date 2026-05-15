@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'solution_controller.dart';
 
 class SolutionView extends GetView<SolutionController> {
-  const SolutionView({Key? key}) : super(key: key);
+  const SolutionView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'commerce_controller.dart';
 
 class CommerceView extends GetView<CommerceController> {
-  const CommerceView({Key? key}) : super(key: key);
+  const CommerceView({super.key});
 
   @override
   Widget build(BuildContext context) {

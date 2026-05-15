@@ -8,7 +8,7 @@ import 'situation_reaction_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: rings
 class SituationReactionEnhancedView extends StatelessWidget {
-  const SituationReactionEnhancedView({Key? key}) : super(key: key);
+  const SituationReactionEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a1a0a);
   static const Color _bg2    = Color(0xff14361f);

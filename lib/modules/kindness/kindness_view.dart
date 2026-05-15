@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'kindness_controller.dart';
 
 class KindnessView extends GetView<KindnessController> {
-  const KindnessView({Key? key}) : super(key: key);
+  const KindnessView({super.key});
 
   static const _coral = Color(0xFFF97316);
   static const _rose = Color(0xFFF43F5E);

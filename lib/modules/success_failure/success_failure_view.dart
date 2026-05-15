@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'success_failure_controller.dart';
 
 class SuccessFailureView extends GetView<SuccessFailureController> {
-  const SuccessFailureView({Key? key}) : super(key: key);
+  const SuccessFailureView({super.key});
 
   @override
   Widget build(BuildContext context) {

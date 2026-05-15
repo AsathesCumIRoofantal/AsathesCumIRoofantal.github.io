@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import '../checked_anomalies/anomalies_controller.dart';
 
 class UncheckedAnomaliesView extends GetView<AnomaliesController> {
-  const UncheckedAnomaliesView({Key? key}) : super(key: key);
+  const UncheckedAnomaliesView({super.key});
 
   @override
   Widget build(BuildContext context) {

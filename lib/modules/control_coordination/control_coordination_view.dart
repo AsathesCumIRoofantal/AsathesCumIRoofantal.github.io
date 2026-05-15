@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'control_coordination_controller.dart';
 
 class ControlCoordinationView extends GetView<ControlCoordinationController> {
-  const ControlCoordinationView({Key? key}) : super(key: key);
+  const ControlCoordinationView({super.key});
 
   @override
   Widget build(BuildContext context) {

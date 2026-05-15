@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'statistics_controller.dart';
 
 class StatisticsView extends GetView<StatisticsController> {
-  const StatisticsView({Key? key}) : super(key: key);
+  const StatisticsView({super.key});
 
   @override
   Widget build(BuildContext context) {

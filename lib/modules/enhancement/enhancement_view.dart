@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'enhancement_controller.dart';
 
 class EnhancementView extends GetView<EnhancementController> {
-  const EnhancementView({Key? key}) : super(key: key);
+  const EnhancementView({super.key});
 
   @override
   Widget build(BuildContext context) {

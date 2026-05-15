@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'social_controller.dart';
 
 class SocialView extends GetView<SocialController> {
-  const SocialView({Key? key}) : super(key: key);
+  const SocialView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'prayer_for_all_controller.dart';
 
 class PrayerForAllView extends GetView<PrayerForAllController> {
-  const PrayerForAllView({Key? key}) : super(key: key);
+  const PrayerForAllView({super.key});
 
   @override
   Widget build(BuildContext context) {

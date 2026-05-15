@@ -8,7 +8,7 @@ import 'settings_view.dart';
 ///
 /// Theme: Indigo Night | Layout: diagonal
 class SettingsEnhancedView extends StatelessWidget {
-  const SettingsEnhancedView({Key? key}) : super(key: key);
+  const SettingsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

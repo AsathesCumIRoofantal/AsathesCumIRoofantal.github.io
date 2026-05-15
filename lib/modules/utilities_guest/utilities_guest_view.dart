@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'utilities_guest_binding.dart';
 
 class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
-  const UtilitiesGuestView({Key? key}) : super(key: key);
+  const UtilitiesGuestView({super.key});
 
   @override
   Widget build(BuildContext context) {

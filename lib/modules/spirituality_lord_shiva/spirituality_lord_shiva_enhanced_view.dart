@@ -8,7 +8,7 @@ import 'spirituality_lord_shiva_view.dart';
 ///
 /// Theme: Twilight Lilac | Layout: blocks
 class SpiritualityLordShivaEnhancedView extends StatelessWidget {
-  const SpiritualityLordShivaEnhancedView({Key? key}) : super(key: key);
+  const SpiritualityLordShivaEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0f2e);
   static const Color _bg2    = Color(0xff2d1b4e);

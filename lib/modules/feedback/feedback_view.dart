@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'feedback_controller.dart';
 
 class FeedbackView extends GetView<FeedbackController> {
-  const FeedbackView({Key? key}) : super(key: key);
+  const FeedbackView({super.key});
 
   @override
   Widget build(BuildContext context) {

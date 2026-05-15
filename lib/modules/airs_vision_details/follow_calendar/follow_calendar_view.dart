@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'follow_calendar_controller.dart';
 
 class FollowCalendarView extends GetView<FollowCalendarController> {
-  const FollowCalendarView({Key? key}) : super(key: key);
+  const FollowCalendarView({super.key});
 
   @override
   Widget build(BuildContext context) {

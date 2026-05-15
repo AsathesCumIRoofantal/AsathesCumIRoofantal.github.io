@@ -8,7 +8,7 @@ import 'notices_view.dart';
 ///
 /// Theme: Bronze Age | Layout: burst
 class NoticesEnhancedView extends StatelessWidget {
-  const NoticesEnhancedView({Key? key}) : super(key: key);
+  const NoticesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f1408);
   static const Color _bg2    = Color(0xff3d2614);

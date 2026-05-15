@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'heigher_studies_controller.dart';
 
 class HeigherStudiesView extends GetView<HeigherStudiesController> {
-  const HeigherStudiesView({Key? key}) : super(key: key);
+  const HeigherStudiesView({super.key});
 
   @override
   Widget build(BuildContext context) {

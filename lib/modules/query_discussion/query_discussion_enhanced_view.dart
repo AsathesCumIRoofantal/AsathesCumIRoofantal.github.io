@@ -8,7 +8,7 @@ import 'query_discussion_view.dart';
 ///
 /// Theme: Forest Moss | Layout: rings
 class QueryDiscussionEnhancedView extends StatelessWidget {
-  const QueryDiscussionEnhancedView({Key? key}) : super(key: key);
+  const QueryDiscussionEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff052e1b);
   static const Color _bg2    = Color(0xff0f3d2a);

@@ -4,7 +4,7 @@ import 'query_discussion_controller.dart';
 import 'package:intl/intl.dart';
 
 class QueryDiscussionView extends GetView<QueryDiscussionController> {
-  const QueryDiscussionView({Key? key}) : super(key: key);
+  const QueryDiscussionView({super.key});
 
   @override
   Widget build(BuildContext context) {

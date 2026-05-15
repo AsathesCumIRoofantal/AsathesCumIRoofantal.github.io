@@ -8,7 +8,7 @@ import 'control_coordination_view.dart';
 ///
 /// Theme: Royal Plum | Layout: burst
 class ControlCoordinationEnhancedView extends StatelessWidget {
-  const ControlCoordinationEnhancedView({Key? key}) : super(key: key);
+  const ControlCoordinationEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1e0a2e);
   static const Color _bg2    = Color(0xff3b0f5c);

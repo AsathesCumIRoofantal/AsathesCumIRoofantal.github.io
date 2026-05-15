@@ -8,7 +8,7 @@ import 'system_all_together_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: wave
 class SystemAllTogetherEnhancedView extends StatelessWidget {
-  const SystemAllTogetherEnhancedView({Key? key}) : super(key: key);
+  const SystemAllTogetherEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f0606);
   static const Color _bg2    = Color(0xff3d0c0c);

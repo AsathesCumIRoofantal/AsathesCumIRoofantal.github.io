@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'demonstration_controller.dart';
 
 class DemonstrationView extends GetView<DemonstrationController> {
-  const DemonstrationView({Key? key}) : super(key: key);
+  const DemonstrationView({super.key});
 
   @override
   Widget build(BuildContext context) {

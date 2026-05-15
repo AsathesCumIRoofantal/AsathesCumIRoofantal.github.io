@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'religion_prayer_controller.dart';
 
 class ReligionPrayerView extends GetView<ReligionPrayerController> {
-  const ReligionPrayerView({Key? key}) : super(key: key);
+  const ReligionPrayerView({super.key});
 
   @override
   Widget build(BuildContext context) {

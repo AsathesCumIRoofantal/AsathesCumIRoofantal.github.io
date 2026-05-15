@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'heart_winning_controller.dart';
 
 class HeartWinningView extends GetView<HeartWinningController> {
-  const HeartWinningView({Key? key}) : super(key: key);
+  const HeartWinningView({super.key});
 
   static const _crimson = Color(0xFFDC2626);
   static const _rose = Color(0xFFF43F5E);

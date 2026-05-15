@@ -8,7 +8,7 @@ import 'prayer_for_all_view.dart';
 ///
 /// Theme: Neon Iris | Layout: rings
 class PrayerForAllEnhancedView extends StatelessWidget {
-  const PrayerForAllEnhancedView({Key? key}) : super(key: key);
+  const PrayerForAllEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a0826);
   static const Color _bg2    = Color(0xff14104a);

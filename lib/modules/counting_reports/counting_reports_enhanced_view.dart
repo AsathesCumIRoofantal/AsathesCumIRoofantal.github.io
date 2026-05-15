@@ -8,7 +8,7 @@ import 'counting_reports_view.dart';
 ///
 /// Theme: Indigo Night | Layout: circles
 class CountingReportsEnhancedView extends StatelessWidget {
-  const CountingReportsEnhancedView({Key? key}) : super(key: key);
+  const CountingReportsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

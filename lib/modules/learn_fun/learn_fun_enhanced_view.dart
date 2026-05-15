@@ -8,7 +8,7 @@ import 'learn_fun_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: blocks
 class LearnFunEnhancedView extends StatelessWidget {
-  const LearnFunEnhancedView({Key? key}) : super(key: key);
+  const LearnFunEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

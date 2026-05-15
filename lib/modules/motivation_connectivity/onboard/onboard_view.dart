@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'onboard_controller.dart';
 
 class OnboardView extends GetView<OnboardController> {
-  const OnboardView({Key? key}) : super(key: key);
+  const OnboardView({super.key});
 
   static const _launch = Color(0xFF7C3AED);
   static const _violet = Color(0xFF8B5CF6);

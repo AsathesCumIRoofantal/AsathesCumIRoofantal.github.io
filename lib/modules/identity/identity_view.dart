@@ -3,10 +3,9 @@ import 'package:get/get.dart';
 import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'identity_controller.dart';
 import '../../core/utils/content_reviser.dart';
-import '../../data/auth_service.dart';
 
 class IdentityView extends GetView<IdentityController> {
-  IdentityView({Key? key}) : super(key: key);
+  const IdentityView({super.key});
 
   @override
   Widget build(BuildContext context) {

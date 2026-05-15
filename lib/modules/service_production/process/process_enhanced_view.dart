@@ -8,7 +8,7 @@ import 'process_view.dart';
 ///
 /// Theme: Magenta Pulse | Layout: circles
 class ProcessEnhancedView extends StatelessWidget {
-  const ProcessEnhancedView({Key? key}) : super(key: key);
+  const ProcessEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff260a1f);
   static const Color _bg2    = Color(0xff4a0e3d);

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'share_care_controller.dart';
 
 class ShareCareView extends GetView<ShareCareController> {
-  const ShareCareView({Key? key}) : super(key: key);
+  const ShareCareView({super.key});
 
   @override
   Widget build(BuildContext context) {

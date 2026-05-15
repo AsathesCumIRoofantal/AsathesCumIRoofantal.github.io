@@ -8,7 +8,7 @@ import 'doctorate_view.dart';
 ///
 /// Theme: Clay Earth | Layout: circles
 class DoctorateEnhancedView extends StatelessWidget {
-  const DoctorateEnhancedView({Key? key}) : super(key: key);
+  const DoctorateEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1810);
   static const Color _bg2    = Color(0xff4a2d1f);

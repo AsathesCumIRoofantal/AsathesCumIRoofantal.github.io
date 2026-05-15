@@ -8,7 +8,7 @@ import 'success_failure_view.dart';
 ///
 /// Theme: Ocean Deep | Layout: stripes
 class SuccessFailureEnhancedView extends StatelessWidget {
-  const SuccessFailureEnhancedView({Key? key}) : super(key: key);
+  const SuccessFailureEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051e2e);
   static const Color _bg2    = Color(0xff0c3a5c);

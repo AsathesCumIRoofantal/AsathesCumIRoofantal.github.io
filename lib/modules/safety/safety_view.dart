@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'safety_controller.dart';
 
 class SafetyView extends GetView<SafetyController> {
-  const SafetyView({Key? key}) : super(key: key);
+  const SafetyView({super.key});
 
   @override
   Widget build(BuildContext context) {

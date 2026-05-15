@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'interviews_controller.dart';
 
 class InterviewsView extends GetView<InterviewsController> {
-  const InterviewsView({Key? key}) : super(key: key);
+  const InterviewsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'skills_talents_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: burst
 class SkillsTalentsEnhancedView extends StatelessWidget {
-  const SkillsTalentsEnhancedView({Key? key}) : super(key: key);
+  const SkillsTalentsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a1a0a);
   static const Color _bg2    = Color(0xff14361f);

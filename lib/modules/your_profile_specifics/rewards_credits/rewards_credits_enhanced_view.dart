@@ -8,7 +8,7 @@ import 'rewards_credits_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: burst
 class RewardsCreditsEnhancedView extends StatelessWidget {
-  const RewardsCreditsEnhancedView({Key? key}) : super(key: key);
+  const RewardsCreditsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a1a0a);
   static const Color _bg2    = Color(0xff14361f);

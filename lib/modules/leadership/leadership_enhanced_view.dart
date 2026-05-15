@@ -8,7 +8,7 @@ import 'leadership_view.dart';
 ///
 /// Theme: Rose Petal | Layout: circles
 class LeadershipEnhancedView extends StatelessWidget {
-  const LeadershipEnhancedView({Key? key}) : super(key: key);
+  const LeadershipEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0814);
   static const Color _bg2    = Color(0xff4a0e26);

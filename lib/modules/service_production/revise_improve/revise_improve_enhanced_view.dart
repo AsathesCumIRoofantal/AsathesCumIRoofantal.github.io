@@ -8,7 +8,7 @@ import 'revise_improve_view.dart';
 ///
 /// Theme: Olive Grove | Layout: rings
 class ReviseImproveEnhancedView extends StatelessWidget {
-  const ReviseImproveEnhancedView({Key? key}) : super(key: key);
+  const ReviseImproveEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a1f0a);
   static const Color _bg2    = Color(0xff2e380f);

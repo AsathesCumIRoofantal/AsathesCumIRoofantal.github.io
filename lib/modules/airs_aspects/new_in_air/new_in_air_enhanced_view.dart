@@ -8,7 +8,7 @@ import 'new_in_air_view.dart';
 ///
 /// Theme: Clay Earth | Layout: burst
 class NewInAirEnhancedView extends StatelessWidget {
-  const NewInAirEnhancedView({Key? key}) : super(key: key);
+  const NewInAirEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1810);
   static const Color _bg2    = Color(0xff4a2d1f);

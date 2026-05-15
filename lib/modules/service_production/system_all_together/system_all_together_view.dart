@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'system_all_together_controller.dart';
 
 class SystemAllTogetherView extends GetView<SystemAllTogetherController> {
-  const SystemAllTogetherView({Key? key}) : super(key: key);
+  const SystemAllTogetherView({super.key});
 
   @override
   Widget build(BuildContext context) {

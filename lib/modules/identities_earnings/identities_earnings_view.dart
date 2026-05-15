@@ -5,7 +5,7 @@ import 'identities_earnings_controller.dart';
 import 'package:intl/intl.dart';
 
 class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
-  const IdentitiesEarningsView({Key? key}) : super(key: key);
+  const IdentitiesEarningsView({super.key});
 
   @override
   Widget build(BuildContext context) {

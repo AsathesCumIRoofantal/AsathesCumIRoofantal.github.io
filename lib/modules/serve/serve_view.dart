@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'serve_controller.dart';
 
 class ServeView extends GetView<ServeController> {
-  const ServeView({Key? key}) : super(key: key);
+  const ServeView({super.key});
 
   @override
   Widget build(BuildContext context) {

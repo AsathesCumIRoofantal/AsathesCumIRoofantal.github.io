@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'empathy_sympathy_controller.dart';
 
 class EmpathySympathyView extends GetView<EmpathySympathyController> {
-  const EmpathySympathyView({Key? key}) : super(key: key);
+  const EmpathySympathyView({super.key});
 
   @override
   Widget build(BuildContext context) {

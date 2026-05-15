@@ -4,7 +4,7 @@ import 'knowledge_center_controller.dart';
 import 'package:intl/intl.dart';
 
 class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
-  const KnowledgeCenterView({Key? key}) : super(key: key);
+  const KnowledgeCenterView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -445,7 +445,7 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
                                   backgroundColor: tertiary.withOpacity(0.1),
                                 ),
                               )
-                              .toList(),
+                              ,
                           ActionChip(
                             avatar: const Icon(Icons.add, size: 14),
                             label: const Text('Mock Attach'),

@@ -8,7 +8,7 @@ import 'innovation_key_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: burst
 class InnovationKeyEnhancedView extends StatelessWidget {
-  const InnovationKeyEnhancedView({Key? key}) : super(key: key);
+  const InnovationKeyEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f0606);
   static const Color _bg2    = Color(0xff3d0c0c);

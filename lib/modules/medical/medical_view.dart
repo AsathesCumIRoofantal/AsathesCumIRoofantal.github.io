@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'medical_controller.dart';
 
 class MedicalView extends GetView<MedicalController> {
-  const MedicalView({Key? key}) : super(key: key);
+  const MedicalView({super.key});
 
   @override
   Widget build(BuildContext context) {

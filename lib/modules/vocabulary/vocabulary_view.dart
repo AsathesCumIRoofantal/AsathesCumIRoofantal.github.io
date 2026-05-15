@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'vocabulary_controller.dart';
 
 class VocabularyView extends GetView<VocabularyController> {
-  const VocabularyView({Key? key}) : super(key: key);
+  const VocabularyView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,7 @@ class VocabularyView extends GetView<VocabularyController> {
           filled: true,
           fillColor: isDark
               ? theme.cardColor.withOpacity(0.3)
-              : theme.colorScheme.surfaceVariant.withOpacity(0.6),
+              : theme.colorScheme.surfaceContainerHighest.withOpacity(0.6),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide.none,

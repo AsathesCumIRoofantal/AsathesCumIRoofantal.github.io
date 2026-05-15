@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'airs_mission_controller.dart';
 
 class AirsMissionView extends GetView<AirsMissionController> {
-  const AirsMissionView({Key? key}) : super(key: key);
+  const AirsMissionView({super.key});
 
   static const _flag = Color(0xFF0EA5E9);
   static const _blue = Color(0xFF2563EB);

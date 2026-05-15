@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'ground_task_controller.dart';
 
 class GroundTaskView extends GetView<GroundTaskController> {
-  const GroundTaskView({Key? key}) : super(key: key);
+  const GroundTaskView({super.key});
 
   @override
   Widget build(BuildContext context) {

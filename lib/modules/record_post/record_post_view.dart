@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'record_post_controller.dart';
 
 class RecordPostView extends GetView<RecordPostController> {
-  const RecordPostView({Key? key}) : super(key: key);
+  const RecordPostView({super.key});
 
   @override
   Widget build(BuildContext context) {

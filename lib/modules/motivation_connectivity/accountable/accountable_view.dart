@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'accountable_controller.dart';
 
 class AccountableView extends GetView<AccountableController> {
-  const AccountableView({Key? key}) : super(key: key);
+  const AccountableView({super.key});
 
   static const _steel = Color(0xFF334155);
   static const _slate = Color(0xFF475569);

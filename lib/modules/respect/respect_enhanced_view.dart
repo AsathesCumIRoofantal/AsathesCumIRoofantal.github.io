@@ -8,7 +8,7 @@ import 'respect_view.dart';
 ///
 /// Theme: Indigo Night | Layout: diagonal
 class RespectEnhancedView extends StatelessWidget {
-  const RespectEnhancedView({Key? key}) : super(key: key);
+  const RespectEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0f172a);
   static const Color _bg2    = Color(0xff1e1b4b);

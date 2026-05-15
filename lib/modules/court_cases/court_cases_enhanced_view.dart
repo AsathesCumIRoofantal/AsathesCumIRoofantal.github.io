@@ -8,7 +8,7 @@ import 'court_cases_view.dart';
 ///
 /// Theme: Olive Grove | Layout: blocks
 class CourtCasesEnhancedView extends StatelessWidget {
-  const CourtCasesEnhancedView({Key? key}) : super(key: key);
+  const CourtCasesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a1f0a);
   static const Color _bg2    = Color(0xff2e380f);

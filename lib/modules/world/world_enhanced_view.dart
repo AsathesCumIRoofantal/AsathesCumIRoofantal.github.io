@@ -8,7 +8,7 @@ import 'world_view.dart';
 ///
 /// Theme: Ocean Deep | Layout: diagonal
 class WorldEnhancedView extends StatelessWidget {
-  const WorldEnhancedView({Key? key}) : super(key: key);
+  const WorldEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051e2e);
   static const Color _bg2    = Color(0xff0c3a5c);

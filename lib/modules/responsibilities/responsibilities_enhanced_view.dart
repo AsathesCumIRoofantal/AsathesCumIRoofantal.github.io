@@ -8,7 +8,7 @@ import 'responsibilities_view.dart';
 ///
 /// Theme: Magenta Pulse | Layout: diagonal
 class ResponsibilitiesEnhancedView extends StatelessWidget {
-  const ResponsibilitiesEnhancedView({Key? key}) : super(key: key);
+  const ResponsibilitiesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff260a1f);
   static const Color _bg2    = Color(0xff4a0e3d);

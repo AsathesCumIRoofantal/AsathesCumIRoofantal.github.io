@@ -4,7 +4,7 @@ import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'wisdom_controller.dart';
 
 class WisdomView extends GetView<WisdomController> {
-  const WisdomView({Key? key}) : super(key: key);
+  const WisdomView({super.key});
 
   @override
   Widget build(BuildContext context) {

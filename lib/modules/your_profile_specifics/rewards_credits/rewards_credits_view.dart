@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'rewards_credits_controller.dart';
 
 class RewardsCreditsView extends GetView<RewardsCreditsController> {
-  const RewardsCreditsView({Key? key}) : super(key: key);
+  const RewardsCreditsView({super.key});
 
   static const _gold = Color(0xFFD4AF37);
   static const _amber = Color(0xFFFFC107);

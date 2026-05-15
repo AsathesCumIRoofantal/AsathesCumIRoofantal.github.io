@@ -8,7 +8,7 @@ import 'events_view.dart';
 ///
 /// Theme: Saffron Sun | Layout: stripes
 class EventsEnhancedView extends StatelessWidget {
-  const EventsEnhancedView({Key? key}) : super(key: key);
+  const EventsEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a1a05);
   static const Color _bg2    = Color(0xff4a2d0a);

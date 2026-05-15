@@ -8,7 +8,7 @@ import 'imagination_features_view.dart';
 ///
 /// Theme: Rose Petal | Layout: rings
 class ImaginationFeaturesEnhancedView extends StatelessWidget {
-  const ImaginationFeaturesEnhancedView({Key? key}) : super(key: key);
+  const ImaginationFeaturesEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0814);
   static const Color _bg2    = Color(0xff4a0e26);

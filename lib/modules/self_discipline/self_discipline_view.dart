@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'self_discipline_controller.dart';
 
 class SelfDisciplineView extends GetView<SelfDisciplineController> {
-  const SelfDisciplineView({Key? key}) : super(key: key);
+  const SelfDisciplineView({super.key});
 
   static const _iron = Color(0xFF374151);
   static const _steel = Color(0xFF6B7280);

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'beliefs_values_controller.dart';
 
 class BeliefsValuesView extends GetView<BeliefsValuesController> {
-  const BeliefsValuesView({Key? key}) : super(key: key);
+  const BeliefsValuesView({super.key});
 
   static const _gold = Color(0xFFD97706);
   static const _amber = Color(0xFFF59E0B);

@@ -8,7 +8,7 @@ import 'trade_import_export_view.dart';
 ///
 /// Theme: Magenta Pulse | Layout: wave
 class TradeImportExportEnhancedView extends StatelessWidget {
-  const TradeImportExportEnhancedView({Key? key}) : super(key: key);
+  const TradeImportExportEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff260a1f);
   static const Color _bg2    = Color(0xff4a0e3d);

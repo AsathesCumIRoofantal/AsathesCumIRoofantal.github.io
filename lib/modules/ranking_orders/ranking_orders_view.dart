@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'ranking_orders_controller.dart';
 
 class RankingOrdersView extends GetView<RankingOrdersController> {
-  const RankingOrdersView({Key? key}) : super(key: key);
+  const RankingOrdersView({super.key});
 
   @override
   Widget build(BuildContext context) {

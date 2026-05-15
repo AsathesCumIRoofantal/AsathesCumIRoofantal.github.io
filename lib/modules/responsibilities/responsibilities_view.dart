@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'responsibilities_controller.dart';
 
 class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
-  const ResponsibilitiesView({Key? key}) : super(key: key);
+  const ResponsibilitiesView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'compitition_controller.dart';
 
 class CompititionView extends GetView<CompititionController> {
-  const CompititionView({Key? key}) : super(key: key);
+  const CompititionView({super.key});
 
   @override
   Widget build(BuildContext context) {

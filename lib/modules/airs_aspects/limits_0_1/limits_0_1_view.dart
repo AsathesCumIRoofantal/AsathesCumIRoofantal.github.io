@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'limits_0_1_controller.dart';
 
 class Limits01View extends GetView<Limits01Controller> {
-  const Limits01View({Key? key}) : super(key: key);
+  const Limits01View({super.key});
 
   @override
   Widget build(BuildContext context) {

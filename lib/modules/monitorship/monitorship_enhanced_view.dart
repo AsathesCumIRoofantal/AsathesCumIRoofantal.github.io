@@ -8,7 +8,7 @@ import 'monitorship_view.dart';
 ///
 /// Theme: Twilight Lilac | Layout: diagonal
 class MonitorshipEnhancedView extends StatelessWidget {
-  const MonitorshipEnhancedView({Key? key}) : super(key: key);
+  const MonitorshipEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0f2e);
   static const Color _bg2    = Color(0xff2d1b4e);

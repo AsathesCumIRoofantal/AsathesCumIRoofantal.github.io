@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'discovery_controller.dart';
 
 class DiscoveryView extends GetView<DiscoveryController> {
-  const DiscoveryView({Key? key}) : super(key: key);
+  const DiscoveryView({super.key});
 
   @override
   Widget build(BuildContext context) {

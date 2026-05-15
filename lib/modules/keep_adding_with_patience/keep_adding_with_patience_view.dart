@@ -5,7 +5,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 
 class KeepAddingWithPatienceView
     extends GetView<KeepAddingWithPatienceController> {
-  const KeepAddingWithPatienceView({Key? key}) : super(key: key);
+  const KeepAddingWithPatienceView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'motivation_controller.dart';
 
 class MotivationView extends GetView<MotivationController> {
-  const MotivationView({Key? key}) : super(key: key);
+  const MotivationView({super.key});
 
   static const _blue = Color(0xFF2563EB);
   static const _indigo = Color(0xFF4F46E5);

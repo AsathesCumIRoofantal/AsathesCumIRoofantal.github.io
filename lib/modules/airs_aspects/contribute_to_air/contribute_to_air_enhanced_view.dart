@@ -8,7 +8,7 @@ import 'contribute_to_air_view.dart';
 ///
 /// Theme: Twilight Lilac | Layout: grid
 class ContributeToAirEnhancedView extends StatelessWidget {
-  const ContributeToAirEnhancedView({Key? key}) : super(key: key);
+  const ContributeToAirEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0f2e);
   static const Color _bg2    = Color(0xff2d1b4e);

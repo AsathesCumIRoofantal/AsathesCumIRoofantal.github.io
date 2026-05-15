@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'forgivness_controller.dart';
 
 class ForgivnessView extends GetView<ForgivnessController> {
-  const ForgivnessView({Key? key}) : super(key: key);
+  const ForgivnessView({super.key});
 
   static const _lavender = Color(0xFF8B5CF6);
   static const _purple = Color(0xFF9333EA);

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'greetings_controller.dart';
 
 class GreetingsView extends GetView<GreetingsController> {
-  const GreetingsView({Key? key}) : super(key: key);
+  const GreetingsView({super.key});
 
   static const _warm = Color(0xFFEA580C);
   static const _peach = Color(0xFFFB923C);

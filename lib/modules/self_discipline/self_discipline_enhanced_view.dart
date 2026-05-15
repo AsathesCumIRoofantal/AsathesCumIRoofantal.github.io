@@ -8,7 +8,7 @@ import 'self_discipline_view.dart';
 ///
 /// Theme: Mint Spring | Layout: burst
 class SelfDisciplineEnhancedView extends StatelessWidget {
-  const SelfDisciplineEnhancedView({Key? key}) : super(key: key);
+  const SelfDisciplineEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff052e2a);
   static const Color _bg2    = Color(0xff0f4d45);

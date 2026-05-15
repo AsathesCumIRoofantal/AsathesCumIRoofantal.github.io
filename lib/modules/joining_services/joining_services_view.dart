@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'joining_services_controller.dart';
 
 class JoiningServicesView extends GetView<JoiningServicesController> {
-  const JoiningServicesView({Key? key}) : super(key: key);
+  const JoiningServicesView({super.key});
 
   @override
   Widget build(BuildContext context) {

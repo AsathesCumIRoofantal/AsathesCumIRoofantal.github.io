@@ -8,7 +8,7 @@ import 'onboard_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: circles
 class OnboardEnhancedView extends StatelessWidget {
-  const OnboardEnhancedView({Key? key}) : super(key: key);
+  const OnboardEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);

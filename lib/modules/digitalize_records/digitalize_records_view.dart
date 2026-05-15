@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'digitalize_records_controller.dart';
 
 class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
-  const DigitalizeRecordsView({Key? key}) : super(key: key);
+  const DigitalizeRecordsView({super.key});
 
   @override
   Widget build(BuildContext context) {

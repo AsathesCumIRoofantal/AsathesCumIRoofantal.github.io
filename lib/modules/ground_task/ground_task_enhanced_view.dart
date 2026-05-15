@@ -8,7 +8,7 @@ import 'ground_task_view.dart';
 ///
 /// Theme: Ember Forge | Layout: rings
 class GroundTaskEnhancedView extends StatelessWidget {
-  const GroundTaskEnhancedView({Key? key}) : super(key: key);
+  const GroundTaskEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0a05);
   static const Color _bg2    = Color(0xff3b1c0e);

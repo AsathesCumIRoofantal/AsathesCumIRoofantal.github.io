@@ -8,7 +8,7 @@ import 'login_view.dart';
 ///
 /// Theme: Neon Iris | Layout: rings
 class LoginEnhancedView extends StatelessWidget {
-  const LoginEnhancedView({Key? key}) : super(key: key);
+  const LoginEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a0826);
   static const Color _bg2    = Color(0xff14104a);

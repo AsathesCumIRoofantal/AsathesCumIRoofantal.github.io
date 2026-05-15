@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'situation_reaction_controller.dart';
 
 class SituationReactionView extends GetView<SituationReactionController> {
-  const SituationReactionView({Key? key}) : super(key: key);
+  const SituationReactionView({super.key});
 
   @override
   Widget build(BuildContext context) {

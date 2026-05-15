@@ -8,7 +8,7 @@ import 'airs_mission_view.dart';
 ///
 /// Theme: Twilight Lilac | Layout: stripes
 class AirsMissionEnhancedView extends StatelessWidget {
-  const AirsMissionEnhancedView({Key? key}) : super(key: key);
+  const AirsMissionEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0f2e);
   static const Color _bg2    = Color(0xff2d1b4e);

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'utility_facilities_controller.dart';
 
 class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
-  const UtilityFacilitiesView({Key? key}) : super(key: key);
+  const UtilityFacilitiesView({super.key});
 
   @override
   Widget build(BuildContext context) {

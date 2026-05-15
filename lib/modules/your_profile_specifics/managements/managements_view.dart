@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'managements_controller.dart';
 
 class ManagementsView extends GetView<ManagementsController> {
-  const ManagementsView({Key? key}) : super(key: key);
+  const ManagementsView({super.key});
 
   @override
   Widget build(BuildContext context) {

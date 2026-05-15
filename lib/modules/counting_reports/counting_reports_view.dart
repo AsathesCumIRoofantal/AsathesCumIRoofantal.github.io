@@ -148,7 +148,7 @@ const List<_ReportSection> _reportSections = [
 //  MAIN VIEW
 // ─────────────────────────────────────────────
 class CountingReportsView extends GetView<CountingReportsController> {
-  const CountingReportsView({Key? key}) : super(key: key);
+  const CountingReportsView({super.key});
 
   @override
   Widget build(BuildContext context) {

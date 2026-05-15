@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// ADVANTAGE — Unique design: emerald + gold "leverage / lever" theme.
 /// New sections: Edge Quotient meter, 6 Strategic Edges, Compounding Steps, Risks-vs-Rewards.
 class AdvantageView extends StatelessWidget {
-  const AdvantageView({Key? key}) : super(key: key);
+  const AdvantageView({super.key});
 
   static const _bg = Color(0xFF02140C);
   static const _emerald = Color(0xFF10B981);

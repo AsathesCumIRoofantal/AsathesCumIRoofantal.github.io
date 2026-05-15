@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'contribute_to_air_controller.dart';
 
 class ContributeToAirView extends GetView<ContributeToAirController> {
-  const ContributeToAirView({Key? key}) : super(key: key);
+  const ContributeToAirView({super.key});
 
   @override
   Widget build(BuildContext context) {

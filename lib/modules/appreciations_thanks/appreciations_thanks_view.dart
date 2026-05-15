@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 /// APPRECIATIONS & THANKS — Unique: amber sunrise + cream "gratitude card" theme.
 /// New sections: Today's Thank-You, Gratitude Wall, 7 Forms of Thanks, Pay-It-Forward ladder.
 class AppreciationsThanksView extends StatelessWidget {
-  const AppreciationsThanksView({Key? key}) : super(key: key);
+  const AppreciationsThanksView({super.key});
 
   static const _cream = Color(0xFFFFFBF0);
   static const _amber = Color(0xFFF59E0B);

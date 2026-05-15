@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'practice_expertise_controller.dart';
 
 class PracticeExpertiseView extends GetView<PracticeExpertiseController> {
-  const PracticeExpertiseView({Key? key}) : super(key: key);
+  const PracticeExpertiseView({super.key});
 
   static const _indigo = Color(0xFF4F46E5);
   static const _violet = Color(0xFF7C3AED);

@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'be_part_of_air_controller.dart';
 
 class BePartOfAirView extends GetView<BePartOfAirController> {
-  const BePartOfAirView({Key? key}) : super(key: key);
+  const BePartOfAirView({super.key});
 
   @override
   Widget build(BuildContext context) {

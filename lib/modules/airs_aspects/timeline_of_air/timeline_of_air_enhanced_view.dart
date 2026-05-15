@@ -8,7 +8,7 @@ import 'timeline_of_air_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: burst
 class TimelineOfAirEnhancedView extends StatelessWidget {
-  const TimelineOfAirEnhancedView({Key? key}) : super(key: key);
+  const TimelineOfAirEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff0a1a0a);
   static const Color _bg2    = Color(0xff14361f);

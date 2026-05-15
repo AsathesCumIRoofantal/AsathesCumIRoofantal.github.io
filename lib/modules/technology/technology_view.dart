@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'technology_controller.dart';
 
 class TechnologyView extends GetView<TechnologyController> {
-  const TechnologyView({Key? key}) : super(key: key);
+  const TechnologyView({super.key});
 
   @override
   Widget build(BuildContext context) {

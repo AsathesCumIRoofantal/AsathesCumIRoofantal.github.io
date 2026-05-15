@@ -8,7 +8,7 @@ import 'research_development_view.dart';
 ///
 /// Theme: Magenta Pulse | Layout: wave
 class ResearchDevelopmentEnhancedView extends StatelessWidget {
-  const ResearchDevelopmentEnhancedView({Key? key}) : super(key: key);
+  const ResearchDevelopmentEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff260a1f);
   static const Color _bg2    = Color(0xff4a0e3d);

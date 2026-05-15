@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'only_one_way_controller.dart';
 
 class OnlyOneWayView extends GetView<OnlyOneWayController> {
-  const OnlyOneWayView({Key? key}) : super(key: key);
+  const OnlyOneWayView({super.key});
 
   @override
   Widget build(BuildContext context) {

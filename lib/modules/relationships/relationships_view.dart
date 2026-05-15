@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'relationships_controller.dart';
 
 class RelationshipsView extends GetView<RelationshipsController> {
-  const RelationshipsView({Key? key}) : super(key: key);
+  const RelationshipsView({super.key});
 
   static const _hub = Color(0xFF0EA5E9);
   static const _blue = Color(0xFF3B82F6);

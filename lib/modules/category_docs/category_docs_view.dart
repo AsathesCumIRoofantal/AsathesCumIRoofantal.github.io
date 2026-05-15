@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// CATEGORY DOCS — Unique: slate + lime "filing cabinet / archive" theme.
 /// New sections: Document Health, 6 Doc Types, Filing Workflow, Compliance Tags.
 class CategoryDocsView extends StatelessWidget {
-  const CategoryDocsView({Key? key}) : super(key: key);
+  const CategoryDocsView({super.key});
 
   static const _bg = Color(0xFFF5F5F0);
   static const _slate = Color(0xFF263238);

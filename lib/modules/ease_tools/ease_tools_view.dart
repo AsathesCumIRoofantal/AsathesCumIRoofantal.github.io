@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'ease_tools_controller.dart';
 
 class EaseToolsView extends GetView<EaseToolsController> {
-  const EaseToolsView({Key? key}) : super(key: key);
+  const EaseToolsView({super.key});
 
   @override
   Widget build(BuildContext context) {

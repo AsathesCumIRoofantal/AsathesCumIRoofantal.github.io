@@ -8,7 +8,7 @@ import 'record_post_view.dart';
 ///
 /// Theme: Coral Reef | Layout: grid
 class RecordPostEnhancedView extends StatelessWidget {
-  const RecordPostEnhancedView({Key? key}) : super(key: key);
+  const RecordPostEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff2a0f0a);
   static const Color _bg2    = Color(0xff4a1f14);

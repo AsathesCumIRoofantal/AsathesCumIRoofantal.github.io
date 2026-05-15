@@ -8,7 +8,7 @@ import 'marketing_promotion_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: circles
 class MarketingPromotionEnhancedView extends StatelessWidget {
-  const MarketingPromotionEnhancedView({Key? key}) : super(key: key);
+  const MarketingPromotionEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f0606);
   static const Color _bg2    = Color(0xff3d0c0c);

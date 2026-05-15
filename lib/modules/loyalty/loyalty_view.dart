@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'loyalty_controller.dart';
 
 class LoyaltyView extends GetView<LoyaltyController> {
-  const LoyaltyView({Key? key}) : super(key: key);
+  const LoyaltyView({super.key});
 
   static const _indigo = Color(0xFF4338CA);
   static const _violet = Color(0xFF7C3AED);

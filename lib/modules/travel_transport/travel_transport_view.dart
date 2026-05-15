@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'travel_transport_controller.dart';
 
 class TravelTransportView extends GetView<TravelTransportController> {
-  const TravelTransportView({Key? key}) : super(key: key);
+  const TravelTransportView({super.key});
 
   @override
   Widget build(BuildContext context) {

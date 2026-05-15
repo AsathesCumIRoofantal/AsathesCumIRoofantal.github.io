@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'revise_improve_controller.dart';
 
 class ReviseImproveView extends GetView<ReviseImproveController> {
-  const ReviseImproveView({Key? key}) : super(key: key);
+  const ReviseImproveView({super.key});
 
   static const _lime = Color(0xFF84CC16);
   static const _green = Color(0xFF10B981);

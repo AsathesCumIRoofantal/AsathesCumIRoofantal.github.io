@@ -4,7 +4,7 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'rules_regulations_controller.dart';
 
 class RulesRegulationsView extends GetView<RulesRegulationsController> {
-  const RulesRegulationsView({Key? key}) : super(key: key);
+  const RulesRegulationsView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'religion_prayer_view.dart';
 ///
 /// Theme: Bronze Age | Layout: rings
 class ReligionPrayerEnhancedView extends StatelessWidget {
-  const ReligionPrayerEnhancedView({Key? key}) : super(key: key);
+  const ReligionPrayerEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1f1408);
   static const Color _bg2    = Color(0xff3d2614);

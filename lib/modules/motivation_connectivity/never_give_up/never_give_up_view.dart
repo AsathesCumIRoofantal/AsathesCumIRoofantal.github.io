@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'never_give_up_controller.dart';
 
 class NeverGiveUpView extends GetView<NeverGiveUpController> {
-  const NeverGiveUpView({Key? key}) : super(key: key);
+  const NeverGiveUpView({super.key});
 
   static const _ember = Color(0xFFEA3A00);
   static const _flame = Color(0xFFFF6B00);

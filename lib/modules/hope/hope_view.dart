@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'hope_controller.dart';
 
 class HopeView extends GetView<HopeController> {
-  const HopeView({Key? key}) : super(key: key);
+  const HopeView({super.key});
 
   @override
   Widget build(BuildContext context) {

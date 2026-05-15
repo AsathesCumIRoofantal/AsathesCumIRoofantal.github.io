@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'doctorate_controller.dart';
 
 class DoctorateView extends GetView<DoctorateController> {
-  const DoctorateView({Key? key}) : super(key: key);
+  const DoctorateView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'share_care_view.dart';
 ///
 /// Theme: Ember Forge | Layout: grid
 class ShareCareEnhancedView extends StatelessWidget {
-  const ShareCareEnhancedView({Key? key}) : super(key: key);
+  const ShareCareEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff1a0a05);
   static const Color _bg2    = Color(0xff3b1c0e);

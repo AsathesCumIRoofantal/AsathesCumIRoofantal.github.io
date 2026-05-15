@@ -8,7 +8,7 @@ import 'friendship_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: stripes
 class FriendshipEnhancedView extends StatelessWidget {
-  const FriendshipEnhancedView({Key? key}) : super(key: key);
+  const FriendshipEnhancedView({super.key});
 
   static const Color _bg     = Color(0xff051628);
   static const Color _bg2    = Color(0xff0c2e4d);
