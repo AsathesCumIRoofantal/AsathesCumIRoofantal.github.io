@@ -27,10 +27,8 @@ class DrawerResultItem {
     required this.title,
     required this.icon,
     required this.route,
-  }) {
-    key:
-    GlobalKey(debugLabel: "${route}");
-  }
+    this.key,
+  }) {}
 }
 
 class DrawerActualSection {
@@ -63,7 +61,8 @@ class HomeController extends GetxController {
   final ScrollController drawerScrollController = ScrollController();
 
   @override
-  void onInit() {
+  void onReady() {
+    super.onReady();
     for (final section in drawerSections) {
       for (final item in section.items) {
         results.value.add(
@@ -75,6 +74,7 @@ class HomeController extends GetxController {
                     title: item.title,
                     icon: item.icon,
                     route: item.route,
+                    key: item.key,
                   ),
                 )
                 .toList(),
@@ -82,7 +82,6 @@ class HomeController extends GetxController {
         );
       }
     }
-    super.onInit();
   }
 
   /// =====================================================
