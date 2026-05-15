@@ -64,6 +64,24 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    for (final section in drawerSections) {
+      for (final item in section.items) {
+        results.value.add(
+          DrawerResultSection(
+            title: section.title,
+            items: section.items
+                .map<DrawerResultItem>(
+                  (item) => DrawerResultItem(
+                    title: item.title,
+                    icon: item.icon,
+                    route: item.route,
+                  ),
+                )
+                .toList(),
+          ),
+        );
+      }
+    }
     super.onInit();
   }
 
