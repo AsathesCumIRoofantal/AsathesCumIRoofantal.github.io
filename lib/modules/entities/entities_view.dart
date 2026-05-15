@@ -4,7 +4,6 @@ import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'entities_controller.dart';
 import '../../data/models/entity_model.dart';
 import '../../core/utils/content_reviser.dart';
-import '../../data/auth_service.dart';
 
 class EntitiesView extends GetView<EntitiesController> {
   EntitiesView({Key? key}) : super(key: key);
@@ -48,22 +47,24 @@ class EntitiesView extends GetView<EntitiesController> {
               ),
               _buildCollapsibleHeader(context),
               _buildEntitiesInfoCard(context),
-              Obx(() => AnimatedSize(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: controller.isEntitiesExpanded.value
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.only(top: 12, bottom: 80),
-                            itemCount: controller.entities.length,
-                            itemBuilder: (context, index) {
-                              final entity = controller.entities[index];
-                              return _buildEntityCard(context, entity);
-                            },
-                          )
-                        : const SizedBox.shrink(),
-                  )),
+              Obx(
+                () => AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: controller.isEntitiesExpanded.value
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.only(top: 12, bottom: 80),
+                          itemCount: controller.entities.length,
+                          itemBuilder: (context, index) {
+                            final entity = controller.entities[index];
+                            return _buildEntityCard(context, entity);
+                          },
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ),
             ],
           ),
         );
@@ -139,14 +140,22 @@ class EntitiesView extends GetView<EntitiesController> {
             const SizedBox(height: 24),
             TextField(
               controller: titleController,
-              decoration: _inputDecoration("Entity Title / Name", Icons.title_rounded, context),
+              decoration: _inputDecoration(
+                "Entity Title / Name",
+                Icons.title_rounded,
+                context,
+              ),
               style: const TextStyle(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 16),
             TextField(
               controller: descController,
               maxLines: 3,
-              decoration: _inputDecoration("Description of Existence", Icons.description_rounded, context),
+              decoration: _inputDecoration(
+                "Description of Existence",
+                Icons.description_rounded,
+                context,
+              ),
             ),
             const SizedBox(height: 24),
             Text(
@@ -159,44 +168,58 @@ class EntitiesView extends GetView<EntitiesController> {
               ),
             ),
             const SizedBox(height: 12),
-            Obx(() => Wrap(
-                  spacing: 12,
-                  runSpacing: 12,
-                  children: controller.categories.map((cat) {
-                    final isSelected = controller.selectedCategory.value == cat;
-                    return ChoiceChip(
-                      label: Text(cat),
-                      selected: isSelected,
-                      onSelected: (selected) {
-                        controller.selectedCategory.value = selected ? cat : "";
-                      },
-                      selectedColor: accent.withOpacity(0.2),
-                      backgroundColor: theme.cardColor,
-                      labelStyle: TextStyle(
-                        color: isSelected ? accent : theme.textTheme.bodyMedium?.color,
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+            Obx(
+              () => Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: controller.categories.map((cat) {
+                  final isSelected = controller.selectedCategory.value == cat;
+                  return ChoiceChip(
+                    label: Text(cat),
+                    selected: isSelected,
+                    onSelected: (selected) {
+                      controller.selectedCategory.value = selected ? cat : "";
+                    },
+                    selectedColor: accent.withOpacity(0.2),
+                    backgroundColor: theme.cardColor,
+                    labelStyle: TextStyle(
+                      color: isSelected
+                          ? accent
+                          : theme.textTheme.bodyMedium?.color,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      side: BorderSide(
+                        color: isSelected
+                            ? accent
+                            : theme.dividerColor.withOpacity(0.1),
                       ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        side: BorderSide(
-                          color: isSelected ? accent : theme.dividerColor.withOpacity(0.1),
-                        ),
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    );
-                  }).toList(),
-                )),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
             const SizedBox(height: 40),
             SizedBox(
               width: double.infinity,
               height: 56,
               child: ElevatedButton(
                 onPressed: () {
-                  if (titleController.text.isNotEmpty && controller.selectedCategory.value.isNotEmpty) {
+                  if (titleController.text.isNotEmpty &&
+                      controller.selectedCategory.value.isNotEmpty) {
                     final newEntity = EntityModel(
                       id: DateTime.now().millisecondsSinceEpoch.toString(),
                       name: titleController.text,
-                      description: descController.text.isEmpty ? "No description provided." : descController.text,
+                      description: descController.text.isEmpty
+                          ? "No description provided."
+                          : descController.text,
                       category: controller.selectedCategory.value,
                       imageUrl: '',
                     );
@@ -213,13 +236,18 @@ class EntitiesView extends GetView<EntitiesController> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: accent,
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                   elevation: 8,
                   shadowColor: accent.withOpacity(0.4),
                 ),
                 child: const Text(
                   "ADD TO ALL-SPACE",
-                  style: TextStyle(fontWeight: FontWeight.w900, letterSpacing: 2),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 2,
+                  ),
                 ),
               ),
             ),
@@ -229,13 +257,22 @@ class EntitiesView extends GetView<EntitiesController> {
     );
   }
 
-  InputDecoration _inputDecoration(String label, IconData icon, BuildContext context) {
+  InputDecoration _inputDecoration(
+    String label,
+    IconData icon,
+    BuildContext context,
+  ) {
     final theme = Theme.of(context);
     return InputDecoration(
       labelText: label,
       prefixIcon: Icon(icon, size: 20),
-      labelStyle: TextStyle(color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
-      floatingLabelStyle: TextStyle(color: theme.colorScheme.primary, fontWeight: FontWeight.bold),
+      labelStyle: TextStyle(
+        color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+      ),
+      floatingLabelStyle: TextStyle(
+        color: theme.colorScheme.primary,
+        fontWeight: FontWeight.bold,
+      ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: theme.dividerColor.withOpacity(0.15)),
@@ -352,11 +389,18 @@ class EntitiesView extends GetView<EntitiesController> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('• ', style: TextStyle(color: accent, fontWeight: FontWeight.bold)),
+            Text(
+              '• ',
+              style: TextStyle(color: accent, fontWeight: FontWeight.bold),
+            ),
             Expanded(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 13, height: 1.35, color: bodyColor?.withOpacity(0.9)),
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.35,
+                  color: bodyColor?.withOpacity(0.9),
+                ),
               ),
             ),
           ],
@@ -411,12 +455,20 @@ class EntitiesView extends GetView<EntitiesController> {
             const SizedBox(height: 8),
             Text(
               'Every entity can be catalogued here and linked through Unions.',
-              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.65)),
+              style: TextStyle(
+                fontSize: 12,
+                height: 1.35,
+                color: bodyColor?.withOpacity(0.65),
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               'Drawer tip: open the menu (☰) from this screen for AIR-wide programmes—explore, profile, vision, motivation, setup, and system—without leaving your entity map.',
-              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.72)),
+              style: TextStyle(
+                fontSize: 12,
+                height: 1.35,
+                color: bodyColor?.withOpacity(0.72),
+              ),
             ),
           ],
         ),
@@ -435,7 +487,9 @@ class EntitiesView extends GetView<EntitiesController> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.05),
+            color: Theme.of(
+              context,
+            ).colorScheme.primary.withValues(alpha: 0.05),
             blurRadius: 10,
             spreadRadius: 2,
           ),
@@ -449,40 +503,42 @@ class EntitiesView extends GetView<EntitiesController> {
             color: Theme.of(context).scaffoldBackgroundColor,
             shape: BoxShape.circle,
             border: Border.all(
-              color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.5),
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.5),
             ),
           ),
-          child: Icon(
-            Icons.hub,
-            color: Theme.of(context).colorScheme.primary,
+          child: Icon(Icons.hub, color: Theme.of(context).colorScheme.primary),
+        ),
+        title: Obx(
+          () => Text(
+            ContentReviser.reviseTitle(entity.name),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+              color: Theme.of(context).textTheme.bodyLarge?.color,
+            ),
           ),
         ),
-        title: Obx(() => Text(
-          ContentReviser.reviseTitle(entity.name),
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            color: Theme.of(context).textTheme.bodyLarge?.color,
-          ),
-        )),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            Obx(() => Text(
-              ContentReviser.revise(entity.description),
-              style: TextStyle(
-                color: Theme.of(context).textTheme.bodyMedium?.color,
+            Obx(
+              () => Text(
+                ContentReviser.revise(entity.description),
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                ),
               ),
-            )),
+            ),
             const SizedBox(height: 12),
             Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-                vertical: 4,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.1),
+                color: Theme.of(
+                  context,
+                ).colorScheme.primary.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: Theme.of(context).colorScheme.primary,

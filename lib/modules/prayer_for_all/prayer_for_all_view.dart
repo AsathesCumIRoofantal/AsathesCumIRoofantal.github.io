@@ -20,7 +20,7 @@ class PrayerForAllView extends GetView<PrayerForAllController> {
           subtitle:
               'Offer intentions for peace at every level — within oneself, in families, communities, and nations. '
               'Peace prayers draw from diverse traditions and are expressed in universal, inclusive language.',
-          icon: Icons.peace,
+          icon: Icons.volunteer_activism_rounded,
         ),
         SampleContentItem(
           title: 'Healing Intentions',
