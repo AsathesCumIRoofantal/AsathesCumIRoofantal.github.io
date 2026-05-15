@@ -60,7 +60,7 @@ class HomeView extends StatelessWidget {
 
     /// BUILD UNIQUE KEY
     final uniqueKey = "${sectionTitle}_$routeTemp";
-    BuildContext? ctx = controller.itemKeys[uniqueKey]?.currentContext;
+    BuildContext? ctx = controller.itemKeys[routeTemp]?.currentContext;
     if (ctx == null) {
       debugPrint("Context NULL -> $uniqueKey");
       return;
@@ -73,32 +73,33 @@ class HomeView extends StatelessWidget {
       curve: Curves.easeInOutCubic,
       alignment: 0.45,
     );
-    // /// GET SAFE GLOBAL KEY
-    // final GlobalKey? globalKey = controller.itemKeys[uniqueKey];
 
-    // if (globalKey == null) {
-    //   debugPrint("GlobalKey NOT FOUND -> $uniqueKey");
-    //   return;
-    // }
+    /// GET SAFE GLOBAL KEY
+    final GlobalKey? globalKey = controller.itemKeys[routeTemp];
 
-    // /// WAIT NEXT FRAME
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   /// SAFE CONTEXT
-    //   final BuildContext? itemContext = globalKey.currentContext;
+    if (globalKey == null) {
+      debugPrint("GlobalKey NOT FOUND -> $uniqueKey");
+      return;
+    }
 
-    //   if (itemContext == null) {
-    //     debugPrint("Context NULL -> $uniqueKey");
-    //     return;
-    //   }
+    /// WAIT NEXT FRAME
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      /// SAFE CONTEXT
+      final BuildContext? itemContext = globalKey.currentContext;
 
-    //   /// SCROLL
-    //   await Scrollable.ensureVisible(
-    //     itemContext,
-    //     duration: const Duration(milliseconds: 800),
-    //     curve: Curves.easeInOutCubic,
-    //     alignment: 0.45,
-    //   );
-    // });
+      if (itemContext == null) {
+        debugPrint("Context NULL -> $uniqueKey");
+        return;
+      }
+
+      /// SCROLL
+      await Scrollable.ensureVisible(
+        itemContext,
+        duration: const Duration(milliseconds: 800),
+        curve: Curves.easeInOutCubic,
+        alignment: 0.45,
+      );
+    });
   }
 
   @override
