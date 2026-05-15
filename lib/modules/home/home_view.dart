@@ -554,7 +554,7 @@ class HomeView extends StatelessWidget {
 
               ...entry.value.map((e) {
                 return Padding(
-                  key: GlobalKey(debugLabel: "Filter${item.route}"),
+                  key: GlobalKey(debugLabel: "Filter${e.item.route}"),
                   padding: const EdgeInsets.only(bottom: 10),
 
                   child: InkWell(
