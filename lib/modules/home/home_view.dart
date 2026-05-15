@@ -14,6 +14,9 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final onSurface = theme.colorScheme.onSurface;
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -111,76 +114,209 @@ class HomeView extends GetView<HomeController> {
               ),
               ...controller.drawerSections
                   .map(
-                    (section) => Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 8.0,
-                          ),
-                          child: Text(
-                            section.title,
-                            style: TextStyle(
-                              color: Theme.of(
-                                context,
-                              ).textTheme.bodyMedium?.color,
-                              fontSize: 12,
-                              letterSpacing: 2,
+                    (section) => Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 0,
+                        vertical: 0,
+                      ),
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(0),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: isDark
+                              ? [
+                                  theme.scaffoldBackgroundColor,
+                                  theme.colorScheme.surface,
+                                ]
+                              : [
+                                  theme.colorScheme.surface,
+                                  theme.scaffoldBackgroundColor,
+                                ],
+                        ),
+                        // border: Border.all(
+                        //   color: const Color(0xFFD4AF37).withOpacity(0.35),
+                        //   width: 0,
+                        // ),
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     color: const Color(0xFFD4AF37).withOpacity(0.08),
+                        //     blurRadius: 18,
+                        //     spreadRadius: 1,
+                        //     offset: const Offset(0, 6),
+                        //   ),
+                        // ],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          /// SECTION TITLE
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 5,
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    gradient: const LinearGradient(
+                                      colors: [
+                                        Color(0xFFFFE8A3),
+                                        Color(0xFFD4AF37),
+                                        Color(0xFF8C6A16),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(width: 12),
+
+                                Expanded(
+                                  child: Text(
+                                    section.title.toUpperCase(),
+                                    style: const TextStyle(
+                                      color: Color(0xFFFFD369),
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w700,
+                                      letterSpacing: 2.2,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 6),
-                          child: Text(
-                            DrawerNavigationCopy.sectionBlurb(section.title),
-                            style: TextStyle(
-                              fontSize: 11,
-                              height: 1.35,
-                              color: Theme.of(
-                                context,
-                              ).textTheme.bodySmall?.color?.withOpacity(0.9),
-                            ),
-                          ),
-                        ),
-                        ...section.items.map(
-                          (item) => ListTile(
-                            titleAlignment: ListTileTitleAlignment.center,
-                            leading: Icon(item.icon, color: Color(0xFFD4AF37)),
-                            title: Text(
-                              item.title,
+
+                          /// SECTION DESCRIPTION
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
+                            child: Text(
+                              DrawerNavigationCopy.sectionBlurb(section.title),
                               style: TextStyle(
-                                color: Color(0xFFD4AF37),
-                                fontSize: 14,
+                                fontSize: 11.2,
+                                height: 1.45,
+                                color: onSurface,
                               ),
                             ),
-                            subtitle: Text(
-                              DrawerNavigationCopy.linkSubtitle(
-                                item.route,
-                                item.title,
-                              ),
-                              maxLines: 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 11,
-                                height: 1.3,
-                                color: Theme.of(
-                                  context,
-                                ).textTheme.bodySmall?.color?.withOpacity(0.88),
-                              ),
-                            ),
-                            isThreeLine: true,
-                            onTap: () {
-                              // Get.back();
-                              Get.toNamed(item.route);
-                            },
                           ),
-                        ),
-                        Divider(
-                          color: Theme.of(context).dividerColor,
-                          height: 32,
-                        ),
-                      ],
+
+                          /// MENU ITEMS
+                          ...section.items.map(
+                            (item) => Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 3,
+                                vertical: 5,
+                              ),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(18),
+                                  onTap: () {
+                                    Get.toNamed(item.route);
+                                  },
+                                  child: Ink(
+                                    padding: const EdgeInsets.all(14),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(0),
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .surfaceContainerHighest
+                                          .withOpacity(0.22),
+                                      // border: Border.all(
+                                      //   color: const Color(
+                                      //     0xFFD4AF37,
+                                      //   ).withOpacity(0.18),
+                                      // ),
+                                      // boxShadow: [
+                                      //   BoxShadow(
+                                      //     color: Colors.black.withOpacity(0.22),
+                                      //     blurRadius: 10,
+                                      //     offset: const Offset(0, 4),
+                                      //   ),
+                                      // ],
+                                    ),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        /// ICON
+                                        Container(
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: LinearGradient(
+                                              colors: [
+                                                const Color(0xFFFFE082),
+                                                const Color(0xFFD4AF37),
+                                              ],
+                                            ),
+                                          ),
+                                          child: Icon(
+                                            item.icon,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        ),
+
+                                        const SizedBox(width: 14),
+
+                                        /// TEXTS
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                item.title,
+                                                style: const TextStyle(
+                                                  color: Color(0xFFFFD369),
+                                                  fontSize: 14.5,
+                                                  fontWeight: FontWeight.w700,
+                                                  letterSpacing: 0.4,
+                                                ),
+                                              ),
+
+                                              const SizedBox(height: 5),
+
+                                              Text(
+                                                DrawerNavigationCopy.linkSubtitle(
+                                                  item.route,
+                                                  item.title,
+                                                ),
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  height: 1.4,
+                                                  color: onSurface.withOpacity(
+                                                    0.75,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+                                        /// ARROW
+                                        Icon(
+                                          Icons.arrow_forward_ios_rounded,
+                                          size: 15,
+                                          color: const Color(
+                                            0xFFD4AF37,
+                                          ).withOpacity(0.7),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          const SizedBox(height: 10),
+                        ],
+                      ),
                     ),
                   )
                   .toList(),
