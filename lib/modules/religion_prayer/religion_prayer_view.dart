@@ -219,23 +219,25 @@ class _Section {
 
 final List<_Section> _sections = [
   _Section(
-    title: 'Prayer Rooms',
+    title: 'Prayer Rooms & Sacred Spaces',
     icon: Icons.mosque,
     color: Colors.teal,
     points: [
-      'Locations of designated prayer areas.',
-      'Schedules and congregational times.',
-      'Guidelines for usage.',
+      'Locations of designated prayer areas within AIR facilities, with quiet-hours policy and usage guidelines.',
+      'Schedules for congregational times across different faith traditions — Friday Jumu\'ah, Sunday services, daily Namaz, and more.',
+      'Booking system for private reflection time so individuals can reserve a quiet space without conflict.',
+      'Interfaith etiquette guide so all users feel welcome regardless of their tradition or practice.',
     ],
   ),
   _Section(
-    title: 'Mindfulness',
+    title: 'Mindfulness & Meditation',
     icon: Icons.self_improvement,
     color: Colors.purple,
     points: [
-      'Guided meditation resources.',
-      'Stress relief techniques.',
-      'Quiet hours policy.',
+      'Guided meditation audio sessions ranging from 5 to 30 minutes — breath-focused, body-scan, and loving-kindness styles.',
+      'Stress relief techniques drawn from evidence-based practices: progressive muscle relaxation, box breathing, and grounding.',
+      'Quiet hours policy that protects designated reflection windows from meetings and notifications.',
+      'Daily mindfulness prompts delivered gently at a time you choose — no pressure, just an invitation.',
     ],
   ),
   _Section(
@@ -243,9 +245,10 @@ final List<_Section> _sections = [
     icon: Icons.book,
     color: Colors.indigo,
     points: [
-      'Religious texts study groups.',
-      'Philosophy workshops.',
-      'Ethical teachings.',
+      'Religious texts study groups covering the Quran, Bible, Bhagavad Gita, Torah, and other sacred scriptures.',
+      'Philosophy workshops exploring ethics, meaning, and the examined life across traditions and secular thought.',
+      'Ethical teachings series that bridges spiritual principles with everyday decisions in work and relationships.',
+      'Reading lists curated by tradition so you can go deep into your own path or explore others respectfully.',
     ],
   ),
   _Section(
@@ -253,19 +256,43 @@ final List<_Section> _sections = [
     icon: Icons.people,
     color: Colors.pink,
     points: [
-      'Spiritual gatherings.',
-      'Festival celebrations.',
-      'Interfaith dialogues.',
+      'Spiritual gatherings and satsangs open to all — no prior knowledge or affiliation required to attend.',
+      'Festival celebrations across traditions: Eid, Diwali, Christmas, Hanukkah, Baisakhi, and more.',
+      'Interfaith dialogues where practitioners share their path and listen to others without debate or conversion intent.',
+      'Annual day of service where the community comes together across faiths to give back to the wider world.',
     ],
   ),
   _Section(
-    title: 'Personal Growth',
+    title: 'Personal Spiritual Growth',
     icon: Icons.psychology,
     color: Colors.amber,
     points: [
-      'Inner peace cultivation.',
-      'Virtue development.',
-      'Spiritual mentorship.',
+      'Inner peace cultivation practices — journaling prompts, gratitude rituals, and evening reflection routines.',
+      'Virtue development tracks: patience, generosity, honesty, and compassion as daily practice, not just ideals.',
+      'Spiritual mentorship matching — connect with a senior practitioner in your tradition for guided growth.',
+      'Progress is personal here: no leaderboards, no comparisons — just your own quiet deepening over time.',
+    ],
+  ),
+  _Section(
+    title: 'Prayer for Specific Needs',
+    icon: Icons.volunteer_activism_outlined,
+    color: Colors.green,
+    points: [
+      'Healing prayers for those facing illness — submit a name and the community holds them in collective intention.',
+      'Prayers for peace in conflict zones, offered weekly in a shared moment of silence across all traditions.',
+      'Gratitude prayers to mark milestones — births, completions, recoveries, and new beginnings.',
+      'Prayers for the departed, offered with dignity and respect for the grieving family\'s tradition.',
+    ],
+  ),
+  _Section(
+    title: 'Respectful Boundaries',
+    icon: Icons.balance_outlined,
+    color: Colors.blueGrey,
+    points: [
+      'All spiritual content is optional — no user is required to engage with any religious material.',
+      'Proselytising and conversion attempts are not permitted in AIR spaces — share your path, don\'t push it.',
+      'Respectful curiosity is encouraged; mockery or dismissal of any tradition is a conduct violation.',
+      'Feedback channel for spiritual content so the community can flag anything that feels exclusionary or harmful.',
     ],
   ),
 ];

@@ -219,9 +219,10 @@ final List<_Section> _sections = [
     icon: Icons.emoji_events,
     color: Colors.amber,
     points: [
-      'Reaching 1 million active users.',
-      'Securing Series B funding.',
-      'Launching our flagship product.',
+      'Reaching 1 million active users — a community milestone that validated the all-space model.',
+      'Securing Series B funding, enabling the infrastructure and team growth needed for the next phase.',
+      'Launching the flagship product on schedule after a disciplined 90-day sprint with zero critical bugs.',
+      'Onboarding the first 100 Mazeasta-role members, proving the expert-tier model works at scale.',
     ],
   ),
   _Section(
@@ -229,9 +230,10 @@ final List<_Section> _sections = [
     icon: Icons.error_outline,
     color: Colors.redAccent,
     points: [
-      'Underestimating server scaling requirements.',
-      'Delayed feedback integration loops.',
-      'Marketing pivot in Q3.',
+      'Underestimating server scaling requirements during the first viral growth spike — now we pre-provision.',
+      'Delayed feedback integration loops meant users waited too long to see their suggestions acted on.',
+      'Marketing pivot in Q3 taught us that authentic community stories outperform polished ad copy every time.',
+      'Shipping features without sufficient onboarding content led to low adoption — documentation ships with code now.',
     ],
   ),
   _Section(
@@ -239,9 +241,10 @@ final List<_Section> _sections = [
     icon: Icons.bar_chart,
     color: Colors.green,
     points: [
-      'YoY revenue growth trajectories.',
-      'Customer acquisition efficiency.',
-      'Market share expansion.',
+      'Year-on-year revenue growth trajectory: 3× in Year 1, 2.2× in Year 2, targeting 1.8× in Year 3.',
+      'Customer acquisition efficiency improved by 40% after switching to community-led growth channels.',
+      'Market share expansion into three new regions, each with localised onboarding and language support.',
+      'Net Promoter Score climbed from 34 to 61 over 18 months — a signal that trust is compounding.',
     ],
   ),
   _Section(
@@ -249,9 +252,32 @@ final List<_Section> _sections = [
     icon: Icons.shield,
     color: Colors.indigo,
     points: [
-      'Identifying potential failure points.',
-      'Contingency planning strategies.',
-      'Crisis response protocols.',
+      'Identifying potential failure points through quarterly red-team exercises before they become incidents.',
+      'Contingency planning strategies for data loss, key-person dependency, and regulatory changes.',
+      'Crisis response protocols tested in tabletop simulations so the team knows exactly who does what.',
+      'Vendor diversification policy: no single supplier accounts for more than 30% of critical infrastructure.',
+    ],
+  ),
+  _Section(
+    title: 'Post-Mortem Practice',
+    icon: Icons.manage_search_outlined,
+    color: Colors.cyan,
+    points: [
+      'Every significant failure triggers a blameless post-mortem within 72 hours — facts, not finger-pointing.',
+      'Root cause analysis follows the five-whys method to reach systemic causes, not surface symptoms.',
+      'Action items from post-mortems are tracked publicly inside AIR so closure is visible to the whole team.',
+      'Retrospective library is searchable — new team members learn from past incidents before they repeat them.',
+    ],
+  ),
+  _Section(
+    title: 'Celebration Rituals',
+    icon: Icons.celebration_outlined,
+    color: Colors.pinkAccent,
+    points: [
+      'Every shipped milestone is acknowledged in the team channel with a brief story of what it took.',
+      'Quarterly "wins wall" compiles user testimonials, metrics jumps, and team contributions in one place.',
+      'Individual contributors are named and thanked publicly — recognition is specific, not generic.',
+      'Annual retrospective dinner where the team reflects on the full year\'s arc, not just the last sprint.',
     ],
   ),
   _Section(
@@ -259,9 +285,10 @@ final List<_Section> _sections = [
     icon: Icons.rocket_launch,
     color: Colors.blue,
     points: [
-      'Scaling to new markets.',
-      'Product line expansion.',
-      'Strategic partnerships.',
+      'Scaling to new markets with localised product variants and community-first go-to-market strategies.',
+      'Product line expansion into adjacent needs identified through the entity and union catalogue on the home tabs.',
+      'Strategic partnerships with organisations whose values align with AIR\'s all-space philosophy.',
+      'R&D investment in features that compound over time rather than one-time novelty releases.',
     ],
   ),
 ];

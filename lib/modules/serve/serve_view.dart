@@ -181,9 +181,22 @@ final List<_ServeSection> _serveSections = [
     icon: Icons.group_add,
     color: Colors.pink,
     points: [
-      'Join local community cleanup initiatives.',
-      'Sign up for mentorship and youth outreach.',
-      'Participate in food drives and charity runs.',
+      'Join local community cleanup initiatives — sign up, show up, and log your hours directly in AIR for recognition.',
+      'Mentorship and youth outreach: pair with a young person in your community for weekly 30-minute guidance sessions.',
+      'Participate in food drives and charity runs — AIR coordinates logistics so you just need to show up ready.',
+      'Skills-based volunteering: offer your professional expertise (design, legal, tech, finance) to NGOs that need it.',
+      'Virtual volunteering options for those who cannot be physically present — tutoring, translation, and content creation.',
+    ],
+  ),
+  _ServeSection(
+    title: 'Seva & Spiritual Service',
+    icon: Icons.volunteer_activism,
+    color: Colors.deepOrange,
+    points: [
+      'Seva (selfless service) log: record acts of service done without expectation of return — small or large.',
+      'Community kitchen participation: help prepare and distribute meals at local shelters or community centres.',
+      'Temple, mosque, church, and gurdwara service opportunities listed and coordinated through AIR.',
+      'Seva is not about hours logged — it\'s about the quality of presence and intention you bring to each act.',
     ],
   ),
   _ServeSection(
@@ -191,9 +204,10 @@ final List<_ServeSection> _serveSections = [
     icon: Icons.public,
     color: Colors.blueAccent,
     points: [
-      'Corporate sustainability and green initiatives.',
-      'Partnering with local non-profit organizations.',
-      'Annual impact reports and transparency.',
+      'Corporate sustainability and green initiatives: tree planting, waste reduction, and carbon offset programmes.',
+      'Partnering with local non-profit organisations to amplify their reach using AIR\'s community network.',
+      'Annual impact reports published transparently — hours served, lives touched, and funds mobilised.',
+      'Social impact scoring: see how your individual contributions add up to collective community change over time.',
     ],
   ),
   _ServeSection(
@@ -201,9 +215,32 @@ final List<_ServeSection> _serveSections = [
     icon: Icons.redeem,
     color: Colors.amber,
     points: [
-      'Information on company-matched charity donations.',
-      'Sponsor a cause or set up automated giving.',
-      'Emergency relief fund contribution pools.',
+      'Information on company-matched charity donations — AIR doubles contributions to approved causes.',
+      'Sponsor a cause or set up automated monthly giving to organisations you believe in.',
+      'Emergency relief fund contribution pools activated within 24 hours of a declared crisis.',
+      'Transparent fund tracking: see exactly where donated money goes, with receipts and impact reports.',
+    ],
+  ),
+  _ServeSection(
+    title: 'Care for the Elderly & Vulnerable',
+    icon: Icons.elderly_outlined,
+    color: Colors.teal,
+    points: [
+      'Regular visits to elderly community members who live alone — companionship is a form of service too.',
+      'Grocery and errand assistance for those with mobility challenges, coordinated through AIR\'s local network.',
+      'Digital literacy support: help older adults navigate smartphones, apps, and online services with patience.',
+      'Emotional support listening sessions — sometimes the most powerful service is simply being present.',
+    ],
+  ),
+  _ServeSection(
+    title: 'Environmental Service',
+    icon: Icons.eco_outlined,
+    color: Colors.green,
+    points: [
+      'Participate in river, beach, and park cleanups organised through AIR\'s environmental service calendar.',
+      'Tree planting drives with GPS-tagged saplings so you can track the growth of what you planted.',
+      'Plastic-free community campaigns: organise your neighbourhood to reduce single-use plastic together.',
+      'Environmental education workshops for children — the next generation of stewards starts with awareness.',
     ],
   ),
 ];

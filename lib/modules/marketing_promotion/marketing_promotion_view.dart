@@ -181,9 +181,10 @@ final List<_MarketingSection> _marketingSections = [
     icon: Icons.campaign_outlined,
     color: Colors.purple,
     points: [
-      'Targeted social media advertising.',
-      'SEO & Content marketing strategies.',
-      'Email newsletters and drip campaigns.',
+      'Targeted social media advertising across Instagram, LinkedIn, and YouTube aligned with AIR\'s audience segments.',
+      'SEO and content marketing strategies that build organic reach without compromising authenticity or brand voice.',
+      'Email newsletters and drip campaigns with personalised sequences based on user behaviour and profile data.',
+      'Retargeting flows that re-engage visitors who showed intent but did not convert on first contact.',
     ],
   ),
   _MarketingSection(
@@ -191,9 +192,10 @@ final List<_MarketingSection> _marketingSections = [
     icon: Icons.branding_watermark_outlined,
     color: Colors.pink,
     points: [
-      'Access to official logos and brand guidelines.',
-      'Marketing collateral and presentation templates.',
-      'High-resolution media kits for press.',
+      'Access to official AIR logos, colour palettes, and typography guidelines so every touchpoint stays consistent.',
+      'Marketing collateral — banners, slide decks, and social templates — ready to customise for your campaign.',
+      'High-resolution media kits for press and partner use, including approved spokesperson bios and key stats.',
+      'Brand tone-of-voice guide to ensure written content sounds unmistakably AIR across all channels.',
     ],
   ),
   _MarketingSection(
@@ -201,9 +203,43 @@ final List<_MarketingSection> _marketingSections = [
     icon: Icons.analytics_outlined,
     color: Colors.indigo,
     points: [
-      'Customer persona development.',
-      'Competitor analysis reports.',
-      'A/B testing results and metrics.',
+      'Customer persona development grounded in real AIR user data — demographics, motivations, and pain points.',
+      'Competitor analysis reports updated quarterly so positioning stays sharp and differentiated.',
+      'A/B testing results and conversion metrics from live campaigns, shared transparently with the team.',
+      'Trend monitoring across industry publications and social listening tools to catch shifts early.',
+    ],
+  ),
+  _MarketingSection(
+    title: 'Ethical Outreach',
+    icon: Icons.handshake_outlined,
+    color: Colors.teal,
+    points: [
+      'All outreach campaigns are reviewed against AIR\'s ethical guidelines before launch — no dark patterns.',
+      'Consent-first email and SMS practices: opt-in only, easy unsubscribe, and transparent data use disclosures.',
+      'Community-led promotion: amplify genuine user stories rather than manufactured testimonials.',
+      'Partnerships are vetted for value alignment before any co-marketing agreement is signed.',
+    ],
+  ),
+  _MarketingSection(
+    title: 'Campaign Performance',
+    icon: Icons.bar_chart_outlined,
+    color: Colors.orange,
+    points: [
+      'Real-time dashboards tracking impressions, clicks, conversions, and cost-per-acquisition per campaign.',
+      'Weekly performance reviews with clear attribution so budget flows to what actually works.',
+      'Post-campaign retrospectives that document what landed, what flopped, and what to try next cycle.',
+      'ROI benchmarks compared against industry standards to keep expectations calibrated and honest.',
+    ],
+  ),
+  _MarketingSection(
+    title: 'Promotion Calendar',
+    icon: Icons.calendar_month_outlined,
+    color: Colors.green,
+    points: [
+      'Annual promotion calendar aligned with AIR milestones, seasonal moments, and community events.',
+      'Content pipeline with lead times for design, copy, review, and scheduling — no last-minute scrambles.',
+      'Cross-team coordination so product launches, events, and campaigns land together, not in conflict.',
+      'Evergreen content library that keeps working between campaign bursts without extra effort.',
     ],
   ),
 ];
