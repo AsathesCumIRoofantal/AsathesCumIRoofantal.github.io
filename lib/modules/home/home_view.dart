@@ -20,10 +20,8 @@ class HomeView extends StatelessWidget {
 
   void getFilteredResults() {
     final query = controller.drawerSearchText.value.trim().toLowerCase();
-
-    if (query.isEmpty) {
-      controller.results.value = [];
-    }
+    controller.results.value = [];
+    if (query.isNotEmpty) {}
 
     for (final section in controller.drawerSections) {
       for (final item in section.items) {
@@ -268,9 +266,7 @@ class HomeView extends StatelessWidget {
                               // );
 
                               return Container(
-                                key:
-                                    (item.route == null &&
-                                        controller.results.value.isNotEmpty)
+                                key: (controller.results.value.isNotEmpty)
                                     ? GlobalKey(
                                         debugLabel:
                                             "FilterItems_${item.icon}_${item.title}",
