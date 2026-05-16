@@ -21,7 +21,7 @@ class PostModel {
 
 class RecordPostController extends GetxController {
   var posts = <PostModel>[].obs;
-  
+
   final List<String> categories = [
     'Public',
     'Private',
@@ -50,7 +50,8 @@ class RecordPostController extends GetxController {
       PostModel(
         id: 'p1',
         title: 'Systemic Transparency',
-        content: 'Absolute transparency in all-space is the core guiding principle of the AIR Organization. This document outlines our commitment to decentralized mapping.',
+        content:
+            'Absolute transparency in all-space is the core guiding principle of the AIR Organization. This document outlines our commitment to decentralized mapping.',
         category: 'System',
         mediaType: 'PDF',
         timestamp: DateTime.now().subtract(const Duration(days: 3)),
@@ -58,7 +59,8 @@ class RecordPostController extends GetxController {
       PostModel(
         id: 'p2',
         title: 'The Be-You Manifesto',
-        content: 'Being yourself is the ultimate form of contribution to the global ecosystem. Each identity node is a unique treasure that must be protected and catalogued.',
+        content:
+            'Being yourself is the ultimate form of contribution to the global ecosystem. Each identity node is a unique treasure that must be protected and catalogued.',
         category: 'Philosophical',
         mediaType: 'Text',
         timestamp: DateTime.now().subtract(const Duration(days: 1)),
@@ -66,7 +68,8 @@ class RecordPostController extends GetxController {
       PostModel(
         id: 'p3',
         title: 'New Node Finding: Alpha-7',
-        content: 'Our latest scans have identified a new digital node in the Beta sector. It appears to be a high-density cluster of abstract knowledge.',
+        content:
+            'Our latest scans have identified a new digital node in the Beta sector. It appears to be a high-density cluster of abstract knowledge.',
         category: 'Public',
         mediaType: 'Link',
         timestamp: DateTime.now().subtract(const Duration(hours: 2)),
@@ -82,7 +85,7 @@ class RecordPostController extends GetxController {
         'Incomplete Record',
         'Title and content are required for all recordings.',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.orange.withOpacity(0.1),
+        backgroundColor: Colors.orange.withValues(alpha: 0.1),
         colorText: Colors.orange,
       );
       return;
@@ -99,12 +102,12 @@ class RecordPostController extends GetxController {
 
     posts.insert(0, newPost);
     Get.back(); // Close modal
-    
+
     Get.snackbar(
       'Recorded',
       'Your post has been successfully logged in the ecosystem.',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Get.theme.colorScheme.tertiary.withOpacity(0.1),
+      backgroundColor: Get.theme.colorScheme.tertiary.withValues(alpha: 0.1),
       colorText: Get.theme.colorScheme.tertiary,
     );
   }

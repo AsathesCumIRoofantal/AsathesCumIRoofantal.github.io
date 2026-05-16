@@ -29,7 +29,7 @@ class AirHomeContextStrip extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final accent = const Color(0xFFD4AF37);
-    final body = theme.textTheme.bodySmall?.color?.withOpacity(0.88);
+    final body = theme.textTheme.bodySmall?.color?.withValues(alpha: 0.88);
 
     final textStyle = theme.textTheme.bodySmall?.copyWith(
       height: 1.35,
@@ -48,9 +48,11 @@ class AirHomeContextStrip extends StatelessWidget {
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerHighest.withOpacity(0.35),
+        color: theme.colorScheme.surfaceContainerHighest.withValues(
+          alpha: 0.35,
+        ),
         borderRadius: BorderRadius.circular(compact ? 12 : 14),
-        border: Border.all(color: accent.withOpacity(0.28)),
+        border: Border.all(color: accent.withValues(alpha: 0.28)),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -63,7 +65,7 @@ class AirHomeContextStrip extends StatelessWidget {
             Icon(
               Icons.map_outlined,
               size: compact ? 18 : 20,
-              color: accent.withOpacity(0.95),
+              color: accent.withValues(alpha: 0.95),
             ),
             const SizedBox(width: 10),
             Expanded(

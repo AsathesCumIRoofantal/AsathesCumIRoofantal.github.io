@@ -138,7 +138,9 @@ class CodeConductView extends StatelessWidget {
 
   Widget _split(String t) => Row(
     children: [
-      Expanded(child: Container(height: 1, color: _navy.withOpacity(0.3))),
+      Expanded(
+        child: Container(height: 1, color: _navy.withValues(alpha: 0.3)),
+      ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Text(
@@ -151,7 +153,9 @@ class CodeConductView extends StatelessWidget {
           ),
         ),
       ),
-      Expanded(child: Container(height: 1, color: _navy.withOpacity(0.3))),
+      Expanded(
+        child: Container(height: 1, color: _navy.withValues(alpha: 0.3)),
+      ),
     ],
   );
 
@@ -159,7 +163,7 @@ class CodeConductView extends StatelessWidget {
     padding: const EdgeInsets.all(20),
     decoration: BoxDecoration(
       color: Colors.white,
-      border: Border.all(color: _gold.withOpacity(0.4)),
+      border: Border.all(color: _gold.withValues(alpha: 0.4)),
       borderRadius: BorderRadius.circular(4),
     ),
     child: Column(
@@ -209,7 +213,7 @@ class CodeConductView extends StatelessWidget {
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: _navy.withOpacity(0.15)),
+            border: Border.all(color: _navy.withValues(alpha: 0.15)),
             borderRadius: BorderRadius.circular(6),
           ),
           child: Row(

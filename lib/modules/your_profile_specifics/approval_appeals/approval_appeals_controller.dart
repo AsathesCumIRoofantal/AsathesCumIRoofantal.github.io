@@ -53,24 +53,29 @@ class ApprovalAppealsController extends GetxController {
 
   void submitAppeal() {
     if (titleController.text.isNotEmpty) {
-      appeals.insert(0, AppealRequest(
-        id: "APP-${300 + appeals.length + 1}",
-        title: titleController.text,
-        requester: requesterController.text.isEmpty ? "System User" : requesterController.text,
-        type: selectedType.value,
-        status: "Submitted",
-        date: DateTime.now(),
-      ));
-      
+      appeals.insert(
+        0,
+        AppealRequest(
+          id: "APP-${300 + appeals.length + 1}",
+          title: titleController.text,
+          requester: requesterController.text.isEmpty
+              ? "System User"
+              : requesterController.text,
+          type: selectedType.value,
+          status: "Submitted",
+          date: DateTime.now(),
+        ),
+      );
+
       titleController.clear();
       requesterController.clear();
-      
+
       Get.back();
       Get.snackbar(
         "Appeal Filed",
         "Your request has been sent for approval.",
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.purple.withOpacity(0.8),
+        backgroundColor: Colors.purple.withValues(alpha: 0.8),
         colorText: Colors.white,
       );
     }

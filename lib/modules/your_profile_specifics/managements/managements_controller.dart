@@ -91,11 +91,16 @@ class ManagementsController extends GetxController {
   var searchQuery = "".obs;
   List<ManagementTask> get filteredTasks {
     if (searchQuery.value.isEmpty) return tasks;
-    return tasks.where((t) => 
-      t.title.toLowerCase().contains(searchQuery.value.toLowerCase()) ||
-      t.assignedTo.toLowerCase().contains(searchQuery.value.toLowerCase()) ||
-      t.id.toLowerCase().contains(searchQuery.value.toLowerCase())
-    ).toList();
+    return tasks
+        .where(
+          (t) =>
+              t.title.toLowerCase().contains(searchQuery.value.toLowerCase()) ||
+              t.assignedTo.toLowerCase().contains(
+                searchQuery.value.toLowerCase(),
+              ) ||
+              t.id.toLowerCase().contains(searchQuery.value.toLowerCase()),
+        )
+        .toList();
   }
 
   final titleController = TextEditingController();
@@ -106,28 +111,32 @@ class ManagementsController extends GetxController {
 
   void createTask() {
     if (titleController.text.isNotEmpty && assignedController.text.isNotEmpty) {
-      tasks.add(ManagementTask(
-        id: "MGT-${100 + tasks.length + 1}",
-        title: titleController.text,
-        assignedTo: assignedController.text,
-        priority: selectedPriority.value,
-        status: "New",
-        category: categoryController.text.isEmpty ? "General" : categoryController.text,
-        dueDate: selectedDate.value,
-      ));
-      
+      tasks.add(
+        ManagementTask(
+          id: "MGT-${100 + tasks.length + 1}",
+          title: titleController.text,
+          assignedTo: assignedController.text,
+          priority: selectedPriority.value,
+          status: "New",
+          category: categoryController.text.isEmpty
+              ? "General"
+              : categoryController.text,
+          dueDate: selectedDate.value,
+        ),
+      );
+
       titleController.clear();
       assignedController.clear();
       categoryController.clear();
       selectedPriority.value = "Medium";
       selectedDate.value = DateTime.now();
-      
+
       Get.back();
       Get.snackbar(
         "Task Created",
         "Management assignment successfully registered.",
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.blue.withOpacity(0.8),
+        backgroundColor: Colors.blue.withValues(alpha: 0.8),
         colorText: Colors.white,
       );
     } else {

@@ -78,7 +78,7 @@ class AirVisionView extends StatelessWidget {
                 gradient: const RadialGradient(colors: [_cyan, _violet]),
                 boxShadow: [
                   BoxShadow(
-                    color: _cyan.withOpacity(0.6),
+                    color: _cyan.withValues(alpha: 0.6),
                     blurRadius: 30,
                     spreadRadius: 4,
                   ),
@@ -103,7 +103,7 @@ class AirVisionView extends StatelessWidget {
             Text(
               '— charting the long horizon —',
               style: TextStyle(
-                color: _cyan.withOpacity(0.9),
+                color: _cyan.withValues(alpha: 0.9),
                 fontSize: 11,
                 letterSpacing: 4,
                 fontWeight: FontWeight.w600,
@@ -155,7 +155,7 @@ class AirVisionView extends StatelessWidget {
     decoration: BoxDecoration(
       color: _ink,
       borderRadius: BorderRadius.circular(16),
-      border: Border.all(color: _cyan.withOpacity(0.3)),
+      border: Border.all(color: _cyan.withValues(alpha: 0.3)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -209,7 +209,7 @@ class AirVisionView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: _ink,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: _violet.withOpacity(0.4)),
+                border: Border.all(color: _violet.withValues(alpha: 0.4)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -356,7 +356,7 @@ class _StarsPainter extends CustomPainter {
       [0.3, 0.85],
     ];
     for (final pos in positions) {
-      p.color = Colors.white.withOpacity(0.3 + (pos[0] * 0.5));
+      p.color = Colors.white.withValues(alpha: 0.3 + (pos[0] * 0.5));
       c.drawCircle(
         Offset(s.width * pos[0], s.height * pos[1]),
         1 + pos[1] * 1.5,

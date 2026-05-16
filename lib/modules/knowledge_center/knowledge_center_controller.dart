@@ -94,7 +94,7 @@ class KnowledgeCenterController extends GetxController {
       'AI Solution Generated',
       'The AIR intelligence node has processed your query.',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Get.theme.colorScheme.primary.withOpacity(0.1),
+      backgroundColor: Get.theme.colorScheme.primary.withValues(alpha: 0.1),
       colorText: Get.theme.colorScheme.primary,
     );
   }
@@ -129,7 +129,7 @@ class KnowledgeCenterController extends GetxController {
       'Submitted',
       'Knowledge entry logged for Administrative Review.',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.amber.withOpacity(0.1),
+      backgroundColor: Colors.amber.withValues(alpha: 0.1),
       colorText: Colors.amber,
     );
   }

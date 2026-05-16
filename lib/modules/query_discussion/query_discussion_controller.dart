@@ -8,7 +8,12 @@ class DiscussionResponse {
   final String text;
   final DateTime timestamp;
 
-  DiscussionResponse({required this.id, required this.user, required this.text, required this.timestamp});
+  DiscussionResponse({
+    required this.id,
+    required this.user,
+    required this.text,
+    required this.timestamp,
+  });
 }
 
 class ConclusiveDocument {
@@ -47,7 +52,13 @@ class QueryDiscussionController extends GetxController {
       return discussions;
     }
     final query = searchQuery.value.toLowerCase();
-    return discussions.where((d) => d.topic.toLowerCase().contains(query) || d.remarks.toLowerCase().contains(query)).toList();
+    return discussions
+        .where(
+          (d) =>
+              d.topic.toLowerCase().contains(query) ||
+              d.remarks.toLowerCase().contains(query),
+        )
+        .toList();
   }
 
   @override
@@ -61,31 +72,55 @@ class QueryDiscussionController extends GetxController {
       DiscussionModel(
         id: '1',
         topic: 'Standardizing Node Sync Protocols',
-        remarks: 'Discussing the transition from MESH-X72 to the new ultra-low latency protocols for deep atlas mapping.',
+        remarks:
+            'Discussing the transition from MESH-X72 to the new ultra-low latency protocols for deep atlas mapping.',
         timestamp: DateTime.now().subtract(const Duration(days: 3)),
         responses: [
-          DiscussionResponse(id: 'r1', user: 'Admin_AIR', text: 'Proposed protocols look solid, observing node stability.', timestamp: DateTime.now().subtract(const Duration(days: 2))),
-          DiscussionResponse(id: 'r2', user: 'Expert_Alpha', text: 'Needs more stress testing in the Alifiyas sector.', timestamp: DateTime.now().subtract(const Duration(days: 1))),
+          DiscussionResponse(
+            id: 'r1',
+            user: 'Admin_AIR',
+            text: 'Proposed protocols look solid, observing node stability.',
+            timestamp: DateTime.now().subtract(const Duration(days: 2)),
+          ),
+          DiscussionResponse(
+            id: 'r2',
+            user: 'Expert_Alpha',
+            text: 'Needs more stress testing in the Alifiyas sector.',
+            timestamp: DateTime.now().subtract(const Duration(days: 1)),
+          ),
         ],
       ),
       DiscussionModel(
         id: '2',
         topic: 'Transparency Log Refactor',
-        remarks: 'Finalized the architectural changes required for absolute ledger transparency.',
+        remarks:
+            'Finalized the architectural changes required for absolute ledger transparency.',
         timestamp: DateTime.now().subtract(const Duration(days: 10)),
         status: DiscussionStatus.concluded,
         responses: [],
         conclusiveDocuments: [
-          ConclusiveDocument(title: 'Refactor Roadmap.pdf', url: 'https://air.org/docs/refactor'),
-          ConclusiveDocument(title: 'Final Schema.json', url: 'https://air.org/docs/schema'),
+          ConclusiveDocument(
+            title: 'Refactor Roadmap.pdf',
+            url: 'https://air.org/docs/refactor',
+          ),
+          ConclusiveDocument(
+            title: 'Final Schema.json',
+            url: 'https://air.org/docs/schema',
+          ),
         ],
       ),
     ]);
   }
 
-  Future<void> postQuery({required String topic, required String remarks}) async {
+  Future<void> postQuery({
+    required String topic,
+    required String remarks,
+  }) async {
     if (topic.isEmpty || remarks.isEmpty) {
-      Get.snackbar('Input Error', 'Please provide both a topic and contextual remarks.');
+      Get.snackbar(
+        'Input Error',
+        'Please provide both a topic and contextual remarks.',
+      );
       return;
     }
 
@@ -104,7 +139,7 @@ class QueryDiscussionController extends GetxController {
       'Discussion Initiated',
       'Your query has been broadcasted to the AIR community.',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Get.theme.colorScheme.primary.withOpacity(0.1),
+      backgroundColor: Get.theme.colorScheme.primary.withValues(alpha: 0.1),
       colorText: Get.theme.colorScheme.primary,
     );
 
@@ -121,16 +156,17 @@ class QueryDiscussionController extends GetxController {
         DiscussionResponse(
           id: 'sim_${DateTime.now().millisecondsSinceEpoch}',
           user: 'CommunityNode_Bot',
-          text: 'Interesting topic! I have cross-referenced this with the Knowledge Center and found partial matches in the Alifiyas archives.',
+          text:
+              'Interesting topic! I have cross-referenced this with the Knowledge Center and found partial matches in the Alifiyas archives.',
           timestamp: DateTime.now(),
         ),
       );
-      
+
       Get.snackbar(
         'New Response',
         'A community member has responded to your topic: "${discussions[index].topic}"',
         snackPosition: SnackPosition.TOP,
-        backgroundColor: Get.theme.colorScheme.secondary.withOpacity(0.2),
+        backgroundColor: Get.theme.colorScheme.secondary.withValues(alpha: 0.2),
         duration: const Duration(seconds: 4),
       );
     }

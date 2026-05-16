@@ -74,7 +74,7 @@ class CategoryDocsView extends StatelessWidget {
                         Text(
                           'all paperwork, sorted, sealed, searchable',
                           style: TextStyle(
-                            color: _lime.withOpacity(0.9),
+                            color: _lime.withValues(alpha: 0.9),
                             fontSize: 12,
                           ),
                         ),
@@ -130,7 +130,9 @@ class CategoryDocsView extends StatelessWidget {
 
   Widget _split(String t) => Row(
     children: [
-      Expanded(child: Container(height: 1, color: _slate.withOpacity(0.3))),
+      Expanded(
+        child: Container(height: 1, color: _slate.withValues(alpha: 0.3)),
+      ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Text(
@@ -143,7 +145,9 @@ class CategoryDocsView extends StatelessWidget {
           ),
         ),
       ),
-      Expanded(child: Container(height: 1, color: _slate.withOpacity(0.3))),
+      Expanded(
+        child: Container(height: 1, color: _slate.withValues(alpha: 0.3)),
+      ),
     ],
   );
 
@@ -152,7 +156,7 @@ class CategoryDocsView extends StatelessWidget {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(12),
-      border: Border.all(color: _slate.withOpacity(0.15)),
+      border: Border.all(color: _slate.withValues(alpha: 0.15)),
     ),
     child: Column(
       children: [
@@ -226,7 +230,7 @@ class CategoryDocsView extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(color: x.$3.withOpacity(0.5)),
+                border: Border.all(color: x.$3.withValues(alpha: 0.5)),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
@@ -235,7 +239,7 @@ class CategoryDocsView extends StatelessWidget {
                     width: 36,
                     height: 36,
                     decoration: BoxDecoration(
-                      color: x.$3.withOpacity(0.15),
+                      color: x.$3.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Icon(x.$2, color: x.$3, size: 20),
@@ -297,7 +301,7 @@ class CategoryDocsView extends StatelessWidget {
                   Container(
                     width: 2,
                     height: 36,
-                    color: _lime.withOpacity(0.4),
+                    color: _lime.withValues(alpha: 0.4),
                   ),
               ],
             ),
@@ -309,7 +313,7 @@ class CategoryDocsView extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: _slate.withOpacity(0.15)),
+                  border: Border.all(color: _slate.withValues(alpha: 0.15)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -351,7 +355,7 @@ class CategoryDocsView extends StatelessWidget {
   Widget _tag(String t, Color c) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
     decoration: BoxDecoration(
-      color: c.withOpacity(0.15),
+      color: c.withValues(alpha: 0.15),
       border: Border.all(color: c),
       borderRadius: BorderRadius.circular(4),
     ),
@@ -371,7 +375,7 @@ class _CabinetPainter extends CustomPainter {
   @override
   void paint(Canvas c, Size s) {
     final p = Paint()
-      ..color = const Color(0xFF84CC16).withOpacity(0.15)
+      ..color = const Color(0xFF84CC16).withValues(alpha: 0.15)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
     for (double x = 0; x < s.width; x += 60) {

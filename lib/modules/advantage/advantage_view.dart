@@ -131,7 +131,9 @@ class AdvantageView extends StatelessWidget {
 
   Widget _split(String t) => Row(
     children: [
-      Expanded(child: Container(height: 1, color: _emerald.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _emerald.withValues(alpha: 0.4)),
+      ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Text(
@@ -144,7 +146,9 @@ class AdvantageView extends StatelessWidget {
           ),
         ),
       ),
-      Expanded(child: Container(height: 1, color: _emerald.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _emerald.withValues(alpha: 0.4)),
+      ),
     ],
   );
 
@@ -153,7 +157,7 @@ class AdvantageView extends StatelessWidget {
     decoration: BoxDecoration(
       color: _ink,
       borderRadius: BorderRadius.circular(14),
-      border: Border.all(color: _emerald.withOpacity(0.3)),
+      border: Border.all(color: _emerald.withValues(alpha: 0.3)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -225,7 +229,7 @@ class AdvantageView extends StatelessWidget {
                     width: 42,
                     height: 42,
                     decoration: BoxDecoration(
-                      color: _emerald.withOpacity(0.15),
+                      color: _emerald.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(x.$3, color: _emerald),
@@ -361,7 +365,7 @@ class _LeverPainter extends CustomPainter {
   @override
   void paint(Canvas c, Size s) {
     final p = Paint()
-      ..color = const Color(0xFFF5C542).withOpacity(0.25)
+      ..color = const Color(0xFFF5C542).withValues(alpha: 0.25)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     c.drawLine(Offset(0, s.height * 0.7), Offset(s.width, s.height * 0.4), p);

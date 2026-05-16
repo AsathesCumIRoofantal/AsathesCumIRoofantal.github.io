@@ -32,7 +32,7 @@ class IdentitiesEarningsController extends GetxController {
     return earningsList.where((item) {
       final query = searchQuery.value.toLowerCase();
       return item.title.toLowerCase().contains(query) ||
-             item.jobDetail.toLowerCase().contains(query);
+          item.jobDetail.toLowerCase().contains(query);
     }).toList();
   }
 
@@ -50,7 +50,8 @@ class IdentitiesEarningsController extends GetxController {
         title: 'Atlas Mapping Expert',
         earnings: '2500 AIR Credits',
         dateTime: DateTime.now().subtract(const Duration(days: 2, hours: 4)),
-        jobDetail: 'Successfully mapped 50+ dormant entities in the sector 7 atlas refactor project.',
+        jobDetail:
+            'Successfully mapped 50+ dormant entities in the sector 7 atlas refactor project.',
       ),
       IdentityEarningModel(
         id: '2',
@@ -58,7 +59,8 @@ class IdentitiesEarningsController extends GetxController {
         title: 'Galaxy Sync Group',
         earnings: '1200 Wisdom Points',
         dateTime: DateTime.now().subtract(const Duration(days: 1)),
-        jobDetail: 'Coordinated a massive union between 12 disparate educational entities for the Alifiyas tour.',
+        jobDetail:
+            'Coordinated a massive union between 12 disparate educational entities for the Alifiyas tour.',
       ),
       IdentityEarningModel(
         id: '3',
@@ -66,7 +68,8 @@ class IdentitiesEarningsController extends GetxController {
         title: 'Systemic Auditor',
         earnings: '500 Transparency Tokens',
         dateTime: DateTime.now().subtract(const Duration(hours: 5)),
-        jobDetail: 'Audited the transparency logs for the latest batch of identity mappings.',
+        jobDetail:
+            'Audited the transparency logs for the latest batch of identity mappings.',
       ),
     ]);
   }
@@ -82,7 +85,7 @@ class IdentitiesEarningsController extends GetxController {
         'Incomplete Record',
         'All fields are essential for identity value mapping.',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.orange.withOpacity(0.1),
+        backgroundColor: Colors.orange.withValues(alpha: 0.1),
         colorText: Colors.orange,
       );
       return;
@@ -99,18 +102,18 @@ class IdentitiesEarningsController extends GetxController {
 
     earningsList.insert(0, newRecord);
     Get.back(); // Close modal
-    
+
     Get.snackbar(
       'Value Minted',
       'Accomplishment successfully bridged to your identity.',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Get.theme.colorScheme.tertiary.withOpacity(0.1),
+      backgroundColor: Get.theme.colorScheme.tertiary.withValues(alpha: 0.1),
       colorText: Get.theme.colorScheme.tertiary,
     );
   }
 
   double get totalCredits {
     // Simple mock parser for "Total Rewards" card
-    return earningsList.length * 1000.0; 
+    return earningsList.length * 1000.0;
   }
 }

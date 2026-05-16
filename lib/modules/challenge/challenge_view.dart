@@ -132,7 +132,9 @@ class ChallengeView extends StatelessWidget {
 
   Widget _split(String t) => Row(
     children: [
-      Expanded(child: Container(height: 1, color: _crimson.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _crimson.withValues(alpha: 0.4)),
+      ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Text(
@@ -145,7 +147,9 @@ class ChallengeView extends StatelessWidget {
           ),
         ),
       ),
-      Expanded(child: Container(height: 1, color: _crimson.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _crimson.withValues(alpha: 0.4)),
+      ),
     ],
   );
 
@@ -154,7 +158,7 @@ class ChallengeView extends StatelessWidget {
     decoration: BoxDecoration(
       color: _slate,
       borderRadius: BorderRadius.circular(14),
-      border: Border.all(color: _crimson.withOpacity(0.4)),
+      border: Border.all(color: _crimson.withValues(alpha: 0.4)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -348,7 +352,7 @@ class _SwordsPainter extends CustomPainter {
   @override
   void paint(Canvas c, Size s) {
     final p = Paint()
-      ..color = const Color(0xFFFBBF24).withOpacity(0.3)
+      ..color = const Color(0xFFFBBF24).withValues(alpha: 0.3)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
     c.drawLine(

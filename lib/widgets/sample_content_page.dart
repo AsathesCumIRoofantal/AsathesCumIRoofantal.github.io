@@ -19,6 +19,7 @@ class SampleContentPage extends StatelessWidget {
   final String subtitle;
   final IconData icon;
   final List<SampleContentItem> items;
+
   /// When true, adds an all-space / home-tabs strip and (if [items] is non-empty)
   /// one extra list card linking this module back to Identity and the drawer.
   final bool showHomeContextBridge;
@@ -76,7 +77,7 @@ class SampleContentPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(18),
                   decoration: BoxDecoration(
-                    color: theme.colorScheme.primary.withOpacity(0.12),
+                    color: theme.colorScheme.primary.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -84,7 +85,9 @@ class SampleContentPage extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                          color: theme.colorScheme.primary.withOpacity(0.18),
+                          color: theme.colorScheme.primary.withValues(
+                            alpha: 0.18,
+                          ),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -109,7 +112,7 @@ class SampleContentPage extends StatelessWidget {
                               subtitle,
                               style: theme.textTheme.bodyMedium?.copyWith(
                                 color: theme.textTheme.bodyMedium?.color
-                                    ?.withOpacity(0.7),
+                                    ?.withValues(alpha: 0.7),
                               ),
                             ),
                           ],
@@ -134,10 +137,14 @@ class SampleContentPage extends StatelessWidget {
                                 vertical: 14,
                               ),
                               decoration: BoxDecoration(
-                                color: theme.colorScheme.surface.withOpacity(0.9),
+                                color: theme.colorScheme.surface.withValues(
+                                  alpha: 0.9,
+                                ),
                                 borderRadius: BorderRadius.circular(18),
                                 border: Border.all(
-                                  color: theme.dividerColor.withOpacity(0.15),
+                                  color: theme.dividerColor.withValues(
+                                    alpha: 0.15,
+                                  ),
                                 ),
                               ),
                               child: Column(
@@ -151,16 +158,15 @@ class SampleContentPage extends StatelessWidget {
                                   const SizedBox(height: 12),
                                   Text(
                                     'Empty sample content',
-                                    style: theme.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: theme.textTheme.titleMedium
+                                        ?.copyWith(fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
                                     'This page is ready to receive real AIR content.',
                                     style: theme.textTheme.bodyMedium?.copyWith(
                                       color: theme.textTheme.bodyMedium?.color
-                                          ?.withOpacity(0.7),
+                                          ?.withValues(alpha: 0.7),
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
@@ -170,11 +176,15 @@ class SampleContentPage extends StatelessWidget {
                                     const SizedBox(height: 8),
                                     Text(
                                       'When real content ships for "$title", it will still sit beside your Identity map and entity catalogue on the home screen.',
-                                      style: theme.textTheme.bodySmall?.copyWith(
-                                        height: 1.35,
-                                        color: theme.textTheme.bodySmall?.color
-                                            ?.withOpacity(0.85),
-                                      ),
+                                      style: theme.textTheme.bodySmall
+                                          ?.copyWith(
+                                            height: 1.35,
+                                            color: theme
+                                                .textTheme
+                                                .bodySmall
+                                                ?.color
+                                                ?.withValues(alpha: 0.85),
+                                          ),
                                       textAlign: TextAlign.center,
                                     ),
                                   ],
@@ -211,7 +221,7 @@ class SampleContentPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -223,7 +233,7 @@ class SampleContentPage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(14),
             decoration: BoxDecoration(
-              color: theme.colorScheme.primary.withOpacity(0.12),
+              color: theme.colorScheme.primary.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(item.icon, color: theme.colorScheme.primary, size: 24),
@@ -243,7 +253,9 @@ class SampleContentPage extends StatelessWidget {
                 Text(
                   item.subtitle,
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.textTheme.bodyMedium?.color?.withOpacity(0.75),
+                    color: theme.textTheme.bodyMedium?.color?.withValues(
+                      alpha: 0.75,
+                    ),
                     height: 1.4,
                   ),
                 ),

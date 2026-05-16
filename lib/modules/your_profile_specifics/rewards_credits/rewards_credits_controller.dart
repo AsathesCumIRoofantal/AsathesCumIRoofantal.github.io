@@ -63,24 +63,27 @@ class RewardsCreditsController extends GetxController {
 
   void addManualReward() {
     if (titleController.text.isNotEmpty && pointsController.text.isNotEmpty) {
-      rewards.insert(0, Reward(
-        title: titleController.text,
-        points: int.tryParse(pointsController.text) ?? 0,
-        reason: reasonController.text,
-        category: selectedCategory.value,
-        date: DateTime.now(),
-      ));
-      
+      rewards.insert(
+        0,
+        Reward(
+          title: titleController.text,
+          points: int.tryParse(pointsController.text) ?? 0,
+          reason: reasonController.text,
+          category: selectedCategory.value,
+          date: DateTime.now(),
+        ),
+      );
+
       titleController.clear();
       pointsController.clear();
       reasonController.clear();
-      
+
       Get.back();
       Get.snackbar(
         "Reward Issued",
         "Points have been credited successfully.",
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.amber.withOpacity(0.8),
+        backgroundColor: Colors.amber.withValues(alpha: 0.8),
         colorText: Colors.white,
       );
     } else {

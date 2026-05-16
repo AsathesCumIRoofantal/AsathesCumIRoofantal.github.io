@@ -12,7 +12,8 @@ class ProductModel {
   final String id;
   final String title;
   final List<String> metaTags;
-  final Map<String, String> identifiers; // e.g. {'Barcode': '12345', 'QR': 'ABC-XYZ'}
+  final Map<String, String>
+  identifiers; // e.g. {'Barcode': '12345', 'QR': 'ABC-XYZ'}
   final List<FeatureLinkModel> links;
   final DateTime timestamp;
 
@@ -41,7 +42,7 @@ class ProductsServicesController extends GetxController {
     final query = searchQuery.value.toLowerCase();
     return productsList.where((p) {
       return p.title.toLowerCase().contains(query) ||
-             p.metaTags.any((t) => t.toLowerCase().contains(query));
+          p.metaTags.any((t) => t.toLowerCase().contains(query));
     }).toList();
   }
 
@@ -57,10 +58,19 @@ class ProductsServicesController extends GetxController {
         id: '1',
         title: 'AIR Core Atlas',
         metaTags: ['#AI', '#Core', '#Transparency'],
-        identifiers: {'Barcode': 'AIR-001-ALPHA', 'QR': 'HTTPS://AIR.ORG/ATLAS-001'},
+        identifiers: {
+          'Barcode': 'AIR-001-ALPHA',
+          'QR': 'HTTPS://AIR.ORG/ATLAS-001',
+        },
         links: [
-          FeatureLinkModel(title: 'View Specs', url: 'https://docs.air.org/specs'),
-          FeatureLinkModel(title: 'Live Demo', url: 'https://demo.air.org/atlas'),
+          FeatureLinkModel(
+            title: 'View Specs',
+            url: 'https://docs.air.org/specs',
+          ),
+          FeatureLinkModel(
+            title: 'Live Demo',
+            url: 'https://demo.air.org/atlas',
+          ),
         ],
         timestamp: DateTime.now().subtract(const Duration(days: 10)),
       ),
@@ -70,7 +80,10 @@ class ProductsServicesController extends GetxController {
         metaTags: ['#Networking', '#Sync', '#Decentralized'],
         identifiers: {'InternalKey': 'MESH-X72', 'AssetID': '9928-112-X'},
         links: [
-          FeatureLinkModel(title: 'Node Setup', url: 'https://air.org/mesh/setup'),
+          FeatureLinkModel(
+            title: 'Node Setup',
+            url: 'https://air.org/mesh/setup',
+          ),
         ],
         timestamp: DateTime.now().subtract(const Duration(days: 2)),
       ),
@@ -119,18 +132,18 @@ class ProductsServicesController extends GetxController {
     );
 
     productsList.insert(0, newProduct);
-    
+
     // Reset form
     tempTags.clear();
     tempLinks.clear();
-    
+
     Get.back(); // Close modal
-    
+
     Get.snackbar(
       'Catalogued',
       'Product successfully established in the AIR ecosystem.',
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green.withOpacity(0.1),
+      backgroundColor: Colors.green.withValues(alpha: 0.1),
       colorText: Colors.green,
     );
   }

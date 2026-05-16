@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'beliefs_values_controller.dart';
 
 class BeliefsValuesView extends GetView<BeliefsValuesController> {
@@ -150,21 +151,21 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xFF3D2A00).withOpacity(isDark ? 1 : 0.6),
-            const Color(0xFF1A0050).withOpacity(isDark ? 1 : 0.5),
+            const Color(0xFF3D2A00).withValues(alpha: isDark ? 1 : 0.6),
+            const Color(0xFF1A0050).withValues(alpha: isDark ? 1 : 0.5),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(22),
-        border: Border.all(color: _gold.withOpacity(0.30)),
+        border: Border.all(color: _gold.withValues(alpha: 0.30)),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: _amber.withOpacity(0.15),
+              color: _amber.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(14),
             ),
             child: const Icon(Icons.balance_rounded, color: _amber, size: 28),
@@ -191,7 +192,7 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
                     height: 1.4,
                     color: isDark
                         ? Colors.white70
-                        : Colors.white.withOpacity(0.9),
+                        : Colors.white.withValues(alpha: 0.9),
                   ),
                 ),
               ],
@@ -275,9 +276,9 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
             (v) => Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: v.$3.withOpacity(0.07),
+                color: v.$3.withValues(alpha: 0.07),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: v.$3.withOpacity(0.22)),
+                border: Border.all(color: v.$3.withValues(alpha: 0.22)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -304,7 +305,7 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
                     v.$4,
                     style: TextStyle(
                       fontSize: 10,
-                      color: onSurface.withOpacity(0.58),
+                      color: onSurface.withValues(alpha: 0.58),
                       height: 1.3,
                     ),
                   ),
@@ -327,9 +328,9 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.06),
+        color: color.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withOpacity(0.20)),
+        border: Border.all(color: color.withValues(alpha: 0.20)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -337,7 +338,7 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.14),
+              color: color.withValues(alpha: 0.14),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 18),
@@ -363,7 +364,7 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
                     height: 1.5,
                     color: Theme.of(
                       context,
-                    ).colorScheme.onSurface.withOpacity(0.72),
+                    ).colorScheme.onSurface.withValues(alpha: 0.72),
                   ),
                 ),
               ],
@@ -405,10 +406,10 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: isDark
-            ? Colors.white.withOpacity(0.03)
-            : Colors.black.withOpacity(0.02),
+            ? Colors.white.withValues(alpha: 0.03)
+            : Colors.black.withValues(alpha: 0.02),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _gold.withOpacity(0.18)),
+        border: Border.all(color: _gold.withValues(alpha: 0.18)),
       ),
       child: Column(
         children: dimensions
@@ -435,7 +436,7 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
                             d.$2,
                             style: TextStyle(
                               fontSize: 11,
-                              color: onSurface.withOpacity(0.60),
+                              color: onSurface.withValues(alpha: 0.60),
                               height: 1.3,
                             ),
                           ),
@@ -456,12 +457,15 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [_amber.withOpacity(0.10), _violet.withOpacity(0.08)],
+          colors: [
+            _amber.withValues(alpha: 0.10),
+            _violet.withValues(alpha: 0.08),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _amber.withOpacity(0.20)),
+        border: Border.all(color: _amber.withValues(alpha: 0.20)),
       ),
       child: Row(
         children: [
@@ -473,7 +477,7 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
               style: TextStyle(
                 fontSize: 11,
                 height: 1.4,
-                color: onSurface.withOpacity(0.72),
+                color: onSurface.withValues(alpha: 0.72),
               ),
             ),
           ),

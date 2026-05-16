@@ -59,7 +59,7 @@ class CategoryTreeView extends StatelessWidget {
                         Text(
                           'roots · trunk · branches · leaves',
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.85),
+                            color: Colors.white.withValues(alpha: 0.85),
                             fontSize: 11,
                             letterSpacing: 3,
                             fontWeight: FontWeight.w600,
@@ -117,7 +117,9 @@ class CategoryTreeView extends StatelessWidget {
 
   Widget _split(String t) => Row(
     children: [
-      Expanded(child: Container(height: 1, color: _leaf.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _leaf.withValues(alpha: 0.4)),
+      ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Text(
@@ -130,7 +132,9 @@ class CategoryTreeView extends StatelessWidget {
           ),
         ),
       ),
-      Expanded(child: Container(height: 1, color: _leaf.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _leaf.withValues(alpha: 0.4)),
+      ),
     ],
   );
 
@@ -139,7 +143,9 @@ class CategoryTreeView extends StatelessWidget {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(14),
-      boxShadow: [BoxShadow(color: _forest.withOpacity(0.08), blurRadius: 12)],
+      boxShadow: [
+        BoxShadow(color: _forest.withValues(alpha: 0.08), blurRadius: 12),
+      ],
     ),
     child: Row(
       children: [
@@ -156,7 +162,7 @@ class CategoryTreeView extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: c.withOpacity(0.12),
+            color: c.withValues(alpha: 0.12),
             shape: BoxShape.circle,
           ),
           child: Text(
@@ -221,7 +227,7 @@ class CategoryTreeView extends StatelessWidget {
               margin: const EdgeInsets.only(top: 6),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: _forest.withOpacity(0.06),
+                color: _forest.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(8),
                 border: Border(left: BorderSide(color: _forest, width: 4)),
               ),
@@ -260,7 +266,7 @@ class CategoryTreeView extends StatelessWidget {
                               vertical: 3,
                             ),
                             decoration: BoxDecoration(
-                              color: _leaf.withOpacity(0.15),
+                              color: _leaf.withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(99),
                             ),
                             child: Text(
@@ -299,7 +305,7 @@ class CategoryTreeView extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: _leaf.withOpacity(0.3)),
+                border: Border.all(color: _leaf.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: [
@@ -380,7 +386,7 @@ class _BranchesPainter extends CustomPainter {
   @override
   void paint(Canvas c, Size s) {
     final p = Paint()
-      ..color = Colors.white.withOpacity(0.2)
+      ..color = Colors.white.withValues(alpha: 0.2)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     final cx = s.width / 2;

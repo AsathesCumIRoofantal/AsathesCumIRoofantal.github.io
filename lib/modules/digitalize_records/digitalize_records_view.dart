@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import 'digitalize_records_controller.dart';
 
 class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
@@ -11,7 +12,10 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('DIGITALIZE RECORDS', style: TextStyle(letterSpacing: 2)),
+        title: const Text(
+          'DIGITALIZE RECORDS',
+          style: TextStyle(letterSpacing: 2),
+        ),
         centerTitle: true,
       ),
       body: Column(
@@ -19,9 +23,7 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
           _buildScannerCard(context),
           const SizedBox(height: 24),
           _buildRecentSectionTitle(context),
-          Expanded(
-            child: _buildRecordsList(context),
-          ),
+          Expanded(child: _buildRecordsList(context)),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -40,14 +42,14 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Theme.of(context).colorScheme.primary.withOpacity(0.8),
-            Theme.of(context).colorScheme.tertiary.withOpacity(0.8),
+            Theme.of(context).colorScheme.primary.withValues(alpha: 0.8),
+            Theme.of(context).colorScheme.tertiary.withValues(alpha: 0.8),
           ],
         ),
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -55,7 +57,11 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
       ),
       child: Column(
         children: [
-          const Icon(Icons.cloud_upload_outlined, size: 60, color: Colors.white),
+          const Icon(
+            Icons.cloud_upload_outlined,
+            size: 60,
+            color: Colors.white,
+          ),
           const SizedBox(height: 16),
           const Text(
             "Ready for Digitalization",
@@ -70,7 +76,7 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
             "Transform your physical assets into AIR's secure digital vault.",
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
               fontSize: 14,
             ),
           ),
@@ -91,27 +97,28 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
               fontSize: 12,
               fontWeight: FontWeight.bold,
               letterSpacing: 2,
-              color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6),
+              color: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
             ),
           ),
-          TextButton(
-            onPressed: () {},
-            child: const Text("VIEW ALL"),
-          ),
+          TextButton(onPressed: () {}, child: const Text("VIEW ALL")),
         ],
       ),
     );
   }
 
   Widget _buildRecordsList(BuildContext context) {
-    return Obx(() => ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          itemCount: controller.records.length,
-          itemBuilder: (context, index) {
-            final record = controller.records[index];
-            return _buildRecordItem(context, record);
-          },
-        ));
+    return Obx(
+      () => ListView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        itemCount: controller.records.length,
+        itemBuilder: (context, index) {
+          final record = controller.records[index];
+          return _buildRecordItem(context, record);
+        },
+      ),
+    );
   }
 
   Widget _buildRecordItem(BuildContext context, DigitizedRecord record) {
@@ -121,14 +128,18 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Theme.of(context).dividerColor.withOpacity(0.1)),
+        border: Border.all(
+          color: Theme.of(context).dividerColor.withValues(alpha: 0.1),
+        ),
       ),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+              color: Theme.of(
+                context,
+              ).colorScheme.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -143,14 +154,19 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
               children: [
                 Text(
                   record.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   "${record.size} • ${DateFormat('MMM dd, yyyy').format(record.date)}",
                   style: TextStyle(
                     fontSize: 12,
-                    color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.6),
+                    color: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.color?.withValues(alpha: 0.6),
                   ),
                 ),
               ],
@@ -159,7 +175,9 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             decoration: BoxDecoration(
-              color: record.status == "Verified" ? Colors.green.withOpacity(0.1) : Colors.orange.withOpacity(0.1),
+              color: record.status == "Verified"
+                  ? Colors.green.withValues(alpha: 0.1)
+                  : Colors.orange.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(6),
             ),
             child: Text(
@@ -167,7 +185,9 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.bold,
-                color: record.status == "Verified" ? Colors.green : Colors.orange,
+                color: record.status == "Verified"
+                    ? Colors.green
+                    : Colors.orange,
               ),
             ),
           ),

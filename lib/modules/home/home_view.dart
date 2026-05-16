@@ -377,7 +377,7 @@ class HomeView extends StatelessWidget {
                           },
 
                           child: Container(
-                            color: Colors.black.withOpacity(0.72),
+                            color: Colors.black.withValues(alpha: 0.72),
 
                             child: SafeArea(
                               child: Column(
@@ -473,7 +473,7 @@ class HomeView extends StatelessWidget {
 
                                                 decoration: BoxDecoration(
                                                   color: Colors.white
-                                                      .withOpacity(0.12),
+                                                      .withValues(alpha: 0.12),
 
                                                   shape: BoxShape.circle,
                                                 ),
@@ -595,7 +595,7 @@ class HomeView extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
 
-                        color: Colors.white.withOpacity(0.08),
+                        color: Colors.white.withValues(alpha: 0.08),
                       ),
 
                       child: Row(
@@ -664,7 +664,7 @@ class HomeView extends StatelessWidget {
 
               color: Theme.of(
                 context,
-              ).colorScheme.surfaceContainerHighest.withOpacity(0.22),
+              ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.22),
             ),
 
             child: Row(
@@ -723,7 +723,7 @@ class HomeView extends StatelessWidget {
 
                           height: 1.4,
 
-                          color: onSurface.withOpacity(0.75),
+                          color: onSurface.withValues(alpha: 0.75),
                         ),
                       ),
                     ],
@@ -735,7 +735,7 @@ class HomeView extends StatelessWidget {
 
                   size: 15,
 
-                  color: const Color(0xFFD4AF37).withOpacity(0.7),
+                  color: const Color(0xFFD4AF37).withValues(alpha: 0.7),
                 ),
               ],
             ),

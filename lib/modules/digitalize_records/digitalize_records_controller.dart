@@ -1,5 +1,5 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DigitizedRecord {
   final String id;
@@ -52,7 +52,7 @@ class DigitalizeRecordsController extends GetxController {
       "Digitalizing",
       "Scanning and processing new document...",
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.blue.withOpacity(0.8),
+      backgroundColor: Colors.blue.withValues(alpha: 0.8),
       colorText: Colors.white,
       duration: const Duration(seconds: 3),
     );
