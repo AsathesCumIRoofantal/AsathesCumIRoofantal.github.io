@@ -179,6 +179,11 @@ class HomeView extends StatelessWidget {
                     final itemSectionActual = controller.drawerSections[index];
                     return Column(
                       children: [
+                        if (index ==
+                            (controller.drawerSections.length + 1)) ...{
+                          Center(),
+                        },
+
                         /// HEADER
                         if (index == 0) ...{
                           UserAccountsDrawerHeader(
