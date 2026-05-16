@@ -11,6 +11,7 @@ class HomeView extends StatelessWidget {
   HomeView({super.key});
 
   HomeController controller = Get.find<HomeController>();
+  // final ScrollController scrollController = ScrollController();
 
   final List<Widget> pages = [EntitiesView(), UnionsView(), IdentityView()];
 
@@ -141,8 +142,8 @@ class HomeView extends StatelessWidget {
                 /// MAIN LIST
                 /// =========================================================
                 ListView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  // shrinkWrap: true,
                   controller: controller.drawerScrollController,
 
                   padding: EdgeInsets.zero,
