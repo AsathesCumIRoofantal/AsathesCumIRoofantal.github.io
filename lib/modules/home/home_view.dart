@@ -183,7 +183,7 @@ class HomeView extends StatelessWidget {
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 0),
 
-                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.symmetric(vertical: 0),
 
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -269,7 +269,7 @@ class HomeView extends StatelessWidget {
                                     18,
                                     0,
                                     18,
-                                    14,
+                                    0,
                                   ),
 
                                   child: Text(
@@ -307,7 +307,7 @@ class HomeView extends StatelessWidget {
                                   ),
                                 ),
 
-                                const SizedBox(height: 10),
+                                // const SizedBox(height: 10),
                               ],
                             ),
                           ),
@@ -642,7 +642,7 @@ class HomeView extends StatelessWidget {
     required Color onSurface,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 0),
 
       child: Material(
         color: Colors.transparent,
@@ -657,7 +657,7 @@ class HomeView extends StatelessWidget {
           },
 
           child: Ink(
-            padding: const EdgeInsets.all(14),
+            padding: EdgeInsets.only(left: 14, top: 10, right: 14, bottom: 0),
 
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(0),
