@@ -64,6 +64,7 @@ class SampleContentPage extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 8),
@@ -117,82 +118,73 @@ class SampleContentPage extends StatelessWidget {
                   const AirHomeContextStrip(),
                 ],
                 const SizedBox(height: 16),
-                Expanded(
-                  child: listItems.isEmpty
-                      ? Center(
-                          child: SingleChildScrollView(
-                            padding: const EdgeInsets.only(bottom: 24),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 14,
-                              ),
-                              decoration: BoxDecoration(
-                                color: theme.colorScheme.surface.withOpacity(
-                                  0.9,
-                                ),
-                                borderRadius: BorderRadius.circular(18),
-                                border: Border.all(
-                                  color: theme.dividerColor.withOpacity(0.15),
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.hourglass_empty,
-                                    size: 42,
-                                    color: theme.colorScheme.primary,
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text(
-                                    'Empty sample content',
-                                    style: theme.textTheme.titleMedium
-                                        ?.copyWith(fontWeight: FontWeight.bold),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'This page is ready to receive real AIR content.',
-                                    style: theme.textTheme.bodyMedium?.copyWith(
-                                      color: theme.textTheme.bodyMedium?.color
-                                          ?.withOpacity(0.7),
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  if (showHomeContextBridge) ...[
-                                    const SizedBox(height: 16),
-                                    const AirHomeContextStrip(),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      'When real content ships for "$title", it will still sit beside your Identity map and entity catalogue on the home screen.',
-                                      style: theme.textTheme.bodySmall
-                                          ?.copyWith(
-                                            height: 1.35,
-                                            color: theme
-                                                .textTheme
-                                                .bodySmall
-                                                ?.color
-                                                ?.withOpacity(0.85),
-                                          ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ],
-                              ),
+                listItems.isEmpty
+                    ? Center(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 14,
+                          ),
+                          decoration: BoxDecoration(
+                            color: theme.colorScheme.surface.withOpacity(0.9),
+                            borderRadius: BorderRadius.circular(18),
+                            border: Border.all(
+                              color: theme.dividerColor.withOpacity(0.15),
                             ),
                           ),
-                        )
-                      : ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: listItems.length,
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: 16),
-                          itemBuilder: (context, index) {
-                            final item = listItems[index];
-                            return _buildCard(context, item);
-                          },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.hourglass_empty,
+                                size: 42,
+                                color: theme.colorScheme.primary,
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                'Empty sample content',
+                                style: theme.textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                'This page is ready to receive real AIR content.',
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: theme.textTheme.bodyMedium?.color
+                                      ?.withOpacity(0.7),
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                              if (showHomeContextBridge) ...[
+                                const SizedBox(height: 16),
+                                const AirHomeContextStrip(),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'When real content ships for "$title", it will still sit beside your Identity map and entity catalogue on the home screen.',
+                                  style: theme.textTheme.bodySmall?.copyWith(
+                                    height: 1.35,
+                                    color: theme.textTheme.bodySmall?.color
+                                        ?.withOpacity(0.85),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ],
+                            ],
+                          ),
                         ),
-                ),
+                      )
+                    : ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: listItems.length,
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 16),
+                        itemBuilder: (context, index) {
+                          final item = listItems[index];
+                          return _buildCard(context, item);
+                        },
+                      ),
               ],
             ),
           ),
