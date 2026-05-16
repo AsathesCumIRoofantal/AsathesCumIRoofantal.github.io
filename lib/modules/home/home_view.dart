@@ -181,8 +181,7 @@ class _HomeViewState extends State<HomeView> {
                   itemCount: controller.drawerSections.length + 1,
 
                   itemBuilder: (context, index) {
-                    final itemSectionActual =
-                        controller.drawerSections[index - 1];
+                    final itemSectionActual = controller.drawerSections[index];
                     return Column(
                       children: [
                         /// HEADER
