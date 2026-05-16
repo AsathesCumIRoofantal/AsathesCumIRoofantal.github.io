@@ -137,31 +137,13 @@ class HomeView extends StatelessWidget {
           /// =========================================================
           /// DRAWER
           /// =========================================================
-          drawer: Drawer(
+          drawer: Container(
             width: 330,
-
-            backgroundColor: theme.colorScheme.surface,
+            decoration: BoxDecoration(color: theme.colorScheme.surface),
 
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                UserAccountsDrawerHeader(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/AIR_Picture.png'),
-
-                      fit: BoxFit.fill,
-
-                      colorFilter: ColorFilter.mode(
-                        Colors.black54,
-                        BlendMode.darken,
-                      ),
-                    ),
-                  ),
-
-                  accountName: const Text('Alifiyas-Mazeasta'),
-
-                  accountEmail: const Text('AsathesCumIRoofantal'),
-                ),
                 Expanded(
                   child: Stack(
                     children: [
@@ -188,7 +170,30 @@ class HomeView extends StatelessWidget {
                           return Column(
                             children: [
                               /// HEADER
-                              if (index == 0) ...{},
+                              if (index == 0) ...{
+                                UserAccountsDrawerHeader(
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        'assets/images/AIR_Picture.png',
+                                      ),
+
+                                      fit: BoxFit.fill,
+
+                                      colorFilter: ColorFilter.mode(
+                                        Colors.black54,
+                                        BlendMode.darken,
+                                      ),
+                                    ),
+                                  ),
+
+                                  accountName: const Text('Alifiyas-Mazeasta'),
+
+                                  accountEmail: const Text(
+                                    'AsathesCumIRoofantal',
+                                  ),
+                                ),
+                              },
 
                               /// =========================================================
                               /// ORIGINAL DRAWER DESIGN
@@ -411,7 +416,7 @@ class HomeView extends StatelessWidget {
                                 },
 
                                 child: Container(
-                                  // color: Colors.black.withValues(alpha: 0.72),
+                                  color: Colors.black.withValues(alpha: 0.72),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
@@ -422,7 +427,7 @@ class HomeView extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
                                             horizontal: 16,
-                                            vertical: 0,
+                                            vertical: 20,
                                           ),
 
                                           child: Container(

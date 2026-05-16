@@ -141,15 +141,15 @@ class HomeController extends GetxController {
   final Map<String, double> itemOffsets = {
     "EXPLORE - ALIFIYAS": 0,
     "RULE - MAZEASTA": 620,
-    "BE-YOU & EARN LIVING": 980,
-    "Use AIR's Space & Resources": 1420,
-    "Your Profile Specifics": 1980,
-    "AIR's - Aspects": 3720,
-    "SERVICE & PRODUCTION": 5980,
-    "AIR'S VISION": 6420,
-    "MOTIVATION & CONNECTIVITY": 7260,
-    "SETUP A-ONE": 9260,
-    "SYSTEM CORE": 9280,
+    "BE-YOU & EARN LIVING": 1180,
+    "Use AIR's Space & Resources": 1620,
+    "Your Profile Specifics": 2180,
+    "AIR's - Aspects": 3920,
+    "SERVICE & PRODUCTION": 6180,
+    "AIR'S VISION": 6620,
+    "MOTIVATION & CONNECTIVITY": 7460,
+    "SETUP A-ONE": 9460,
+    "SYSTEM CORE": 9480,
   };
 
   final List<DrawerActualSection> drawerSections = [
