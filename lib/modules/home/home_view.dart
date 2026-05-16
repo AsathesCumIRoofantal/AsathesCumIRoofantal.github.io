@@ -8,9 +8,14 @@ import '../unions/unions_view.dart';
 import 'drawer_navigation_copy.dart';
 import 'home_controller.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   HomeController controller = Get.find<HomeController>();
 
   final List<Widget> pages = [EntitiesView(), UnionsView(), IdentityView()];
