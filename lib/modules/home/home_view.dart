@@ -41,7 +41,7 @@ class HomeView extends StatelessWidget {
 
     controller.itemScrollSectionController.scrollTo(
       index: indexSection,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 800),
       curve: Curves.easeInOutCubic,
       alignment: 0.45,
     );
@@ -49,7 +49,7 @@ class HomeView extends StatelessWidget {
     routeTemp = routeTemp;
 
     /// WAIT FOR UI REBUILD
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 500));
     GlobalKey? keyActualTab = ((controller.drawerSections.firstWhere(
       (s) => s.title == sectionTitle,
     )).items.firstWhere((i) => i.route == routeTemp)).key;
@@ -88,7 +88,7 @@ class HomeView extends StatelessWidget {
       /// SCROLL
       await Scrollable.ensureVisible(
         itemContext,
-        duration: const Duration(milliseconds: 100),
+        duration: const Duration(milliseconds: 3800),
         curve: Curves.easeInOutCubic,
         alignment: 0.45,
       );
@@ -651,7 +651,7 @@ class HomeView extends StatelessWidget {
 
           onTap: () {
             Get.toNamed(item.route);
-                    },
+          },
 
           child: Ink(
             padding: EdgeInsets.only(left: 14, top: 10, right: 14, bottom: 0),
