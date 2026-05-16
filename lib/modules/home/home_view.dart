@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../entities/entities_view.dart';
 import '../identity/identity_view.dart';
@@ -11,7 +12,6 @@ class HomeView extends StatelessWidget {
   HomeView({super.key});
 
   HomeController controller = Get.find<HomeController>();
-  // final ScrollController scrollController = ScrollController();
 
   final List<Widget> pages = [EntitiesView(), UnionsView(), IdentityView()];
 
@@ -60,48 +60,65 @@ class HomeView extends StatelessWidget {
   }) async {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
-    routeTemp = "${routeTemp}";
+    // controller.itemScrollSectionController.scrollTo(
+    //   index: indexSection,
+    //   duration: const Duration(milliseconds: 1200),
+    //   curve: Curves.easeInOutCubic,
+    //   alignment: 0.45,
+    // );
+    // controller.itemScrollActualTabController.scrollTo(
+    //   index: indexActualTab,
+    //   duration: const Duration(milliseconds: 1200),
+    //   curve: Curves.easeInOutCubic,
+    //   alignment: 0.45,
+    // );
+    // routeTemp = "${routeTemp}";
 
-    /// WAIT FOR UI REBUILD
-    await Future.delayed(const Duration(milliseconds: 800));
-    GlobalKey? keyActual = ((controller.drawerSections.firstWhere(
-      (s) => s.title == sectionTitle,
-    )).items.firstWhere((i) => i.route == routeTemp)).key;
+    // /// WAIT FOR UI REBUILD
+    // await Future.delayed(const Duration(milliseconds: 800));
+    // GlobalKey? keyActual = ((controller.drawerSections.firstWhere(
+    //   (s) => s.title == sectionTitle,
+    // )).items.firstWhere((i) => i.route == routeTemp)).key;
 
-    /// BUILD UNIQUE KEY
+    // /// BUILD UNIQUE KEY
+    // // int retry = 0;
+    // // while (keyActual?.currentContext == null && retry < 10) {
+    // //   retry++;
 
-    BuildContext? ctx = keyActual?.currentContext;
-    if (ctx == null) {
-      debugPrint("Context NULL -> $routeTemp");
-      return;
-    }
+    // //   await Future.delayed(const Duration(milliseconds: 120));
+    // // }
+    // BuildContext? ctx = keyActual?.currentContext;
+    // if (ctx == null) {
+    //   debugPrint("Context NULL -> $routeTemp");
+    //   return;
+    // }
 
-    /// GET SAFE GLOBAL KEY
-    final GlobalKey? globalKey = keyActual;
+    // /// GET SAFE GLOBAL KEY
+    // final GlobalKey? globalKey = keyActual;
 
-    if (globalKey == null) {
-      debugPrint("GlobalKey NOT FOUND -> $routeTemp");
-      return;
-    }
+    // if (globalKey == null) {
+    //   debugPrint("GlobalKey NOT FOUND -> $routeTemp");
+    //   return;
+    // }
 
-    /// WAIT NEXT FRAME
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      /// SAFE CONTEXT
-      final BuildContext? itemContext = globalKey.currentContext;
+    // /// WAIT NEXT FRAME
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   /// SAFE CONTEXT
+    //   final BuildContext? itemContext = globalKey.currentContext;
 
-      if (itemContext == null) {
-        debugPrint("Context NULL -> $routeTemp");
-        return;
-      }
+    //   if (itemContext == null) {
+    //     debugPrint("Context NULL -> $routeTemp");
+    //     return;
+    //   }
 
-      /// SCROLL
-      await Scrollable.ensureVisible(
-        itemContext,
-        duration: const Duration(milliseconds: 1000),
-        curve: Curves.easeInOutCubic,
-        alignment: 0.45,
-      );
-    });
+    //   /// SCROLL
+    //   await Scrollable.ensureVisible(
+    //     itemContext,
+    //     duration: const Duration(milliseconds: 1000),
+    //     curve: Curves.easeInOutCubic,
+    //     alignment: 0.45,
+    //   );
+    // });
   }
 
   @override
@@ -141,161 +158,181 @@ class HomeView extends StatelessWidget {
                 /// =========================================================
                 /// MAIN LIST
                 /// =========================================================
-                ListView(
-                  // physics: const NeverScrollableScrollPhysics(),
-                  // shrinkWrap: true,
-                  controller: controller.drawerScrollController,
+                ScrollablePositionedList.builder(
+                  itemScrollController: controller.drawerSections.isNotEmpty
+                      ? controller.itemScrollSectionController
+                      : null,
 
-                  padding: EdgeInsets.zero,
+                  itemCount: controller.drawerSections.length + 1,
 
-                  children: [
-                    /// HEADER
-                    UserAccountsDrawerHeader(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('assets/images/AIR_Picture.png'),
+                  itemBuilder: (context, index) {
+                    final itemSectionActual =
+                        controller.drawerSections[index - 1];
+                    return Column(
+                      children: [
+                        /// HEADER
+                        if (index == 0) ...{
+                          UserAccountsDrawerHeader(
+                            decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/images/AIR_Picture.png',
+                                ),
 
-                          fit: BoxFit.fill,
+                                fit: BoxFit.fill,
 
-                          colorFilter: ColorFilter.mode(
-                            Colors.black54,
-                            BlendMode.darken,
+                                colorFilter: ColorFilter.mode(
+                                  Colors.black54,
+                                  BlendMode.darken,
+                                ),
+                              ),
+                            ),
+
+                            accountName: const Text('Alifiyas-Mazeasta'),
+
+                            accountEmail: const Text('AsathesCumIRoofantal'),
                           ),
-                        ),
-                      ),
+                        },
 
-                      accountName: const Text('Alifiyas-Mazeasta'),
+                        /// =========================================================
+                        /// ORIGINAL DRAWER DESIGN
+                        /// =========================================================
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 0),
 
-                      accountEmail: const Text('AsathesCumIRoofantal'),
-                    ),
+                          padding: const EdgeInsets.symmetric(vertical: 4),
 
-                    /// =========================================================
-                    /// ORIGINAL DRAWER DESIGN
-                    /// =========================================================
-                    ...controller.drawerSections.map((section) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(vertical: 0),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
 
-                        padding: const EdgeInsets.symmetric(vertical: 4),
+                              end: Alignment.bottomRight,
 
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            begin: Alignment.topLeft,
+                              colors: isDark
+                                  ? [
+                                      theme.scaffoldBackgroundColor,
 
-                            end: Alignment.bottomRight,
+                                      theme.colorScheme.surface,
+                                    ]
+                                  : [
+                                      theme.colorScheme.surface,
 
-                            colors: isDark
-                                ? [
-                                    theme.scaffoldBackgroundColor,
+                                      theme.scaffoldBackgroundColor,
+                                    ],
+                            ),
+                          ),
 
-                                    theme.colorScheme.surface,
-                                  ]
-                                : [
-                                    theme.colorScheme.surface,
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
 
-                                    theme.scaffoldBackgroundColor,
+                            children: [
+                              /// SECTION TITLE
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
+
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: 5,
+                                      height: 32,
+
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          100,
+                                        ),
+
+                                        gradient: const LinearGradient(
+                                          colors: [
+                                            Color(0xFFFFE8A3),
+
+                                            Color(0xFFD4AF37),
+
+                                            Color(0xFF8C6A16),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                    const SizedBox(width: 12),
+
+                                    Expanded(
+                                      child: Text(
+                                        itemSectionActual.title.toUpperCase(),
+
+                                        style: const TextStyle(
+                                          color: Color(0xFFFFD369),
+
+                                          fontSize: 13,
+
+                                          fontWeight: FontWeight.w700,
+
+                                          letterSpacing: 2.2,
+                                        ),
+                                      ),
+                                    ),
                                   ],
+                                ),
+                              ),
+
+                              /// SECTION DESCRIPTION
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  18,
+                                  0,
+                                  18,
+                                  14,
+                                ),
+
+                                child: Text(
+                                  DrawerNavigationCopy.sectionBlurb(
+                                    itemSectionActual.title,
+                                  ),
+
+                                  style: TextStyle(
+                                    fontSize: 11.2,
+
+                                    height: 1.45,
+
+                                    color: onSurface,
+                                  ),
+                                ),
+                              ),
+
+                              /// ITEMS
+                              ScrollablePositionedList.builder(
+                                itemScrollController:
+                                    controller.drawerSections.isNotEmpty
+                                    ? controller.itemScrollSectionController
+                                    : null,
+
+                                itemCount: itemSectionActual.items.length,
+
+                                itemBuilder: (context, indexTabActual) {
+                                  final itemTabsActual =
+                                      itemSectionActual.items[indexTabActual];
+                                  return Container(
+                                    key: itemTabsActual.key,
+                                    child: buildDrawerActualItem(
+                                      context: context,
+
+                                      item: itemTabsActual,
+
+                                      onSurface: onSurface,
+                                    ),
+                                  );
+                                },
+                              ),
+
+                              const SizedBox(height: 10),
+                            ],
                           ),
                         ),
 
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-
-                          children: [
-                            /// SECTION TITLE
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
-
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 5,
-                                    height: 32,
-
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-
-                                      gradient: const LinearGradient(
-                                        colors: [
-                                          Color(0xFFFFE8A3),
-
-                                          Color(0xFFD4AF37),
-
-                                          Color(0xFF8C6A16),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-                                  const SizedBox(width: 12),
-
-                                  Expanded(
-                                    child: Text(
-                                      section.title.toUpperCase(),
-
-                                      style: const TextStyle(
-                                        color: Color(0xFFFFD369),
-
-                                        fontSize: 13,
-
-                                        fontWeight: FontWeight.w700,
-
-                                        letterSpacing: 2.2,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            /// SECTION DESCRIPTION
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
-
-                              child: Text(
-                                DrawerNavigationCopy.sectionBlurb(
-                                  section.title,
-                                ),
-
-                                style: TextStyle(
-                                  fontSize: 11.2,
-
-                                  height: 1.45,
-
-                                  color: onSurface,
-                                ),
-                              ),
-                            ),
-
-                            /// ITEMS
-                            ...section.items.map((item) {
-                              // controller.itemKeys.putIfAbsent(
-                              //   item.route,
-                              //   () => GlobalKey(
-                              //     debugLabel: "${section.title}_${item.route}",
-                              //   ),
-                              // );
-
-                              return Container(
-                                child: buildDrawerActualItem(
-                                  context: context,
-
-                                  item: item,
-
-                                  onSurface: onSurface,
-                                ),
-                              );
-                            }),
-
-                            const SizedBox(height: 10),
-                          ],
-                        ),
-                      );
-                    }),
-
-                    const SizedBox(height: 120),
-                  ],
+                        const SizedBox(height: 120),
+                      ],
+                    );
+                  },
                 ),
 
                 /// =========================================================
@@ -653,7 +690,6 @@ class HomeView extends StatelessWidget {
 
               children: [
                 Container(
-                  key: item.key,
                   padding: const EdgeInsets.all(10),
 
                   decoration: const BoxDecoration(

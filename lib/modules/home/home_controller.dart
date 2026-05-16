@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../routes/app_pages.dart';
 
 class DrawerActualItem {
+  int indexTab = 0;
   final String title;
   final IconData icon;
   final String route;
@@ -12,6 +14,8 @@ class DrawerActualItem {
     required this.title,
     required this.icon,
     required this.route,
+    this.key,
+    this.indexTab = 0,
   });
 }
 
@@ -29,10 +33,15 @@ class DrawerResultItem {
 }
 
 class DrawerActualSection {
+  int indexSection = 0;
   final String title;
   final List<DrawerActualItem> items;
 
-  DrawerActualSection({required this.title, required this.items}) {}
+  DrawerActualSection({
+    required this.title,
+    required this.items,
+    this.indexSection = 0,
+  });
 }
 
 class DrawerResultSection {
@@ -55,14 +64,17 @@ class HomeController extends GetxController {
 
   final TextEditingController drawerSearchController = TextEditingController();
 
-  final ScrollController drawerScrollController = ScrollController();
+  // final ScrollController drawerScrollController = ScrollController();
 
   @override
   void onReady() {
     super.onReady();
     for (final section in drawerSections) {
+      section.indexSection = drawerSections.indexOf(section);
       for (final item in section.items) {
         item.key = GlobalKey(debugLabel: "Actual_${item.route}");
+
+        item.indexTab = section.items.indexOf(item);
         results.value.add(
           DrawerResultSection(
             title: section.title,
@@ -85,7 +97,10 @@ class HomeController extends GetxController {
   /// =====================================================
   /// DRAWER DATA
   /// =====================================================
-
+  final ItemScrollController itemScrollSectionController =
+      ItemScrollController();
+  final ItemScrollController itemScrollActualTabController =
+      ItemScrollController();
   final List<DrawerActualSection> drawerSections = [
     DrawerActualSection(
       title: "EXPLORE - ALIFIYAS",
