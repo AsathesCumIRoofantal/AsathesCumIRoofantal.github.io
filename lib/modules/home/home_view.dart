@@ -179,11 +179,6 @@ class HomeView extends StatelessWidget {
                     final itemSectionActual = controller.drawerSections[index];
                     return Column(
                       children: [
-                        if (index ==
-                            (controller.drawerSections.length + 1)) ...{
-                          Center(),
-                        },
-
                         /// HEADER
                         if (index == 0) ...{
                           UserAccountsDrawerHeader(
@@ -211,132 +206,141 @@ class HomeView extends StatelessWidget {
                         /// =========================================================
                         /// ORIGINAL DRAWER DESIGN
                         /// =========================================================
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 0),
+                        if (index == (controller.drawerSections.length)) ...{
+                          Center(),
+                        } else ...{
+                          Container(
+                            margin: const EdgeInsets.symmetric(vertical: 0),
 
-                          padding: const EdgeInsets.symmetric(vertical: 4),
+                            padding: const EdgeInsets.symmetric(vertical: 4),
 
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
 
-                              end: Alignment.bottomRight,
+                                end: Alignment.bottomRight,
 
-                              colors: isDark
-                                  ? [
-                                      theme.scaffoldBackgroundColor,
+                                colors: isDark
+                                    ? [
+                                        theme.scaffoldBackgroundColor,
 
-                                      theme.colorScheme.surface,
-                                    ]
-                                  : [
-                                      theme.colorScheme.surface,
+                                        theme.colorScheme.surface,
+                                      ]
+                                    : [
+                                        theme.colorScheme.surface,
 
-                                      theme.scaffoldBackgroundColor,
+                                        theme.scaffoldBackgroundColor,
+                                      ],
+                              ),
+                            ),
+
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
+                              children: [
+                                /// SECTION TITLE
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    8,
+                                    4,
+                                    8,
+                                    6,
+                                  ),
+
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 5,
+                                        height: 32,
+
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            100,
+                                          ),
+
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFFFFE8A3),
+
+                                              Color(0xFFD4AF37),
+
+                                              Color(0xFF8C6A16),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+
+                                      const SizedBox(width: 12),
+
+                                      Expanded(
+                                        child: Text(
+                                          itemSectionActual.title.toUpperCase(),
+
+                                          style: const TextStyle(
+                                            color: Color(0xFFFFD369),
+
+                                            fontSize: 13,
+
+                                            fontWeight: FontWeight.w700,
+
+                                            letterSpacing: 2.2,
+                                          ),
+                                        ),
+                                      ),
                                     ],
+                                  ),
+                                ),
+
+                                /// SECTION DESCRIPTION
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    18,
+                                    0,
+                                    18,
+                                    14,
+                                  ),
+
+                                  child: Text(
+                                    DrawerNavigationCopy.sectionBlurb(
+                                      itemSectionActual.title,
+                                    ),
+
+                                    style: TextStyle(
+                                      fontSize: 11.2,
+
+                                      height: 1.45,
+
+                                      color: onSurface,
+                                    ),
+                                  ),
+                                ),
+
+                                /// ITEMS
+                                Column(
+                                  children: List.generate(
+                                    itemSectionActual.items.length,
+                                    (indexTabActual) {
+                                      final itemTabsActual = itemSectionActual
+                                          .items[indexTabActual];
+
+                                      return Container(
+                                        key: itemTabsActual.key,
+                                        child: buildDrawerActualItem(
+                                          context: context,
+                                          item: itemTabsActual,
+                                          onSurface: onSurface,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+
+                                const SizedBox(height: 10),
+                              ],
                             ),
                           ),
-
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-
-                            children: [
-                              /// SECTION TITLE
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 4, 8, 6),
-
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 5,
-                                      height: 32,
-
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          100,
-                                        ),
-
-                                        gradient: const LinearGradient(
-                                          colors: [
-                                            Color(0xFFFFE8A3),
-
-                                            Color(0xFFD4AF37),
-
-                                            Color(0xFF8C6A16),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-
-                                    const SizedBox(width: 12),
-
-                                    Expanded(
-                                      child: Text(
-                                        itemSectionActual.title.toUpperCase(),
-
-                                        style: const TextStyle(
-                                          color: Color(0xFFFFD369),
-
-                                          fontSize: 13,
-
-                                          fontWeight: FontWeight.w700,
-
-                                          letterSpacing: 2.2,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              /// SECTION DESCRIPTION
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                  18,
-                                  0,
-                                  18,
-                                  14,
-                                ),
-
-                                child: Text(
-                                  DrawerNavigationCopy.sectionBlurb(
-                                    itemSectionActual.title,
-                                  ),
-
-                                  style: TextStyle(
-                                    fontSize: 11.2,
-
-                                    height: 1.45,
-
-                                    color: onSurface,
-                                  ),
-                                ),
-                              ),
-
-                              /// ITEMS
-                              Column(
-                                children: List.generate(
-                                  itemSectionActual.items.length,
-                                  (indexTabActual) {
-                                    final itemTabsActual =
-                                        itemSectionActual.items[indexTabActual];
-
-                                    return Container(
-                                      key: itemTabsActual.key,
-                                      child: buildDrawerActualItem(
-                                        context: context,
-                                        item: itemTabsActual,
-                                        onSurface: onSurface,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-
-                              const SizedBox(height: 10),
-                            ],
-                          ),
-                        ),
+                        },
 
                         const SizedBox(height: 10),
                       ],
