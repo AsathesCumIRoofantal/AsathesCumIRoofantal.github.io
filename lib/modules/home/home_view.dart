@@ -177,7 +177,7 @@ class HomeView extends StatelessWidget {
 
                   itemBuilder: (context, index) {
                     DrawerActualSection? itemSectionActual = null;
-                    if (index == (controller.drawerSections.length)) {
+                    if (index == ((controller.drawerSections.length + 1))) {
                     } else {
                       itemSectionActual = controller.drawerSections[index + 1];
                     }
@@ -211,8 +211,7 @@ class HomeView extends StatelessWidget {
                         /// =========================================================
                         /// ORIGINAL DRAWER DESIGN
                         /// =========================================================
-                        if (index == (controller.drawerSections.length) ||
-                            itemSectionActual == null) ...{
+                        if (itemSectionActual == null) ...{
                           Center(),
                         } else ...{
                           Container(
