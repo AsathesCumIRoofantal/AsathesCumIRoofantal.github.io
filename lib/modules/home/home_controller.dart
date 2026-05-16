@@ -134,10 +134,12 @@ class HomeController extends GetxController {
   /// =====================================================
   /// DRAWER DATA
   /// =====================================================
-  final ItemScrollController itemScrollSectionController =
-      ItemScrollController();
-  final ItemScrollController itemScrollActualTabController =
-      ItemScrollController();
+  // final ItemScrollController itemScrollSectionController =
+  //     ItemScrollController();
+
+  final ScrollController scrollController = ScrollController();
+  final Map<String, double> itemOffsets = {};
+
   final List<DrawerActualSection> drawerSections = [
     DrawerActualSection(
       title: "EXPLORE - ALIFIYAS",

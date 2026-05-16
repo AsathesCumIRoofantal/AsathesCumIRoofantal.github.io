@@ -38,13 +38,13 @@ class HomeView extends StatelessWidget {
         }
       }
     }
-
-    controller.itemScrollSectionController.scrollTo(
-      index: indexSection,
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.easeInOutCubic,
-      alignment: 0.45,
-    );
+    await scrollToSectionNewItem(routeTemp);
+    // controller.itemScrollSectionController.scrollTo(
+    //   index: indexSection,
+    //   duration: const Duration(milliseconds: 800),
+    //   curve: Curves.easeInOutCubic,
+    //   alignment: 0.45,
+    // );
 
     routeTemp = routeTemp;
 
@@ -95,6 +95,21 @@ class HomeView extends StatelessWidget {
     });
   }
 
+  Future<void> scrollToSectionNewItem(String route) async {
+    final offset = controller.itemOffsets[route];
+
+    if (offset == null) {
+      debugPrint("Offset not found");
+      return;
+    }
+
+    await controller.scrollController.animateTo(
+      offset,
+      duration: const Duration(milliseconds: 800),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -127,384 +142,410 @@ class HomeView extends StatelessWidget {
 
             backgroundColor: theme.colorScheme.surface,
 
-            child: Stack(
+            child: Column(
               children: [
-                /// =========================================================
-                /// MAIN LIST
-                /// =========================================================
-                ScrollablePositionedList.builder(
-                  itemScrollController: controller.drawerSections.isNotEmpty
-                      ? controller.itemScrollSectionController
-                      : ItemScrollController(),
-                  // physics: const NeverScrollableScrollPhysics(),
-                  // shrinkWrap: true,
-                  itemCount: controller.drawerSections.length + 1,
+                UserAccountsDrawerHeader(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/AIR_Picture.png'),
 
-                  itemBuilder: (context, index) {
-                    DrawerActualSection? itemSectionActual;
-                    if (index == (controller.drawerSections.length)) {
-                    } else {
-                      itemSectionActual = controller.drawerSections[index];
-                    }
+                      fit: BoxFit.fill,
 
-                    return Column(
-                      children: [
-                        /// HEADER
-                        if (index == 0) ...{
-                          UserAccountsDrawerHeader(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage(
-                                  'assets/images/AIR_Picture.png',
-                                ),
+                      colorFilter: ColorFilter.mode(
+                        Colors.black54,
+                        BlendMode.darken,
+                      ),
+                    ),
+                  ),
 
-                                fit: BoxFit.fill,
+                  accountName: const Text('Alifiyas-Mazeasta'),
 
-                                colorFilter: ColorFilter.mode(
-                                  Colors.black54,
-                                  BlendMode.darken,
-                                ),
-                              ),
-                            ),
+                  accountEmail: const Text('AsathesCumIRoofantal'),
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      /// =========================================================
+                      /// MAIN LIST
+                      /// =========================================================
+                      ListView.builder(
+                        controller: controller.scrollController,
+                        // itemScrollController: controller.drawerSections.isNotEmpty
+                        //     ? controller.itemScrollSectionController
+                        //     : ItemScrollController(),
+                        // physics: const NeverScrollableScrollPhysics(),
+                        // shrinkWrap: true,
+                        itemCount: controller.drawerSections.length + 1,
 
-                            accountName: const Text('Alifiyas-Mazeasta'),
+                        itemBuilder: (context, index) {
+                          DrawerActualSection? itemSectionActual;
+                          if (index == (controller.drawerSections.length)) {
+                          } else {
+                            itemSectionActual =
+                                controller.drawerSections[index];
+                          }
 
-                            accountEmail: const Text('AsathesCumIRoofantal'),
-                          ),
-                        },
+                          return Column(
+                            children: [
+                              /// HEADER
+                              if (index == 0) ...{},
 
-                        /// =========================================================
-                        /// ORIGINAL DRAWER DESIGN
-                        /// =========================================================
-                        if (itemSectionActual == null) ...{
-                          SizedBox(height: 10),
-                        } else ...{
-                          Container(
-                            margin: const EdgeInsets.symmetric(vertical: 0),
+                              /// =========================================================
+                              /// ORIGINAL DRAWER DESIGN
+                              /// =========================================================
+                              if (itemSectionActual == null) ...{
+                                SizedBox(height: 10),
+                              } else ...{
+                                PositionTracker(
+                                  title: itemSectionActual.title,
+                                  itemOffsets: controller.itemOffsets,
+                                  child: Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      vertical: 0,
+                                    ),
 
-                            padding: const EdgeInsets.symmetric(vertical: 0),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 0,
+                                    ),
 
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
 
-                                end: Alignment.bottomRight,
+                                        end: Alignment.bottomRight,
 
-                                colors: isDark
-                                    ? [
-                                        theme.scaffoldBackgroundColor,
+                                        colors: isDark
+                                            ? [
+                                                theme.scaffoldBackgroundColor,
 
-                                        theme.colorScheme.surface,
-                                      ]
-                                    : [
-                                        theme.colorScheme.surface,
+                                                theme.colorScheme.surface,
+                                              ]
+                                            : [
+                                                theme.colorScheme.surface,
 
-                                        theme.scaffoldBackgroundColor,
-                                      ],
-                              ),
-                            ),
+                                                theme.scaffoldBackgroundColor,
+                                              ],
+                                      ),
+                                    ),
 
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
 
-                              children: [
-                                /// SECTION TITLE
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                    8,
-                                    4,
-                                    8,
-                                    6,
-                                  ),
-
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 5,
-                                        height: 32,
-
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            100,
+                                      children: [
+                                        /// SECTION TITLE
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            8,
+                                            4,
+                                            8,
+                                            6,
                                           ),
 
-                                          gradient: const LinearGradient(
-                                            colors: [
-                                              Color(0xFFFFE8A3),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                width: 5,
+                                                height: 32,
 
-                                              Color(0xFFD4AF37),
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                        100,
+                                                      ),
 
-                                              Color(0xFF8C6A16),
+                                                  gradient:
+                                                      const LinearGradient(
+                                                        colors: [
+                                                          Color(0xFFFFE8A3),
+
+                                                          Color(0xFFD4AF37),
+
+                                                          Color(0xFF8C6A16),
+                                                        ],
+                                                      ),
+                                                ),
+                                              ),
+
+                                              const SizedBox(width: 12),
+
+                                              Expanded(
+                                                child: Text(
+                                                  itemSectionActual.title
+                                                      .toUpperCase(),
+
+                                                  style: const TextStyle(
+                                                    color: Color(0xFFFFD369),
+
+                                                    fontSize: 13,
+
+                                                    fontWeight: FontWeight.w700,
+
+                                                    letterSpacing: 2.2,
+                                                  ),
+                                                ),
+                                              ),
                                             ],
+                                          ),
+                                        ),
+
+                                        /// SECTION DESCRIPTION
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            18,
+                                            0,
+                                            18,
+                                            0,
+                                          ),
+
+                                          child: Text(
+                                            DrawerNavigationCopy.sectionBlurb(
+                                              itemSectionActual.title,
+                                            ),
+
+                                            style: TextStyle(
+                                              fontSize: 11.2,
+
+                                              height: 1.45,
+
+                                              color: onSurface,
+                                            ),
+                                          ),
+                                        ),
+
+                                        /// ITEMS
+                                        Column(
+                                          children: List.generate(
+                                            itemSectionActual.items.length,
+                                            (indexTabActual) {
+                                              final itemTabsActual =
+                                                  itemSectionActual!
+                                                      .items[indexTabActual];
+
+                                              return Container(
+                                                key: itemTabsActual.key,
+                                                child: buildDrawerActualItem(
+                                                  context: context,
+                                                  item: itemTabsActual,
+                                                  onSurface: onSurface,
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+
+                                        // const SizedBox(height: 10),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              },
+                            ],
+                          );
+                        },
+                      ),
+
+                      /// =========================================================
+                      /// FLOATING SEARCH BUTTON
+                      /// =========================================================
+                      Positioned(
+                        bottom: 20,
+                        right: 18,
+
+                        child: Material(
+                          color: Colors.transparent,
+
+                          elevation: 12,
+
+                          borderRadius: BorderRadius.circular(100),
+
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(100),
+
+                            onTap: () {
+                              controller.isDrawerSearchVisible.value = true;
+                            },
+
+                            child: Ink(
+                              width: 62,
+                              height: 62,
+
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF00C6FF),
+                                    Color(0xFF0072FF),
+                                  ],
+                                ),
+                              ),
+
+                              child: const Icon(
+                                Icons.search_rounded,
+                                color: Colors.white,
+                                size: 28,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      /// =========================================================
+                      /// SEARCH OVERLAY
+                      /// =========================================================
+                      controller.isDrawerSearchVisible.value
+                          ? Positioned.fill(
+                              // top: 0,
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+
+                                onTap: () {
+                                  controller.drawerSearchController.clear();
+
+                                  controller.drawerSearchText.value = '';
+
+                                  controller.isDrawerSearchVisible.value =
+                                      false;
+                                },
+
+                                child: Container(
+                                  // color: Colors.black.withValues(alpha: 0.72),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      /// SEARCH BAR
+                                      GestureDetector(
+                                        onTap: () {},
+
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 16,
+                                            vertical: 0,
+                                          ),
+
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 16,
+                                            ),
+
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(22),
+
+                                              gradient: const LinearGradient(
+                                                colors: [
+                                                  Color(0xFF182848),
+
+                                                  Color(0xFF4B6CB7),
+                                                ],
+                                              ),
+                                            ),
+
+                                            child: Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.search,
+                                                  color: Colors.white,
+                                                ),
+
+                                                const SizedBox(width: 10),
+
+                                                Expanded(
+                                                  child: TextField(
+                                                    autofocus: true,
+
+                                                    controller: controller
+                                                        .drawerSearchController,
+
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+
+                                                    onChanged: (value) {
+                                                      controller
+                                                              .drawerSearchText
+                                                              .value =
+                                                          value;
+                                                    },
+
+                                                    decoration:
+                                                        const InputDecoration(
+                                                          border:
+                                                              InputBorder.none,
+
+                                                          hintText:
+                                                              'Search anything...',
+
+                                                          hintStyle: TextStyle(
+                                                            color:
+                                                                Colors.white70,
+                                                          ),
+                                                        ),
+                                                  ),
+                                                ),
+
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    controller
+                                                        .drawerSearchController
+                                                        .clear();
+
+                                                    controller
+                                                            .drawerSearchText
+                                                            .value =
+                                                        '';
+
+                                                    controller
+                                                            .isDrawerSearchVisible
+                                                            .value =
+                                                        false;
+                                                  },
+
+                                                  child: Container(
+                                                    padding:
+                                                        const EdgeInsets.all(7),
+
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.white
+                                                          .withValues(
+                                                            alpha: 0.12,
+                                                          ),
+
+                                                      shape: BoxShape.circle,
+                                                    ),
+
+                                                    child: const Icon(
+                                                      Icons.close_rounded,
+                                                      color: Colors.white,
+                                                      size: 18,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
 
-                                      const SizedBox(width: 12),
-
+                                      /// RESULTS
                                       Expanded(
-                                        child: Text(
-                                          itemSectionActual.title.toUpperCase(),
+                                        child: GestureDetector(
+                                          onTap: () {},
 
-                                          style: const TextStyle(
-                                            color: Color(0xFFFFD369),
-
-                                            fontSize: 13,
-
-                                            fontWeight: FontWeight.w700,
-
-                                            letterSpacing: 2.2,
-                                          ),
+                                          child: getFilterResultsUIComponent(),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
-
-                                /// SECTION DESCRIPTION
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                    18,
-                                    0,
-                                    18,
-                                    0,
-                                  ),
-
-                                  child: Text(
-                                    DrawerNavigationCopy.sectionBlurb(
-                                      itemSectionActual.title,
-                                    ),
-
-                                    style: TextStyle(
-                                      fontSize: 11.2,
-
-                                      height: 1.45,
-
-                                      color: onSurface,
-                                    ),
-                                  ),
-                                ),
-
-                                /// ITEMS
-                                Column(
-                                  children: List.generate(
-                                    itemSectionActual.items.length,
-                                    (indexTabActual) {
-                                      final itemTabsActual = itemSectionActual!
-                                          .items[indexTabActual];
-
-                                      return Container(
-                                        key: itemTabsActual.key,
-                                        child: buildDrawerActualItem(
-                                          context: context,
-                                          item: itemTabsActual,
-                                          onSurface: onSurface,
-                                        ),
-                                      );
-                                    },
-                                  ),
-                                ),
-
-                                // const SizedBox(height: 10),
-                              ],
-                            ),
-                          ),
-                        },
-                      ],
-                    );
-                  },
-                ),
-
-                /// =========================================================
-                /// FLOATING SEARCH BUTTON
-                /// =========================================================
-                Positioned(
-                  bottom: 20,
-                  right: 18,
-
-                  child: Material(
-                    color: Colors.transparent,
-
-                    elevation: 12,
-
-                    borderRadius: BorderRadius.circular(100),
-
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(100),
-
-                      onTap: () {
-                        controller.isDrawerSearchVisible.value = true;
-                      },
-
-                      child: Ink(
-                        width: 62,
-                        height: 62,
-
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-
-                          gradient: LinearGradient(
-                            colors: [Color(0xFF00C6FF), Color(0xFF0072FF)],
-                          ),
-                        ),
-
-                        child: const Icon(
-                          Icons.search_rounded,
-                          color: Colors.white,
-                          size: 28,
-                        ),
-                      ),
-                    ),
+                              ),
+                            )
+                          : const SizedBox(),
+                    ],
                   ),
                 ),
-
-                /// =========================================================
-                /// SEARCH OVERLAY
-                /// =========================================================
-                controller.isDrawerSearchVisible.value
-                    ? Positioned.fill(
-                        child: GestureDetector(
-                          behavior: HitTestBehavior.opaque,
-
-                          onTap: () {
-                            controller.drawerSearchController.clear();
-
-                            controller.drawerSearchText.value = '';
-
-                            controller.isDrawerSearchVisible.value = false;
-                          },
-
-                          child: Container(
-                            color: Colors.black.withValues(alpha: 0.72),
-
-                            child: SafeArea(
-                              child: Column(
-                                children: [
-                                  /// SEARCH BAR
-                                  GestureDetector(
-                                    onTap: () {},
-
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(14),
-
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 16,
-                                        ),
-
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            22,
-                                          ),
-
-                                          gradient: const LinearGradient(
-                                            colors: [
-                                              Color(0xFF182848),
-
-                                              Color(0xFF4B6CB7),
-                                            ],
-                                          ),
-                                        ),
-
-                                        child: Row(
-                                          children: [
-                                            const Icon(
-                                              Icons.search,
-                                              color: Colors.white,
-                                            ),
-
-                                            const SizedBox(width: 10),
-
-                                            Expanded(
-                                              child: TextField(
-                                                autofocus: true,
-
-                                                controller: controller
-                                                    .drawerSearchController,
-
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                ),
-
-                                                onChanged: (value) {
-                                                  controller
-                                                          .drawerSearchText
-                                                          .value =
-                                                      value;
-                                                },
-
-                                                decoration:
-                                                    const InputDecoration(
-                                                      border: InputBorder.none,
-
-                                                      hintText:
-                                                          'Search anything...',
-
-                                                      hintStyle: TextStyle(
-                                                        color: Colors.white70,
-                                                      ),
-                                                    ),
-                                              ),
-                                            ),
-
-                                            GestureDetector(
-                                              onTap: () {
-                                                controller
-                                                    .drawerSearchController
-                                                    .clear();
-
-                                                controller
-                                                        .drawerSearchText
-                                                        .value =
-                                                    '';
-
-                                                controller
-                                                        .isDrawerSearchVisible
-                                                        .value =
-                                                    false;
-                                              },
-
-                                              child: Container(
-                                                padding: const EdgeInsets.all(
-                                                  7,
-                                                ),
-
-                                                decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withValues(alpha: 0.12),
-
-                                                  shape: BoxShape.circle,
-                                                ),
-
-                                                child: const Icon(
-                                                  Icons.close_rounded,
-                                                  color: Colors.white,
-                                                  size: 18,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  /// RESULTS
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {},
-
-                                      child: getFilterResultsUIComponent(),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    : const SizedBox(),
               ],
             ),
           ),
@@ -740,5 +781,34 @@ class HomeView extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PositionTracker extends StatelessWidget {
+  final Widget child;
+  final String title;
+  final Map<String, double> itemOffsets;
+
+  const PositionTracker({
+    super.key,
+    required this.child,
+    required this.title,
+    required this.itemOffsets,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    HomeController controller = Get.find<HomeController>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final box = context.findRenderObject() as RenderBox?;
+
+      if (box != null) {
+        final position = box.localToGlobal(Offset.zero);
+
+        itemOffsets[title] = position.dy + controller.scrollController.offset;
+      }
+    });
+
+    return child;
   }
 }
