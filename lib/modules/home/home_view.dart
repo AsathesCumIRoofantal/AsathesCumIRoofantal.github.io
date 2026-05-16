@@ -61,13 +61,13 @@ class HomeView extends StatelessWidget {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
     int indexSection = 0;
-    int indexActualTab = 0;
+    // int indexActualTab = 0;
     for (final section in controller.drawerSections) {
       section.indexSection = controller.drawerSections.indexOf(section);
       for (final item in section.items) {
         if (item.route == routeTemp) {
           indexSection = section.indexSection;
-          indexActualTab = item.indexTab;
+          // indexActualTab = item.indexTab;
           break;
         }
       }
@@ -75,16 +75,16 @@ class HomeView extends StatelessWidget {
 
     controller.itemScrollSectionController.scrollTo(
       index: indexSection,
-      duration: const Duration(milliseconds: 1200),
+      duration: const Duration(milliseconds: 100),
       curve: Curves.easeInOutCubic,
       alignment: 0.45,
     );
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 100));
 
     routeTemp = "${routeTemp}";
 
     /// WAIT FOR UI REBUILD
-    await Future.delayed(const Duration(milliseconds: 800));
+    await Future.delayed(const Duration(milliseconds: 100));
     GlobalKey? keyActualTab = ((controller.drawerSections.firstWhere(
       (s) => s.title == sectionTitle,
     )).items.firstWhere((i) => i.route == routeTemp)).key;
@@ -94,7 +94,7 @@ class HomeView extends StatelessWidget {
     while (keyActualTab?.currentContext == null && retry < 10) {
       retry++;
 
-      await Future.delayed(const Duration(milliseconds: 120));
+      await Future.delayed(const Duration(milliseconds: 100));
     }
     BuildContext? ctx = keyActualTab?.currentContext;
     if (ctx == null) {
@@ -123,7 +123,7 @@ class HomeView extends StatelessWidget {
       /// SCROLL
       await Scrollable.ensureVisible(
         itemContext,
-        duration: const Duration(milliseconds: 1000),
+        duration: const Duration(milliseconds: 100),
         curve: Curves.easeInOutCubic,
         alignment: 0.45,
       );

@@ -69,6 +69,7 @@ class HomeController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    drawerSearchController.text = "Sign";
     for (final section in drawerSections) {
       section.indexSection = drawerSections.indexOf(section);
       for (final item in section.items) {
