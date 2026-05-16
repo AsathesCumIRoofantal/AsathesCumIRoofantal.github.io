@@ -175,8 +175,9 @@ class HomeView extends StatelessWidget {
                 ScrollablePositionedList.builder(
                   itemScrollController: controller.drawerSections.isNotEmpty
                       ? controller.itemScrollSectionController
-                      : null,
-
+                      : ItemScrollController(),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   itemCount: controller.drawerSections.length + 1,
 
                   itemBuilder: (context, index) {
@@ -317,9 +318,10 @@ class HomeView extends StatelessWidget {
                               ScrollablePositionedList.builder(
                                 itemScrollController:
                                     controller.drawerSections.isNotEmpty
-                                    ? controller.itemScrollSectionController
-                                    : null,
-
+                                    ? controller.itemScrollActualTabController
+                                    : ItemScrollController(),
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
                                 itemCount: itemSectionActual.items.length,
 
                                 itemBuilder: (context, indexTabActual) {
