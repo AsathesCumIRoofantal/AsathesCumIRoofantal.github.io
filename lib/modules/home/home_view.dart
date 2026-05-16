@@ -178,7 +178,7 @@ class HomeView extends StatelessWidget {
                         /// ORIGINAL DRAWER DESIGN
                         /// =========================================================
                         if (itemSectionActual == null) ...{
-                          Center(),
+                          SizedBox(height: 10),
                         } else ...{
                           Container(
                             margin: const EdgeInsets.symmetric(vertical: 0),
@@ -312,8 +312,6 @@ class HomeView extends StatelessWidget {
                             ),
                           ),
                         },
-
-                        const SizedBox(height: 10),
                       ],
                     );
                   },
