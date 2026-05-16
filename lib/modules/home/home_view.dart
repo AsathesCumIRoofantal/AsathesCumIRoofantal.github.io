@@ -32,7 +32,7 @@ class _HomeViewState extends State<HomeView> {
     for (final section in controller.drawerSections) {
       List<DrawerResultItem> existingItemsPerSection = [];
       for (final item in section.items) {
-        if (item.title.toLowerCase().contains(query)) {
+        if ((item.title.toLowerCase().contains(query)) && query.isNotEmpty) {
           existingItemsPerSection = [
             ...existingItemsPerSection,
             DrawerResultItem(
