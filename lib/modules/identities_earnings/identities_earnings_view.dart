@@ -1,8 +1,9 @@
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
-import 'identities_earnings_controller.dart';
 import 'package:intl/intl.dart';
+
+import 'identities_earnings_controller.dart';
 
 class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
   const IdentitiesEarningsView({super.key});
@@ -63,7 +64,7 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
                           Icon(
                             Icons.search_off_rounded,
                             size: 64,
-                            color: tertiary.withOpacity(0.3),
+                            color: tertiary.withValues(alpha: 0.3),
                           ),
                           const SizedBox(height: 16),
                           Text(
@@ -100,9 +101,9 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: tertiary.withOpacity(0.1),
+        color: tertiary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: tertiary.withOpacity(0.3)),
+        border: Border.all(color: tertiary.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -147,10 +148,10 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
           hintText: 'Search by Title or Job Details...',
           prefixIcon: Icon(
             Icons.search,
-            color: theme.colorScheme.tertiary.withOpacity(0.5),
+            color: theme.colorScheme.tertiary.withValues(alpha: 0.5),
           ),
           filled: true,
-          fillColor: theme.cardColor.withOpacity(0.3),
+          fillColor: theme.cardColor.withValues(alpha: 0.3),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none,
@@ -169,17 +170,17 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: theme.cardColor.withOpacity(0.5),
+        color: theme.cardColor.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: tertiary.withOpacity(0.1)),
+        border: Border.all(color: tertiary.withValues(alpha: 0.1)),
       ),
       child: ExpansionTile(
         leading: Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: isEntity
-                ? theme.colorScheme.primary.withOpacity(0.1)
-                : theme.colorScheme.secondary.withOpacity(0.1),
+                ? theme.colorScheme.primary.withValues(alpha: 0.1)
+                : theme.colorScheme.secondary.withValues(alpha: 0.1),
             shape: BoxShape.circle,
           ),
           child: Icon(
@@ -227,7 +228,7 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
           Text(
             item.jobDetail,
             style: TextStyle(
-              color: theme.textTheme.bodyMedium?.color?.withOpacity(0.8),
+              color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.8),
               height: 1.6,
             ),
           ),
@@ -267,7 +268,7 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: theme.dividerColor.withOpacity(0.2),
+                  color: theme.dividerColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -391,11 +392,13 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
         decoration: BoxDecoration(
           color: isSelected
-              ? color.withOpacity(0.2)
-              : theme.cardColor.withOpacity(0.5),
+              ? color.withValues(alpha: 0.2)
+              : theme.cardColor.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: isSelected ? color : theme.dividerColor.withOpacity(0.1),
+            color: isSelected
+                ? color
+                : theme.dividerColor.withValues(alpha: 0.1),
           ),
         ),
         child: Text(
@@ -420,7 +423,7 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
       labelText: label,
       prefixIcon: Icon(
         icon,
-        color: theme.colorScheme.tertiary.withOpacity(0.7),
+        color: theme.colorScheme.tertiary.withValues(alpha: 0.7),
       ),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       focusedBorder: OutlineInputBorder(
@@ -428,7 +431,7 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
         borderSide: BorderSide(color: theme.colorScheme.tertiary, width: 2),
       ),
       filled: true,
-      fillColor: theme.cardColor.withOpacity(0.5),
+      fillColor: theme.cardColor.withValues(alpha: 0.5),
     );
   }
 }

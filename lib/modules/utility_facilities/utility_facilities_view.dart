@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'utility_facilities_controller.dart';
 
 class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
@@ -43,7 +44,9 @@ class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
             children: [
               _buildHeader(context, isDark, onSurface),
               const SizedBox(height: 20),
-              ..._utilitySections.map((s) => _buildSection(context, s, isDark, onSurface)),
+              ..._utilitySections.map(
+                (s) => _buildSection(context, s, isDark, onSurface),
+              ),
             ],
           ),
         ),
@@ -56,12 +59,15 @@ class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.indigo.withOpacity(0.15), Colors.blue.withOpacity(0.05)],
+          colors: [
+            Colors.indigo.withValues(alpha: 0.15),
+            Colors.blue.withValues(alpha: 0.05),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.indigo.withOpacity(0.25)),
+        border: Border.all(color: Colors.indigo.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,21 +77,36 @@ class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.indigo.withOpacity(0.15),
+                  color: Colors.indigo.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: const Icon(Icons.amp_stories_rounded, color: Colors.indigo, size: 28),
+                child: const Icon(
+                  Icons.amp_stories_rounded,
+                  color: Colors.indigo,
+                  size: 28,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Utility & Facilities',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: onSurface)),
+                    Text(
+                      'Utility & Facilities',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: onSurface,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text('Resources for your convenience',
-                        style: TextStyle(fontSize: 13, color: onSurface.withOpacity(0.6))),
+                    Text(
+                      'Resources for your convenience',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: onSurface.withValues(alpha: 0.6),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -96,28 +117,45 @@ class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
             'Explore the comprehensive utilities and modern facilities available. '
             'We provide an environment fully equipped to support your daily needs '
             'with efficiency, comfort, and state-of-the-art infrastructure.',
-            style: TextStyle(fontSize: 14, color: onSurface.withOpacity(0.75), height: 1.6),
+            style: TextStyle(
+              fontSize: 14,
+              color: onSurface.withValues(alpha: 0.75),
+              height: 1.6,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSection(BuildContext context, _UtilitySection section, bool isDark, Color onSurface) {
+  Widget _buildSection(
+    BuildContext context,
+    _UtilitySection section,
+    bool isDark,
+    Color onSurface,
+  ) {
     final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
-        color: isDark ? theme.cardColor.withOpacity(0.35) : theme.colorScheme.surface,
+        color: isDark
+            ? theme.cardColor.withValues(alpha: 0.35)
+            : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
+              ? Colors.white.withValues(alpha: 0.06)
+              : theme.colorScheme.outline.withValues(alpha: 0.12),
         ),
         boxShadow: isDark
             ? []
-            : [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 3))],
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
       ),
       child: Theme(
         data: theme.copyWith(dividerColor: Colors.transparent),
@@ -127,15 +165,21 @@ class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
+              color: section.color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(section.icon, color: section.color, size: 20),
           ),
-          title: Text(section.title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: onSurface)),
-          iconColor: onSurface.withOpacity(0.5),
-          collapsedIconColor: onSurface.withOpacity(0.4),
+          title: Text(
+            section.title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              color: onSurface,
+            ),
+          ),
+          iconColor: onSurface.withValues(alpha: 0.5),
+          collapsedIconColor: onSurface.withValues(alpha: 0.4),
           children: section.points
               .map((p) => _buildPoint(p, onSurface, section.color))
               .toList(),
@@ -158,8 +202,14 @@ class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(point,
-                style: TextStyle(fontSize: 14, color: onSurface.withOpacity(0.75), height: 1.5)),
+            child: Text(
+              point,
+              style: TextStyle(
+                fontSize: 14,
+                color: onSurface.withValues(alpha: 0.75),
+                height: 1.5,
+              ),
+            ),
           ),
         ],
       ),
@@ -172,7 +222,12 @@ class _UtilitySection {
   final IconData icon;
   final Color color;
   final List<String> points;
-  const _UtilitySection({required this.title, required this.icon, required this.color, required this.points});
+  const _UtilitySection({
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.points,
+  });
 }
 
 final List<_UtilitySection> _utilitySections = [

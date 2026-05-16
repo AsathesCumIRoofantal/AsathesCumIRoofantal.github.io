@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'loop_hole_controller.dart';
 
 class LoopHoleView extends GetView<LoopHoleController> {
@@ -59,14 +60,14 @@ class LoopHoleView extends GetView<LoopHoleController> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.red.withOpacity(0.15),
-            Colors.orange.withOpacity(0.05),
+            Colors.red.withValues(alpha: 0.15),
+            Colors.orange.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.red.withOpacity(0.25)),
+        border: Border.all(color: Colors.red.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +77,7 @@ class LoopHoleView extends GetView<LoopHoleController> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.red.withOpacity(0.15),
+                  color: Colors.red.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Icon(Icons.loop, color: Colors.red, size: 28),
@@ -99,7 +100,7 @@ class LoopHoleView extends GetView<LoopHoleController> {
                       'Identify and resolve vulnerabilities',
                       style: TextStyle(
                         fontSize: 13,
-                        color: onSurface.withOpacity(0.6),
+                        color: onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   ],
@@ -113,7 +114,7 @@ class LoopHoleView extends GetView<LoopHoleController> {
             'We proactively analyze risks and formulate mitigation strategies.',
             style: TextStyle(
               fontSize: 14,
-              color: onSurface.withOpacity(0.75),
+              color: onSurface.withValues(alpha: 0.75),
               height: 1.6,
             ),
           ),
@@ -133,13 +134,13 @@ class LoopHoleView extends GetView<LoopHoleController> {
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
         color: isDark
-            ? theme.cardColor.withOpacity(0.35)
+            ? theme.cardColor.withValues(alpha: 0.35)
             : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
+              ? Colors.white.withValues(alpha: 0.06)
+              : theme.colorScheme.outline.withValues(alpha: 0.12),
         ),
       ),
       child: Theme(
@@ -150,7 +151,7 @@ class LoopHoleView extends GetView<LoopHoleController> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
+              color: section.color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(section.icon, color: section.color, size: 20),
@@ -189,7 +190,7 @@ class LoopHoleView extends GetView<LoopHoleController> {
               point,
               style: TextStyle(
                 fontSize: 14,
-                color: onSurface.withOpacity(0.75),
+                color: onSurface.withValues(alpha: 0.75),
                 height: 1.5,
               ),
             ),

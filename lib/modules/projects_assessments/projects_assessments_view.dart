@@ -1,6 +1,7 @@
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
+
 import 'projects_assessments_controller.dart';
 
 class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
@@ -22,7 +23,7 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [primary.withOpacity(0.8), Colors.transparent],
+                colors: [primary.withValues(alpha: 0.8), Colors.transparent],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
               ),
@@ -78,7 +79,7 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
               end: Alignment.bottomRight,
               colors: [
                 theme.scaffoldBackgroundColor,
-                theme.colorScheme.surface.withOpacity(0.8),
+                theme.colorScheme.surface.withValues(alpha: 0.8),
               ],
             ),
           ),
@@ -136,12 +137,12 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 20),
         decoration: BoxDecoration(
-          color: theme.cardColor.withOpacity(0.7),
+          color: theme.cardColor.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: primary.withOpacity(0.1)),
+          border: Border.all(color: primary.withValues(alpha: 0.1)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: Colors.black.withValues(alpha: 0.1),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
@@ -157,7 +158,7 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
                 child: Icon(
                   Icons.assignment_rounded,
                   size: 100,
-                  color: primary.withOpacity(0.05),
+                  color: primary.withValues(alpha: 0.05),
                 ),
               ),
               Padding(
@@ -211,7 +212,7 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
                           height: 10,
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: primary.withOpacity(0.1),
+                            color: primary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
@@ -223,12 +224,12 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
                               project.progress,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
-                              colors: [primary, primary.withOpacity(0.6)],
+                              colors: [primary, primary.withValues(alpha: 0.6)],
                             ),
                             borderRadius: BorderRadius.circular(5),
                             boxShadow: [
                               BoxShadow(
-                                color: primary.withOpacity(0.3),
+                                color: primary.withValues(alpha: 0.3),
                                 blurRadius: 4,
                                 spreadRadius: 1,
                               ),
@@ -267,9 +268,9 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
+        color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(30),
-        border: Border.all(color: color.withOpacity(0.5), width: 1.5),
+        border: Border.all(color: color.withValues(alpha: 0.5), width: 1.5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -335,11 +336,11 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
         margin: const EdgeInsets.only(bottom: 16),
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: theme.cardColor.withOpacity(0.7),
+          color: theme.cardColor.withValues(alpha: 0.7),
           borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: tertiary.withOpacity(0.2)),
+          border: Border.all(color: tertiary.withValues(alpha: 0.2)),
           gradient: LinearGradient(
-            colors: [tertiary.withOpacity(0.05), Colors.transparent],
+            colors: [tertiary.withValues(alpha: 0.05), Colors.transparent],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -352,11 +353,11 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
-                  colors: [tertiary, tertiary.withOpacity(0.6)],
+                  colors: [tertiary, tertiary.withValues(alpha: 0.6)],
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: tertiary.withOpacity(0.4),
+                    color: tertiary.withValues(alpha: 0.4),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -402,7 +403,7 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: tertiary.withOpacity(0.1),
+                color: tertiary.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(Icons.verified_rounded, color: tertiary, size: 24),

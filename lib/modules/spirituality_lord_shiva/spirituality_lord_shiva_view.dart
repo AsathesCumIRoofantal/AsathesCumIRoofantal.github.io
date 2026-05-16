@@ -1,7 +1,9 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
 import 'spirituality_lord_shiva_controller.dart';
 
 // ─────────────────────────────────────────────
@@ -601,15 +603,15 @@ class _ShivaHeroBackgroundState extends State<_ShivaHeroBackground>
                   builder: (_, __) => Container(
                     padding: const EdgeInsets.all(18),
                     decoration: BoxDecoration(
-                      color: _saffron.withOpacity(0.15),
+                      color: _saffron.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(
-                        color: _gold.withOpacity(_glow.value),
+                        color: _gold.withValues(alpha: _glow.value),
                         width: 1.5,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: _saffron.withOpacity(_glow.value * 0.4),
+                          color: _saffron.withValues(alpha: _glow.value * 0.4),
                           blurRadius: 24,
                           spreadRadius: 4,
                         ),
@@ -644,7 +646,7 @@ class _ShivaHeroBackgroundState extends State<_ShivaHeroBackground>
                       Text(
                         'Explore devotional content, sacred texts, and the timeless wisdom of Mahadeva.',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.72),
+                          color: Colors.white.withValues(alpha: 0.72),
                           fontSize: 12,
                           height: 1.5,
                         ),
@@ -680,7 +682,7 @@ class _ShivaHeroBackgroundState extends State<_ShivaHeroBackground>
           height: 200,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: _saffron.withOpacity(0.05),
+            color: _saffron.withValues(alpha: 0.05),
           ),
         ),
       ),
@@ -692,7 +694,7 @@ class _ShivaHeroBackgroundState extends State<_ShivaHeroBackground>
           height: 140,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: _gold.withOpacity(0.05),
+            color: _gold.withValues(alpha: 0.05),
           ),
         ),
       ),
@@ -704,7 +706,7 @@ class _ShivaHeroBackgroundState extends State<_ShivaHeroBackground>
           height: 60,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white.withOpacity(0.03),
+            color: Colors.white.withValues(alpha: 0.03),
           ),
         ),
       ),
@@ -742,9 +744,9 @@ class _HeroBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.15),
+        color: color.withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: color.withOpacity(0.35)),
+        border: Border.all(color: color.withValues(alpha: 0.35)),
       ),
       child: Text(
         label,
@@ -816,15 +818,17 @@ class _MantraCardState extends State<_MantraCard> {
         margin: const EdgeInsets.only(bottom: 14),
         decoration: BoxDecoration(
           color: isDark
-              ? const Color(0xFF1E193B).withOpacity(0.75)
+              ? const Color(0xFF1E193B).withValues(alpha: 0.75)
               : Colors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: m.accent.withOpacity(isDark ? 0.35 : 0.22)),
+          border: Border.all(
+            color: m.accent.withValues(alpha: isDark ? 0.35 : 0.22),
+          ),
           boxShadow: isDark
               ? []
               : [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
+                    color: Colors.black.withValues(alpha: 0.06),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),
@@ -843,7 +847,7 @@ class _MantraCardState extends State<_MantraCard> {
                       Container(
                         padding: const EdgeInsets.all(9),
                         decoration: BoxDecoration(
-                          color: m.accent.withOpacity(0.13),
+                          color: m.accent.withValues(alpha: 0.13),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Icon(
@@ -884,7 +888,7 @@ class _MantraCardState extends State<_MantraCard> {
                         child: Icon(
                           Icons.copy_outlined,
                           size: 16,
-                          color: onSurface.withOpacity(0.35),
+                          color: onSurface.withValues(alpha: 0.35),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -892,7 +896,7 @@ class _MantraCardState extends State<_MantraCard> {
                         _expanded
                             ? Icons.keyboard_arrow_up_rounded
                             : Icons.keyboard_arrow_down_rounded,
-                        color: onSurface.withOpacity(0.35),
+                        color: onSurface.withValues(alpha: 0.35),
                         size: 20,
                       ),
                     ],
@@ -903,9 +907,11 @@ class _MantraCardState extends State<_MantraCard> {
                     width: double.infinity,
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: m.accent.withOpacity(isDark ? 0.1 : 0.06),
+                      color: m.accent.withValues(alpha: isDark ? 0.1 : 0.06),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: m.accent.withOpacity(0.2)),
+                      border: Border.all(
+                        color: m.accent.withValues(alpha: 0.2),
+                      ),
                     ),
                     child: Text(
                       m.sanskrit,
@@ -922,7 +928,7 @@ class _MantraCardState extends State<_MantraCard> {
               ),
             ),
             if (_expanded) ...[
-              Divider(height: 1, color: m.accent.withOpacity(0.15)),
+              Divider(height: 1, color: m.accent.withValues(alpha: 0.15)),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -996,7 +1002,7 @@ class _MantraDetail extends StatelessWidget {
           value,
           style: TextStyle(
             fontSize: 13,
-            color: onSurface.withOpacity(0.78),
+            color: onSurface.withValues(alpha: 0.78),
             height: 1.5,
           ),
         ),
@@ -1036,9 +1042,9 @@ class _MantraGuidanceCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: _saffron.withOpacity(isDark ? 0.1 : 0.06),
+        color: _saffron.withValues(alpha: isDark ? 0.1 : 0.06),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: _saffron.withOpacity(0.25)),
+        border: Border.all(color: _saffron.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1085,7 +1091,7 @@ class _MantraGuidanceCard extends StatelessWidget {
                           t.$2,
                           style: TextStyle(
                             fontSize: 12,
-                            color: onSurface.withOpacity(0.65),
+                            color: onSurface.withValues(alpha: 0.65),
                             height: 1.4,
                           ),
                         ),
@@ -1163,15 +1169,17 @@ class _SymbolCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: isDark
-            ? const Color(0xFF1E193B).withOpacity(0.75)
+            ? const Color(0xFF1E193B).withValues(alpha: 0.75)
             : Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: symbol.color.withOpacity(isDark ? 0.35 : 0.22)),
+        border: Border.all(
+          color: symbol.color.withValues(alpha: isDark ? 0.35 : 0.22),
+        ),
         boxShadow: isDark
             ? null
             : [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
+                  color: Colors.black.withValues(alpha: 0.05),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -1184,9 +1192,9 @@ class _SymbolCard extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: symbol.color.withOpacity(0.12),
+              color: symbol.color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: symbol.color.withOpacity(0.3)),
+              border: Border.all(color: symbol.color.withValues(alpha: 0.3)),
             ),
             alignment: Alignment.center,
             child: Text(symbol.emoji, style: const TextStyle(fontSize: 26)),
@@ -1239,13 +1247,22 @@ class _FestivalsStoriesTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
-        _SectionTitle(text: 'Sacred Festivals', color: _saffron, onSurface: onSurface),
+        _SectionTitle(
+          text: 'Sacred Festivals',
+          color: _saffron,
+          onSurface: onSurface,
+        ),
         const SizedBox(height: 10),
         ..._festivals.map(
-          (f) => _FestivalCard(festival: f, isDark: isDark, onSurface: onSurface),
+          (f) =>
+              _FestivalCard(festival: f, isDark: isDark, onSurface: onSurface),
         ),
         const SizedBox(height: 18),
-        _SectionTitle(text: 'Eternal Stories', color: _crimson, onSurface: onSurface),
+        _SectionTitle(
+          text: 'Eternal Stories',
+          color: _crimson,
+          onSurface: onSurface,
+        ),
         const SizedBox(height: 10),
         ..._stories.map(
           (s) => _StoryCard(story: s, isDark: isDark, onSurface: onSurface),
@@ -1270,10 +1287,12 @@ class _FestivalCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
         color: isDark
-            ? const Color(0xFF1E193B).withOpacity(0.75)
+            ? const Color(0xFF1E193B).withValues(alpha: 0.75)
             : Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: festival.color.withOpacity(isDark ? 0.35 : 0.22)),
+        border: Border.all(
+          color: festival.color.withValues(alpha: isDark ? 0.35 : 0.22),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1285,11 +1304,13 @@ class _FestivalCard extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  festival.color.withOpacity(0.18),
-                  festival.color.withOpacity(0.04),
+                  festival.color.withValues(alpha: 0.18),
+                  festival.color.withValues(alpha: 0.04),
                 ],
               ),
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(20),
+              ),
             ),
             child: Row(
               children: [
@@ -1340,7 +1361,7 @@ class _FestivalCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.5,
                     height: 1.55,
-                    color: onSurface.withOpacity(0.78),
+                    color: onSurface.withValues(alpha: 0.78),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -1377,7 +1398,7 @@ class _FestivalCard extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 12.5,
                               height: 1.45,
-                              color: onSurface.withOpacity(0.82),
+                              color: onSurface.withValues(alpha: 0.82),
                             ),
                           ),
                         ),
@@ -1420,10 +1441,12 @@ class _StoryCardState extends State<_StoryCard> {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: widget.isDark
-              ? const Color(0xFF1E193B).withOpacity(0.75)
+              ? const Color(0xFF1E193B).withValues(alpha: 0.75)
               : Colors.white,
           borderRadius: BorderRadius.circular(18),
-          border: Border.all(color: s.accent.withOpacity(_open ? 0.5 : 0.22)),
+          border: Border.all(
+            color: s.accent.withValues(alpha: _open ? 0.5 : 0.22),
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1433,7 +1456,7 @@ class _StoryCardState extends State<_StoryCard> {
                 Container(
                   padding: const EdgeInsets.all(9),
                   decoration: BoxDecoration(
-                    color: s.accent.withOpacity(0.13),
+                    color: s.accent.withValues(alpha: 0.13),
                     borderRadius: BorderRadius.circular(11),
                   ),
                   child: Icon(s.icon, color: s.accent, size: 18),
@@ -1452,8 +1475,10 @@ class _StoryCardState extends State<_StoryCard> {
                 AnimatedRotation(
                   turns: _open ? 0.5 : 0,
                   duration: const Duration(milliseconds: 220),
-                  child: Icon(Icons.keyboard_arrow_down_rounded,
-                      color: s.accent),
+                  child: Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: s.accent,
+                  ),
                 ),
               ],
             ),
@@ -1465,7 +1490,7 @@ class _StoryCardState extends State<_StoryCard> {
               style: TextStyle(
                 fontSize: 12.5,
                 height: 1.55,
-                color: widget.onSurface.withOpacity(0.78),
+                color: widget.onSurface.withValues(alpha: 0.78),
               ),
             ),
             if (_open) ...[
@@ -1473,9 +1498,9 @@ class _StoryCardState extends State<_StoryCard> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: s.accent.withOpacity(0.07),
+                  color: s.accent.withValues(alpha: 0.07),
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: s.accent.withOpacity(0.22)),
+                  border: Border.all(color: s.accent.withValues(alpha: 0.22)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1495,7 +1520,7 @@ class _StoryCardState extends State<_StoryCard> {
                       style: TextStyle(
                         fontSize: 12.5,
                         height: 1.55,
-                        color: widget.onSurface.withOpacity(0.82),
+                        color: widget.onSurface.withValues(alpha: 0.82),
                       ),
                     ),
                   ],
@@ -1504,8 +1529,11 @@ class _StoryCardState extends State<_StoryCard> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  Icon(Icons.menu_book_outlined,
-                      size: 12, color: widget.onSurface.withOpacity(0.5)),
+                  Icon(
+                    Icons.menu_book_outlined,
+                    size: 12,
+                    color: widget.onSurface.withValues(alpha: 0.5),
+                  ),
                   const SizedBox(width: 6),
                   Expanded(
                     child: Text(
@@ -1513,7 +1541,7 @@ class _StoryCardState extends State<_StoryCard> {
                       style: TextStyle(
                         fontSize: 11,
                         fontStyle: FontStyle.italic,
-                        color: widget.onSurface.withOpacity(0.55),
+                        color: widget.onSurface.withValues(alpha: 0.55),
                       ),
                     ),
                   ),
@@ -1595,10 +1623,10 @@ class _JyotirlingaTile extends StatelessWidget {
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: isDark
-            ? const Color(0xFF1E193B).withOpacity(0.75)
+            ? const Color(0xFF1E193B).withValues(alpha: 0.75)
             : Colors.white,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _gold.withOpacity(isDark ? 0.3 : 0.22)),
+        border: Border.all(color: _gold.withValues(alpha: isDark ? 0.3 : 0.22)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1640,15 +1668,14 @@ class _JyotirlingaTile extends StatelessWidget {
                 const SizedBox(height: 2),
                 Row(
                   children: [
-                    Icon(Icons.location_on_outlined,
-                        size: 12, color: _saffron),
+                    Icon(Icons.location_on_outlined, size: 12, color: _saffron),
                     const SizedBox(width: 4),
                     Expanded(
                       child: Text(
                         '${item.location} · ${item.state}',
                         style: TextStyle(
                           fontSize: 11.5,
-                          color: onSurface.withOpacity(0.6),
+                          color: onSurface.withValues(alpha: 0.6),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -1661,7 +1688,7 @@ class _JyotirlingaTile extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12.5,
                     height: 1.5,
-                    color: onSurface.withOpacity(0.78),
+                    color: onSurface.withValues(alpha: 0.78),
                   ),
                 ),
               ],
@@ -1732,9 +1759,9 @@ class _ShivaIntro extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: color.withOpacity(isDark ? 0.1 : 0.06),
+        color: color.withValues(alpha: isDark ? 0.1 : 0.06),
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: color.withOpacity(0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1761,7 +1788,7 @@ class _ShivaIntro extends StatelessWidget {
             style: TextStyle(
               fontSize: 12.5,
               height: 1.55,
-              color: onSurface.withOpacity(0.78),
+              color: onSurface.withValues(alpha: 0.78),
             ),
           ),
         ],

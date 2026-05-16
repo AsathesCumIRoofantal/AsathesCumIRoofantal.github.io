@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'utilities_guest_binding.dart';
 
 class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
@@ -11,9 +12,7 @@ class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
     final primary = theme.colorScheme.primary;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Guest Utilities'),
-      ),
+      appBar: AppBar(title: const Text('Guest Utilities')),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -29,27 +28,35 @@ class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
             final util = controller.utilities[index];
             return Card(
               margin: const EdgeInsets.only(bottom: 16),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(20),
                 leading: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: primary.withOpacity(0.1),
+                    color: primary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(_getIcon(util['icon'] as String), color: primary),
                 ),
                 title: Text(
                   util['name'] as String,
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
                 subtitle: Text(util['desc'] as String),
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
-                  Get.snackbar('Guest Access', 'Please sign in for full utility access.',
-                      snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: theme.colorScheme.surface);
+                  Get.snackbar(
+                    'Guest Access',
+                    'Please sign in for full utility access.',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: theme.colorScheme.surface,
+                  );
                 },
               ),
             );
@@ -61,11 +68,16 @@ class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
 
   IconData _getIcon(String iconName) {
     switch (iconName) {
-      case 'search': return Icons.search;
-      case 'calculate': return Icons.calculate_outlined;
-      case 'map': return Icons.map_outlined;
-      case 'analytics': return Icons.analytics_outlined;
-      default: return Icons.extension;
+      case 'search':
+        return Icons.search;
+      case 'calculate':
+        return Icons.calculate_outlined;
+      case 'map':
+        return Icons.map_outlined;
+      case 'analytics':
+        return Icons.analytics_outlined;
+      default:
+        return Icons.extension;
     }
   }
 }

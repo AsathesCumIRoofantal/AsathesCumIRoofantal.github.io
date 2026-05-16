@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'marketing_promotion_controller.dart';
 
 class MarketingPromotionView extends GetView<MarketingPromotionController> {
@@ -43,7 +44,9 @@ class MarketingPromotionView extends GetView<MarketingPromotionController> {
             children: [
               _buildHeader(context, isDark, onSurface),
               const SizedBox(height: 20),
-              ..._marketingSections.map((s) => _buildSection(context, s, isDark, onSurface)),
+              ..._marketingSections.map(
+                (s) => _buildSection(context, s, isDark, onSurface),
+              ),
             ],
           ),
         ),
@@ -56,12 +59,15 @@ class MarketingPromotionView extends GetView<MarketingPromotionController> {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.purple.withOpacity(0.15), Colors.pinkAccent.withOpacity(0.05)],
+          colors: [
+            Colors.purple.withValues(alpha: 0.15),
+            Colors.pinkAccent.withValues(alpha: 0.05),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.purple.withOpacity(0.25)),
+        border: Border.all(color: Colors.purple.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,7 +77,7 @@ class MarketingPromotionView extends GetView<MarketingPromotionController> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.purple.withOpacity(0.15),
+                  color: Colors.purple.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Icon(Icons.shop, color: Colors.purple, size: 28),
@@ -81,11 +87,22 @@ class MarketingPromotionView extends GetView<MarketingPromotionController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Marketing & Promotion',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: onSurface)),
+                    Text(
+                      'Marketing & Promotion',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: onSurface,
+                      ),
+                    ),
                     const SizedBox(height: 4),
-                    Text('Brand strategy & campaigns',
-                        style: TextStyle(fontSize: 13, color: onSurface.withOpacity(0.6))),
+                    Text(
+                      'Brand strategy & campaigns',
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: onSurface.withValues(alpha: 0.6),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -96,28 +113,45 @@ class MarketingPromotionView extends GetView<MarketingPromotionController> {
             'Discover our marketing initiatives and promotional campaigns. '
             'We leverage data-driven strategies to elevate brand awareness and '
             'drive successful product launches.',
-            style: TextStyle(fontSize: 14, color: onSurface.withOpacity(0.75), height: 1.6),
+            style: TextStyle(
+              fontSize: 14,
+              color: onSurface.withValues(alpha: 0.75),
+              height: 1.6,
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildSection(BuildContext context, _MarketingSection section, bool isDark, Color onSurface) {
+  Widget _buildSection(
+    BuildContext context,
+    _MarketingSection section,
+    bool isDark,
+    Color onSurface,
+  ) {
     final theme = Theme.of(context);
     return Container(
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
-        color: isDark ? theme.cardColor.withOpacity(0.35) : theme.colorScheme.surface,
+        color: isDark
+            ? theme.cardColor.withValues(alpha: 0.35)
+            : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
+              ? Colors.white.withValues(alpha: 0.06)
+              : theme.colorScheme.outline.withValues(alpha: 0.12),
         ),
         boxShadow: isDark
             ? []
-            : [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 3))],
+            : [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, 3),
+                ),
+              ],
       ),
       child: Theme(
         data: theme.copyWith(dividerColor: Colors.transparent),
@@ -127,15 +161,21 @@ class MarketingPromotionView extends GetView<MarketingPromotionController> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
+              color: section.color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(section.icon, color: section.color, size: 20),
           ),
-          title: Text(section.title,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15, color: onSurface)),
-          iconColor: onSurface.withOpacity(0.5),
-          collapsedIconColor: onSurface.withOpacity(0.4),
+          title: Text(
+            section.title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              color: onSurface,
+            ),
+          ),
+          iconColor: onSurface.withValues(alpha: 0.5),
+          collapsedIconColor: onSurface.withValues(alpha: 0.4),
           children: section.points
               .map((p) => _buildPoint(p, onSurface, section.color))
               .toList(),
@@ -158,8 +198,14 @@ class MarketingPromotionView extends GetView<MarketingPromotionController> {
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: Text(point,
-                style: TextStyle(fontSize: 14, color: onSurface.withOpacity(0.75), height: 1.5)),
+            child: Text(
+              point,
+              style: TextStyle(
+                fontSize: 14,
+                color: onSurface.withValues(alpha: 0.75),
+                height: 1.5,
+              ),
+            ),
           ),
         ],
       ),
@@ -172,7 +218,12 @@ class _MarketingSection {
   final IconData icon;
   final Color color;
   final List<String> points;
-  const _MarketingSection({required this.title, required this.icon, required this.color, required this.points});
+  const _MarketingSection({
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.points,
+  });
 }
 
 final List<_MarketingSection> _marketingSections = [

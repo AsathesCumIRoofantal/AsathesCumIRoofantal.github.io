@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'products_services_controller.dart';
 import 'package:intl/intl.dart';
+
+import 'products_services_controller.dart';
 
 class ProductsServicesView extends GetView<ProductsServicesController> {
   const ProductsServicesView({super.key});
@@ -56,7 +57,7 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
                           Icon(
                             Icons.inventory_2_outlined,
                             size: 64,
-                            color: theme.dividerColor.withOpacity(0.1),
+                            color: theme.dividerColor.withValues(alpha: 0.1),
                           ),
                           const SizedBox(height: 16),
                           const Text(
@@ -96,7 +97,7 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
           hintText: 'Search by Title or #Tags...',
           prefixIcon: Icon(Icons.search, color: theme.dividerColor),
           filled: true,
-          fillColor: theme.cardColor.withOpacity(0.3),
+          fillColor: theme.cardColor.withValues(alpha: 0.3),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none,
@@ -114,9 +115,9 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
     return Container(
       margin: const EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-        color: theme.cardColor.withOpacity(0.5),
+        color: theme.cardColor.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: theme.dividerColor.withOpacity(0.1)),
+        border: Border.all(color: theme.dividerColor.withValues(alpha: 0.1)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -157,10 +158,10 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: tertiary.withOpacity(0.1),
+                            color: tertiary.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: tertiary.withOpacity(0.2),
+                              color: tertiary.withValues(alpha: 0.2),
                             ),
                           ),
                           child: Text(
@@ -182,7 +183,7 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              color: Colors.white.withOpacity(0.02),
+              color: Colors.white.withValues(alpha: 0.02),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -262,11 +263,13 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
                             vertical: 10,
                           ),
                           decoration: BoxDecoration(
-                            color: theme.colorScheme.secondary.withOpacity(0.1),
+                            color: theme.colorScheme.secondary.withValues(
+                              alpha: 0.1,
+                            ),
                             borderRadius: BorderRadius.circular(12),
                             border: Border.all(
-                              color: theme.colorScheme.secondary.withOpacity(
-                                0.2,
+                              color: theme.colorScheme.secondary.withValues(
+                                alpha: 0.2,
                               ),
                             ),
                           ),
@@ -335,7 +338,7 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: theme.dividerColor.withOpacity(0.2),
+                  color: theme.dividerColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -405,7 +408,9 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
                               (tag) => Chip(
                                 label: Text(tag),
                                 onDeleted: () => controller.removeTempTag(tag),
-                                backgroundColor: tertiary.withOpacity(0.05),
+                                backgroundColor: tertiary.withValues(
+                                  alpha: 0.05,
+                                ),
                               ),
                             )
                             .toList(),
@@ -460,7 +465,7 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: theme.cardColor.withOpacity(0.3),
+                        color: theme.cardColor.withValues(alpha: 0.3),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
@@ -586,7 +591,7 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
       labelText: label,
       prefixIcon: Icon(
         icon,
-        color: theme.colorScheme.tertiary.withOpacity(0.7),
+        color: theme.colorScheme.tertiary.withValues(alpha: 0.7),
       ),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       focusedBorder: OutlineInputBorder(
@@ -594,7 +599,7 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
         borderSide: BorderSide(color: theme.colorScheme.tertiary, width: 2),
       ),
       filled: true,
-      fillColor: theme.cardColor.withOpacity(0.5),
+      fillColor: theme.cardColor.withValues(alpha: 0.5),
     );
   }
 }

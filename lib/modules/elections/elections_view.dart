@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'elections_controller.dart';
 
 // ─────────────────────────────────────────────
@@ -327,12 +328,14 @@ class ElectionsView extends GetView<ElectionsController> {
         slivers: [
           _buildAppBar(context, isDark),
           SliverToBoxAdapter(child: _StatStrip(isDark: isDark)),
-          SliverToBoxAdapter(child: _SectionHeading(
-            label: 'CIVIC PILLARS',
-            title: 'Seven foundations of an informed vote',
-            color: _inkBlue,
-            isDark: isDark,
-          )),
+          SliverToBoxAdapter(
+            child: _SectionHeading(
+              label: 'CIVIC PILLARS',
+              title: 'Seven foundations of an informed vote',
+              color: _inkBlue,
+              isDark: isDark,
+            ),
+          ),
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
             sliver: SliverList.builder(
@@ -345,19 +348,23 @@ class ElectionsView extends GetView<ElectionsController> {
               ),
             ),
           ),
-          SliverToBoxAdapter(child: _SectionHeading(
-            label: 'JOURNEY',
-            title: 'How an election unfolds, step by step',
-            color: _saffron,
-            isDark: isDark,
-          )),
+          SliverToBoxAdapter(
+            child: _SectionHeading(
+              label: 'JOURNEY',
+              title: 'How an election unfolds, step by step',
+              color: _saffron,
+              isDark: isDark,
+            ),
+          ),
           SliverToBoxAdapter(child: _Timeline(isDark: isDark)),
-          SliverToBoxAdapter(child: _SectionHeading(
-            label: 'YOUR RIGHTS',
-            title: 'Guarantees every voter must know',
-            color: _civicGreen,
-            isDark: isDark,
-          )),
+          SliverToBoxAdapter(
+            child: _SectionHeading(
+              label: 'YOUR RIGHTS',
+              title: 'Guarantees every voter must know',
+              color: _civicGreen,
+              isDark: isDark,
+            ),
+          ),
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
             sliver: SliverGrid.builder(
@@ -372,19 +379,23 @@ class ElectionsView extends GetView<ElectionsController> {
                   _RightChip(item: _rights[i], isDark: isDark),
             ),
           ),
-          SliverToBoxAdapter(child: _SectionHeading(
-            label: 'POLLING DAY',
-            title: 'A 6-step checklist before you leave home',
-            color: _ballotNavy,
-            isDark: isDark,
-          )),
+          SliverToBoxAdapter(
+            child: _SectionHeading(
+              label: 'POLLING DAY',
+              title: 'A 6-step checklist before you leave home',
+              color: _ballotNavy,
+              isDark: isDark,
+            ),
+          ),
           SliverToBoxAdapter(child: _Checklist(isDark: isDark)),
-          SliverToBoxAdapter(child: _SectionHeading(
-            label: 'QUESTIONS, ANSWERED',
-            title: 'Frequently asked by first-time voters',
-            color: _stamp,
-            isDark: isDark,
-          )),
+          SliverToBoxAdapter(
+            child: _SectionHeading(
+              label: 'QUESTIONS, ANSWERED',
+              title: 'Frequently asked by first-time voters',
+              color: _stamp,
+              isDark: isDark,
+            ),
+          ),
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
             sliver: SliverList.builder(
@@ -454,7 +465,10 @@ class _BallotHeroBackground extends StatelessWidget {
             height: 220,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: _saffron.withOpacity(0.35), width: 6),
+              border: Border.all(
+                color: _saffron.withValues(alpha: 0.35),
+                width: 6,
+              ),
             ),
           ),
         ),
@@ -466,7 +480,10 @@ class _BallotHeroBackground extends StatelessWidget {
             height: 110,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: _saffron.withOpacity(0.55), width: 3),
+              border: Border.all(
+                color: _saffron.withValues(alpha: 0.55),
+                width: 3,
+              ),
             ),
             child: const Center(
               child: Text(
@@ -491,7 +508,7 @@ class _BallotHeroBackground extends StatelessWidget {
             'timelines, and voter responsibilities. An informed electorate is '
             'the foundation of a healthy democratic process.',
             style: TextStyle(
-              color: Colors.white.withOpacity(0.85),
+              color: Colors.white.withValues(alpha: 0.85),
               fontSize: 11.5,
               height: 1.45,
             ),
@@ -521,20 +538,18 @@ class _StatStrip extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 4),
       padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
       decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withOpacity(0.04)
-            : Colors.white,
+        color: isDark ? Colors.white.withValues(alpha: 0.04) : Colors.white,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.08)
-              : _ballotNavy.withOpacity(0.12),
+              ? Colors.white.withValues(alpha: 0.08)
+              : _ballotNavy.withValues(alpha: 0.12),
         ),
         boxShadow: isDark
             ? null
             : [
                 BoxShadow(
-                  color: _ballotNavy.withOpacity(0.06),
+                  color: _ballotNavy.withValues(alpha: 0.06),
                   blurRadius: 14,
                   offset: const Offset(0, 6),
                 ),
@@ -561,10 +576,9 @@ class _StatStrip extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 9.5,
                       letterSpacing: 0.6,
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(0.6),
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                 ],
@@ -574,10 +588,9 @@ class _StatStrip extends StatelessWidget {
               Container(
                 width: 1,
                 height: 32,
-                color: Theme.of(context)
-                    .colorScheme
-                    .onSurface
-                    .withOpacity(0.08),
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.08),
               ),
           ],
         ],
@@ -683,14 +696,14 @@ class _PillarCardState extends State<_PillarCard> {
           color: isDark ? const Color(0xFF161B2C) : Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: p.accent.withOpacity(_open ? 0.5 : 0.18),
+            color: p.accent.withValues(alpha: _open ? 0.5 : 0.18),
             width: _open ? 1.4 : 1,
           ),
           boxShadow: isDark
               ? null
               : [
                   BoxShadow(
-                    color: p.accent.withOpacity(0.08),
+                    color: p.accent.withValues(alpha: 0.08),
                     blurRadius: 14,
                     offset: const Offset(0, 6),
                   ),
@@ -711,10 +724,7 @@ class _PillarCardState extends State<_PillarCard> {
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [
-                          p.accent,
-                          p.accent.withOpacity(0.7),
-                        ],
+                        colors: [p.accent, p.accent.withValues(alpha: 0.7)],
                       ),
                       borderRadius: BorderRadius.circular(14),
                     ),
@@ -765,7 +775,7 @@ class _PillarCardState extends State<_PillarCard> {
                           style: TextStyle(
                             fontSize: 12.5,
                             height: 1.5,
-                            color: widget.onSurface.withOpacity(0.72),
+                            color: widget.onSurface.withValues(alpha: 0.72),
                           ),
                         ),
                       ],
@@ -778,7 +788,7 @@ class _PillarCardState extends State<_PillarCard> {
               Container(
                 height: 1,
                 margin: const EdgeInsets.symmetric(horizontal: 16),
-                color: p.accent.withOpacity(0.15),
+                color: p.accent.withValues(alpha: 0.15),
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
@@ -816,7 +826,9 @@ class _PillarCardState extends State<_PillarCard> {
                                 style: TextStyle(
                                   fontSize: 12.5,
                                   height: 1.45,
-                                  color: widget.onSurface.withOpacity(0.82),
+                                  color: widget.onSurface.withValues(
+                                    alpha: 0.82,
+                                  ),
                                 ),
                               ),
                             ),
@@ -890,7 +902,7 @@ class _TimelineRow extends StatelessWidget {
                   height: 6,
                   color: isFirst
                       ? Colors.transparent
-                      : item.color.withOpacity(0.35),
+                      : item.color.withValues(alpha: 0.35),
                 ),
                 Container(
                   width: 28,
@@ -900,7 +912,7 @@ class _TimelineRow extends StatelessWidget {
                     shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
-                        color: item.color.withOpacity(0.35),
+                        color: item.color.withValues(alpha: 0.35),
                         blurRadius: 8,
                       ),
                     ],
@@ -912,7 +924,7 @@ class _TimelineRow extends StatelessWidget {
                     width: 2,
                     color: isLast
                         ? Colors.transparent
-                        : item.color.withOpacity(0.35),
+                        : item.color.withValues(alpha: 0.35),
                   ),
                 ),
               ],
@@ -925,10 +937,10 @@ class _TimelineRow extends StatelessWidget {
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 color: isDark
-                    ? Colors.white.withOpacity(0.04)
+                    ? Colors.white.withValues(alpha: 0.04)
                     : Colors.white,
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: item.color.withOpacity(0.25)),
+                border: Border.all(color: item.color.withValues(alpha: 0.25)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -947,9 +959,11 @@ class _TimelineRow extends StatelessWidget {
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
                         decoration: BoxDecoration(
-                          color: item.color.withOpacity(0.12),
+                          color: item.color.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
@@ -970,7 +984,7 @@ class _TimelineRow extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12.5,
                       height: 1.5,
-                      color: onSurface.withOpacity(0.72),
+                      color: onSurface.withValues(alpha: 0.72),
                     ),
                   ),
                 ],
@@ -999,12 +1013,12 @@ class _RightChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: isDark ? const Color(0xFF161B2C) : Colors.white,
         borderRadius: BorderRadius.circular(18),
-        border: Border.all(color: _civicGreen.withOpacity(0.22)),
+        border: Border.all(color: _civicGreen.withValues(alpha: 0.22)),
         boxShadow: isDark
             ? null
             : [
                 BoxShadow(
-                  color: _civicGreen.withOpacity(0.07),
+                  color: _civicGreen.withValues(alpha: 0.07),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -1016,7 +1030,7 @@ class _RightChip extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: _civicGreen.withOpacity(0.12),
+              color: _civicGreen.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(item.icon, size: 16, color: _civicGreen),
@@ -1037,7 +1051,7 @@ class _RightChip extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11.5,
                 height: 1.4,
-                color: onSurface.withOpacity(0.7),
+                color: onSurface.withValues(alpha: 0.7),
               ),
               overflow: TextOverflow.fade,
             ),
@@ -1075,10 +1089,13 @@ class _Checklist extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: isDark
               ? const [Color(0xFF1B2240), Color(0xFF111827)]
-              : [_ballotNavy.withOpacity(0.04), _inkBlue.withOpacity(0.08)],
+              : [
+                  _ballotNavy.withValues(alpha: 0.04),
+                  _inkBlue.withValues(alpha: 0.08),
+                ],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: _ballotNavy.withOpacity(0.22)),
+        border: Border.all(color: _ballotNavy.withValues(alpha: 0.22)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -1096,8 +1113,11 @@ class _Checklist extends StatelessWidget {
                       color: _ballotNavy,
                       borderRadius: BorderRadius.circular(7),
                     ),
-                    child: const Icon(Icons.check_rounded,
-                        color: Colors.white, size: 14),
+                    child: const Icon(
+                      Icons.check_rounded,
+                      color: Colors.white,
+                      size: 14,
+                    ),
                   ),
                   const SizedBox(width: 12),
                   Expanded(
@@ -1106,7 +1126,7 @@ class _Checklist extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 13,
                         height: 1.45,
-                        color: onSurface.withOpacity(0.85),
+                        color: onSurface.withValues(alpha: 0.85),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -1146,7 +1166,7 @@ class _FaqTileState extends State<_FaqTile> {
           color: widget.isDark ? const Color(0xFF161B2C) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
-            color: _stamp.withOpacity(_open ? 0.45 : 0.18),
+            color: _stamp.withValues(alpha: _open ? 0.45 : 0.18),
           ),
         ),
         child: Column(
@@ -1156,9 +1176,11 @@ class _FaqTileState extends State<_FaqTile> {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 3),
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
-                    color: _stamp.withOpacity(0.12),
+                    color: _stamp.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: const Text(
@@ -1185,8 +1207,10 @@ class _FaqTileState extends State<_FaqTile> {
                 AnimatedRotation(
                   turns: _open ? 0.5 : 0,
                   duration: const Duration(milliseconds: 180),
-                  child: const Icon(Icons.keyboard_arrow_down_rounded,
-                      color: _stamp),
+                  child: const Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: _stamp,
+                  ),
                 ),
               ],
             ),
@@ -1197,7 +1221,7 @@ class _FaqTileState extends State<_FaqTile> {
                 style: TextStyle(
                   fontSize: 12.5,
                   height: 1.55,
-                  color: onSurface.withOpacity(0.78),
+                  color: onSurface.withValues(alpha: 0.78),
                 ),
               ),
             ],
@@ -1233,8 +1257,7 @@ class _Pledge extends StatelessWidget {
         children: [
           Row(
             children: const [
-              Icon(Icons.front_hand_outlined,
-                  color: Colors.white, size: 22),
+              Icon(Icons.front_hand_outlined, color: Colors.white, size: 22),
               SizedBox(width: 10),
               Text(
                 'THE VOTER\'S PLEDGE',

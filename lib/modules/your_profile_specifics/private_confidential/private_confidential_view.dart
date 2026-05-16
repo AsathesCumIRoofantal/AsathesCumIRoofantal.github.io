@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'private_confidential_controller.dart';
 
 class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
@@ -10,21 +11,26 @@ class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
     return Scaffold(
       backgroundColor: const Color(0xFF1A1A1A),
       appBar: AppBar(
-        title: const Text('SECURE VAULT', style: TextStyle(letterSpacing: 4, fontWeight: FontWeight.bold)),
+        title: const Text(
+          'SECURE VAULT',
+          style: TextStyle(letterSpacing: 4, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: Column(
         children: [
           _buildVaultHeader(context),
           Expanded(
-            child: Obx(() => ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: controller.files.length,
-              itemBuilder: (context, index) {
-                final file = controller.files[index];
-                return _buildSecureFileRow(context, file);
-              },
-            )),
+            child: Obx(
+              () => ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: controller.files.length,
+                itemBuilder: (context, index) {
+                  final file = controller.files[index];
+                  return _buildSecureFileRow(context, file);
+                },
+              ),
+            ),
           ),
         ],
       ),
@@ -46,12 +52,21 @@ class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
           SizedBox(height: 24),
           Text(
             "RESTRICTED AREA",
-            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 2),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 2,
+            ),
           ),
           SizedBox(height: 8),
           Text(
             "Military Grade Encryption Active",
-            style: TextStyle(color: Colors.red, fontSize: 12, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
@@ -65,7 +80,7 @@ class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
       decoration: BoxDecoration(
         color: Colors.black,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.red.withOpacity(0.3)),
+        border: Border.all(color: Colors.red.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -75,12 +90,29 @@ class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(file.name, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                Text("Access: ${file.accessLevel}", style: const TextStyle(color: Colors.grey, fontSize: 10)),
+                Text(
+                  file.name,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  "Access: ${file.accessLevel}",
+                  style: const TextStyle(color: Colors.grey, fontSize: 10),
+                ),
               ],
             ),
           ),
-          Text(file.status, style: const TextStyle(color: Colors.grey, fontSize: 10, fontWeight: FontWeight.bold)),
+          Text(
+            file.status,
+            style: const TextStyle(
+              color: Colors.grey,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );

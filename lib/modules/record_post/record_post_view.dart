@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'record_post_controller.dart';
 
 class RecordPostView extends GetView<RecordPostController> {
@@ -46,7 +47,9 @@ class RecordPostView extends GetView<RecordPostController> {
                 child: Text(
                   'Record your thoughts and findings to the all-space narrative.',
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+                    color: theme.textTheme.bodyMedium?.color?.withValues(
+                      alpha: 0.7,
+                    ),
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -61,7 +64,7 @@ class RecordPostView extends GetView<RecordPostController> {
                           Icon(
                             Icons.history_edu_rounded,
                             size: 64,
-                            color: tertiary.withOpacity(0.3),
+                            color: tertiary.withValues(alpha: 0.3),
                           ),
                           const SizedBox(height: 16),
                           Text(
@@ -109,9 +112,9 @@ class RecordPostView extends GetView<RecordPostController> {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: theme.cardColor.withOpacity(0.5),
+        color: theme.cardColor.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: tertiary.withOpacity(0.2)),
+        border: Border.all(color: tertiary.withValues(alpha: 0.2)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -123,7 +126,7 @@ class RecordPostView extends GetView<RecordPostController> {
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: tertiary.withOpacity(0.1),
+                    color: tertiary.withValues(alpha: 0.1),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(mediaIcon, color: tertiary, size: 20),
@@ -158,7 +161,9 @@ class RecordPostView extends GetView<RecordPostController> {
             Text(
               post.content,
               style: TextStyle(
-                color: theme.textTheme.bodyMedium?.color?.withOpacity(0.9),
+                color: theme.textTheme.bodyMedium?.color?.withValues(
+                  alpha: 0.9,
+                ),
                 height: 1.5,
               ),
             ),
@@ -198,7 +203,7 @@ class RecordPostView extends GetView<RecordPostController> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: theme.dividerColor.withOpacity(0.2),
+                  color: theme.dividerColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -254,7 +259,7 @@ class RecordPostView extends GetView<RecordPostController> {
                             selected: isSelected,
                             onSelected: (selected) =>
                                 controller.selectedCategory.value = cat,
-                            selectedColor: tertiary.withOpacity(0.2),
+                            selectedColor: tertiary.withValues(alpha: 0.2),
                             backgroundColor: theme.cardColor,
                             labelStyle: TextStyle(
                               color: isSelected
@@ -296,7 +301,9 @@ class RecordPostView extends GetView<RecordPostController> {
                                     border: Border.all(
                                       color: isSelected
                                           ? tertiary
-                                          : theme.dividerColor.withOpacity(0.1),
+                                          : theme.dividerColor.withValues(
+                                              alpha: 0.1,
+                                            ),
                                     ),
                                   ),
                                   child: Icon(
@@ -304,7 +311,7 @@ class RecordPostView extends GetView<RecordPostController> {
                                     color: isSelected
                                         ? Colors.black87
                                         : theme.textTheme.bodyMedium?.color
-                                              ?.withOpacity(0.5),
+                                              ?.withValues(alpha: 0.5),
                                   ),
                                 ),
                                 const SizedBox(height: 8),
@@ -318,7 +325,7 @@ class RecordPostView extends GetView<RecordPostController> {
                                     color: isSelected
                                         ? tertiary
                                         : theme.textTheme.bodyMedium?.color
-                                              ?.withOpacity(0.5),
+                                              ?.withValues(alpha: 0.5),
                                   ),
                                 ),
                               ],
@@ -369,7 +376,7 @@ class RecordPostView extends GetView<RecordPostController> {
         fontSize: 11,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
-        color: color.withOpacity(0.8),
+        color: color.withValues(alpha: 0.8),
       ),
     );
   }
@@ -383,14 +390,14 @@ class RecordPostView extends GetView<RecordPostController> {
     final tertiary = theme.colorScheme.tertiary;
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon, color: tertiary.withOpacity(0.7)),
+      prefixIcon: Icon(icon, color: tertiary.withValues(alpha: 0.7)),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: tertiary, width: 2),
       ),
       filled: true,
-      fillColor: theme.cardColor.withOpacity(0.5),
+      fillColor: theme.cardColor.withValues(alpha: 0.5),
     );
   }
 }

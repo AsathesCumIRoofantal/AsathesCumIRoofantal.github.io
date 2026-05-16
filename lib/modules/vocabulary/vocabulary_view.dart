@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'vocabulary_controller.dart';
 
 class VocabularyView extends GetView<VocabularyController> {
@@ -79,12 +80,17 @@ class VocabularyView extends GetView<VocabularyController> {
         style: TextStyle(color: onSurface),
         decoration: InputDecoration(
           hintText: 'Search terminology...',
-          hintStyle: TextStyle(color: onSurface.withOpacity(0.5)),
-          prefixIcon: Icon(Icons.search, color: onSurface.withOpacity(0.6)),
+          hintStyle: TextStyle(color: onSurface.withValues(alpha: 0.5)),
+          prefixIcon: Icon(
+            Icons.search,
+            color: onSurface.withValues(alpha: 0.6),
+          ),
           filled: true,
           fillColor: isDark
-              ? theme.cardColor.withOpacity(0.3)
-              : theme.colorScheme.surfaceContainerHighest.withOpacity(0.6),
+              ? theme.cardColor.withValues(alpha: 0.3)
+              : theme.colorScheme.surfaceContainerHighest.withValues(
+                  alpha: 0.6,
+                ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide.none,
@@ -106,19 +112,19 @@ class VocabularyView extends GetView<VocabularyController> {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: isDark
-            ? theme.cardColor.withOpacity(0.4)
+            ? theme.cardColor.withValues(alpha: 0.4)
             : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.15),
+              ? Colors.white.withValues(alpha: 0.06)
+              : theme.colorScheme.outline.withValues(alpha: 0.15),
         ),
         boxShadow: isDark
             ? []
             : [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.06),
+                  color: Colors.black.withValues(alpha: 0.06),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -132,7 +138,7 @@ class VocabularyView extends GetView<VocabularyController> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: primary.withOpacity(0.12),
+                  color: primary.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
@@ -148,7 +154,7 @@ class VocabularyView extends GetView<VocabularyController> {
               const Spacer(),
               Icon(
                 Icons.info_outline,
-                color: onSurface.withOpacity(0.35),
+                color: onSurface.withValues(alpha: 0.35),
                 size: 18,
               ),
             ],
@@ -167,7 +173,7 @@ class VocabularyView extends GetView<VocabularyController> {
             item.definition,
             style: TextStyle(
               fontSize: 14,
-              color: onSurface.withOpacity(0.65),
+              color: onSurface.withValues(alpha: 0.65),
               height: 1.5,
             ),
           ),
@@ -185,12 +191,12 @@ class VocabularyView extends GetView<VocabularyController> {
           Icon(
             Icons.search_off_rounded,
             size: 64,
-            color: onSurface.withOpacity(0.2),
+            color: onSurface.withValues(alpha: 0.2),
           ),
           const SizedBox(height: 16),
           Text(
             'No terms found matching your search.',
-            style: TextStyle(color: onSurface.withOpacity(0.5)),
+            style: TextStyle(color: onSurface.withValues(alpha: 0.5)),
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'solution_controller.dart';
 
 class SolutionView extends GetView<SolutionController> {
@@ -59,14 +60,14 @@ class SolutionView extends GetView<SolutionController> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.teal.withOpacity(0.15),
-            Colors.green.withOpacity(0.05),
+            Colors.teal.withValues(alpha: 0.15),
+            Colors.green.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.teal.withOpacity(0.25)),
+        border: Border.all(color: Colors.teal.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +77,7 @@ class SolutionView extends GetView<SolutionController> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.teal.withOpacity(0.15),
+                  color: Colors.teal.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Icon(
@@ -103,7 +104,7 @@ class SolutionView extends GetView<SolutionController> {
                       'Innovative problem solving',
                       style: TextStyle(
                         fontSize: 13,
-                        color: onSurface.withOpacity(0.6),
+                        color: onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   ],
@@ -117,7 +118,7 @@ class SolutionView extends GetView<SolutionController> {
             'We engineer robust frameworks designed for scale and impact.',
             style: TextStyle(
               fontSize: 14,
-              color: onSurface.withOpacity(0.75),
+              color: onSurface.withValues(alpha: 0.75),
               height: 1.6,
             ),
           ),
@@ -137,13 +138,13 @@ class SolutionView extends GetView<SolutionController> {
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
         color: isDark
-            ? theme.cardColor.withOpacity(0.35)
+            ? theme.cardColor.withValues(alpha: 0.35)
             : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
+              ? Colors.white.withValues(alpha: 0.06)
+              : theme.colorScheme.outline.withValues(alpha: 0.12),
         ),
       ),
       child: Theme(
@@ -154,7 +155,7 @@ class SolutionView extends GetView<SolutionController> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
+              color: section.color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(section.icon, color: section.color, size: 20),
@@ -193,7 +194,7 @@ class SolutionView extends GetView<SolutionController> {
               point,
               style: TextStyle(
                 fontSize: 14,
-                color: onSurface.withOpacity(0.75),
+                color: onSurface.withValues(alpha: 0.75),
                 height: 1.5,
               ),
             ),

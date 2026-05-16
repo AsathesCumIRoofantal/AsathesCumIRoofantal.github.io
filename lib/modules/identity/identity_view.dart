@@ -1,8 +1,9 @@
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
-import 'identity_controller.dart';
+
 import '../../core/utils/content_reviser.dart';
+import 'identity_controller.dart';
 
 class IdentityView extends GetView<IdentityController> {
   const IdentityView({super.key});
@@ -59,7 +60,9 @@ class IdentityView extends GetView<IdentityController> {
                     style: TextStyle(
                       fontSize: 13,
                       height: 1.4,
-                      color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.75),
+                      color: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.color?.withValues(alpha: 0.75),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -115,20 +118,26 @@ class IdentityView extends GetView<IdentityController> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: isExpanded
-                  ? [accent.withOpacity(0.15), accent.withOpacity(0.05)]
-                  : [accent.withOpacity(0.08), accent.withOpacity(0.03)],
+                  ? [
+                      accent.withValues(alpha: 0.15),
+                      accent.withValues(alpha: 0.05),
+                    ]
+                  : [
+                      accent.withValues(alpha: 0.08),
+                      accent.withValues(alpha: 0.03),
+                    ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: accent.withOpacity(isExpanded ? 0.5 : 0.2),
+              color: accent.withValues(alpha: isExpanded ? 0.5 : 0.2),
               width: 1.5,
             ),
             boxShadow: [
               if (isExpanded)
                 BoxShadow(
-                  color: accent.withOpacity(0.1),
+                  color: accent.withValues(alpha: 0.1),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -138,64 +147,64 @@ class IdentityView extends GetView<IdentityController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: accent.withOpacity(0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  Icons.remove_red_eye_rounded,
-                  color: accent,
-                  size: 22,
-                ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Identity is the 'Mapping of Coordinates in all-space'",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        color: theme.textTheme.bodyLarge?.color,
-                        height: 1.3,
-                      ),
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: accent.withValues(alpha: 0.1),
+                      shape: BoxShape.circle,
                     ),
-                    if (!isExpanded)
-                      Padding(
-                        padding: const EdgeInsets.only(top: 4),
-                        child: Text(
-                          "Identify your relationship to AIR",
+                    child: Icon(
+                      Icons.remove_red_eye_rounded,
+                      color: accent,
+                      size: 22,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Identity is the 'Mapping of Coordinates in all-space'",
                           style: TextStyle(
-                            fontSize: 11,
-                            color: theme.textTheme.bodyMedium?.color
-                                ?.withOpacity(0.6),
-                            letterSpacing: 0.5,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: theme.textTheme.bodyLarge?.color,
+                            height: 1.3,
                           ),
                         ),
-                      ),
-                  ],
-                ),
+                        if (!isExpanded)
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Text(
+                              "Identify your relationship to AIR",
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: theme.textTheme.bodyMedium?.color
+                                    ?.withValues(alpha: 0.6),
+                                letterSpacing: 0.5,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  AnimatedRotation(
+                    turns: isExpanded ? 0.5 : 0.0,
+                    duration: const Duration(milliseconds: 250),
+                    child: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: accent,
+                      size: 28,
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(width: 12),
-              AnimatedRotation(
-                turns: isExpanded ? 0.5 : 0.0,
-                duration: const Duration(milliseconds: 250),
-                child: Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  color: accent,
-                  size: 28,
-                ),
-              ),
-            ],
-          ),
               if (isExpanded) ...[
                 const SizedBox(height: 14),
-                Divider(height: 1, color: accent.withOpacity(0.25)),
+                Divider(height: 1, color: accent.withValues(alpha: 0.25)),
                 const SizedBox(height: 12),
                 Text(
                   'Expanded view — how this tab meets the drawer',
@@ -203,7 +212,7 @@ class IdentityView extends GetView<IdentityController> {
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.5,
-                    color: accent.withOpacity(0.95),
+                    color: accent.withValues(alpha: 0.95),
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -212,7 +221,9 @@ class IdentityView extends GetView<IdentityController> {
                   style: TextStyle(
                     fontSize: 12,
                     height: 1.4,
-                    color: theme.textTheme.bodyMedium?.color?.withOpacity(0.82),
+                    color: theme.textTheme.bodyMedium?.color?.withValues(
+                      alpha: 0.82,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -221,7 +232,9 @@ class IdentityView extends GetView<IdentityController> {
                   style: TextStyle(
                     fontSize: 12,
                     height: 1.4,
-                    color: theme.textTheme.bodyMedium?.color?.withOpacity(0.72),
+                    color: theme.textTheme.bodyMedium?.color?.withValues(
+                      alpha: 0.72,
+                    ),
                   ),
                 ),
               ],
@@ -243,11 +256,18 @@ class IdentityView extends GetView<IdentityController> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('• ', style: TextStyle(color: accent, fontWeight: FontWeight.bold)),
+            Text(
+              '• ',
+              style: TextStyle(color: accent, fontWeight: FontWeight.bold),
+            ),
             Expanded(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 13, height: 1.35, color: bodyColor?.withOpacity(0.9)),
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.35,
+                  color: bodyColor?.withValues(alpha: 0.9),
+                ),
               ),
             ),
           ],
@@ -261,9 +281,9 @@ class IdentityView extends GetView<IdentityController> {
         width: double.infinity,
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: theme.cardColor.withOpacity(0.6),
+          color: theme.cardColor.withValues(alpha: 0.6),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: accent.withOpacity(0.25)),
+          border: Border.all(color: accent.withValues(alpha: 0.25)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -278,7 +298,7 @@ class IdentityView extends GetView<IdentityController> {
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
-                    color: accent.withOpacity(0.9),
+                    color: accent.withValues(alpha: 0.9),
                   ),
                 ),
               ],
@@ -300,23 +320,37 @@ class IdentityView extends GetView<IdentityController> {
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 2,
-                color: accent.withOpacity(0.85),
+                color: accent.withValues(alpha: 0.85),
               ),
             ),
             const SizedBox(height: 8),
             bullet('You answer a sequence of reflective questions (phases).'),
-            bullet('Each answer steers the system toward your unique identity node.'),
-            bullet('When complete, your identity is mapped and logged by the AIR Organisation.'),
-            bullet('Use Recalibrate or Re-map anytime as your perspective evolves.'),
+            bullet(
+              'Each answer steers the system toward your unique identity node.',
+            ),
+            bullet(
+              'When complete, your identity is mapped and logged by the AIR Organisation.',
+            ),
+            bullet(
+              'Use Recalibrate or Re-map anytime as your perspective evolves.',
+            ),
             const SizedBox(height: 10),
             Text(
               'Your identity node anchors learning pathways and connects you to relevant entities and unions.',
-              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.65)),
+              style: TextStyle(
+                fontSize: 12,
+                height: 1.35,
+                color: bodyColor?.withValues(alpha: 0.65),
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               'Drawer tip: after mapping here, use the menu (☰) for BE-YOU & EARN LIVING, motivation, and profile specifics so your inner coordinates meet outward programmes in one flow.',
-              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.72)),
+              style: TextStyle(
+                fontSize: 12,
+                height: 1.35,
+                color: bodyColor?.withValues(alpha: 0.72),
+              ),
             ),
           ],
         ),
@@ -354,9 +388,9 @@ class IdentityView extends GetView<IdentityController> {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
               decoration: BoxDecoration(
-                color: accent.withOpacity(0.1),
+                color: accent.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: accent.withOpacity(0.5)),
+                border: Border.all(color: accent.withValues(alpha: 0.5)),
               ),
               child: Text(
                 "PHASE ${controller.currentQuestionIndex.value + 1} // ${controller.questionnaires.length}",
@@ -402,10 +436,10 @@ class IdentityView extends GetView<IdentityController> {
                     decoration: BoxDecoration(
                       color: Theme.of(context).cardColor,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: accent.withOpacity(0.3)),
+                      border: Border.all(color: accent.withValues(alpha: 0.3)),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -452,11 +486,11 @@ class IdentityView extends GetView<IdentityController> {
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: accent.withOpacity(0.1),
+                color: accent.withValues(alpha: 0.1),
                 border: Border.all(color: accent, width: 2),
                 boxShadow: [
                   BoxShadow(
-                    color: accent.withOpacity(0.2),
+                    color: accent.withValues(alpha: 0.2),
                     blurRadius: 30,
                     spreadRadius: 10,
                   ),
@@ -475,15 +509,19 @@ class IdentityView extends GetView<IdentityController> {
               ),
             ),
             const SizedBox(height: 16),
-            Obx(() => Text(
-              ContentReviser.revise("Your answers point to a highly organized systemic node. The AIR Organization has logged your coordinates effectively."),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Theme.of(context).textTheme.bodyMedium?.color,
-                height: 1.5,
+            Obx(
+              () => Text(
+                ContentReviser.revise(
+                  "Your answers point to a highly organized systemic node. The AIR Organization has logged your coordinates effectively.",
+                ),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).textTheme.bodyMedium?.color,
+                  height: 1.5,
+                ),
               ),
-            )),
+            ),
             const SizedBox(height: 16),
             AirHomeContextStrip(
               compact: true,

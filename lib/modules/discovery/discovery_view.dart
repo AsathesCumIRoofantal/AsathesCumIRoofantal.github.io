@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'discovery_controller.dart';
 
 class DiscoveryView extends GetView<DiscoveryController> {
@@ -59,14 +60,14 @@ class DiscoveryView extends GetView<DiscoveryController> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.cyan.withOpacity(0.15),
-            Colors.lightBlue.withOpacity(0.05),
+            Colors.cyan.withValues(alpha: 0.15),
+            Colors.lightBlue.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.cyan.withOpacity(0.25)),
+        border: Border.all(color: Colors.cyan.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +77,7 @@ class DiscoveryView extends GetView<DiscoveryController> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.cyan.withOpacity(0.15),
+                  color: Colors.cyan.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Icon(Icons.search, color: Colors.cyan, size: 28),
@@ -99,7 +100,7 @@ class DiscoveryView extends GetView<DiscoveryController> {
                       'Unveiling new opportunities',
                       style: TextStyle(
                         fontSize: 13,
-                        color: onSurface.withOpacity(0.6),
+                        color: onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   ],
@@ -113,7 +114,7 @@ class DiscoveryView extends GetView<DiscoveryController> {
             'We constantly seek the unknown to bring valuable information to light.',
             style: TextStyle(
               fontSize: 14,
-              color: onSurface.withOpacity(0.75),
+              color: onSurface.withValues(alpha: 0.75),
               height: 1.6,
             ),
           ),
@@ -133,13 +134,13 @@ class DiscoveryView extends GetView<DiscoveryController> {
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
         color: isDark
-            ? theme.cardColor.withOpacity(0.35)
+            ? theme.cardColor.withValues(alpha: 0.35)
             : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
+              ? Colors.white.withValues(alpha: 0.06)
+              : theme.colorScheme.outline.withValues(alpha: 0.12),
         ),
       ),
       child: Theme(
@@ -150,7 +151,7 @@ class DiscoveryView extends GetView<DiscoveryController> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
+              color: section.color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(section.icon, color: section.color, size: 20),
@@ -189,7 +190,7 @@ class DiscoveryView extends GetView<DiscoveryController> {
               point,
               style: TextStyle(
                 fontSize: 14,
-                color: onSurface.withOpacity(0.75),
+                color: onSurface.withValues(alpha: 0.75),
                 height: 1.5,
               ),
             ),

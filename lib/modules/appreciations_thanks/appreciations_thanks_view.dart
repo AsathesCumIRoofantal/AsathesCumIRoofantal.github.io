@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 /// APPRECIATIONS & THANKS — Unique: amber sunrise + cream "gratitude card" theme.
@@ -50,7 +51,7 @@ class AppreciationsThanksView extends StatelessWidget {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.2),
+                                color: Colors.black.withValues(alpha: 0.2),
                                 blurRadius: 16,
                               ),
                             ],
@@ -132,7 +133,9 @@ class AppreciationsThanksView extends StatelessWidget {
 
   Widget _split(String t) => Row(
     children: [
-      Expanded(child: Container(height: 1, color: _amber.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _amber.withValues(alpha: 0.4)),
+      ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Text(
@@ -145,7 +148,9 @@ class AppreciationsThanksView extends StatelessWidget {
           ),
         ),
       ),
-      Expanded(child: Container(height: 1, color: _amber.withOpacity(0.4))),
+      Expanded(
+        child: Container(height: 1, color: _amber.withValues(alpha: 0.4)),
+      ),
     ],
   );
 
@@ -154,8 +159,10 @@ class AppreciationsThanksView extends StatelessWidget {
     decoration: BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(18),
-      border: Border.all(color: _amber.withOpacity(0.5)),
-      boxShadow: [BoxShadow(color: _amber.withOpacity(0.2), blurRadius: 20)],
+      border: Border.all(color: _amber.withValues(alpha: 0.5)),
+      boxShadow: [
+        BoxShadow(color: _amber.withValues(alpha: 0.2), blurRadius: 20),
+      ],
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -211,7 +218,7 @@ class AppreciationsThanksView extends StatelessWidget {
     width: 160,
     padding: const EdgeInsets.all(12),
     decoration: BoxDecoration(
-      color: c.withOpacity(0.25),
+      color: c.withValues(alpha: 0.25),
       border: Border.all(color: c),
       borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(2),
@@ -316,8 +323,8 @@ class AppreciationsThanksView extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                _sun.withOpacity(0.2 + i * 0.15),
-                _amber.withOpacity(0.2 + i * 0.1),
+                _sun.withValues(alpha: 0.2 + i * 0.15),
+                _amber.withValues(alpha: 0.2 + i * 0.1),
               ],
             ),
             borderRadius: BorderRadius.circular(10),
@@ -360,7 +367,7 @@ class _RaysPainter extends CustomPainter {
   @override
   void paint(Canvas c, Size s) {
     final p = Paint()
-      ..color = Colors.white.withOpacity(0.15)
+      ..color = Colors.white.withValues(alpha: 0.15)
       ..strokeWidth = 1.5;
     final cx = s.width * 0.5;
     final cy = s.height * 0.4;

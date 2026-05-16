@@ -1,10 +1,11 @@
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
-import 'unions_controller.dart';
-import '../entities/entities_controller.dart';
-import '../../data/models/union_model.dart';
+
 import '../../core/utils/content_reviser.dart';
+import '../../data/models/union_model.dart';
+import '../entities/entities_controller.dart';
+import 'unions_controller.dart';
 
 class UnionsView extends GetView<UnionsController> {
   const UnionsView({super.key});
@@ -29,8 +30,10 @@ class UnionsView extends GetView<UnionsController> {
       body: Obx(() {
         if (controller.isLoading.value) {
           return Center(
-              child: CircularProgressIndicator(
-                  color: Theme.of(context).colorScheme.secondary));
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          );
         }
         return SingleChildScrollView(
           child: Column(
@@ -46,22 +49,24 @@ class UnionsView extends GetView<UnionsController> {
               ),
               _buildCollapsibleHeader(context),
               _buildUnionsInfoCard(context),
-              Obx(() => AnimatedSize(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: controller.isUnionsExpanded.value
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.only(top: 12, bottom: 80),
-                            itemCount: controller.unions.length,
-                            itemBuilder: (context, index) {
-                              final union = controller.unions[index];
-                              return _buildUnionCard(context, union);
-                            },
-                          )
-                        : const SizedBox.shrink(),
-                  )),
+              Obx(
+                () => AnimatedSize(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: controller.isUnionsExpanded.value
+                      ? ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.only(top: 12, bottom: 80),
+                          itemCount: controller.unions.length,
+                          itemBuilder: (context, index) {
+                            final union = controller.unions[index];
+                            return _buildUnionCard(context, union);
+                          },
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              ),
             ],
           ),
         );
@@ -103,7 +108,7 @@ class UnionsView extends GetView<UnionsController> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: theme.dividerColor.withOpacity(0.2),
+                  color: theme.dividerColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -131,58 +136,70 @@ class UnionsView extends GetView<UnionsController> {
                     TextField(
                       controller: titleController,
                       decoration: _inputDecoration(
-                          "Union Name", Icons.badge_rounded, context),
+                        "Union Name",
+                        Icons.badge_rounded,
+                        context,
+                      ),
                       style: const TextStyle(fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(height: 16),
                     TextField(
                       controller: descController,
                       maxLines: 2,
-                      decoration: _inputDecoration("Relationship Description",
-                          Icons.description_rounded, context),
+                      decoration: _inputDecoration(
+                        "Relationship Description",
+                        Icons.description_rounded,
+                        context,
+                      ),
                     ),
                     const SizedBox(height: 24),
                     _sectionLabel("UNION TYPE", secondary),
                     const SizedBox(height: 12),
-                    Obx(() => Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: controller.categories.map((cat) {
-                            final isSelected =
-                                controller.selectedCategory.value == cat;
-                            return ChoiceChip(
-                              label: Text(cat),
-                              selected: isSelected,
-                              onSelected: (selected) => controller
-                                  .selectedCategory.value = selected ? cat : "",
-                              selectedColor: secondary.withOpacity(0.2),
-                              backgroundColor: theme.cardColor,
-                              labelStyle: TextStyle(
+                    Obx(
+                      () => Wrap(
+                        spacing: 8,
+                        runSpacing: 8,
+                        children: controller.categories.map((cat) {
+                          final isSelected =
+                              controller.selectedCategory.value == cat;
+                          return ChoiceChip(
+                            label: Text(cat),
+                            selected: isSelected,
+                            onSelected: (selected) =>
+                                controller.selectedCategory.value = selected
+                                ? cat
+                                : "",
+                            selectedColor: secondary.withValues(alpha: 0.2),
+                            backgroundColor: theme.cardColor,
+                            labelStyle: TextStyle(
+                              color: isSelected
+                                  ? secondary
+                                  : theme.textTheme.bodyMedium?.color,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              side: BorderSide(
                                 color: isSelected
                                     ? secondary
-                                    : theme.textTheme.bodyMedium?.color,
-                                fontWeight: isSelected
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
+                                    : theme.dividerColor.withValues(alpha: 0.1),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                side: BorderSide(
-                                  color: isSelected
-                                      ? secondary
-                                      : theme.dividerColor.withOpacity(0.1),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        )),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                     const SizedBox(height: 24),
                     _sectionLabel("INVOLVED ENTITIES", secondary),
                     const SizedBox(height: 12),
                     Obx(() {
                       if (entitiesController.entities.isEmpty) {
-                        return Text("No entities catalogued yet.",
-                            style: theme.textTheme.bodySmall);
+                        return Text(
+                          "No entities catalogued yet.",
+                          style: theme.textTheme.bodySmall,
+                        );
                       }
                       return Wrap(
                         spacing: 8,
@@ -200,7 +217,7 @@ class UnionsView extends GetView<UnionsController> {
                                 controller.selectedEntities.remove(entity.name);
                               }
                             },
-                            selectedColor: secondary.withOpacity(0.15),
+                            selectedColor: secondary.withValues(alpha: 0.15),
                             checkmarkColor: secondary,
                             backgroundColor: theme.cardColor,
                             labelStyle: TextStyle(
@@ -213,8 +230,8 @@ class UnionsView extends GetView<UnionsController> {
                               borderRadius: BorderRadius.circular(12),
                               side: BorderSide(
                                 color: isSelected
-                                    ? secondary.withOpacity(0.5)
-                                    : theme.dividerColor.withOpacity(0.1),
+                                    ? secondary.withValues(alpha: 0.5)
+                                    : theme.dividerColor.withValues(alpha: 0.1),
                               ),
                             ),
                           );
@@ -241,7 +258,9 @@ class UnionsView extends GetView<UnionsController> {
                           ? "A new relationship union."
                           : descController.text,
                       category: controller.selectedCategory.value,
-                      unionedEntities: List<String>.from(controller.selectedEntities),
+                      unionedEntities: List<String>.from(
+                        controller.selectedEntities,
+                      ),
                       imageUrl: '',
                     );
                     controller.addUnion(newUnion);
@@ -249,7 +268,7 @@ class UnionsView extends GetView<UnionsController> {
                     Get.snackbar(
                       "Incomplete Union",
                       "Provide title, type, and at least one entity.",
-                      backgroundColor: Colors.orange.withOpacity(0.1),
+                      backgroundColor: Colors.orange.withValues(alpha: 0.1),
                       colorText: Colors.orange,
                     );
                   }
@@ -258,12 +277,15 @@ class UnionsView extends GetView<UnionsController> {
                   backgroundColor: secondary,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                 ),
                 child: const Text(
                   "ESTABLISH UNION",
-                  style:
-                      TextStyle(fontWeight: FontWeight.w900, letterSpacing: 2),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 2,
+                  ),
                 ),
               ),
             ),
@@ -280,32 +302,40 @@ class UnionsView extends GetView<UnionsController> {
         fontSize: 11,
         fontWeight: FontWeight.bold,
         letterSpacing: 2,
-        color: color.withOpacity(0.8),
+        color: color.withValues(alpha: 0.8),
       ),
     );
   }
 
   InputDecoration _inputDecoration(
-      String label, IconData icon, BuildContext context) {
+    String label,
+    IconData icon,
+    BuildContext context,
+  ) {
     final theme = Theme.of(context);
     final secondary = theme.colorScheme.secondary;
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon, size: 20, color: secondary.withOpacity(0.7)),
+      prefixIcon: Icon(icon, size: 20, color: secondary.withValues(alpha: 0.7)),
       labelStyle: TextStyle(
-          color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7)),
-      floatingLabelStyle:
-          TextStyle(color: secondary, fontWeight: FontWeight.bold),
+        color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
+      ),
+      floatingLabelStyle: TextStyle(
+        color: secondary,
+        fontWeight: FontWeight.bold,
+      ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: theme.dividerColor.withOpacity(0.15)),
+        borderSide: BorderSide(
+          color: theme.dividerColor.withValues(alpha: 0.15),
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: secondary, width: 2),
       ),
       filled: true,
-      fillColor: theme.cardColor.withOpacity(0.5),
+      fillColor: theme.cardColor.withValues(alpha: 0.5),
     );
   }
 
@@ -324,20 +354,26 @@ class UnionsView extends GetView<UnionsController> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: isExpanded
-                  ? [accent.withOpacity(0.15), accent.withOpacity(0.05)]
-                  : [accent.withOpacity(0.08), accent.withOpacity(0.03)],
+                  ? [
+                      accent.withValues(alpha: 0.15),
+                      accent.withValues(alpha: 0.05),
+                    ]
+                  : [
+                      accent.withValues(alpha: 0.08),
+                      accent.withValues(alpha: 0.03),
+                    ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: accent.withOpacity(isExpanded ? 0.5 : 0.2),
+              color: accent.withValues(alpha: isExpanded ? 0.5 : 0.2),
               width: 1.5,
             ),
             boxShadow: [
               if (isExpanded)
                 BoxShadow(
-                  color: accent.withOpacity(0.1),
+                  color: accent.withValues(alpha: 0.1),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -348,7 +384,7 @@ class UnionsView extends GetView<UnionsController> {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: accent.withOpacity(0.1),
+                  color: accent.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(Icons.hub_outlined, color: accent, size: 22),
@@ -375,7 +411,7 @@ class UnionsView extends GetView<UnionsController> {
                           style: TextStyle(
                             fontSize: 11,
                             color: theme.textTheme.bodyMedium?.color
-                                ?.withOpacity(0.6),
+                                ?.withValues(alpha: 0.6),
                             letterSpacing: 0.5,
                           ),
                         ),
@@ -411,11 +447,18 @@ class UnionsView extends GetView<UnionsController> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('• ', style: TextStyle(color: accent, fontWeight: FontWeight.bold)),
+            Text(
+              '• ',
+              style: TextStyle(color: accent, fontWeight: FontWeight.bold),
+            ),
             Expanded(
               child: Text(
                 text,
-                style: TextStyle(fontSize: 13, height: 1.35, color: bodyColor?.withOpacity(0.9)),
+                style: TextStyle(
+                  fontSize: 13,
+                  height: 1.35,
+                  color: bodyColor?.withValues(alpha: 0.9),
+                ),
               ),
             ),
           ],
@@ -429,9 +472,9 @@ class UnionsView extends GetView<UnionsController> {
         width: double.infinity,
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: theme.cardColor.withOpacity(0.6),
+          color: theme.cardColor.withValues(alpha: 0.6),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: accent.withOpacity(0.25)),
+          border: Border.all(color: accent.withValues(alpha: 0.25)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -446,7 +489,7 @@ class UnionsView extends GetView<UnionsController> {
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
-                    color: accent.withOpacity(0.9),
+                    color: accent.withValues(alpha: 0.9),
                   ),
                 ),
               ],
@@ -469,12 +512,20 @@ class UnionsView extends GetView<UnionsController> {
             const SizedBox(height: 8),
             Text(
               'Use Catalogue Union to record how entities connect in your map.',
-              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.65)),
+              style: TextStyle(
+                fontSize: 12,
+                height: 1.35,
+                color: bodyColor?.withValues(alpha: 0.65),
+              ),
             ),
             const SizedBox(height: 8),
             Text(
               'Drawer tip: the same menu (☰) lists collaborations, notices, rewards, and long-form SETUP lanes—use it when a union needs policy, learning, or services beyond this relationship list.',
-              style: TextStyle(fontSize: 12, height: 1.35, color: bodyColor?.withOpacity(0.72)),
+              style: TextStyle(
+                fontSize: 12,
+                height: 1.35,
+                color: bodyColor?.withValues(alpha: 0.72),
+              ),
             ),
           ],
         ),
@@ -501,7 +552,7 @@ class UnionsView extends GetView<UnionsController> {
             color: secondary.withValues(alpha: 0.05),
             blurRadius: 15,
             spreadRadius: 1,
-          )
+          ),
         ],
       ),
       child: Padding(
@@ -514,27 +565,31 @@ class UnionsView extends GetView<UnionsController> {
                 Icon(Icons.bubble_chart, color: secondary, size: 28),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Obx(() => Text(
-                    ContentReviser.reviseTitle(union.name),
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: theme.textTheme.bodyLarge?.color,
-                      letterSpacing: 1,
+                  child: Obx(
+                    () => Text(
+                      ContentReviser.reviseTitle(union.name),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: theme.textTheme.bodyLarge?.color,
+                        letterSpacing: 1,
+                      ),
                     ),
-                  )),
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            Obx(() => Text(
-              ContentReviser.revise(union.description),
-              style: TextStyle(
-                color: theme.textTheme.bodyMedium?.color,
-                fontSize: 14,
-                height: 1.4,
+            Obx(
+              () => Text(
+                ContentReviser.revise(union.description),
+                style: TextStyle(
+                  color: theme.textTheme.bodyMedium?.color,
+                  fontSize: 14,
+                  height: 1.4,
+                ),
               ),
-            )),
+            ),
             const SizedBox(height: 16),
             Text(
               'COMPOSED OF:',
@@ -550,22 +605,27 @@ class UnionsView extends GetView<UnionsController> {
               spacing: 8.0,
               runSpacing: 8.0,
               children: union.unionedEntities
-                  .map<Widget>((e) => Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: secondary.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(
-                              color: secondary.withValues(alpha: 0.5)),
+                  .map<Widget>(
+                    (e) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: secondary.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: secondary.withValues(alpha: 0.5),
                         ),
-                        child: Text(
-                          e.toString(),
-                          style: TextStyle(fontSize: 12, color: secondary),
-                        ),
-                      ))
+                      ),
+                      child: Text(
+                        e.toString(),
+                        style: TextStyle(fontSize: 12, color: secondary),
+                      ),
+                    ),
+                  )
                   .toList(),
-            )
+            ),
           ],
         ),
       ),

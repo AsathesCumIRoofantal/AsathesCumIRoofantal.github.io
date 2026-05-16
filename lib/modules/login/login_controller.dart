@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../data/auth_service.dart';
 
 class LoginController extends GetxController {
@@ -61,7 +62,7 @@ class LoginController extends GetxController {
         'Error',
         'Please enter username and password',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.redAccent.withOpacity(0.1),
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
         colorText: Colors.redAccent,
       );
       return;

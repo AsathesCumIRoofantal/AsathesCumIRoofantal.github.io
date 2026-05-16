@@ -1,9 +1,10 @@
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
-import 'entities_controller.dart';
-import '../../data/models/entity_model.dart';
+
 import '../../core/utils/content_reviser.dart';
+import '../../data/models/entity_model.dart';
+import 'entities_controller.dart';
 
 class EntitiesView extends GetView<EntitiesController> {
   const EntitiesView({super.key});
@@ -96,7 +97,7 @@ class EntitiesView extends GetView<EntitiesController> {
           borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
+              color: Colors.black.withValues(alpha: 0.2),
               blurRadius: 20,
               offset: const Offset(0, -5),
             ),
@@ -111,7 +112,7 @@ class EntitiesView extends GetView<EntitiesController> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: theme.dividerColor.withOpacity(0.2),
+                  color: theme.dividerColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -134,7 +135,9 @@ class EntitiesView extends GetView<EntitiesController> {
             Text(
               "Add a new node to the all-space knowledge map.",
               style: theme.textTheme.bodyMedium?.copyWith(
-                color: theme.textTheme.bodyMedium?.color?.withOpacity(0.6),
+                color: theme.textTheme.bodyMedium?.color?.withValues(
+                  alpha: 0.6,
+                ),
               ),
             ),
             const SizedBox(height: 24),
@@ -164,7 +167,7 @@ class EntitiesView extends GetView<EntitiesController> {
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 2,
-                color: accent.withOpacity(0.8),
+                color: accent.withValues(alpha: 0.8),
               ),
             ),
             const SizedBox(height: 12),
@@ -180,7 +183,7 @@ class EntitiesView extends GetView<EntitiesController> {
                     onSelected: (selected) {
                       controller.selectedCategory.value = selected ? cat : "";
                     },
-                    selectedColor: accent.withOpacity(0.2),
+                    selectedColor: accent.withValues(alpha: 0.2),
                     backgroundColor: theme.cardColor,
                     labelStyle: TextStyle(
                       color: isSelected
@@ -195,7 +198,7 @@ class EntitiesView extends GetView<EntitiesController> {
                       side: BorderSide(
                         color: isSelected
                             ? accent
-                            : theme.dividerColor.withOpacity(0.1),
+                            : theme.dividerColor.withValues(alpha: 0.1),
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(
@@ -228,7 +231,7 @@ class EntitiesView extends GetView<EntitiesController> {
                     Get.snackbar(
                       "Missing Info",
                       "Please provide at least a title and a category.",
-                      backgroundColor: Colors.orange.withOpacity(0.1),
+                      backgroundColor: Colors.orange.withValues(alpha: 0.1),
                       colorText: Colors.orange,
                     );
                   }
@@ -240,7 +243,7 @@ class EntitiesView extends GetView<EntitiesController> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   elevation: 8,
-                  shadowColor: accent.withOpacity(0.4),
+                  shadowColor: accent.withValues(alpha: 0.4),
                 ),
                 child: const Text(
                   "ADD TO ALL-SPACE",
@@ -267,7 +270,7 @@ class EntitiesView extends GetView<EntitiesController> {
       labelText: label,
       prefixIcon: Icon(icon, size: 20),
       labelStyle: TextStyle(
-        color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+        color: theme.textTheme.bodyMedium?.color?.withValues(alpha: 0.7),
       ),
       floatingLabelStyle: TextStyle(
         color: theme.colorScheme.primary,
@@ -275,14 +278,16 @@ class EntitiesView extends GetView<EntitiesController> {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: theme.dividerColor.withOpacity(0.15)),
+        borderSide: BorderSide(
+          color: theme.dividerColor.withValues(alpha: 0.15),
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: theme.colorScheme.primary, width: 2),
       ),
       filled: true,
-      fillColor: theme.cardColor.withOpacity(0.5),
+      fillColor: theme.cardColor.withValues(alpha: 0.5),
     );
   }
 
@@ -301,20 +306,26 @@ class EntitiesView extends GetView<EntitiesController> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: isExpanded
-                  ? [accent.withOpacity(0.15), accent.withOpacity(0.05)]
-                  : [accent.withOpacity(0.08), accent.withOpacity(0.03)],
+                  ? [
+                      accent.withValues(alpha: 0.15),
+                      accent.withValues(alpha: 0.05),
+                    ]
+                  : [
+                      accent.withValues(alpha: 0.08),
+                      accent.withValues(alpha: 0.03),
+                    ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: accent.withOpacity(isExpanded ? 0.5 : 0.2),
+              color: accent.withValues(alpha: isExpanded ? 0.5 : 0.2),
               width: 1.5,
             ),
             boxShadow: [
               if (isExpanded)
                 BoxShadow(
-                  color: accent.withOpacity(0.1),
+                  color: accent.withValues(alpha: 0.1),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -325,7 +336,7 @@ class EntitiesView extends GetView<EntitiesController> {
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: accent.withOpacity(0.1),
+                  color: accent.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(Icons.layers_rounded, color: accent, size: 22),
@@ -352,7 +363,7 @@ class EntitiesView extends GetView<EntitiesController> {
                           style: TextStyle(
                             fontSize: 11,
                             color: theme.textTheme.bodyMedium?.color
-                                ?.withOpacity(0.6),
+                                ?.withValues(alpha: 0.6),
                             letterSpacing: 0.5,
                           ),
                         ),
@@ -399,7 +410,7 @@ class EntitiesView extends GetView<EntitiesController> {
                 style: TextStyle(
                   fontSize: 13,
                   height: 1.35,
-                  color: bodyColor?.withOpacity(0.9),
+                  color: bodyColor?.withValues(alpha: 0.9),
                 ),
               ),
             ),
@@ -414,9 +425,9 @@ class EntitiesView extends GetView<EntitiesController> {
         width: double.infinity,
         padding: const EdgeInsets.all(18),
         decoration: BoxDecoration(
-          color: theme.cardColor.withOpacity(0.6),
+          color: theme.cardColor.withValues(alpha: 0.6),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: accent.withOpacity(0.25)),
+          border: Border.all(color: accent.withValues(alpha: 0.25)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -431,7 +442,7 @@ class EntitiesView extends GetView<EntitiesController> {
                     fontSize: 11,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
-                    color: accent.withOpacity(0.9),
+                    color: accent.withValues(alpha: 0.9),
                   ),
                 ),
               ],
@@ -458,7 +469,7 @@ class EntitiesView extends GetView<EntitiesController> {
               style: TextStyle(
                 fontSize: 12,
                 height: 1.35,
-                color: bodyColor?.withOpacity(0.65),
+                color: bodyColor?.withValues(alpha: 0.65),
               ),
             ),
             const SizedBox(height: 8),
@@ -467,7 +478,7 @@ class EntitiesView extends GetView<EntitiesController> {
               style: TextStyle(
                 fontSize: 12,
                 height: 1.35,
-                color: bodyColor?.withOpacity(0.72),
+                color: bodyColor?.withValues(alpha: 0.72),
               ),
             ),
           ],

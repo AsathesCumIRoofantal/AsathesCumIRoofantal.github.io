@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../routes/app_pages.dart';
 import 'login_controller.dart';
 
@@ -41,13 +42,13 @@ class LoginView extends GetView<LoginController> {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: tertiary.withOpacity(0.5),
+                          color: tertiary.withValues(alpha: 0.5),
                           width: 2,
                         ),
-                        color: tertiary.withOpacity(0.05),
+                        color: tertiary.withValues(alpha: 0.05),
                         boxShadow: [
                           BoxShadow(
-                            color: tertiary.withOpacity(0.2),
+                            color: tertiary.withValues(alpha: 0.2),
                             blurRadius: 30,
                             spreadRadius: 5,
                           ),
@@ -77,7 +78,7 @@ class LoginView extends GetView<LoginController> {
                   Text(
                     'CHOOSE YOUR PATH - AS GUEST',
                     style: theme.textTheme.labelSmall?.copyWith(
-                      color: tertiary.withOpacity(0.7),
+                      color: tertiary.withValues(alpha: 0.7),
                       letterSpacing: 2,
                       fontWeight: FontWeight.bold,
                     ),
@@ -110,13 +111,15 @@ class LoginView extends GetView<LoginController> {
                                 ),
                                 decoration: BoxDecoration(
                                   color: isSelected
-                                      ? tertiary.withOpacity(0.1)
+                                      ? tertiary.withValues(alpha: 0.1)
                                       : Colors.transparent,
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
                                     color: isSelected
                                         ? tertiary
-                                        : theme.dividerColor.withOpacity(0.2),
+                                        : theme.dividerColor.withValues(
+                                            alpha: 0.2,
+                                          ),
                                     width: 2,
                                   ),
                                 ),
@@ -141,9 +144,9 @@ class LoginView extends GetView<LoginController> {
                                       style: TextStyle(
                                         fontSize: 10,
                                         color: isSelected
-                                            ? tertiary.withOpacity(0.7)
-                                            : theme.dividerColor.withOpacity(
-                                                0.5,
+                                            ? tertiary.withValues(alpha: 0.7)
+                                            : theme.dividerColor.withValues(
+                                                alpha: 0.5,
                                               ),
                                       ),
                                     ),
@@ -213,7 +216,7 @@ class LoginView extends GetView<LoginController> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           elevation: 8,
-                          shadowColor: tertiary.withOpacity(0.5),
+                          shadowColor: tertiary.withValues(alpha: 0.5),
                         ),
                         child: controller.isLoading.value
                             ? const CircularProgressIndicator(
@@ -271,23 +274,27 @@ class LoginView extends GetView<LoginController> {
       labelStyle: TextStyle(color: theme.dividerColor),
       prefixIcon: Icon(
         icon,
-        color: theme.colorScheme.tertiary.withOpacity(0.7),
+        color: theme.colorScheme.tertiary.withValues(alpha: 0.7),
       ),
       suffixIcon: suffix,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: theme.dividerColor.withOpacity(0.2)),
+        borderSide: BorderSide(
+          color: theme.dividerColor.withValues(alpha: 0.2),
+        ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
-        borderSide: BorderSide(color: theme.dividerColor.withOpacity(0.2)),
+        borderSide: BorderSide(
+          color: theme.dividerColor.withValues(alpha: 0.2),
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(16),
         borderSide: BorderSide(color: theme.colorScheme.tertiary, width: 2),
       ),
       filled: true,
-      fillColor: theme.cardColor.withOpacity(0.5),
+      fillColor: theme.cardColor.withValues(alpha: 0.5),
     );
   }
 }

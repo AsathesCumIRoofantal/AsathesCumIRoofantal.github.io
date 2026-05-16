@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'knowledge_center_controller.dart';
 import 'package:intl/intl.dart';
+
+import 'knowledge_center_controller.dart';
 
 class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
   const KnowledgeCenterView({super.key});
@@ -69,7 +70,7 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
                           Icon(
                             Icons.auto_stories_rounded,
                             size: 64,
-                            color: primary.withOpacity(0.1),
+                            color: primary.withValues(alpha: 0.1),
                           ),
                           const SizedBox(height: 16),
                           const Text(
@@ -107,9 +108,9 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
       margin: const EdgeInsets.all(16),
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: primary.withOpacity(0.05),
+        color: primary.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: primary.withOpacity(0.2)),
+        border: Border.all(color: primary.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +131,7 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
             decoration: InputDecoration(
               hintText: 'Enter your query for AI analysis...',
               filled: true,
-              fillColor: theme.cardColor.withOpacity(0.3),
+              fillColor: theme.cardColor.withValues(alpha: 0.3),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
                 borderSide: BorderSide.none,
@@ -203,7 +204,7 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
           hintText: 'Filter knowledge history...',
           prefixIcon: Icon(Icons.search, color: theme.dividerColor),
           filled: true,
-          fillColor: theme.cardColor.withOpacity(0.3),
+          fillColor: theme.cardColor.withValues(alpha: 0.3),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(16),
             borderSide: BorderSide.none,
@@ -223,10 +224,12 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
-        color: theme.cardColor.withOpacity(0.5),
+        color: theme.cardColor.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
-          color: (isAI ? primary : theme.colorScheme.tertiary).withOpacity(0.1),
+          color: (isAI ? primary : theme.colorScheme.tertiary).withValues(
+            alpha: 0.1,
+          ),
         ),
       ),
       child: ExpansionTile(
@@ -251,9 +254,11 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Colors.amber.withOpacity(0.1),
+                  color: Colors.amber.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: Colors.amber.withOpacity(0.3)),
+                  border: Border.all(
+                    color: Colors.amber.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: const Text(
                   'PENDING REVIEW',
@@ -268,9 +273,11 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: Colors.green.withOpacity(0.1),
+                  color: Colors.green.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4),
-                  border: Border.all(color: Colors.green.withOpacity(0.3)),
+                  border: Border.all(
+                    color: Colors.green.withValues(alpha: 0.3),
+                  ),
                 ),
                 child: const Text(
                   'CATALOGUED',
@@ -297,7 +304,10 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
             const SizedBox(height: 12),
             Text(
               entry.solution ?? '',
-              style: TextStyle(color: primary.withOpacity(0.9), height: 1.6),
+              style: TextStyle(
+                color: primary.withValues(alpha: 0.9),
+                height: 1.6,
+              ),
             ),
           ] else ...[
             const Text(
@@ -312,7 +322,9 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
             Text(
               entry.detail,
               style: TextStyle(
-                color: theme.textTheme.bodyMedium?.color?.withOpacity(0.8),
+                color: theme.textTheme.bodyMedium?.color?.withValues(
+                  alpha: 0.8,
+                ),
                 height: 1.6,
               ),
             ),
@@ -335,8 +347,8 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
                     .map(
                       (f) => Chip(
                         label: Text(f, style: const TextStyle(fontSize: 10)),
-                        backgroundColor: theme.colorScheme.tertiary.withOpacity(
-                          0.1,
+                        backgroundColor: theme.colorScheme.tertiary.withValues(
+                          alpha: 0.1,
                         ),
                         avatar: const Icon(Icons.attach_file, size: 12),
                       ),
@@ -380,7 +392,7 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
                 width: 40,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: theme.dividerColor.withOpacity(0.2),
+                  color: theme.dividerColor.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -437,15 +449,13 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
                         spacing: 8,
                         runSpacing: 8,
                         children: [
-                          ...attachments
-                              .map(
-                                (f) => Chip(
-                                  label: Text(f),
-                                  onDeleted: () => attachments.remove(f),
-                                  backgroundColor: tertiary.withOpacity(0.1),
-                                ),
-                              )
-                              ,
+                          ...attachments.map(
+                            (f) => Chip(
+                              label: Text(f),
+                              onDeleted: () => attachments.remove(f),
+                              backgroundColor: tertiary.withValues(alpha: 0.1),
+                            ),
+                          ),
                           ActionChip(
                             avatar: const Icon(Icons.add, size: 14),
                             label: const Text('Mock Attach'),
@@ -503,7 +513,7 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
       labelText: label,
       prefixIcon: Icon(
         icon,
-        color: theme.colorScheme.tertiary.withOpacity(0.7),
+        color: theme.colorScheme.tertiary.withValues(alpha: 0.7),
       ),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       focusedBorder: OutlineInputBorder(
@@ -511,7 +521,7 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
         borderSide: BorderSide(color: theme.colorScheme.tertiary, width: 2),
       ),
       filled: true,
-      fillColor: theme.cardColor.withOpacity(0.5),
+      fillColor: theme.cardColor.withValues(alpha: 0.5),
     );
   }
 }

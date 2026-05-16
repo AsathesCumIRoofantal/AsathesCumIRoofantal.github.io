@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'outcome_processed_controller.dart';
 
 class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
@@ -25,8 +26,14 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         foregroundColor: theme.colorScheme.onSurface,
-        title: const Text('OUTCOME PROCESSED',
-            style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold, fontSize: 13)),
+        title: const Text(
+          'OUTCOME PROCESSED',
+          style: TextStyle(
+            letterSpacing: 2,
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+          ),
+        ),
         centerTitle: true,
         actions: [
           Padding(
@@ -34,7 +41,7 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: _emerald.withOpacity(0.15),
+                color: _emerald.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: const Row(
@@ -42,7 +49,15 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
                 children: [
                   Icon(Icons.circle, size: 6, color: _sage),
                   SizedBox(width: 4),
-                  Text('LIVE', style: TextStyle(fontSize: 9, color: _sage, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  Text(
+                    'LIVE',
+                    style: TextStyle(
+                      fontSize: 9,
+                      color: _sage,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -56,19 +71,39 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
           const SizedBox(height: 20),
           _buildQualityGates(context, isDark),
           const SizedBox(height: 24),
-          _buildSectionLabel('ARTEFACT LIBRARY', Icons.folder_special_rounded, _emerald, context),
+          _buildSectionLabel(
+            'ARTEFACT LIBRARY',
+            Icons.folder_special_rounded,
+            _emerald,
+            context,
+          ),
           const SizedBox(height: 12),
           ..._artefacts.map((a) => _buildArtefactCard(context, isDark, a)),
           const SizedBox(height: 24),
-          _buildSectionLabel('DELIVERY STATUS', Icons.mark_email_read_rounded, _teal, context),
+          _buildSectionLabel(
+            'DELIVERY STATUS',
+            Icons.mark_email_read_rounded,
+            _teal,
+            context,
+          ),
           const SizedBox(height: 12),
           _buildDeliveryList(context, isDark),
           const SizedBox(height: 24),
-          _buildSectionLabel('OUTCOME ANALYTICS', Icons.bar_chart_rounded, _blue, context),
+          _buildSectionLabel(
+            'OUTCOME ANALYTICS',
+            Icons.bar_chart_rounded,
+            _blue,
+            context,
+          ),
           const SizedBox(height: 12),
           _buildAnalyticsPanel(context, isDark),
           const SizedBox(height: 24),
-          _buildSectionLabel('EXPORT CENTRE', Icons.download_for_offline_rounded, _amber, context),
+          _buildSectionLabel(
+            'EXPORT CENTRE',
+            Icons.download_for_offline_rounded,
+            _amber,
+            context,
+          ),
           const SizedBox(height: 12),
           _buildExportOptions(context, isDark),
           const SizedBox(height: 20),
@@ -84,11 +119,18 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [const Color(0xFF003822), const Color(0xFF001A0E)],
-          begin: Alignment.topLeft, end: Alignment.bottomRight,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: _emerald.withOpacity(0.35)),
-        boxShadow: [BoxShadow(color: _emerald.withOpacity(0.15), blurRadius: 20, offset: const Offset(0, 6))],
+        border: Border.all(color: _emerald.withValues(alpha: 0.35)),
+        boxShadow: [
+          BoxShadow(
+            color: _emerald.withValues(alpha: 0.15),
+            blurRadius: 20,
+            offset: const Offset(0, 6),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +139,20 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
             children: [
               const Icon(Icons.task_alt_rounded, color: _sage, size: 16),
               const SizedBox(width: 8),
-              const Text('PROCESSING OVERVIEW', style: TextStyle(fontSize: 10, color: _sage, fontWeight: FontWeight.bold, letterSpacing: 2)),
+              const Text(
+                'PROCESSING OVERVIEW',
+                style: TextStyle(
+                  fontSize: 10,
+                  color: _sage,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                ),
+              ),
               const Spacer(),
-              const Text('30-day window', style: TextStyle(fontSize: 9, color: Colors.white38)),
+              const Text(
+                '30-day window',
+                style: TextStyle(fontSize: 9, color: Colors.white38),
+              ),
             ],
           ),
           const SizedBox(height: 20),
@@ -116,7 +169,14 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
             ],
           ),
           const SizedBox(height: 16),
-          const Text('THROUGHPUT (LAST 7 DAYS)', style: TextStyle(fontSize: 8, color: Colors.white38, letterSpacing: 1)),
+          const Text(
+            'THROUGHPUT (LAST 7 DAYS)',
+            style: TextStyle(
+              fontSize: 8,
+              color: Colors.white38,
+              letterSpacing: 1,
+            ),
+          ),
           const SizedBox(height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -138,16 +198,35 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
   Widget _buildDashStat(String value, String label, Color color) {
     return Column(
       children: [
-        Text(value, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: color, height: 1)),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: color,
+            height: 1,
+          ),
+        ),
         const SizedBox(height: 4),
-        Text(label, textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 9, color: Colors.white54, height: 1.3, letterSpacing: 0.5)),
+        Text(
+          label,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 9,
+            color: Colors.white54,
+            height: 1.3,
+            letterSpacing: 0.5,
+          ),
+        ),
       ],
     );
   }
 
-  Widget _buildDashDivider() =>
-      Container(height: 40, width: 1, color: Colors.white.withOpacity(0.08));
+  Widget _buildDashDivider() => Container(
+    height: 40,
+    width: 1,
+    color: Colors.white.withValues(alpha: 0.08),
+  );
 
   Widget _buildBar(double fraction, String day, Color color) {
     return Expanded(
@@ -164,15 +243,20 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
                   heightFactor: fraction,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.65),
-                      borderRadius: const BorderRadius.vertical(top: Radius.circular(3)),
+                      color: color.withValues(alpha: 0.65),
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(3),
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 4),
-            Text(day, style: const TextStyle(fontSize: 8, color: Colors.white38)),
+            Text(
+              day,
+              style: const TextStyle(fontSize: 8, color: Colors.white38),
+            ),
           ],
         ),
       ),
@@ -189,53 +273,95 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.04) : Colors.black.withOpacity(0.03),
+        color: isDark
+            ? Colors.white.withValues(alpha: 0.04)
+            : Colors.black.withValues(alpha: 0.03),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _emerald.withOpacity(0.18)),
+        border: Border.all(color: _emerald.withValues(alpha: 0.18)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(children: [
-            Icon(Icons.verified_rounded, color: _emerald, size: 14),
-            SizedBox(width: 6),
-            Text('QUALITY GATE RESULTS', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 2, color: _emerald)),
-          ]),
+          const Row(
+            children: [
+              Icon(Icons.verified_rounded, color: _emerald, size: 14),
+              SizedBox(width: 6),
+              Text(
+                'QUALITY GATE RESULTS',
+                style: TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 2,
+                  color: _emerald,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 14),
-          ...gates.map((g) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(g.$1, style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSurface)),
-                    Text(g.$4, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: g.$3)),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                LinearProgressIndicator(
-                  value: g.$2,
-                  backgroundColor: Colors.white.withOpacity(0.08),
-                  valueColor: AlwaysStoppedAnimation(g.$3),
-                  borderRadius: BorderRadius.circular(3),
-                  minHeight: 5,
-                ),
-              ],
+          ...gates.map(
+            (g) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        g.$1,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      Text(
+                        g.$4,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: g.$3,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  LinearProgressIndicator(
+                    value: g.$2,
+                    backgroundColor: Colors.white.withValues(alpha: 0.08),
+                    valueColor: AlwaysStoppedAnimation(g.$3),
+                    borderRadius: BorderRadius.circular(3),
+                    minHeight: 5,
+                  ),
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildSectionLabel(String title, IconData icon, Color color, BuildContext context) {
-    return Row(children: [
-      Icon(icon, color: color, size: 16),
-      const SizedBox(width: 8),
-      Text(title, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 2, color: color)),
-    ]);
+  Widget _buildSectionLabel(
+    String title,
+    IconData icon,
+    Color color,
+    BuildContext context,
+  ) {
+    return Row(
+      children: [
+        Icon(icon, color: color, size: 16),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 11,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2,
+            color: color,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildArtefactCard(BuildContext context, bool isDark, _Artefact a) {
@@ -243,74 +369,158 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: a.color.withOpacity(0.06),
+        color: a.color.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: a.color.withOpacity(0.20)),
+        border: Border.all(color: a.color.withValues(alpha: 0.20)),
       ),
-      child: Row(children: [
-        Icon(a.icon, color: a.color, size: 20),
-        const SizedBox(width: 12),
-        Expanded(child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(a.name, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.onSurface)),
-            Text(a.description, style: TextStyle(fontSize: 11, height: 1.3,
-                color: Theme.of(context).colorScheme.onSurface.withOpacity(0.60))),
-          ],
-        )),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              decoration: BoxDecoration(
-                color: _emerald.withOpacity(0.12),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text(a.format, style: const TextStyle(fontSize: 9, color: _emerald, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+      child: Row(
+        children: [
+          Icon(a.icon, color: a.color, size: 20),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  a.name,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.onSurface,
+                  ),
+                ),
+                Text(
+                  a.description,
+                  style: TextStyle(
+                    fontSize: 11,
+                    height: 1.3,
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.60),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(height: 4),
-            Text(a.count, style: TextStyle(fontSize: 10, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.45))),
-          ],
-        ),
-      ]),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  color: _emerald.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  a.format,
+                  style: const TextStyle(
+                    fontSize: 9,
+                    color: _emerald,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                a.count,
+                style: TextStyle(
+                  fontSize: 10,
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.45),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildDeliveryList(BuildContext context, bool isDark) {
     final deliveries = [
-      ('Final Report Q1-2025', 'Confirmed', _emerald, Icons.check_circle_rounded),
-      ('Entity Atlas Export', 'Confirmed', _emerald, Icons.check_circle_rounded),
-      ('Knowledge Batch 24-C', 'Pending Acknowledgment', _amber, Icons.schedule_rounded),
-      ('Identity Audit Output', 'Under Review', _teal, Icons.rate_review_rounded),
-      ('Community Metrics Report', 'Flagged for Re-Review', _red, Icons.flag_rounded),
-    ];
-    return Column(children: deliveries.map((d) => Container(
-      margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-      decoration: BoxDecoration(
-        color: isDark ? Colors.white.withOpacity(0.03) : Colors.black.withOpacity(0.02),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: d.$3.withOpacity(0.18)),
+      (
+        'Final Report Q1-2025',
+        'Confirmed',
+        _emerald,
+        Icons.check_circle_rounded,
       ),
-      child: Row(children: [
-        Icon(d.$4, color: d.$3, size: 16),
-        const SizedBox(width: 10),
-        Expanded(child: Text(d.$1, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.onSurface))),
-        Text(d.$2, style: TextStyle(fontSize: 10, color: d.$3, fontWeight: FontWeight.w600)),
-      ]),
-    )).toList());
+      (
+        'Entity Atlas Export',
+        'Confirmed',
+        _emerald,
+        Icons.check_circle_rounded,
+      ),
+      (
+        'Knowledge Batch 24-C',
+        'Pending Acknowledgment',
+        _amber,
+        Icons.schedule_rounded,
+      ),
+      (
+        'Identity Audit Output',
+        'Under Review',
+        _teal,
+        Icons.rate_review_rounded,
+      ),
+      (
+        'Community Metrics Report',
+        'Flagged for Re-Review',
+        _red,
+        Icons.flag_rounded,
+      ),
+    ];
+    return Column(
+      children: deliveries
+          .map(
+            (d) => Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: isDark
+                    ? Colors.white.withValues(alpha: 0.03)
+                    : Colors.black.withValues(alpha: 0.02),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: d.$3.withValues(alpha: 0.18)),
+              ),
+              child: Row(
+                children: [
+                  Icon(d.$4, color: d.$3, size: 16),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      d.$1,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    d.$2,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: d.$3,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+          .toList(),
+    );
   }
 
   Widget _buildAnalyticsPanel(BuildContext context, bool isDark) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: _blue.withOpacity(0.06),
+        color: _blue.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _blue.withOpacity(0.18)),
+        border: Border.all(color: _blue.withValues(alpha: 0.18)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -324,22 +534,45 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
             ],
           ),
           const SizedBox(height: 14),
-          Text('Trend charts reveal whether output quality is improving or degrading across '
-              'successive processing cycles. The 30-day rolling pass rate has improved from '
-              '96.1% to 98.3% — a 2.2% uplift driven primarily by the new completeness '
-              'validation layer introduced in February 2025.',
-              style: TextStyle(fontSize: 12, height: 1.5,
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.72))),
+          Text(
+            'Trend charts reveal whether output quality is improving or degrading across '
+            'successive processing cycles. The 30-day rolling pass rate has improved from '
+            '96.1% to 98.3% — a 2.2% uplift driven primarily by the new completeness '
+            'validation layer introduced in February 2025.',
+            style: TextStyle(
+              fontSize: 12,
+              height: 1.5,
+              color: Theme.of(
+                context,
+              ).colorScheme.onSurface.withValues(alpha: 0.72),
+            ),
+          ),
         ],
       ),
     );
   }
 
   Widget _buildAnalyticPill(String label, String value, Color color) {
-    return Column(children: [
-      Text(value, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: color)),
-      Text(label, style: TextStyle(fontSize: 9, color: color.withOpacity(0.75), letterSpacing: 0.5)),
-    ]);
+    return Column(
+      children: [
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: color,
+          ),
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 9,
+            color: color.withValues(alpha: 0.75),
+            letterSpacing: 0.5,
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildExportOptions(BuildContext context, bool isDark) {
@@ -350,22 +583,35 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
       (Icons.code_rounded, 'XML', _amber),
     ];
     return Row(
-      children: formats.map((f) => Expanded(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          decoration: BoxDecoration(
-            color: f.$3.withOpacity(0.08),
-            borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: f.$3.withOpacity(0.22)),
-          ),
-          child: Column(children: [
-            Icon(f.$1, color: f.$3, size: 22),
-            const SizedBox(height: 6),
-            Text(f.$2, style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: f.$3)),
-          ]),
-        ),
-      )).toList(),
+      children: formats
+          .map(
+            (f) => Expanded(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                padding: const EdgeInsets.symmetric(vertical: 14),
+                decoration: BoxDecoration(
+                  color: f.$3.withValues(alpha: 0.08),
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: f.$3.withValues(alpha: 0.22)),
+                ),
+                child: Column(
+                  children: [
+                    Icon(f.$1, color: f.$3, size: 22),
+                    const SizedBox(height: 6),
+                    Text(
+                      f.$2,
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: f.$3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -373,21 +619,30 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: _emerald.withOpacity(0.07),
+        color: _emerald.withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: _emerald.withOpacity(0.18)),
+        border: Border.all(color: _emerald.withValues(alpha: 0.18)),
       ),
-      child: Row(children: [
-        const Icon(Icons.info_outline_rounded, color: _emerald, size: 18),
-        const SizedBox(width: 10),
-        Expanded(child: Text(
-          'Every outcome is signed, timestamped, and stored so stakeholders can retrieve '
-          'proof of completion at any time. Items below threshold are flagged for human review '
-          'rather than silently passed downstream.',
-          style: TextStyle(fontSize: 11, height: 1.4,
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.70)),
-        )),
-      ]),
+      child: Row(
+        children: [
+          const Icon(Icons.info_outline_rounded, color: _emerald, size: 18),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              'Every outcome is signed, timestamped, and stored so stakeholders can retrieve '
+              'proof of completion at any time. Items below threshold are flagged for human review '
+              'rather than silently passed downstream.',
+              style: TextStyle(
+                fontSize: 11,
+                height: 1.4,
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.70),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -396,16 +651,47 @@ class _Artefact {
   final String name, description, format, count;
   final IconData icon;
   final Color color;
-  const _Artefact(this.name, this.description, this.format, this.count, this.icon, this.color);
+  const _Artefact(
+    this.name,
+    this.description,
+    this.format,
+    this.count,
+    this.icon,
+    this.color,
+  );
 }
 
 final _artefacts = [
-  _Artefact('Reports Archive', 'Processed analytical and performance reports, signed and timestamped.',
-      'PDF · CSV', '1,240 items', Icons.description_rounded, Color(0xFF059669)),
-  _Artefact('Dataset Outputs', 'Structured data exports from processing cycles with full lineage.',
-      'CSV · JSON', '486 items', Icons.storage_rounded, Color(0xFF0D9488)),
-  _Artefact('Certificates', 'Completion and achievement certificates issued across all modules.',
-      'PDF', '312 items', Icons.workspace_premium_rounded, Color(0xFFF59E0B)),
-  _Artefact('Knowledge Documents', 'Processed and peer-verified knowledge submissions.',
-      'JSON · XML', '809 items', Icons.article_rounded, Color(0xFF3B82F6)),
+  _Artefact(
+    'Reports Archive',
+    'Processed analytical and performance reports, signed and timestamped.',
+    'PDF · CSV',
+    '1,240 items',
+    Icons.description_rounded,
+    Color(0xFF059669),
+  ),
+  _Artefact(
+    'Dataset Outputs',
+    'Structured data exports from processing cycles with full lineage.',
+    'CSV · JSON',
+    '486 items',
+    Icons.storage_rounded,
+    Color(0xFF0D9488),
+  ),
+  _Artefact(
+    'Certificates',
+    'Completion and achievement certificates issued across all modules.',
+    'PDF',
+    '312 items',
+    Icons.workspace_premium_rounded,
+    Color(0xFFF59E0B),
+  ),
+  _Artefact(
+    'Knowledge Documents',
+    'Processed and peer-verified knowledge submissions.',
+    'JSON · XML',
+    '809 items',
+    Icons.article_rounded,
+    Color(0xFF3B82F6),
+  ),
 ];

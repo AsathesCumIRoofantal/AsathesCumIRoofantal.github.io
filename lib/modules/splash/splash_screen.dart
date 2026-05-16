@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:air_app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 
@@ -87,7 +88,7 @@ class _SplashScreenState extends State<SplashScreen>
                       shape: BoxShape.circle,
                       color: const Color(
                         0xFF4DA6FF,
-                      ).withOpacity(0.12 * _glowAnimation.value),
+                      ).withValues(alpha: 0.12 * _glowAnimation.value),
                     ),
                   );
                 },
@@ -107,7 +108,7 @@ class _SplashScreenState extends State<SplashScreen>
                       shape: BoxShape.circle,
                       color: const Color(
                         0xFFFFC857,
-                      ).withOpacity(0.08 * _glowAnimation.value),
+                      ).withValues(alpha: 0.08 * _glowAnimation.value),
                     ),
                   );
                 },
@@ -137,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 BoxShadow(
                                   color: const Color(
                                     0xFF4DA6FF,
-                                  ).withOpacity(0.35),
+                                  ).withValues(alpha: 0.35),
                                   blurRadius: 35,
                                   spreadRadius: 2,
                                 ),

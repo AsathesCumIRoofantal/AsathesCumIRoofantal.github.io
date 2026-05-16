@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'enhancement_controller.dart';
 
 class EnhancementView extends GetView<EnhancementController> {
@@ -59,14 +60,14 @@ class EnhancementView extends GetView<EnhancementController> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.purpleAccent.withOpacity(0.15),
-            Colors.deepPurple.withOpacity(0.05),
+            Colors.purpleAccent.withValues(alpha: 0.15),
+            Colors.deepPurple.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.purpleAccent.withOpacity(0.25)),
+        border: Border.all(color: Colors.purpleAccent.withValues(alpha: 0.25)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,7 +77,7 @@ class EnhancementView extends GetView<EnhancementController> {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.purpleAccent.withOpacity(0.15),
+                  color: Colors.purpleAccent.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: const Icon(
@@ -103,7 +104,7 @@ class EnhancementView extends GetView<EnhancementController> {
                       'Continuous improvement',
                       style: TextStyle(
                         fontSize: 13,
-                        color: onSurface.withOpacity(0.6),
+                        color: onSurface.withValues(alpha: 0.6),
                       ),
                     ),
                   ],
@@ -117,7 +118,7 @@ class EnhancementView extends GetView<EnhancementController> {
             'ongoing efforts to optimize processes, upgrade systems, and elevate the user experience.',
             style: TextStyle(
               fontSize: 14,
-              color: onSurface.withOpacity(0.75),
+              color: onSurface.withValues(alpha: 0.75),
               height: 1.6,
             ),
           ),
@@ -137,13 +138,13 @@ class EnhancementView extends GetView<EnhancementController> {
       margin: const EdgeInsets.only(bottom: 14),
       decoration: BoxDecoration(
         color: isDark
-            ? theme.cardColor.withOpacity(0.35)
+            ? theme.cardColor.withValues(alpha: 0.35)
             : theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.06)
-              : theme.colorScheme.outline.withOpacity(0.12),
+              ? Colors.white.withValues(alpha: 0.06)
+              : theme.colorScheme.outline.withValues(alpha: 0.12),
         ),
       ),
       child: Theme(
@@ -154,7 +155,7 @@ class EnhancementView extends GetView<EnhancementController> {
           leading: Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: section.color.withOpacity(0.12),
+              color: section.color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(section.icon, color: section.color, size: 20),
@@ -193,7 +194,7 @@ class EnhancementView extends GetView<EnhancementController> {
               point,
               style: TextStyle(
                 fontSize: 14,
-                color: onSurface.withOpacity(0.75),
+                color: onSurface.withValues(alpha: 0.75),
                 height: 1.5,
               ),
             ),

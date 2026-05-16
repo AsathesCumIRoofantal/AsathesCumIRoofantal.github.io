@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import 'approval_appeals_controller.dart';
 
 class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
@@ -11,21 +12,26 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        title: const Text('APPROVAL & APPEALS', style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
+        title: const Text(
+          'APPROVAL & APPEALS',
+          style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold),
+        ),
         centerTitle: true,
       ),
       body: Column(
         children: [
           _buildFilterChips(context),
           Expanded(
-            child: Obx(() => ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: controller.appeals.length,
-              itemBuilder: (context, index) {
-                final appeal = controller.appeals[index];
-                return _buildAppealCard(context, appeal, index);
-              },
-            )),
+            child: Obx(
+              () => ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: controller.appeals.length,
+                itemBuilder: (context, index) {
+                  final appeal = controller.appeals[index];
+                  return _buildAppealCard(context, appeal, index);
+                },
+              ),
+            ),
           ),
         ],
       ),
@@ -57,14 +63,22 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
     );
   }
 
-  Widget _buildAppealCard(BuildContext context, AppealRequest appeal, int index) {
+  Widget _buildAppealCard(
+    BuildContext context,
+    AppealRequest appeal,
+    int index,
+  ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4)),
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: Column(
@@ -72,10 +86,18 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
           ListTile(
             contentPadding: const EdgeInsets.all(16),
             leading: CircleAvatar(
-              backgroundColor: _getTypeColor(appeal.type).withOpacity(0.1),
-              child: Icon(_getTypeIcon(appeal.type), color: _getTypeColor(appeal.type)),
+              backgroundColor: _getTypeColor(
+                appeal.type,
+              ).withValues(alpha: 0.1),
+              child: Icon(
+                _getTypeIcon(appeal.type),
+                color: _getTypeColor(appeal.type),
+              ),
             ),
-            title: Text(appeal.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            title: Text(
+              appeal.title,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -84,7 +106,10 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    Text(DateFormat('MMM dd').format(appeal.date), style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                    Text(
+                      DateFormat('MMM dd').format(appeal.date),
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
                     const Spacer(),
                     _buildStatusBadge(appeal.status),
                   ],
@@ -101,7 +126,10 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
                 TextButton(onPressed: () {}, child: const Text("VIEW DETAILS")),
                 ElevatedButton(
                   onPressed: () => controller.approveAppeal(index),
-                  style: ElevatedButton.styleFrom(backgroundColor: Colors.green[700], foregroundColor: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green[700],
+                    foregroundColor: Colors.white,
+                  ),
                   child: const Text("APPROVE"),
                 ),
               ],
@@ -116,28 +144,43 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.orange.withOpacity(0.1),
+        color: Colors.orange.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(6),
       ),
-      child: Text(status.toUpperCase(), style: const TextStyle(color: Colors.orange, fontSize: 10, fontWeight: FontWeight.bold)),
+      child: Text(
+        status.toUpperCase(),
+        style: const TextStyle(
+          color: Colors.orange,
+          fontSize: 10,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 
   Color _getTypeColor(String type) {
     switch (type) {
-      case "Leave": return Colors.blue;
-      case "Budget": return Colors.green;
-      case "Policy": return Colors.purple;
-      default: return Colors.grey;
+      case "Leave":
+        return Colors.blue;
+      case "Budget":
+        return Colors.green;
+      case "Policy":
+        return Colors.purple;
+      default:
+        return Colors.grey;
     }
   }
 
   IconData _getTypeIcon(String type) {
     switch (type) {
-      case "Leave": return Icons.time_to_leave;
-      case "Budget": return Icons.monetization_on_outlined;
-      case "Policy": return Icons.policy_outlined;
-      default: return Icons.help_outline;
+      case "Leave":
+        return Icons.time_to_leave;
+      case "Budget":
+        return Icons.monetization_on_outlined;
+      case "Policy":
+        return Icons.policy_outlined;
+      default:
+        return Icons.help_outline;
     }
   }
 
@@ -145,20 +188,39 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
     Get.bottomSheet(
       Container(
         padding: const EdgeInsets.all(24),
-        decoration: BoxDecoration(color: Theme.of(context).colorScheme.surface, borderRadius: const BorderRadius.vertical(top: Radius.circular(30))),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("FILE NEW APPEAL", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, letterSpacing: 2)),
+            const Text(
+              "FILE NEW APPEAL",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2,
+              ),
+            ),
             const SizedBox(height: 24),
-            TextField(controller: controller.titleController, decoration: const InputDecoration(labelText: "Appeal Title")),
+            TextField(
+              controller: controller.titleController,
+              decoration: const InputDecoration(labelText: "Appeal Title"),
+            ),
             const SizedBox(height: 16),
-            TextField(controller: controller.requesterController, decoration: const InputDecoration(labelText: "Your Name/Dept")),
+            TextField(
+              controller: controller.requesterController,
+              decoration: const InputDecoration(labelText: "Your Name/Dept"),
+            ),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(onPressed: () => controller.submitAppeal(), child: const Text("SUBMIT APPEAL")),
+              child: ElevatedButton(
+                onPressed: () => controller.submitAppeal(),
+                child: const Text("SUBMIT APPEAL"),
+              ),
             ),
             const SizedBox(height: 16),
           ],

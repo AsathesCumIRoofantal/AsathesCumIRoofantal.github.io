@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'ease_tools_controller.dart';
 
 class EaseToolsView extends GetView<EaseToolsController> {
@@ -24,10 +25,7 @@ class EaseToolsView extends GetView<EaseToolsController> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [
-              theme.scaffoldBackgroundColor,
-              theme.colorScheme.surface,
-            ],
+            colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
           ),
         ),
         child: SafeArea(
@@ -39,12 +37,13 @@ class EaseToolsView extends GetView<EaseToolsController> {
                 child: Obx(() {
                   return GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 0.85,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 0.85,
+                        ),
                     itemCount: controller.tools.length,
                     itemBuilder: (context, index) {
                       return _buildToolCard(context, controller.tools[index]);
@@ -91,12 +90,12 @@ class EaseToolsView extends GetView<EaseToolsController> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: theme.cardColor.withOpacity(0.4),
+        color: theme.cardColor.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: tool.color.withOpacity(0.1)),
+        border: Border.all(color: tool.color.withValues(alpha: 0.1)),
         boxShadow: [
           BoxShadow(
-            color: tool.color.withOpacity(0.05),
+            color: tool.color.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -108,7 +107,7 @@ class EaseToolsView extends GetView<EaseToolsController> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: tool.color.withOpacity(0.1),
+              color: tool.color.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(tool.icon, color: tool.color, size: 24),
@@ -116,10 +115,7 @@ class EaseToolsView extends GetView<EaseToolsController> {
           const Spacer(),
           Text(
             tool.name,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           const SizedBox(height: 4),
           Text(
@@ -136,7 +132,7 @@ class EaseToolsView extends GetView<EaseToolsController> {
           Icon(
             Icons.arrow_forward_rounded,
             size: 16,
-            color: tool.color.withOpacity(0.5),
+            color: tool.color.withValues(alpha: 0.5),
           ),
         ],
       ),
