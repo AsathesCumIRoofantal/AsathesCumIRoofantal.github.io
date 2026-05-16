@@ -138,7 +138,19 @@ class HomeController extends GetxController {
   //     ItemScrollController();
 
   final ScrollController scrollController = ScrollController();
-  final Map<String, double> itemOffsets = {};
+  final Map<String, double> itemOffsets = {
+    "EXPLORE - ALIFIYAS": 0,
+    "RULE - MAZEASTA": 620,
+    "BE-YOU & EARN LIVING": 980,
+    "Use AIR's Space & Resources": 1420,
+    "Your Profile Specifics": 1980,
+    "AIR's - Aspects": 3720,
+    "SERVICE & PRODUCTION": 5980,
+    "AIR'S VISION": 6420,
+    "MOTIVATION & CONNECTIVITY": 7260,
+    "SETUP A-ONE": 9260,
+    "SYSTEM CORE": 17300,
+  };
 
   final List<DrawerActualSection> drawerSections = [
     DrawerActualSection(

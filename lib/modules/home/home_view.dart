@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
         }
       }
     }
-    await scrollToSectionNewItem(routeTemp);
+    await scrollToSectionNewItem(sectionTitle);
     // controller.itemScrollSectionController.scrollTo(
     //   index: indexSection,
     //   duration: const Duration(milliseconds: 800),
@@ -95,8 +95,8 @@ class HomeView extends StatelessWidget {
     });
   }
 
-  Future<void> scrollToSectionNewItem(String route) async {
-    final offset = controller.itemOffsets[route];
+  Future<void> scrollToSectionNewItem(String sectionTitle) async {
+    final offset = controller.itemOffsets[sectionTitle];
 
     if (offset == null) {
       debugPrint("Offset not found");
