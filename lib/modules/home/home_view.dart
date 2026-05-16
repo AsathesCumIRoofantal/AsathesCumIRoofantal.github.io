@@ -177,7 +177,7 @@ class HomeView extends StatelessWidget {
 
                   itemBuilder: (context, index) {
                     final itemSectionActual =
-                        controller.drawerSections[index - 1];
+                        controller.drawerSections[index + 1];
                     return Column(
                       children: [
                         /// HEADER
