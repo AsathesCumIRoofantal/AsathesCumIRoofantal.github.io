@@ -93,8 +93,8 @@ class HomeController extends GetxController {
         );
       }
     }
-    drawerSearchController.text = "Sign";
-    getFilteredResults();
+    // drawerSearchController.text = "Sign";
+    // getFilteredResults();
   }
 
   void getFilteredResults() {
