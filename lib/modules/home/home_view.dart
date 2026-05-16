@@ -60,18 +60,32 @@ class HomeView extends StatelessWidget {
   }) async {
     /// CLOSE SEARCH OVERLAY
     controller.isDrawerSearchVisible.value = false;
-    // controller.itemScrollSectionController.scrollTo(
-    //   index: indexSection,
-    //   duration: const Duration(milliseconds: 1200),
-    //   curve: Curves.easeInOutCubic,
-    //   alignment: 0.45,
-    // );
-    // controller.itemScrollActualTabController.scrollTo(
-    //   index: indexActualTab,
-    //   duration: const Duration(milliseconds: 1200),
-    //   curve: Curves.easeInOutCubic,
-    //   alignment: 0.45,
-    // );
+    int indexSection = 0;
+    int indexActualTab = 0;
+    for (final section in controller.drawerSections) {
+      section.indexSection = controller.drawerSections.indexOf(section);
+      for (final item in section.items) {
+        if (item.route == routeTemp) {
+          indexSection = section.indexSection;
+          indexActualTab = item.indexTab;
+          break;
+        }
+      }
+    }
+
+    controller.itemScrollSectionController.scrollTo(
+      index: indexSection,
+      duration: const Duration(milliseconds: 1200),
+      curve: Curves.easeInOutCubic,
+      alignment: 0.45,
+    );
+    await Future.delayed(const Duration(milliseconds: 300));
+    controller.itemScrollActualTabController.scrollTo(
+      index: indexActualTab,
+      duration: const Duration(milliseconds: 1200),
+      curve: Curves.easeInOutCubic,
+      alignment: 0.45,
+    );
     // routeTemp = "${routeTemp}";
 
     // /// WAIT FOR UI REBUILD
