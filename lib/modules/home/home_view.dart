@@ -85,59 +85,54 @@ class _HomeViewState extends State<HomeView> {
       alignment: 0.45,
     );
     await Future.delayed(const Duration(milliseconds: 300));
-    controller.itemScrollActualTabController.scrollTo(
-      index: indexActualTab,
-      duration: const Duration(milliseconds: 1200),
-      curve: Curves.easeInOutCubic,
-      alignment: 0.45,
-    );
-    // routeTemp = "${routeTemp}";
 
-    // /// WAIT FOR UI REBUILD
-    // await Future.delayed(const Duration(milliseconds: 800));
-    // GlobalKey? keyActual = ((controller.drawerSections.firstWhere(
-    //   (s) => s.title == sectionTitle,
-    // )).items.firstWhere((i) => i.route == routeTemp)).key;
+    routeTemp = "${routeTemp}";
 
-    // /// BUILD UNIQUE KEY
-    // // int retry = 0;
-    // // while (keyActual?.currentContext == null && retry < 10) {
-    // //   retry++;
+    /// WAIT FOR UI REBUILD
+    await Future.delayed(const Duration(milliseconds: 800));
+    GlobalKey? keyActualTab = ((controller.drawerSections.firstWhere(
+      (s) => s.title == sectionTitle,
+    )).items.firstWhere((i) => i.route == routeTemp)).key;
 
-    // //   await Future.delayed(const Duration(milliseconds: 120));
-    // // }
-    // BuildContext? ctx = keyActual?.currentContext;
-    // if (ctx == null) {
-    //   debugPrint("Context NULL -> $routeTemp");
-    //   return;
-    // }
+    //  BUILD UNIQUE KEY
+    int retry = 0;
+    while (keyActualTab?.currentContext == null && retry < 10) {
+      retry++;
 
-    // /// GET SAFE GLOBAL KEY
-    // final GlobalKey? globalKey = keyActual;
+      await Future.delayed(const Duration(milliseconds: 120));
+    }
+    BuildContext? ctx = keyActualTab?.currentContext;
+    if (ctx == null) {
+      debugPrint("Context NULL -> $routeTemp");
+      return;
+    }
 
-    // if (globalKey == null) {
-    //   debugPrint("GlobalKey NOT FOUND -> $routeTemp");
-    //   return;
-    // }
+    /// GET SAFE GLOBAL KEY
+    final GlobalKey? globalKey = keyActualTab;
 
-    // /// WAIT NEXT FRAME
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   /// SAFE CONTEXT
-    //   final BuildContext? itemContext = globalKey.currentContext;
+    if (globalKey == null) {
+      debugPrint("GlobalKey NOT FOUND -> $routeTemp");
+      return;
+    }
 
-    //   if (itemContext == null) {
-    //     debugPrint("Context NULL -> $routeTemp");
-    //     return;
-    //   }
+    /// WAIT NEXT FRAME
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      /// SAFE CONTEXT
+      final BuildContext? itemContext = globalKey.currentContext;
 
-    //   /// SCROLL
-    //   await Scrollable.ensureVisible(
-    //     itemContext,
-    //     duration: const Duration(milliseconds: 1000),
-    //     curve: Curves.easeInOutCubic,
-    //     alignment: 0.45,
-    //   );
-    // });
+      if (itemContext == null) {
+        debugPrint("Context NULL -> $routeTemp");
+        return;
+      }
+
+      /// SCROLL
+      await Scrollable.ensureVisible(
+        itemContext,
+        duration: const Duration(milliseconds: 1000),
+        curve: Curves.easeInOutCubic,
+        alignment: 0.45,
+      );
+    });
   }
 
   @override
@@ -181,8 +176,8 @@ class _HomeViewState extends State<HomeView> {
                   itemScrollController: controller.drawerSections.isNotEmpty
                       ? controller.itemScrollSectionController
                       : ItemScrollController(),
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  // shrinkWrap: true,
                   itemCount: controller.drawerSections.length + 1,
 
                   itemBuilder: (context, index) {
@@ -320,29 +315,23 @@ class _HomeViewState extends State<HomeView> {
                               ),
 
                               /// ITEMS
-                              ScrollablePositionedList.builder(
-                                itemScrollController:
-                                    controller.drawerSections.isNotEmpty
-                                    ? controller.itemScrollActualTabController
-                                    : ItemScrollController(),
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: itemSectionActual.items.length,
+                              Column(
+                                children: List.generate(
+                                  itemSectionActual.items.length,
+                                  (indexTabActual) {
+                                    final itemTabsActual =
+                                        itemSectionActual.items[indexTabActual];
 
-                                itemBuilder: (context, indexTabActual) {
-                                  final itemTabsActual =
-                                      itemSectionActual.items[indexTabActual];
-                                  return Container(
-                                    key: itemTabsActual.key,
-                                    child: buildDrawerActualItem(
-                                      context: context,
-
-                                      item: itemTabsActual,
-
-                                      onSurface: onSurface,
-                                    ),
-                                  );
-                                },
+                                    return Container(
+                                      key: itemTabsActual.key,
+                                      child: buildDrawerActualItem(
+                                        context: context,
+                                        item: itemTabsActual,
+                                        onSurface: onSurface,
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
 
                               const SizedBox(height: 10),
@@ -350,7 +339,7 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ),
 
-                        const SizedBox(height: 120),
+                        const SizedBox(height: 10),
                       ],
                     );
                   },
