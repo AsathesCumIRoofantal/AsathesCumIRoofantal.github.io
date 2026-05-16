@@ -51,15 +51,8 @@ class SampleContentPage extends StatelessWidget {
         ),
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title.toUpperCase()),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: theme.colorScheme.onSurface,
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
+    return SizedBox(
+      child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,

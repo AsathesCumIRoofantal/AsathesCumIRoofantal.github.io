@@ -166,6 +166,7 @@ class SystemAllTogetherEnhancedView extends StatelessWidget {
               ),
             ),
           ),
+
           SliverToBoxAdapter(
             child: Container(
               color: isDark ? _bg : Colors.white,

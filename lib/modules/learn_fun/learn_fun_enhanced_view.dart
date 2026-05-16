@@ -1,8 +1,7 @@
 import 'dart:math' as math;
 
+import 'package:air_app/modules/learn_fun/learn_fun_view.dart';
 import 'package:flutter/material.dart';
-
-import 'learn_fun_view.dart';
 
 /// Auto-generated unique themed wrapper for Learn Fun.
 /// Adds a fresh design + new content sections while preserving original content
@@ -186,6 +185,7 @@ class LearnFunEnhancedView extends StatelessWidget {
               ),
             ),
           ),
+
           // Original page content embedded — nothing deleted.
           SliverToBoxAdapter(child: const LearnFunView()),
         ],

@@ -1,6 +1,7 @@
+import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
+
 import 'learn_fun_controller.dart';
 
 class LearnFunView extends GetView<LearnFunController> {
@@ -8,11 +9,16 @@ class LearnFunView extends GetView<LearnFunController> {
 
   IconData _getIcon(String identifier) {
     switch (identifier) {
-      case 'science': return Icons.science;
-      case 'color_lens': return Icons.color_lens;
-      case 'remove_red_eye': return Icons.remove_red_eye;
-      case 'calculate': return Icons.calculate;
-      default: return Icons.book;
+      case 'science':
+        return Icons.science;
+      case 'color_lens':
+        return Icons.color_lens;
+      case 'remove_red_eye':
+        return Icons.remove_red_eye;
+      case 'calculate':
+        return Icons.calculate;
+      default:
+        return Icons.book;
     }
   }
 
@@ -26,13 +32,14 @@ class LearnFunView extends GetView<LearnFunController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Alifiyas's - Learn & Fun"),
-      ),
-      body: Obx(() {
+    return SizedBox(
+      child: Obx(() {
         if (controller.isLoading.value) {
-          return Center(child: CircularProgressIndicator(color: Theme.of(context).colorScheme.primary));
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          );
         }
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -103,7 +110,9 @@ class LearnFunView extends GetView<LearnFunController> {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: Theme.of(context).textTheme.bodyLarge?.color,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.bodyLarge?.color,
                               ),
                             ),
                           ],
