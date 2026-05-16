@@ -6,6 +6,10 @@ class EnhancedViewWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PageView(physics: const BouncingScrollPhysics(), children: [child]);
+    return PageView(
+      scrollDirection: Axis.horizontal,
+      physics: const BouncingScrollPhysics(),
+      children: [child],
+    );
   }
 }
