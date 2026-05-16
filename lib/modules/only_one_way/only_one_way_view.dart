@@ -1,9 +1,23 @@
+import 'package:air_app/widgets/sample_content_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
-import 'only_one_way_controller.dart';
 
-class OnlyOneWayView extends GetView<OnlyOneWayController> {
+import 'only_one_way_controller.dart';
+import 'only_one_way_enhanced_view.dart';
+
+class OnlyOneWayPage extends GetView<OnlyOneWayController> {
+  const OnlyOneWayPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView(
+      physics: const BouncingScrollPhysics(),
+      children: const [OnlyOneWayEnhancedView(), OnlyOneWayView()],
+    );
+  }
+}
+
+class OnlyOneWayView extends StatelessWidget {
   const OnlyOneWayView({super.key});
 
   @override

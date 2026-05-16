@@ -24,8 +24,6 @@ class ConnectCollaborateEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
         slivers: [
           SliverAppBar(
             pinned: true,
@@ -190,12 +188,7 @@ class ConnectCollaborateEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 1.2,
-              child: const ConnectCollaborateView(),
-            ),
-          ),
+          SliverToBoxAdapter(child: const ConnectCollaborateView()),
         ],
       ),
     );
