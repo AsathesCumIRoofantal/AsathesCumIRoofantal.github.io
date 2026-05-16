@@ -51,6 +51,7 @@ class SampleContentPage extends StatelessWidget {
         ),
     ];
 
+    return Center();
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
