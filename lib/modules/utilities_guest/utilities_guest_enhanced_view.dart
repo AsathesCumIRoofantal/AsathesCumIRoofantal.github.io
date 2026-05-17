@@ -10,7 +10,8 @@ import 'utilities_guest_view.dart';
 ///
 /// Theme: Ocean Deep | Layout: stripes
 class UtilitiesGuestEnhancedView extends StatelessWidget {
-  const UtilitiesGuestEnhancedView({super.key});
+  final bool isEmbedded;
+  const UtilitiesGuestEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff051e2e);
   static const Color _bg2 = Color(0xff0c3a5c);
@@ -24,7 +25,9 @@ class UtilitiesGuestEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

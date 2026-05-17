@@ -4,11 +4,12 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'managements_controller.dart';
 
 class ManagementsView extends GetView<ManagementsController> {
-  const ManagementsView({super.key});
+  final bool isEmbedded;
+  const ManagementsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
+    return SampleContentPage(
       title: 'Managements',
       subtitle:
           'Exercise operational control over everything you steward — teams, assets, programmes, and processes — from a single, structured interface. '

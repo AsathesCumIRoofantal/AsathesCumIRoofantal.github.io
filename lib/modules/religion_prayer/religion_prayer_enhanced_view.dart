@@ -10,7 +10,8 @@ import 'religion_prayer_view.dart';
 ///
 /// Theme: Bronze Age | Layout: rings
 class ReligionPrayerEnhancedView extends StatelessWidget {
-  const ReligionPrayerEnhancedView({super.key});
+  final bool isEmbedded;
+  const ReligionPrayerEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1f1408);
   static const Color _bg2 = Color(0xff3d2614);
@@ -24,7 +25,9 @@ class ReligionPrayerEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

@@ -4,11 +4,12 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'windup_else_controller.dart';
 
 class WindupElseView extends GetView<WindupElseController> {
-  const WindupElseView({super.key});
+  final bool isEmbedded;
+  const WindupElseView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
+    return SampleContentPage(
       title: 'Windup & Else',
       subtitle:
           'Close out initiatives, sessions, and commitments gracefully — preserving the truth of what happened without leaving loose ends. '

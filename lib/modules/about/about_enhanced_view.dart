@@ -10,7 +10,8 @@ import 'about_app_view.dart';
 ///
 /// Theme: Slate Steel | Layout: wave
 class AboutEnhancedView extends StatelessWidget {
-  const AboutEnhancedView({super.key});
+  final bool isEmbedded;
+  const AboutEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0f172a);
   static const Color _bg2 = Color(0xff1e293b);
@@ -24,7 +25,9 @@ class AboutEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

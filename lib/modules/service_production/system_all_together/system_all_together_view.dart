@@ -4,11 +4,12 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'system_all_together_controller.dart';
 
 class SystemAllTogetherView extends GetView<SystemAllTogetherController> {
-  const SystemAllTogetherView({super.key});
+  final bool isEmbedded;
+  const SystemAllTogetherView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
+    return SampleContentPage(
       title: 'System All Together',
       subtitle:
           'Step back and see the entire AIR operation as one interconnected system — inputs, processes, outcomes, people, and feedback loops all in one view. '

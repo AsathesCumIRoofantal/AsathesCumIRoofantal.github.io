@@ -10,7 +10,8 @@ import 'outcome_processed_view.dart';
 ///
 /// Theme: Ember Forge | Layout: diagonal
 class OutcomeProcessedEnhancedView extends StatelessWidget {
-  const OutcomeProcessedEnhancedView({super.key});
+  final bool isEmbedded;
+  const OutcomeProcessedEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1a0a05);
   static const Color _bg2 = Color(0xff3b1c0e);
@@ -24,7 +25,9 @@ class OutcomeProcessedEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

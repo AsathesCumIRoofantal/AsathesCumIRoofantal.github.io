@@ -9,7 +9,8 @@ import 'about_app_view.dart';
 /// Wraps and preserves the original AboutAppView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class AboutAppBestView extends StatelessWidget {
-  const AboutAppBestView({super.key});
+  final bool isEmbedded;
+  const AboutAppBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFF7C3AED);
   static const Color _secondary = Color(0xFFA855F7);
@@ -90,7 +91,9 @@ class AboutAppBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,

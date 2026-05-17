@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'connect_collaborate_controller.dart';
 
 class ConnectCollaborateView extends GetView<ConnectCollaborateController> {
-  const ConnectCollaborateView({super.key});
+  final bool isEmbedded;
+  const ConnectCollaborateView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

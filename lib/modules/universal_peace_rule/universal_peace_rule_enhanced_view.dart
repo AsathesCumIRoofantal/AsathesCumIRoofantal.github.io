@@ -10,7 +10,8 @@ import 'universal_peace_rule_view.dart';
 ///
 /// Theme: Indigo Night | Layout: stripes
 class UniversalPeaceRuleEnhancedView extends StatelessWidget {
-  const UniversalPeaceRuleEnhancedView({super.key});
+  final bool isEmbedded;
+  const UniversalPeaceRuleEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0f172a);
   static const Color _bg2 = Color(0xff1e1b4b);
@@ -24,7 +25,9 @@ class UniversalPeaceRuleEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

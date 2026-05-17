@@ -10,7 +10,8 @@ import 'query_discussion_view.dart';
 ///
 /// Theme: Forest Moss | Layout: rings
 class QueryDiscussionEnhancedView extends StatelessWidget {
-  const QueryDiscussionEnhancedView({super.key});
+  final bool isEmbedded;
+  const QueryDiscussionEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff052e1b);
   static const Color _bg2 = Color(0xff0f3d2a);
@@ -24,7 +25,9 @@ class QueryDiscussionEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

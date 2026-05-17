@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'network_apis_controller.dart';
 
 class NetworkApisView extends GetView<NetworkApisController> {
-  const NetworkApisView({super.key});
+  final bool isEmbedded;
+  const NetworkApisView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

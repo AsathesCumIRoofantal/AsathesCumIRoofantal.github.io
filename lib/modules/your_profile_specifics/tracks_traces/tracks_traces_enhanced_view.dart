@@ -10,7 +10,8 @@ import 'tracks_traces_view.dart';
 ///
 /// Theme: Mint Spring | Layout: blocks
 class TracksTracesEnhancedView extends StatelessWidget {
-  const TracksTracesEnhancedView({super.key});
+  final bool isEmbedded;
+  const TracksTracesEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff052e2a);
   static const Color _bg2 = Color(0xff0f4d45);
@@ -24,7 +25,9 @@ class TracksTracesEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

@@ -10,7 +10,8 @@ import 'finally_blessings_view.dart';
 ///
 /// Theme: Coral Reef | Layout: diagonal
 class FinallyBlessingsEnhancedView extends StatelessWidget {
-  const FinallyBlessingsEnhancedView({super.key});
+  final bool isEmbedded;
+  const FinallyBlessingsEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff2a0f0a);
   static const Color _bg2 = Color(0xff4a1f14);
@@ -24,6 +25,8 @@ class FinallyBlessingsEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         slivers: [
           SliverAppBar(
             pinned: true,

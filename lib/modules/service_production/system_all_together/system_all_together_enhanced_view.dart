@@ -10,7 +10,8 @@ import 'system_all_together_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: wave
 class SystemAllTogetherEnhancedView extends StatelessWidget {
-  const SystemAllTogetherEnhancedView({super.key});
+  final bool isEmbedded;
+  const SystemAllTogetherEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1f0606);
   static const Color _bg2 = Color(0xff3d0c0c);
@@ -24,7 +25,9 @@ class SystemAllTogetherEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

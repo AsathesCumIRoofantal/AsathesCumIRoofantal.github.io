@@ -10,7 +10,8 @@ import 'airs_showcase_view.dart';
 ///
 /// Theme: Bronze Age | Layout: diagonal
 class AirsShowcaseEnhancedView extends StatelessWidget {
-  const AirsShowcaseEnhancedView({super.key});
+  final bool isEmbedded;
+  const AirsShowcaseEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1f1408);
   static const Color _bg2 = Color(0xff3d2614);
@@ -24,6 +25,8 @@ class AirsShowcaseEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         slivers: [
           SliverAppBar(
             pinned: true,
@@ -186,8 +189,8 @@ class AirsShowcaseEnhancedView extends StatelessWidget {
               ),
             ),
           ),
+
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const AirsShowcaseView()),
         ],
       ),
     );

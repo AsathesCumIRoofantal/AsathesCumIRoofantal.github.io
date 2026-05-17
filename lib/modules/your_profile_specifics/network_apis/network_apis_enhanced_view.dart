@@ -10,7 +10,8 @@ import 'network_apis_view.dart';
 ///
 /// Theme: Neon Iris | Layout: diagonal
 class NetworkApisEnhancedView extends StatelessWidget {
-  const NetworkApisEnhancedView({super.key});
+  final bool isEmbedded;
+  const NetworkApisEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0a0826);
   static const Color _bg2 = Color(0xff14104a);
@@ -24,7 +25,9 @@ class NetworkApisEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

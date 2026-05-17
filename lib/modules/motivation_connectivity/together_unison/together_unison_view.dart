@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'together_unison_controller.dart';
 
 class TogetherUnisonView extends GetView<TogetherUnisonController> {
-  const TogetherUnisonView({super.key});
+  final bool isEmbedded;
+  const TogetherUnisonView({super.key, this.isEmbedded = false});
 
   static const _rose = Color(0xFFE11D48);
   static const _pink = Color(0xFFDB2777);
@@ -45,6 +46,8 @@ class TogetherUnisonView extends GetView<TogetherUnisonController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

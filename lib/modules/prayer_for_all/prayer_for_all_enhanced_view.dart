@@ -10,7 +10,8 @@ import 'prayer_for_all_view.dart';
 ///
 /// Theme: Neon Iris | Layout: rings
 class PrayerForAllEnhancedView extends StatelessWidget {
-  const PrayerForAllEnhancedView({super.key});
+  final bool isEmbedded;
+  const PrayerForAllEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0a0826);
   static const Color _bg2 = Color(0xff14104a);
@@ -24,7 +25,9 @@ class PrayerForAllEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

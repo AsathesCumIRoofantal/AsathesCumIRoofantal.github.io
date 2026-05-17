@@ -10,7 +10,8 @@ import 'statistics_view.dart';
 ///
 /// Theme: Ember Forge | Layout: wave
 class StatisticsEnhancedView extends StatelessWidget {
-  const StatisticsEnhancedView({super.key});
+  final bool isEmbedded;
+  const StatisticsEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1a0a05);
   static const Color _bg2 = Color(0xff3b1c0e);
@@ -24,7 +25,9 @@ class StatisticsEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

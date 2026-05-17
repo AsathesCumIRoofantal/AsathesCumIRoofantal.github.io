@@ -10,7 +10,8 @@ import 'maintenance_view.dart';
 ///
 /// Theme: Olive Grove | Layout: circles
 class MaintenanceEnhancedView extends StatelessWidget {
-  const MaintenanceEnhancedView({super.key});
+  final bool isEmbedded;
+  const MaintenanceEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1a1f0a);
   static const Color _bg2 = Color(0xff2e380f);
@@ -24,7 +25,9 @@ class MaintenanceEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

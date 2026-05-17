@@ -9,7 +9,8 @@ import 'be_part_of_air_view.dart';
 /// Wraps and preserves the original BePartOfAirView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class BePartOfAirBestView extends StatelessWidget {
-  const BePartOfAirBestView({super.key});
+  final bool isEmbedded;
+  const BePartOfAirBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFFE11D48);
   static const Color _secondary = Color(0xFFF43F5E);
@@ -93,7 +94,9 @@ class BePartOfAirBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,

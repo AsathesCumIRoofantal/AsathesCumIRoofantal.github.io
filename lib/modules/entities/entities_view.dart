@@ -36,9 +36,7 @@ class EntitiesView extends GetView<EntitiesController> {
           );
         }
         return SingleChildScrollView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+          physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             children: [
               Padding(
@@ -573,9 +571,3 @@ class EntitiesView extends GetView<EntitiesController> {
     );
   }
 }
-
-
-
-
-
-

@@ -10,7 +10,8 @@ import 'social_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: rings
 class SocialEnhancedView extends StatelessWidget {
-  const SocialEnhancedView({super.key});
+  final bool isEmbedded;
+  const SocialEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff051628);
   static const Color _bg2 = Color(0xff0c2e4d);
@@ -24,7 +25,9 @@ class SocialEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

@@ -10,7 +10,8 @@ import 'technology_view.dart';
 ///
 /// Theme: Mint Spring | Layout: blocks
 class TechnologyEnhancedView extends StatelessWidget {
-  const TechnologyEnhancedView({super.key});
+  final bool isEmbedded;
+  const TechnologyEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff052e2a);
   static const Color _bg2 = Color(0xff0f4d45);
@@ -24,7 +25,9 @@ class TechnologyEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

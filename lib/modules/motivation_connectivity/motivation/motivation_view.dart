@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'motivation_controller.dart';
 
 class MotivationView extends GetView<MotivationController> {
-  const MotivationView({super.key});
+  final bool isEmbedded;
+  const MotivationView({super.key, this.isEmbedded = false});
 
   static const _blue = Color(0xFF2563EB);
   static const _indigo = Color(0xFF4F46E5);
@@ -30,6 +31,9 @@ class MotivationView extends GetView<MotivationController> {
         foregroundColor: theme.colorScheme.onSurface,
       ),
       body: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        // padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildQuoteHero(context, isDark),
           _buildCategoryPillars(context, isDark),

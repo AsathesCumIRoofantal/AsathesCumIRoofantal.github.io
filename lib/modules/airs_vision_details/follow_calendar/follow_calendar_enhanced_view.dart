@@ -10,7 +10,8 @@ import 'follow_calendar_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: blocks
 class FollowCalendarEnhancedView extends StatelessWidget {
-  const FollowCalendarEnhancedView({super.key});
+  final bool isEmbedded;
+  const FollowCalendarEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff051628);
   static const Color _bg2 = Color(0xff0c2e4d);
@@ -24,6 +25,8 @@ class FollowCalendarEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         slivers: [
           SliverAppBar(
             pinned: true,

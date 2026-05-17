@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'input_in_process_controller.dart';
 
 class InputInProcessView extends GetView<InputInProcessController> {
-  const InputInProcessView({super.key});
+  final bool isEmbedded;
+  const InputInProcessView({super.key, this.isEmbedded = false});
 
   static const _electric = Color(0xFF2563EB);
   static const _sky = Color(0xFF0EA5E9);
@@ -45,6 +46,8 @@ class InputInProcessView extends GetView<InputInProcessController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

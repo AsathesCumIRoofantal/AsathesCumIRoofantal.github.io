@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'practice_expertise_controller.dart';
 
 class PracticeExpertiseView extends GetView<PracticeExpertiseController> {
-  const PracticeExpertiseView({super.key});
+  final bool isEmbedded;
+  const PracticeExpertiseView({super.key, this.isEmbedded = false});
 
   static const _indigo = Color(0xFF4F46E5);
   static const _violet = Color(0xFF7C3AED);
@@ -45,6 +46,8 @@ class PracticeExpertiseView extends GetView<PracticeExpertiseController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

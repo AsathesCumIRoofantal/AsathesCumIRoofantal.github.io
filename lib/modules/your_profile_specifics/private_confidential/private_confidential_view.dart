@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'private_confidential_controller.dart';
 
 class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
-  const PrivateConfidentialView({super.key});
+  final bool isEmbedded;
+  const PrivateConfidentialView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

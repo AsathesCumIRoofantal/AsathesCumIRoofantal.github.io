@@ -10,7 +10,8 @@ import 'elections_view.dart';
 ///
 /// Theme: Clay Earth | Layout: burst
 class ElectionsEnhancedView extends StatelessWidget {
-  const ElectionsEnhancedView({super.key});
+  final bool isEmbedded;
+  const ElectionsEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff2a1810);
   static const Color _bg2 = Color(0xff4a2d1f);
@@ -24,7 +25,9 @@ class ElectionsEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

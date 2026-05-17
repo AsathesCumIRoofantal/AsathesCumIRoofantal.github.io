@@ -10,7 +10,8 @@ import 'private_confidential_view.dart';
 ///
 /// Theme: Indigo Night | Layout: circles
 class PrivateConfidentialEnhancedView extends StatelessWidget {
-  const PrivateConfidentialEnhancedView({super.key});
+  final bool isEmbedded;
+  const PrivateConfidentialEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0f172a);
   static const Color _bg2 = Color(0xff1e1b4b);
@@ -24,7 +25,9 @@ class PrivateConfidentialEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

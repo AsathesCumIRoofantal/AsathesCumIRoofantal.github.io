@@ -10,7 +10,8 @@ import 'serve_view.dart';
 ///
 /// Theme: Ocean Deep | Layout: blocks
 class ServeEnhancedView extends StatelessWidget {
-  const ServeEnhancedView({super.key});
+  final bool isEmbedded;
+  const ServeEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff051e2e);
   static const Color _bg2 = Color(0xff0c3a5c);
@@ -24,7 +25,9 @@ class ServeEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

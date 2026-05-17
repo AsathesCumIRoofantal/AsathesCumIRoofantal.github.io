@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'tracks_traces_controller.dart';
 
 class TracksTracesView extends GetView<TracksTracesController> {
-  const TracksTracesView({super.key});
+  final bool isEmbedded;
+  const TracksTracesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

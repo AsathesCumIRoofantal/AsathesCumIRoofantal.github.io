@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'airs_showcase_controller.dart';
 
 class AirsShowcaseView extends GetView<AirsShowcaseController> {
-  const AirsShowcaseView({super.key});
+  final bool isEmbedded;
+  const AirsShowcaseView({super.key, required this.isEmbedded});
 
   static const _violet = Color(0xFF7C3AED);
   static const _indigo = Color(0xFF4F46E5);
@@ -215,10 +216,8 @@ class AirsShowcaseView extends GetView<AirsShowcaseController> {
   Widget _buildImpactStats(BuildContext context, bool isDark) {
     final stats = [
       ('12', 'Stories', _violet),
-      ('5K+', 'Lives
-Touched', _pink),
-      ('98%', 'Quality
-Pass Rate', _green),
+      ('5K+', 'LivesTouched', _pink),
+      ('98%', 'Quality Pass Rate', _green),
       ('32', 'Partners', _cyan),
     ];
     return Row(
@@ -761,6 +760,3 @@ final _partners = [
     Icons.work_rounded,
   ),
 ];
-
-
-

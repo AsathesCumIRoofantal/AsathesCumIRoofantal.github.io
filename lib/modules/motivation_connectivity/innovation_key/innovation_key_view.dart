@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'innovation_key_controller.dart';
 
 class InnovationKeyView extends GetView<InnovationKeyController> {
-  const InnovationKeyView({super.key});
+  final bool isEmbedded;
+  const InnovationKeyView({super.key, this.isEmbedded = false});
 
   static const _yellow = Color(0xFFEAB308);
   static const _amber = Color(0xFFF59E0B);
@@ -45,6 +46,8 @@ class InnovationKeyView extends GetView<InnovationKeyController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

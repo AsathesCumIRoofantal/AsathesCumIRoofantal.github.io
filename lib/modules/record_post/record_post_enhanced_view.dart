@@ -10,7 +10,8 @@ import 'record_post_view.dart';
 ///
 /// Theme: Coral Reef | Layout: grid
 class RecordPostEnhancedView extends StatelessWidget {
-  const RecordPostEnhancedView({super.key});
+  final bool isEmbedded;
+  const RecordPostEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff2a0f0a);
   static const Color _bg2 = Color(0xff4a1f14);
@@ -24,7 +25,9 @@ class RecordPostEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

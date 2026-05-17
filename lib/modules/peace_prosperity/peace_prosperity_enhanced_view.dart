@@ -10,7 +10,8 @@ import 'peace_prosperity_view.dart';
 ///
 /// Theme: Bronze Age | Layout: wave
 class PeaceProsperityEnhancedView extends StatelessWidget {
-  const PeaceProsperityEnhancedView({super.key});
+  final bool isEmbedded;
+  const PeaceProsperityEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1f1408);
   static const Color _bg2 = Color(0xff3d2614);
@@ -24,7 +25,9 @@ class PeaceProsperityEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

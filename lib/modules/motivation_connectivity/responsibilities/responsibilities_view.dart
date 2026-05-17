@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'responsibilities_controller.dart';
 
 class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
-  const ResponsibilitiesView({super.key});
+  final bool isEmbedded;
+  const ResponsibilitiesView({super.key, this.isEmbedded = false});
 
   static const _sage = Color(0xFF15803D);
   static const _earth = Color(0xFF713F12);
@@ -45,6 +46,8 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

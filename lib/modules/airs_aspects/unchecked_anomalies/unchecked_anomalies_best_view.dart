@@ -9,7 +9,8 @@ import 'unchecked_anomalies_view.dart';
 /// Wraps and preserves the original UncheckedAnomaliesView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class UncheckedAnomaliesBestView extends StatelessWidget {
-  const UncheckedAnomaliesBestView({super.key});
+  final bool isEmbedded;
+  const UncheckedAnomaliesBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFFEA580C);
   static const Color _secondary = Color(0xFFDC2626);
@@ -93,7 +94,9 @@ class UncheckedAnomaliesBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,

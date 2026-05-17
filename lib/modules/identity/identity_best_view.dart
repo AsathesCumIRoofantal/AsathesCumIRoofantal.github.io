@@ -1688,4 +1688,3 @@ class _SpiralPainter extends CustomPainter {
   @override
   bool shouldRepaint(_) => false;
 }
-

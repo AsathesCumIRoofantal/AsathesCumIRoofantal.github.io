@@ -4,11 +4,12 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'follow_calendar_controller.dart';
 
 class FollowCalendarView extends GetView<FollowCalendarController> {
-  const FollowCalendarView({super.key});
+  final bool isEmbedded;
+  const FollowCalendarView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
+    return SampleContentPage(
       title: 'Follow Calendar',
       subtitle:
           'Anchor your habits, commitments, and deadlines to a humane calendar that respects your energy and rhythm. '

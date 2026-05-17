@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'greetings_controller.dart';
 
 class GreetingsView extends GetView<GreetingsController> {
-  const GreetingsView({super.key});
+  final bool isEmbedded;
+  const GreetingsView({super.key, this.isEmbedded = false});
 
   static const _warm = Color(0xFFEA580C);
   static const _peach = Color(0xFFFB923C);
@@ -45,6 +46,8 @@ class GreetingsView extends GetView<GreetingsController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

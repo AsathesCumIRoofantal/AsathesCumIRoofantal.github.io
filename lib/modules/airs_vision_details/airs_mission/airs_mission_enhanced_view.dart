@@ -10,7 +10,8 @@ import 'airs_mission_view.dart';
 ///
 /// Theme: Twilight Lilac | Layout: stripes
 class AirsMissionEnhancedView extends StatelessWidget {
-  const AirsMissionEnhancedView({super.key});
+  final bool isEmbedded;
+  const AirsMissionEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1a0f2e);
   static const Color _bg2 = Color(0xff2d1b4e);
@@ -24,6 +25,8 @@ class AirsMissionEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         slivers: [
           SliverAppBar(
             pinned: true,

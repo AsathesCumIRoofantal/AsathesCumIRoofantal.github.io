@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 /// Wraps and preserves the original HomeView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class HomeBestView extends StatelessWidget {
-  const HomeBestView({super.key});
+  final bool isEmbedded;
+  const HomeBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFF4F46E5);
   static const Color _secondary = Color(0xFF312E81);
@@ -88,7 +89,9 @@ class HomeBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           // SliverToBoxAdapter(child: HomeView()),
           // const SliverToBoxAdapter(child: SizedBox(height: 40)),
           SliverAppBar(

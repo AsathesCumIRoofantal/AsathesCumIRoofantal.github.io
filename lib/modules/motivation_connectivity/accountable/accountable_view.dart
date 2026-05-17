@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'accountable_controller.dart';
 
 class AccountableView extends GetView<AccountableController> {
-  const AccountableView({super.key});
+  final bool isEmbedded;
+  const AccountableView({super.key, this.isEmbedded = false});
 
   static const _steel = Color(0xFF334155);
   static const _slate = Color(0xFF475569);
@@ -45,6 +46,8 @@ class AccountableView extends GetView<AccountableController> {
         ],
       ),
       body: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

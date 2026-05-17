@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'approval_appeals_controller.dart';
 
 class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
-  const ApprovalAppealsView({super.key});
+  final bool isEmbedded;
+  const ApprovalAppealsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

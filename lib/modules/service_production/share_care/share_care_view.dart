@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'share_care_controller.dart';
 
 class ShareCareView extends GetView<ShareCareController> {
-  const ShareCareView({super.key});
+  final bool isEmbedded;
+  const ShareCareView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

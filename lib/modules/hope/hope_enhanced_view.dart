@@ -10,7 +10,8 @@ import 'hope_view.dart';
 ///
 /// Theme: Glacier Blue | Layout: burst
 class HopeEnhancedView extends StatelessWidget {
-  const HopeEnhancedView({super.key});
+  final bool isEmbedded;
+  const HopeEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff051628);
   static const Color _bg2 = Color(0xff0c2e4d);
@@ -24,7 +25,9 @@ class HopeEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

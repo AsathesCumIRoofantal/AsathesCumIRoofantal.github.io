@@ -10,7 +10,8 @@ import 'events_view.dart';
 ///
 /// Theme: Saffron Sun | Layout: stripes
 class EventsEnhancedView extends StatelessWidget {
-  const EventsEnhancedView({super.key});
+  final bool isEmbedded;
+  const EventsEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff2a1a05);
   static const Color _bg2 = Color(0xff4a2d0a);
@@ -24,7 +25,9 @@ class EventsEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

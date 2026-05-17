@@ -10,7 +10,8 @@ import 'media_news_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: rings
 class MediaNewsEnhancedView extends StatelessWidget {
-  const MediaNewsEnhancedView({super.key});
+  final bool isEmbedded;
+  const MediaNewsEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1f0606);
   static const Color _bg2 = Color(0xff3d0c0c);
@@ -24,7 +25,9 @@ class MediaNewsEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

@@ -74,6 +74,10 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
                       horizontal: 16,
                       vertical: 8,
                     ),
+                    shrinkWrap: isEmbedded,
+                    physics: isEmbedded
+                        ? const NeverScrollableScrollPhysics()
+                        : null,
                     itemCount: list.length,
                     itemBuilder: (context, index) {
                       return _buildProductCard(context, list[index]);
@@ -354,9 +358,10 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
+
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -607,9 +612,3 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
     );
   }
 }
-
-
-
-
-
-

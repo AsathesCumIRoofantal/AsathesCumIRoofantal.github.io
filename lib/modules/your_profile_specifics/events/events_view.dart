@@ -4,11 +4,12 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'events_controller.dart';
 
 class EventsView extends GetView<EventsController> {
-  const EventsView({super.key});
+  final bool isEmbedded;
+  const EventsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
+    return SampleContentPage(
       title: 'Events',
       subtitle:
           'Manage your full schedule of AIR and profile-linked events — plan ahead, confirm attendance, and follow up on outcomes so nothing slips through the cracks. '

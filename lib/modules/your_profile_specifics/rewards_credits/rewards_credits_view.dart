@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'rewards_credits_controller.dart';
 
 class RewardsCreditsView extends GetView<RewardsCreditsController> {
-  const RewardsCreditsView({super.key});
+  final bool isEmbedded;
+  const RewardsCreditsView({super.key, this.isEmbedded = false});
 
   static const _gold = Color(0xFFD4AF37);
   static const _amber = Color(0xFFFFC107);

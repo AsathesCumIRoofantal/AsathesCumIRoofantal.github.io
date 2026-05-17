@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'public_stuff_controller.dart';
 
 class PublicStuffView extends GetView<PublicStuffController> {
-  const PublicStuffView({super.key});
+  final bool isEmbedded;
+  const PublicStuffView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'process_controller.dart';
 
 class ProcessView extends GetView<ProcessController> {
-  const ProcessView({super.key});
+  final bool isEmbedded;
+  const ProcessView({super.key, this.isEmbedded = false});
 
   static const _orange = Color(0xFFEA580C);
   static const _amber = Color(0xFFF59E0B);
@@ -49,6 +50,8 @@ class ProcessView extends GetView<ProcessController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),
@@ -277,10 +280,8 @@ class ProcessView extends GetView<ProcessController> {
     Color onSurface,
   ) {
     final stages = [
-      ('Input
-Queue', '12', _blue),
-      ('In
-Process', '47', _orange),
+      ('Input Queue', '12', _blue),
+      ('In Process', '47', _orange),
       ('Review', '8', _amber),
       ('Done', '182', _green),
     ];
@@ -503,6 +504,3 @@ Process', '47', _orange),
     );
   }
 }
-
-
-

@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'revise_improve_controller.dart';
 
 class ReviseImproveView extends GetView<ReviseImproveController> {
-  const ReviseImproveView({super.key});
+  final bool isEmbedded;
+  const ReviseImproveView({super.key, this.isEmbedded = false});
 
   static const _lime = Color(0xFF84CC16);
   static const _green = Color(0xFF10B981);
@@ -45,6 +46,8 @@ class ReviseImproveView extends GetView<ReviseImproveController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

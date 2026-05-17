@@ -9,7 +9,8 @@ import 'about_org_view.dart';
 /// Wraps and preserves the original AboutOrgView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class AboutOrgBestView extends StatelessWidget {
-  const AboutOrgBestView({super.key});
+  final bool isEmbedded;
+  const AboutOrgBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFF059669);
   static const Color _secondary = Color(0xFF065F46);
@@ -90,7 +91,9 @@ class AboutOrgBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,

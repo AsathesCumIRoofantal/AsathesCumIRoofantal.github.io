@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'your_business_controller.dart';
 
 class YourBusinessView extends GetView<YourBusinessController> {
-  const YourBusinessView({super.key});
+  final bool isEmbedded;
+  const YourBusinessView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

@@ -4,11 +4,12 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'notices_controller.dart';
 
 class NoticesView extends GetView<NoticesController> {
-  const NoticesView({super.key});
+  final bool isEmbedded;
+  const NoticesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
+    return SampleContentPage(
       title: 'Notices',
       subtitle:
           'Stay on top of official notices that affect you — read them, acknowledge receipt, and archive them so you always have a record of what you were informed and when. '

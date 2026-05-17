@@ -10,7 +10,8 @@ import 'pick_good_going_view.dart';
 ///
 /// Theme: Saffron Sun | Layout: diagonal
 class PickGoodGoingEnhancedView extends StatelessWidget {
-  const PickGoodGoingEnhancedView({super.key});
+  final bool isEmbedded;
+  const PickGoodGoingEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff2a1a05);
   static const Color _bg2 = Color(0xff4a2d0a);
@@ -24,6 +25,8 @@ class PickGoodGoingEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         slivers: [
           SliverAppBar(
             pinned: true,

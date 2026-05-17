@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'outcome_processed_controller.dart';
 
 class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
-  const OutcomeProcessedView({super.key});
+  final bool isEmbedded;
+  const OutcomeProcessedView({super.key, this.isEmbedded = false});
 
   static const _emerald = Color(0xFF059669);
   static const _mint = Color(0xFF10B981);
@@ -66,6 +67,8 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildSummaryDashboard(context, isDark),
           const SizedBox(height: 20),
@@ -159,17 +162,13 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildDashStat('2,847', 'Total
-Processed', _emerald),
+              _buildDashStat('2,847', 'Total Processed', _emerald),
               _buildDashDivider(),
-              _buildDashStat('98.3%', 'Quality
-Pass Rate', _sage),
+              _buildDashStat('98.3%', 'Quality Pass Rate', _sage),
               _buildDashDivider(),
-              _buildDashStat('1.4h', 'Avg Turn-
-around', _teal),
+              _buildDashStat('1.4h', 'Avg Turn-around', _teal),
               _buildDashDivider(),
-              _buildDashStat('12', 'Pending
-Review', _amber),
+              _buildDashStat('12', 'Pending Review', _amber),
             ],
           ),
           const SizedBox(height: 16),
@@ -699,6 +698,3 @@ final _artefacts = [
     Color(0xFF3B82F6),
   ),
 ];
-
-
-

@@ -10,7 +10,8 @@ import 'kindness_view.dart';
 ///
 /// Theme: Royal Plum | Layout: wave
 class KindnessEnhancedView extends StatelessWidget {
-  const KindnessEnhancedView({super.key});
+  final bool isEmbedded;
+  const KindnessEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1e0a2e);
   static const Color _bg2 = Color(0xff3b0f5c);
@@ -24,7 +25,9 @@ class KindnessEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

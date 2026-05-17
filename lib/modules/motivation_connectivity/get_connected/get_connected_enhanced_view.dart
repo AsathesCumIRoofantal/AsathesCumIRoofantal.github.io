@@ -10,7 +10,8 @@ import 'get_connected_view.dart';
 ///
 /// Theme: Crimson Vault | Layout: circles
 class GetConnectedEnhancedView extends StatelessWidget {
-  const GetConnectedEnhancedView({super.key});
+  final bool isEmbedded;
+  const GetConnectedEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff1f0606);
   static const Color _bg2 = Color(0xff3d0c0c);
@@ -24,7 +25,9 @@ class GetConnectedEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

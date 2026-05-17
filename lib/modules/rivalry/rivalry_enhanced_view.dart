@@ -10,7 +10,8 @@ import 'rivalry_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: grid
 class RivalryEnhancedView extends StatelessWidget {
-  const RivalryEnhancedView({super.key});
+  final bool isEmbedded;
+  const RivalryEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0a1a0a);
   static const Color _bg2 = Color(0xff14361f);
@@ -24,7 +25,9 @@ class RivalryEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

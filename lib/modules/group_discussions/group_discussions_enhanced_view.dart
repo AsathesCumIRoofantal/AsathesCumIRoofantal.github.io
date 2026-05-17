@@ -10,7 +10,8 @@ import 'group_discussions_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: stripes
 class GroupDiscussionsEnhancedView extends StatelessWidget {
-  const GroupDiscussionsEnhancedView({super.key});
+  final bool isEmbedded;
+  const GroupDiscussionsEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0a1a0a);
   static const Color _bg2 = Color(0xff14361f);
@@ -24,7 +25,9 @@ class GroupDiscussionsEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

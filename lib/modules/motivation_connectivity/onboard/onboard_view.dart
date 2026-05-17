@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'onboard_controller.dart';
 
 class OnboardView extends GetView<OnboardController> {
-  const OnboardView({super.key});
+  final bool isEmbedded;
+  const OnboardView({super.key, this.isEmbedded = false});
 
   static const _launch = Color(0xFF7C3AED);
   static const _violet = Color(0xFF8B5CF6);
@@ -45,6 +46,8 @@ class OnboardView extends GetView<OnboardController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

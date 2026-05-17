@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'never_give_up_controller.dart';
 
 class NeverGiveUpView extends GetView<NeverGiveUpController> {
-  const NeverGiveUpView({super.key});
+  final bool isEmbedded;
+  const NeverGiveUpView({super.key, this.isEmbedded = false});
 
   static const _ember = Color(0xFFEA3A00);
   static const _flame = Color(0xFFFF6B00);
@@ -46,6 +47,8 @@ class NeverGiveUpView extends GetView<NeverGiveUpController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildMantaCard(context, isDark),
           const SizedBox(height: 20),
@@ -151,8 +154,7 @@ class NeverGiveUpView extends GetView<NeverGiveUpController> {
           ),
           const SizedBox(height: 16),
           const Text(
-            '"The obstacle is not the signal to stop.
-It is data. Process it and move."',
+            '"The obstacle is not the signal to stop. It is data. Process it and move."',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -768,6 +770,3 @@ final _inspirations = [
     'Rikki Rogers',
   ),
 ];
-
-
-

@@ -10,7 +10,8 @@ import 'being_recorded_rewarded_view.dart';
 ///
 /// Theme: Magenta Pulse | Layout: grid
 class BeingRecordedRewardedEnhancedView extends StatelessWidget {
-  const BeingRecordedRewardedEnhancedView({super.key});
+  final bool isEmbedded;
+  const BeingRecordedRewardedEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff260a1f);
   static const Color _bg2 = Color(0xff4a0e3d);
@@ -24,7 +25,9 @@ class BeingRecordedRewardedEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             pinned: true,
             expandedHeight: 240,

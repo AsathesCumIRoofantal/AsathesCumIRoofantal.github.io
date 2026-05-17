@@ -4,11 +4,12 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'pick_good_going_controller.dart';
 
 class PickGoodGoingView extends GetView<PickGoodGoingController> {
-  const PickGoodGoingView({super.key});
+  final bool isEmbedded;
+  const PickGoodGoingView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
-    return const SampleContentPage(
+    return SampleContentPage(
       title: 'Pick Good Going',
       subtitle:
           'Choose constructive next steps with intention instead of drifting into whatever feels easiest or most urgent. '

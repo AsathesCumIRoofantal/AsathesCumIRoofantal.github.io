@@ -9,7 +9,8 @@ import 'training_view.dart';
 /// Wraps and preserves the original TrainingView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class TrainingBestView extends StatelessWidget {
-  const TrainingBestView({super.key});
+  final bool isEmbedded;
+  const TrainingBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFFFB7185);
   static const Color _secondary = Color(0xFFF97316);
@@ -90,7 +91,9 @@ class TrainingBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
-        slivers: [
+        
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,

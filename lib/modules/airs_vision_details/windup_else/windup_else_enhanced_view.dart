@@ -10,7 +10,8 @@ import 'windup_else_view.dart';
 ///
 /// Theme: Cyber Lime | Layout: rings
 class WindupElseEnhancedView extends StatelessWidget {
-  const WindupElseEnhancedView({super.key});
+  final bool isEmbedded;
+  const WindupElseEnhancedView({super.key, this.isEmbedded = false});
 
   static const Color _bg = Color(0xff0a1a0a);
   static const Color _bg2 = Color(0xff14361f);
@@ -24,6 +25,8 @@ class WindupElseEnhancedView extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? _bg : Colors.white,
       body: CustomScrollView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         slivers: [
           SliverAppBar(
             pinned: true,

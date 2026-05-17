@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'live_fullest_controller.dart';
 
 class LiveFullestView extends GetView<LiveFullestController> {
-  const LiveFullestView({super.key});
+  final bool isEmbedded;
+  const LiveFullestView({super.key, this.isEmbedded = false});
 
   static const _sky = Color(0xFF0EA5E9);
   static const _teal = Color(0xFF0D9488);
@@ -46,6 +47,8 @@ class LiveFullestView extends GetView<LiveFullestController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

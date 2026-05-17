@@ -37,9 +37,7 @@ class UnionsView extends GetView<UnionsController> {
           );
         }
         return SingleChildScrollView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+          physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             children: [
               Padding(
@@ -134,9 +132,9 @@ class UnionsView extends GetView<UnionsController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -639,9 +637,3 @@ class UnionsView extends GetView<UnionsController> {
     );
   }
 }
-
-
-
-
-
-
