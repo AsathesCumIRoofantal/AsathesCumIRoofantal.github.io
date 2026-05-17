@@ -62,20 +62,61 @@ class SkillsTalentsEnhancedView extends StatelessWidget {
                 margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(colors: [Color(0xFF1A0A40), Color(0xFF0D0520)]),
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF1A0A40), Color(0xFF0D0520)],
+                  ),
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: const Color(0xFF7C3AED).withOpacity(0.5)),
+                  border: Border.all(
+                    color: const Color(0xFF7C3AED).withOpacity(0.5),
+                  ),
                 ),
-                child: Row(children: [
-                  Container(padding: const EdgeInsets.all(10), decoration: BoxDecoration(color: const Color(0xFF7C3AED).withOpacity(0.2), borderRadius: BorderRadius.circular(12)), child: const Icon(Icons.auto_awesome_rounded, color: Color(0xFF7C3AED), size: 22)),
-                  const SizedBox(width: 14),
-                  const Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text('✨  BEST VIEW', style: TextStyle(color: Color(0xFF7C3AED), fontSize: 10, fontWeight: FontWeight.w900, letterSpacing: 2)),
-                    SizedBox(height: 3),
-                    Text('See Skills & Talents reimagined with a showcase Bento Grid design.', style: TextStyle(color: Colors.white70, fontSize: 12, height: 1.3)),
-                  ])),
-                  Icon(Icons.arrow_forward_ios_rounded, color: const Color(0xFF7C3AED).withOpacity(0.6), size: 14),
-                ]),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF7C3AED).withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: const Icon(
+                        Icons.auto_awesome_rounded,
+                        color: Color(0xFF7C3AED),
+                        size: 22,
+                      ),
+                    ),
+                    const SizedBox(width: 14),
+                    const Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '✨  BEST VIEW',
+                            style: TextStyle(
+                              color: Color(0xFF7C3AED),
+                              fontSize: 10,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 2,
+                            ),
+                          ),
+                          SizedBox(height: 3),
+                          Text(
+                            'See Skills & Talents reimagined with a showcase Bento Grid design.',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 12,
+                              height: 1.3,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: const Color(0xFF7C3AED).withOpacity(0.6),
+                      size: 14,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -214,7 +255,7 @@ class SkillsTalentsEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const SkillsTalentsView()),
+          SliverToBoxAdapter(child: const SkillsTalentsView(isEmbedded: true)),
         ],
       ),
     );

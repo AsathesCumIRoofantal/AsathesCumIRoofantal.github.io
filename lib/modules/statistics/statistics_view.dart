@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'statistics_controller.dart';
 
 class StatisticsView extends GetView<StatisticsController> {
-  const StatisticsView({super.key});
+  final bool isEmbedded;
+  const StatisticsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class StatisticsView extends GetView<StatisticsController> {
     );
   }
 }
+
+
+

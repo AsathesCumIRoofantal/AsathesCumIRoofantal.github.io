@@ -4,7 +4,8 @@ import 'package:air_app/widgets/air_home_context_strip.dart';
 import 'wisdom_controller.dart';
 
 class WisdomView extends GetView<WisdomController> {
-  const WisdomView({super.key});
+  final bool isEmbedded;
+  const WisdomView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -390,3 +391,6 @@ class WisdomView extends GetView<WisdomController> {
     );
   }
 }
+
+
+

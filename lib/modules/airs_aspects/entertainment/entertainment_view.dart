@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class EntertainmentView extends StatelessWidget {
-  const EntertainmentView({super.key});
+  final bool isEmbedded;
+  const EntertainmentView({super.key, required this.isEmbedded});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,8 @@ class EntertainmentView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF07111F),
       body: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,

@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'utility_facilities_controller.dart';
 
 class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
-  const UtilityFacilitiesView({super.key});
+  final bool isEmbedded;
+  const UtilityFacilitiesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class UtilityFacilitiesView extends GetView<UtilityFacilitiesController> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

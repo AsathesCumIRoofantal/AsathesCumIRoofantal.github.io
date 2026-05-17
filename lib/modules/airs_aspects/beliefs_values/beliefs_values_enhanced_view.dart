@@ -187,7 +187,7 @@ class BeliefsValuesEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const BeliefsValuesView()),
+          SliverToBoxAdapter(child: const BeliefsValuesView(isEmbedded: true)),
         ],
       ),
     );

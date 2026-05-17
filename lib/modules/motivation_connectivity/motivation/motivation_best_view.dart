@@ -208,7 +208,7 @@ class MotivationBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const MotivationView()),
+          SliverToBoxAdapter(child: MotivationView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

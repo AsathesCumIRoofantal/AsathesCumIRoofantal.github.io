@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'airs_mission_controller.dart';
 
 class AirsMissionView extends GetView<AirsMissionController> {
-  const AirsMissionView({super.key});
+  final bool isEmbedded;
+  const AirsMissionView({super.key, this.isEmbedded = false});
 
   static const _flag = Color(0xFF0EA5E9);
   static const _blue = Color(0xFF2563EB);
@@ -45,6 +46,8 @@ class AirsMissionView extends GetView<AirsMissionController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

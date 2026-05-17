@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'court_cases_controller.dart';
 
 class CourtCasesView extends GetView<CourtCasesController> {
-  const CourtCasesView({super.key});
+  final bool isEmbedded;
+  const CourtCasesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class CourtCasesView extends GetView<CourtCasesController> {
     );
   }
 }
+
+
+

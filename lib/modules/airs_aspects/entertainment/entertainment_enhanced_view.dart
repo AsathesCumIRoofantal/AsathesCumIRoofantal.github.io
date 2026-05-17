@@ -187,7 +187,7 @@ class EntertainmentEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const EntertainmentView()),
+          SliverToBoxAdapter(child: const EntertainmentView(isEmbedded: true)),
         ],
       ),
     );

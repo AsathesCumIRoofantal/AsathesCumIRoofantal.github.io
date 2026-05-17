@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'knowledge_center_controller.dart';
 
 class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
-  const KnowledgeCenterView({super.key});
+  final bool isEmbedded;
+  const KnowledgeCenterView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -413,6 +414,10 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
+
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

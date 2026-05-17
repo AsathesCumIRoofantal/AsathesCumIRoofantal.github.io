@@ -1,0 +1,9 @@
+{
+  "id": "2026-05-17T14-47-03-027Z",
+  "mode": "review",
+  "prompt": "Find in all error pages-:\nSliverToBoxAdapter(child: 'PageName'View(isEmbedded: true)),on_details.. the page like 'AirsMission'View..\n>>>\ndo make\n final bool isEmbedded;\nAnd \nshrinkWrap: isEmbedded,\n        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,\nin any Scrolable-list in \"'PageName'View\" and when page is error free do go to next page..",
+  "createdAt": "2026-05-17T14:47:03.027Z",
+  "runbookPath": "drylake.xu",
+  "providerId": "user-ide-ai",
+  "providerLabel": "User IDE AI"
+}

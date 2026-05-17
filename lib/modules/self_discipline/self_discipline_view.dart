@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'self_discipline_controller.dart';
 
 class SelfDisciplineView extends GetView<SelfDisciplineController> {
-  const SelfDisciplineView({super.key});
+  final bool isEmbedded;
+  const SelfDisciplineView({super.key, this.isEmbedded = false});
 
   static const _iron = Color(0xFF374151);
   static const _steel = Color(0xFF6B7280);
@@ -48,6 +49,8 @@ class SelfDisciplineView extends GetView<SelfDisciplineController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

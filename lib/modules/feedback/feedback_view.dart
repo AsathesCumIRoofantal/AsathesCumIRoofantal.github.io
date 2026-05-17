@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'feedback_controller.dart';
 
 class FeedbackView extends GetView<FeedbackController> {
-  const FeedbackView({super.key});
+  final bool isEmbedded;
+  const FeedbackView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class FeedbackView extends GetView<FeedbackController> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

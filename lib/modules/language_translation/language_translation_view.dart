@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'language_translation_controller.dart';
 
 class LanguageTranslationView extends GetView<LanguageTranslationController> {
-  const LanguageTranslationView({super.key});
+  final bool isEmbedded;
+  const LanguageTranslationView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class LanguageTranslationView extends GetView<LanguageTranslationController> {
     );
   }
 }
+
+
+

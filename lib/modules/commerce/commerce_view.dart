@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'commerce_controller.dart';
 
 class CommerceView extends GetView<CommerceController> {
-  const CommerceView({super.key});
+  final bool isEmbedded;
+  const CommerceView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,9 @@ class CommerceView extends GetView<CommerceController> {
         ),
         child: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
             children: [
               _buildHeader(context, isDark, onSurface),
               const SizedBox(height: 20),

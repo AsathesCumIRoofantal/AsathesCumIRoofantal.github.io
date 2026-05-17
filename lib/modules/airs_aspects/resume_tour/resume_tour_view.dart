@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'resume_tour_controller.dart';
 
 class ResumeTourView extends GetView<ResumeTourController> {
-  const ResumeTourView({super.key});
+  final bool isEmbedded;
+  const ResumeTourView({super.key, required this.isEmbedded});
 
   static const _mint = Color(0xFF10B981);
   static const _green = Color(0xFF059669);
@@ -44,6 +45,8 @@ class ResumeTourView extends GetView<ResumeTourController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildProgressHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

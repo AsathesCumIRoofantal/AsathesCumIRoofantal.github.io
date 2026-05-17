@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'loyalty_controller.dart';
 
 class LoyaltyView extends GetView<LoyaltyController> {
-  const LoyaltyView({super.key});
+  final bool isEmbedded;
+  const LoyaltyView({super.key, this.isEmbedded = false});
 
   static const _indigo = Color(0xFF4338CA);
   static const _violet = Color(0xFF7C3AED);
@@ -44,6 +45,8 @@ class LoyaltyView extends GetView<LoyaltyController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

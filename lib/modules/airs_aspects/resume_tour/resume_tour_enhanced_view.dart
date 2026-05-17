@@ -187,7 +187,7 @@ class ResumeTourEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const ResumeTourView()),
+          SliverToBoxAdapter(child: const ResumeTourView(isEmbedded: true)),
         ],
       ),
     );

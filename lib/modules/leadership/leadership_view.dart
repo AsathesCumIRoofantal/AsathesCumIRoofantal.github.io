@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'leadership_controller.dart';
 
 class LeadershipView extends GetView<LeadershipController> {
-  const LeadershipView({super.key});
+  final bool isEmbedded;
+  const LeadershipView({super.key, this.isEmbedded = false});
 
   static const _navy = Color(0xFF1E3A5F);
   static const _blue = Color(0xFF2563EB);
@@ -44,6 +45,8 @@ class LeadershipView extends GetView<LeadershipController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),
@@ -277,12 +280,12 @@ class LeadershipView extends GetView<LeadershipController> {
       (Icons.shield_rounded, 'Protector', 'Guards the team\'s path', _green),
     ];
     return GridView.count(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      childAspectRatio: 2.2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      childAspectRatio: 2.2,
       children: postures
           .map(
             (p) => Container(

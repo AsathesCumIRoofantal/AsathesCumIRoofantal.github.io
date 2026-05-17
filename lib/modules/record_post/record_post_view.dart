@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'record_post_controller.dart';
 
 class RecordPostView extends GetView<RecordPostController> {
-  const RecordPostView({super.key});
+  final bool isEmbedded;
+  const RecordPostView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -224,6 +225,9 @@ class RecordPostView extends GetView<RecordPostController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -401,3 +405,9 @@ class RecordPostView extends GetView<RecordPostController> {
     );
   }
 }
+
+
+
+
+
+

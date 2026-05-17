@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'timeline_of_air_controller.dart';
 
 class TimelineOfAirView extends GetView<TimelineOfAirController> {
-  const TimelineOfAirView({super.key});
+  final bool isEmbedded;
+  const TimelineOfAirView({super.key, required this.isEmbedded});
 
   static const _gold = Color(0xFFD4AF37);
   static const _teal = Color(0xFF009688);
@@ -33,6 +34,8 @@ class TimelineOfAirView extends GetView<TimelineOfAirController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeader(context, isDark),
           const SizedBox(height: 24),

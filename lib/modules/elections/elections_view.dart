@@ -316,7 +316,8 @@ const List<_Faq> _faqs = [
 ];
 
 class ElectionsView extends GetView<ElectionsController> {
-  const ElectionsView({super.key});
+  final bool isEmbedded;
+  const ElectionsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -325,6 +326,8 @@ class ElectionsView extends GetView<ElectionsController> {
     return Scaffold(
       backgroundColor: isDark ? const Color(0xFF0B0F1A) : _parchment,
       body: CustomScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         slivers: [
           _buildAppBar(context, isDark),
           SliverToBoxAdapter(child: _StatStrip(isDark: isDark)),

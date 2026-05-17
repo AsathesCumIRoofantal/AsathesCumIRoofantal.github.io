@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'vocabulary_controller.dart';
 
 class VocabularyView extends GetView<VocabularyController> {
-  const VocabularyView({super.key});
+  final bool isEmbedded;
+  const VocabularyView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -203,3 +204,6 @@ class VocabularyView extends GetView<VocabularyController> {
     );
   }
 }
+
+
+

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 /// AIR VISION — Unique design: cosmic indigo + neon cyan blueprint theme.
 /// New sections: Vision Beacon, 6 Vision Pillars, 5-stage Roadmap, Manifesto.
 class AirVisionView extends StatelessWidget {
-  const AirVisionView({super.key});
+  final bool isEmbedded;
+  const AirVisionView({super.key, this.isEmbedded = false});
 
   static const _bg = Color(0xFF030318);
   static const _ink = Color(0xFF0A0A2E);
@@ -16,6 +17,8 @@ class AirVisionView extends StatelessWidget {
     return Scaffold(
       backgroundColor: _bg,
       body: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -187,9 +190,9 @@ class AirVisionView extends StatelessWidget {
       ('Stewardship', 'Open & accountable forever.', Icons.shield),
     ];
     return GridView.count(
-      crossAxisCount: 2,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
       childAspectRatio: 1.3,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
@@ -306,7 +309,7 @@ class AirVisionView extends StatelessWidget {
         Icon(Icons.format_quote, color: _gold, size: 30),
         const SizedBox(height: 4),
         const Text(
-          'We do not predict the future.\nWe build the floor it stands on.',
+          'We do not predict the future.',
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,

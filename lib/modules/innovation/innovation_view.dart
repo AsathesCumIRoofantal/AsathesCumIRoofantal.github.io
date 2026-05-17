@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'innovation_controller.dart';
 
 class InnovationView extends GetView<InnovationController> {
-  const InnovationView({super.key});
+  final bool isEmbedded;
+  const InnovationView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class InnovationView extends GetView<InnovationController> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

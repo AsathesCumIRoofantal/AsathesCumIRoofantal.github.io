@@ -92,127 +92,132 @@ class ProjectsAssessmentsBestView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: bg,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 260,
-            pinned: true,
-            stretch: true,
-            backgroundColor: _primary,
-            foregroundColor: Colors.white,
-            title: const Text(
-              'Projects Assessments',
-              style: TextStyle(
-                fontWeight: FontWeight.w800,
-                letterSpacing: 1.4,
-                fontSize: 16,
-              ),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: _HeroStripes(
-                primary: _primary,
-                secondary: _secondary,
-                accent: _accent,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 28, 20, 12),
-              child: _Intro(
-                title: 'Projects Assessments',
-                primary: _primary,
-                secondary: _secondary,
-                accent: _accent,
-                onSurface: onSurface,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-              child: _SectionLabel(
-                label: 'CORE LANDSCAPE',
-                icon: Icons.spa_rounded,
-                color: _primary,
-                onSurface: onSurface,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-              child: _SplitBlock(
-                pillars: _pillars,
-                primary: _primary,
-                secondary: _secondary,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-              child: _SectionLabel(
-                label: 'PRACTICE LOOP',
-                icon: Icons.lightbulb_rounded,
-                color: _secondary,
-                onSurface: onSurface,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-              child: _ActionList(
-                actions: _actions,
-                primary: _primary,
-                secondary: _secondary,
-                accent: _accent,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-              child: _SectionLabel(
-                label: 'BY THE NUMBERS',
-                icon: Icons.insights_rounded,
-                color: _accent,
-                onSurface: onSurface,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-              child: _StatsBlock(
-                stats: _stats,
-                primary: _primary,
-                secondary: _secondary,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
-              child: _Quote(
-                text:
-                    'When projects assessments becomes a practice rather than an idea, the whole story changes.',
-                primary: _primary,
-                secondary: _secondary,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-              child: _OriginalBanner(primary: _primary, secondary: _secondary),
-            ),
-          ),
-          const SliverToBoxAdapter(child: SizedBox(height: 8)),
-          // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const ProjectsAssessmentsView()),
-          const SliverToBoxAdapter(child: SizedBox(height: 40)),
+      body: Column(
+        children: [
+          ProjectsAssessmentsView(isEmbedded: false),
+          // CustomScrollView(
+          //   slivers: [
+          //     SliverAppBar(
+          //       expandedHeight: 260,
+          //       pinned: true,
+          //       stretch: true,
+          //       backgroundColor: _primary,
+          //       foregroundColor: Colors.white,
+          //       title: const Text(
+          //         'Projects Assessments',
+          //         style: TextStyle(
+          //           fontWeight: FontWeight.w800,
+          //           letterSpacing: 1.4,
+          //           fontSize: 16,
+          //         ),
+          //       ),
+          //       flexibleSpace: FlexibleSpaceBar(
+          //         background: _HeroStripes(
+          //           primary: _primary,
+          //           secondary: _secondary,
+          //           accent: _accent,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 28, 20, 12),
+          //         child: _Intro(
+          //           title: 'Projects Assessments',
+          //           primary: _primary,
+          //           secondary: _secondary,
+          //           accent: _accent,
+          //           onSurface: onSurface,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+          //         child: _SectionLabel(
+          //           label: 'CORE LANDSCAPE',
+          //           icon: Icons.spa_rounded,
+          //           color: _primary,
+          //           onSurface: onSurface,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+          //         child: _SplitBlock(
+          //           pillars: _pillars,
+          //           primary: _primary,
+          //           secondary: _secondary,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+          //         child: _SectionLabel(
+          //           label: 'PRACTICE LOOP',
+          //           icon: Icons.lightbulb_rounded,
+          //           color: _secondary,
+          //           onSurface: onSurface,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+          //         child: _ActionList(
+          //           actions: _actions,
+          //           primary: _primary,
+          //           secondary: _secondary,
+          //           accent: _accent,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+          //         child: _SectionLabel(
+          //           label: 'BY THE NUMBERS',
+          //           icon: Icons.insights_rounded,
+          //           color: _accent,
+          //           onSurface: onSurface,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+          //         child: _StatsBlock(
+          //           stats: _stats,
+          //           primary: _primary,
+          //           secondary: _secondary,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+          //         child: _Quote(
+          //           text:
+          //               'When projects assessments becomes a practice rather than an idea, the whole story changes.',
+          //           primary: _primary,
+          //           secondary: _secondary,
+          //         ),
+          //       ),
+          //     ),
+          //     SliverToBoxAdapter(
+          //       child: Padding(
+          //         padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+          //         child: _OriginalBanner(primary: _primary, secondary: _secondary),
+          //       ),
+          //     ),
+          //     const SliverToBoxAdapter(child: SizedBox(height: 8)),
+          //     // Original page content embedded below — nothing is lost
+          //     SliverToBoxAdapter(child: ProjectsAssessmentsView(isEmbedded: true)),
+          //     const SliverToBoxAdapter(child: SizedBox(height: 40)),
+          //   ],
+          // ),
         ],
       ),
     );

@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'universal_peace_rule_controller.dart';
 
 class UniversalPeaceRuleView extends GetView<UniversalPeaceRuleController> {
-  const UniversalPeaceRuleView({super.key});
+  final bool isEmbedded;
+  const UniversalPeaceRuleView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class UniversalPeaceRuleView extends GetView<UniversalPeaceRuleController> {
     );
   }
 }
+
+
+

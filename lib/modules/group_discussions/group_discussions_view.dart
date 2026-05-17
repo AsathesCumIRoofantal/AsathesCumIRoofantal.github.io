@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'group_discussions_controller.dart';
 
 class GroupDiscussionsView extends GetView<GroupDiscussionsController> {
-  const GroupDiscussionsView({super.key});
+  final bool isEmbedded;
+  const GroupDiscussionsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class GroupDiscussionsView extends GetView<GroupDiscussionsController> {
     );
   }
 }
+
+
+

@@ -5,7 +5,8 @@ import 'survellence_investigation_controller.dart';
 
 class SurvellenceInvestigationView
     extends GetView<SurvellenceInvestigationController> {
-  const SurvellenceInvestigationView({super.key});
+  final bool isEmbedded;
+  const SurvellenceInvestigationView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -69,3 +70,6 @@ class SurvellenceInvestigationView
     );
   }
 }
+
+
+

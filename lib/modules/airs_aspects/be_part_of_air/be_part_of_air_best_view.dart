@@ -211,7 +211,7 @@ class BePartOfAirBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const BePartOfAirView()),
+          SliverToBoxAdapter(child: BePartOfAirView()),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'script_strategy_controller.dart';
 
 class ScriptStrategyView extends GetView<ScriptStrategyController> {
-  const ScriptStrategyView({super.key});
+  final bool isEmbedded;
+  const ScriptStrategyView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,10 @@ class ScriptStrategyView extends GetView<ScriptStrategyController> {
         ),
         child: SafeArea(
           child: ListView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded
+                ? const NeverScrollableScrollPhysics()
+                : const AlwaysScrollableScrollPhysics(),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

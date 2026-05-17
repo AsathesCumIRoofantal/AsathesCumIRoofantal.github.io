@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'discovery_controller.dart';
 
 class DiscoveryView extends GetView<DiscoveryController> {
-  const DiscoveryView({super.key});
+  final bool isEmbedded;
+  const DiscoveryView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,9 @@ class DiscoveryView extends GetView<DiscoveryController> {
         ),
         child: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
             children: [
               _buildHeader(context, isDark, onSurface),
               const SizedBox(height: 20),

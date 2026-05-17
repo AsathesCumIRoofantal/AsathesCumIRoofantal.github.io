@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 /// APPRECIATIONS & THANKS — Unique: amber sunrise + cream "gratitude card" theme.
 /// New sections: Today's Thank-You, Gratitude Wall, 7 Forms of Thanks, Pay-It-Forward ladder.
 class AppreciationsThanksView extends StatelessWidget {
-  const AppreciationsThanksView({super.key});
+  final bool isEmbedded;
+  const AppreciationsThanksView({super.key, this.isEmbedded = false});
 
   static const _cream = Color(0xFFFFFBF0);
   static const _amber = Color(0xFFF59E0B);
@@ -18,6 +19,8 @@ class AppreciationsThanksView extends StatelessWidget {
     return Scaffold(
       backgroundColor: _cream,
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         children: [
           Stack(
             fit: StackFit.expand,
@@ -169,8 +172,7 @@ class AppreciationsThanksView extends StatelessWidget {
         ),
         SizedBox(height: 8),
         Text(
-          'Name one person who carried something for you this week.\n'
-          'Tell them — by voice, by note, by deed. Specifics over generics.',
+          'Name one person who carried something for you this week.\nTell them — by voice, by note, by deed. Specifics over generics.',
           style: TextStyle(color: _coffee, fontSize: 15, height: 1.55),
         ),
       ],

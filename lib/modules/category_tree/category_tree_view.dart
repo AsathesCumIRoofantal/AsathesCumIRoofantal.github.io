@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 /// CATEGORY TREE — Unique: forest green "living tree / mind-map" theme.
 /// New sections: Tree Health, Visual Branch Map, How to Navigate, Naming Rules.
 class CategoryTreeView extends StatelessWidget {
-  const CategoryTreeView({super.key});
+  final bool isEmbedded;
+  const CategoryTreeView({super.key, this.isEmbedded = false});
 
   static const _bg = Color(0xFFF1F8F2);
   static const _forest = Color(0xFF14532D);
@@ -16,6 +17,8 @@ class CategoryTreeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: _bg,
       body: CustomScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         slivers: [
           SliverAppBar(
             pinned: true,

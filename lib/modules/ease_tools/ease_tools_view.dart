@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'ease_tools_controller.dart';
 
 class EaseToolsView extends GetView<EaseToolsController> {
-  const EaseToolsView({super.key});
+  final bool isEmbedded;
+  const EaseToolsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,10 @@ class EaseToolsView extends GetView<EaseToolsController> {
               Expanded(
                 child: Obx(() {
                   return GridView.builder(
+                    physics: isEmbedded
+                        ? const NeverScrollableScrollPhysics()
+                        : null,
+                    shrinkWrap: isEmbedded,
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(

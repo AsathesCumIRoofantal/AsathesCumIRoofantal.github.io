@@ -211,7 +211,7 @@ class GetConnectedBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const GetConnectedView()),
+          SliverToBoxAdapter(child: GetConnectedView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

@@ -277,8 +277,10 @@ class ProcessView extends GetView<ProcessController> {
     Color onSurface,
   ) {
     final stages = [
-      ('Input\nQueue', '12', _blue),
-      ('In\nProcess', '47', _orange),
+      ('Input
+Queue', '12', _blue),
+      ('In
+Process', '47', _orange),
       ('Review', '8', _amber),
       ('Done', '182', _green),
     ];
@@ -501,3 +503,6 @@ class ProcessView extends GetView<ProcessController> {
     );
   }
 }
+
+
+

@@ -187,7 +187,7 @@ class NewInAirEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const NewInAirView()),
+          SliverToBoxAdapter(child: const NewInAirView(isEmbedded: true)),
         ],
       ),
     );

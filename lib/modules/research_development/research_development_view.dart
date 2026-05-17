@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'research_development_controller.dart';
 
 class ResearchDevelopmentView extends GetView<ResearchDevelopmentController> {
-  const ResearchDevelopmentView({super.key});
+  final bool isEmbedded;
+  const ResearchDevelopmentView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class ResearchDevelopmentView extends GetView<ResearchDevelopmentController> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

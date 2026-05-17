@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'hospitality_care_controller.dart';
 
 class HospitalityCareView extends GetView<HospitalityCareController> {
-  const HospitalityCareView({super.key});
+  final bool isEmbedded;
+  const HospitalityCareView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class HospitalityCareView extends GetView<HospitalityCareController> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

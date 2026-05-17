@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'control_coordination_controller.dart';
 
 class ControlCoordinationView extends GetView<ControlCoordinationController> {
-  const ControlCoordinationView({super.key});
+  final bool isEmbedded;
+  const ControlCoordinationView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class ControlCoordinationView extends GetView<ControlCoordinationController> {
     );
   }
 }
+
+
+

@@ -357,7 +357,8 @@ const List<_ReportSection> _reportSections = [
 //  MAIN VIEW
 // ─────────────────────────────────────────────
 class CountingReportsView extends GetView<CountingReportsController> {
-  const CountingReportsView({super.key});
+  final bool isEmbedded;
+  const CountingReportsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {

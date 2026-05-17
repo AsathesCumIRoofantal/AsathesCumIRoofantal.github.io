@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'engagements_controller.dart';
 
 class EngagementsView extends GetView<EngagementsController> {
-  const EngagementsView({super.key});
+  final bool isEmbedded;
+  const EngagementsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class EngagementsView extends GetView<EngagementsController> {
     );
   }
 }
+
+
+

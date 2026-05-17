@@ -187,7 +187,7 @@ class TimelineOfAirEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const TimelineOfAirView()),
+          SliverToBoxAdapter(child: const TimelineOfAirView(isEmbedded: true)),
         ],
       ),
     );

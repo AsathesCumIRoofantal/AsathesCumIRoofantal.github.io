@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'joining_services_controller.dart';
 
 class JoiningServicesView extends GetView<JoiningServicesController> {
-  const JoiningServicesView({super.key});
+  final bool isEmbedded;
+  const JoiningServicesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class JoiningServicesView extends GetView<JoiningServicesController> {
     );
   }
 }
+
+
+

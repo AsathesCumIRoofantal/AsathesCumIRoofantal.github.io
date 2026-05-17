@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'heart_winning_controller.dart';
 
 class HeartWinningView extends GetView<HeartWinningController> {
-  const HeartWinningView({super.key});
+  final bool isEmbedded;
+  const HeartWinningView({super.key, this.isEmbedded = false});
 
   static const _crimson = Color(0xFFDC2626);
   static const _rose = Color(0xFFF43F5E);
@@ -44,6 +45,8 @@ class HeartWinningView extends GetView<HeartWinningController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),
@@ -272,9 +275,9 @@ class HeartWinningView extends GetView<HeartWinningController> {
       (Icons.policy, 'Compassion', _blue),
     ];
     return GridView.count(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
       childAspectRatio: 2.5,

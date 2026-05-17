@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'situation_reaction_controller.dart';
 
 class SituationReactionView extends GetView<SituationReactionController> {
-  const SituationReactionView({super.key});
+  final bool isEmbedded;
+  const SituationReactionView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class SituationReactionView extends GetView<SituationReactionController> {
     );
   }
 }
+
+
+

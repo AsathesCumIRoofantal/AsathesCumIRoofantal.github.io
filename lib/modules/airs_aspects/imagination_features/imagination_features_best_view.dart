@@ -211,7 +211,7 @@ class ImaginationFeaturesBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const ImaginationFeaturesView()),
+          SliverToBoxAdapter(child: ImaginationFeaturesView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

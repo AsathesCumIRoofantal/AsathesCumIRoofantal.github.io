@@ -211,7 +211,7 @@ class ReviseImproveBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const ReviseImproveView()),
+          SliverToBoxAdapter(child: ReviseImproveView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

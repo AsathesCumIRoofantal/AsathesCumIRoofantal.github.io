@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'rules_regulations_controller.dart';
 
 class RulesRegulationsView extends GetView<RulesRegulationsController> {
-  const RulesRegulationsView({super.key});
+  final bool isEmbedded;
+  const RulesRegulationsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class RulesRegulationsView extends GetView<RulesRegulationsController> {
     );
   }
 }
+
+
+

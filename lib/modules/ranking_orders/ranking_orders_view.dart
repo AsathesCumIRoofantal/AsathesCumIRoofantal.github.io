@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'ranking_orders_controller.dart';
 
 class RankingOrdersView extends GetView<RankingOrdersController> {
-  const RankingOrdersView({super.key});
+  final bool isEmbedded;
+  const RankingOrdersView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class RankingOrdersView extends GetView<RankingOrdersController> {
     );
   }
 }
+
+
+

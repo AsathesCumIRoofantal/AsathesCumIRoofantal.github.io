@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'respect_controller.dart';
 
 class RespectView extends GetView<RespectController> {
-  const RespectView({super.key});
+  final bool isEmbedded;
+  const RespectView({super.key, this.isEmbedded = false});
 
   static const _gold = Color(0xFFD97706);
   static const _amber = Color(0xFFF59E0B);
@@ -44,6 +45,8 @@ class RespectView extends GetView<RespectController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

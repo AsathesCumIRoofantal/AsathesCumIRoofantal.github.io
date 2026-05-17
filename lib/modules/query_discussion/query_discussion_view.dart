@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'query_discussion_controller.dart';
 
 class QueryDiscussionView extends GetView<QueryDiscussionController> {
-  const QueryDiscussionView({super.key});
+  final bool isEmbedded;
+  const QueryDiscussionView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -339,6 +340,9 @@ class QueryDiscussionView extends GetView<QueryDiscussionController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
                 child: Column(
                   children: [
                     TextField(
@@ -432,3 +436,9 @@ class QueryDiscussionView extends GetView<QueryDiscussionController> {
     );
   }
 }
+
+
+
+
+
+

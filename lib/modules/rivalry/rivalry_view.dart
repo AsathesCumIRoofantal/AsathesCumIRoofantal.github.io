@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'rivalry_controller.dart';
 
 class RivalryView extends GetView<RivalryController> {
-  const RivalryView({super.key});
+  final bool isEmbedded;
+  const RivalryView({super.key, this.isEmbedded = false});
 
   static const _fire = Color(0xFFDC2626);
   static const _orange = Color(0xFFEA580C);
@@ -44,6 +45,8 @@ class RivalryView extends GetView<RivalryController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

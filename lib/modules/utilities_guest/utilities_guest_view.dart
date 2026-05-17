@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'utilities_guest_binding.dart';
 
 class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
-  const UtilitiesGuestView({super.key});
+  final bool isEmbedded;
+  const UtilitiesGuestView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -81,3 +82,6 @@ class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
     }
   }
 }
+
+
+

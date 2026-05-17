@@ -108,9 +108,9 @@ const List<_Mantra> _mantras = [
   _Mantra(
     name: 'Maha Mrityunjaya Mantra',
     sanskrit:
-        'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।\nउर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय माऽमृतात्॥',
+        'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्।उर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय माऽमृतात्॥',
     transliteration:
-        'Om Tryambakam Yajamahe Sugandhim Pushti-vardhanam\nUrvarukamiva Bandhanat Mrityor Mukshiya Maamritat',
+        'Om Tryambakam Yajamahe Sugandhim Pushti-vardhanamUrvarukamiva Bandhanat Mrityor Mukshiya Maamritat',
     meaning:
         'We worship the three-eyed Lord Shiva who is fragrant and nourishes all beings. May He liberate us from death for the sake of immortality, just as the cucumber is severed from its bondage to the vine.',
     bestTime: 'Dawn (Brahma Muhurta) — 4:00–6:00 AM',
@@ -131,9 +131,9 @@ const List<_Mantra> _mantras = [
   ),
   _Mantra(
     name: 'Shiva Gayatri Mantra',
-    sanskrit: 'ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि।\nतन्नो रुद्रः प्रचोदयात्॥',
+    sanskrit: 'ॐ तत्पुरुषाय विद्महे महादेवाय धीमहि।तन्नो रुद्रः प्रचोदयात्॥',
     transliteration:
-        'Om Tatpurushaya Vidmahe Mahadevaya Dhimahi\nTanno Rudrah Prachodayat',
+        'Om Tatpurushaya Vidmahe Mahadevaya DhimahiTanno Rudrah Prachodayat',
     meaning:
         'We meditate on the Supreme Being, the Great God. May Rudra illuminate our intellect and inspire us toward the highest truth.',
     bestTime: 'Sunrise and sunset — the sandhya periods',
@@ -155,7 +155,7 @@ const List<_Mantra> _mantras = [
   _Mantra(
     name: 'Shiva Dhyana Mantra',
     sanskrit:
-        'करचरणकृतं वाक्कायजं कर्मजं वा\nश्रवणनयनजं वा मानसं वापराधम्।\nविहितमविहितं वा सर्वमेतत्क्षमस्व\nजय जय करुणाब्धे श्रीमहादेव शम्भो॥',
+        'करचरणकृतं वाक्कायजं कर्मजं वाश्रवणनयनजं वा मानसं वापराधम्।विहितमविहितं वा सर्वमेतत्क्षमस्वजय जय करुणाब्धे श्रीमहादेव शम्भो॥',
     transliteration: 'Karacharana Kritam Vaa Kaayajam Karmajam Vaa...',
     meaning:
         'O Lord Shiva, please forgive all my sins committed through hands, feet, speech, body, actions, ears, eyes, or mind — whether permitted or forbidden. Victory to you, O ocean of compassion, O great Mahadeva, O Shambho.',
@@ -167,7 +167,7 @@ const List<_Mantra> _mantras = [
   _Mantra(
     name: 'Shiva Tandava Stotram (Opening)',
     sanskrit:
-        'जटाटवीगलज्जलप्रवाहपावितस्थले\nगलेऽवलम्ब्य लम्बितां भुजङ्गतुङ्गमालिकाम्।\nडमड्डमड्डमड्डमन्निनादवड्डमर्वयं\nचकार चण्डताण्डवं तनोतु नः शिवः शिवम्॥',
+        'जटाटवीगलज्जलप्रवाहपावितस्थलेगलेऽवलम्ब्य लम्बितां भुजङ्गतुङ्गमालिकाम्।डमड्डमड्डमड्डमन्निनादवड्डमर्वयंचकार चण्डताण्डवं तनोतु नः शिवः शिवम्॥',
     transliteration: 'Jatatavigalajjala Pravahapavitasthale...',
     meaning:
         'With the sacred Ganga flowing through his matted locks, adorned with a garland of serpents, to the sound of the Damaru — Lord Shiva performs the fierce Tandava dance. May that Shiva bestow auspiciousness upon us.',
@@ -463,7 +463,8 @@ const List<_Jyotirlinga> _jyotirlingas = [
 // ─────────────────────────────────────────────
 class SpiritualityLordShivaView
     extends GetView<SpiritualityLordShivaController> {
-  const SpiritualityLordShivaView({super.key});
+  final bool isEmbedded;
+  const SpiritualityLordShivaView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -478,10 +479,10 @@ class SpiritualityLordShivaView
           ],
           body: const TabBarView(
             children: [
-              _MantrasTab(),
-              _SymbolsTab(),
-              _FestivalsStoriesTab(),
-              _PilgrimageGuideTab(),
+              _MantrasTab(isEmbedded: false),
+              _SymbolsTab(isEmbedded: false),
+              _FestivalsStoriesTab(isEmbedded: false),
+              _PilgrimageGuideTab(isEmbedded: false),
             ],
           ),
         ),
@@ -765,12 +766,15 @@ class _HeroBadge extends StatelessWidget {
 //  TAB 1 — MANTRAS
 // ─────────────────────────────────────────────
 class _MantrasTab extends StatelessWidget {
-  const _MantrasTab();
+  final bool isEmbedded;
+  const _MantrasTab({required this.isEmbedded});
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final onSurface = Theme.of(context).colorScheme.onSurface;
     return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         // _InfoBanner(
@@ -871,7 +875,7 @@ class _MantraCardState extends State<_MantraCard> {
                         onTap: () {
                           Clipboard.setData(
                             ClipboardData(
-                              text: '${m.sanskrit}\n\n${m.transliteration}',
+                              text: '${m.sanskrit}${m.transliteration}',
                             ),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -1112,12 +1116,16 @@ class _MantraGuidanceCard extends StatelessWidget {
 //  TAB 2 — SYMBOLS
 // ─────────────────────────────────────────────
 class _SymbolsTab extends StatelessWidget {
-  const _SymbolsTab();
+  final bool isEmbedded;
+  const _SymbolsTab({required this.isEmbedded});
+
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final onSurface = Theme.of(context).colorScheme.onSurface;
     return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         _ShivaIntro(
@@ -1239,12 +1247,15 @@ class _SymbolCard extends StatelessWidget {
 //  TAB 3 — FESTIVALS & STORIES
 // ─────────────────────────────────────────────
 class _FestivalsStoriesTab extends StatelessWidget {
-  const _FestivalsStoriesTab();
+  final bool isEmbedded;
+  const _FestivalsStoriesTab({required this.isEmbedded});
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final onSurface = Theme.of(context).colorScheme.onSurface;
     return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         _SectionTitle(
@@ -1559,12 +1570,15 @@ class _StoryCardState extends State<_StoryCard> {
 //  TAB 4 — PILGRIMAGE (12 Jyotirlingas)
 // ─────────────────────────────────────────────
 class _PilgrimageGuideTab extends StatelessWidget {
-  const _PilgrimageGuideTab();
+  final bool isEmbedded;
+  const _PilgrimageGuideTab({required this.isEmbedded});
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final onSurface = Theme.of(context).colorScheme.onSurface;
     return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         _ShivaIntro(

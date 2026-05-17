@@ -8,7 +8,8 @@ import '../entities/entities_controller.dart';
 import 'unions_controller.dart';
 
 class UnionsView extends GetView<UnionsController> {
-  const UnionsView({super.key});
+  final bool isEmbedded;
+  const UnionsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +37,9 @@ class UnionsView extends GetView<UnionsController> {
           );
         }
         return SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             children: [
               Padding(
@@ -130,6 +134,9 @@ class UnionsView extends GetView<UnionsController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -632,3 +639,9 @@ class UnionsView extends GetView<UnionsController> {
     );
   }
 }
+
+
+
+
+
+

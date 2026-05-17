@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'world_controller.dart';
 
 class WorldView extends GetView<WorldController> {
-  const WorldView({super.key});
+  final bool isEmbedded;
+  const WorldView({super.key, this.isEmbedded = false});
 
   static const _earth = Color(0xFF1D4ED8);
   static const _sky = Color(0xFF0EA5E9);
@@ -44,6 +45,8 @@ class WorldView extends GetView<WorldController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

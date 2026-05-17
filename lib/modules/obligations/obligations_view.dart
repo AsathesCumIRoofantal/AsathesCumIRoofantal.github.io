@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'obligations_controller.dart';
 
 class ObligationsView extends GetView<ObligationsController> {
-  const ObligationsView({super.key});
+  final bool isEmbedded;
+  const ObligationsView({super.key, this.isEmbedded = false});
 
   static const _law = Color(0xFF1E40AF);
   static const _blue = Color(0xFF3B82F6);
@@ -44,6 +45,8 @@ class ObligationsView extends GetView<ObligationsController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

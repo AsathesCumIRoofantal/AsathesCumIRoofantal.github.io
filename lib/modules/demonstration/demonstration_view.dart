@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'demonstration_controller.dart';
 
 class DemonstrationView extends GetView<DemonstrationController> {
-  const DemonstrationView({super.key});
+  final bool isEmbedded;
+  const DemonstrationView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class DemonstrationView extends GetView<DemonstrationController> {
     );
   }
 }
+
+
+

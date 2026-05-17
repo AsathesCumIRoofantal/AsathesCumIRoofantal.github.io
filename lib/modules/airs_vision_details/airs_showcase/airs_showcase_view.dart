@@ -215,8 +215,10 @@ class AirsShowcaseView extends GetView<AirsShowcaseController> {
   Widget _buildImpactStats(BuildContext context, bool isDark) {
     final stats = [
       ('12', 'Stories', _violet),
-      ('5K+', 'Lives\nTouched', _pink),
-      ('98%', 'Quality\nPass Rate', _green),
+      ('5K+', 'Lives
+Touched', _pink),
+      ('98%', 'Quality
+Pass Rate', _green),
       ('32', 'Partners', _cyan),
     ];
     return Row(
@@ -759,3 +761,6 @@ final _partners = [
     Icons.work_rounded,
   ),
 ];
+
+
+

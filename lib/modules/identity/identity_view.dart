@@ -6,7 +6,8 @@ import '../../core/utils/content_reviser.dart';
 import 'identity_controller.dart';
 
 class IdentityView extends GetView<IdentityController> {
-  const IdentityView({super.key});
+  final bool isEmbedded;
+  const IdentityView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,9 @@ class IdentityView extends GetView<IdentityController> {
         if (controller.questionnaires.isEmpty) {
           return Center(
             child: SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
               padding: const EdgeInsets.all(24),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -79,6 +83,9 @@ class IdentityView extends GetView<IdentityController> {
         }
 
         return SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             children: [
               Padding(
@@ -536,3 +543,9 @@ class IdentityView extends GetView<IdentityController> {
     );
   }
 }
+
+
+
+
+
+

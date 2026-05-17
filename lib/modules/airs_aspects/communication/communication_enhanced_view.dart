@@ -187,7 +187,7 @@ class CommunicationEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const CommunicationView()),
+          SliverToBoxAdapter(child: const CommunicationView(isEmbedded: true)),
         ],
       ),
     );

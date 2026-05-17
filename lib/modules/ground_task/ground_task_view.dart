@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'ground_task_controller.dart';
 
 class GroundTaskView extends GetView<GroundTaskController> {
-  const GroundTaskView({super.key});
+  final bool isEmbedded;
+  const GroundTaskView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class GroundTaskView extends GetView<GroundTaskController> {
     );
   }
 }
+
+
+

@@ -4,7 +4,8 @@ import 'queries_controller.dart';
 import 'package:intl/intl.dart';
 
 class QueriesView extends GetView<QueriesController> {
-  const QueriesView({super.key});
+  final bool isEmbedded;
+  const QueriesView({super.key, this.isEmbedded = false});
 
   void _showSubmissionSheet(BuildContext context) {
     Get.bottomSheet(
@@ -22,6 +23,9 @@ class QueriesView extends GetView<QueriesController> {
           ]
         ),
         child: SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -252,3 +256,9 @@ class QueriesView extends GetView<QueriesController> {
     );
   }
 }
+
+
+
+
+
+

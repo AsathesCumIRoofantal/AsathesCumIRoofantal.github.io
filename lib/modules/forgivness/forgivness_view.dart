@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'forgivness_controller.dart';
 
 class ForgivnessView extends GetView<ForgivnessController> {
-  const ForgivnessView({super.key});
+  final bool isEmbedded;
+  const ForgivnessView({super.key, this.isEmbedded = false});
 
   static const _lavender = Color(0xFF8B5CF6);
   static const _purple = Color(0xFF9333EA);
@@ -44,6 +45,8 @@ class ForgivnessView extends GetView<ForgivnessController> {
         ],
       ),
       body: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

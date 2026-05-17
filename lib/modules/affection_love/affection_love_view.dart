@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AffectionLoveView extends StatelessWidget {
-  const AffectionLoveView({super.key});
+  final bool isEmbedded;
+  const AffectionLoveView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,8 @@ class AffectionLoveView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF07111F),
       body: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,

@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'products_services_controller.dart';
 
 class ProductsServicesView extends GetView<ProductsServicesController> {
-  const ProductsServicesView({super.key});
+  final bool isEmbedded;
+  const ProductsServicesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -353,6 +354,9 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -603,3 +607,9 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
     );
   }
 }
+
+
+
+
+
+

@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'hope_controller.dart';
 
 class HopeView extends GetView<HopeController> {
-  const HopeView({super.key});
+  final bool isEmbedded;
+  const HopeView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class HopeView extends GetView<HopeController> {
         ),
         child: SafeArea(
           child: ListView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

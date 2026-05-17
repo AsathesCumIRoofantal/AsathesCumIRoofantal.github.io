@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
-  const SignupView({super.key});
+  final bool isEmbedded;
+  const SignupView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class SignupView extends GetView<SignupController> {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
+              physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
               padding: const EdgeInsets.symmetric(
                 horizontal: 32.0,
                 vertical: 48.0,
@@ -71,8 +73,12 @@ class SignupView extends GetView<SignupController> {
                       // Obx(() {
                       //   if (controller.isLoading.value == false) {
                       //     return GridView.builder(
-                      //       shrinkWrap: true,
-                      //       physics: const NeverScrollableScrollPhysics(),
+                      //       physics: isEmbedded
+                      //           ? const NeverScrollableScrollPhysics()
+                      //           : null,
+                      //       shrinkWrap: isEmbedded,
+                      //       //       shrinkWrap: true,
+                      //       //       physics: const NeverScrollableScrollPhysics(),
                       //       itemCount: controller.roles.length,
                       //       gridDelegate:
                       //           const SliverGridDelegateWithFixedCrossAxisCount(

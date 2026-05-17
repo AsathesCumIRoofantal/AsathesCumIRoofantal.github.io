@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'learn_fun_controller.dart';
 
 class LearnFunView extends GetView<LearnFunController> {
-  const LearnFunView({super.key});
+  final bool isEmbedded;
+  const LearnFunView({super.key, this.isEmbedded = false});
 
   IconData _getIcon(String identifier) {
     switch (identifier) {
@@ -54,8 +55,8 @@ class LearnFunView extends GetView<LearnFunController> {
               ),
             ),
             GridView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
+              physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+              shrinkWrap: isEmbedded,
               padding: const EdgeInsets.all(16),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,

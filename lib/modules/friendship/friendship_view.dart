@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'friendship_controller.dart';
 
 class FriendshipView extends GetView<FriendshipController> {
-  const FriendshipView({super.key});
+  final bool isEmbedded;
+  const FriendshipView({super.key, this.isEmbedded = false});
 
   static const _peach = Color(0xFFFB923C);
   static const _warm = Color(0xFFEA580C);
@@ -44,6 +45,8 @@ class FriendshipView extends GetView<FriendshipController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

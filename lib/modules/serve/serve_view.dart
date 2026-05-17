@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'serve_controller.dart';
 
 class ServeView extends GetView<ServeController> {
-  const ServeView({super.key});
+  final bool isEmbedded;
+  const ServeView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class ServeView extends GetView<ServeController> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

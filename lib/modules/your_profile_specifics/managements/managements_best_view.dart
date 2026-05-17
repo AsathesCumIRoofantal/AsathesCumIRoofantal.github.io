@@ -208,7 +208,7 @@ class ManagementsBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const ManagementsView()),
+          SliverToBoxAdapter(child: ManagementsView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

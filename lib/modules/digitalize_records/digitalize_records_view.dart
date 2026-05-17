@@ -5,7 +5,8 @@ import 'package:intl/intl.dart';
 import 'digitalize_records_controller.dart';
 
 class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
-  const DigitalizeRecordsView({super.key});
+  final bool isEmbedded;
+  const DigitalizeRecordsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -196,3 +197,6 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
     );
   }
 }
+
+
+

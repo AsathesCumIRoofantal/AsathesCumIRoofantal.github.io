@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'family_controller.dart';
 
 class FamilyView extends GetView<FamilyController> {
-  const FamilyView({super.key});
+  final bool isEmbedded;
+  const FamilyView({super.key, this.isEmbedded = false});
 
   static const _warm = Color(0xFFEA580C);
   static const _amber = Color(0xFFF59E0B);
@@ -44,6 +45,8 @@ class FamilyView extends GetView<FamilyController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),
@@ -272,12 +275,12 @@ class FamilyView extends GetView<FamilyController> {
       (Icons.balance_rounded, 'Peacemaker', _teal),
     ];
     return GridView.count(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
+      childAspectRatio: 2.5,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      childAspectRatio: 2.5,
       children: roles
           .map(
             (r) => Container(

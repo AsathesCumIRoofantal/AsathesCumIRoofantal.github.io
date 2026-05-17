@@ -235,7 +235,8 @@ const List<Map<String, dynamic>> _featureSections = [
 //  MAIN VIEW
 // ─────────────────────────────────────────────
 class FingersAreCrossedView extends GetView<FingersAreCrossedController> {
-  const FingersAreCrossedView({super.key});
+  final bool isEmbedded;
+  const FingersAreCrossedView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -252,9 +253,9 @@ class FingersAreCrossedView extends GetView<FingersAreCrossedController> {
           ],
           body: const TabBarView(
             children: [
-              _HopeDashboardTab(),
-              _WaitingWisdomTab(),
-              _FeatureGuideTab(),
+              _HopeDashboardTab(isEmbedded: false),
+              _WaitingWisdomTab(isEmbedded: false),
+              _FeatureGuideTab(isEmbedded: false),
             ],
           ),
         ),
@@ -536,7 +537,8 @@ class _MiniStat extends StatelessWidget {
 //  TAB 1 — HOPE DASHBOARD (My Bets)
 // ─────────────────────────────────────────────
 class _HopeDashboardTab extends StatelessWidget {
-  const _HopeDashboardTab();
+  final bool isEmbedded;
+  const _HopeDashboardTab({required this.isEmbedded});
 
   @override
   Widget build(BuildContext context) {
@@ -545,6 +547,8 @@ class _HopeDashboardTab extends StatelessWidget {
     final onSurface = theme.colorScheme.onSurface;
 
     return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         // Overall hope meter
@@ -1158,7 +1162,8 @@ class _AddBetPrompt extends StatelessWidget {
 //  TAB 2 — WAITING WISDOM (Quotes)
 // ─────────────────────────────────────────────
 class _WaitingWisdomTab extends StatefulWidget {
-  const _WaitingWisdomTab();
+  final bool isEmbedded;
+  const _WaitingWisdomTab({required this.isEmbedded});
 
   @override
   State<_WaitingWisdomTab> createState() => _WaitingWisdomTabState();
@@ -1175,6 +1180,8 @@ class _WaitingWisdomTabState extends State<_WaitingWisdomTab> {
     final quote = _hopeQuotes[_currentQuote];
 
     return ListView(
+      physics: widget.isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: widget.isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 20, 16, 32),
       children: [
         // Featured quote card
@@ -1540,7 +1547,8 @@ class _GroundingCard extends StatelessWidget {
 //  TAB 3 — FEATURE GUIDE  (all original content)
 // ─────────────────────────────────────────────
 class _FeatureGuideTab extends StatelessWidget {
-  const _FeatureGuideTab();
+  final bool isEmbedded;
+  const _FeatureGuideTab({required this.isEmbedded});
 
   @override
   Widget build(BuildContext context) {
@@ -1549,6 +1557,8 @@ class _FeatureGuideTab extends StatelessWidget {
     final onSurface = theme.colorScheme.onSurface;
 
     return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
         // Info banner

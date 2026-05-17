@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'responsibilities_controller.dart';
 
 class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
-  const ResponsibilitiesView({super.key});
+  final bool isEmbedded;
+  const ResponsibilitiesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -54,3 +55,6 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
     );
   }
 }
+
+
+

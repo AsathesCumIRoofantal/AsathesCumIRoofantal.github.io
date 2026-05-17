@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'share_experience_controller.dart';
 
 class ShareExperienceView extends GetView<ShareExperienceController> {
-  const ShareExperienceView({super.key});
+  final bool isEmbedded;
+  const ShareExperienceView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -197,6 +198,9 @@ class ShareExperienceView extends GetView<ShareExperienceController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
                 child: Column(
                   children: [
                     TextField(
@@ -307,3 +311,9 @@ class ShareExperienceView extends GetView<ShareExperienceController> {
     );
   }
 }
+
+
+
+
+
+

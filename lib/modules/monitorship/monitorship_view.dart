@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'monitorship_controller.dart';
 
 class MonitorshipView extends GetView<MonitorshipController> {
-  const MonitorshipView({super.key});
+  final bool isEmbedded;
+  const MonitorshipView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class MonitorshipView extends GetView<MonitorshipController> {
     );
   }
 }
+
+
+

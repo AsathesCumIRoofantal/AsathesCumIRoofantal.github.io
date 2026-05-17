@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'interviews_controller.dart';
 
 class InterviewsView extends GetView<InterviewsController> {
-  const InterviewsView({super.key});
+  final bool isEmbedded;
+  const InterviewsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class InterviewsView extends GetView<InterviewsController> {
     );
   }
 }
+
+
+

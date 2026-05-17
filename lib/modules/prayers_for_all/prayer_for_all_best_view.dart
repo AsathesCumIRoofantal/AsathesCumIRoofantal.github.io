@@ -55,7 +55,13 @@ class PrayerForAllBestView extends StatelessWidget {
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text('The Daily Intention', style: TextStyle(color: _teal, fontSize: 13, fontWeight: FontWeight.w800)),
               const SizedBox(height: 8),
-              const Text('Begin each day with three questions:\n\n• What do I hope to give today?\n• Who needs grace from me today?\n• What am I grateful for that I haven\'t yet acknowledged?\n\nThe answers need not be elaborate — even a single honest sentence for each creates the orientation that shapes the day.', style: TextStyle(color: Colors.white60, fontSize: 12, height: 1.55)),
+              const Text('Begin each day with three questions:
+
+• What do I hope to give today?
+• Who needs grace from me today?
+• What am I grateful for that I haven\'t yet acknowledged?
+
+The answers need not be elaborate — even a single honest sentence for each creates the orientation that shapes the day.', style: TextStyle(color: Colors.white60, fontSize: 12, height: 1.55)),
             ]),
           ),
           const SizedBox(height: 16),
@@ -118,3 +124,6 @@ class _PrayerCard extends StatelessWidget {
     ]),
   );
 }
+
+
+

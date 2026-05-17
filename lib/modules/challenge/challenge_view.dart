@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 /// CHALLENGE — Unique: crimson + slate "battle map / arena" theme.
 /// New sections: Challenge Tracker, 6 Types of Challenge, Battle Plan, Mindset Mantras.
 class ChallengeView extends StatelessWidget {
-  const ChallengeView({super.key});
+  final bool isEmbedded;
+  const ChallengeView({super.key, this.isEmbedded = false});
 
   static const _bg = Color(0xFF0E0B0B);
   static const _slate = Color(0xFF1F2937);
@@ -16,6 +17,8 @@ class ChallengeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: _bg,
       body: CustomScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         slivers: [
           SliverAppBar(
             pinned: true,
@@ -220,9 +223,9 @@ class ChallengeView extends StatelessWidget {
       ('SPIRITUAL', 'Doubt, surrender, faith.', Icons.self_improvement, _gold),
     ];
     return GridView.count(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       childAspectRatio: 1.4,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,

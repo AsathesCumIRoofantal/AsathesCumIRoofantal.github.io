@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'relationships_controller.dart';
 
 class RelationshipsView extends GetView<RelationshipsController> {
-  const RelationshipsView({super.key});
+  final bool isEmbedded;
+  const RelationshipsView({super.key, this.isEmbedded = false});
 
   static const _hub = Color(0xFF0EA5E9);
   static const _blue = Color(0xFF3B82F6);
@@ -44,6 +45,8 @@ class RelationshipsView extends GetView<RelationshipsController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),
@@ -354,9 +357,9 @@ class RelationshipsView extends GetView<RelationshipsController> {
       (Icons.support_agent_rounded, 'Sponsors', '2', _amber),
     ];
     return GridView.count(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       crossAxisCount: 3,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,
       childAspectRatio: 1.2,

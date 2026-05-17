@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'punctuality_controller.dart';
 
 class PunctualityView extends GetView<PunctualityController> {
-  const PunctualityView({super.key});
+  final bool isEmbedded;
+  const PunctualityView({super.key, this.isEmbedded = false});
 
   static const _steel = Color(0xFF475569);
   static const _blue = Color(0xFF2563EB);
@@ -44,6 +45,8 @@ class PunctualityView extends GetView<PunctualityController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

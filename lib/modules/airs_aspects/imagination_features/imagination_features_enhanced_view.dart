@@ -187,7 +187,9 @@ class ImaginationFeaturesEnhancedView extends StatelessWidget {
             ),
           ),
           // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const ImaginationFeaturesView()),
+          SliverToBoxAdapter(
+            child: const ImaginationFeaturesView(isEmbedded: true),
+          ),
         ],
       ),
     );

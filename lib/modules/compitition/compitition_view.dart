@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'compitition_controller.dart';
 
 class CompititionView extends GetView<CompititionController> {
-  const CompititionView({super.key});
+  final bool isEmbedded;
+  const CompititionView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -60,3 +61,6 @@ class CompititionView extends GetView<CompititionController> {
     );
   }
 }
+
+
+

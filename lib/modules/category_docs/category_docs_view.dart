@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 /// CATEGORY DOCS — Unique: slate + lime "filing cabinet / archive" theme.
 /// New sections: Document Health, 6 Doc Types, Filing Workflow, Compliance Tags.
 class CategoryDocsView extends StatelessWidget {
-  const CategoryDocsView({super.key});
+  final bool isEmbedded;
+  const CategoryDocsView({super.key, this.isEmbedded = false});
 
   static const _bg = Color(0xFFF5F5F0);
   static const _slate = Color(0xFF263238);
@@ -16,6 +17,8 @@ class CategoryDocsView extends StatelessWidget {
     return Scaffold(
       backgroundColor: _bg,
       body: CustomScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         slivers: [
           SliverAppBar(
             pinned: true,
@@ -218,9 +221,9 @@ class CategoryDocsView extends StatelessWidget {
       ('Medical', Icons.medical_services, _amber),
     ];
     return GridView.count(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
       crossAxisCount: 2,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
       childAspectRatio: 2.2,
       crossAxisSpacing: 8,
       mainAxisSpacing: 8,

@@ -6,7 +6,8 @@ import 'package:intl/intl.dart';
 import 'identities_earnings_controller.dart';
 
 class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
-  const IdentitiesEarningsView({super.key});
+  final bool isEmbedded;
+  const IdentitiesEarningsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -283,6 +284,9 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
                 child: Column(
                   children: [
                     TextField(

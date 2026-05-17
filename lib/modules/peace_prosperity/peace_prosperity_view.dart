@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'peace_prosperity_controller.dart';
 
 class PeaceProsperityView extends GetView<PeaceProsperityController> {
-  const PeaceProsperityView({super.key});
+  final bool isEmbedded;
+  const PeaceProsperityView({super.key, this.isEmbedded = false});
 
   static const _sage = Color(0xFF16A34A);
   static const _sky = Color(0xFF0EA5E9);
@@ -44,6 +45,8 @@ class PeaceProsperityView extends GetView<PeaceProsperityController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

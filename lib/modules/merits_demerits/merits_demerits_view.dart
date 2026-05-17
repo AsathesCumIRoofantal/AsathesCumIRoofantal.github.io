@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'merits_demerits_controller.dart';
 
 class MeritsDemeritsView extends GetView<MeritsDemeritsController> {
-  const MeritsDemeritsView({super.key});
+  final bool isEmbedded;
+  const MeritsDemeritsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -61,3 +62,6 @@ class MeritsDemeritsView extends GetView<MeritsDemeritsController> {
     );
   }
 }
+
+
+

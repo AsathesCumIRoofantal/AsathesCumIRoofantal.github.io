@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'prayer_for_all_controller.dart';
 
 class PrayerForAllView extends GetView<PrayerForAllController> {
-  const PrayerForAllView({super.key});
+  final bool isEmbedded;
+  const PrayerForAllView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class PrayerForAllView extends GetView<PrayerForAllController> {
     );
   }
 }
+
+
+

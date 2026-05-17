@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'projects_assessments_controller.dart';
 
 class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
-  const ProjectsAssessmentsView({super.key});
+  final bool isEmbedded;
+  const ProjectsAssessmentsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -414,3 +415,6 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
     );
   }
 }
+
+
+

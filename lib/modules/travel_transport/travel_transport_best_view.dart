@@ -211,7 +211,7 @@ class TravelTransportBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const TravelTransportView()),
+          SliverToBoxAdapter(child: TravelTransportView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),
@@ -1691,3 +1691,4 @@ class _SpiralPainter extends CustomPainter {
   @override
   bool shouldRepaint(_) => false;
 }
+

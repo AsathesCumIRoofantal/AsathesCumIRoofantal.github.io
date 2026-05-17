@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'technology_controller.dart';
 
 class TechnologyView extends GetView<TechnologyController> {
-  const TechnologyView({super.key});
+  final bool isEmbedded;
+  const TechnologyView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -60,3 +61,6 @@ class TechnologyView extends GetView<TechnologyController> {
     );
   }
 }
+
+
+

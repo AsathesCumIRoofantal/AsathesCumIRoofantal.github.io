@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'enhancement_controller.dart';
 
 class EnhancementView extends GetView<EnhancementController> {
-  const EnhancementView({super.key});
+  final bool isEmbedded;
+  const EnhancementView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,9 @@ class EnhancementView extends GetView<EnhancementController> {
         ),
         child: SafeArea(
           child: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
             children: [
               _buildHeader(context, isDark, onSurface),
               const SizedBox(height: 20),

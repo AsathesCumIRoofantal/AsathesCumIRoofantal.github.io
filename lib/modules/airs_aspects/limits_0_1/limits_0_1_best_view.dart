@@ -208,7 +208,7 @@ class Limits01BestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const Limits01View()),
+          SliverToBoxAdapter(child: Limits01View()),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

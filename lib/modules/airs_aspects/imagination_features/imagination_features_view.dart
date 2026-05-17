@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ImaginationFeaturesView extends StatelessWidget {
-  const ImaginationFeaturesView({super.key});
+  final bool isEmbedded;
+  const ImaginationFeaturesView({super.key, required this.isEmbedded});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,8 @@ class ImaginationFeaturesView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF07111F),
       body: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,

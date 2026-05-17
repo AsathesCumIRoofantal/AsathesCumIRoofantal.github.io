@@ -4,13 +4,16 @@ import 'package:get/get.dart';
 import 'settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
-  const SettingsView({super.key});
+  final bool isEmbedded;
+  const SettingsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('App Settings')),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.all(16.0),
         children: [
           Container(

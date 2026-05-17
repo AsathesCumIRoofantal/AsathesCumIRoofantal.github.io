@@ -18,7 +18,8 @@ class OnlyOneWayPage extends GetView<OnlyOneWayController> {
 }
 
 class OnlyOneWayView extends StatelessWidget {
-  const OnlyOneWayView({super.key});
+  final bool isEmbedded;
+  const OnlyOneWayView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -82,3 +83,6 @@ class OnlyOneWayView extends StatelessWidget {
     );
   }
 }
+
+
+

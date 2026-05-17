@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'life_hacks_controller.dart';
 
 class LifeHacksView extends GetView<LifeHacksController> {
-  const LifeHacksView({super.key});
+  final bool isEmbedded;
+  const LifeHacksView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,8 @@ class LifeHacksView extends GetView<LifeHacksController> {
         ),
         child: SafeArea(
           child: ListView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             children: [
               _buildHeader(context, isDark, onSurface),

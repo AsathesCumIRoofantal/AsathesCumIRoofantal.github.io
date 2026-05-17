@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'trade_import_export_controller.dart';
 
 class TradeImportExportView extends GetView<TradeImportExportController> {
-  const TradeImportExportView({super.key});
+  final bool isEmbedded;
+  const TradeImportExportView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class TradeImportExportView extends GetView<TradeImportExportController> {
     );
   }
 }
+
+
+

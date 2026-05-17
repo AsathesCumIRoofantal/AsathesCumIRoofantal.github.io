@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'medical_controller.dart';
 
 class MedicalView extends GetView<MedicalController> {
-  const MedicalView({super.key});
+  final bool isEmbedded;
+  const MedicalView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class MedicalView extends GetView<MedicalController> {
     );
   }
 }
+
+
+

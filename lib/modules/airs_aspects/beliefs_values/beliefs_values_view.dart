@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import 'beliefs_values_controller.dart';
-
-class BeliefsValuesView extends GetView<BeliefsValuesController> {
-  const BeliefsValuesView({super.key});
+class BeliefsValuesView extends StatelessWidget {
+  final bool isEmbedded;
+  const BeliefsValuesView({super.key, required this.isEmbedded});
 
   static const _gold = Color(0xFFD97706);
   static const _amber = Color(0xFFF59E0B);
@@ -45,6 +43,8 @@ class BeliefsValuesView extends GetView<BeliefsValuesController> {
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildHeroHeader(context, isDark, onSurface),
           const SizedBox(height: 20),

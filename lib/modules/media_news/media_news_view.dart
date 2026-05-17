@@ -4,7 +4,8 @@ import 'package:air_app/widgets/sample_content_page.dart';
 import 'media_news_controller.dart';
 
 class MediaNewsView extends GetView<MediaNewsController> {
-  const MediaNewsView({super.key});
+  final bool isEmbedded;
+  const MediaNewsView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -68,3 +69,6 @@ class MediaNewsView extends GetView<MediaNewsController> {
     );
   }
 }
+
+
+

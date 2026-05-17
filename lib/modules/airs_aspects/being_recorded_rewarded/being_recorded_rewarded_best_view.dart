@@ -211,7 +211,7 @@ class BeingRecordedRewardedBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: const BeingRecordedRewardedView()),
+          SliverToBoxAdapter(child: BeingRecordedRewardedView()),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),

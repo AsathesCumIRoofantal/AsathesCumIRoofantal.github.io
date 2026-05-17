@@ -617,3 +617,4 @@ class _Quote extends StatelessWidget {
     );
   }
 }
+

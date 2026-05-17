@@ -7,7 +7,8 @@ import '../../data/models/entity_model.dart';
 import 'entities_controller.dart';
 
 class EntitiesView extends GetView<EntitiesController> {
-  const EntitiesView({super.key});
+  final bool isEmbedded;
+  const EntitiesView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +36,9 @@ class EntitiesView extends GetView<EntitiesController> {
           );
         }
         return SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
           child: Column(
             children: [
               Padding(
@@ -569,3 +573,9 @@ class EntitiesView extends GetView<EntitiesController> {
     );
   }
 }
+
+
+
+
+
+

@@ -5,7 +5,8 @@ import '../../routes/app_pages.dart';
 import 'login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+  final bool isEmbedded;
+  const LoginView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class LoginView extends GetView<LoginController> {
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
+              physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
               padding: const EdgeInsets.symmetric(
                 horizontal: 32.0,
                 vertical: 48.0,
@@ -88,8 +90,10 @@ class LoginView extends GetView<LoginController> {
                     () => Column(
                       children: [
                         GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: isEmbedded,
+                          physics: isEmbedded
+                              ? const NeverScrollableScrollPhysics()
+                              : null,
                           itemCount: controller.roles.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(

@@ -151,7 +151,8 @@ class NeverGiveUpView extends GetView<NeverGiveUpController> {
           ),
           const SizedBox(height: 16),
           const Text(
-            '"The obstacle is not the signal to stop.\nIt is data. Process it and move."',
+            '"The obstacle is not the signal to stop.
+It is data. Process it and move."',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -767,3 +768,6 @@ final _inspirations = [
     'Rikki Rogers',
   ),
 ];
+
+
+

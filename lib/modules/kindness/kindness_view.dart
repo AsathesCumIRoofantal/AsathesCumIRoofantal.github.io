@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'kindness_controller.dart';
 
 class KindnessView extends GetView<KindnessController> {
-  const KindnessView({super.key});
+  final bool isEmbedded;
+  const KindnessView({super.key, this.isEmbedded = false});
 
   static const _coral = Color(0xFFF97316);
   static const _rose = Color(0xFFF43F5E);
@@ -48,6 +49,8 @@ class KindnessView extends GetView<KindnessController> {
         ],
       ),
       body: ListView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildHeroHeader(context, isDark, onSurface),

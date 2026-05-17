@@ -27,6 +27,8 @@ class AboutAppView extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF07111F),
       body: ListView(
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
         children: [
           Column(
             mainAxisSize: MainAxisSize.min,
