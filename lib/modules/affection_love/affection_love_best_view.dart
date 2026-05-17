@@ -92,7 +92,7 @@ class _AffectionLoveBestViewState extends State<AffectionLoveBestView>
                         (
                           'Self-Love',
                           'Compassion and acceptance of oneself',
-                          Icons.wellness_center_rounded,
+                          Icons.self_improvement_rounded,
                         ),
                         (
                           'Universal Love',

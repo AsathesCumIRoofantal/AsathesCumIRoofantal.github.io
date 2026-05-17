@@ -299,7 +299,7 @@ class _GlassmorphicHeader extends StatelessWidget {
                   color: Colors.blue.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Colors.blue.withValues(alpha: 0.4)),
-                  backdropFilter: ui.ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  // backdropFilter: ui.ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                 ),
                 child: const Icon(
                   Icons.lock_open_rounded,

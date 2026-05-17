@@ -200,7 +200,7 @@ class _NeumorphicAboutHeader extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               const Text(
-                'About App'.toUpperCase(),
+                'About App',
                 style: TextStyle(
                   color: Colors.black87,
                   fontSize: 24,

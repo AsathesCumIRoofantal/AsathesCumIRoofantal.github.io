@@ -297,7 +297,7 @@ class _GlassmorphicFamilyHeader extends StatelessWidget {
                   border: Border.all(
                     color: Colors.orange.withValues(alpha: 0.4),
                   ),
-                  backdropFilter: ui.ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                  // backdropFilter: ui.ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                 ),
                 child: const Icon(
                   Icons.family_restroom_rounded,
