@@ -1,7 +1,9 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import 'wisdom_best_view.dart';
 import 'wisdom_view.dart';
 
 /// Auto-generated unique themed wrapper for Wisdom.
