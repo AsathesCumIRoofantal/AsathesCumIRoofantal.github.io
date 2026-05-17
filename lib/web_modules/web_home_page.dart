@@ -26,7 +26,11 @@ class WebHomePage extends StatelessWidget {
         actions: [
           TextButton.icon(
             onPressed: () => Get.back(),
-            icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 15),
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.white,
+              size: 15,
+            ),
             label: const Text('Back', style: TextStyle(color: Colors.white)),
           ),
         ],
@@ -51,13 +55,18 @@ class WebHomePage extends StatelessWidget {
                     backgroundColor: Colors.white,
                     foregroundColor: WColors.indigo,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 22, vertical: 14),
+                      horizontal: 22,
+                      vertical: 14,
+                    ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
                   icon: const Icon(Icons.explore_rounded),
-                  label: const Text('Explore AIR',
-                      style: TextStyle(fontWeight: FontWeight.w700)),
+                  label: const Text(
+                    'Explore AIR',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
                 ),
                 OutlinedButton.icon(
                   onPressed: () {},
@@ -65,13 +74,18 @@ class WebHomePage extends StatelessWidget {
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.white54),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 22, vertical: 14),
+                      horizontal: 22,
+                      vertical: 14,
+                    ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
                   icon: const Icon(Icons.login_rounded),
-                  label: const Text('Sign In',
-                      style: TextStyle(fontWeight: FontWeight.w600)),
+                  label: const Text(
+                    'Sign In',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
                 ),
               ],
             ),
@@ -84,28 +98,36 @@ class WebHomePage extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                        child: WStatChip(
-                            value: '100+',
-                            label: 'Learning\nModules',
-                            color: WColors.indigo)),
+                      child: WStatChip(
+                        value: '100+',
+                        label: 'Learning\nModules',
+                        color: WColors.indigo,
+                      ),
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
-                        child: WStatChip(
-                            value: '8',
-                            label: 'Core\nSections',
-                            color: WColors.teal)),
+                      child: WStatChip(
+                        value: '8',
+                        label: 'Core\nSections',
+                        color: WColors.teal,
+                      ),
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
-                        child: WStatChip(
-                            value: '∞',
-                            label: 'Space for\nGrowth',
-                            color: WColors.amber)),
+                      child: WStatChip(
+                        value: '∞',
+                        label: 'Space for\nGrowth',
+                        color: WColors.amber,
+                      ),
+                    ),
                     const SizedBox(width: 12),
                     Expanded(
-                        child: WStatChip(
-                            value: '1',
-                            label: 'Unified\nPlatform',
-                            color: WColors.violet)),
+                      child: WStatChip(
+                        value: '1',
+                        label: 'Unified\nPlatform',
+                        color: WColors.violet,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -210,9 +232,10 @@ class WebHomePage extends StatelessWidget {
                       'shaping the future of integrated living.',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.85),
-                          fontSize: 15,
-                          height: 1.6),
+                        color: Colors.white.withValues(alpha: 0.85),
+                        fontSize: 15,
+                        height: 1.6,
+                      ),
                     ),
                     const SizedBox(height: 28),
                     ElevatedButton(
@@ -221,13 +244,20 @@ class WebHomePage extends StatelessWidget {
                         backgroundColor: Colors.white,
                         foregroundColor: WColors.teal,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 36, vertical: 16),
+                          horizontal: 36,
+                          vertical: 16,
+                        ),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
-                      child: const Text('Get Started — It\'s Free',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w800, fontSize: 15)),
+                      child: const Text(
+                        'Get Started — It\'s Free',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ],
                 ),

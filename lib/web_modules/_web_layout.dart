@@ -4,7 +4,6 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 // ── Breakpoints ──────────────────────────────────────────────
 class WBreak {
@@ -94,14 +93,16 @@ class WGrid extends StatelessWidget {
           padding: EdgeInsets.only(bottom: spacing),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(rowItems.length * 2 - 1, (i) {
-              if (i.isOdd) return SizedBox(width: spacing);
-              return Expanded(child: rowItems[i ~/ 2]);
-            })
-              ..addAll(List.generate(
-                (cols - rowItems.length) * 2,
-                (_) => const Expanded(child: SizedBox()),
-              )),
+            children:
+                List.generate(rowItems.length * 2 - 1, (i) {
+                  if (i.isOdd) return SizedBox(width: spacing);
+                  return Expanded(child: rowItems[i ~/ 2]);
+                })..addAll(
+                  List.generate(
+                    (cols - rowItems.length) * 2,
+                    (_) => const Expanded(child: SizedBox()),
+                  ),
+                ),
           ),
         );
       }),
@@ -187,51 +188,54 @@ class WFeatureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: isDark ? WColors.cardDark : WColors.cardLight,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withValues(alpha: 0.18)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: 46,
-            height: 46,
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(12),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: isDark ? WColors.cardDark : WColors.cardLight,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: color.withValues(alpha: 0.18)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: isDark ? 0.25 : 0.06),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
             ),
-            child: Icon(icon, color: color, size: 24),
-          ),
-          const SizedBox(height: 14),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 15.5,
-              fontWeight: FontWeight.w700,
-              color: isDark ? Colors.white : const Color(0xFF0F172A),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                color: color.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(icon, color: color, size: 24),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            body,
-            style: TextStyle(
-              fontSize: 13.5,
-              height: 1.55,
-              color: isDark ? Colors.white60 : Colors.black54,
+            const SizedBox(height: 14),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 15.5,
+                fontWeight: FontWeight.w700,
+                color: isDark ? Colors.white : const Color(0xFF0F172A),
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 6),
+            Text(
+              body,
+              style: TextStyle(
+                fontSize: 13.5,
+                height: 1.55,
+                color: isDark ? Colors.white60 : Colors.black54,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -256,7 +260,10 @@ class WStatChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [color.withValues(alpha: 0.12), color.withValues(alpha: 0.04)],
+          colors: [
+            color.withValues(alpha: 0.12),
+            color.withValues(alpha: 0.04),
+          ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
@@ -329,24 +336,34 @@ class WHeroBanner extends StatelessWidget {
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(icon, color: Colors.white.withValues(alpha: 0.5), size: 56),
+                  Icon(
+                    icon,
+                    color: Colors.white.withValues(alpha: 0.5),
+                    size: 56,
+                  ),
                   const SizedBox(height: 16),
-                  Text(title,
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 30,
-                          fontWeight: FontWeight.w900,
-                          height: 1.2)),
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w900,
+                      height: 1.2,
+                    ),
+                  ),
                   const SizedBox(height: 10),
-                  Text(subtitle,
-                      style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.8),
-                          fontSize: 15,
-                          height: 1.6)),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.8),
+                      fontSize: 15,
+                      height: 1.6,
+                    ),
+                  ),
                   if (actions != null) ...[
                     const SizedBox(height: 24),
                     Wrap(spacing: 12, runSpacing: 12, children: actions!),
-                  ]
+                  ],
                 ],
               )
             : Row(
@@ -355,28 +372,37 @@ class WHeroBanner extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(title,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 38,
-                                fontWeight: FontWeight.w900,
-                                height: 1.2)),
+                        Text(
+                          title,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 38,
+                            fontWeight: FontWeight.w900,
+                            height: 1.2,
+                          ),
+                        ),
                         const SizedBox(height: 12),
-                        Text(subtitle,
-                            style: TextStyle(
-                                color: Colors.white.withValues(alpha: 0.8),
-                                fontSize: 16,
-                                height: 1.7)),
+                        Text(
+                          subtitle,
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.8),
+                            fontSize: 16,
+                            height: 1.7,
+                          ),
+                        ),
                         if (actions != null) ...[
                           const SizedBox(height: 28),
                           Wrap(spacing: 12, runSpacing: 12, children: actions!),
-                        ]
+                        ],
                       ],
                     ),
                   ),
                   const SizedBox(width: 40),
-                  Icon(icon,
-                      color: Colors.white.withValues(alpha: 0.25), size: 120),
+                  Icon(
+                    icon,
+                    color: Colors.white.withValues(alpha: 0.25),
+                    size: 120,
+                  ),
                 ],
               ),
       ),
@@ -399,9 +425,14 @@ class WBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
         border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
-      child: Text(label,
-          style: TextStyle(
-              color: color, fontSize: 11.5, fontWeight: FontWeight.w700)),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: color,
+          fontSize: 11.5,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
     );
   }
 }
@@ -418,8 +449,10 @@ class WDividerLabel extends StatelessWidget {
         const Expanded(child: Divider()),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Text(label,
-              style: const TextStyle(fontSize: 12, color: Colors.grey)),
+          child: Text(
+            label,
+            style: const TextStyle(fontSize: 12, color: Colors.grey),
+          ),
         ),
         const Expanded(child: Divider()),
       ],
