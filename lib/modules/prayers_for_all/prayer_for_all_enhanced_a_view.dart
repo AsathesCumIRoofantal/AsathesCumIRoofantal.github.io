@@ -58,7 +58,7 @@ class PrayerForAllBestAView extends StatelessWidget {
             child: Text(
               'Peace be upon all living beings',
               style: TextStyle(
-                color: _gold.withOpacity(0.8),
+                color: _gold.withValues(alpha: 0.8),
                 fontSize: 12,
                 fontStyle: FontStyle.italic,
                 letterSpacing: 1,
@@ -123,9 +123,9 @@ class PrayerForAllBestAView extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: _teal.withOpacity(0.07),
+              color: _teal.withValues(alpha: 0.07),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _teal.withOpacity(0.2)),
+              border: Border.all(color: _teal.withValues(alpha: 0.2)),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,10 +155,13 @@ class PrayerForAllBestAView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [_gold.withOpacity(0.10), _amber.withOpacity(0.06)],
+                colors: [
+                  _gold.withValues(alpha: 0.10),
+                  _amber.withValues(alpha: 0.06),
+                ],
               ),
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: _gold.withOpacity(0.2)),
+              border: Border.all(color: _gold.withValues(alpha: 0.2)),
             ),
             child: Row(
               children: [
@@ -199,7 +202,7 @@ class _MandalaPainter extends CustomPainter {
     for (int ring = 0; ring < 5; ring++) {
       final r = 20.0 + ring * 18;
       final p = Paint()
-        ..color = _colors[ring].withOpacity(0.2)
+        ..color = _colors[ring].withValues(alpha: 0.2)
         ..strokeWidth = 1
         ..style = PaintingStyle.stroke;
       canvas.drawCircle(Offset(cx, cy), r, p);
@@ -211,14 +214,14 @@ class _MandalaPainter extends CustomPainter {
         canvas.drawCircle(
           Offset(x, y),
           2 + ring.toDouble(),
-          Paint()..color = _colors[ring].withOpacity(0.15 + ring * 0.05),
+          Paint()..color = _colors[ring].withValues(alpha: 0.15 + ring * 0.05),
         );
       }
     }
     canvas.drawCircle(
       Offset(cx, cy),
       12,
-      Paint()..color = const Color(0xFFD4A853).withOpacity(0.4),
+      Paint()..color = const Color(0xFFD4A853).withValues(alpha: 0.4),
     );
     canvas.drawCircle(
       Offset(cx, cy),
@@ -243,7 +246,7 @@ class _SecHead extends StatelessWidget {
       Text(
         text,
         style: TextStyle(
-          color: color.withOpacity(0.85),
+          color: color.withValues(alpha: 0.85),
           fontSize: 10,
           fontWeight: FontWeight.w800,
           letterSpacing: 2,
@@ -267,9 +270,9 @@ class _PrayerCard extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: color.withOpacity(0.07),
+      color: color.withValues(alpha: 0.07),
       borderRadius: BorderRadius.circular(14),
-      border: Border.all(color: color.withOpacity(0.22)),
+      border: Border.all(color: color.withValues(alpha: 0.22)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,7 +282,7 @@ class _PrayerCard extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(6),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.15),
+                color: color.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(icon, color: color, size: 14),

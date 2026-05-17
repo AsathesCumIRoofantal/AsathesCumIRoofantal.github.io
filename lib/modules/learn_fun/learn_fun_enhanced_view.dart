@@ -8,9 +8,11 @@ import 'package:flutter/material.dart';
 /// (the original LearnFunView is embedded below the new sections).
 ///
 /// Theme: Glacier Blue | Layout: blocks
-class LearnFunEnhancedView extends StatelessWidget {
+class LearnFunEnhancedView {
   final bool isEmbedded;
-  const LearnFunEnhancedView({super.key, this.isEmbedded = false});
+  final bool isDark; // Pass brightness here instead of using global Get.context
+
+  const LearnFunEnhancedView({this.isEmbedded = false, required this.isDark});
 
   static const Color _bg = Color(0xff051628);
   static const Color _bg2 = Color(0xff0c2e4d);
@@ -18,183 +20,124 @@ class LearnFunEnhancedView extends StatelessWidget {
   static const Color _soft = Color(0xffbfdbfe);
   static const Color _gold = Color(0xfff472b6);
 
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    return Scaffold(
-      backgroundColor: isDark ? _bg : Colors.white,
-      body: CustomScrollView(
-        
-            shrinkWrap: isEmbedded,
-            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,slivers: [
-          SliverAppBar(
-            pinned: true,
-            expandedHeight: 240,
-            backgroundColor: _bg,
-            foregroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.white),
-            title: const Text(
-              'Learn Fun',
+  List<Widget> get slivers => [
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'CORE PRINCIPLES',
+          title: 'Four Pillars',
+          child: Column(
+            children: [
+              _Pillar(
+                n: 1,
+                text: 'Begin in stillness',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 2,
+                text: 'Choose presence over pressure',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 3,
+                text: 'Honour the small wins',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 4,
+                text: 'Return often, gently',
+                accent: _accent,
+                gold: _gold,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'PRACTICE',
+          title: 'Action Steps',
+          child: Column(
+            children: [
+              _Step(
+                n: 1,
+                text: 'Set a 10-minute timer of presence',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 2,
+                text: 'Notice five things you can sense',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 3,
+                text: 'Release one expectation',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 4,
+                text: 'Receive whatever arrives',
+                accent: _accent,
+                gold: _gold,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+        child: _Quote(
+          text: 'Everything has beauty, but not everyone sees it.',
+          author: 'Confucius',
+          accent: _accent,
+          gold: _gold,
+          bg2: _bg2,
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+        child: Row(
+          children: [
+            Container(width: 4, height: 22, color: _accent),
+            const SizedBox(width: 10),
+            Text(
+              'ORIGINAL CONTENT',
               style: TextStyle(
                 letterSpacing: 2,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
+                color: isDark ? Colors.white60 : Colors.black54,
               ),
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: _Hero(
-                palette: 'Glacier Blue',
-                layout: 'blocks',
-                bg: _bg,
-                bg2: _bg2,
-                accent: _accent,
-                soft: _soft,
-                gold: _gold,
-                icon: Icons.track_changes_outlined,
-                title: 'Learn Fun',
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'OVERVIEW',
-                title: 'About Learn Fun',
-                child: Text(
-                  'A living chapter in the larger journey — examined here with fresh perspective, deeper context, and practical guidance you can apply today.',
-                  style: TextStyle(
-                    fontSize: 15.5,
-                    height: 1.6,
-                    color: isDark ? Colors.white70 : Colors.black87,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'CORE PRINCIPLES',
-                title: 'Four Pillars',
-                child: Column(
-                  children: [
-                    _Pillar(
-                      n: 1,
-                      text: 'Begin in stillness',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 2,
-                      text: 'Choose presence over pressure',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 3,
-                      text: 'Honour the small wins',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 4,
-                      text: 'Return often, gently',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'PRACTICE',
-                title: 'Action Steps',
-                child: Column(
-                  children: [
-                    _Step(
-                      n: 1,
-                      text: 'Set a 10-minute timer of presence',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 2,
-                      text: 'Notice five things you can sense',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 3,
-                      text: 'Release one expectation',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 4,
-                      text: 'Receive whatever arrives',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-              child: _Quote(
-                text: 'Everything has beauty, but not everyone sees it.',
-                author: 'Confucius',
-                accent: _accent,
-                gold: _gold,
-                bg2: _bg2,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-              child: Row(
-                children: [
-                  Container(width: 4, height: 22, color: _accent),
-                  const SizedBox(width: 10),
-                  const Text(
-                    'ORIGINAL CONTENT',
-                    style: TextStyle(
-                      letterSpacing: 2,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const LearnFunView()),
-        ],
+          ],
+        ),
       ),
-    );
-  }
+    ),
+    // The Original page content is embedded HERE.
+    SliverToBoxAdapter(child: const LearnFunView()),
+  ];
 }
 
 class _Hero extends StatelessWidget {
@@ -619,4 +562,3 @@ class _Quote extends StatelessWidget {
     );
   }
 }
-

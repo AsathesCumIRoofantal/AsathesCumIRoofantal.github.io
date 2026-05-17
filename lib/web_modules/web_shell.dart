@@ -30,7 +30,7 @@
 //                 color: theme.colorScheme.surface,
 //                 border: Border(
 //                   right: BorderSide(
-//                     color: theme.dividerColor.withOpacity(0.25),
+//                     color: theme.dividerColor.withValues(alpha:0.25),
 //                     width: 1,
 //                   ),
 //                 ),
@@ -78,11 +78,11 @@
 //                       child: Container(
 //                         padding: const EdgeInsets.all(10),
 //                         decoration: BoxDecoration(
-//                           color: theme.colorScheme.surface.withOpacity(0.9),
+//                           color: theme.colorScheme.surface.withValues(alpha:0.9),
 //                           borderRadius: BorderRadius.circular(14),
 //                           boxShadow: [
 //                             BoxShadow(
-//                               color: Colors.black.withOpacity(0.12),
+//                               color: Colors.black.withValues(alpha:0.12),
 //                               blurRadius: 18,
 //                               offset: const Offset(0, 8),
 //                             ),
@@ -126,8 +126,8 @@
 //             decoration: BoxDecoration(
 //               gradient: LinearGradient(
 //                 colors: [
-//                   theme.colorScheme.primary.withOpacity(0.95),
-//                   theme.colorScheme.secondary.withOpacity(0.85),
+//                   theme.colorScheme.primary.withValues(alpha:0.95),
+//                   theme.colorScheme.secondary.withValues(alpha:0.85),
 //                 ],
 //                 begin: Alignment.topLeft,
 //                 end: Alignment.bottomRight,
@@ -149,7 +149,7 @@
 //                 Text(
 //                   'Enterprise web shell for all modules',
 //                   style: TextStyle(
-//                     color: Colors.white.withOpacity(0.9),
+//                     color: Colors.white.withValues(alpha:0.9),
 //                     fontSize: 12,
 //                     height: 1.4,
 //                   ),
@@ -259,14 +259,14 @@
 //                     color: active
 //                         ? Theme.of(
 //                             context,
-//                           ).colorScheme.primary.withOpacity(0.12)
+//                           ).colorScheme.primary.withValues(alpha:0.12)
 //                         : Theme.of(context).colorScheme.surface,
 //                     borderRadius: BorderRadius.circular(14),
 //                     border: Border.all(
 //                       color: active
 //                           ? Theme.of(
 //                               context,
-//                             ).colorScheme.primary.withOpacity(0.28)
+//                             ).colorScheme.primary.withValues(alpha:0.28)
 //                           : Colors.transparent,
 //                     ),
 //                   ),
@@ -279,10 +279,10 @@
 //                           color: active
 //                               ? Theme.of(
 //                                   context,
-//                                 ).colorScheme.primary.withOpacity(0.18)
+//                                 ).colorScheme.primary.withValues(alpha:0.18)
 //                               : Theme.of(
 //                                   context,
-//                                 ).dividerColor.withOpacity(0.08),
+//                                 ).dividerColor.withValues(alpha:0.08),
 //                           borderRadius: BorderRadius.circular(12),
 //                         ),
 //                         child: Icon(

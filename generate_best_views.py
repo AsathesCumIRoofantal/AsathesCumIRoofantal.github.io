@@ -219,7 +219,7 @@ class {best_view_class} extends StatelessWidget {{
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [_primary.withOpacity(0.7), _accent.withOpacity(0.5)],
+                        colors: [_primary.withValues(alpha:0.7), _accent.withValues(alpha:0.5)],
                       ),
                     ),
                   ),
@@ -293,11 +293,11 @@ class _BuildCard extends StatelessWidget {{
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.8),
+        color: Colors.white.withValues(alpha:0.8),
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha:0.1),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -463,12 +463,12 @@ class _NeumorphicContainer extends StatelessWidget {{
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.white.withOpacity(0.8),
+            color: Colors.white.withValues(alpha:0.8),
             offset: const Offset(-4, -4),
             blurRadius: 12,
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha:0.1),
             offset: const Offset(4, 4),
             blurRadius: 12,
           ),
@@ -494,7 +494,7 @@ class _NeumorphicButton extends StatelessWidget {{
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: Colors.black.withValues(alpha:0.2),
             offset: const Offset(4, 4),
             blurRadius: 12,
           ),
@@ -538,7 +538,7 @@ class {best_view_class} extends StatelessWidget {{
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [_bg, _bg2, _primary.withOpacity(0.5)],
+                    colors: [_bg, _bg2, _primary.withValues(alpha:0.5)],
                     stops: const [0, 0.5, 1],
                   ),
                 ),
@@ -552,7 +552,7 @@ class {best_view_class} extends StatelessWidget {{
                         height: 300,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: _primary.withOpacity(0.2),
+                          color: _primary.withValues(alpha:0.2),
                         ),
                       ),
                     ),
@@ -631,8 +631,8 @@ class _GradientCard extends StatelessWidget {{
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            const Color(0xffe94560).withOpacity(0.8),
-            const Color(0xfff39c12).withOpacity(0.6),
+            const Color(0xffe94560).withValues(alpha:0.8),
+            const Color(0xfff39c12).withValues(alpha:0.6),
           ],
         ),
         borderRadius: BorderRadius.circular(16),
@@ -653,7 +653,7 @@ class _GradientCard extends StatelessWidget {{
             desc,
             style: TextStyle(
               fontSize: 13,
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha:0.9),
               height: 1.5,
             ),
           ),

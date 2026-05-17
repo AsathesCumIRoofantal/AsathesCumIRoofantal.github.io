@@ -247,10 +247,13 @@ class _Intro extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [primary.withOpacity(0.08), secondary.withOpacity(0.04)],
+          colors: [
+            primary.withValues(alpha: 0.08),
+            secondary.withValues(alpha: 0.04),
+          ],
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: primary.withOpacity(0.18)),
+        border: Border.all(color: primary.withValues(alpha: 0.18)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -263,7 +266,7 @@ class _Intro extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: accent.withOpacity(0.18),
+                  color: accent.withValues(alpha: 0.18),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -283,7 +286,7 @@ class _Intro extends StatelessWidget {
                   vertical: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: primary.withOpacity(0.12),
+                  color: primary.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
@@ -315,7 +318,7 @@ class _Intro extends StatelessWidget {
             'concrete actions you can take this week, and the data that proves it works. '
             'Original content is preserved further down the page.',
             style: TextStyle(
-              color: onSurface.withOpacity(0.78),
+              color: onSurface.withValues(alpha: 0.78),
               fontSize: 14.5,
               height: 1.55,
             ),
@@ -343,7 +346,7 @@ class _SectionLabel extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.15),
+            color: color.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Icon(icon, color: color, size: 18),
@@ -359,7 +362,9 @@ class _SectionLabel extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        Expanded(child: Container(height: 1, color: color.withOpacity(0.25))),
+        Expanded(
+          child: Container(height: 1, color: color.withValues(alpha: 0.25)),
+        ),
       ],
     );
   }
@@ -383,9 +388,9 @@ class _ActionList extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 10),
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: primary.withOpacity(0.04),
+            color: primary.withValues(alpha: 0.04),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: primary.withOpacity(0.15)),
+            border: Border.all(color: primary.withValues(alpha: 0.15)),
           ),
           child: Row(
             children: [
@@ -471,9 +476,9 @@ class _OriginalBanner extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: primary.withOpacity(0.08),
+        color: primary.withValues(alpha: 0.08),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: primary.withOpacity(0.2)),
+        border: Border.all(color: primary.withValues(alpha: 0.2)),
       ),
       child: Row(
         children: [
@@ -549,10 +554,10 @@ class _BentoGrid extends StatelessWidget {
       gradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
-        colors: [a.withOpacity(0.18), b.withOpacity(0.08)],
+        colors: [a.withValues(alpha: 0.18), b.withValues(alpha: 0.08)],
       ),
       borderRadius: BorderRadius.circular(18),
-      border: Border.all(color: a.withOpacity(0.25)),
+      border: Border.all(color: a.withValues(alpha: 0.25)),
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -574,7 +579,7 @@ class _BentoGrid extends StatelessWidget {
               style: TextStyle(
                 fontSize: 11.5,
                 height: 1.35,
-                color: Colors.black.withOpacity(0.7),
+                color: Colors.black.withValues(alpha: 0.7),
               ),
             ),
           ],
@@ -616,7 +621,7 @@ class _TimelineBlock extends StatelessWidget {
                     Expanded(
                       child: Container(
                         width: 2,
-                        color: primary.withOpacity(0.3),
+                        color: primary.withValues(alpha: 0.3),
                       ),
                     ),
                 ],
@@ -627,9 +632,9 @@ class _TimelineBlock extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 12),
                   padding: const EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: primary.withOpacity(0.05),
+                    color: primary.withValues(alpha: 0.05),
                     borderRadius: BorderRadius.circular(14),
-                    border: Border.all(color: primary.withOpacity(0.15)),
+                    border: Border.all(color: primary.withValues(alpha: 0.15)),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -694,7 +699,7 @@ class _TabsBlockState extends State<_TabsBlock> {
                   decoration: BoxDecoration(
                     color: selected
                         ? widget.primary
-                        : widget.primary.withOpacity(0.1),
+                        : widget.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -717,12 +722,12 @@ class _TabsBlockState extends State<_TabsBlock> {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                widget.primary.withOpacity(0.08),
-                widget.secondary.withOpacity(0.04),
+                widget.primary.withValues(alpha: 0.08),
+                widget.secondary.withValues(alpha: 0.04),
               ],
             ),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: widget.primary.withOpacity(0.15)),
+            border: Border.all(color: widget.primary.withValues(alpha: 0.15)),
           ),
           child: Text(
             widget.steps[idx].description,
@@ -830,9 +835,9 @@ class _AccordionBlockState extends State<_AccordionBlock> {
         return Container(
           margin: const EdgeInsets.only(bottom: 8),
           decoration: BoxDecoration(
-            color: widget.primary.withOpacity(0.05),
+            color: widget.primary.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(14),
-            border: Border.all(color: widget.primary.withOpacity(0.15)),
+            border: Border.all(color: widget.primary.withValues(alpha: 0.15)),
           ),
           child: Column(
             children: [
@@ -899,9 +904,9 @@ class _SplitBlock extends StatelessWidget {
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.all(14),
           decoration: BoxDecoration(
-            color: primary.withOpacity(0.06),
+            color: primary.withValues(alpha: 0.06),
             borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: primary.withOpacity(0.15)),
+            border: Border.all(color: primary.withValues(alpha: 0.15)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -967,7 +972,7 @@ class _NumberedBlock extends StatelessWidget {
             borderRadius: BorderRadius.circular(14),
             boxShadow: [
               BoxShadow(
-                color: primary.withOpacity(0.08),
+                color: primary.withValues(alpha: 0.08),
                 blurRadius: 14,
                 offset: const Offset(0, 6),
               ),
@@ -1037,8 +1042,8 @@ class _BadgesBlock extends StatelessWidget {
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: primary.withOpacity(0.07),
-                border: Border.all(color: primary.withOpacity(0.2)),
+                color: primary.withValues(alpha: 0.07),
+                border: Border.all(color: primary.withValues(alpha: 0.2)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1046,7 +1051,7 @@ class _BadgesBlock extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: secondary.withOpacity(0.15),
+                      color: secondary.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(p.icon, color: secondary, size: 18),
@@ -1165,9 +1170,9 @@ class _StatsBlock extends StatelessWidget {
             (s) => Container(
               padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: primary.withOpacity(0.06),
+                color: primary.withValues(alpha: 0.06),
                 borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: primary.withOpacity(0.15)),
+                border: Border.all(color: primary.withValues(alpha: 0.15)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1249,7 +1254,7 @@ class _WavePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = c.withOpacity(0.35)
+      ..color = c.withValues(alpha: 0.35)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     for (int i = 0; i < 6; i++) {
@@ -1289,7 +1294,7 @@ class _DiagPainter extends CustomPainter {
   _DiagPainter(this.c);
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = c.withOpacity(0.25);
+    final paint = Paint()..color = c.withValues(alpha: 0.25);
     for (int i = -10; i < 30; i++) {
       final p = Path()
         ..moveTo(i * 30.0, 0)
@@ -1327,7 +1332,7 @@ class _GridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = c.withOpacity(0.3)
+      ..color = c.withValues(alpha: 0.3)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
     for (double x = 0; x <= size.width; x += 24)
@@ -1361,14 +1366,14 @@ class _CirclesPainter extends CustomPainter {
   _CirclesPainter(this.c);
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = c.withOpacity(0.18);
+    final paint = Paint()..color = c.withValues(alpha: 0.18);
     for (int i = 0; i < 8; i++)
       canvas.drawCircle(
         Offset(size.width * 0.15 * i, size.height * 0.4),
         40.0 + i * 8,
         paint,
       );
-    final p2 = Paint()..color = c.withOpacity(0.1);
+    final p2 = Paint()..color = c.withValues(alpha: 0.1);
     canvas.drawCircle(Offset(size.width * 0.8, size.height * 0.7), 120, p2);
   }
 
@@ -1397,7 +1402,7 @@ class _PrismPainter extends CustomPainter {
   _PrismPainter(this.c);
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = c.withOpacity(0.22);
+    final paint = Paint()..color = c.withValues(alpha: 0.22);
     for (int i = 0; i < 6; i++) {
       final p = Path()
         ..moveTo(size.width * 0.5, size.height * 0.5)
@@ -1441,7 +1446,7 @@ class _BeamPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < 16; i++) {
-      final paint = Paint()..color = c.withOpacity(0.06 + (i % 4) * 0.04);
+      final paint = Paint()..color = c.withValues(alpha: 0.06 + (i % 4) * 0.04);
       final p = Path()
         ..moveTo(size.width * 0.5, size.height * 0.5)
         ..lineTo(
@@ -1483,7 +1488,7 @@ class _MeshPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = c.withOpacity(0.25)
+      ..color = c.withValues(alpha: 0.25)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
     final rand = math.Random(7);
@@ -1498,7 +1503,7 @@ class _MeshPainter extends CustomPainter {
       for (var b in pts)
         if ((a - b).distance < 120) canvas.drawLine(a, b, paint);
     for (var p in pts)
-      canvas.drawCircle(p, 3, Paint()..color = c.withOpacity(0.6));
+      canvas.drawCircle(p, 3, Paint()..color = c.withValues(alpha: 0.6));
   }
 
   @override
@@ -1526,7 +1531,7 @@ class _StripesPainter extends CustomPainter {
   _StripesPainter(this.c);
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = c.withOpacity(0.18);
+    final paint = Paint()..color = c.withValues(alpha: 0.18);
     for (double y = 0; y < size.height; y += 16)
       canvas.drawRect(Rect.fromLTWH(0, y, size.width, 6), paint);
   }
@@ -1561,9 +1566,9 @@ class _OrbPainter extends CustomPainter {
       canvas.drawCircle(
         center,
         30.0 * i,
-        Paint()..color = c.withOpacity(0.03 * i),
+        Paint()..color = c.withValues(alpha: 0.03 * i),
       );
-    canvas.drawCircle(center, 40, Paint()..color = c.withOpacity(0.7));
+    canvas.drawCircle(center, 40, Paint()..color = c.withValues(alpha: 0.7));
   }
 
   @override
@@ -1618,7 +1623,7 @@ class _ArchPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < 5; i++) {
       final paint = Paint()
-        ..color = c.withOpacity(0.1 + i * 0.05)
+        ..color = c.withValues(alpha: 0.1 + i * 0.05)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2;
       canvas.drawArc(
@@ -1660,7 +1665,7 @@ class _SpiralPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = c.withOpacity(0.4)
+      ..color = c.withValues(alpha: 0.4)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     final path = Path();

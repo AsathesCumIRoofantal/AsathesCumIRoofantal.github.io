@@ -70,7 +70,7 @@ class SkillsTalentsEnhancedView extends StatelessWidget {
                   ),
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(
-                    color: const Color(0xFF7C3AED).withOpacity(0.5),
+                    color: const Color(0xFF7C3AED).withValues(alpha: 0.5),
                   ),
                 ),
                 child: Row(
@@ -78,7 +78,7 @@ class SkillsTalentsEnhancedView extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF7C3AED).withOpacity(0.2),
+                        color: const Color(0xFF7C3AED).withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: const Icon(
@@ -115,7 +115,7 @@ class SkillsTalentsEnhancedView extends StatelessWidget {
                     ),
                     Icon(
                       Icons.arrow_forward_ios_rounded,
-                      color: const Color(0xFF7C3AED).withOpacity(0.6),
+                      color: const Color(0xFF7C3AED).withValues(alpha: 0.6),
                       size: 14,
                     ),
                   ],
