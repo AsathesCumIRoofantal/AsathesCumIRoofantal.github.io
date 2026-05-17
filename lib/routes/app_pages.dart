@@ -1,3 +1,4 @@
+import 'package:air_app/web_modules/web_routes.dart';
 import 'package:air_app/modules/advantage/advantage_binding.dart';
 import 'package:air_app/modules/advantage/advantage_view.dart';
 import 'package:air_app/modules/challenge/challenge_binding.dart';
@@ -603,6 +604,16 @@ class AppRoutes {
   static const PRAYER_FOR_ALL = '/prayer-for-all';
   static const FINGERS_ARE_CROSSED = '/fingers-are-crossed';
   static const COUNTING_REPORTS = '/counting-reports';
+
+  // ── Web Module Routes ─────────────────────────────────────
+  static const WEB_HOME = '/web-home';
+  static const WEB_WISDOM = '/web-wisdom';
+  static const WEB_EXPLORE = '/web-explore';
+  static const WEB_AIR_VISION = '/web-air-vision';
+  static const WEB_PROFILE = '/web-profile';
+  static const WEB_COMMUNITY = '/web-community';
+  static const WEB_ABOUT = '/web-about';
+  static const WEB_SETUP = '/web-setup';
 }
 
 class AppPages {
@@ -1496,5 +1507,8 @@ class AppPages {
       binding: CountingReportsBinding(),
       transition: Transition.rightToLeft,
     ),
+
+    // ── Web Modules (Responsive Flutter Web pages) ─────────
+    ...WebRoutes.pages,
   ];
 }

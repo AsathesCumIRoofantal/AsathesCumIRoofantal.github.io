@@ -18,7 +18,7 @@ class AirApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Categories in All-Space',
+      title: 'AIR-Space',
       theme: AppTheme.etherealLight,
       darkTheme: AppTheme.cosmicDark,
       themeMode: ThemeMode.system, // Defaults to system but managed by Settings

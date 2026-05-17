@@ -1,3 +1,5 @@
+import 'package:air_app/routes/app_pages.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -76,8 +78,11 @@ class LoginController extends GetxController {
       usernameController.text,
       selectedRole.value ?? 'guest',
     );
-
-    Get.offAllNamed('/');
+    if (kIsWeb) {
+      Get.offAllNamed(AppRoutes.WEB_HOME);
+    } else {
+      Get.offAllNamed('/');
+    }
     Get.snackbar(
       'Success',
       'Welcome back, ${usernameController.text} (${selectedRole.value})!',
