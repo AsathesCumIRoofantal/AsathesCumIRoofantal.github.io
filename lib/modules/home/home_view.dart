@@ -14,10 +14,10 @@ class HomeView extends StatelessWidget {
   HomeController controller = Get.find<HomeController>();
 
   final List<Widget> pages = [
-    HomeBestView(),
     EntitiesView(),
     UnionsView(),
     IdentityView(),
+    HomeBestView(),
   ];
 
   /// =========================================================
@@ -125,16 +125,19 @@ class HomeView extends StatelessWidget {
 
     return Obx(
       () => DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             title: const Text('All-Space', style: TextStyle(letterSpacing: 3)),
 
             bottom: const TabBar(
+              labelPadding: EdgeInsets.all(8),
+              isScrollable: true,
               tabs: [
                 Tab(icon: Icon(Icons.category), text: 'ENTITIES'),
                 Tab(icon: Icon(Icons.account_tree), text: 'UNIONS'),
                 Tab(icon: Icon(Icons.fingerprint), text: 'IDENTITY'),
+                Tab(icon: Icon(Icons.category), text: 'Home UI & UX'),
               ],
             ),
           ),
