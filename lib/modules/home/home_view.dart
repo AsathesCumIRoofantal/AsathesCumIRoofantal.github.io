@@ -1,6 +1,6 @@
+import 'package:air_app/modules/home/home_best_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../entities/entities_view.dart';
 import '../identity/identity_view.dart';
@@ -13,7 +13,12 @@ class HomeView extends StatelessWidget {
 
   HomeController controller = Get.find<HomeController>();
 
-  final List<Widget> pages = [EntitiesView(), UnionsView(), IdentityView()];
+  final List<Widget> pages = [
+    HomeBestView(),
+    EntitiesView(),
+    UnionsView(),
+    IdentityView(),
+  ];
 
   /// =========================================================
   /// FILTERED RESULTS

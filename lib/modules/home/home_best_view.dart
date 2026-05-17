@@ -2,8 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-import 'home_view.dart';
-
 /// HomeBestView
 /// Auto-generated showcase view — Design Pattern: Indigo / hero:wave / section:gallery.
 /// Wraps and preserves the original HomeView at the bottom so no
@@ -90,7 +88,11 @@ class HomeBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
         slivers: [
+          // SliverToBoxAdapter(child: HomeView()),
+          // const SliverToBoxAdapter(child: SizedBox(height: 40)),
           SliverAppBar(
             expandedHeight: 260,
             pinned: true,
@@ -207,9 +209,8 @@ class HomeBestView extends StatelessWidget {
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
+
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: HomeView()),
-          const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),
     );
