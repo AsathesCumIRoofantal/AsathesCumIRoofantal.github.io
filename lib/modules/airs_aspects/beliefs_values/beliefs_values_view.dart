@@ -19,29 +19,9 @@ class BeliefsValuesView extends StatelessWidget {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF080510) : const Color(0xFFFAF8FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'BELIEFS & VALUES',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.balance_rounded, color: _gold, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
+    return Container(
+      color: bg,
+      child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         shrinkWrap: isEmbedded,
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,

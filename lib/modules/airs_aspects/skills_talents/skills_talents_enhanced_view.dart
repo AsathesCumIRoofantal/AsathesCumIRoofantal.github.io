@@ -14,7 +14,10 @@ import 'skills_talents_view.dart';
 class SkillsTalentsEnhancedView {
   final bool isEmbedded;
   final bool isDark;
-  const SkillsTalentsEnhancedView({this.isEmbedded = false, required this.isDark});
+  const SkillsTalentsEnhancedView({
+    this.isEmbedded = false,
+    required this.isDark,
+  });
 
   static const Color _bg = Color(0xff0a1a0a);
   static const Color _bg2 = Color(0xff14361f);
@@ -22,237 +25,235 @@ class SkillsTalentsEnhancedView {
   static const Color _soft = Color(0xffd9f99d);
   static const Color _gold = Color(0xff22d3ee);
 
-    List<Widget> get slivers => [
-          SliverAppBar(
-            pinned: true,
-            expandedHeight: 240,
-            backgroundColor: _bg,
-            foregroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.white),
-            title: const Text(
-              'Skills Talents',
+  List<Widget> get slivers => [
+    SliverAppBar(
+      pinned: true,
+      expandedHeight: 240,
+      backgroundColor: _bg,
+      foregroundColor: Colors.white,
+      iconTheme: const IconThemeData(color: Colors.white),
+      title: const Text(
+        'Skills Talents',
+        style: TextStyle(
+          letterSpacing: 2,
+          fontWeight: FontWeight.w800,
+          color: Colors.white,
+        ),
+      ),
+      flexibleSpace: FlexibleSpaceBar(
+        background: _Hero(
+          palette: 'Cyber Lime',
+          layout: 'burst',
+          bg: _bg,
+          bg2: _bg2,
+          accent: _accent,
+          soft: _soft,
+          gold: _gold,
+          icon: Icons.explore_outlined,
+          title: 'Skills Talents',
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: GestureDetector(
+        onTap: () => Get.to(() => const SkillsTalentsBestView()),
+        child: Container(
+          margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [Color(0xFF1A0A40), Color(0xFF0D0520)],
+            ),
+            borderRadius: BorderRadius.circular(18),
+            border: Border.all(
+              color: const Color(0xFF7C3AED).withValues(alpha: 0.5),
+            ),
+          ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF7C3AED).withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Icon(
+                  Icons.auto_awesome_rounded,
+                  color: Color(0xFF7C3AED),
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 14),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '✨  BEST VIEW',
+                      style: TextStyle(
+                        color: Color(0xFF7C3AED),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    SizedBox(height: 3),
+                    Text(
+                      'See Skills & Talents reimagined with a showcase Bento Grid design.',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                        height: 1.3,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: const Color(0xFF7C3AED).withValues(alpha: 0.6),
+                size: 14,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'OVERVIEW',
+          title: 'About Skills Talents',
+          child: Text(
+            'A living chapter in the larger journey — examined here with fresh perspective, deeper context, and practical guidance you can apply today.',
+            style: TextStyle(
+              fontSize: 15.5,
+              height: 1.6,
+              color: isDark ? Colors.white70 : Colors.black87,
+            ),
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'CORE PRINCIPLES',
+          title: 'Four Pillars',
+          child: Column(
+            children: [
+              _Pillar(
+                n: 1,
+                text: 'Name what is true',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 2,
+                text: 'Hold what is tender',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 3,
+                text: 'Release what is heavy',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 4,
+                text: 'Carry what is needed',
+                accent: _accent,
+                gold: _gold,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'PRACTICE',
+          title: 'Action Steps',
+          child: Column(
+            children: [
+              _Step(
+                n: 1,
+                text: 'Pause for one full breath before starting',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 2,
+                text: 'Write a single intention for today',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 3,
+                text: 'Take one action — however small',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 4,
+                text: 'Note what shifted, however subtly',
+                accent: _accent,
+                gold: _gold,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+        child: _Quote(
+          text:
+              'What we plant in the soil of contemplation, we shall reap in the harvest of action.',
+          author: 'Meister Eckhart',
+          accent: _accent,
+          gold: _gold,
+          bg2: _bg2,
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+        child: Row(
+          children: [
+            Container(width: 4, height: 22, color: _accent),
+            const SizedBox(width: 10),
+            const Text(
+              'ORIGINAL CONTENT',
               style: TextStyle(
                 letterSpacing: 2,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
               ),
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: _Hero(
-                palette: 'Cyber Lime',
-                layout: 'burst',
-                bg: _bg,
-                bg2: _bg2,
-                accent: _accent,
-                soft: _soft,
-                gold: _gold,
-                icon: Icons.explore_outlined,
-                title: 'Skills Talents',
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: GestureDetector(
-              onTap: () => Get.to(() => const SkillsTalentsBestView()),
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(20, 16, 20, 0),
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF1A0A40), Color(0xFF0D0520)],
-                  ),
-                  borderRadius: BorderRadius.circular(18),
-                  border: Border.all(
-                    color: const Color(0xFF7C3AED).withValues(alpha: 0.5),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF7C3AED).withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: const Icon(
-                        Icons.auto_awesome_rounded,
-                        color: Color(0xFF7C3AED),
-                        size: 22,
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '✨  BEST VIEW',
-                            style: TextStyle(
-                              color: Color(0xFF7C3AED),
-                              fontSize: 10,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 2,
-                            ),
-                          ),
-                          SizedBox(height: 3),
-                          Text(
-                            'See Skills & Talents reimagined with a showcase Bento Grid design.',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12,
-                              height: 1.3,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: const Color(0xFF7C3AED).withValues(alpha: 0.6),
-                      size: 14,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'OVERVIEW',
-                title: 'About Skills Talents',
-                child: Text(
-                  'A living chapter in the larger journey — examined here with fresh perspective, deeper context, and practical guidance you can apply today.',
-                  style: TextStyle(
-                    fontSize: 15.5,
-                    height: 1.6,
-                    color: isDark ? Colors.white70 : Colors.black87,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'CORE PRINCIPLES',
-                title: 'Four Pillars',
-                child: Column(
-                  children: [
-                    _Pillar(
-                      n: 1,
-                      text: 'Name what is true',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 2,
-                      text: 'Hold what is tender',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 3,
-                      text: 'Release what is heavy',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 4,
-                      text: 'Carry what is needed',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'PRACTICE',
-                title: 'Action Steps',
-                child: Column(
-                  children: [
-                    _Step(
-                      n: 1,
-                      text: 'Pause for one full breath before starting',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 2,
-                      text: 'Write a single intention for today',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 3,
-                      text: 'Take one action — however small',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 4,
-                      text: 'Note what shifted, however subtly',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-              child: _Quote(
-                text:
-                    'What we plant in the soil of contemplation, we shall reap in the harvest of action.',
-                author: 'Meister Eckhart',
-                accent: _accent,
-                gold: _gold,
-                bg2: _bg2,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-              child: Row(
-                children: [
-                  Container(width: 4, height: 22, color: _accent),
-                  const SizedBox(width: 10),
-                  const Text(
-                    'ORIGINAL CONTENT',
-                    style: TextStyle(
-                      letterSpacing: 2,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: const SkillsTalentsView(isEmbedded: true)),
-          ];
+          ],
+        ),
+      ),
+    ),
+  ];
 }
 
 class _Hero extends StatelessWidget {
@@ -269,7 +270,8 @@ class _Hero extends StatelessWidget {
     required this.gold,
     required this.icon,
     required this.title,
-  }); @override
+  });
+  @override
   Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
@@ -342,7 +344,8 @@ class _HeroPainter extends CustomPainter {
     required this.accent,
     required this.soft,
     required this.gold,
-  }); @override
+  });
+  @override
   void paint(Canvas canvas, Size size) {
     final p = Paint();
     switch (layout) {
@@ -463,7 +466,9 @@ class _HeroPainter extends CustomPainter {
           );
         }
     }
-  } @override
+  }
+
+  @override
   bool shouldRepaint(covariant CustomPainter old) => false;
 }
 
@@ -477,7 +482,8 @@ class _Section extends StatelessWidget {
     required this.child,
     required this.accent,
     required this.gold,
-  }); @override
+  });
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -523,7 +529,8 @@ class _Pillar extends StatelessWidget {
     required this.text,
     required this.accent,
     required this.gold,
-  }); @override
+  });
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -571,7 +578,8 @@ class _Step extends StatelessWidget {
     required this.text,
     required this.accent,
     required this.gold,
-  }); @override
+  });
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -626,7 +634,8 @@ class _Quote extends StatelessWidget {
     required this.accent,
     required this.gold,
     required this.bg2,
-  }); @override
+  });
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
