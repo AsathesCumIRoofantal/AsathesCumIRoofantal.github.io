@@ -212,9 +212,10 @@ class SurvellenceInvestigationBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: SurvellenceInvestigationEnhancedView(isEmbedded: true),
-          ),
+          ...SurvellenceInvestigationEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(
             child: SurvellenceInvestigationView(isEmbedded: true),
           ),

@@ -212,9 +212,10 @@ class SuccessFailureBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: SuccessFailureEnhancedView(isEmbedded: true),
-          ),
+          ...SuccessFailureEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(child: SuccessFailureView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],

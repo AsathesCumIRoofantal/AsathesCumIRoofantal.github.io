@@ -212,9 +212,10 @@ class SystemAllTogetherBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: SystemAllTogetherEnhancedView(isEmbedded: true),
-          ),
+          ...SystemAllTogetherEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(child: SystemAllTogetherView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],

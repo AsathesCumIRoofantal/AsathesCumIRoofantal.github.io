@@ -216,9 +216,10 @@ class FingersAreCrossedBestView extends StatelessWidget {
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 8)),
               // Original page content embedded below — nothing is lost
-              SliverToBoxAdapter(
-                child: FingersAreCrossedEnhancedView(isEmbedded: true),
-              ),
+              ...FingersAreCrossedEnhancedView(
+                isEmbedded: true,
+                isDark: isDark,
+              ).slivers,
 
               const SliverToBoxAdapter(child: SizedBox(height: 40)),
             ],

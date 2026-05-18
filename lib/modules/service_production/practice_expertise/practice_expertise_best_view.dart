@@ -212,9 +212,10 @@ class PracticeExpertiseBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: PracticeExpertiseEnhancedView(isEmbedded: true),
-          ),
+          ...PracticeExpertiseEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(child: PracticeExpertiseView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],

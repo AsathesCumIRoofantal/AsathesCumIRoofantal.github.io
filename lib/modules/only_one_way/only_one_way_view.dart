@@ -12,7 +12,7 @@ class OnlyOneWayPage extends GetView<OnlyOneWayController> {
   Widget build(BuildContext context) {
     return PageView(
       physics: const BouncingScrollPhysics(),
-      children: const [OnlyOneWayEnhancedView(), OnlyOneWayView()],
+      children: const [OnlyOneWayView()],
     );
   }
 }
@@ -83,6 +83,3 @@ class OnlyOneWayView extends StatelessWidget {
     );
   }
 }
-
-
-

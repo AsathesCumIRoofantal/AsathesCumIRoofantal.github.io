@@ -207,6 +207,7 @@ class DiscoveryBestView extends StatelessWidget {
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
+
           // Original page content embedded below — nothing is lost
           SliverToBoxAdapter(child: DiscoveryView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),

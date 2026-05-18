@@ -211,10 +211,12 @@ class ApprovalAppealsBestView extends StatelessWidget {
             ),
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
+
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: ApprovalAppealsEnhancedView(isEmbedded: true),
-          ),
+          ...ApprovalAppealsEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(child: ApprovalAppealsView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],

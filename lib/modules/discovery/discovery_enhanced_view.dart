@@ -20,173 +20,172 @@ class DiscoveryEnhancedView {
   static const Color _soft = Color(0xfffce7f3);
   static const Color _gold = Color(0xff38bdf8);
 
-    List<Widget> get slivers => [
-          SliverAppBar(
-            pinned: true,
-            expandedHeight: 240,
-            backgroundColor: _bg,
-            foregroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.white),
-            title: const Text(
-              'Discovery',
+  List<Widget> get slivers => [
+    SliverAppBar(
+      pinned: true,
+      expandedHeight: 240,
+      backgroundColor: _bg,
+      foregroundColor: Colors.white,
+      iconTheme: const IconThemeData(color: Colors.white),
+      title: const Text(
+        'Discovery',
+        style: TextStyle(
+          letterSpacing: 2,
+          fontWeight: FontWeight.w800,
+          color: Colors.white,
+        ),
+      ),
+      flexibleSpace: FlexibleSpaceBar(
+        background: _Hero(
+          palette: 'Magenta Pulse',
+          layout: 'grid',
+          bg: _bg,
+          bg2: _bg2,
+          accent: _accent,
+          soft: _soft,
+          gold: _gold,
+          icon: Icons.psychology_outlined,
+          title: 'Discovery',
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'OVERVIEW',
+          title: 'About Discovery',
+          child: Text(
+            'A living chapter in the larger journey — examined here with fresh perspective, deeper context, and practical guidance you can apply today.',
+            style: TextStyle(
+              fontSize: 15.5,
+              height: 1.6,
+              color: isDark ? Colors.white70 : Colors.black87,
+            ),
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'CORE PRINCIPLES',
+          title: 'Four Pillars',
+          child: Column(
+            children: [
+              _Pillar(
+                n: 1,
+                text: 'Listen first, twice',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 2,
+                text: 'Decide once, fully',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 3,
+                text: 'Move slow, then fast',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Pillar(
+                n: 4,
+                text: 'Reflect, then repeat',
+                accent: _accent,
+                gold: _gold,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        child: _Section(
+          accent: _accent,
+          gold: _gold,
+          eyebrow: 'PRACTICE',
+          title: 'Action Steps',
+          child: Column(
+            children: [
+              _Step(
+                n: 1,
+                text: 'Set a 10-minute timer of presence',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 2,
+                text: 'Notice five things you can sense',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 3,
+                text: 'Release one expectation',
+                accent: _accent,
+                gold: _gold,
+              ),
+              _Step(
+                n: 4,
+                text: 'Receive whatever arrives',
+                accent: _accent,
+                gold: _gold,
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+        child: _Quote(
+          text: 'The wound is the place where the Light enters you.',
+          author: 'Rumi',
+          accent: _accent,
+          gold: _gold,
+          bg2: _bg2,
+        ),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: Container(
+        color: isDark ? _bg : Colors.white,
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+        child: Row(
+          children: [
+            Container(width: 4, height: 22, color: _accent),
+            const SizedBox(width: 10),
+            const Text(
+              'ORIGINAL CONTENT',
               style: TextStyle(
                 letterSpacing: 2,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
+                fontSize: 11,
+                fontWeight: FontWeight.w700,
               ),
             ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: _Hero(
-                palette: 'Magenta Pulse',
-                layout: 'grid',
-                bg: _bg,
-                bg2: _bg2,
-                accent: _accent,
-                soft: _soft,
-                gold: _gold,
-                icon: Icons.psychology_outlined,
-                title: 'Discovery',
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'OVERVIEW',
-                title: 'About Discovery',
-                child: Text(
-                  'A living chapter in the larger journey — examined here with fresh perspective, deeper context, and practical guidance you can apply today.',
-                  style: TextStyle(
-                    fontSize: 15.5,
-                    height: 1.6,
-                    color: isDark ? Colors.white70 : Colors.black87,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'CORE PRINCIPLES',
-                title: 'Four Pillars',
-                child: Column(
-                  children: [
-                    _Pillar(
-                      n: 1,
-                      text: 'Listen first, twice',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 2,
-                      text: 'Decide once, fully',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 3,
-                      text: 'Move slow, then fast',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Pillar(
-                      n: 4,
-                      text: 'Reflect, then repeat',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-              child: _Section(
-                accent: _accent,
-                gold: _gold,
-                eyebrow: 'PRACTICE',
-                title: 'Action Steps',
-                child: Column(
-                  children: [
-                    _Step(
-                      n: 1,
-                      text: 'Set a 10-minute timer of presence',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 2,
-                      text: 'Notice five things you can sense',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 3,
-                      text: 'Release one expectation',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                    _Step(
-                      n: 4,
-                      text: 'Receive whatever arrives',
-                      accent: _accent,
-                      gold: _gold,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
-              child: _Quote(
-                text: 'The wound is the place where the Light enters you.',
-                author: 'Rumi',
-                accent: _accent,
-                gold: _gold,
-                bg2: _bg2,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              color: isDark ? _bg : Colors.white,
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-              child: Row(
-                children: [
-                  Container(width: 4, height: 22, color: _accent),
-                  const SizedBox(width: 10),
-                  const Text(
-                    'ORIGINAL CONTENT',
-                    style: TextStyle(
-                      letterSpacing: 2,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          // Original page content embedded — nothing deleted.
-          SliverToBoxAdapter(child: DiscoveryEnhancedView(isEmbedded: true)),
-          // Original page content embedded below — nothing is lost
-          ...DiscoveryEnhancedView(isEmbedded: true, isDark: isDark).slivers,
-          ];
+          ],
+        ),
+      ),
+    ),
+
+    // Original page content embedded below — nothing is lost
+    ...DiscoveryEnhancedView(isEmbedded: true, isDark: isDark).slivers,
+  ];
 }
 
 class _Hero extends StatelessWidget {
@@ -203,7 +202,8 @@ class _Hero extends StatelessWidget {
     required this.gold,
     required this.icon,
     required this.title,
-  }); Widget build(BuildContext context) {
+  });
+  Widget build(BuildContext context) {
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -275,7 +275,8 @@ class _HeroPainter extends CustomPainter {
     required this.accent,
     required this.soft,
     required this.gold,
-  }); void paint(Canvas canvas, Size size) {
+  });
+  void paint(Canvas canvas, Size size) {
     final p = Paint();
     switch (layout) {
       case 'wave':
@@ -395,7 +396,9 @@ class _HeroPainter extends CustomPainter {
           );
         }
     }
-  } bool shouldRepaint(covariant CustomPainter old) => false;
+  }
+
+  bool shouldRepaint(covariant CustomPainter old) => false;
 }
 
 class _Section extends StatelessWidget {
@@ -408,7 +411,8 @@ class _Section extends StatelessWidget {
     required this.child,
     required this.accent,
     required this.gold,
-  }); Widget build(BuildContext context) {
+  });
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -453,7 +457,8 @@ class _Pillar extends StatelessWidget {
     required this.text,
     required this.accent,
     required this.gold,
-  }); Widget build(BuildContext context) {
+  });
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
@@ -500,7 +505,8 @@ class _Step extends StatelessWidget {
     required this.text,
     required this.accent,
     required this.gold,
-  }); Widget build(BuildContext context) {
+  });
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
@@ -554,7 +560,8 @@ class _Quote extends StatelessWidget {
     required this.accent,
     required this.gold,
     required this.bg2,
-  }); Widget build(BuildContext context) {
+  });
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(

@@ -212,9 +212,10 @@ class KeepAddingWithPatienceBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: KeepAddingWithPatienceEnhancedView(isEmbedded: true),
-          ),
+          ...KeepAddingWithPatienceEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(
             child: KeepAddingWithPatienceView(isEmbedded: true),
           ),

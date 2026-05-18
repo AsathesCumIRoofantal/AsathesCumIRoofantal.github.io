@@ -212,9 +212,10 @@ class OutcomeProcessedBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: OutcomeProcessedEnhancedView(isEmbedded: true),
-          ),
+          ...OutcomeProcessedEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(child: OutcomeProcessedView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],

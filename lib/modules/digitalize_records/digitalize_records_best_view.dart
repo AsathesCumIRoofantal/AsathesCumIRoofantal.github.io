@@ -212,9 +212,10 @@ class DigitalizeRecordsBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(
-            child: DigitalizeRecordsEnhancedView(isEmbedded: true),
-          ),
+          ...DigitalizeRecordsEnhancedView(
+            isEmbedded: true,
+            isDark: isDark,
+          ).slivers,
           SliverToBoxAdapter(child: DigitalizeRecordsView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
