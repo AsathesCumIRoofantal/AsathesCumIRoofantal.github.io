@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AboutOrgView extends StatelessWidget {
-  const AboutOrgView({super.key});
+  final bool isEmbedded;
+  const AboutOrgView({super.key, required this.isEmbedded});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,8 @@ class AboutOrgView extends StatelessWidget {
     return Container(
       color: const Color(0xFF07111F),
       child: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? NeverScrollableScrollPhysics() : null,
         children: [
           Stack(
             children: [
