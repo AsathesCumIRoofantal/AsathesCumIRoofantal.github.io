@@ -25,16 +25,16 @@ class NetworkApisView extends GetView<NetworkApisController> {
             foregroundColor: Colors.black,
           ),
           _buildTerminalHeader(),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: controller.endpoints.length,
-                itemBuilder: (context, index) {
-                  final api = controller.endpoints[index];
-                  return _buildApiRow(api);
-                },
-              ),
+          Obx(
+            () => ListView.builder(
+              padding: const EdgeInsets.all(16),
+              shrinkWrap: isEmbedded,
+              physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+              itemCount: controller.endpoints.length,
+              itemBuilder: (context, index) {
+                final api = controller.endpoints[index];
+                return _buildApiRow(api);
+              },
             ),
           ),
         ],

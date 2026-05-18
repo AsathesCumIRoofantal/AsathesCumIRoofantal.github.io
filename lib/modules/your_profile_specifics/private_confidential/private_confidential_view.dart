@@ -21,16 +21,16 @@ class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
             backgroundColor: Colors.red[900],
           ),
           _buildVaultHeader(context),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: controller.files.length,
-                itemBuilder: (context, index) {
-                  final file = controller.files[index];
-                  return _buildSecureFileRow(context, file);
-                },
-              ),
+          Obx(
+            () => ListView.builder(
+              padding: const EdgeInsets.all(16),
+              shrinkWrap: isEmbedded,
+              physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+              itemCount: controller.files.length,
+              itemBuilder: (context, index) {
+                final file = controller.files[index];
+                return _buildSecureFileRow(context, file);
+              },
             ),
           ),
         ],

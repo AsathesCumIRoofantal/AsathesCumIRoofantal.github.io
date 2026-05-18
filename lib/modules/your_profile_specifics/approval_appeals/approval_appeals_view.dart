@@ -22,16 +22,16 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
             backgroundColor: Colors.purple[700],
           ),
           _buildFilterChips(context),
-          Expanded(
-            child: Obx(
-              () => ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: controller.appeals.length,
-                itemBuilder: (context, index) {
-                  final appeal = controller.appeals[index];
-                  return _buildAppealCard(context, appeal, index);
-                },
-              ),
+          Obx(
+            () => ListView.builder(
+              padding: const EdgeInsets.all(16),
+              shrinkWrap: isEmbedded,
+              physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+              itemCount: controller.appeals.length,
+              itemBuilder: (context, index) {
+                final appeal = controller.appeals[index];
+                return _buildAppealCard(context, appeal, index);
+              },
             ),
           ),
         ],

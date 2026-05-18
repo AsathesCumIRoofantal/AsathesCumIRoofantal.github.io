@@ -22,6 +22,8 @@ class PublicStuffView extends GetView<PublicStuffController> {
             ),
             ListView.builder(
               padding: const EdgeInsets.all(16),
+              shrinkWrap: isEmbedded,
+              physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
               itemCount: controller.posts.length,
               itemBuilder: (context, index) {
                 final post = controller.posts[index];
