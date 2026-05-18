@@ -24,9 +24,9 @@ class AboutOrgView extends StatelessWidget {
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF07111F),
-      body: ListView(
+    return Container(
+      color: const Color(0xFF07111F),
+      child: ListView(
         children: [
           Stack(
             children: [

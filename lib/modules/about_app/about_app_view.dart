@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AboutAppView extends StatelessWidget {
-  const AboutAppView({super.key});
+  final bool isEmbedded;
+  const AboutAppView({super.key, this.isEmbedded = false});
 
   @override
   Widget build(BuildContext context) {
@@ -24,55 +25,52 @@ class AboutAppView extends StatelessWidget {
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF07111F),
-      body: ListView(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
+    return Container(
+      color: const Color(0xFF07111F),
+      child: ListView(
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
+          Stack(
+            children: [
+              Positioned(
+                right: -20,
+                top: 40,
+                child: Icon(Icons.hub, size: 180, color: Colors.white10),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 90, 20, 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'ABOUT App',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    SizedBox(height: 12),
+                    Text(
+                      'Digital command center',
+                      style: TextStyle(
+                        color: Color(0xFFB8D8FF),
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
           Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Stack(
-                children: [
-                  Positioned(
-                    right: -20,
-                    top: 40,
-                    child: Icon(
-                      Icons.phone_android,
-                      size: 180,
-                      color: Colors.white10,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 90, 20, 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Text(
-                          'ABOUT App',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 2,
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        Text(
-                          'Future mobile ecosystem',
-                          style: TextStyle(
-                            color: Color(0xFFB8D8FF),
-                            fontSize: 14,
-                            height: 1.5,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
               Container(
                 padding: const EdgeInsets.all(18),
                 decoration: BoxDecoration(

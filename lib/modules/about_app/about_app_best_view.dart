@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:air_app/modules/about_app/about_app_enhanced_view.dart';
 import 'package:flutter/material.dart';
 
 import 'about_app_view.dart';
@@ -9,8 +10,7 @@ import 'about_app_view.dart';
 /// Wraps and preserves the original AboutAppView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class AboutAppBestView extends StatelessWidget {
-  final bool isEmbedded;
-  const AboutAppBestView({super.key, this.isEmbedded = false});
+  const AboutAppBestView({super.key});
 
   static const Color _primary = Color(0xFF7C3AED);
   static const Color _secondary = Color(0xFFA855F7);
@@ -91,8 +91,6 @@ class AboutAppBestView extends StatelessWidget {
     return Scaffold(
       backgroundColor: bg,
       body: CustomScrollView(
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         slivers: [
           SliverAppBar(
             expandedHeight: 260,
@@ -211,7 +209,8 @@ class AboutAppBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          SliverToBoxAdapter(child: AboutAppView()),
+          ...AboutAppEnhancedView(isEmbedded: true, isDark: isDark).slivers,
+          SliverToBoxAdapter(child: AboutAppView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),
