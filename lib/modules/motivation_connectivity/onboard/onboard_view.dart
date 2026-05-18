@@ -22,120 +22,97 @@ class OnboardView extends GetView<OnboardController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF060310) : const Color(0xFFF5F3FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'ONBOARDING',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'ONBOARDING PROGRESS',
+          Icons.track_changes_rounded,
+          _launch,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.rocket_launch_rounded, color: _launch, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'ONBOARDING PROGRESS',
-            Icons.track_changes_rounded,
-            _launch,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildProgressSteps(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'ONBOARDING RESOURCES',
-            Icons.auto_stories_rounded,
-            _blue,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildOnboardCard(
-            context,
-            isDark,
-            Icons.checklist_rounded,
-            _launch,
-            'Welcome Checklist',
-            'Complete a short sequence of first-day tasks — profile setup, community introduction, and a quick orientation quiz — to establish your presence in AIR. '
-                'The checklist is designed to take under 30 minutes and leaves you with everything you need to participate immediately. '
-                'Each checklist item is accompanied by a 2-minute explainer video so you understand why the step matters, not just how to complete it — producing informed members, not just technically set-up ones.',
-          ),
-          const SizedBox(height: 10),
-          _buildOnboardCard(
-            context,
-            isDark,
-            Icons.map_rounded,
-            _blue,
-            'Orientation Map',
-            'Explore a visual map of AIR\'s modules, communities, and key resources so you know where to go for what you need. '
-                'The map is interactive — tap any area to get a plain-language description of its purpose and a suggested first action. '
-                'The map is updated each time a significant new feature launches, so returning members can use it as a "what\'s new" guide in addition to its primary orientation function.',
-          ),
-          const SizedBox(height: 10),
-          _buildOnboardCard(
-            context,
-            isDark,
-            Icons.person_add_rounded,
-            _cyan,
-            'Buddy Assignment',
-            'Get matched with an experienced AIR member who will answer your first questions, make introductions, and check in during your first two weeks. '
-                'Buddy relationships reduce the anxiety of being new and dramatically accelerate the time to feeling genuinely at home. '
-                'Buddy matching uses your profile interests, working style, and goals to find someone whose experience is genuinely relevant to your situation rather than assigning randomly by availability.',
-          ),
-          const SizedBox(height: 10),
-          _buildOnboardCard(
-            context,
-            isDark,
-            Icons.lightbulb_rounded,
-            _amber,
-            'First Contribution Prompt',
-            'Receive a personalised prompt for your first meaningful contribution — matched to your skills and interests — so you can add value before you feel fully settled. '
-                'Early contribution is the fastest path to belonging; the prompt removes the paralysis of not knowing where to start. '
-                'The prompt is intentionally modest — a contribution within your comfortable skill range — so the first experience of giving to the community is positive and self-reinforcing rather than intimidating.',
-          ),
-          const SizedBox(height: 10),
-          _buildOnboardCard(
-            context,
-            isDark,
-            Icons.menu_book_rounded,
-            _sky,
-            'Culture & Norms Primer',
-            'Read a concise guide to how AIR communicates, makes decisions, handles disagreement, and celebrates wins. '
-                'Understanding the culture early prevents the accidental missteps that make new members feel like outsiders long after they have joined. '
-                'The primer uses real examples from AIR\'s history — including examples of things that went wrong and how the community responded — so the culture description is grounded in actual behaviour, not aspirational statements.',
-          ),
-          const SizedBox(height: 10),
-          _buildOnboardCard(
-            context,
-            isDark,
-            Icons.track_changes_rounded,
-            _green,
-            'Onboarding Progress Tracker',
-            'See your onboarding completion percentage and the specific steps remaining so you always know how close you are to being fully oriented. '
-                'The tracker also unlocks access to advanced features as you complete each stage, rewarding progress with expanded capability. '
-                'Completion milestones are shared with your buddy automatically so they can celebrate your progress and proactively offer help for upcoming stages rather than waiting for you to ask.',
-          ),
-          const SizedBox(height: 20),
-          _buildOnboardQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildProgressSteps(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'ONBOARDING RESOURCES',
+          Icons.auto_stories_rounded,
+          _blue,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildOnboardCard(
+          context,
+          isDark,
+          Icons.checklist_rounded,
+          _launch,
+          'Welcome Checklist',
+          'Complete a short sequence of first-day tasks — profile setup, community introduction, and a quick orientation quiz — to establish your presence in AIR. '
+              'The checklist is designed to take under 30 minutes and leaves you with everything you need to participate immediately. '
+              'Each checklist item is accompanied by a 2-minute explainer video so you understand why the step matters, not just how to complete it — producing informed members, not just technically set-up ones.',
+        ),
+        const SizedBox(height: 10),
+        _buildOnboardCard(
+          context,
+          isDark,
+          Icons.map_rounded,
+          _blue,
+          'Orientation Map',
+          'Explore a visual map of AIR\'s modules, communities, and key resources so you know where to go for what you need. '
+              'The map is interactive — tap any area to get a plain-language description of its purpose and a suggested first action. '
+              'The map is updated each time a significant new feature launches, so returning members can use it as a "what\'s new" guide in addition to its primary orientation function.',
+        ),
+        const SizedBox(height: 10),
+        _buildOnboardCard(
+          context,
+          isDark,
+          Icons.person_add_rounded,
+          _cyan,
+          'Buddy Assignment',
+          'Get matched with an experienced AIR member who will answer your first questions, make introductions, and check in during your first two weeks. '
+              'Buddy relationships reduce the anxiety of being new and dramatically accelerate the time to feeling genuinely at home. '
+              'Buddy matching uses your profile interests, working style, and goals to find someone whose experience is genuinely relevant to your situation rather than assigning randomly by availability.',
+        ),
+        const SizedBox(height: 10),
+        _buildOnboardCard(
+          context,
+          isDark,
+          Icons.lightbulb_rounded,
+          _amber,
+          'First Contribution Prompt',
+          'Receive a personalised prompt for your first meaningful contribution — matched to your skills and interests — so you can add value before you feel fully settled. '
+              'Early contribution is the fastest path to belonging; the prompt removes the paralysis of not knowing where to start. '
+              'The prompt is intentionally modest — a contribution within your comfortable skill range — so the first experience of giving to the community is positive and self-reinforcing rather than intimidating.',
+        ),
+        const SizedBox(height: 10),
+        _buildOnboardCard(
+          context,
+          isDark,
+          Icons.menu_book_rounded,
+          _sky,
+          'Culture & Norms Primer',
+          'Read a concise guide to how AIR communicates, makes decisions, handles disagreement, and celebrates wins. '
+              'Understanding the culture early prevents the accidental missteps that make new members feel like outsiders long after they have joined. '
+              'The primer uses real examples from AIR\'s history — including examples of things that went wrong and how the community responded — so the culture description is grounded in actual behaviour, not aspirational statements.',
+        ),
+        const SizedBox(height: 10),
+        _buildOnboardCard(
+          context,
+          isDark,
+          Icons.track_changes_rounded,
+          _green,
+          'Onboarding Progress Tracker',
+          'See your onboarding completion percentage and the specific steps remaining so you always know how close you are to being fully oriented. '
+              'The tracker also unlocks access to advanced features as you complete each stage, rewarding progress with expanded capability. '
+              'Completion milestones are shared with your buddy automatically so they can celebrate your progress and proactively offer help for upcoming stages rather than waiting for you to ask.',
+        ),
+        const SizedBox(height: 20),
+        _buildOnboardQuote(context, isDark, onSurface),
+      ],
     );
   }
 

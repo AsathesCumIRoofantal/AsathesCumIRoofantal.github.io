@@ -22,131 +22,108 @@ class LeadershipView extends GetView<LeadershipController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF020610) : const Color(0xFFEFF6FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'LEADERSHIP',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'LEADERSHIP POSTURE',
+          Icons.track_changes_outlined,
+          _blue,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.military_tech_outlined, color: _blue, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'LEADERSHIP POSTURE',
-            Icons.track_changes_outlined,
-            _blue,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildPostureGrid(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'LEADERSHIP TOOLS',
-            Icons.build_rounded,
-            _sky,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildLeaderCard(
-            context,
-            isDark,
-            Icons.track_changes_outlined,
-            _blue,
-            'Vision Setting',
-            'A leader without a written vision is just reacting. Define your 90-day and 1-year north stars so every decision has a reference point. AIR tracks your vision statements and flags when actions drift from them. '
-                'Effective vision statements are specific enough to make tradeoffs obvious and inspiring enough to motivate action during difficult periods — the right level of ambiguity is a craft, not an accident. '
-                'Vision reviews are built into the quarterly cycle so your north stars evolve as you learn rather than becoming outdated anchors holding the team in the wrong direction.',
-          ),
-          const SizedBox(height: 10),
-          _buildLeaderCard(
-            context,
-            isDark,
-            Icons.account_tree_outlined,
-            _cyan,
-            'Delegation Map',
-            'Delegation is not abdication — it requires matching task complexity to the right person\'s skill level. Log who owns what, at what authority level, and when you expect a status update back. '
-                'The map distinguishes three delegation modes: instruct (tell them exactly what to do), coach (guide them to find the answer), and empower (hand full ownership and step back). '
-                'Delegation decisions are logged with the rationale so you can review whether your matching assumptions were accurate and calibrate future assignments accordingly.',
-          ),
-          const SizedBox(height: 10),
-          _buildLeaderCard(
-            context,
-            isDark,
-            Icons.fact_check_outlined,
-            _green,
-            'Decision Log',
-            'Great leaders document why they decided, not just what they decided. Capture key decisions with context, alternatives considered, and the expected outcome so you can review and learn. '
-                'The decision log creates an intellectual audit trail — it prevents repeating past mistakes, enables faster onboarding of new team members, and builds institutional memory that survives personnel changes. '
-                'Logging decisions in the moment takes 5 minutes but saves hours of reconstruction later when the context has faded and stakeholders are questioning the reasoning.',
-          ),
-          const SizedBox(height: 10),
-          _buildLeaderCard(
-            context,
-            isDark,
-            Icons.checklist_outlined,
-            _amber,
-            'Follow-Through Tracker',
-            'Commitments made in meetings evaporate without a system. AIR lets you log promises you made to your team and surfaces them before the next check-in so nothing slips. '
-                'The tracker distinguishes between commitments made publicly (in team settings) and privately (in 1:1s), applying different visibility rules to protect sensitive conversations. '
-                'Follow-through rates are one of the most reliable predictors of team trust — the tracker gives you data to understand your own patterns before they become an issue others notice first.',
-          ),
-          const SizedBox(height: 10),
-          _buildLeaderCard(
-            context,
-            isDark,
-            Icons.rate_review_outlined,
-            _violet,
-            'Feedback Cadence',
-            'Regular, specific feedback is the fastest way to grow the people around you. Set a rhythm — weekly, bi-weekly — and use AIR to draft honest, constructive notes before each session. '
-                'Feedback cadence is not about having regular meetings — it is about maintaining a continuous signal between leader and team member that makes the relationship a genuine development relationship. '
-                'Feedback notes are drafted with a structured format: observation, impact, request — so each piece of feedback is specific, consequential, and actionable rather than vague or general.',
-          ),
-          const SizedBox(height: 10),
-          _buildLeaderCard(
-            context,
-            isDark,
-            Icons.menu_book_outlined,
-            _sky,
-            'Leadership Principles',
-            'Your personal leadership principles are the rules you refuse to break under pressure. Write them down, review them quarterly, and let them guide how you handle conflict and ambiguity. '
-                'Documented principles prevent the slow erosion that happens when expedient exceptions gradually become the new normal — a written principle is far harder to rationalise away than a mental one. '
-                'Principles are tested most under conditions that make breaking them feel reasonable — having written them in calm moments gives you a compass when the pressure to compromise is highest.',
-          ),
-          const SizedBox(height: 10),
-          _buildLeaderCard(
-            context,
-            isDark,
-            Icons.bolt_outlined,
-            _amber,
-            'Energy & Presence',
-            'How you show up sets the tone for everyone around you. Track your energy levels, note what drains versus fuels you, and design your schedule to protect your highest-impact hours. '
-                'Leader energy is contagious — teams unconsciously calibrate their own energy and sense of safety to the leader\'s visible emotional state, making your inner state a team-level factor. '
-                'Energy management is a leadership skill, not a personal preference — scheduling recovery and protecting your highest-energy windows is a strategic act that multiplies your impact.',
-          ),
-          const SizedBox(height: 20),
-          _buildLeadershipQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildPostureGrid(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'LEADERSHIP TOOLS',
+          Icons.build_rounded,
+          _sky,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildLeaderCard(
+          context,
+          isDark,
+          Icons.track_changes_outlined,
+          _blue,
+          'Vision Setting',
+          'A leader without a written vision is just reacting. Define your 90-day and 1-year north stars so every decision has a reference point. AIR tracks your vision statements and flags when actions drift from them. '
+              'Effective vision statements are specific enough to make tradeoffs obvious and inspiring enough to motivate action during difficult periods — the right level of ambiguity is a craft, not an accident. '
+              'Vision reviews are built into the quarterly cycle so your north stars evolve as you learn rather than becoming outdated anchors holding the team in the wrong direction.',
+        ),
+        const SizedBox(height: 10),
+        _buildLeaderCard(
+          context,
+          isDark,
+          Icons.account_tree_outlined,
+          _cyan,
+          'Delegation Map',
+          'Delegation is not abdication — it requires matching task complexity to the right person\'s skill level. Log who owns what, at what authority level, and when you expect a status update back. '
+              'The map distinguishes three delegation modes: instruct (tell them exactly what to do), coach (guide them to find the answer), and empower (hand full ownership and step back). '
+              'Delegation decisions are logged with the rationale so you can review whether your matching assumptions were accurate and calibrate future assignments accordingly.',
+        ),
+        const SizedBox(height: 10),
+        _buildLeaderCard(
+          context,
+          isDark,
+          Icons.fact_check_outlined,
+          _green,
+          'Decision Log',
+          'Great leaders document why they decided, not just what they decided. Capture key decisions with context, alternatives considered, and the expected outcome so you can review and learn. '
+              'The decision log creates an intellectual audit trail — it prevents repeating past mistakes, enables faster onboarding of new team members, and builds institutional memory that survives personnel changes. '
+              'Logging decisions in the moment takes 5 minutes but saves hours of reconstruction later when the context has faded and stakeholders are questioning the reasoning.',
+        ),
+        const SizedBox(height: 10),
+        _buildLeaderCard(
+          context,
+          isDark,
+          Icons.checklist_outlined,
+          _amber,
+          'Follow-Through Tracker',
+          'Commitments made in meetings evaporate without a system. AIR lets you log promises you made to your team and surfaces them before the next check-in so nothing slips. '
+              'The tracker distinguishes between commitments made publicly (in team settings) and privately (in 1:1s), applying different visibility rules to protect sensitive conversations. '
+              'Follow-through rates are one of the most reliable predictors of team trust — the tracker gives you data to understand your own patterns before they become an issue others notice first.',
+        ),
+        const SizedBox(height: 10),
+        _buildLeaderCard(
+          context,
+          isDark,
+          Icons.rate_review_outlined,
+          _violet,
+          'Feedback Cadence',
+          'Regular, specific feedback is the fastest way to grow the people around you. Set a rhythm — weekly, bi-weekly — and use AIR to draft honest, constructive notes before each session. '
+              'Feedback cadence is not about having regular meetings — it is about maintaining a continuous signal between leader and team member that makes the relationship a genuine development relationship. '
+              'Feedback notes are drafted with a structured format: observation, impact, request — so each piece of feedback is specific, consequential, and actionable rather than vague or general.',
+        ),
+        const SizedBox(height: 10),
+        _buildLeaderCard(
+          context,
+          isDark,
+          Icons.menu_book_outlined,
+          _sky,
+          'Leadership Principles',
+          'Your personal leadership principles are the rules you refuse to break under pressure. Write them down, review them quarterly, and let them guide how you handle conflict and ambiguity. '
+              'Documented principles prevent the slow erosion that happens when expedient exceptions gradually become the new normal — a written principle is far harder to rationalise away than a mental one. '
+              'Principles are tested most under conditions that make breaking them feel reasonable — having written them in calm moments gives you a compass when the pressure to compromise is highest.',
+        ),
+        const SizedBox(height: 10),
+        _buildLeaderCard(
+          context,
+          isDark,
+          Icons.bolt_outlined,
+          _amber,
+          'Energy & Presence',
+          'How you show up sets the tone for everyone around you. Track your energy levels, note what drains versus fuels you, and design your schedule to protect your highest-impact hours. '
+              'Leader energy is contagious — teams unconsciously calibrate their own energy and sense of safety to the leader\'s visible emotional state, making your inner state a team-level factor. '
+              'Energy management is a leadership skill, not a personal preference — scheduling recovery and protecting your highest-energy windows is a strategic act that multiplies your impact.',
+        ),
+        const SizedBox(height: 20),
+        _buildLeadershipQuote(context, isDark, onSurface),
+      ],
     );
   }
 

@@ -22,33 +22,9 @@ class SelfDisciplineView extends GetView<SelfDisciplineController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF020305) : const Color(0xFFF9FAFB);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'SELF DISCIPLINE',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(
-              Icons.fitness_center_outlined,
-              color: _orange,
-              size: 22,
-            ),
-          ),
-        ],
-      ),
-      body: ListView(
+    return Container(
+      color: bg,
+      child: ListView(
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),

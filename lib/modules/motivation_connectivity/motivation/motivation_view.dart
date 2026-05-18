@@ -18,100 +18,87 @@ class MotivationView extends GetView<MotivationController> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: const Text(
-          'MOTIVATION',
-          style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold),
+    return ListView(
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      // padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildQuoteHero(context, isDark),
+        _buildCategoryPillars(context, isDark),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: _buildSectionLabel(
+            'DAILY PRACTICES',
+            Icons.wb_sunny_rounded,
+            _blue,
+            context,
+          ),
         ),
-        centerTitle: true,
-        foregroundColor: theme.colorScheme.onSurface,
-      ),
-      body: ListView(
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        // padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildQuoteHero(context, isDark),
-          _buildCategoryPillars(context, isDark),
-          const SizedBox(height: 24),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildSectionLabel(
-              'DAILY PRACTICES',
-              Icons.wb_sunny_rounded,
-              _blue,
-              context,
-            ),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: _dailyPractices
+                .map((p) => _buildPracticeCard(context, isDark, p))
+                .toList(),
           ),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: _dailyPractices
-                  .map((p) => _buildPracticeCard(context, isDark, p))
-                  .toList(),
-            ),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: _buildSectionLabel(
+            'MOTIVATION ARCHETYPES',
+            Icons.category_rounded,
+            _violet,
+            context,
           ),
-          const SizedBox(height: 24),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildSectionLabel(
-              'MOTIVATION ARCHETYPES',
-              Icons.category_rounded,
-              _violet,
-              context,
-            ),
+        ),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: _buildArchetypeGrid(context, isDark),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: _buildSectionLabel(
+            'WISDOM FROM ACHIEVERS',
+            Icons.format_quote_rounded,
+            _sky,
+            context,
           ),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildArchetypeGrid(context, isDark),
+        ),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: _wisdomQuotes
+                .map((q) => _buildWisdomCard(context, isDark, q))
+                .toList(),
           ),
-          const SizedBox(height: 24),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildSectionLabel(
-              'WISDOM FROM ACHIEVERS',
-              Icons.format_quote_rounded,
-              _sky,
-              context,
-            ),
+        ),
+        const SizedBox(height: 24),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: _buildSectionLabel(
+            'MOTIVATION SCIENCE',
+            Icons.science_rounded,
+            _teal,
+            context,
           ),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: _wisdomQuotes
-                  .map((q) => _buildWisdomCard(context, isDark, q))
-                  .toList(),
-            ),
+        ),
+        const SizedBox(height: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: _scienceFacts
+                .map((f) => _buildFactCard(context, isDark, f))
+                .toList(),
           ),
-          const SizedBox(height: 24),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _buildSectionLabel(
-              'MOTIVATION SCIENCE',
-              Icons.science_rounded,
-              _teal,
-              context,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              children: _scienceFacts
-                  .map((f) => _buildFactCard(context, isDark, f))
-                  .toList(),
-            ),
-          ),
-          const SizedBox(height: 32),
-        ],
-      ),
+        ),
+        const SizedBox(height: 32),
+      ],
     );
   }
 

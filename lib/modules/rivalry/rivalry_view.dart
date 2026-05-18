@@ -22,29 +22,9 @@ class RivalryView extends GetView<RivalryController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF0C0200) : const Color(0xFFFFF7F0);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'RIVALRY',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.sports_score_outlined, color: _fire, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
+    return Container(
+      color: bg,
+      child: ListView(
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         shrinkWrap: isEmbedded,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),

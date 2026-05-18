@@ -12,82 +12,74 @@ class RecordPostView extends GetView<RecordPostController> {
     final theme = Theme.of(context);
     final tertiary = theme.colorScheme.tertiary;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Record Your Post',
-          style: TextStyle(letterSpacing: 2),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
-      extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showRecordPostModal(context),
-        label: const Text(
-          'Record New Post',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white54),
-        ),
-        icon: const Icon(Icons.mic_none_rounded, color: Colors.white54),
-        backgroundColor: tertiary,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Text(
-                  'Record your thoughts and findings to the all-space narrative.',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.textTheme.bodyMedium?.color?.withValues(
-                      alpha: 0.7,
-                    ),
-                    fontStyle: FontStyle.italic,
-                  ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FloatingActionButton.extended(
+              onPressed: () => _showRecordPostModal(context),
+              label: const Text(
+                'Record New Post',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white54,
                 ),
               ),
-              Expanded(
-                child: Obx(() {
-                  if (controller.posts.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.history_edu_rounded,
-                            size: 64,
-                            color: tertiary.withValues(alpha: 0.3),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'No recordings logged yet.',
-                            style: TextStyle(color: theme.dividerColor),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: controller.posts.length,
-                    itemBuilder: (context, index) {
-                      final post = controller.posts[index];
-                      return _buildPostCard(context, post);
-                    },
-                  );
-                }),
+              icon: const Icon(Icons.mic_none_rounded, color: Colors.white54),
+              backgroundColor: tertiary,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                'Record your thoughts and findings to the all-space narrative.',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.textTheme.bodyMedium?.color?.withValues(
+                    alpha: 0.7,
+                  ),
+                  fontStyle: FontStyle.italic,
+                ),
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              child: Obx(() {
+                if (controller.posts.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.history_edu_rounded,
+                          size: 64,
+                          color: tertiary.withValues(alpha: 0.3),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'No recordings logged yet.',
+                          style: TextStyle(color: theme.dividerColor),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: controller.posts.length,
+                  itemBuilder: (context, index) {
+                    final post = controller.posts[index];
+                    return _buildPostCard(context, post);
+                  },
+                );
+              }),
+            ),
+          ],
         ),
       ),
     );

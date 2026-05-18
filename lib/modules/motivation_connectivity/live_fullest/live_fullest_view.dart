@@ -23,131 +23,108 @@ class LiveFullestView extends GetView<LiveFullestController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF020812) : const Color(0xFFF0FAFF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'LIVE TO THE FULLEST',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 13,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          '8 LIFE DOMAINS',
+          Icons.radar_rounded,
+          _sky,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.self_improvement_rounded, color: _sky, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            '8 LIFE DOMAINS',
-            Icons.radar_rounded,
-            _sky,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildDomainGrid(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'FULLEST LIVING TOOLS',
-            Icons.bolt_rounded,
-            _purple,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.radar_rounded,
-            _sky,
-            'Life Domain Audit',
-            'Score your current satisfaction across eight life domains — health, relationships, work, finances, growth, play, purpose, and environment. '
-                'The audit reveals which domains are thriving and which are quietly draining the energy you need everywhere else. '
-                'Audit results are visualised as a life-balance wheel — a single glance shows you where you are full and where you are running on empty.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.bolt_rounded,
-            _amber,
-            'Energy Architecture',
-            'Map your daily energy peaks and troughs, then redesign your schedule so your most demanding work lands in your highest-energy windows. '
-                'Energy management is the foundation of full living — without it, even the best intentions collapse under fatigue. '
-                'Energy mapping is done over 7 days to capture enough data to distinguish genuine patterns from random daily variation before you restructure your schedule.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.explore_rounded,
-            _teal,
-            'Ethical Compass Check',
-            'Periodically review your choices against your stated values to catch the slow drift that happens when convenience quietly overrides conviction. '
-                'The compass check is not about guilt — it is about recalibrating so your actions and your identity stay aligned. '
-                'A quarterly compass check takes less than 10 minutes and generates a private alignment score that becomes a meaningful longitudinal record of your values-consistency over years.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.sentiment_very_satisfied_rounded,
-            _pink,
-            'Joy Inventory',
-            'List the activities, people, and environments that reliably produce genuine joy — not just pleasure or distraction, but deep aliveness. '
-                'The inventory ensures joy is scheduled, not left to chance, and that it grows as a deliberate part of your life design. '
-                'Joy sources are categorised by cost, time, and accessibility so you can always find a joy source that fits your current constraints rather than waiting for perfect conditions.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.landscape_rounded,
-            _purple,
-            'Whole-Life Vision Board',
-            'Build a structured vision that integrates career ambition, relational depth, physical vitality, and spiritual meaning into one coherent picture. '
-                'A whole-life vision prevents the trap of succeeding in one domain while quietly neglecting the others that make success feel worthwhile. '
-                'The vision board is reviewed every six months and evolved — it is a living document, not a static aspiration frozen at a single point in time.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.hourglass_top_rounded,
-            _rose,
-            'Regret Minimisation Frame',
-            'Use the regret-minimisation framework to evaluate big decisions by asking which choice your future self will be most grateful for. '
-                'The frame shifts decision-making from short-term comfort to long-term fulfilment, the hallmark of a life lived fully. '
-                'The framework prompts you to write from the perspective of yourself at 80 looking back — a cognitive shift that reliably surfaces what genuinely matters versus what merely feels urgent.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.wb_sunny_rounded,
-            _orange,
-            'Daily Aliveness Ritual',
-            'Design a morning or evening ritual that begins or ends each day with one small act of intentionality — a reflection, a gratitude note, a commitment for the day ahead. '
-                'Small daily rituals compound into a fundamentally different quality of life over months and years. '
-                'Ritual streaks are tracked in AIR, and the cumulative record becomes a powerful visual reminder of the identity you are building one day at a time.',
-          ),
-          const SizedBox(height: 20),
-          _buildLifeQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildDomainGrid(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'FULLEST LIVING TOOLS',
+          Icons.bolt_rounded,
+          _purple,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.radar_rounded,
+          _sky,
+          'Life Domain Audit',
+          'Score your current satisfaction across eight life domains — health, relationships, work, finances, growth, play, purpose, and environment. '
+              'The audit reveals which domains are thriving and which are quietly draining the energy you need everywhere else. '
+              'Audit results are visualised as a life-balance wheel — a single glance shows you where you are full and where you are running on empty.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.bolt_rounded,
+          _amber,
+          'Energy Architecture',
+          'Map your daily energy peaks and troughs, then redesign your schedule so your most demanding work lands in your highest-energy windows. '
+              'Energy management is the foundation of full living — without it, even the best intentions collapse under fatigue. '
+              'Energy mapping is done over 7 days to capture enough data to distinguish genuine patterns from random daily variation before you restructure your schedule.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.explore_rounded,
+          _teal,
+          'Ethical Compass Check',
+          'Periodically review your choices against your stated values to catch the slow drift that happens when convenience quietly overrides conviction. '
+              'The compass check is not about guilt — it is about recalibrating so your actions and your identity stay aligned. '
+              'A quarterly compass check takes less than 10 minutes and generates a private alignment score that becomes a meaningful longitudinal record of your values-consistency over years.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.sentiment_very_satisfied_rounded,
+          _pink,
+          'Joy Inventory',
+          'List the activities, people, and environments that reliably produce genuine joy — not just pleasure or distraction, but deep aliveness. '
+              'The inventory ensures joy is scheduled, not left to chance, and that it grows as a deliberate part of your life design. '
+              'Joy sources are categorised by cost, time, and accessibility so you can always find a joy source that fits your current constraints rather than waiting for perfect conditions.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.landscape_rounded,
+          _purple,
+          'Whole-Life Vision Board',
+          'Build a structured vision that integrates career ambition, relational depth, physical vitality, and spiritual meaning into one coherent picture. '
+              'A whole-life vision prevents the trap of succeeding in one domain while quietly neglecting the others that make success feel worthwhile. '
+              'The vision board is reviewed every six months and evolved — it is a living document, not a static aspiration frozen at a single point in time.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.hourglass_top_rounded,
+          _rose,
+          'Regret Minimisation Frame',
+          'Use the regret-minimisation framework to evaluate big decisions by asking which choice your future self will be most grateful for. '
+              'The frame shifts decision-making from short-term comfort to long-term fulfilment, the hallmark of a life lived fully. '
+              'The framework prompts you to write from the perspective of yourself at 80 looking back — a cognitive shift that reliably surfaces what genuinely matters versus what merely feels urgent.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.wb_sunny_rounded,
+          _orange,
+          'Daily Aliveness Ritual',
+          'Design a morning or evening ritual that begins or ends each day with one small act of intentionality — a reflection, a gratitude note, a commitment for the day ahead. '
+              'Small daily rituals compound into a fundamentally different quality of life over months and years. '
+              'Ritual streaks are tracked in AIR, and the cumulative record becomes a powerful visual reminder of the identity you are building one day at a time.',
+        ),
+        const SizedBox(height: 20),
+        _buildLifeQuote(context, isDark, onSurface),
+      ],
     );
   }
 

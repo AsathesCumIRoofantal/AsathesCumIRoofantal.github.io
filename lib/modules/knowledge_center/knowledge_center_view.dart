@@ -16,85 +16,88 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
 
     final queryController = TextEditingController();
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Knowledge Center',
-          style: TextStyle(letterSpacing: 2),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddKnowledgeModal(context),
-        label: const Text(
-          'Add Knowledge',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white54),
-        ),
-        icon: const Icon(Icons.library_add_rounded, color: Colors.white54),
-        backgroundColor: tertiary,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                theme.scaffoldBackgroundColor,
+                theme.colorScheme.surface,
+              ],
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildAIQuerySection(context, queryController),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                child: Text(
-                  'KNOWLEDGE HISTORY',
-                  style: TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 2,
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildAIQuerySection(context, queryController),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  child: Text(
+                    'KNOWLEDGE HISTORY',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 2,
+                    ),
                   ),
                 ),
-              ),
-              _buildSearchBar(context),
-              Expanded(
-                child: Obx(() {
-                  final list = controller.filteredHistory;
-                  if (list.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.auto_stories_rounded,
-                            size: 64,
-                            color: primary.withValues(alpha: 0.1),
-                          ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            'No knowledge nodes found.',
-                            style: TextStyle(color: Colors.white24),
-                          ),
-                        ],
-                      ),
+                _buildSearchBar(context),
+                Expanded(
+                  child: Obx(() {
+                    final list = controller.filteredHistory;
+                    if (list.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.auto_stories_rounded,
+                              size: 64,
+                              color: primary.withValues(alpha: 0.1),
+                            ),
+                            const SizedBox(height: 16),
+                            const Text(
+                              'No knowledge nodes found.',
+                              style: TextStyle(color: Colors.white24),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        return _buildHistoryCard(context, list[index]);
+                      },
                     );
-                  }
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      return _buildHistoryCard(context, list[index]);
-                    },
-                  );
-                }),
-              ),
-            ],
+                  }),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
+        Positioned(
+          top: -20,
+          right: 20,
+          child: FloatingActionButton.extended(
+            onPressed: () => _showAddKnowledgeModal(context),
+            label: const Text(
+              'Add Knowledge',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white54,
+              ),
+            ),
+            icon: const Icon(Icons.library_add_rounded, color: Colors.white54),
+            backgroundColor: tertiary,
+          ),
+        ),
+      ],
     );
   }
 

@@ -22,140 +22,117 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF030A04) : const Color(0xFFF0FDF4);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'RESPONSIBILITIES',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'DUTY DOMAINS',
+          Icons.category_rounded,
+          _sage,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.assignment_rounded, color: _sage, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'DUTY DOMAINS',
-            Icons.category_rounded,
-            _sage,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildDomainRings(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'RESPONSIBILITY DETAILS',
-            Icons.list_alt_rounded,
-            _earth,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.person_rounded,
-            _sage,
-            'Self-Responsibility Inventory',
-            'Identify the core duties you hold toward your own health, growth, finances, and mental wellbeing — the foundation everything else rests on. '
-                'You cannot reliably fulfil responsibilities to others if the responsibilities to yourself are chronically neglected. '
-                'The self-inventory includes a quarterly health review, a financial status check, and a growth commitments tracker — three pillars that together constitute the foundation of a responsible life.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.family_restroom_rounded,
-            _earth,
-            'Family Duty Map',
-            'Clarify the specific responsibilities you carry within your family — care, presence, financial contribution, emotional support, and shared decisions. '
-                'Making these explicit prevents the resentment that builds when family members have different assumptions about who owes what. '
-                'The duty map includes a conversation guide for discussing it openly with family members so alignment is explicit rather than assumed.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.work_rounded,
-            _terracotta,
-            'Professional Obligations Tracker',
-            'List your active professional commitments — deliverables, relationships, and role-specific duties — and track their status in one place. '
-                'Professional responsibilities are often the most visible, but they are also the most likely to expand beyond sustainable limits without active management. '
-                'The tracker includes a scope-creep alert that flags when new commitments are being added faster than existing ones are being closed.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.groups_rounded,
-            _moss,
-            'Community Contribution Planner',
-            'Define how you will contribute to your community — AIR, local, or broader — in ways that are meaningful, sustainable, and matched to your capacity. '
-                'Community responsibility is the outermost ring of duty, and it is where individual integrity becomes collective strength. '
-                'The planner includes a capacity calculator so you never commit to community roles that would require cannibalising your self or family duties.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.balance_rounded,
-            _sky,
-            'Responsibility Conflict Resolver',
-            'When duties in different domains collide — work versus family, self versus community — use the resolver to make a principled choice and communicate it clearly. '
-                'Conflicts between responsibilities are inevitable; having a framework for resolving them prevents paralysis and preserves relationships. '
-                'The resolver walks you through a five-step process: name the conflict, identify the competing values, clarify the stakes, choose deliberately, and communicate the choice with care.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.share_rounded,
-            _violet,
-            'Duty Delegation Guide',
-            'Identify responsibilities that can be shared, delegated, or renegotiated without abandoning your core obligations. '
-                'Carrying every duty alone is not virtue — it is a path to burnout that ultimately harms the people who depend on you. '
-                'The delegation guide distinguishes between responsibilities you must own personally, those you can share, and those that were never really yours to begin with but which you accepted by default.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.loop_rounded,
-            _amber,
-            'Responsibility Review Cycle',
-            'Schedule a quarterly review of your full duty map to add new responsibilities, retire completed ones, and rebalance as your life evolves. '
-                'Responsibilities change as circumstances change — a regular review keeps your map accurate and your commitments realistic. '
-                'The quarterly review includes a wellbeing check so you can catch unsustainable loads before they cause breakdown rather than after.',
-          ),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'RESPONSIBILITY LOAD',
-            Icons.bar_chart_rounded,
-            _amber,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildLoadMeter(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildQuoteBanner(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildDomainRings(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'RESPONSIBILITY DETAILS',
+          Icons.list_alt_rounded,
+          _earth,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.person_rounded,
+          _sage,
+          'Self-Responsibility Inventory',
+          'Identify the core duties you hold toward your own health, growth, finances, and mental wellbeing — the foundation everything else rests on. '
+              'You cannot reliably fulfil responsibilities to others if the responsibilities to yourself are chronically neglected. '
+              'The self-inventory includes a quarterly health review, a financial status check, and a growth commitments tracker — three pillars that together constitute the foundation of a responsible life.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.family_restroom_rounded,
+          _earth,
+          'Family Duty Map',
+          'Clarify the specific responsibilities you carry within your family — care, presence, financial contribution, emotional support, and shared decisions. '
+              'Making these explicit prevents the resentment that builds when family members have different assumptions about who owes what. '
+              'The duty map includes a conversation guide for discussing it openly with family members so alignment is explicit rather than assumed.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.work_rounded,
+          _terracotta,
+          'Professional Obligations Tracker',
+          'List your active professional commitments — deliverables, relationships, and role-specific duties — and track their status in one place. '
+              'Professional responsibilities are often the most visible, but they are also the most likely to expand beyond sustainable limits without active management. '
+              'The tracker includes a scope-creep alert that flags when new commitments are being added faster than existing ones are being closed.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.groups_rounded,
+          _moss,
+          'Community Contribution Planner',
+          'Define how you will contribute to your community — AIR, local, or broader — in ways that are meaningful, sustainable, and matched to your capacity. '
+              'Community responsibility is the outermost ring of duty, and it is where individual integrity becomes collective strength. '
+              'The planner includes a capacity calculator so you never commit to community roles that would require cannibalising your self or family duties.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.balance_rounded,
+          _sky,
+          'Responsibility Conflict Resolver',
+          'When duties in different domains collide — work versus family, self versus community — use the resolver to make a principled choice and communicate it clearly. '
+              'Conflicts between responsibilities are inevitable; having a framework for resolving them prevents paralysis and preserves relationships. '
+              'The resolver walks you through a five-step process: name the conflict, identify the competing values, clarify the stakes, choose deliberately, and communicate the choice with care.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.share_rounded,
+          _violet,
+          'Duty Delegation Guide',
+          'Identify responsibilities that can be shared, delegated, or renegotiated without abandoning your core obligations. '
+              'Carrying every duty alone is not virtue — it is a path to burnout that ultimately harms the people who depend on you. '
+              'The delegation guide distinguishes between responsibilities you must own personally, those you can share, and those that were never really yours to begin with but which you accepted by default.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.loop_rounded,
+          _amber,
+          'Responsibility Review Cycle',
+          'Schedule a quarterly review of your full duty map to add new responsibilities, retire completed ones, and rebalance as your life evolves. '
+              'Responsibilities change as circumstances change — a regular review keeps your map accurate and your commitments realistic. '
+              'The quarterly review includes a wellbeing check so you can catch unsustainable loads before they cause breakdown rather than after.',
+        ),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'RESPONSIBILITY LOAD',
+          Icons.bar_chart_rounded,
+          _amber,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildLoadMeter(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildQuoteBanner(context, isDark, onSurface),
+      ],
     );
   }
 

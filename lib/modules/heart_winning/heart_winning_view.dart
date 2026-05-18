@@ -22,131 +22,108 @@ class HeartWinningView extends GetView<HeartWinningController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF080003) : const Color(0xFFFFF5F5);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'HEART WINNING',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'LEADERSHIP DIMENSIONS',
+          Icons.favorite,
+          _rose,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.volunteer_activism, color: _rose, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'LEADERSHIP DIMENSIONS',
-            Icons.favorite,
-            _rose,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildDimGrid(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'HEART-CENTRED TOOLS',
-            Icons.build_rounded,
-            _orange,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildCard(
-            context,
-            isDark,
-            Icons.favorite,
-            _rose,
-            'Empathetic Leadership',
-            'Learn frameworks for leading with emotional intelligence alongside operational authority. '
-                'Case studies show how empathetic decisions build long-term trust with communities and teams. '
-                'Empathetic leadership does not mean avoiding hard decisions — it means making them with full awareness of their human impact, communicating them with care, and following up on the people most affected.',
-          ),
-          const SizedBox(height: 10),
-          _buildCard(
-            context,
-            isDark,
-            Icons.groups,
-            _orange,
-            'Community Engagement',
-            'Plan and record outreach activities that connect leaders directly with the people they serve. '
-                'Engagement logs capture feedback and commitments made during community interactions. '
-                'The engagement planner includes a listening-mode protocol — structured sessions where the leader\'s role is only to receive, not to defend, explain, or respond, allowing genuinely unfiltered input to surface.',
-          ),
-          const SizedBox(height: 10),
-          _buildCard(
-            context,
-            isDark,
-            Icons.policy,
-            _blue,
-            'Policy with Purpose',
-            'Review policies through a human-centred lens to identify where rules can be applied with compassion. '
-                'Annotate policies with empathy notes that guide frontline staff in sensitive situations. '
-                'Purpose annotations distinguish between the letter of the policy (what it requires) and the spirit (what it is trying to achieve) — enabling frontline staff to honour the intent even in edge cases the policy did not anticipate.',
-          ),
-          const SizedBox(height: 10),
-          _buildCard(
-            context,
-            isDark,
-            Icons.hearing,
-            _teal,
-            'Listening Sessions',
-            'Schedule and document structured listening sessions where leaders hear concerns without agenda. '
-                'Session summaries are shared back with participants to demonstrate that voices were heard. '
-                'The shared-back summary is the most critical step — when people see their specific words reflected in writing, they know they were genuinely heard rather than performatively consulted.',
-          ),
-          const SizedBox(height: 10),
-          _buildCard(
-            context,
-            isDark,
-            Icons.star_outline,
-            _amber,
-            'Recognition & Gratitude',
-            'Acknowledge the contributions of individuals and communities through formal and informal recognition. '
-                'Gratitude expressed publicly reinforces a culture where people feel valued and seen. '
-                'The recognition log distinguishes between private (individual) and public (group) recognition — both matter, and the appropriate mode depends on the recipient\'s preference, not the leader\'s comfort level.',
-          ),
-          const SizedBox(height: 10),
-          _buildCard(
-            context,
-            isDark,
-            Icons.handshake,
-            _violet,
-            'Conflict Resolution',
-            'Apply principled negotiation techniques to resolve disputes in a way that preserves relationships. '
-                'Resolution templates guide leaders through structured dialogue toward mutually acceptable outcomes. '
-                'Heart-centred conflict resolution focuses on interests (what people genuinely need) rather than positions (what they are demanding), consistently producing agreements that both parties actually honour.',
-          ),
-          const SizedBox(height: 10),
-          _buildCard(
-            context,
-            isDark,
-            Icons.auto_stories,
-            _teal,
-            'Impact Stories',
-            'Capture and share stories of positive change that resulted from heart-centred leadership decisions. '
-                'Stories inspire others and build an evidence base for the value of empathetic governance. '
-                'Impact stories follow a narrative arc — the challenge faced, the human-centred choice made, the outcome achieved — making them shareable, memorable, and useful as teaching tools for developing other leaders.',
-          ),
-          const SizedBox(height: 20),
-          _buildHeartQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildDimGrid(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'HEART-CENTRED TOOLS',
+          Icons.build_rounded,
+          _orange,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildCard(
+          context,
+          isDark,
+          Icons.favorite,
+          _rose,
+          'Empathetic Leadership',
+          'Learn frameworks for leading with emotional intelligence alongside operational authority. '
+              'Case studies show how empathetic decisions build long-term trust with communities and teams. '
+              'Empathetic leadership does not mean avoiding hard decisions — it means making them with full awareness of their human impact, communicating them with care, and following up on the people most affected.',
+        ),
+        const SizedBox(height: 10),
+        _buildCard(
+          context,
+          isDark,
+          Icons.groups,
+          _orange,
+          'Community Engagement',
+          'Plan and record outreach activities that connect leaders directly with the people they serve. '
+              'Engagement logs capture feedback and commitments made during community interactions. '
+              'The engagement planner includes a listening-mode protocol — structured sessions where the leader\'s role is only to receive, not to defend, explain, or respond, allowing genuinely unfiltered input to surface.',
+        ),
+        const SizedBox(height: 10),
+        _buildCard(
+          context,
+          isDark,
+          Icons.policy,
+          _blue,
+          'Policy with Purpose',
+          'Review policies through a human-centred lens to identify where rules can be applied with compassion. '
+              'Annotate policies with empathy notes that guide frontline staff in sensitive situations. '
+              'Purpose annotations distinguish between the letter of the policy (what it requires) and the spirit (what it is trying to achieve) — enabling frontline staff to honour the intent even in edge cases the policy did not anticipate.',
+        ),
+        const SizedBox(height: 10),
+        _buildCard(
+          context,
+          isDark,
+          Icons.hearing,
+          _teal,
+          'Listening Sessions',
+          'Schedule and document structured listening sessions where leaders hear concerns without agenda. '
+              'Session summaries are shared back with participants to demonstrate that voices were heard. '
+              'The shared-back summary is the most critical step — when people see their specific words reflected in writing, they know they were genuinely heard rather than performatively consulted.',
+        ),
+        const SizedBox(height: 10),
+        _buildCard(
+          context,
+          isDark,
+          Icons.star_outline,
+          _amber,
+          'Recognition & Gratitude',
+          'Acknowledge the contributions of individuals and communities through formal and informal recognition. '
+              'Gratitude expressed publicly reinforces a culture where people feel valued and seen. '
+              'The recognition log distinguishes between private (individual) and public (group) recognition — both matter, and the appropriate mode depends on the recipient\'s preference, not the leader\'s comfort level.',
+        ),
+        const SizedBox(height: 10),
+        _buildCard(
+          context,
+          isDark,
+          Icons.handshake,
+          _violet,
+          'Conflict Resolution',
+          'Apply principled negotiation techniques to resolve disputes in a way that preserves relationships. '
+              'Resolution templates guide leaders through structured dialogue toward mutually acceptable outcomes. '
+              'Heart-centred conflict resolution focuses on interests (what people genuinely need) rather than positions (what they are demanding), consistently producing agreements that both parties actually honour.',
+        ),
+        const SizedBox(height: 10),
+        _buildCard(
+          context,
+          isDark,
+          Icons.auto_stories,
+          _teal,
+          'Impact Stories',
+          'Capture and share stories of positive change that resulted from heart-centred leadership decisions. '
+              'Stories inspire others and build an evidence base for the value of empathetic governance. '
+              'Impact stories follow a narrative arc — the challenge faced, the human-centred choice made, the outcome achieved — making them shareable, memorable, and useful as teaching tools for developing other leaders.',
+        ),
+        const SizedBox(height: 20),
+        _buildHeartQuote(context, isDark, onSurface),
+      ],
     );
   }
 

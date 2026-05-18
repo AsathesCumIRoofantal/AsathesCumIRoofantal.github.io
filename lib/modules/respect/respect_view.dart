@@ -22,131 +22,108 @@ class RespectView extends GetView<RespectController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF060402) : const Color(0xFFFFFBF0);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'RESPECT',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'RESPECT DIMENSIONS',
+          Icons.category_rounded,
+          _gold,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.balance_outlined, color: _gold, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'RESPECT DIMENSIONS',
-            Icons.category_rounded,
-            _gold,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildDimensionRow(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'RESPECT PRACTICES',
-            Icons.auto_stories_rounded,
-            _amber,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.badge_outlined,
-            _gold,
-            'Titles & Forms of Address',
-            'Using someone\'s preferred name and title is the smallest possible act of respect — and skipping it is a loud signal. Log the preferences of people you interact with regularly and honour them without being reminded. '
-                'Name use signals that you see the person as an individual rather than a role or a function — it is a micro-act of recognition that compounds across thousands of interactions into a reputation for attentiveness. '
-                'The preference log syncs with your communication templates so your default addressing style automatically reflects each person\'s stated preference rather than requiring active recall.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.do_not_disturb_alt_outlined,
-            _teal,
-            'Boundary Awareness',
-            'Boundaries are not obstacles — they are the terms under which someone can engage with you safely. Learn the stated and unstated limits of the people around you and treat them as hard constraints. '
-                'Unstated boundaries are the harder ones — they require observation, not just listening. Watch for what people consistently decline, avoid, or deflect, and treat the pattern as a boundary even without an explicit statement. '
-                'The boundary log distinguishes between personal, professional, and communication boundaries so you can respect someone fully across all the contexts in which your relationship operates.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.shield_outlined,
-            _violet,
-            'Dignity Defaults',
-            'Every person deserves basic dignity regardless of their status, performance, or relationship to you. Define your dignity defaults — how you speak about people when they\'re not in the room. '
-                'The behind-closed-doors test: if the person you are discussing could hear what you are saying, would they feel seen and fairly treated? Dignity defaults require passing this test consistently, not just in public. '
-                'Dignity defaults are especially tested in hierarchies — how you speak about and treat people with less institutional power than you is the most reliable measure of your actual respect ethic.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.hearing_outlined,
-            _blue,
-            'Listening as Respect',
-            'Interrupting, checking your phone, or half-listening signals that your thoughts matter more than theirs. Practise full-presence listening as a concrete act of respect in every conversation. '
-                'Full-presence listening means your goal for the next 2 minutes is to understand, not to respond. The shift from listening-to-reply to listening-to-understand is felt by the speaker and changes the entire character of the conversation. '
-                'A weekly listening log tracks the ratio of times you interrupted versus listened to completion — not to create guilt, but to give you honest data on a behaviour that is far more automatic than most people realise.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.forum_outlined,
-            _green,
-            'Disagreement with Dignity',
-            'You can challenge an idea without diminishing the person who holds it. Log how you handle disagreements — are you attacking the argument or the person? Respect survives conflict when the distinction is clear. '
-                'The language of respectful disagreement: "I see it differently, and here\'s why" rather than "you\'re wrong"; "I didn\'t follow that reasoning" rather than "that makes no sense". The shift is small; the effect on the relationship is large. '
-                'Disagreement done with dignity actually deepens respect — it signals that you take the other person seriously enough to engage their ideas rather than dismissing them or deferring to avoid conflict.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.swap_vert_outlined,
-            _amber,
-            'Respect Under Hierarchy',
-            'Respect flows in all directions — not just upward to authority. How you treat people with less power than you is the truest measure of your character. Track your behaviour with subordinates and service workers. '
-                'Downward respect is the hardest to maintain because there is no immediate social cost to failing — but there is a long-term culture cost, because every person you disrespect observes and communicates how you treat others. '
-                'The directional respect audit covers four directions: upward (to authority), lateral (to peers), downward (to those with less power), and outward (to strangers and service workers) — all four must pass the dignity default test.',
-          ),
-          const SizedBox(height: 10),
-          _buildRespCard(
-            context,
-            isDark,
-            Icons.build_circle_outlined,
-            _rose,
-            'Repair After Disrespect',
-            'Everyone slips. What matters is whether you notice, own it, and repair it. Log instances where you fell short of your respect standards and the steps you took to make it right. '
-                'Effective repair has three elements: acknowledgement (naming what happened without minimising), apology (taking responsibility without deflecting), and action (changing the specific behaviour that caused the harm). '
-                'The repair log prevents the accumulation of unaddressed disrespect incidents that quietly erode trust — each logged repair is evidence of the self-awareness and accountability that make respect a genuine practice rather than a performance.',
-          ),
-          const SizedBox(height: 20),
-          _buildRespectQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildDimensionRow(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'RESPECT PRACTICES',
+          Icons.auto_stories_rounded,
+          _amber,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.badge_outlined,
+          _gold,
+          'Titles & Forms of Address',
+          'Using someone\'s preferred name and title is the smallest possible act of respect — and skipping it is a loud signal. Log the preferences of people you interact with regularly and honour them without being reminded. '
+              'Name use signals that you see the person as an individual rather than a role or a function — it is a micro-act of recognition that compounds across thousands of interactions into a reputation for attentiveness. '
+              'The preference log syncs with your communication templates so your default addressing style automatically reflects each person\'s stated preference rather than requiring active recall.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.do_not_disturb_alt_outlined,
+          _teal,
+          'Boundary Awareness',
+          'Boundaries are not obstacles — they are the terms under which someone can engage with you safely. Learn the stated and unstated limits of the people around you and treat them as hard constraints. '
+              'Unstated boundaries are the harder ones — they require observation, not just listening. Watch for what people consistently decline, avoid, or deflect, and treat the pattern as a boundary even without an explicit statement. '
+              'The boundary log distinguishes between personal, professional, and communication boundaries so you can respect someone fully across all the contexts in which your relationship operates.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.shield_outlined,
+          _violet,
+          'Dignity Defaults',
+          'Every person deserves basic dignity regardless of their status, performance, or relationship to you. Define your dignity defaults — how you speak about people when they\'re not in the room. '
+              'The behind-closed-doors test: if the person you are discussing could hear what you are saying, would they feel seen and fairly treated? Dignity defaults require passing this test consistently, not just in public. '
+              'Dignity defaults are especially tested in hierarchies — how you speak about and treat people with less institutional power than you is the most reliable measure of your actual respect ethic.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.hearing_outlined,
+          _blue,
+          'Listening as Respect',
+          'Interrupting, checking your phone, or half-listening signals that your thoughts matter more than theirs. Practise full-presence listening as a concrete act of respect in every conversation. '
+              'Full-presence listening means your goal for the next 2 minutes is to understand, not to respond. The shift from listening-to-reply to listening-to-understand is felt by the speaker and changes the entire character of the conversation. '
+              'A weekly listening log tracks the ratio of times you interrupted versus listened to completion — not to create guilt, but to give you honest data on a behaviour that is far more automatic than most people realise.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.forum_outlined,
+          _green,
+          'Disagreement with Dignity',
+          'You can challenge an idea without diminishing the person who holds it. Log how you handle disagreements — are you attacking the argument or the person? Respect survives conflict when the distinction is clear. '
+              'The language of respectful disagreement: "I see it differently, and here\'s why" rather than "you\'re wrong"; "I didn\'t follow that reasoning" rather than "that makes no sense". The shift is small; the effect on the relationship is large. '
+              'Disagreement done with dignity actually deepens respect — it signals that you take the other person seriously enough to engage their ideas rather than dismissing them or deferring to avoid conflict.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.swap_vert_outlined,
+          _amber,
+          'Respect Under Hierarchy',
+          'Respect flows in all directions — not just upward to authority. How you treat people with less power than you is the truest measure of your character. Track your behaviour with subordinates and service workers. '
+              'Downward respect is the hardest to maintain because there is no immediate social cost to failing — but there is a long-term culture cost, because every person you disrespect observes and communicates how you treat others. '
+              'The directional respect audit covers four directions: upward (to authority), lateral (to peers), downward (to those with less power), and outward (to strangers and service workers) — all four must pass the dignity default test.',
+        ),
+        const SizedBox(height: 10),
+        _buildRespCard(
+          context,
+          isDark,
+          Icons.build_circle_outlined,
+          _rose,
+          'Repair After Disrespect',
+          'Everyone slips. What matters is whether you notice, own it, and repair it. Log instances where you fell short of your respect standards and the steps you took to make it right. '
+              'Effective repair has three elements: acknowledgement (naming what happened without minimising), apology (taking responsibility without deflecting), and action (changing the specific behaviour that caused the harm). '
+              'The repair log prevents the accumulation of unaddressed disrespect incidents that quietly erode trust — each logged repair is evidence of the self-awareness and accountability that make respect a genuine practice rather than a performance.',
+        ),
+        const SizedBox(height: 20),
+        _buildRespectQuote(context, isDark, onSurface),
+      ],
     );
   }
 

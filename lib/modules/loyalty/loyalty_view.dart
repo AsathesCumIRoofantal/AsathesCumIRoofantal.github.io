@@ -22,129 +22,101 @@ class LoyaltyView extends GetView<LoyaltyController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF04040E) : const Color(0xFFF5F3FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'LOYALTY',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'COMMITMENT TYPES',
+          Icons.category_rounded,
+          _indigo,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.verified_outlined, color: _violet, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'COMMITMENT TYPES',
-            Icons.category_rounded,
-            _indigo,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildCommitmentTypes(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'LOYALTY PRINCIPLES',
-            Icons.anchor_rounded,
-            _violet,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildLoyaltyCard(
-            context,
-            isDark,
-            Icons.anchor_outlined,
-            _indigo,
-            'Long-Term Commitments',
-            'Some relationships and causes deserve your unconditional investment — your family, your core team, your deepest values. Name them explicitly so you know what you are protecting when things get hard. '
-                'Long-term commitments are the anchors that give you stability when circumstances shift — without them, every difficulty becomes a reason to start over rather than a reason to deepen. '
-                'AIR prompts you to articulate why each long-term commitment matters to you at a values level so the "why" is clear when the "what" becomes difficult.',
-          ),
-          const SizedBox(height: 10),
-          _buildLoyaltyCard(
-            context,
-            isDark,
-            Icons.science_outlined,
-            _sky,
-            'Experimental Allegiances',
-            'Not every commitment needs to be permanent. Some relationships and projects are worth a trial period — log them separately so you can evaluate honestly without guilt when the trial ends. '
-                'Experimental allegiances are not lesser commitments — they are appropriate commitments for situations where permanence has not yet been earned or established. '
-                'Trial periods are set explicitly at the outset so both parties understand the nature of the commitment and can have an honest conversation at the end of the trial.',
-          ),
-          const SizedBox(height: 10),
-          _buildLoyaltyCard(
-            context,
-            isDark,
-            Icons.thumb_up_alt_outlined,
-            _green,
-            'Loyalty Signals',
-            'Loyalty is shown through behaviour, not declarations. Log the concrete signals you send — showing up when it\'s inconvenient, defending someone in their absence, keeping confidences under pressure. '
-                'The signal log builds a record of the specific acts that make loyalty real, distinguishing genuine commitment from rhetorical allegiance. '
-                'Reviewing your loyalty signal log annually reveals which relationships you are investing in and which you are maintaining in name only — a clarifying exercise that prevents unconscious neglect.',
-          ),
-          const SizedBox(height: 10),
-          _buildLoyaltyCard(
-            context,
-            isDark,
-            Icons.warning_outlined,
-            _amber,
-            'Loyalty vs. Enabling',
-            'Loyalty does not mean covering for bad behaviour or staying silent when someone you care about is heading in the wrong direction. Know the line between standing by someone and enabling their worst patterns. '
-                'The most loyal act is often the most difficult one — the honest conversation delivered with care, not the comfortable silence that protects the relationship at the cost of the person. '
-                'AIR\'s loyalty module includes a decision framework for confronting difficult loyalty paradoxes, helping you choose between kindness and honesty when they appear to conflict.',
-          ),
-          const SizedBox(height: 10),
-          _buildLoyaltyCard(
-            context,
-            isDark,
-            Icons.compare_arrows_outlined,
-            _blue,
-            'Reciprocal Loyalty Check',
-            'Loyalty should be mutual. Periodically review whether the people and organisations you are loyal to are showing up for you in return — not to keep score, but to ensure the relationship is sustainable. '
-                'Chronically one-sided loyalty is not virtue — it is a pattern that eventually produces resentment or collapse. The check is not transactional; it is diagnostic. '
-                'The reciprocal check helps you distinguish between a genuinely difficult season for the other party (temporary imbalance) and a structural pattern (chronic imbalance) that requires a direct conversation.',
-          ),
-          const SizedBox(height: 10),
-          _buildLoyaltyCard(
-            context,
-            isDark,
-            Icons.exit_to_app_outlined,
-            _rose,
-            'Exiting with Integrity',
-            'When a commitment no longer serves either party, leaving well is the final act of loyalty. Log how you have ended commitments — did you give notice, honour obligations, and leave the door open? '
-                'How you exit is remembered as much as how you contributed — a clean, honourable exit protects the relationship even when the commitment ends. '
-                'The exit protocol prompts you to complete any outstanding obligations, communicate your reasons clearly, and express genuine gratitude for what the relationship produced before formally closing it.',
-          ),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'LOYALTY MAP',
-            Icons.map_rounded,
-            _amber,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildLoyaltyMap(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildLoyaltyQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildCommitmentTypes(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'LOYALTY PRINCIPLES',
+          Icons.anchor_rounded,
+          _violet,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildLoyaltyCard(
+          context,
+          isDark,
+          Icons.anchor_outlined,
+          _indigo,
+          'Long-Term Commitments',
+          'Some relationships and causes deserve your unconditional investment — your family, your core team, your deepest values. Name them explicitly so you know what you are protecting when things get hard. '
+              'Long-term commitments are the anchors that give you stability when circumstances shift — without them, every difficulty becomes a reason to start over rather than a reason to deepen. '
+              'AIR prompts you to articulate why each long-term commitment matters to you at a values level so the "why" is clear when the "what" becomes difficult.',
+        ),
+        const SizedBox(height: 10),
+        _buildLoyaltyCard(
+          context,
+          isDark,
+          Icons.science_outlined,
+          _sky,
+          'Experimental Allegiances',
+          'Not every commitment needs to be permanent. Some relationships and projects are worth a trial period — log them separately so you can evaluate honestly without guilt when the trial ends. '
+              'Experimental allegiances are not lesser commitments — they are appropriate commitments for situations where permanence has not yet been earned or established. '
+              'Trial periods are set explicitly at the outset so both parties understand the nature of the commitment and can have an honest conversation at the end of the trial.',
+        ),
+        const SizedBox(height: 10),
+        _buildLoyaltyCard(
+          context,
+          isDark,
+          Icons.thumb_up_alt_outlined,
+          _green,
+          'Loyalty Signals',
+          'Loyalty is shown through behaviour, not declarations. Log the concrete signals you send — showing up when it\'s inconvenient, defending someone in their absence, keeping confidences under pressure. '
+              'The signal log builds a record of the specific acts that make loyalty real, distinguishing genuine commitment from rhetorical allegiance. '
+              'Reviewing your loyalty signal log annually reveals which relationships you are investing in and which you are maintaining in name only — a clarifying exercise that prevents unconscious neglect.',
+        ),
+        const SizedBox(height: 10),
+        _buildLoyaltyCard(
+          context,
+          isDark,
+          Icons.warning_outlined,
+          _amber,
+          'Loyalty vs. Enabling',
+          'Loyalty does not mean covering for bad behaviour or staying silent when someone you care about is heading in the wrong direction. Know the line between standing by someone and enabling their worst patterns. '
+              'The most loyal act is often the most difficult one — the honest conversation delivered with care, not the comfortable silence that protects the relationship at the cost of the person. '
+              'AIR\'s loyalty module includes a decision framework for confronting difficult loyalty paradoxes, helping you choose between kindness and honesty when they appear to conflict.',
+        ),
+        const SizedBox(height: 10),
+        _buildLoyaltyCard(
+          context,
+          isDark,
+          Icons.compare_arrows_outlined,
+          _blue,
+          'Reciprocal Loyalty Check',
+          'Loyalty should be mutual. Periodically review whether the people and organisations you are loyal to are showing up for you in return — not to keep score, but to ensure the relationship is sustainable. '
+              'Chronically one-sided loyalty is not virtue — it is a pattern that eventually produces resentment or collapse. The check is not transactional; it is diagnostic. '
+              'The reciprocal check helps you distinguish between a genuinely difficult season for the other party (temporary imbalance) and a structural pattern (chronic imbalance) that requires a direct conversation.',
+        ),
+        const SizedBox(height: 10),
+        _buildLoyaltyCard(
+          context,
+          isDark,
+          Icons.exit_to_app_outlined,
+          _rose,
+          'Exiting with Integrity',
+          'When a commitment no longer serves either party, leaving well is the final act of loyalty. Log how you have ended commitments — did you give notice, honour obligations, and leave the door open? '
+              'How you exit is remembered as much as how you contributed — a clean, honourable exit protects the relationship even when the commitment ends. '
+              'The exit protocol prompts you to complete any outstanding obligations, communicate your reasons clearly, and express genuine gratitude for what the relationship produced before formally closing it.',
+        ),
+        const SizedBox(height: 24),
+        _buildSectionLabel('LOYALTY MAP', Icons.map_rounded, _amber, onSurface),
+        const SizedBox(height: 12),
+        _buildLoyaltyMap(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildLoyaltyQuote(context, isDark, onSurface),
+      ],
     );
   }
 

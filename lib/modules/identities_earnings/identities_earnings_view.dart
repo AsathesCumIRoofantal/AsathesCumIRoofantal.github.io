@@ -14,84 +14,88 @@ class IdentitiesEarningsView extends GetView<IdentitiesEarningsController> {
     final theme = Theme.of(context);
     final tertiary = theme.colorScheme.tertiary;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Identities Cum Earnings',
-          style: TextStyle(letterSpacing: 2),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-      ),
-      extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddEarningModal(context),
-        label: const Text(
-          'Log Identity Job',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white54),
-        ),
-        icon: const Icon(Icons.add_task_rounded, color: Colors.white54),
-        backgroundColor: tertiary,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                theme.scaffoldBackgroundColor,
+                theme.colorScheme.surface,
+              ],
+            ),
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              _buildSummaryHeader(context),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-                child: AirHomeContextStrip(
-                  compact: true,
-                  extraLine:
-                      'What you log here should agree with the IDENTITY tab and the ENTITIES / UNIONS you already catalogue—those tabs stay on the home screen underneath this route.',
+          child: SafeArea(
+            child: Column(
+              children: [
+                _buildSummaryHeader(context),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                  child: AirHomeContextStrip(
+                    compact: true,
+                    extraLine:
+                        'What you log here should agree with the IDENTITY tab and the ENTITIES / UNIONS you already catalogue—those tabs stay on the home screen underneath this route.',
+                  ),
                 ),
-              ),
-              _buildSearchBar(context),
-              Expanded(
-                child: Obx(() {
-                  final list = controller.filteredEarnings;
-                  if (list.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.search_off_rounded,
-                            size: 64,
-                            color: tertiary.withValues(alpha: 0.3),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'No accomplishments match your search.',
-                            style: TextStyle(color: theme.dividerColor),
-                          ),
-                        ],
+                _buildSearchBar(context),
+                Expanded(
+                  child: Obx(() {
+                    final list = controller.filteredEarnings;
+                    if (list.isEmpty) {
+                      return Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search_off_rounded,
+                              size: 64,
+                              color: tertiary.withValues(alpha: 0.3),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              'No accomplishments match your search.',
+                              style: TextStyle(color: theme.dividerColor),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                    return ListView.builder(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 8,
                       ),
+                      itemCount: list.length,
+                      itemBuilder: (context, index) {
+                        return _buildEarningCard(context, list[index]);
+                      },
                     );
-                  }
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      return _buildEarningCard(context, list[index]);
-                    },
-                  );
-                }),
-              ),
-            ],
+                  }),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
+
+        Positioned(
+          right: 20,
+          top: -20,
+          child: FloatingActionButton.extended(
+            onPressed: () => _showAddEarningModal(context),
+            label: const Text(
+              'Log Identity Job',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white54,
+              ),
+            ),
+            icon: const Icon(Icons.add_task_rounded, color: Colors.white54),
+            backgroundColor: tertiary,
+          ),
+        ),
+      ],
     );
   }
 

@@ -14,28 +14,7 @@ class QueryDiscussionView extends GetView<QueryDiscussionController> {
     final primary = theme.colorScheme.primary;
     final tertiary = theme.colorScheme.tertiary;
 
-    return
-    // Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text(
-    //       'Query & Discussion',
-    //       style: TextStyle(letterSpacing: 2),
-    //     ),
-    //     elevation: 0,
-    //     backgroundColor: Colors.transparent,
-    //   ),
-    //   extendBodyBehindAppBar: true,
-    //   floatingActionButton: FloatingActionButton.extended(
-    //     onPressed: () => _showAddQueryModal(context),
-    //     label: const Text(
-    //       'Open Discussion',
-    //       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white54),
-    //     ),
-    //     icon: const Icon(Icons.forum_rounded, color: Colors.white54),
-    //     backgroundColor: tertiary,
-    //   ),
-    //   body:
-    Container(
+    return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,

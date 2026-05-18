@@ -23,129 +23,106 @@ class AccountableView extends GetView<AccountableController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF020408) : const Color(0xFFF8FAFC);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'ACCOUNTABLE',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'COMMITMENT LEDGER',
+          Icons.menu_book_rounded,
+          _blue,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.fact_check_rounded, color: _blue, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'COMMITMENT LEDGER',
-            Icons.menu_book_rounded,
-            _blue,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildLedgerPanel(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'ACCOUNTABILITY SCORE',
-            Icons.score_rounded,
-            _green,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildScoreCard(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'ACCOUNTABILITY TOOLS',
-            Icons.build_rounded,
-            _violet,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildAcctCard(
-            context,
-            isDark,
-            Icons.assignment_ind_rounded,
-            _blue,
-            'Outcome Ownership Declaration',
-            'Before starting any task or project, formally declare ownership so there is never ambiguity about who is responsible for the result. '
-                'Declarations are timestamped and visible to relevant stakeholders, removing the grey zone where accountability usually disappears. '
-                'Co-owned tasks require dual declarations, making shared accountability explicit rather than leaving it as an unspoken assumption that erodes when pressure builds.',
-          ),
-          const SizedBox(height: 10),
-          _buildAcctCard(
-            context,
-            isDark,
-            Icons.update_rounded,
-            _sky,
-            'Transparent Progress Updates',
-            'Share structured progress notes at agreed intervals so stakeholders always know where things stand without having to chase you. '
-                'Transparency builds trust faster than any single success, and it makes course-correction a collaborative act rather than a surprise. '
-                'Update templates are pre-formatted to take under 2 minutes to complete — the friction of transparency is removed so it actually happens consistently.',
-          ),
-          const SizedBox(height: 10),
-          _buildAcctCard(
-            context,
-            isDark,
-            Icons.report_problem_rounded,
-            _amber,
-            'Miss & Learn Report',
-            'When a commitment is missed, file a brief miss-and-learn report that captures what happened, why, and what changes next time. '
-                'The report is not a confession — it is a signal of maturity that turns every failure into institutional knowledge. '
-                'Miss reports are visible to stakeholders as evidence of honest self-reflection, and they consistently build more trust than pretending the miss did not happen.',
-          ),
-          const SizedBox(height: 10),
-          _buildAcctCard(
-            context,
-            isDark,
-            Icons.menu_book_rounded,
-            _green,
-            'Commitment Ledger',
-            'Log every promise you make — to yourself, your team, or the community — and track its status from open to closed. '
-                'The ledger creates a living record of your word, making it easy to spot patterns of follow-through or drift before they become habits. '
-                'The ledger distinguishes between hard commitments (spoken promises with clear deadlines) and soft commitments (intentions without explicit deadlines) — both tracked, but weighted differently in your accountability score.',
-          ),
-          const SizedBox(height: 10),
-          _buildAcctCard(
-            context,
-            isDark,
-            Icons.swap_horiz_rounded,
-            _violet,
-            'Delegation Handoff Protocol',
-            'When you pass a task to someone else, use the handoff protocol to transfer ownership cleanly — including context, constraints, and a clear acceptance signal. '
-                'Clean handoffs prevent the accountability vacuum that forms when tasks move between people without explicit transfer. '
-                'Handoffs require confirmation from the receiver before ownership is transferred in the system — no assumption of receipt without explicit acknowledgement.',
-          ),
-          const SizedBox(height: 10),
-          _buildAcctCard(
-            context,
-            isDark,
-            Icons.check_circle_rounded,
-            _green,
-            'Closure Ritual',
-            'Mark completed commitments with a brief closure note that confirms the outcome and any residual actions. '
-                'The ritual trains the brain to associate finishing with satisfaction, reinforcing the accountability loop at a neurological level. '
-                'Closure notes are archived permanently in your commitment ledger, creating a growing evidence base of your reliability that compounds in credibility over time.',
-          ),
-          const SizedBox(height: 20),
-          _buildAccountabilityQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildLedgerPanel(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'ACCOUNTABILITY SCORE',
+          Icons.score_rounded,
+          _green,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildScoreCard(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'ACCOUNTABILITY TOOLS',
+          Icons.build_rounded,
+          _violet,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildAcctCard(
+          context,
+          isDark,
+          Icons.assignment_ind_rounded,
+          _blue,
+          'Outcome Ownership Declaration',
+          'Before starting any task or project, formally declare ownership so there is never ambiguity about who is responsible for the result. '
+              'Declarations are timestamped and visible to relevant stakeholders, removing the grey zone where accountability usually disappears. '
+              'Co-owned tasks require dual declarations, making shared accountability explicit rather than leaving it as an unspoken assumption that erodes when pressure builds.',
+        ),
+        const SizedBox(height: 10),
+        _buildAcctCard(
+          context,
+          isDark,
+          Icons.update_rounded,
+          _sky,
+          'Transparent Progress Updates',
+          'Share structured progress notes at agreed intervals so stakeholders always know where things stand without having to chase you. '
+              'Transparency builds trust faster than any single success, and it makes course-correction a collaborative act rather than a surprise. '
+              'Update templates are pre-formatted to take under 2 minutes to complete — the friction of transparency is removed so it actually happens consistently.',
+        ),
+        const SizedBox(height: 10),
+        _buildAcctCard(
+          context,
+          isDark,
+          Icons.report_problem_rounded,
+          _amber,
+          'Miss & Learn Report',
+          'When a commitment is missed, file a brief miss-and-learn report that captures what happened, why, and what changes next time. '
+              'The report is not a confession — it is a signal of maturity that turns every failure into institutional knowledge. '
+              'Miss reports are visible to stakeholders as evidence of honest self-reflection, and they consistently build more trust than pretending the miss did not happen.',
+        ),
+        const SizedBox(height: 10),
+        _buildAcctCard(
+          context,
+          isDark,
+          Icons.menu_book_rounded,
+          _green,
+          'Commitment Ledger',
+          'Log every promise you make — to yourself, your team, or the community — and track its status from open to closed. '
+              'The ledger creates a living record of your word, making it easy to spot patterns of follow-through or drift before they become habits. '
+              'The ledger distinguishes between hard commitments (spoken promises with clear deadlines) and soft commitments (intentions without explicit deadlines) — both tracked, but weighted differently in your accountability score.',
+        ),
+        const SizedBox(height: 10),
+        _buildAcctCard(
+          context,
+          isDark,
+          Icons.swap_horiz_rounded,
+          _violet,
+          'Delegation Handoff Protocol',
+          'When you pass a task to someone else, use the handoff protocol to transfer ownership cleanly — including context, constraints, and a clear acceptance signal. '
+              'Clean handoffs prevent the accountability vacuum that forms when tasks move between people without explicit transfer. '
+              'Handoffs require confirmation from the receiver before ownership is transferred in the system — no assumption of receipt without explicit acknowledgement.',
+        ),
+        const SizedBox(height: 10),
+        _buildAcctCard(
+          context,
+          isDark,
+          Icons.check_circle_rounded,
+          _green,
+          'Closure Ritual',
+          'Mark completed commitments with a brief closure note that confirms the outcome and any residual actions. '
+              'The ritual trains the brain to associate finishing with satisfaction, reinforcing the accountability loop at a neurological level. '
+              'Closure notes are archived permanently in your commitment ledger, creating a growing evidence base of your reliability that compounds in credibility over time.',
+        ),
+        const SizedBox(height: 20),
+        _buildAccountabilityQuote(context, isDark, onSurface),
+      ],
     );
   }
 

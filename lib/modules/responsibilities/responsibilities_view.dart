@@ -8,20 +8,20 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text('RESPONSIBILITIES', style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold)),
-        centerTitle: true,
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Obx(
+        () => ListView.builder(
+          shrinkWrap: isEmbedded,
+          physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+          padding: const EdgeInsets.all(24),
+          itemCount: controller.duties.length,
+          itemBuilder: (context, index) {
+            final duty = controller.duties[index];
+            return _buildDutyCard(context, duty);
+          },
+        ),
       ),
-      body: Obx(() => ListView.builder(
-        padding: const EdgeInsets.all(24),
-        itemCount: controller.duties.length,
-        itemBuilder: (context, index) {
-          final duty = controller.duties[index];
-          return _buildDutyCard(context, duty);
-        },
-      )),
     );
   }
 
@@ -34,12 +34,27 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(duty.title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              Text("${(duty.progress * 100).toInt()}%", style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+              Text(
+                duty.title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              Text(
+                "${(duty.progress * 100).toInt()}%",
+                style: const TextStyle(
+                  color: Colors.blue,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 8),
-          Text(duty.description, style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+          Text(
+            duty.description,
+            style: TextStyle(color: Colors.grey[600], fontSize: 13),
+          ),
           const SizedBox(height: 12),
           ClipRRect(
             borderRadius: BorderRadius.circular(10),
@@ -47,7 +62,9 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
               value: duty.progress,
               minHeight: 8,
               backgroundColor: Colors.grey[200],
-              valueColor: AlwaysStoppedAnimation<Color>(duty.progress == 1.0 ? Colors.green : Colors.blue),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                duty.progress == 1.0 ? Colors.green : Colors.blue,
+              ),
             ),
           ),
         ],
@@ -55,6 +72,3 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
     );
   }
 }
-
-
-

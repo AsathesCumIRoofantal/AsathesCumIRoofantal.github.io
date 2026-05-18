@@ -22,129 +22,106 @@ class GreetingsView extends GetView<GreetingsController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF0A0502) : const Color(0xFFFFF7F0);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'GREETINGS',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'CULTURAL GREETINGS',
+          Icons.language_rounded,
+          _warm,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.waving_hand_rounded, color: _warm, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'CULTURAL GREETINGS',
-            Icons.language_rounded,
-            _warm,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildCultureChips(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'GREETING CONTEXTS',
-            Icons.forum_rounded,
-            _teal,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildContextCards(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'GREETING TOOLKIT',
-            Icons.build_rounded,
-            _violet,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.language_rounded,
-            _warm,
-            'Cultural Greeting Library',
-            'Browse a curated library of greeting customs from dozens of cultures — verbal, gestural, and written — so you can meet people on their own terms. '
-                'The library is searchable by region, formality level, and context, making it a practical reference for real interactions. '
-                'Each cultural entry includes pronunciation guides, the appropriate response, and notes on common mistakes made by outsiders so you can avoid the most frequent missteps.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.auto_awesome_rounded,
-            _amber,
-            'Context-Aware Greeting Builder',
-            'Generate a contextually appropriate greeting for any situation — first meeting, re-engagement, formal introduction, or community welcome — in seconds. '
-                'The builder factors in the recipient\'s background, the channel, and the relationship stage to produce something that feels genuinely personal. '
-                'Generated greetings can be saved as templates so your most effective openings are reusable without feeling copy-pasted.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.psychology_rounded,
-            _blue,
-            'First Impression Principles',
-            'Learn the evidence-based principles behind strong first impressions — warmth before competence, name use, and the power of genuine curiosity. '
-                'These principles apply across cultures and channels, giving you a reliable foundation regardless of the specific greeting form. '
-                'Principle cards include common pitfalls and real examples of how subtle changes in wording or timing dramatically shift the warmth of an opening exchange.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.mail_rounded,
-            _teal,
-            'Welcome Message Templates',
-            'Access a set of thoughtfully written welcome messages for new AIR members, guests, and collaborators that you can personalise and send in one tap. '
-                'Templates save time without sacrificing warmth — they are starting points, not scripts. '
-                'Welcome message effectiveness is tracked through response rates so you know which templates are landing well and which need refinement.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.tune_rounded,
-            _peach,
-            'Greeting Tone Calibrator',
-            'Adjust the formality, warmth, and length of any greeting to match the specific relationship and context you are navigating. '
-                'Tone mismatches are one of the most common sources of early friction — the calibrator helps you get it right the first time. '
-                'The calibrator uses a simple three-axis model: formality (casual to formal), warmth (professional to personal), and directness (indirect to direct) — adjust each slider and preview the result in real time.',
-          ),
-          const SizedBox(height: 10),
-          _buildToolCard(
-            context,
-            isDark,
-            Icons.refresh_rounded,
-            _rose,
-            'Re-engagement Opener',
-            'Reconnect with someone you have not spoken to in a while using an opener that acknowledges the gap without making it awkward. '
-                'Re-engagement is a skill — the right opener turns a dormant relationship into an active one with a single well-crafted message. '
-                'The opener wizard prompts you to recall your last meaningful shared moment and weaves it naturally into the re-engagement so the message feels specific rather than generic.',
-          ),
-          const SizedBox(height: 20),
-          _buildGreetingPrinciple(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildCultureChips(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'GREETING CONTEXTS',
+          Icons.forum_rounded,
+          _teal,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildContextCards(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'GREETING TOOLKIT',
+          Icons.build_rounded,
+          _violet,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.language_rounded,
+          _warm,
+          'Cultural Greeting Library',
+          'Browse a curated library of greeting customs from dozens of cultures — verbal, gestural, and written — so you can meet people on their own terms. '
+              'The library is searchable by region, formality level, and context, making it a practical reference for real interactions. '
+              'Each cultural entry includes pronunciation guides, the appropriate response, and notes on common mistakes made by outsiders so you can avoid the most frequent missteps.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.auto_awesome_rounded,
+          _amber,
+          'Context-Aware Greeting Builder',
+          'Generate a contextually appropriate greeting for any situation — first meeting, re-engagement, formal introduction, or community welcome — in seconds. '
+              'The builder factors in the recipient\'s background, the channel, and the relationship stage to produce something that feels genuinely personal. '
+              'Generated greetings can be saved as templates so your most effective openings are reusable without feeling copy-pasted.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.psychology_rounded,
+          _blue,
+          'First Impression Principles',
+          'Learn the evidence-based principles behind strong first impressions — warmth before competence, name use, and the power of genuine curiosity. '
+              'These principles apply across cultures and channels, giving you a reliable foundation regardless of the specific greeting form. '
+              'Principle cards include common pitfalls and real examples of how subtle changes in wording or timing dramatically shift the warmth of an opening exchange.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.mail_rounded,
+          _teal,
+          'Welcome Message Templates',
+          'Access a set of thoughtfully written welcome messages for new AIR members, guests, and collaborators that you can personalise and send in one tap. '
+              'Templates save time without sacrificing warmth — they are starting points, not scripts. '
+              'Welcome message effectiveness is tracked through response rates so you know which templates are landing well and which need refinement.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.tune_rounded,
+          _peach,
+          'Greeting Tone Calibrator',
+          'Adjust the formality, warmth, and length of any greeting to match the specific relationship and context you are navigating. '
+              'Tone mismatches are one of the most common sources of early friction — the calibrator helps you get it right the first time. '
+              'The calibrator uses a simple three-axis model: formality (casual to formal), warmth (professional to personal), and directness (indirect to direct) — adjust each slider and preview the result in real time.',
+        ),
+        const SizedBox(height: 10),
+        _buildToolCard(
+          context,
+          isDark,
+          Icons.refresh_rounded,
+          _rose,
+          'Re-engagement Opener',
+          'Reconnect with someone you have not spoken to in a while using an opener that acknowledges the gap without making it awkward. '
+              'Re-engagement is a skill — the right opener turns a dormant relationship into an active one with a single well-crafted message. '
+              'The opener wizard prompts you to recall your last meaningful shared moment and weaves it naturally into the re-engagement so the message feels specific rather than generic.',
+        ),
+        const SizedBox(height: 20),
+        _buildGreetingPrinciple(context, isDark, onSurface),
+      ],
     );
   }
 

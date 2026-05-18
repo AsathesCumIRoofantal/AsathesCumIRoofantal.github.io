@@ -21,51 +21,9 @@ class OutcomeProcessedView extends GetView<OutcomeProcessedController> {
     final isDark = theme.brightness == Brightness.dark;
     final bg = isDark ? const Color(0xFF020F08) : const Color(0xFFF0FDF4);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: theme.colorScheme.onSurface,
-        title: const Text(
-          'OUTCOME PROCESSED',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 13,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: _emerald.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.circle, size: 6, color: _sage),
-                  SizedBox(width: 4),
-                  Text(
-                    'LIVE',
-                    style: TextStyle(
-                      fontSize: 9,
-                      color: _sage,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: ListView(
+    return Container(
+      color: bg,
+      child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         shrinkWrap: isEmbedded,
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,

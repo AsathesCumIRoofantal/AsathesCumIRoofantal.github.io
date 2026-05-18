@@ -19,91 +19,62 @@ class NeverGiveUpView extends GetView<NeverGiveUpController> {
     final isDark = theme.brightness == Brightness.dark;
     final bg = isDark ? const Color(0xFF0F0600) : const Color(0xFFFFF3E0);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: theme.colorScheme.onSurface,
-        title: const Text(
-          'NEVER GIVE UP',
-          style: TextStyle(
-            letterSpacing: 2.5,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildMantaCard(context, isDark),
+        const SizedBox(height: 20),
+        _buildPersistenceBar(context, isDark),
+        const SizedBox(height: 24),
+        _buildSectionTitle(
+          'THE THREE TESTS',
+          Icons.quiz_rounded,
+          _ember,
+          context,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(
-              Icons.local_fire_department_rounded,
-              color: _flame,
-              size: 22,
-            ),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildMantaCard(context, isDark),
-          const SizedBox(height: 20),
-          _buildPersistenceBar(context, isDark),
-          const SizedBox(height: 24),
-          _buildSectionTitle(
-            'THE THREE TESTS',
-            Icons.quiz_rounded,
-            _ember,
-            context,
-          ),
-          const SizedBox(height: 12),
-          _buildHoldPivot(context, isDark),
-          const SizedBox(height: 24),
-          _buildSectionTitle(
-            'CORE FRAMEWORKS',
-            Icons.architecture,
-            _flame,
-            context,
-          ),
-          const SizedBox(height: 12),
-          ..._frameworks.map((f) => _buildFrameworkCard(context, isDark, f)),
-          const SizedBox(height: 24),
-          _buildSectionTitle(
-            'MENTAL TOOLS',
-            Icons.psychology_rounded,
-            _gold,
-            context,
-          ),
-          const SizedBox(height: 12),
-          _buildMentalTools(context, isDark),
-          const SizedBox(height: 24),
-          _buildSectionTitle(
-            'RESILIENCE PILLARS',
-            Icons.shield_rounded,
-            _teal,
-            context,
-          ),
-          const SizedBox(height: 12),
-          ..._pillars.map((p) => _buildPillarRow(context, isDark, p)),
-          const SizedBox(height: 24),
-          _buildSectionTitle(
-            'INSPIRATION & EVIDENCE',
-            Icons.bookmark_rounded,
-            _rose,
-            context,
-          ),
-          const SizedBox(height: 12),
-          ..._inspirations.map(
-            (i) => _buildInspirationCard(context, isDark, i),
-          ),
-          const SizedBox(height: 20),
-          _buildAccountabilityBanner(context, isDark),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildHoldPivot(context, isDark),
+        const SizedBox(height: 24),
+        _buildSectionTitle(
+          'CORE FRAMEWORKS',
+          Icons.architecture,
+          _flame,
+          context,
+        ),
+        const SizedBox(height: 12),
+        ..._frameworks.map((f) => _buildFrameworkCard(context, isDark, f)),
+        const SizedBox(height: 24),
+        _buildSectionTitle(
+          'MENTAL TOOLS',
+          Icons.psychology_rounded,
+          _gold,
+          context,
+        ),
+        const SizedBox(height: 12),
+        _buildMentalTools(context, isDark),
+        const SizedBox(height: 24),
+        _buildSectionTitle(
+          'RESILIENCE PILLARS',
+          Icons.shield_rounded,
+          _teal,
+          context,
+        ),
+        const SizedBox(height: 12),
+        ..._pillars.map((p) => _buildPillarRow(context, isDark, p)),
+        const SizedBox(height: 24),
+        _buildSectionTitle(
+          'INSPIRATION & EVIDENCE',
+          Icons.bookmark_rounded,
+          _rose,
+          context,
+        ),
+        const SizedBox(height: 12),
+        ..._inspirations.map((i) => _buildInspirationCard(context, isDark, i)),
+        const SizedBox(height: 20),
+        _buildAccountabilityBanner(context, isDark),
+      ],
     );
   }
 

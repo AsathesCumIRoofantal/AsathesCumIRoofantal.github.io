@@ -22,129 +22,106 @@ class InnovationKeyView extends GetView<InnovationKeyController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF080600) : const Color(0xFFFFFBEB);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'INNOVATION IS KEY',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 13,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'INNOVATION PIPELINE',
+          Icons.linear_scale_rounded,
+          _amber,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.key_rounded, color: _yellow, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'INNOVATION PIPELINE',
-            Icons.linear_scale_rounded,
-            _amber,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildPipelineStages(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'IDEATION SPARKS',
-            Icons.lightbulb_rounded,
-            _yellow,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildIdeationGrid(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'CAPABILITIES',
-            Icons.settings_rounded,
-            _lime,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildCapCard(
-            context,
-            isDark,
-            Icons.lightbulb_rounded,
-            _yellow,
-            'Idea Generation Studio',
-            'Use structured brainstorming prompts, constraint-based thinking, and analogical reasoning to generate novel solutions. '
-                'Ideas are captured in a shared studio so the best ones can be developed collaboratively rather than in isolation. '
-                'The studio runs timed ideation sprints — 20 minutes of divergent thinking followed by structured convergence — proven to produce more usable ideas than free-form brainstorming.',
-          ),
-          const SizedBox(height: 10),
-          _buildCapCard(
-            context,
-            isDark,
-            Icons.verified_user_rounded,
-            _orange,
-            'Integrity Stress Test',
-            'Before advancing any innovation, stress-test it against AIR\'s core values and non-negotiable commitments. '
-                'An idea that only works by cutting ethical corners is not innovation — it is a liability dressed up as progress. '
-                'The stress test generates a written integrity assessment you can share with stakeholders as evidence that the innovation has been vetted against principle, not just performance.',
-          ),
-          const SizedBox(height: 10),
-          _buildCapCard(
-            context,
-            isDark,
-            Icons.science_rounded,
-            _cyan,
-            'Rapid Prototype Lab',
-            'Build lightweight prototypes of promising ideas in 48 hours or less using AIR\'s modular component library. '
-                'Fast prototyping surfaces real-world friction early, when changes are cheap and learning is fast. '
-                'Every prototype run is logged with hypotheses, observations, and conclusions — building a knowledge base that prevents teams from re-running experiments already completed by others.',
-          ),
-          const SizedBox(height: 10),
-          _buildCapCard(
-            context,
-            isDark,
-            Icons.analytics_rounded,
-            _violet,
-            'Innovation Metrics',
-            'Track the health of your innovation pipeline — ideas generated, experiments run, pilots launched, and innovations scaled. '
-                'Metrics reveal whether the culture is genuinely innovative or just talking about innovation. '
-                'Conversion ratios at each pipeline stage highlight where ideas are dying and why, enabling targeted interventions to unblock the specific constraint limiting your innovation throughput.',
-          ),
-          const SizedBox(height: 10),
-          _buildCapCard(
-            context,
-            isDark,
-            Icons.shuffle_rounded,
-            _pink,
-            'Cross-Domain Pollination',
-            'Deliberately import ideas from fields outside your domain and test whether they solve problems in new ways. '
-                'The most disruptive innovations in history came from applying a known solution to an unexpected context. '
-                'AIR curates a weekly "out-of-domain" brief drawn from science, art, sport, and philosophy that surfaces analogies applicable to the challenges your team is currently working on.',
-          ),
-          const SizedBox(height: 10),
-          _buildCapCard(
-            context,
-            isDark,
-            Icons.emoji_events_rounded,
-            _amber,
-            'Innovation Recognition',
-            'Celebrate and attribute every innovation that ships — from the original idea through to the team that scaled it. '
-                'Recognition reinforces the behaviours that produce innovation and signals to the whole community that novelty is valued. '
-                'Innovation attributions are publicly visible in the AIR Showcase, giving inventors lasting credit in the community record regardless of organisational changes.',
-          ),
-          const SizedBox(height: 20),
-          _buildInnovationQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildPipelineStages(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'IDEATION SPARKS',
+          Icons.lightbulb_rounded,
+          _yellow,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildIdeationGrid(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'CAPABILITIES',
+          Icons.settings_rounded,
+          _lime,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildCapCard(
+          context,
+          isDark,
+          Icons.lightbulb_rounded,
+          _yellow,
+          'Idea Generation Studio',
+          'Use structured brainstorming prompts, constraint-based thinking, and analogical reasoning to generate novel solutions. '
+              'Ideas are captured in a shared studio so the best ones can be developed collaboratively rather than in isolation. '
+              'The studio runs timed ideation sprints — 20 minutes of divergent thinking followed by structured convergence — proven to produce more usable ideas than free-form brainstorming.',
+        ),
+        const SizedBox(height: 10),
+        _buildCapCard(
+          context,
+          isDark,
+          Icons.verified_user_rounded,
+          _orange,
+          'Integrity Stress Test',
+          'Before advancing any innovation, stress-test it against AIR\'s core values and non-negotiable commitments. '
+              'An idea that only works by cutting ethical corners is not innovation — it is a liability dressed up as progress. '
+              'The stress test generates a written integrity assessment you can share with stakeholders as evidence that the innovation has been vetted against principle, not just performance.',
+        ),
+        const SizedBox(height: 10),
+        _buildCapCard(
+          context,
+          isDark,
+          Icons.science_rounded,
+          _cyan,
+          'Rapid Prototype Lab',
+          'Build lightweight prototypes of promising ideas in 48 hours or less using AIR\'s modular component library. '
+              'Fast prototyping surfaces real-world friction early, when changes are cheap and learning is fast. '
+              'Every prototype run is logged with hypotheses, observations, and conclusions — building a knowledge base that prevents teams from re-running experiments already completed by others.',
+        ),
+        const SizedBox(height: 10),
+        _buildCapCard(
+          context,
+          isDark,
+          Icons.analytics_rounded,
+          _violet,
+          'Innovation Metrics',
+          'Track the health of your innovation pipeline — ideas generated, experiments run, pilots launched, and innovations scaled. '
+              'Metrics reveal whether the culture is genuinely innovative or just talking about innovation. '
+              'Conversion ratios at each pipeline stage highlight where ideas are dying and why, enabling targeted interventions to unblock the specific constraint limiting your innovation throughput.',
+        ),
+        const SizedBox(height: 10),
+        _buildCapCard(
+          context,
+          isDark,
+          Icons.shuffle_rounded,
+          _pink,
+          'Cross-Domain Pollination',
+          'Deliberately import ideas from fields outside your domain and test whether they solve problems in new ways. '
+              'The most disruptive innovations in history came from applying a known solution to an unexpected context. '
+              'AIR curates a weekly "out-of-domain" brief drawn from science, art, sport, and philosophy that surfaces analogies applicable to the challenges your team is currently working on.',
+        ),
+        const SizedBox(height: 10),
+        _buildCapCard(
+          context,
+          isDark,
+          Icons.emoji_events_rounded,
+          _amber,
+          'Innovation Recognition',
+          'Celebrate and attribute every innovation that ships — from the original idea through to the team that scaled it. '
+              'Recognition reinforces the behaviours that produce innovation and signals to the whole community that novelty is valued. '
+              'Innovation attributions are publicly visible in the AIR Showcase, giving inventors lasting credit in the community record regardless of organisational changes.',
+        ),
+        const SizedBox(height: 20),
+        _buildInnovationQuote(context, isDark, onSurface),
+      ],
     );
   }
 

@@ -22,124 +22,97 @@ class KindnessView extends GetView<KindnessController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF080308) : const Color(0xFFFFF1F2);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'KINDNESS',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'TODAY\'S KINDNESS LOG',
+          Icons.wb_sunny_outlined,
+          _coral,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(
-              Icons.volunteer_activism_outlined,
-              color: _rose,
-              size: 22,
-            ),
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'TODAY\'S KINDNESS LOG',
-            Icons.wb_sunny_outlined,
-            _coral,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildKindnessLog(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'KINDNESS PRACTICES',
-            Icons.spa_rounded,
-            _pink,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildKindCard(
-            context,
-            isDark,
-            Icons.wb_sunny_outlined,
-            _coral,
-            'Daily Kindness Habit',
-            'One intentional act of kindness per day compounds into a reputation and a character. Log small acts — holding a door, a genuine compliment, a helpful message — to build the habit through visibility. '
-                'Micro-kindnesses are as powerful as grand gestures because they are daily and consistent — the person who remembers your name, who asks a follow-up question, who notices when you\'re off, is doing micro-kindness at scale. '
-                'The daily log includes a prompt at a time of your choosing to pause and reflect on whether you\'ve created a moment of genuine warmth for someone that day — a 30-second practice that rebuilds attention to others.',
-          ),
-          const SizedBox(height: 10),
-          _buildKindCard(
-            context,
-            isDark,
-            Icons.sentiment_satisfied_alt_outlined,
-            _amber,
-            'Politeness Defaults',
-            'Politeness is the baseline — please, thank you, eye contact, full attention. Define your non-negotiable politeness defaults so they operate automatically even when you\'re tired or stressed. '
-                'Defaults matter precisely because they operate when your conscious attention is elsewhere — building them means your worst moments still meet a minimum standard that preserves relationships and dignity. '
-                'The defaults audit includes specific wording to avoid — dismissive phrases that have become habitual, tones that slip in under pressure — and replacement phrases practised until the new pattern becomes automatic.',
-          ),
-          const SizedBox(height: 10),
-          _buildKindCard(
-            context,
-            isDark,
-            Icons.self_improvement_outlined,
-            _violet,
-            'Kindness Under Pressure',
-            'Anyone can be kind when things are easy. The real test is how you treat people when you\'re frustrated, rushed, or disappointed. Log moments where you chose kindness under pressure. '
-                'Under-pressure kindness is a muscle — it strengthens with deliberate practice and weakens with neglect. Each logged instance of choosing patience over irritation is a strengthening rep. '
-                'The pressure kindness log includes a brief note on what made the situation difficult, helping you identify your personal triggers and prepare in advance for the contexts where your kindness most reliably fails.',
-          ),
-          const SizedBox(height: 10),
-          _buildKindCard(
-            context,
-            isDark,
-            Icons.visibility_outlined,
-            _sky,
-            'Noticing Others',
-            'Kindness starts with noticing — who looks tired, who needs help, who hasn\'t spoken in a while. Train your attention to scan for others\' needs before they have to ask. '
-                'Noticing is a trainable skill, not a personality trait. The practice is simple: before entering any group setting, spend 30 seconds scanning the room for who looks like they might need something. '
-                'The noticing log records what you observed and what you did — over time, the log reveals patterns in whose needs you naturally spot and whose you tend to miss, showing you where to direct your attentiveness deliberately.',
-          ),
-          const SizedBox(height: 10),
-          _buildKindCard(
-            context,
-            isDark,
-            Icons.chat_outlined,
-            _teal,
-            'Words That Land Well',
-            'Some words open people up; others shut them down. Keep a personal list of phrases that have landed well in difficult conversations and revisit them before high-stakes interactions. '
-                'The language library is built from real experience — phrases you used that produced connection, understanding, or relief — making it a highly personalised tool calibrated to your own voice and relationships. '
-                'Pre-conversation review takes 2 minutes and significantly improves the quality of high-stakes conversations by grounding you in language that has already proven effective in similar contexts.',
-          ),
-          const SizedBox(height: 10),
-          _buildKindCard(
-            context,
-            isDark,
-            Icons.spa_outlined,
-            _rose,
-            'Kindness to Yourself',
-            'You cannot sustain kindness toward others if you\'re running on self-criticism. Log moments of self-compassion — rest taken without guilt, mistakes forgiven, progress acknowledged. '
-                'Self-kindness is not self-indulgence — it is the maintenance practice that keeps your capacity for genuine kindness toward others from depleting. Chronically self-critical people gradually become harsher toward others too. '
-                'The self-compassion log prompts you to write three sentences after any significant mistake: what happened, what you learned, and one kind thing you would say to a friend in your situation — then say it to yourself.',
-          ),
-          const SizedBox(height: 20),
-          _buildKindnessQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildKindnessLog(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'KINDNESS PRACTICES',
+          Icons.spa_rounded,
+          _pink,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildKindCard(
+          context,
+          isDark,
+          Icons.wb_sunny_outlined,
+          _coral,
+          'Daily Kindness Habit',
+          'One intentional act of kindness per day compounds into a reputation and a character. Log small acts — holding a door, a genuine compliment, a helpful message — to build the habit through visibility. '
+              'Micro-kindnesses are as powerful as grand gestures because they are daily and consistent — the person who remembers your name, who asks a follow-up question, who notices when you\'re off, is doing micro-kindness at scale. '
+              'The daily log includes a prompt at a time of your choosing to pause and reflect on whether you\'ve created a moment of genuine warmth for someone that day — a 30-second practice that rebuilds attention to others.',
+        ),
+        const SizedBox(height: 10),
+        _buildKindCard(
+          context,
+          isDark,
+          Icons.sentiment_satisfied_alt_outlined,
+          _amber,
+          'Politeness Defaults',
+          'Politeness is the baseline — please, thank you, eye contact, full attention. Define your non-negotiable politeness defaults so they operate automatically even when you\'re tired or stressed. '
+              'Defaults matter precisely because they operate when your conscious attention is elsewhere — building them means your worst moments still meet a minimum standard that preserves relationships and dignity. '
+              'The defaults audit includes specific wording to avoid — dismissive phrases that have become habitual, tones that slip in under pressure — and replacement phrases practised until the new pattern becomes automatic.',
+        ),
+        const SizedBox(height: 10),
+        _buildKindCard(
+          context,
+          isDark,
+          Icons.self_improvement_outlined,
+          _violet,
+          'Kindness Under Pressure',
+          'Anyone can be kind when things are easy. The real test is how you treat people when you\'re frustrated, rushed, or disappointed. Log moments where you chose kindness under pressure. '
+              'Under-pressure kindness is a muscle — it strengthens with deliberate practice and weakens with neglect. Each logged instance of choosing patience over irritation is a strengthening rep. '
+              'The pressure kindness log includes a brief note on what made the situation difficult, helping you identify your personal triggers and prepare in advance for the contexts where your kindness most reliably fails.',
+        ),
+        const SizedBox(height: 10),
+        _buildKindCard(
+          context,
+          isDark,
+          Icons.visibility_outlined,
+          _sky,
+          'Noticing Others',
+          'Kindness starts with noticing — who looks tired, who needs help, who hasn\'t spoken in a while. Train your attention to scan for others\' needs before they have to ask. '
+              'Noticing is a trainable skill, not a personality trait. The practice is simple: before entering any group setting, spend 30 seconds scanning the room for who looks like they might need something. '
+              'The noticing log records what you observed and what you did — over time, the log reveals patterns in whose needs you naturally spot and whose you tend to miss, showing you where to direct your attentiveness deliberately.',
+        ),
+        const SizedBox(height: 10),
+        _buildKindCard(
+          context,
+          isDark,
+          Icons.chat_outlined,
+          _teal,
+          'Words That Land Well',
+          'Some words open people up; others shut them down. Keep a personal list of phrases that have landed well in difficult conversations and revisit them before high-stakes interactions. '
+              'The language library is built from real experience — phrases you used that produced connection, understanding, or relief — making it a highly personalised tool calibrated to your own voice and relationships. '
+              'Pre-conversation review takes 2 minutes and significantly improves the quality of high-stakes conversations by grounding you in language that has already proven effective in similar contexts.',
+        ),
+        const SizedBox(height: 10),
+        _buildKindCard(
+          context,
+          isDark,
+          Icons.spa_outlined,
+          _rose,
+          'Kindness to Yourself',
+          'You cannot sustain kindness toward others if you\'re running on self-criticism. Log moments of self-compassion — rest taken without guilt, mistakes forgiven, progress acknowledged. '
+              'Self-kindness is not self-indulgence — it is the maintenance practice that keeps your capacity for genuine kindness toward others from depleting. Chronically self-critical people gradually become harsher toward others too. '
+              'The self-compassion log prompts you to write three sentences after any significant mistake: what happened, what you learned, and one kind thing you would say to a friend in your situation — then say it to yourself.',
+        ),
+        const SizedBox(height: 20),
+        _buildKindnessQuote(context, isDark, onSurface),
+      ],
     );
   }
 

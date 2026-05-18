@@ -13,24 +13,7 @@ class HeigherStudiesView extends GetView<HeigherStudiesController> {
     final isDark = theme.brightness == Brightness.dark;
     final onSurface = theme.colorScheme.onSurface;
 
-    return
-    //  Scaffold(
-    // appBar: AppBar(
-    //   title: Text(
-    //     'Higher Studies',
-    //     style: TextStyle(
-    //       letterSpacing: 1.5,
-    //       fontWeight: FontWeight.bold,
-    //       color: onSurface,
-    //     ),
-    //   ),
-    //   elevation: 0,
-    //   backgroundColor: Colors.transparent,
-    //   foregroundColor: onSurface,
-    //   iconTheme: IconThemeData(color: onSurface),
-    // ),
-    // extendBodyBehindAppBar: true,
-    Container(
+    return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,

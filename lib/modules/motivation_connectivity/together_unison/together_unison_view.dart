@@ -22,129 +22,106 @@ class TogetherUnisonView extends GetView<TogetherUnisonController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF0D0306) : const Color(0xFFFFF1F3);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'TOGETHER IN UNISON',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 13,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'UNISON HEALTH PULSE',
+          Icons.favorite_rounded,
+          _rose,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.groups_rounded, color: _rose, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'UNISON HEALTH PULSE',
-            Icons.favorite_rounded,
-            _rose,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildPulsePanel(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'GROUP CAPABILITIES',
-            Icons.settings_rounded,
-            _pink,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildGroupCard(
-            context,
-            isDark,
-            Icons.account_tree_rounded,
-            _violet,
-            'Role Clarity Map',
-            'Define each team member\'s primary role, decision authority, and the interfaces where their work touches others. '
-                'Role ambiguity is the single most common source of team friction — a clear map eliminates most conflicts before they start. '
-                'Role maps are reviewed every 90 days to account for natural evolution in responsibilities and to re-align overlapping authority zones.',
-          ),
-          const SizedBox(height: 10),
-          _buildGroupCard(
-            context,
-            isDark,
-            Icons.calendar_month_rounded,
-            _blue,
-            'Shared Rhythm Calendar',
-            'Establish the recurring cadences — standups, reviews, retrospectives, and social touchpoints — that give the group a predictable heartbeat. '
-                'Rhythm reduces coordination overhead and creates the psychological safety that comes from knowing when and how the group will connect. '
-                'Rhythm adherence scores are tracked so the group can see objectively whether their cadence is being honoured or is gradually eroding.',
-          ),
-          const SizedBox(height: 10),
-          _buildGroupCard(
-            context,
-            isDark,
-            Icons.handshake_rounded,
-            _rose,
-            'Conflict Repair Protocol',
-            'When tension surfaces, use the structured repair protocol to move from positions to interests and find solutions that honour everyone\'s core needs. '
-                'Groups that repair well are stronger after conflict than before it — the protocol turns friction into a trust-building event. '
-                'Protocol sessions are logged (with consent) so patterns of recurring conflict can be identified and addressed at the systemic level rather than case-by-case.',
-          ),
-          const SizedBox(height: 10),
-          _buildGroupCard(
-            context,
-            isDark,
-            Icons.leaderboard_rounded,
-            _teal,
-            'Contribution Visibility Board',
-            'Make each member\'s contributions visible to the whole group so recognition is accurate, timely, and not dependent on self-promotion. '
-                'Invisible contributions breed resentment; a visibility board ensures that quiet contributors are seen and valued. '
-                'Visibility data feeds directly into the Rewards & Credits system so that consistent contributors receive tangible recognition, not just applause.',
-          ),
-          const SizedBox(height: 10),
-          _buildGroupCard(
-            context,
-            isDark,
-            Icons.how_to_vote_rounded,
-            _coral,
-            'Group Decision Framework',
-            'Choose the right decision mode — consent, consensus, or authority — for each type of choice the group faces, and document the rationale. '
-                'Mismatched decision modes are a hidden source of group dysfunction; the framework aligns expectations before the decision is made. '
-                'Decision modes are pre-agreed for recurring decision types so the group does not spend time debating process when it should be debating substance.',
-          ),
-          const SizedBox(height: 10),
-          _buildGroupCard(
-            context,
-            isDark,
-            Icons.favorite_rounded,
-            _pink,
-            'Unison Health Pulse',
-            'Run a brief anonymous pulse survey after each major group event to measure psychological safety, clarity, and energy levels. '
-                'The pulse gives leaders early warning of harmony erosion so they can intervene before small cracks become structural fractures. '
-                'Pulse results are shared with the whole group in aggregate form — honesty is only possible when individuals feel safe to respond candidly.',
-          ),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'WHAT UNISON IS NOT',
-            Icons.info_outline_rounded,
-            _amber,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildUniformityCard(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildQuoteBanner(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildPulsePanel(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'GROUP CAPABILITIES',
+          Icons.settings_rounded,
+          _pink,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildGroupCard(
+          context,
+          isDark,
+          Icons.account_tree_rounded,
+          _violet,
+          'Role Clarity Map',
+          'Define each team member\'s primary role, decision authority, and the interfaces where their work touches others. '
+              'Role ambiguity is the single most common source of team friction — a clear map eliminates most conflicts before they start. '
+              'Role maps are reviewed every 90 days to account for natural evolution in responsibilities and to re-align overlapping authority zones.',
+        ),
+        const SizedBox(height: 10),
+        _buildGroupCard(
+          context,
+          isDark,
+          Icons.calendar_month_rounded,
+          _blue,
+          'Shared Rhythm Calendar',
+          'Establish the recurring cadences — standups, reviews, retrospectives, and social touchpoints — that give the group a predictable heartbeat. '
+              'Rhythm reduces coordination overhead and creates the psychological safety that comes from knowing when and how the group will connect. '
+              'Rhythm adherence scores are tracked so the group can see objectively whether their cadence is being honoured or is gradually eroding.',
+        ),
+        const SizedBox(height: 10),
+        _buildGroupCard(
+          context,
+          isDark,
+          Icons.handshake_rounded,
+          _rose,
+          'Conflict Repair Protocol',
+          'When tension surfaces, use the structured repair protocol to move from positions to interests and find solutions that honour everyone\'s core needs. '
+              'Groups that repair well are stronger after conflict than before it — the protocol turns friction into a trust-building event. '
+              'Protocol sessions are logged (with consent) so patterns of recurring conflict can be identified and addressed at the systemic level rather than case-by-case.',
+        ),
+        const SizedBox(height: 10),
+        _buildGroupCard(
+          context,
+          isDark,
+          Icons.leaderboard_rounded,
+          _teal,
+          'Contribution Visibility Board',
+          'Make each member\'s contributions visible to the whole group so recognition is accurate, timely, and not dependent on self-promotion. '
+              'Invisible contributions breed resentment; a visibility board ensures that quiet contributors are seen and valued. '
+              'Visibility data feeds directly into the Rewards & Credits system so that consistent contributors receive tangible recognition, not just applause.',
+        ),
+        const SizedBox(height: 10),
+        _buildGroupCard(
+          context,
+          isDark,
+          Icons.how_to_vote_rounded,
+          _coral,
+          'Group Decision Framework',
+          'Choose the right decision mode — consent, consensus, or authority — for each type of choice the group faces, and document the rationale. '
+              'Mismatched decision modes are a hidden source of group dysfunction; the framework aligns expectations before the decision is made. '
+              'Decision modes are pre-agreed for recurring decision types so the group does not spend time debating process when it should be debating substance.',
+        ),
+        const SizedBox(height: 10),
+        _buildGroupCard(
+          context,
+          isDark,
+          Icons.favorite_rounded,
+          _pink,
+          'Unison Health Pulse',
+          'Run a brief anonymous pulse survey after each major group event to measure psychological safety, clarity, and energy levels. '
+              'The pulse gives leaders early warning of harmony erosion so they can intervene before small cracks become structural fractures. '
+              'Pulse results are shared with the whole group in aggregate form — honesty is only possible when individuals feel safe to respond candidly.',
+        ),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'WHAT UNISON IS NOT',
+          Icons.info_outline_rounded,
+          _amber,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildUniformityCard(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildQuoteBanner(context, isDark, onSurface),
+      ],
     );
   }
 

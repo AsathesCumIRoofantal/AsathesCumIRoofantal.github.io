@@ -22,29 +22,9 @@ class PracticeExpertiseView extends GetView<PracticeExpertiseController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF030210) : const Color(0xFFF5F3FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'PRACTICE EXPERTISE',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 13,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.model_training_rounded, color: _indigo, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
+    return Container(
+     color: bg,
+      child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         shrinkWrap: isEmbedded,
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
