@@ -141,6 +141,7 @@ import 'package:air_app/modules/social/social_binding.dart';
 import 'package:air_app/modules/solution/solution_best_view.dart';
 import 'package:air_app/modules/solution/solution_binding.dart';
 import 'package:air_app/modules/spirituality_lord_shiva/spirituality_lord_shiva_best_view.dart';
+import 'package:air_app/modules/spirituality_lord_shiva/spirituality_lord_shiva_view.dart';
 import 'package:air_app/modules/splash/spash_binding.dart';
 import 'package:air_app/modules/splash/splash_screen.dart';
 import 'package:air_app/modules/statistics/statistics_best_view.dart';
@@ -1341,7 +1342,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.SPIRITUALITY_LORD_SHIVA,
-      page: () => const SpiritualityLordShivaBestView(),
+      page: () => const SpiritualityLordShivaView(),
       binding: SpiritualityLordShivaBinding(),
       transition: Transition.rightToLeft,
     ),

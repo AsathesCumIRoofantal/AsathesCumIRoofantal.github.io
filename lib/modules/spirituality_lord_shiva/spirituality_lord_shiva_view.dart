@@ -480,11 +480,11 @@ class SpiritualityLordShivaView
           ],
           body: const TabBarView(
             children: [
-              _MantrasTab(isEmbedded: false),
-              _SymbolsTab(isEmbedded: false),
-              _FestivalsStoriesTab(isEmbedded: false),
-              _PilgrimageGuideTab(isEmbedded: false),
-              SpiritualityLordShivaBestView(),
+              _MantrasTab(isEmbedded: true),
+              _SymbolsTab(isEmbedded: true),
+              _FestivalsStoriesTab(isEmbedded: true),
+              _PilgrimageGuideTab(isEmbedded: true),
+              SpiritualityLordShivaBestView(isEmbedded: true),
             ],
           ),
         ),

@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 /// Wraps and preserves the original SpiritualityLordShivaView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class SpiritualityLordShivaBestView extends StatelessWidget {
-  const SpiritualityLordShivaBestView({super.key});
+  final bool isEmbedded;
+  const SpiritualityLordShivaBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFF0EA5E9);
   static const Color _secondary = Color(0xFF1E40AF);
@@ -89,11 +90,14 @@ class SpiritualityLordShivaBestView extends StatelessWidget {
     final bg = isDark ? _bgDark : _bgLight;
     final onSurface = isDark ? Colors.white : const Color(0xFF0F172A);
 
-    return Scaffold(
-      backgroundColor: bg,
-      body: Column(
+    return Container(
+      color: bg,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           CustomScrollView(
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+            shrinkWrap: isEmbedded,
             slivers: [
               SliverAppBar(
                 expandedHeight: 260,
@@ -639,12 +643,7 @@ class _TimelineBlock extends StatelessWidget {
                     ),
                   ),
                   if (i != steps.length - 1)
-                    Expanded(
-                      child: Container(
-                        width: 2,
-                        color: primary.withValues(alpha: 0.3),
-                      ),
-                    ),
+                    Container(width: 2, color: primary.withValues(alpha: 0.3)),
                 ],
               ),
               const SizedBox(width: 14),
