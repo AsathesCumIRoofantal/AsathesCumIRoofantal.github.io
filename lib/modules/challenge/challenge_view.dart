@@ -14,9 +14,9 @@ class ChallengeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: _bg,
-      body: CustomScrollView(
+    return Container(
+      color: _bg,
+      child: CustomScrollView(
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         shrinkWrap: isEmbedded,
         slivers: [
@@ -27,7 +27,7 @@ class ChallengeView extends StatelessWidget {
             foregroundColor: Colors.white,
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
-                fit: StackFit.expand,
+                fit: StackFit.loose,
                 children: [
                   Container(
                     decoration: const BoxDecoration(

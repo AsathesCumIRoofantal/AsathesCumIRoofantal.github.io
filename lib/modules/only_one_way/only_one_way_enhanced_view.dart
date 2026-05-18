@@ -2,16 +2,19 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-
 /// Auto-generated unique themed wrapper for Only One Way.
 /// Adds a fresh design + new content sections while preserving original content
 /// (the original OnlyOneWayView is embedded below the new sections).
 ///
 /// Theme: Rose Petal | Layout: blocks
-class OnlyOneWayEnhancedView {
+class OnlyOneWayEnhancedView extends StatelessWidget {
   final bool isEmbedded;
   final bool isDark;
-  const OnlyOneWayEnhancedView({this.isEmbedded = false, required this.isDark});
+  const OnlyOneWayEnhancedView({
+    super.key,
+    this.isEmbedded = false,
+    required this.isDark,
+  });
 
   static const Color _bg = Color(0xff2a0814);
   static const Color _bg2 = Color(0xff4a0e26);
@@ -182,6 +185,18 @@ class OnlyOneWayEnhancedView {
       ),
     ),
   ];
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
+    final onSurface = isDark ? Colors.white : const Color(0xFF0F172A);
+
+    return Scaffold(
+      backgroundColor: _bg,
+      body: CustomScrollView(slivers: slivers),
+    );
+  }
 }
 
 class _Hero extends StatelessWidget {

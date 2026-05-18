@@ -14,9 +14,9 @@ class CodeConductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: _ivory,
-      body: ListView(
+    return Container(
+      color: _ivory,
+      child: ListView(
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         shrinkWrap: isEmbedded,
         children: [
@@ -47,7 +47,7 @@ class CodeConductView extends StatelessWidget {
   }
 
   Widget _seal() => Stack(
-    fit: StackFit.expand,
+    fit: StackFit.loose,
     children: [
       Container(
         decoration: const BoxDecoration(

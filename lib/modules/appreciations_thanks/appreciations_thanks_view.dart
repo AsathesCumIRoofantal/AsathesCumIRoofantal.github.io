@@ -16,14 +16,14 @@ class AppreciationsThanksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: _cream,
-      body: ListView(
+    return Container(
+      color: _cream,
+      child: ListView(
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         shrinkWrap: isEmbedded,
         children: [
           Stack(
-            fit: StackFit.expand,
+            fit: StackFit.loose,
             children: [
               Container(
                 decoration: const BoxDecoration(

@@ -13,9 +13,9 @@ class AdvantageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: _bg,
-      body: ListView(
+    return Container(
+      color: _bg,
+      child: ListView(
         shrinkWrap: isEmbedded,
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [

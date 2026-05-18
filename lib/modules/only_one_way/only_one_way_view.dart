@@ -1,3 +1,5 @@
+import 'package:air_app/modules/only_one_way/only_one_way_best_view.dart';
+import 'package:air_app/modules/only_one_way/only_one_way_enhanced_view.dart';
 import 'package:air_app/widgets/sample_content_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,9 +11,13 @@ class OnlyOneWayPage extends GetView<OnlyOneWayController> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return PageView(
       physics: const BouncingScrollPhysics(),
-      children: const [OnlyOneWayView()],
+      children: [
+        const OnlyOneWayBestView(),
+        OnlyOneWayEnhancedView(isDark: isDark),
+      ],
     );
   }
 }
