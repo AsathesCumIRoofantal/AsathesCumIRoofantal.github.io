@@ -15,9 +15,9 @@ class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
           shrinkWrap: isEmbedded,
           physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
           padding: const EdgeInsets.all(24),
-          itemCount: controller.duties.length,
+          itemCount: controller.duties.value.length,
           itemBuilder: (context, index) {
-            final duty = controller.duties[index];
+            final duty = controller.duties.value[index];
             return _buildDutyCard(context, duty);
           },
         ),

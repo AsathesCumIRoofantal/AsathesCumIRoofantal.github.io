@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import 'responsibilities_controller.dart';
-
-class ResponsibilitiesView extends GetView<ResponsibilitiesController> {
+class ResponsibilitiesView extends StatelessWidget {
   final bool isEmbedded;
   const ResponsibilitiesView({super.key, this.isEmbedded = false});
 

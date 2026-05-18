@@ -24,27 +24,25 @@ class EaseToolsView extends GetView<EaseToolsController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildHeader(context),
-            Expanded(
-              child: Obx(() {
-                return GridView.builder(
-                  physics: isEmbedded
-                      ? const NeverScrollableScrollPhysics()
-                      : null,
-                  shrinkWrap: isEmbedded,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 0.85,
-                  ),
-                  itemCount: controller.tools.length,
-                  itemBuilder: (context, index) {
-                    return _buildToolCard(context, controller.tools[index]);
-                  },
-                );
-              }),
-            ),
+            Obx(() {
+              return GridView.builder(
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
+                shrinkWrap: isEmbedded,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.85,
+                ),
+                itemCount: controller.tools.length,
+                itemBuilder: (context, index) {
+                  return _buildToolCard(context, controller.tools[index]);
+                },
+              );
+            }),
           ],
         ),
       ),

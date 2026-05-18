@@ -28,24 +28,26 @@ class VocabularyView extends GetView<VocabularyController> {
         child: Column(
           children: [
             _buildSearchBar(context),
-            Expanded(
-              child: Obx(() {
-                final items = controller.filteredItems;
-                if (items.isEmpty) {
-                  return _buildEmptyState(context);
-                }
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return _buildVocabularyCard(context, items[index]);
-                  },
-                );
-              }),
-            ),
+            Obx(() {
+              final items = controller.filteredItems;
+              if (items.isEmpty) {
+                return _buildEmptyState(context);
+              }
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                shrinkWrap: isEmbedded,
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return _buildVocabularyCard(context, items[index]);
+                },
+              );
+            }),
           ],
         ),
       ),

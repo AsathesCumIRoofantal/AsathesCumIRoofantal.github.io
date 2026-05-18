@@ -96,13 +96,14 @@ import 'package:air_app/modules/motivation_connectivity/live_fullest/live_fulles
 import 'package:air_app/modules/motivation_connectivity/motivation/motivation_best_view.dart';
 import 'package:air_app/modules/motivation_connectivity/never_give_up/never_give_up_best_view.dart';
 import 'package:air_app/modules/motivation_connectivity/onboard/onboard_best_view.dart';
+import 'package:air_app/modules/motivation_connectivity/responsibilities/responsibilities_best_view.dart';
 import 'package:air_app/modules/motivation_connectivity/together_unison/together_unison_best_view.dart';
 import 'package:air_app/modules/obligations/obligations_best_view.dart';
 import 'package:air_app/modules/obligations/obligations_binding.dart';
 import 'package:air_app/modules/peace_prosperity/peace_prosperity_best_view.dart';
 import 'package:air_app/modules/prayer_for_all/prayer_for_all_best_view.dart';
 import 'package:air_app/modules/products_services/products_services_best_view.dart';
-import 'package:air_app/modules/projects_assessments/projects_assessments_best_view.dart';
+import 'package:air_app/modules/projects_assessments/projects_assessments_view.dart';
 import 'package:air_app/modules/punctuality/punctuality_best_view.dart';
 import 'package:air_app/modules/queries/queries_best_view.dart';
 import 'package:air_app/modules/query_discussion/query_discussion_best_view.dart';
@@ -115,7 +116,6 @@ import 'package:air_app/modules/religion_prayer/religion_prayer_binding.dart';
 import 'package:air_app/modules/research_development/research_development_best_view.dart';
 import 'package:air_app/modules/research_development/research_development_binding.dart';
 import 'package:air_app/modules/respect/respect_best_view.dart';
-import 'package:air_app/modules/responsibilities/responsibilities_best_view.dart';
 import 'package:air_app/modules/rivalry/rivalry_best_view.dart';
 import 'package:air_app/modules/rules_regulations/rules_regulations_best_view.dart';
 import 'package:air_app/modules/safety/safety_best_view.dart';
@@ -908,7 +908,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.projects_assessments,
-      page: () => const ProjectsAssessmentsBestView(),
+      page: () => const ProjectsAssessmentsView(),
       binding: ProjectsAssessmentsBinding(),
       transition: Transition.rightToLeft,
     ),

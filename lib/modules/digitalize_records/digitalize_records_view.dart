@@ -17,7 +17,7 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
             _buildScannerCard(context),
             const SizedBox(height: 24),
             _buildRecentSectionTitle(context),
-            Expanded(child: _buildRecordsList(context)),
+            _buildRecordsList(context),
           ],
         ),
         Positioned(
@@ -111,6 +111,8 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
     return Obx(
       () => ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 16),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         itemCount: controller.records.length,
         itemBuilder: (context, index) {
           final record = controller.records[index];
