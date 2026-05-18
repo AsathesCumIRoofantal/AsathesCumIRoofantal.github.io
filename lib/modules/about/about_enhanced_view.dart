@@ -19,34 +19,34 @@ class AboutEnhancedView {
   static const Color _gold = Color(0xff22d3ee);
 
   List<Widget> get slivers => [
-    // SliverAppBar(
-    //   pinned: true,
-    //   expandedHeight: 240,
-    //   backgroundColor: _bg,
-    //   foregroundColor: Colors.white,
-    //   iconTheme: const IconThemeData(color: Colors.white),
-    //   title: const Text(
-    //     'About',
-    //     style: TextStyle(
-    //       letterSpacing: 2,
-    //       fontWeight: FontWeight.w800,
-    //       color: Colors.white,
-    //     ),
-    //   ),
-    //   flexibleSpace: FlexibleSpaceBar(
-    //     background: _Hero(
-    //       palette: 'Slate Steel',
-    //       layout: 'wave',
-    //       bg: _bg,
-    //       bg2: _bg2,
-    //       accent: _accent,
-    //       soft: _soft,
-    //       gold: _gold,
-    //       icon: Icons.rocket_launch_outlined,
-    //       title: 'About',
-    //     ),
-    //   ),
-    // ),
+    SliverAppBar(
+      pinned: true,
+      expandedHeight: 240,
+      backgroundColor: _bg,
+      foregroundColor: Colors.white,
+      iconTheme: const IconThemeData(color: Colors.white),
+      title: const Text(
+        'About',
+        style: TextStyle(
+          letterSpacing: 2,
+          fontWeight: FontWeight.w800,
+          color: Colors.white,
+        ),
+      ),
+      flexibleSpace: FlexibleSpaceBar(
+        background: _Hero(
+          palette: 'Slate Steel',
+          layout: 'wave',
+          bg: _bg,
+          bg2: _bg2,
+          accent: _accent,
+          soft: _soft,
+          gold: _gold,
+          icon: Icons.rocket_launch_outlined,
+          title: 'About',
+        ),
+      ),
+    ),
     SliverToBoxAdapter(
       child: Container(
         color: isDark ? _bg : Colors.white,
