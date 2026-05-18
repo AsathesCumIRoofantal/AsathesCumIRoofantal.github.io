@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 /// Wraps and preserves the original FingersAreCrossedView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class FingersAreCrossedBestView extends StatelessWidget {
-  const FingersAreCrossedBestView({super.key});
+  final bool isEmbedded;
+  const FingersAreCrossedBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFF06B6D4);
   static const Color _secondary = Color(0xFF155E75);
@@ -94,6 +95,8 @@ class FingersAreCrossedBestView extends StatelessWidget {
       body: Column(
         children: [
           CustomScrollView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
             slivers: [
               SliverAppBar(
                 expandedHeight: 260,

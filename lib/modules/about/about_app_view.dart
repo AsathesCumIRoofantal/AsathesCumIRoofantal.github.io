@@ -25,9 +25,9 @@ class AboutAppView extends StatelessWidget {
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF07111F),
-      body: ListView(
+    return Container(
+      color: const Color(0xFF07111F),
+      child: ListView(
         shrinkWrap: isEmbedded,
         physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
@@ -41,8 +41,9 @@ class AboutAppView extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 90, 20, 20),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text(
                       'ABOUT App',

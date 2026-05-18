@@ -245,7 +245,7 @@ class FingersAreCrossedView extends GetView<FingersAreCrossedController> {
     final isDark = theme.brightness == Brightness.dark;
 
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         backgroundColor: theme.scaffoldBackgroundColor,
         body: NestedScrollView(
@@ -257,7 +257,6 @@ class FingersAreCrossedView extends GetView<FingersAreCrossedController> {
               _HopeDashboardTab(isEmbedded: false),
               _WaitingWisdomTab(isEmbedded: false),
               _FeatureGuideTab(isEmbedded: false),
-              FingersAreCrossedBestView(),
             ],
           ),
         ),
@@ -1563,6 +1562,7 @@ class _FeatureGuideTab extends StatelessWidget {
       shrinkWrap: isEmbedded,
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
       children: [
+        FingersAreCrossedBestView(isEmbedded: true),
         // Info banner
         Container(
           padding: const EdgeInsets.all(14),

@@ -35,7 +35,7 @@ import 'package:air_app/modules/commerce/commerce_best_view.dart';
 import 'package:air_app/modules/commerce/commerce_binding.dart';
 import 'package:air_app/modules/compitition/compitition_best_view.dart';
 import 'package:air_app/modules/control_coordination/control_coordination_best_view.dart';
-import 'package:air_app/modules/counting_reports/counting_reports_best_view.dart';
+import 'package:air_app/modules/counting_reports/counting_reports_view.dart';
 import 'package:air_app/modules/court_cases/court_cases_best_view.dart';
 import 'package:air_app/modules/demonstration/demonstration_best_view.dart';
 import 'package:air_app/modules/digitalize_records/digitalize_records_best_view.dart';
@@ -53,7 +53,7 @@ import 'package:air_app/modules/enhancement/enhancement_binding.dart';
 import 'package:air_app/modules/family/family_best_view.dart';
 import 'package:air_app/modules/feedback/feedback_best_view.dart';
 import 'package:air_app/modules/feedback/feedback_binding.dart';
-import 'package:air_app/modules/fingers_are_crossed/fingers_are_crossed_best_view.dart';
+import 'package:air_app/modules/fingers_are_crossed/fingers_are_crossed_view.dart';
 import 'package:air_app/modules/forgivness/forgivness_best_view.dart';
 import 'package:air_app/modules/friendship/friendship_best_view.dart';
 import 'package:air_app/modules/ground_task/ground_task_best_view.dart';
@@ -140,7 +140,6 @@ import 'package:air_app/modules/social/social_best_view.dart';
 import 'package:air_app/modules/social/social_binding.dart';
 import 'package:air_app/modules/solution/solution_best_view.dart';
 import 'package:air_app/modules/solution/solution_binding.dart';
-import 'package:air_app/modules/spirituality_lord_shiva/spirituality_lord_shiva_best_view.dart';
 import 'package:air_app/modules/spirituality_lord_shiva/spirituality_lord_shiva_view.dart';
 import 'package:air_app/modules/splash/spash_binding.dart';
 import 'package:air_app/modules/splash/splash_screen.dart';
@@ -1354,13 +1353,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.FINGERS_ARE_CROSSED,
-      page: () => const FingersAreCrossedBestView(),
+      page: () => const FingersAreCrossedView(),
       binding: FingersAreCrossedBinding(),
       transition: Transition.rightToLeft,
     ),
     GetPage(
       name: AppRoutes.COUNTING_REPORTS,
-      page: () => const CountingReportsBestView(),
+      page: () => const CountingReportsView(),
       binding: CountingReportsBinding(),
       transition: Transition.rightToLeft,
     ),
