@@ -16,7 +16,7 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
     final secondary = theme.colorScheme.secondary;
 
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -39,8 +39,10 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
               fontSize: 18,
             ),
           ),
-          centerTitle: true,
+          centerTitle: false,
+          titleSpacing: 0,
           bottom: TabBar(
+            isScrollable: true,
             indicatorColor: secondary,
             indicatorWeight: 4,
             labelStyle: const TextStyle(
@@ -89,7 +91,6 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
             children: [
               _buildProjectsList(context),
               _buildAssessmentsList(context),
-              ProjectsAssessmentsBestView(),
             ],
           ),
         ),
@@ -101,8 +102,11 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
     return Obx(
       () => ListView.builder(
         padding: const EdgeInsets.fromLTRB(16, 100, 16, 100),
-        itemCount: controller.projects.length + 1,
+        itemCount: controller.projects.length + 2,
         itemBuilder: (context, index) {
+          if (index == 1) {
+            return ProjectsAssessmentsBestView(isEmbedded: true);
+          }
           if (index == 0) {
             return Padding(
               padding: const EdgeInsets.only(bottom: 12),
@@ -114,8 +118,8 @@ class ProjectsAssessmentsView extends GetView<ProjectsAssessmentsController> {
               ),
             );
           }
-          final project = controller.projects[index - 1];
-          return _buildProjectCard(context, project, index - 1);
+          final project = controller.projects[index - 2];
+          return _buildProjectCard(context, project, index - 2);
         },
       ),
     );

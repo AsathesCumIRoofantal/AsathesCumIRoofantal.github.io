@@ -3,13 +3,13 @@ import 'dart:math' as math;
 import 'package:air_app/modules/projects_assessments/projects_assessments_enhanced_view.dart';
 import 'package:flutter/material.dart';
 
-
 /// ProjectsAssessmentsBestView
 /// Auto-generated showcase view — Design Pattern: Emerald / hero:stripes / section:split.
 /// Wraps and preserves the original ProjectsAssessmentsView at the bottom so no
 /// content is lost. Designed to demonstrate unique UI/UX per page.
 class ProjectsAssessmentsBestView extends StatelessWidget {
-  const ProjectsAssessmentsBestView({super.key});
+  final bool isEmbedded;
+  const ProjectsAssessmentsBestView({super.key, this.isEmbedded = false});
 
   static const Color _primary = Color(0xFF10B981);
   static const Color _secondary = Color(0xFF047857);
@@ -90,11 +90,14 @@ class ProjectsAssessmentsBestView extends StatelessWidget {
     final bg = isDark ? _bgDark : _bgLight;
     final onSurface = isDark ? Colors.white : const Color(0xFF0F172A);
 
-    return Scaffold(
-      backgroundColor: bg,
-      body: Column(
+    return Container(
+      color: bg,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           CustomScrollView(
+            shrinkWrap: isEmbedded,
+            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
             slivers: [
               SliverAppBar(
                 expandedHeight: 260,
@@ -640,12 +643,7 @@ class _TimelineBlock extends StatelessWidget {
                     ),
                   ),
                   if (i != steps.length - 1)
-                    Expanded(
-                      child: Container(
-                        width: 2,
-                        color: primary.withValues(alpha: 0.3),
-                      ),
-                    ),
+                    Container(width: 2, color: primary.withValues(alpha: 0.3)),
                 ],
               ),
               const SizedBox(width: 14),
