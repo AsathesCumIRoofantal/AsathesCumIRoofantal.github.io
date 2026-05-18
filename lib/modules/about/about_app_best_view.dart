@@ -209,9 +209,9 @@ class AboutAppBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          // ...AboutEnhancedView(isEmbedded: true, isDark: isDark).slivers,
-          // SliverToBoxAdapter(child: AboutAppView(isEmbedded: true)),
-          // const SliverToBoxAdapter(child: SizedBox(height: 40)),
+          ...AboutEnhancedView(isEmbedded: true, isDark: isDark).slivers,
+          SliverToBoxAdapter(child: AboutAppView(isEmbedded: true)),
+          const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
       ),
     );
