@@ -26,40 +26,42 @@ class QueryDiscussionView extends GetView<QueryDiscussionController> {
         child: Column(
           children: [
             _buildSearchBar(context),
-            Expanded(
-              child: Obx(() {
-                final list = controller.filteredDiscussions;
-                if (list.isEmpty) {
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.comments_disabled_outlined,
-                          size: 64,
-                          color: primary.withValues(alpha: 0.1),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'No discussions matching your query.',
-                          style: TextStyle(color: Colors.white24),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return ListView.builder(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
+            Obx(() {
+              final list = controller.filteredDiscussions;
+              if (list.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.comments_disabled_outlined,
+                        size: 64,
+                        color: primary.withValues(alpha: 0.1),
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        'No discussions matching your query.',
+                        style: TextStyle(color: Colors.white24),
+                      ),
+                    ],
                   ),
-                  itemCount: list.length,
-                  itemBuilder: (context, index) {
-                    return _buildDiscussionCard(context, list[index]);
-                  },
                 );
-              }),
-            ),
+              }
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                shrinkWrap: isEmbedded,
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
+                itemCount: list.length,
+                itemBuilder: (context, index) {
+                  return _buildDiscussionCard(context, list[index]);
+                },
+              );
+            }),
           ],
         ),
       ),

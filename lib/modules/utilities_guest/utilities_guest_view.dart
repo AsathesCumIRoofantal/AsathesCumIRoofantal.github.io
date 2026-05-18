@@ -22,6 +22,8 @@ class UtilitiesGuestView extends GetView<UtilitiesGuestController> {
       ),
       child: ListView.builder(
         padding: const EdgeInsets.all(16),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         itemCount: controller.utilities.length,
         itemBuilder: (context, index) {
           final util = controller.utilities[index];

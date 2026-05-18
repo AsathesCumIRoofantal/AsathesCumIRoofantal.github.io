@@ -22,6 +22,8 @@ class RewardsCreditsView extends GetView<RewardsCreditsController> {
       color: isDark ? const Color(0xFF0D0A00) : const Color(0xFFFFF8E1),
       child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+        shrinkWrap: isEmbedded,
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
         children: [
           _buildBalanceCard(context, isDark),
           const SizedBox(height: 20),
