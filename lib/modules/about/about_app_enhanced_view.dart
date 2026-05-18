@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 /// (the original AboutAppView is embedded below the new sections).
 ///
 /// Theme: Slate Steel | Layout: wave
-class AboutEnhancedView {
+class AboutAppEnhancedView {
   final bool isEmbedded;
   final bool isDark;
-  const AboutEnhancedView({this.isEmbedded = false, required this.isDark});
+  const AboutAppEnhancedView({this.isEmbedded = false, required this.isDark});
 
   static const Color _bg = Color(0xff0f172a);
   static const Color _bg2 = Color(0xff1e293b);
@@ -202,7 +202,7 @@ class _Hero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.expand,
+      fit: StackFit.loose,
       children: [
         Container(
           decoration: BoxDecoration(

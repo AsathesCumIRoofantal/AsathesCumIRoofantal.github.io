@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:air_app/modules/about/about_enhanced_view.dart';
+import 'package:air_app/modules/about/about_app_enhanced_view.dart';
 import 'package:flutter/material.dart';
 
 import 'about_app_view.dart';
@@ -209,7 +209,7 @@ class AboutAppBestView extends StatelessWidget {
           ),
           const SliverToBoxAdapter(child: SizedBox(height: 8)),
           // Original page content embedded below — nothing is lost
-          ...AboutEnhancedView(isEmbedded: true, isDark: isDark).slivers,
+          ...AboutAppEnhancedView(isEmbedded: true, isDark: isDark).slivers,
           SliverToBoxAdapter(child: AboutAppView(isEmbedded: true)),
           const SliverToBoxAdapter(child: SizedBox(height: 40)),
         ],
