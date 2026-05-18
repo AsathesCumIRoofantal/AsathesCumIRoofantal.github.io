@@ -57,8 +57,10 @@ class LearnFunView extends GetView<LearnFunController> {
                 ),
               ),
               GridView.builder(
-                // physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-                // shrinkWrap: isEmbedded,
+                physics: isEmbedded
+                    ? const NeverScrollableScrollPhysics()
+                    : null,
+                shrinkWrap: isEmbedded,
                 padding: const EdgeInsets.all(16),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,

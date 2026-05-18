@@ -13,45 +13,46 @@ class LifeHacksView extends GetView<LifeHacksController> {
     final isDark = theme.brightness == Brightness.dark;
     final onSurface = theme.colorScheme.onSurface;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Life Hacks',
-          style: TextStyle(
-            letterSpacing: 1.5,
-            fontWeight: FontWeight.bold,
-            color: onSurface,
-          ),
+    return
+    //  Scaffold(
+    //   appBar: AppBar(
+    //     title: Text(
+    //       'Life Hacks',
+    //       style: TextStyle(
+    //         letterSpacing: 1.5,
+    //         fontWeight: FontWeight.bold,
+    //         color: onSurface,
+    //       ),
+    //     ),
+    //     elevation: 0,
+    //     backgroundColor: Colors.transparent,
+    //     foregroundColor: onSurface,
+    //     iconTheme: IconThemeData(color: onSurface),
+    //   ),
+    //   extendBodyBehindAppBar: true,
+    //   body:
+    Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
+              : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-        iconTheme: IconThemeData(color: onSurface),
       ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, theme.colorScheme.surface]
-                : [theme.colorScheme.surface, theme.scaffoldBackgroundColor],
-          ),
-        ),
-        child: SafeArea(
-          child: ListView(
-            physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-            shrinkWrap: isEmbedded,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            children: [
-              _buildHeader(context, isDark, onSurface),
-              const SizedBox(height: 20),
-              ..._sections.map(
-                (s) => _buildSection(context, s, isDark, onSurface),
-              ),
-            ],
-          ),
+      child: SafeArea(
+        child: ListView(
+          physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+          shrinkWrap: isEmbedded,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          children: [
+            _buildHeader(context, isDark, onSurface),
+            const SizedBox(height: 20),
+            ..._sections.map(
+              (s) => _buildSection(context, s, isDark, onSurface),
+            ),
+          ],
         ),
       ),
     );

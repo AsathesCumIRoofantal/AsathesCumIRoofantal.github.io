@@ -135,8 +135,6 @@ class LearnFunEnhancedView {
         ),
       ),
     ),
-    // The Original page content is embedded HERE.
-    SliverToBoxAdapter(child: const LearnFunView()),
   ];
 }
 
