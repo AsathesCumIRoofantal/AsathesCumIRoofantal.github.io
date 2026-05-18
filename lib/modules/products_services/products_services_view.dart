@@ -335,10 +335,6 @@ class ProductsServicesView extends GetView<ProductsServicesController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
-                physics: isEmbedded
-                    ? const NeverScrollableScrollPhysics()
-                    : null,
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

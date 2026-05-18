@@ -417,10 +417,6 @@ class KnowledgeCenterView extends GetView<KnowledgeCenterController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
-                physics: isEmbedded
-                    ? const NeverScrollableScrollPhysics()
-                    : null,
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

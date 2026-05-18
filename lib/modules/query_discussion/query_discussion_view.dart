@@ -320,9 +320,6 @@ class QueryDiscussionView extends GetView<QueryDiscussionController> {
             const SizedBox(height: 24),
             Expanded(
               child: SingleChildScrollView(
-                physics: isEmbedded
-                    ? const NeverScrollableScrollPhysics()
-                    : null,
                 child: Column(
                   children: [
                     TextField(
