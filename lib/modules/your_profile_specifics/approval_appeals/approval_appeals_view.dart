@@ -10,17 +10,17 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text(
-          'APPROVAL & APPEALS',
-          style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+
+      child: Column(
         children: [
+          FloatingActionButton.extended(
+            onPressed: () => _showFileAppealSheet(context),
+            label: const Text("FILE NEW APPEAL"),
+            icon: const Icon(Icons.gavel_rounded),
+            backgroundColor: Colors.purple[700],
+          ),
           _buildFilterChips(context),
           Expanded(
             child: Obx(
@@ -35,12 +35,6 @@ class ApprovalAppealsView extends GetView<ApprovalAppealsController> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showFileAppealSheet(context),
-        label: const Text("FILE NEW APPEAL"),
-        icon: const Icon(Icons.gavel_rounded),
-        backgroundColor: Colors.purple[700],
       ),
     );
   }

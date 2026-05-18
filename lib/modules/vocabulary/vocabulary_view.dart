@@ -14,56 +14,39 @@ class VocabularyView extends GetView<VocabularyController> {
     final onSurface = theme.colorScheme.onSurface;
     final surface = theme.colorScheme.surface;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Vocabulary',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            color: onSurface,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? [theme.scaffoldBackgroundColor, surface]
+              : [surface, theme.scaffoldBackgroundColor],
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: onSurface,
-        iconTheme: IconThemeData(color: onSurface),
       ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: isDark
-                ? [theme.scaffoldBackgroundColor, surface]
-                : [surface, theme.scaffoldBackgroundColor],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              _buildSearchBar(context),
-              Expanded(
-                child: Obx(() {
-                  final items = controller.filteredItems;
-                  if (items.isEmpty) {
-                    return _buildEmptyState(context);
-                  }
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      return _buildVocabularyCard(context, items[index]);
-                    },
-                  );
-                }),
-              ),
-            ],
-          ),
+      child: SafeArea(
+        child: Column(
+          children: [
+            _buildSearchBar(context),
+            Expanded(
+              child: Obx(() {
+                final items = controller.filteredItems;
+                if (items.isEmpty) {
+                  return _buildEmptyState(context);
+                }
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return _buildVocabularyCard(context, items[index]);
+                  },
+                );
+              }),
+            ),
+          ],
         ),
       ),
     );
@@ -204,6 +187,3 @@ class VocabularyView extends GetView<VocabularyController> {
     );
   }
 }
-
-
-

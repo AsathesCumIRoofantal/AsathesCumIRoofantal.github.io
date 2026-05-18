@@ -9,22 +9,21 @@ class NetworkApisView extends GetView<NetworkApisController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0D0208), // Matrix/Terminal dark
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'NETWORK & APIs',
-          style: TextStyle(
-            color: Color(0xFF00FF41),
-            letterSpacing: 4,
-            fontFamily: 'monospace',
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
+    return Container(
+      color: const Color(0xFF0D0208),
+      // Matrix/Terminal dark
+      child: Column(
         children: [
+          FloatingActionButton.extended(
+            onPressed: () => controller.testNetwork(),
+            label: const Text(
+              "RUN NETWORK DIAGNOSTICS",
+              style: TextStyle(fontFamily: 'monospace'),
+            ),
+            icon: const Icon(Icons.terminal),
+            backgroundColor: const Color(0xFF00FF41),
+            foregroundColor: Colors.black,
+          ),
           _buildTerminalHeader(),
           Expanded(
             child: Obx(
@@ -39,16 +38,6 @@ class NetworkApisView extends GetView<NetworkApisController> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.testNetwork(),
-        label: const Text(
-          "RUN NETWORK DIAGNOSTICS",
-          style: TextStyle(fontFamily: 'monospace'),
-        ),
-        icon: const Icon(Icons.terminal),
-        backgroundColor: const Color(0xFF00FF41),
-        foregroundColor: Colors.black,
       ),
     );
   }

@@ -10,29 +10,26 @@ class PublicStuffView extends GetView<PublicStuffController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text(
-          'PUBLIC FEED',
-          style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold),
+    return Container(
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Obx(
+        () => Column(
+          children: [
+            FloatingActionButton.extended(
+              onPressed: () => _showCreatePostSheet(context),
+              label: const Text("SHARE SOMETHING"),
+              icon: const Icon(Icons.send_rounded),
+            ),
+            ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: controller.posts.length,
+              itemBuilder: (context, index) {
+                final post = controller.posts[index];
+                return _buildPostCard(context, post);
+              },
+            ),
+          ],
         ),
-        centerTitle: true,
-      ),
-      body: Obx(
-        () => ListView.builder(
-          padding: const EdgeInsets.all(16),
-          itemCount: controller.posts.length,
-          itemBuilder: (context, index) {
-            final post = controller.posts[index];
-            return _buildPostCard(context, post);
-          },
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showCreatePostSheet(context),
-        label: const Text("SHARE SOMETHING"),
-        icon: const Icon(Icons.send_rounded),
       ),
     );
   }

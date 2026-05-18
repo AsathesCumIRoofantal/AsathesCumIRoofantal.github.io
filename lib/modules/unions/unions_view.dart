@@ -13,67 +13,64 @@ class UnionsView extends GetView<UnionsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddUnionModal(context),
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        icon: const Icon(Icons.group_add_rounded, color: Colors.white),
-        label: const Text(
-          "Catalogue Union",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
-          ),
-        ),
-      ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
-          );
-        }
-        return SingleChildScrollView(
-          physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: AirHomeContextStrip(
-                  compact: true,
-                  placement: AirHomeContextPlacement.homeTab,
-                  extraLine:
-                      'UNIONS tab: record bindings between entities; keep names consistent with the ENTITIES tab and your IDENTITY map.',
-                ),
-              ),
-              _buildCollapsibleHeader(context),
-              _buildUnionsInfoCard(context),
-              Obx(
-                () => AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  child: controller.isUnionsExpanded.value
-                      ? ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.only(top: 12, bottom: 80),
-                          itemCount: controller.unions.length,
-                          itemBuilder: (context, index) {
-                            final union = controller.unions[index];
-                            return _buildUnionCard(context, union);
-                          },
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ),
-            ],
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: Theme.of(context).colorScheme.secondary,
           ),
         );
-      }),
-    );
+      }
+      return SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        child: Column(
+          children: [
+            FloatingActionButton.extended(
+              onPressed: () => _showAddUnionModal(context),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              icon: const Icon(Icons.group_add_rounded, color: Colors.white),
+              label: const Text(
+                "Catalogue Union",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: AirHomeContextStrip(
+                compact: true,
+                placement: AirHomeContextPlacement.homeTab,
+                extraLine:
+                    'UNIONS tab: record bindings between entities; keep names consistent with the ENTITIES tab and your IDENTITY map.',
+              ),
+            ),
+            _buildCollapsibleHeader(context),
+            _buildUnionsInfoCard(context),
+            Obx(
+              () => AnimatedSize(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: controller.isUnionsExpanded.value
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(top: 12, bottom: 80),
+                        itemCount: controller.unions.length,
+                        itemBuilder: (context, index) {
+                          final union = controller.unions[index];
+                          return _buildUnionCard(context, union);
+                        },
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   void _showAddUnionModal(BuildContext context) {

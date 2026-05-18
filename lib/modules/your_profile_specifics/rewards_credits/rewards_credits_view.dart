@@ -18,35 +18,9 @@ class RewardsCreditsView extends GetView<RewardsCreditsController> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
-    return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF0D0A00)
-          : const Color(0xFFFFF8E1),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: theme.colorScheme.onSurface,
-        title: const Text(
-          'REWARDS & CREDITS',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(
-              Icons.workspace_premium_rounded,
-              color: _gold,
-              size: 22,
-            ),
-          ),
-        ],
-      ),
-      body: ListView(
+    return Container(
+      color: isDark ? const Color(0xFF0D0A00) : const Color(0xFFFFF8E1),
+      child: ListView(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
         children: [
           _buildBalanceCard(context, isDark),

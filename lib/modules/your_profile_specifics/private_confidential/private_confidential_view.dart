@@ -9,17 +9,17 @@ class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF1A1A1A),
-      appBar: AppBar(
-        title: const Text(
-          'SECURE VAULT',
-          style: TextStyle(letterSpacing: 4, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
+    return Container(
+      color: const Color(0xFF1A1A1A),
+
+      child: Column(
         children: [
+          FloatingActionButton.extended(
+            onPressed: () => controller.authenticate(),
+            label: const Text("AUTHENTICATE ACCESS"),
+            icon: const Icon(Icons.fingerprint),
+            backgroundColor: Colors.red[900],
+          ),
           _buildVaultHeader(context),
           Expanded(
             child: Obx(
@@ -34,12 +34,6 @@ class PrivateConfidentialView extends GetView<PrivateConfidentialController> {
             ),
           ),
         ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.authenticate(),
-        label: const Text("AUTHENTICATE ACCESS"),
-        icon: const Icon(Icons.fingerprint),
-        backgroundColor: Colors.red[900],
       ),
     );
   }

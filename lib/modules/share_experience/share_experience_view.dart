@@ -12,82 +12,71 @@ class ShareExperienceView extends GetView<ShareExperienceController> {
     final theme = Theme.of(context);
     final primary = theme.colorScheme.primary;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Share Experience',
-          style: TextStyle(letterSpacing: 2),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
-      extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddExperienceModal(context),
-        label: const Text(
-          'Add your Experience',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        icon: const Icon(Icons.add),
-        backgroundColor: primary,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Text(
-                  'Your contributions help map the all-space experience.',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.textTheme.bodyMedium?.color?.withValues(
-                      alpha: 0.7,
-                    ),
-                    fontStyle: FontStyle.italic,
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            FloatingActionButton.extended(
+              onPressed: () => _showAddExperienceModal(context),
+              label: const Text(
+                'Add your Experience',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              icon: const Icon(Icons.add),
+              backgroundColor: primary,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Text(
+                'Your contributions help map the all-space experience.',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.textTheme.bodyMedium?.color?.withValues(
+                    alpha: 0.7,
                   ),
+                  fontStyle: FontStyle.italic,
                 ),
               ),
-              Expanded(
-                child: Obx(() {
-                  if (controller.experiences.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.auto_awesome,
-                            size: 64,
-                            color: primary.withValues(alpha: 0.3),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            'No experiences shared yet.',
-                            style: TextStyle(color: theme.dividerColor),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    itemCount: controller.experiences.length,
-                    itemBuilder: (context, index) {
-                      final exp = controller.experiences[index];
-                      return _buildExperienceCard(context, exp);
-                    },
+            ),
+            Expanded(
+              child: Obx(() {
+                if (controller.experiences.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.auto_awesome,
+                          size: 64,
+                          color: primary.withValues(alpha: 0.3),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'No experiences shared yet.',
+                          style: TextStyle(color: theme.dividerColor),
+                        ),
+                      ],
+                    ),
                   );
-                }),
-              ),
-            ],
-          ),
+                }
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  itemCount: controller.experiences.length,
+                  itemBuilder: (context, index) {
+                    final exp = controller.experiences[index];
+                    return _buildExperienceCard(context, exp);
+                  },
+                );
+              }),
+            ),
+          ],
         ),
       ),
     );
