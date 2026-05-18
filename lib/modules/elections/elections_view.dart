@@ -315,125 +315,119 @@ const List<_Faq> _faqs = [
   ),
 ];
 
-class ElectionsView extends GetView<ElectionsController> {
+class ElectionsView {
   final bool isEmbedded;
-  const ElectionsView({super.key, this.isEmbedded = false});
+  final bool isDark;
+  final ColorScheme colorScheme;
 
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final scheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      backgroundColor: isDark ? const Color(0xFF0B0F1A) : _parchment,
-      body: CustomScrollView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        slivers: [
-          _buildAppBar(context, isDark),
-          SliverToBoxAdapter(child: _StatStrip(isDark: isDark)),
-          SliverToBoxAdapter(
-            child: _SectionHeading(
-              label: 'CIVIC PILLARS',
-              title: 'Seven foundations of an informed vote',
-              color: _inkBlue,
-              isDark: isDark,
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
-            sliver: SliverList.builder(
-              itemCount: _pillars.length,
-              itemBuilder: (_, i) => _PillarCard(
-                index: i,
-                pillar: _pillars[i],
-                isDark: isDark,
-                onSurface: scheme.onSurface,
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: _SectionHeading(
-              label: 'JOURNEY',
-              title: 'How an election unfolds, step by step',
-              color: _saffron,
-              isDark: isDark,
-            ),
-          ),
-          SliverToBoxAdapter(child: _Timeline(isDark: isDark)),
-          SliverToBoxAdapter(
-            child: _SectionHeading(
-              label: 'YOUR RIGHTS',
-              title: 'Guarantees every voter must know',
-              color: _civicGreen,
-              isDark: isDark,
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
-            sliver: SliverGrid.builder(
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 260,
-                mainAxisExtent: 168,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-              ),
-              itemCount: _rights.length,
-              itemBuilder: (_, i) =>
-                  _RightChip(item: _rights[i], isDark: isDark),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: _SectionHeading(
-              label: 'POLLING DAY',
-              title: 'A 6-step checklist before you leave home',
-              color: _ballotNavy,
-              isDark: isDark,
-            ),
-          ),
-          SliverToBoxAdapter(child: _Checklist(isDark: isDark)),
-          SliverToBoxAdapter(
-            child: _SectionHeading(
-              label: 'QUESTIONS, ANSWERED',
-              title: 'Frequently asked by first-time voters',
-              color: _stamp,
-              isDark: isDark,
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-            sliver: SliverList.builder(
-              itemCount: _faqs.length,
-              itemBuilder: (_, i) => _FaqTile(faq: _faqs[i], isDark: isDark),
-            ),
-          ),
-          SliverToBoxAdapter(child: _Pledge(isDark: isDark)),
-          const SliverToBoxAdapter(child: SizedBox(height: 32)),
-        ],
+  const ElectionsView({
+    required this.isEmbedded,
+    required this.isDark,
+    required this.colorScheme,
+  });
+
+  List<Widget> get slivers => [
+    _buildAppBar(Get.context!, isDark),
+    SliverToBoxAdapter(child: _StatStrip(isDark: isDark)),
+    SliverToBoxAdapter(
+      child: _SectionHeading(
+        label: 'CIVIC PILLARS',
+        title: 'Seven foundations of an informed vote',
+        color: _inkBlue,
+        isDark: isDark,
       ),
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context, bool isDark) {
-    return SliverAppBar(
-      expandedHeight: 230,
-      pinned: true,
-      backgroundColor: isDark ? const Color(0xFF111827) : _ballotNavy,
-      iconTheme: const IconThemeData(color: Colors.white),
-      flexibleSpace: FlexibleSpaceBar(
-        titlePadding: const EdgeInsets.only(left: 16, bottom: 14),
-        title: const Text(
-          'Elections',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 18,
-            letterSpacing: 1.1,
-          ),
+    ),
+    SliverPadding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 8),
+      sliver: SliverList.builder(
+        itemCount: _pillars.length,
+        itemBuilder: (_, i) => _PillarCard(
+          index: i,
+          pillar: _pillars[i],
+          isDark: isDark,
+          onSurface: colorScheme.onSurface,
         ),
-        background: _BallotHeroBackground(isDark: isDark),
       ),
-    );
-  }
+    ),
+    SliverToBoxAdapter(
+      child: _SectionHeading(
+        label: 'JOURNEY',
+        title: 'How an election unfolds, step by step',
+        color: _saffron,
+        isDark: isDark,
+      ),
+    ),
+    SliverToBoxAdapter(child: _Timeline(isDark: isDark)),
+    SliverToBoxAdapter(
+      child: _SectionHeading(
+        label: 'YOUR RIGHTS',
+        title: 'Guarantees every voter must know',
+        color: _civicGreen,
+        isDark: isDark,
+      ),
+    ),
+    SliverPadding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+      sliver: SliverGrid.builder(
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 260,
+          mainAxisExtent: 168,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
+        ),
+        itemCount: _rights.length,
+        itemBuilder: (_, i) => _RightChip(item: _rights[i], isDark: isDark),
+      ),
+    ),
+    SliverToBoxAdapter(
+      child: _SectionHeading(
+        label: 'POLLING DAY',
+        title: 'A 6-step checklist before you leave home',
+        color: _ballotNavy,
+        isDark: isDark,
+      ),
+    ),
+    SliverToBoxAdapter(child: _Checklist(isDark: isDark)),
+    SliverToBoxAdapter(
+      child: _SectionHeading(
+        label: 'QUESTIONS, ANSWERED',
+        title: 'Frequently asked by first-time voters',
+        color: _stamp,
+        isDark: isDark,
+      ),
+    ),
+    SliverPadding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+      sliver: SliverList.builder(
+        itemCount: _faqs.length,
+        itemBuilder: (_, i) => _FaqTile(faq: _faqs[i], isDark: isDark),
+      ),
+    ),
+    SliverToBoxAdapter(child: _Pledge(isDark: isDark)),
+    const SliverToBoxAdapter(child: SizedBox(height: 32)),
+  ];
+}
+
+Widget _buildAppBar(BuildContext context, bool isDark) {
+  return SliverAppBar(
+    expandedHeight: 230,
+    pinned: true,
+    backgroundColor: isDark ? const Color(0xFF111827) : _ballotNavy,
+    iconTheme: const IconThemeData(color: Colors.white),
+    flexibleSpace: FlexibleSpaceBar(
+      titlePadding: const EdgeInsets.only(left: 16, bottom: 14),
+      title: const Text(
+        'Elections',
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          letterSpacing: 1.1,
+        ),
+      ),
+      background: _BallotHeroBackground(isDark: isDark),
+    ),
+  );
 }
 
 // ─────────────────────────────────────────────

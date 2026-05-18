@@ -12,67 +12,51 @@ class EntitiesView extends GetView<EntitiesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddEntityModal(context),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        icon: const Icon(Icons.add_rounded, color: Colors.white),
-        label: const Text(
-          "Add New Entity",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1,
-          ),
-        ),
-      ),
-      body: Obx(() {
-        if (controller.isLoading.value) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: Theme.of(context).colorScheme.primary,
-            ),
-          );
-        }
-        return SingleChildScrollView(
-          physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                child: AirHomeContextStrip(
-                  compact: true,
-                  placement: AirHomeContextPlacement.homeTab,
-                  extraLine:
-                      'ENTITIES tab: catalogue discrete nodes first; UNIONS and IDENTITY explain how they connect and who observes them.',
-                ),
-              ),
-              _buildCollapsibleHeader(context),
-              _buildEntitiesInfoCard(context),
-              Obx(
-                () => AnimatedSize(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  child: controller.isEntitiesExpanded.value
-                      ? ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          padding: const EdgeInsets.only(top: 12, bottom: 80),
-                          itemCount: controller.entities.length,
-                          itemBuilder: (context, index) {
-                            final entity = controller.entities[index];
-                            return _buildEntityCard(context, entity);
-                          },
-                        )
-                      : const SizedBox.shrink(),
-                ),
-              ),
-            ],
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return Center(
+          child: CircularProgressIndicator(
+            color: Theme.of(context).colorScheme.primary,
           ),
         );
-      }),
-    );
+      }
+      return SingleChildScrollView(
+        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: AirHomeContextStrip(
+                compact: true,
+                placement: AirHomeContextPlacement.homeTab,
+                extraLine:
+                    'ENTITIES tab: catalogue discrete nodes first; UNIONS and IDENTITY explain how they connect and who observes them.',
+              ),
+            ),
+            _buildCollapsibleHeader(context),
+            _buildEntitiesInfoCard(context),
+            Obx(
+              () => AnimatedSize(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: controller.isEntitiesExpanded.value
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(top: 12, bottom: 80),
+                        itemCount: controller.entities.length,
+                        itemBuilder: (context, index) {
+                          final entity = controller.entities[index];
+                          return _buildEntityCard(context, entity);
+                        },
+                      )
+                    : const SizedBox.shrink(),
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   void _showAddEntityModal(BuildContext context) {

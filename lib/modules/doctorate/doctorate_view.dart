@@ -13,25 +13,7 @@ class DoctorateView extends GetView<DoctorateController> {
     final isDark = theme.brightness == Brightness.dark;
     final onSurface = theme.colorScheme.onSurface;
 
-    return
-    // Scaffold(
-    //   appBar: AppBar(
-    //     title: Text(
-    //       'Doctorate',
-    //       style: TextStyle(
-    //         letterSpacing: 1.5,
-    //         fontWeight: FontWeight.bold,
-    //         color: onSurface,
-    //       ),
-    //     ),
-    //     elevation: 0,
-    //     backgroundColor: Colors.transparent,
-    //     foregroundColor: onSurface,
-    //     iconTheme: IconThemeData(color: onSurface),
-    //   ),
-    //   extendBodyBehindAppBar: true,
-    // body:
-    Container(
+    return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,

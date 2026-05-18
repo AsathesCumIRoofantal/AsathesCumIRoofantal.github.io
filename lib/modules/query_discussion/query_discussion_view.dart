@@ -14,73 +14,74 @@ class QueryDiscussionView extends GetView<QueryDiscussionController> {
     final primary = theme.colorScheme.primary;
     final tertiary = theme.colorScheme.tertiary;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Query & Discussion',
-          style: TextStyle(letterSpacing: 2),
+    return
+    // Scaffold(
+    //   appBar: AppBar(
+    //     title: const Text(
+    //       'Query & Discussion',
+    //       style: TextStyle(letterSpacing: 2),
+    //     ),
+    //     elevation: 0,
+    //     backgroundColor: Colors.transparent,
+    //   ),
+    //   extendBodyBehindAppBar: true,
+    //   floatingActionButton: FloatingActionButton.extended(
+    //     onPressed: () => _showAddQueryModal(context),
+    //     label: const Text(
+    //       'Open Discussion',
+    //       style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white54),
+    //     ),
+    //     icon: const Icon(Icons.forum_rounded, color: Colors.white54),
+    //     backgroundColor: tertiary,
+    //   ),
+    //   body:
+    Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
-      extendBodyBehindAppBar: true,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => _showAddQueryModal(context),
-        label: const Text(
-          'Open Discussion',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white54),
-        ),
-        icon: const Icon(Icons.forum_rounded, color: Colors.white54),
-        backgroundColor: tertiary,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              _buildSearchBar(context),
-              Expanded(
-                child: Obx(() {
-                  final list = controller.filteredDiscussions;
-                  if (list.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.comments_disabled_outlined,
-                            size: 64,
-                            color: primary.withValues(alpha: 0.1),
-                          ),
-                          const SizedBox(height: 16),
-                          const Text(
-                            'No discussions matching your query.',
-                            style: TextStyle(color: Colors.white24),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
+      child: SafeArea(
+        child: Column(
+          children: [
+            _buildSearchBar(context),
+            Expanded(
+              child: Obx(() {
+                final list = controller.filteredDiscussions;
+                if (list.isEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.comments_disabled_outlined,
+                          size: 64,
+                          color: primary.withValues(alpha: 0.1),
+                        ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          'No discussions matching your query.',
+                          style: TextStyle(color: Colors.white24),
+                        ),
+                      ],
                     ),
-                    itemCount: list.length,
-                    itemBuilder: (context, index) {
-                      return _buildDiscussionCard(context, list[index]);
-                    },
                   );
-                }),
-              ),
-            ],
-          ),
+                }
+                return ListView.builder(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    return _buildDiscussionCard(context, list[index]);
+                  },
+                );
+              }),
+            ),
+          ],
         ),
       ),
     );

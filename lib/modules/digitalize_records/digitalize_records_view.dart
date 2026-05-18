@@ -10,29 +10,27 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text(
-          'DIGITALIZE RECORDS',
-          style: TextStyle(letterSpacing: 2),
+    return Stack(
+      children: [
+        Column(
+          children: [
+            _buildScannerCard(context),
+            const SizedBox(height: 24),
+            _buildRecentSectionTitle(context),
+            Expanded(child: _buildRecordsList(context)),
+          ],
         ),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          _buildScannerCard(context),
-          const SizedBox(height: 24),
-          _buildRecentSectionTitle(context),
-          Expanded(child: _buildRecordsList(context)),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => controller.digitalizeNewRecord(),
-        label: const Text("START SCANNING"),
-        icon: const Icon(Icons.document_scanner_outlined),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-      ),
+        Positioned(
+          top: -20,
+          right: 20,
+          child: FloatingActionButton.extended(
+            onPressed: () => controller.digitalizeNewRecord(),
+            label: const Text("START SCANNING"),
+            icon: const Icon(Icons.document_scanner_outlined),
+            backgroundColor: Theme.of(context).colorScheme.primary,
+          ),
+        ),
+      ],
     );
   }
 
@@ -197,6 +195,3 @@ class DigitalizeRecordsView extends GetView<DigitalizeRecordsController> {
     );
   }
 }
-
-
-

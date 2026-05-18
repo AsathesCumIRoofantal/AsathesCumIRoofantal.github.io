@@ -22,120 +22,97 @@ class FriendshipView extends GetView<FriendshipController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF080403) : const Color(0xFFFFF7ED);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'FRIENDSHIP',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'FRIEND ROSTER',
+          Icons.contacts_outlined,
+          _pink,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.group_outlined, color: _pink, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'FRIEND ROSTER',
-            Icons.contacts_outlined,
-            _pink,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildFriendCircles(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'FRIENDSHIP TOOLKIT',
-            Icons.build_rounded,
-            _warm,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildFriendCard(
-            context,
-            isDark,
-            Icons.phone_outlined,
-            _peach,
-            'Reach-Out Log',
-            'Log every meaningful reach-out — a call, a message, a coffee. Seeing the last contact date for each friend makes it obvious who you\'ve been neglecting before the relationship fades. '
-                'The log highlights friends you haven\'t contacted in more than 30 days with a gentle nudge — not to create obligation, but to make the invisible visible before it becomes a regret. '
-                'Reach-out entries include a mood note so you can see which friends leave you energised and which drain you — useful data for managing your social energy over time.',
-          ),
-          const SizedBox(height: 10),
-          _buildFriendCard(
-            context,
-            isDark,
-            Icons.compare_arrows_outlined,
-            _blue,
-            'Reciprocity Check',
-            'Healthy friendships flow both ways. Track who initiates contact and notice patterns — if you\'re always the one reaching out, it\'s worth a conversation or a quiet recalibration. '
-                'Reciprocity data is presented as a ratio over a rolling 90-day window — it accounts for natural fluctuations (life seasons, workload) without penalising temporarily one-sided periods. '
-                'The check is not about keeping score; it is about having honest information before a friendship quietly erodes to the point where both parties feel too distant to reconnect.',
-          ),
-          const SizedBox(height: 10),
-          _buildFriendCard(
-            context,
-            isDark,
-            Icons.record_voice_over_outlined,
-            _rose,
-            'Depth Conversations',
-            'Surface-level chat keeps friendships alive but doesn\'t deepen them. Log the last time you had a real conversation — about fears, goals, struggles — and schedule the next one. '
-                'Depth is built through vulnerability, which requires both safety and preparation — knowing you want to go deeper before the conversation starts makes it more likely to actually happen. '
-                'The depth log includes a bank of conversation starters calibrated to different friendship stages, from acquaintance to close friend, making the first move toward depth easier.',
-          ),
-          const SizedBox(height: 10),
-          _buildFriendCard(
-            context,
-            isDark,
-            Icons.explore_outlined,
-            _teal,
-            'Shared Experiences',
-            'Shared experiences are the fastest way to strengthen a friendship. Plan activities together — a trip, a project, a challenge — and log them as anchors in your shared history. '
-                'Shared experiences work because they create memories that belong uniquely to the two of you, building a relational vocabulary and a reference point only you share. '
-                'The experience planner includes low-effort, high-connection options for busy periods — a 30-minute walk, a co-working session, a shared podcast — so depth does not require elaborate planning.',
-          ),
-          const SizedBox(height: 10),
-          _buildFriendCard(
-            context,
-            isDark,
-            Icons.handshake_outlined,
-            _amber,
-            'Support Given & Received',
-            'Note when a friend showed up for you and when you showed up for them. Gratitude for support received keeps you from taking friendships for granted during easy times. '
-                'Support records create a private ledger of the moments that actually defined the friendship — the 2am call, the job reference, the show-up when it mattered. '
-                'Reviewing support history before reconnecting with a friend after a gap naturally rekindles warmth and gives you authentic material for the reopening conversation.',
-          ),
-          const SizedBox(height: 10),
-          _buildFriendCard(
-            context,
-            isDark,
-            Icons.contacts_outlined,
-            _pink,
-            'Friend Roster',
-            'Know who your actual friends are versus acquaintances. Categorise your relationships by depth — close, casual, professional — so you can allocate your social energy intentionally. '
-                'Research consistently shows that most people can maintain approximately 5 close friendships, 15 good friends, and 50 regular contacts simultaneously — the roster helps you operate within your natural capacity. '
-                'The roster includes a "last meaningful interaction" date for every person so you can quickly see which relationships are alive, dormant, or quietly fading before intervention becomes difficult.',
-          ),
-          const SizedBox(height: 20),
-          _buildFriendQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildFriendCircles(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'FRIENDSHIP TOOLKIT',
+          Icons.build_rounded,
+          _warm,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildFriendCard(
+          context,
+          isDark,
+          Icons.phone_outlined,
+          _peach,
+          'Reach-Out Log',
+          'Log every meaningful reach-out — a call, a message, a coffee. Seeing the last contact date for each friend makes it obvious who you\'ve been neglecting before the relationship fades. '
+              'The log highlights friends you haven\'t contacted in more than 30 days with a gentle nudge — not to create obligation, but to make the invisible visible before it becomes a regret. '
+              'Reach-out entries include a mood note so you can see which friends leave you energised and which drain you — useful data for managing your social energy over time.',
+        ),
+        const SizedBox(height: 10),
+        _buildFriendCard(
+          context,
+          isDark,
+          Icons.compare_arrows_outlined,
+          _blue,
+          'Reciprocity Check',
+          'Healthy friendships flow both ways. Track who initiates contact and notice patterns — if you\'re always the one reaching out, it\'s worth a conversation or a quiet recalibration. '
+              'Reciprocity data is presented as a ratio over a rolling 90-day window — it accounts for natural fluctuations (life seasons, workload) without penalising temporarily one-sided periods. '
+              'The check is not about keeping score; it is about having honest information before a friendship quietly erodes to the point where both parties feel too distant to reconnect.',
+        ),
+        const SizedBox(height: 10),
+        _buildFriendCard(
+          context,
+          isDark,
+          Icons.record_voice_over_outlined,
+          _rose,
+          'Depth Conversations',
+          'Surface-level chat keeps friendships alive but doesn\'t deepen them. Log the last time you had a real conversation — about fears, goals, struggles — and schedule the next one. '
+              'Depth is built through vulnerability, which requires both safety and preparation — knowing you want to go deeper before the conversation starts makes it more likely to actually happen. '
+              'The depth log includes a bank of conversation starters calibrated to different friendship stages, from acquaintance to close friend, making the first move toward depth easier.',
+        ),
+        const SizedBox(height: 10),
+        _buildFriendCard(
+          context,
+          isDark,
+          Icons.explore_outlined,
+          _teal,
+          'Shared Experiences',
+          'Shared experiences are the fastest way to strengthen a friendship. Plan activities together — a trip, a project, a challenge — and log them as anchors in your shared history. '
+              'Shared experiences work because they create memories that belong uniquely to the two of you, building a relational vocabulary and a reference point only you share. '
+              'The experience planner includes low-effort, high-connection options for busy periods — a 30-minute walk, a co-working session, a shared podcast — so depth does not require elaborate planning.',
+        ),
+        const SizedBox(height: 10),
+        _buildFriendCard(
+          context,
+          isDark,
+          Icons.handshake_outlined,
+          _amber,
+          'Support Given & Received',
+          'Note when a friend showed up for you and when you showed up for them. Gratitude for support received keeps you from taking friendships for granted during easy times. '
+              'Support records create a private ledger of the moments that actually defined the friendship — the 2am call, the job reference, the show-up when it mattered. '
+              'Reviewing support history before reconnecting with a friend after a gap naturally rekindles warmth and gives you authentic material for the reopening conversation.',
+        ),
+        const SizedBox(height: 10),
+        _buildFriendCard(
+          context,
+          isDark,
+          Icons.contacts_outlined,
+          _pink,
+          'Friend Roster',
+          'Know who your actual friends are versus acquaintances. Categorise your relationships by depth — close, casual, professional — so you can allocate your social energy intentionally. '
+              'Research consistently shows that most people can maintain approximately 5 close friendships, 15 good friends, and 50 regular contacts simultaneously — the roster helps you operate within your natural capacity. '
+              'The roster includes a "last meaningful interaction" date for every person so you can quickly see which relationships are alive, dormant, or quietly fading before intervention becomes difficult.',
+        ),
+        const SizedBox(height: 20),
+        _buildFriendQuote(context, isDark, onSurface),
+      ],
     );
   }
 

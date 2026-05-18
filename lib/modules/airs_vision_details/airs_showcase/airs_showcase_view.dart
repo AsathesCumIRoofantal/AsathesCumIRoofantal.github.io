@@ -20,90 +20,53 @@ class AirsShowcaseView extends GetView<AirsShowcaseController> {
     final isDark = theme.brightness == Brightness.dark;
     final bg = isDark ? const Color(0xFF07030F) : const Color(0xFFF5F3FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: theme.colorScheme.onSurface,
-        title: const Text(
-          "AIR'S SHOWCASE",
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroFeature(context, isDark),
+        const SizedBox(height: 20),
+        _buildImpactStats(context, isDark),
+        const SizedBox(height: 24),
+        _buildCategoryLabel(
+          'SUCCESS STORIES',
+          Icons.auto_stories_rounded,
+          _violet,
+          context,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: _violet.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: _violet.withValues(alpha: 0.35)),
-              ),
-              child: const Text(
-                'LIVE',
-                style: TextStyle(
-                  fontSize: 9,
-                  color: _violet,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroFeature(context, isDark),
-          const SizedBox(height: 20),
-          _buildImpactStats(context, isDark),
-          const SizedBox(height: 24),
-          _buildCategoryLabel(
-            'SUCCESS STORIES',
-            Icons.auto_stories_rounded,
-            _violet,
-            context,
-          ),
-          const SizedBox(height: 12),
-          ..._stories.map((s) => _buildStoryCard(context, isDark, s)),
-          const SizedBox(height: 20),
-          _buildCategoryLabel(
-            'INNOVATION SPOTLIGHTS',
-            Icons.lightbulb_rounded,
-            _pink,
-            context,
-          ),
-          const SizedBox(height: 12),
-          _buildInnovationGrid(context, isDark),
-          const SizedBox(height: 24),
-          _buildCategoryLabel(
-            'COMMUNITY EXEMPLARS',
-            Icons.people_rounded,
-            _cyan,
-            context,
-          ),
-          const SizedBox(height: 12),
-          ..._exemplars.map((e) => _buildExemplarRow(context, isDark, e)),
-          const SizedBox(height: 24),
-          _buildCategoryLabel(
-            'PARTNER ACHIEVEMENTS',
-            Icons.diversity_3_rounded,
-            _green,
-            context,
-          ),
-          const SizedBox(height: 12),
-          ..._partners.map((p) => _buildPartnerCard(context, isDark, p)),
-          const SizedBox(height: 24),
-          _buildSubmissionBanner(context, isDark),
-        ],
-      ),
+        const SizedBox(height: 12),
+        ..._stories.map((s) => _buildStoryCard(context, isDark, s)),
+        const SizedBox(height: 20),
+        _buildCategoryLabel(
+          'INNOVATION SPOTLIGHTS',
+          Icons.lightbulb_rounded,
+          _pink,
+          context,
+        ),
+        const SizedBox(height: 12),
+        _buildInnovationGrid(context, isDark),
+        const SizedBox(height: 24),
+        _buildCategoryLabel(
+          'COMMUNITY EXEMPLARS',
+          Icons.people_rounded,
+          _cyan,
+          context,
+        ),
+        const SizedBox(height: 12),
+        ..._exemplars.map((e) => _buildExemplarRow(context, isDark, e)),
+        const SizedBox(height: 24),
+        _buildCategoryLabel(
+          'PARTNER ACHIEVEMENTS',
+          Icons.diversity_3_rounded,
+          _green,
+          context,
+        ),
+        const SizedBox(height: 12),
+        ..._partners.map((p) => _buildPartnerCard(context, isDark, p)),
+        const SizedBox(height: 24),
+        _buildSubmissionBanner(context, isDark),
+      ],
     );
   }
 

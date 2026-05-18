@@ -22,131 +22,108 @@ class FamilyView extends GetView<FamilyController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF0A0402) : const Color(0xFFFFF8F0);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'FAMILY',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      shrinkWrap: isEmbedded,
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'FAMILY STRUCTURE',
+          Icons.people_outline,
+          _warm,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.family_restroom_outlined, color: _warm, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        shrinkWrap: isEmbedded,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'FAMILY STRUCTURE',
-            Icons.people_outline,
-            _warm,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildRoleCards(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'FAMILY TOOLS',
-            Icons.build_rounded,
-            _gold,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildFamCard(
-            context,
-            isDark,
-            Icons.calendar_month_outlined,
-            _blue,
-            'Shared Calendar',
-            'A family without a shared calendar is a family that surprises each other with conflicts. Sync key dates — school events, appointments, travel — so no one is caught off guard. '
-                'The shared calendar includes a colour-coding system by family member so glancing at the week reveals whose schedule is heaviest and who may need support that week. '
-                'Recurring events are flagged for quarterly review so the calendar evolves with the family\'s actual schedule rather than accumulating obsolete commitments that no longer reflect real life.',
-          ),
-          const SizedBox(height: 10),
-          _buildFamCard(
-            context,
-            isDark,
-            Icons.celebration_outlined,
-            _amber,
-            'Family Rituals',
-            'Rituals are the glue of family identity — Sunday dinners, bedtime routines, annual trips. Log your rituals, protect them from schedule creep, and add new ones as the family evolves. '
-                'Rituals create the shared memory bank that family members draw on for identity and comfort, especially during periods of external stress or change. '
-                'The ritual protection system alerts you when a protected ritual is at risk of being displaced by a conflicting commitment, prompting a conscious decision rather than a default drift away from what matters.',
-          ),
-          const SizedBox(height: 10),
-          _buildFamCard(
-            context,
-            isDark,
-            Icons.chat_bubble_outline,
-            _teal,
-            'Communication Norms',
-            'How your family communicates under stress determines how well it holds together. Define your norms — no phones at dinner, weekly check-ins, a signal word for when someone needs space. '
-                'Communication norms reduce the emotional cost of conflict by providing agreed frameworks before the heat of disagreement — neither party is inventing the rules while already upset. '
-                'Norms are reviewed annually with all participating family members to ensure they continue to reflect the family\'s actual needs rather than becoming outdated rules enforced out of habit.',
-          ),
-          const SizedBox(height: 10),
-          _buildFamCard(
-            context,
-            isDark,
-            Icons.home_outlined,
-            _green,
-            'Household Responsibilities',
-            'Chores and responsibilities assigned clearly prevent the invisible labour problem. Use AIR to map who owns what at home and rotate tasks fairly as circumstances change. '
-                'The invisible labour audit surfaces tasks that are being done by one person invisibly — without recognition or rotation — and flags them for explicit assignment and acknowledgement. '
-                'Responsibility maps are age-appropriate for younger family members — the system suggests developmental-stage-appropriate contributions that build capability and belonging without creating unfair burden.',
-          ),
-          const SizedBox(height: 10),
-          _buildFamCard(
-            context,
-            isDark,
-            Icons.flag_outlined,
-            _warm,
-            'Family Goals',
-            'Families that set goals together — a vacation, a savings target, a home project — build shared purpose. Log your family goals and track progress so everyone feels invested. '
-                'Shared goals create a "we" narrative that is distinct from the sum of individual "I" narratives — families with shared goals report higher cohesion and resilience during individual setbacks. '
-                'Goal tracking includes a contribution board so each family member can see how their specific actions are advancing the shared goal, making contribution visible and motivating.',
-          ),
-          const SizedBox(height: 10),
-          _buildFamCard(
-            context,
-            isDark,
-            Icons.favorite_border_outlined,
-            _rose,
-            'One-on-One Time',
-            'Individual attention within a family is as important as group time. Schedule dedicated one-on-one time with each family member and log what you talked about to deepen the connection. '
-                'One-on-one time communicates individual value — that the person matters to you specifically, not just as a member of the group. Children especially register this distinction. '
-                'The one-on-one log includes a prompt before each session to consider what that specific person has been navigating recently, enabling you to arrive with genuine interest rather than generic availability.',
-          ),
-          const SizedBox(height: 10),
-          _buildFamCard(
-            context,
-            isDark,
-            Icons.people_outline,
-            _gold,
-            'Family Roles',
-            'Every family member plays a role — provider, nurturer, planner, peacemaker. Making these roles explicit reduces resentment and helps everyone know where they contribute most. '
-                'Explicit roles prevent the assumption that someone else is handling a critical function — and they enable appreciation for contributions that might otherwise go unnoticed or unacknowledged. '
-                'Role reviews happen twice a year — as life circumstances change, roles should evolve deliberately rather than drifting into patterns that no longer serve the family\'s current reality or values.',
-          ),
-          const SizedBox(height: 20),
-          _buildFamilyQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildRoleCards(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'FAMILY TOOLS',
+          Icons.build_rounded,
+          _gold,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildFamCard(
+          context,
+          isDark,
+          Icons.calendar_month_outlined,
+          _blue,
+          'Shared Calendar',
+          'A family without a shared calendar is a family that surprises each other with conflicts. Sync key dates — school events, appointments, travel — so no one is caught off guard. '
+              'The shared calendar includes a colour-coding system by family member so glancing at the week reveals whose schedule is heaviest and who may need support that week. '
+              'Recurring events are flagged for quarterly review so the calendar evolves with the family\'s actual schedule rather than accumulating obsolete commitments that no longer reflect real life.',
+        ),
+        const SizedBox(height: 10),
+        _buildFamCard(
+          context,
+          isDark,
+          Icons.celebration_outlined,
+          _amber,
+          'Family Rituals',
+          'Rituals are the glue of family identity — Sunday dinners, bedtime routines, annual trips. Log your rituals, protect them from schedule creep, and add new ones as the family evolves. '
+              'Rituals create the shared memory bank that family members draw on for identity and comfort, especially during periods of external stress or change. '
+              'The ritual protection system alerts you when a protected ritual is at risk of being displaced by a conflicting commitment, prompting a conscious decision rather than a default drift away from what matters.',
+        ),
+        const SizedBox(height: 10),
+        _buildFamCard(
+          context,
+          isDark,
+          Icons.chat_bubble_outline,
+          _teal,
+          'Communication Norms',
+          'How your family communicates under stress determines how well it holds together. Define your norms — no phones at dinner, weekly check-ins, a signal word for when someone needs space. '
+              'Communication norms reduce the emotional cost of conflict by providing agreed frameworks before the heat of disagreement — neither party is inventing the rules while already upset. '
+              'Norms are reviewed annually with all participating family members to ensure they continue to reflect the family\'s actual needs rather than becoming outdated rules enforced out of habit.',
+        ),
+        const SizedBox(height: 10),
+        _buildFamCard(
+          context,
+          isDark,
+          Icons.home_outlined,
+          _green,
+          'Household Responsibilities',
+          'Chores and responsibilities assigned clearly prevent the invisible labour problem. Use AIR to map who owns what at home and rotate tasks fairly as circumstances change. '
+              'The invisible labour audit surfaces tasks that are being done by one person invisibly — without recognition or rotation — and flags them for explicit assignment and acknowledgement. '
+              'Responsibility maps are age-appropriate for younger family members — the system suggests developmental-stage-appropriate contributions that build capability and belonging without creating unfair burden.',
+        ),
+        const SizedBox(height: 10),
+        _buildFamCard(
+          context,
+          isDark,
+          Icons.flag_outlined,
+          _warm,
+          'Family Goals',
+          'Families that set goals together — a vacation, a savings target, a home project — build shared purpose. Log your family goals and track progress so everyone feels invested. '
+              'Shared goals create a "we" narrative that is distinct from the sum of individual "I" narratives — families with shared goals report higher cohesion and resilience during individual setbacks. '
+              'Goal tracking includes a contribution board so each family member can see how their specific actions are advancing the shared goal, making contribution visible and motivating.',
+        ),
+        const SizedBox(height: 10),
+        _buildFamCard(
+          context,
+          isDark,
+          Icons.favorite_border_outlined,
+          _rose,
+          'One-on-One Time',
+          'Individual attention within a family is as important as group time. Schedule dedicated one-on-one time with each family member and log what you talked about to deepen the connection. '
+              'One-on-one time communicates individual value — that the person matters to you specifically, not just as a member of the group. Children especially register this distinction. '
+              'The one-on-one log includes a prompt before each session to consider what that specific person has been navigating recently, enabling you to arrive with genuine interest rather than generic availability.',
+        ),
+        const SizedBox(height: 10),
+        _buildFamCard(
+          context,
+          isDark,
+          Icons.people_outline,
+          _gold,
+          'Family Roles',
+          'Every family member plays a role — provider, nurturer, planner, peacemaker. Making these roles explicit reduces resentment and helps everyone know where they contribute most. '
+              'Explicit roles prevent the assumption that someone else is handling a critical function — and they enable appreciation for contributions that might otherwise go unnoticed or unacknowledged. '
+              'Role reviews happen twice a year — as life circumstances change, roles should evolve deliberately rather than drifting into patterns that no longer serve the family\'s current reality or values.',
+        ),
+        const SizedBox(height: 20),
+        _buildFamilyQuote(context, isDark, onSurface),
+      ],
     );
   }
 

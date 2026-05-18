@@ -11,53 +11,41 @@ class EaseToolsView extends GetView<EaseToolsController> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Ease Tools',
-          style: TextStyle(letterSpacing: 2, fontWeight: FontWeight.bold),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
       ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topRight,
-            end: Alignment.bottomLeft,
-            colors: [theme.scaffoldBackgroundColor, theme.colorScheme.surface],
-          ),
-        ),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildHeader(context),
-              Expanded(
-                child: Obx(() {
-                  return GridView.builder(
-                    physics: isEmbedded
-                        ? const NeverScrollableScrollPhysics()
-                        : null,
-                    shrinkWrap: isEmbedded,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          childAspectRatio: 0.85,
-                        ),
-                    itemCount: controller.tools.length,
-                    itemBuilder: (context, index) {
-                      return _buildToolCard(context, controller.tools[index]);
-                    },
-                  );
-                }),
-              ),
-            ],
-          ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(context),
+            Expanded(
+              child: Obx(() {
+                return GridView.builder(
+                  physics: isEmbedded
+                      ? const NeverScrollableScrollPhysics()
+                      : null,
+                  shrinkWrap: isEmbedded,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.85,
+                  ),
+                  itemCount: controller.tools.length,
+                  itemBuilder: (context, index) {
+                    return _buildToolCard(context, controller.tools[index]);
+                  },
+                );
+              }),
+            ),
+          ],
         ),
       ),
     );

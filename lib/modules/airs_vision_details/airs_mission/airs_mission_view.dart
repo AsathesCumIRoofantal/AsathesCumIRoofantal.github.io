@@ -22,129 +22,106 @@ class AirsMissionView extends GetView<AirsMissionController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF010510) : const Color(0xFFF0F9FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          "AIR'S MISSION",
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeroHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'CORE MISSION',
+          Icons.stars_rounded,
+          _flag,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.flag_rounded, color: _flag, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeroHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'CORE MISSION',
-            Icons.stars_rounded,
-            _flag,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildMissionStatement(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'STRATEGIC PRIORITIES',
-            Icons.format_list_numbered_rounded,
-            _blue,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildPriorityList(context, isDark, onSurface),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'MISSION DETAILS',
-            Icons.auto_stories_rounded,
-            _cyan,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildMissionCard(
-            context,
-            isDark,
-            Icons.gavel_rounded,
-            _flag,
-            'Non-Negotiable Commitments',
-            'Certain principles — data integrity, user privacy, and equitable access — are never traded away for speed or profit. '
-                'This section documents those commitments explicitly so they cannot be quietly eroded over time. '
-                'Non-negotiables are distinguished from preferences: a preference can be traded under sufficient pressure; a non-negotiable cannot — documenting them removes the ambiguity that allows erosion to happen incrementally.',
-          ),
-          const SizedBox(height: 10),
-          _buildMissionCard(
-            context,
-            isDark,
-            Icons.checklist_rounded,
-            _blue,
-            'Mission Alignment Check',
-            'Before launching any new initiative, run it through the mission alignment checklist to confirm it serves the core purpose. '
-                'Misaligned initiatives are redirected or shelved, keeping the roadmap coherent and focused. '
-                'The alignment check takes 10 minutes and produces a written summary that can be shared with any stakeholder questioning why an initiative was approved or declined — making the decision process transparent and repeatable.',
-          ),
-          const SizedBox(height: 10),
-          _buildMissionCard(
-            context,
-            isDark,
-            Icons.handshake_rounded,
-            _teal,
-            'Stakeholder Commitments',
-            'Document the specific promises AIR has made to users, partners, and communities — and track delivery against each one. '
-                'Transparency about commitments builds the trust that makes long-term collaboration possible. '
-                'Each stakeholder commitment has a delivery owner, a deadline, a success metric, and a current status — making the commitment ledger a living accountability document, not a static list of aspirations.',
-          ),
-          const SizedBox(height: 10),
-          _buildMissionCard(
-            context,
-            isDark,
-            Icons.history_edu_rounded,
-            _violet,
-            'Mission History & Evolution',
-            'A versioned record of how the mission statement has evolved since AIR\'s founding, with the reasoning behind each change. '
-                'Understanding the evolution prevents revisionism and helps new members grasp the depth of the current direction. '
-                'Version history includes the internal debate that preceded each change — the objections raised, the evidence considered, and the reasoning that ultimately prevailed — so the current mission is understood as a deliberate choice, not an inherited default.',
-          ),
-          const SizedBox(height: 10),
-          _buildMissionCard(
-            context,
-            isDark,
-            Icons.format_list_numbered_rounded,
-            _green,
-            'Strategic Priorities',
-            'A ranked list of the three to five outcomes AIR is optimising for in the current operating period. '
-                'Priorities are reviewed quarterly and updated transparently so every team member knows where to focus energy. '
-                'Each priority includes a time horizon, a success indicator, and the current progress status — ensuring priorities remain actionable rather than becoming abstract aspirations that cannot be measured or operationalised.',
-          ),
-          const SizedBox(height: 10),
-          _buildMissionCard(
-            context,
-            isDark,
-            Icons.stars_rounded,
-            _amber,
-            'Core Mission Statement',
-            'AIR exists to revolutionise industrial coordination through autonomous digitisation and community-driven verification. '
-                'Every feature, policy, and partnership is evaluated against this statement before it is approved. '
-                'The mission statement is intentionally compact — short enough to be memorised, specific enough to make tradeoffs obvious, and ambitious enough to inspire effort beyond what immediate incentives would produce.',
-          ),
-          const SizedBox(height: 20),
-          _buildMissionQuote(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 12),
+        _buildMissionStatement(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'STRATEGIC PRIORITIES',
+          Icons.format_list_numbered_rounded,
+          _blue,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildPriorityList(context, isDark, onSurface),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'MISSION DETAILS',
+          Icons.auto_stories_rounded,
+          _cyan,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildMissionCard(
+          context,
+          isDark,
+          Icons.gavel_rounded,
+          _flag,
+          'Non-Negotiable Commitments',
+          'Certain principles — data integrity, user privacy, and equitable access — are never traded away for speed or profit. '
+              'This section documents those commitments explicitly so they cannot be quietly eroded over time. '
+              'Non-negotiables are distinguished from preferences: a preference can be traded under sufficient pressure; a non-negotiable cannot — documenting them removes the ambiguity that allows erosion to happen incrementally.',
+        ),
+        const SizedBox(height: 10),
+        _buildMissionCard(
+          context,
+          isDark,
+          Icons.checklist_rounded,
+          _blue,
+          'Mission Alignment Check',
+          'Before launching any new initiative, run it through the mission alignment checklist to confirm it serves the core purpose. '
+              'Misaligned initiatives are redirected or shelved, keeping the roadmap coherent and focused. '
+              'The alignment check takes 10 minutes and produces a written summary that can be shared with any stakeholder questioning why an initiative was approved or declined — making the decision process transparent and repeatable.',
+        ),
+        const SizedBox(height: 10),
+        _buildMissionCard(
+          context,
+          isDark,
+          Icons.handshake_rounded,
+          _teal,
+          'Stakeholder Commitments',
+          'Document the specific promises AIR has made to users, partners, and communities — and track delivery against each one. '
+              'Transparency about commitments builds the trust that makes long-term collaboration possible. '
+              'Each stakeholder commitment has a delivery owner, a deadline, a success metric, and a current status — making the commitment ledger a living accountability document, not a static list of aspirations.',
+        ),
+        const SizedBox(height: 10),
+        _buildMissionCard(
+          context,
+          isDark,
+          Icons.history_edu_rounded,
+          _violet,
+          'Mission History & Evolution',
+          'A versioned record of how the mission statement has evolved since AIR\'s founding, with the reasoning behind each change. '
+              'Understanding the evolution prevents revisionism and helps new members grasp the depth of the current direction. '
+              'Version history includes the internal debate that preceded each change — the objections raised, the evidence considered, and the reasoning that ultimately prevailed — so the current mission is understood as a deliberate choice, not an inherited default.',
+        ),
+        const SizedBox(height: 10),
+        _buildMissionCard(
+          context,
+          isDark,
+          Icons.format_list_numbered_rounded,
+          _green,
+          'Strategic Priorities',
+          'A ranked list of the three to five outcomes AIR is optimising for in the current operating period. '
+              'Priorities are reviewed quarterly and updated transparently so every team member knows where to focus energy. '
+              'Each priority includes a time horizon, a success indicator, and the current progress status — ensuring priorities remain actionable rather than becoming abstract aspirations that cannot be measured or operationalised.',
+        ),
+        const SizedBox(height: 10),
+        _buildMissionCard(
+          context,
+          isDark,
+          Icons.stars_rounded,
+          _amber,
+          'Core Mission Statement',
+          'AIR exists to revolutionise industrial coordination through autonomous digitisation and community-driven verification. '
+              'Every feature, policy, and partnership is evaluated against this statement before it is approved. '
+              'The mission statement is intentionally compact — short enough to be memorised, specific enough to make tradeoffs obvious, and ambitious enough to inspire effort beyond what immediate incentives would produce.',
+        ),
+        const SizedBox(height: 20),
+        _buildMissionQuote(context, isDark, onSurface),
+      ],
     );
   }
 

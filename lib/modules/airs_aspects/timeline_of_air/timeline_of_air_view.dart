@@ -20,190 +20,186 @@ class TimelineOfAirView extends GetView<TimelineOfAirController> {
     final isDark = theme.brightness == Brightness.dark;
     final bg = isDark ? const Color(0xFF0A0E1A) : const Color(0xFFF0F4FF);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: theme.colorScheme.onSurface,
-        title: const Text(
-          'Timeline of AIR',
-          style: TextStyle(letterSpacing: 1.5, fontWeight: FontWeight.bold),
+    return
+    // Scaffold(
+    //   backgroundColor: bg,
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.transparent,
+    //     elevation: 0,
+    //     foregroundColor: theme.colorScheme.onSurface,
+    //     title: const Text(
+    //       'Timeline of AIR',
+    //       style: TextStyle(letterSpacing: 1.5, fontWeight: FontWeight.bold),
+    //     ),
+    //     centerTitle: true,
+    //   ),
+    //   body:
+    ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildHeader(context, isDark),
+        const SizedBox(height: 24),
+        _buildStatRow(context),
+        const SizedBox(height: 28),
+        _buildSectionLabel('FOUNDING ERA', Icons.flag_rounded, _gold, context),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2019',
+          era: 'GENESIS',
+          color: _gold,
+          icon: Icons.lightbulb_rounded,
+          title: 'The AIR Concept is Born',
+          description:
+              'The all-space intelligence framework is conceived — a bold vision to map, track, and '
+              'make transparent every entity and union in existence. The foundational philosophy of '
+              'Alifiyas (Explore) and Mazeasta (Rule) is authored as a living governing doctrine.',
+          isFirst: true,
+          isLast: false,
         ),
-        centerTitle: true,
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildHeader(context, isDark),
-          const SizedBox(height: 24),
-          _buildStatRow(context),
-          const SizedBox(height: 28),
-          _buildSectionLabel(
-            'FOUNDING ERA',
-            Icons.flag_rounded,
-            _gold,
-            context,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2019',
-            era: 'GENESIS',
-            color: _gold,
-            icon: Icons.lightbulb_rounded,
-            title: 'The AIR Concept is Born',
-            description:
-                'The all-space intelligence framework is conceived — a bold vision to map, track, and '
-                'make transparent every entity and union in existence. The foundational philosophy of '
-                'Alifiyas (Explore) and Mazeasta (Rule) is authored as a living governing doctrine.',
-            isFirst: true,
-            isLast: false,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2020',
-            era: 'FRAMEWORK',
-            color: _gold,
-            icon: Icons.architecture,
-            title: 'First Framework Documented',
-            description:
-                'The dual-council model — Alifiyas overseeing the EXPLORE domain and Mazeasta governing the RULE domain — '
-                'is formally documented. Entity and Union classification taxonomy v1.0 is released internally '
-                'and the all-space atlas structure is defined.',
-            isFirst: false,
-            isLast: false,
-          ),
-          _buildSectionLabel(
-            'GROWTH ERA',
-            Icons.trending_up_rounded,
-            _teal,
-            context,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2021',
-            era: 'FOUNDATION',
-            color: _teal,
-            icon: Icons.account_tree_rounded,
-            title: 'Alifiyas-Mazeasta Dual Framework Ratified',
-            description:
-                'The full governance model is ratified. Alifiyas Council takes responsibility for all learning, '
-                'identity, and public interaction touchpoints. Mazeasta Council assumes stewardship of advanced '
-                'philosophical frameworks, expert supervision protocols, and earned privileges.',
-            isFirst: false,
-            isLast: false,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2022',
-            era: 'BUILD',
-            color: _teal,
-            icon: Icons.phone_android_rounded,
-            title: 'AIR Mobile App Development Begins',
-            description:
-                'Flutter is chosen as the cross-platform framework. The app\'s modular drawer navigation '
-                'system — with 10 thematic sections and 80+ module pages — is architected and the '
-                'core GetX state management framework is implemented.',
-            isFirst: false,
-            isLast: false,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2023',
-            era: 'LAUNCH',
-            color: _teal,
-            icon: Icons.school_rounded,
-            title: 'Learn & Fun Module Released',
-            description:
-                'The first public-facing module launches. Learners access an interactive grid of knowledge categories '
-                '— Science, Art, Mathematics, Vision — each linking to AIR\'s JSON-powered document '
-                'library. Community engagement passes 1,000 active sessions.',
-            isFirst: false,
-            isLast: false,
-          ),
-          _buildSectionLabel(
-            'CURRENT ERA',
-            Icons.radio_button_checked_rounded,
-            _indigo,
-            context,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2024',
-            era: 'IDENTITY',
-            color: _indigo,
-            icon: Icons.fingerprint,
-            title: 'Identity System Deployed',
-            description:
-                'The "Get-As-Identified" questionnaire goes live — placing every individual within their '
-                'unique all-space node. The system uses a philosophical phase-based approach to map '
-                'cognitive coordinates. Wisdom Mode and Expert Supervision protocols are activated.',
-            isFirst: false,
-            isLast: false,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2025',
-            era: 'ECONOMY',
-            color: _indigo,
-            icon: Icons.account_balance_wallet_rounded,
-            title: 'Rewards Economy & Be-You Earnings Activated',
-            description:
-                'The Be-You & Earn Living economy activates: users receive AIR-V credits for contributions, '
-                'shared experiences, and verified posts. Identity-linked earnings are tracked in real time. '
-                'The Identities Cum Earnings dashboard reaches 5,000+ logged entries.',
-            isFirst: false,
-            isLast: false,
-          ),
-          _buildSectionLabel(
-            'FUTURE ROADMAP',
-            Icons.explore_rounded,
-            _purple,
-            context,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2026',
-            era: 'SCALE',
-            color: _purple,
-            icon: Icons.public_rounded,
-            title: 'Global Atlas Expansion',
-            description:
-                'AIR begins full-scale mapping of global entities and unions across all seven continents. '
-                'Multi-language support is rolled out. Strategic partnerships with academic institutions and '
-                'organisations are formalised under the AIR Partner Programme.',
-            isFirst: false,
-            isLast: false,
-          ),
-          _buildTimelineEvent(
-            context,
-            isDark,
-            date: '2027',
-            era: 'GOVERN',
-            color: _green,
-            icon: Icons.gavel_rounded,
-            title: 'Full Governance Mode',
-            description:
-                'AIR Organisation operates at full-scale governance — products, services, and the knowledge '
-                'economy running end-to-end. Democratic peer-review systems, transparent decision logs, '
-                'and community-driven atlas maintenance become the standard operating model.',
-            isFirst: false,
-            isLast: true,
-          ),
-          const SizedBox(height: 12),
-          _buildClosingBanner(context, isDark),
-        ],
-      ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2020',
+          era: 'FRAMEWORK',
+          color: _gold,
+          icon: Icons.architecture,
+          title: 'First Framework Documented',
+          description:
+              'The dual-council model — Alifiyas overseeing the EXPLORE domain and Mazeasta governing the RULE domain — '
+              'is formally documented. Entity and Union classification taxonomy v1.0 is released internally '
+              'and the all-space atlas structure is defined.',
+          isFirst: false,
+          isLast: false,
+        ),
+        _buildSectionLabel(
+          'GROWTH ERA',
+          Icons.trending_up_rounded,
+          _teal,
+          context,
+        ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2021',
+          era: 'FOUNDATION',
+          color: _teal,
+          icon: Icons.account_tree_rounded,
+          title: 'Alifiyas-Mazeasta Dual Framework Ratified',
+          description:
+              'The full governance model is ratified. Alifiyas Council takes responsibility for all learning, '
+              'identity, and public interaction touchpoints. Mazeasta Council assumes stewardship of advanced '
+              'philosophical frameworks, expert supervision protocols, and earned privileges.',
+          isFirst: false,
+          isLast: false,
+        ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2022',
+          era: 'BUILD',
+          color: _teal,
+          icon: Icons.phone_android_rounded,
+          title: 'AIR Mobile App Development Begins',
+          description:
+              'Flutter is chosen as the cross-platform framework. The app\'s modular drawer navigation '
+              'system — with 10 thematic sections and 80+ module pages — is architected and the '
+              'core GetX state management framework is implemented.',
+          isFirst: false,
+          isLast: false,
+        ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2023',
+          era: 'LAUNCH',
+          color: _teal,
+          icon: Icons.school_rounded,
+          title: 'Learn & Fun Module Released',
+          description:
+              'The first public-facing module launches. Learners access an interactive grid of knowledge categories '
+              '— Science, Art, Mathematics, Vision — each linking to AIR\'s JSON-powered document '
+              'library. Community engagement passes 1,000 active sessions.',
+          isFirst: false,
+          isLast: false,
+        ),
+        _buildSectionLabel(
+          'CURRENT ERA',
+          Icons.radio_button_checked_rounded,
+          _indigo,
+          context,
+        ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2024',
+          era: 'IDENTITY',
+          color: _indigo,
+          icon: Icons.fingerprint,
+          title: 'Identity System Deployed',
+          description:
+              'The "Get-As-Identified" questionnaire goes live — placing every individual within their '
+              'unique all-space node. The system uses a philosophical phase-based approach to map '
+              'cognitive coordinates. Wisdom Mode and Expert Supervision protocols are activated.',
+          isFirst: false,
+          isLast: false,
+        ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2025',
+          era: 'ECONOMY',
+          color: _indigo,
+          icon: Icons.account_balance_wallet_rounded,
+          title: 'Rewards Economy & Be-You Earnings Activated',
+          description:
+              'The Be-You & Earn Living economy activates: users receive AIR-V credits for contributions, '
+              'shared experiences, and verified posts. Identity-linked earnings are tracked in real time. '
+              'The Identities Cum Earnings dashboard reaches 5,000+ logged entries.',
+          isFirst: false,
+          isLast: false,
+        ),
+        _buildSectionLabel(
+          'FUTURE ROADMAP',
+          Icons.explore_rounded,
+          _purple,
+          context,
+        ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2026',
+          era: 'SCALE',
+          color: _purple,
+          icon: Icons.public_rounded,
+          title: 'Global Atlas Expansion',
+          description:
+              'AIR begins full-scale mapping of global entities and unions across all seven continents. '
+              'Multi-language support is rolled out. Strategic partnerships with academic institutions and '
+              'organisations are formalised under the AIR Partner Programme.',
+          isFirst: false,
+          isLast: false,
+        ),
+        _buildTimelineEvent(
+          context,
+          isDark,
+          date: '2027',
+          era: 'GOVERN',
+          color: _green,
+          icon: Icons.gavel_rounded,
+          title: 'Full Governance Mode',
+          description:
+              'AIR Organisation operates at full-scale governance — products, services, and the knowledge '
+              'economy running end-to-end. Democratic peer-review systems, transparent decision logs, '
+              'and community-driven atlas maintenance become the standard operating model.',
+          isFirst: false,
+          isLast: true,
+        ),
+        const SizedBox(height: 12),
+        _buildClosingBanner(context, isDark),
+      ],
     );
   }
 

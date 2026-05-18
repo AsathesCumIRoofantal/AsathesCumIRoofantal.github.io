@@ -21,123 +21,123 @@ class ResumeTourView extends GetView<ResumeTourController> {
     final onSurface = theme.colorScheme.onSurface;
     final bg = isDark ? const Color(0xFF020A06) : const Color(0xFFF0FDF4);
 
-    return Scaffold(
-      backgroundColor: bg,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: onSurface,
-        title: const Text(
-          'RESUME TOUR',
-          style: TextStyle(
-            letterSpacing: 2,
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+    return
+    // Scaffold(
+    //   backgroundColor: bg,
+    //   appBar: AppBar(
+    //     backgroundColor: Colors.transparent,
+    //     elevation: 0,
+    //     foregroundColor: onSurface,
+    //     title: const Text(
+    //       'RESUME TOUR',
+    //       style: TextStyle(
+    //         letterSpacing: 2,
+    //         fontWeight: FontWeight.bold,
+    //         fontSize: 14,
+    //       ),
+    //     ),
+    //     centerTitle: true,
+    //     actions: [
+    //       Padding(
+    //         padding: const EdgeInsets.only(right: 16),
+    //         child: Icon(Icons.play_circle_rounded, color: _mint, size: 22),
+    //       ),
+    //     ],
+    //   ),
+    //   body:
+    ListView(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
+      shrinkWrap: isEmbedded,
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      children: [
+        _buildProgressHeader(context, isDark, onSurface),
+        const SizedBox(height: 20),
+        _buildSectionLabel(
+          'YOUR JOURNEY STEPS',
+          Icons.route_rounded,
+          _mint,
+          onSurface,
         ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16),
-            child: Icon(Icons.play_circle_rounded, color: _mint, size: 22),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
-        shrinkWrap: isEmbedded,
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        children: [
-          _buildProgressHeader(context, isDark, onSurface),
-          const SizedBox(height: 20),
-          _buildSectionLabel(
-            'YOUR JOURNEY STEPS',
-            Icons.route_rounded,
-            _mint,
-            onSurface,
-          ),
-          const SizedBox(height: 14),
-          ..._tourSteps.asMap().entries.map(
-            (e) =>
-                _buildJourneyStep(context, isDark, onSurface, e.key, e.value),
-          ),
-          const SizedBox(height: 24),
-          _buildSectionLabel(
-            'TOUR DETAILS',
-            Icons.info_outline_rounded,
-            _sky,
-            onSurface,
-          ),
-          const SizedBox(height: 12),
-          _buildDetailCard(
-            context,
-            isDark,
-            Icons.flag_rounded,
-            _mint,
-            'Progress Checkpoint',
-            'See a clear summary of which tour stages you have completed, which are in progress, and which are still ahead. '
-                'The checkpoint prevents the disorientation of returning after a break — you always know exactly where you are in the journey. '
-                'Checkpoints are saved automatically so you can switch devices and pick up seamlessly mid-tour.',
-          ),
-          const SizedBox(height: 10),
-          _buildDetailCard(
-            context,
-            isDark,
-            Icons.explore_rounded,
-            _sky,
-            'Module Deep-Dives',
-            'Step through interactive walkthroughs of each AIR module — not just what it does, but how to use it effectively in real situations. '
-                'Deep-dives are designed to be completed in 5–10 minutes each, making it easy to fit orientation into a busy schedule. '
-                'Each deep-dive ends with a practical exercise so the knowledge is anchored through doing, not just watching.',
-          ),
-          const SizedBox(height: 10),
-          _buildDetailCard(
-            context,
-            isDark,
-            Icons.search_rounded,
-            _lime,
-            'Guided Feature Discovery',
-            'Unlock hidden and advanced features through a structured discovery sequence that reveals capabilities in the order they become most useful. '
-                'Discovery is paced to match your growing familiarity — you will not be shown features you are not yet ready to use. '
-                'Feature unlocks are celebrated with a micro-achievement so the discovery process itself feels rewarding.',
-          ),
-          const SizedBox(height: 10),
-          _buildDetailCard(
-            context,
-            isDark,
-            Icons.quiz_rounded,
-            _amber,
-            'Orientation Quiz',
-            'Test your understanding of key AIR concepts with a short quiz at the end of each tour section to reinforce what you have learned. '
-                'Quizzes are low-stakes and immediately reviewed — they are learning tools, not assessments. '
-                'Wrong answers reveal the correct reasoning immediately, turning errors into the deepest form of learning.',
-          ),
-          const SizedBox(height: 10),
-          _buildDetailCard(
-            context,
-            isDark,
-            Icons.route_rounded,
-            _violet,
-            'Personalised Tour Path',
-            'Adjust the tour sequence based on your role, interests, and the modules most relevant to your immediate goals. '
-                'A personalised path means you spend time on what matters most to you, not on a generic sequence designed for everyone. '
-                'Your chosen path is saved and can be updated at any time as your priorities within AIR evolve.',
-          ),
-          const SizedBox(height: 10),
-          _buildDetailCard(
-            context,
-            isDark,
-            Icons.workspace_premium_rounded,
-            _amber,
-            'Tour Completion Certificate',
-            'Earn a completion certificate when you finish the full orientation tour — a shareable credential that signals your readiness to contribute fully. '
-                'The certificate is recorded in your AIR profile and visible to collaborators who want to know your level of platform fluency. '
-                'Completing the tour also unlocks the first tier of the AIR Rewards system, crediting your account with orientation bonus points.',
-          ),
-          const SizedBox(height: 20),
-          _buildCompletionBanner(context, isDark, onSurface),
-        ],
-      ),
+        const SizedBox(height: 14),
+        ..._tourSteps.asMap().entries.map(
+          (e) => _buildJourneyStep(context, isDark, onSurface, e.key, e.value),
+        ),
+        const SizedBox(height: 24),
+        _buildSectionLabel(
+          'TOUR DETAILS',
+          Icons.info_outline_rounded,
+          _sky,
+          onSurface,
+        ),
+        const SizedBox(height: 12),
+        _buildDetailCard(
+          context,
+          isDark,
+          Icons.flag_rounded,
+          _mint,
+          'Progress Checkpoint',
+          'See a clear summary of which tour stages you have completed, which are in progress, and which are still ahead. '
+              'The checkpoint prevents the disorientation of returning after a break — you always know exactly where you are in the journey. '
+              'Checkpoints are saved automatically so you can switch devices and pick up seamlessly mid-tour.',
+        ),
+        const SizedBox(height: 10),
+        _buildDetailCard(
+          context,
+          isDark,
+          Icons.explore_rounded,
+          _sky,
+          'Module Deep-Dives',
+          'Step through interactive walkthroughs of each AIR module — not just what it does, but how to use it effectively in real situations. '
+              'Deep-dives are designed to be completed in 5–10 minutes each, making it easy to fit orientation into a busy schedule. '
+              'Each deep-dive ends with a practical exercise so the knowledge is anchored through doing, not just watching.',
+        ),
+        const SizedBox(height: 10),
+        _buildDetailCard(
+          context,
+          isDark,
+          Icons.search_rounded,
+          _lime,
+          'Guided Feature Discovery',
+          'Unlock hidden and advanced features through a structured discovery sequence that reveals capabilities in the order they become most useful. '
+              'Discovery is paced to match your growing familiarity — you will not be shown features you are not yet ready to use. '
+              'Feature unlocks are celebrated with a micro-achievement so the discovery process itself feels rewarding.',
+        ),
+        const SizedBox(height: 10),
+        _buildDetailCard(
+          context,
+          isDark,
+          Icons.quiz_rounded,
+          _amber,
+          'Orientation Quiz',
+          'Test your understanding of key AIR concepts with a short quiz at the end of each tour section to reinforce what you have learned. '
+              'Quizzes are low-stakes and immediately reviewed — they are learning tools, not assessments. '
+              'Wrong answers reveal the correct reasoning immediately, turning errors into the deepest form of learning.',
+        ),
+        const SizedBox(height: 10),
+        _buildDetailCard(
+          context,
+          isDark,
+          Icons.route_rounded,
+          _violet,
+          'Personalised Tour Path',
+          'Adjust the tour sequence based on your role, interests, and the modules most relevant to your immediate goals. '
+              'A personalised path means you spend time on what matters most to you, not on a generic sequence designed for everyone. '
+              'Your chosen path is saved and can be updated at any time as your priorities within AIR evolve.',
+        ),
+        const SizedBox(height: 10),
+        _buildDetailCard(
+          context,
+          isDark,
+          Icons.workspace_premium_rounded,
+          _amber,
+          'Tour Completion Certificate',
+          'Earn a completion certificate when you finish the full orientation tour — a shareable credential that signals your readiness to contribute fully. '
+              'The certificate is recorded in your AIR profile and visible to collaborators who want to know your level of platform fluency. '
+              'Completing the tour also unlocks the first tier of the AIR Rewards system, crediting your account with orientation bonus points.',
+        ),
+        const SizedBox(height: 20),
+        _buildCompletionBanner(context, isDark, onSurface),
+      ],
     );
   }
 
