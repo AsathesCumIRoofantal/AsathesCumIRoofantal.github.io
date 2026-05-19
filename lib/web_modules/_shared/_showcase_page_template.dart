@@ -86,11 +86,13 @@ class ShowcasePageTemplate extends StatelessWidget {
     return WebShell(
       currentRoute: currentRoute,
       child: Scaffold(
-        backgroundColor: isDark ? WColors.surfaceDark : section.accent.withValues(alpha: 0.35),
+        backgroundColor: isDark
+            ? WColors.surfaceDark
+            : section.accent.withValues(alpha: 0.35),
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: WBreak.isMobile(context) ? 320 : 420,
+              expandedHeight: WBreak.isMobile(context) ? 320 : 442,
               pinned: true,
               elevation: 0,
               backgroundColor: section.primary,
@@ -101,7 +103,10 @@ class ShowcasePageTemplate extends StatelessWidget {
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
                   pageTitle,
-                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 18,
+                  ),
                 ),
                 background: _ShowcaseHero(
                   section: section,
@@ -150,7 +155,10 @@ class ShowcasePageTemplate extends StatelessWidget {
                         duration: const Duration(milliseconds: 500),
                         child: ScaleAnimation(
                           child: FadeInAnimation(
-                            child: _SpotlightCard(section: section, spotlight: spot),
+                            child: _SpotlightCard(
+                              section: section,
+                              spotlight: spot,
+                            ),
                           ),
                         ),
                       );
@@ -161,9 +169,7 @@ class ShowcasePageTemplate extends StatelessWidget {
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 32)),
             SliverToBoxAdapter(
-              child: WMaxWidth(
-                child: _CapabilityBanner(section: section),
-              ),
+              child: WMaxWidth(child: _CapabilityBanner(section: section)),
             ),
             SliverToBoxAdapter(child: const SizedBox(height: 32)),
             SliverPadding(
@@ -241,7 +247,11 @@ class _PinnedSearchDelegate extends SliverPersistentHeaderDelegate {
   });
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       color: isDark ? WColors.surfaceDark : WColors.surface,
@@ -275,7 +285,10 @@ class _PinnedSearchDelegate extends SliverPersistentHeaderDelegate {
                     : const SizedBox();
               }),
               border: InputBorder.none,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 18,
+              ),
             ),
           ),
         ),
@@ -410,7 +423,10 @@ class _ShowcaseHeroState extends State<_ShowcaseHero>
                       children: widget.metrics
                           .map(
                             (metric) => Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
                               decoration: BoxDecoration(
                                 color: Colors.white.withValues(alpha: 0.12),
                                 borderRadius: BorderRadius.circular(16),
@@ -432,7 +448,9 @@ class _ShowcaseHeroState extends State<_ShowcaseHero>
                                   Text(
                                     metric.label,
                                     style: TextStyle(
-                                      color: Colors.white.withValues(alpha: 0.8),
+                                      color: Colors.white.withValues(
+                                        alpha: 0.8,
+                                      ),
                                       fontSize: 12,
                                     ),
                                   ),
@@ -597,7 +615,9 @@ class _InnerTopicCardState extends State<_InnerTopicCard> {
           color: isDark ? WColors.cardDark : Colors.white,
           borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: widget.section.primary.withValues(alpha: _hovered ? 0.32 : 0.14),
+            color: widget.section.primary.withValues(
+              alpha: _hovered ? 0.32 : 0.14,
+            ),
             width: 1.4,
           ),
           boxShadow: [
@@ -619,7 +639,10 @@ class _InnerTopicCardState extends State<_InnerTopicCard> {
                   height: 52,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [widget.section.primary, widget.section.secondary],
+                      colors: [
+                        widget.section.primary,
+                        widget.section.secondary,
+                      ],
                     ),
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -653,23 +676,23 @@ class _InnerTopicCardState extends State<_InnerTopicCard> {
               ),
             ),
             const SizedBox(height: 16),
-            Row(
-              children: [
-                Text(
-                  'Designed as a Flutter-ready inner section',
-                  style: TextStyle(
-                    color: widget.section.primary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const Spacer(),
-                Icon(
-                  Icons.arrow_forward_rounded,
-                  color: widget.section.primary,
-                ),
-              ],
-            ),
+            // Row(
+            //   children: [
+            //     Text(
+            //       'Designed as a Flutter-ready inner section',
+            //       style: TextStyle(
+            //         color: widget.section.primary,
+            //         fontSize: 12,
+            //         fontWeight: FontWeight.w800,
+            //       ),
+            //     ),
+            //     const Spacer(),
+            //     Icon(
+            //       Icons.arrow_forward_rounded,
+            //       color: widget.section.primary,
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),
@@ -756,7 +779,9 @@ class _TimelinePanel extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w900,
-                            color: isDark ? Colors.white : const Color(0xFF0F172A),
+                            color: isDark
+                                ? Colors.white
+                                : const Color(0xFF0F172A),
                           ),
                         ),
                         const SizedBox(height: 6),
