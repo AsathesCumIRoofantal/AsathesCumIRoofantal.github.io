@@ -1,22 +1,31 @@
-// web_modules/web_air_space/web_air_space_view.dart
-// Section workspace — unique palette, hero, item grid, and detail.
-// ENHANCED: Slivers, pinned header, parallax scrolling, advanced animations
+// web_modules/_shared/_enhanced_page_template.dart
+// Reusable enhanced template for all section pages with advanced animations
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'dart:math' as math;
+import '_web_layout.dart';
+import 'web_nav_data.dart';
 
-import '../_shared/_web_layout.dart';
-import '../_shared/web_nav_data.dart';
-import '../_shared/web_shell.dart';
-import 'web_air_space_controller.dart';
+/// Enhanced page builder with slivers and animations
+class EnhancedPageTemplate extends StatelessWidget {
+  final WebNavSection section;
+  final ScrollController scrollController;
+  final RxString searchQuery;
+  final Function(String) onSearchChanged;
+  final Widget? customHero;
+  final List<Widget>? additionalSlivers;
 
-class WebAirSpaceView extends GetView<WebAirSpaceController> {
-  const WebAirSpaceView({super.key});
-
-  static const String routeName = '/web-air_space';
-  static final WebNavSection section = WebNavData.bySlug('air_space');
+  const EnhancedPageTemplate({
+    super.key,
+    required this.section,
+    required this.scrollController,
+    required this.searchQuery,
+    required this.onSearchChanged,
+    this.customHero,
+    this.additionalSlivers,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,145 +34,141 @@ class WebAirSpaceView extends GetView<WebAirSpaceController> {
         ? WColors.surfaceDark
         : section.accent.withValues(alpha: 0.35);
 
-    return WebShell(
-      currentRoute: routeName,
-      child: Scaffold(
-        backgroundColor: bg,
-        body: CustomScrollView(
-          controller: controller.scrollController,
-          slivers: [
-            // ── PARALLAX HERO WITH SLIVER APP BAR ──
-            SliverAppBar(
-              expandedHeight: WBreak.isMobile(context) ? 300 : 400,
-              pinned: true,
-              backgroundColor: section.primary,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(
-                  section.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w900,
-                    fontSize: 18,
-                  ),
+    return Scaffold(
+      backgroundColor: bg,
+      body: CustomScrollView(
+        controller: scrollController,
+        slivers: [
+          // Hero Section
+          SliverAppBar(
+            expandedHeight: WBreak.isMobile(context) ? 300 : 400,
+            pinned: true,
+            backgroundColor: section.primary,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text(
+                section.title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
                 ),
-                background: _ParallaxHero(section: section),
               ),
+              background: customHero ?? AnimatedHeroSection(section: section),
             ),
+          ),
 
-            // ── FLOATING SEARCH BAR ──
-            SliverPersistentHeader(
-              pinned: true,
-              delegate: _SearchBarDelegate(
-                controller: controller,
-                color: section.primary,
-                minHeight: 80,
-                maxHeight: 80,
-              ),
+          // Search Bar
+          SliverPersistentHeader(
+            pinned: true,
+            delegate: EnhancedSearchDelegate(
+              searchQuery: searchQuery,
+              onChanged: onSearchChanged,
+              color: section.primary,
+              minHeight: 80,
+              maxHeight: 80,
             ),
+          ),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 20)),
+          SliverToBoxAdapter(child: const SizedBox(height: 20)),
 
-            // ── SECTION HEADER ──
-            SliverToBoxAdapter(
-              child: WMaxWidth(
-                child: FadeInAnimation(
-                  child: WSectionHeader(
-                    eyebrow: '${section.items.length} topics',
-                    title: 'Explore AIR\'s Space & Resources',
-                    subtitle:
-                        'Each tile is a focused topic inside ${section.title}. '
-                        'Tap to read its purpose and how to use it.',
-                    accent: section.primary,
-                  ),
+          // Section Header
+          SliverToBoxAdapter(
+            child: WMaxWidth(
+              child: FadeInAnimation(
+                child: WSectionHeader(
+                  eyebrow: '${section.items.length} topics',
+                  title: section.tagline,
+                  subtitle: section.blurb,
+                  accent: section.primary,
                 ),
               ),
             ),
+          ),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 24)),
+          SliverToBoxAdapter(child: const SizedBox(height: 24)),
 
-            // ── ANIMATED GRID WITH SLIVERS ──
-            Obx(() {
-              final q = controller.searchQuery.value.toLowerCase();
-              final items = q.isEmpty
-                  ? section.items
-                  : section.items
-                        .where(
-                          (it) =>
-                              it.title.toLowerCase().contains(q) ||
-                              it.description.toLowerCase().contains(q),
-                        )
-                        .toList();
+          // Additional custom slivers
+          if (additionalSlivers != null) ...additionalSlivers!,
 
-              if (items.isEmpty) {
-                return SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40),
-                    child: Center(
-                      child: Text(
-                        'No topics match "$q".',
-                        style: const TextStyle(color: Colors.grey),
-                      ),
+          // Animated Grid
+          Obx(() {
+            final q = searchQuery.value.toLowerCase();
+            final items = q.isEmpty
+                ? section.items
+                : section.items
+                      .where(
+                        (it) =>
+                            it.title.toLowerCase().contains(q) ||
+                            it.description.toLowerCase().contains(q),
+                      )
+                      .toList();
+
+            if (items.isEmpty) {
+              return SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: Center(
+                    child: Text(
+                      'No topics match "$q".',
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ),
-                );
-              }
-
-              return SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                sliver: SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: WBreak.cols(context).toInt(),
-                    childAspectRatio: 0.95,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                  ),
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    return AnimationConfiguration.staggeredGrid(
-                      position: index,
-                      duration: const Duration(milliseconds: 500),
-                      columnCount: WBreak.cols(context).toInt(),
-                      child: ScaleAnimation(
-                        scale: 0.5,
-                        child: FadeInAnimation(
-                          child: _EnhancedItemCard(
-                            item: items[index],
-                            color: section.primary,
-                          ),
-                        ),
-                      ),
-                    );
-                  }, childCount: items.length),
                 ),
               );
-            }),
+            }
 
-            SliverToBoxAdapter(child: const SizedBox(height: 48)),
+            return SliverPadding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              sliver: SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: WBreak.cols(context).toInt(),
+                  childAspectRatio: 0.95,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  return AnimationConfiguration.staggeredGrid(
+                    position: index,
+                    duration: const Duration(milliseconds: 500),
+                    columnCount: WBreak.cols(context).toInt(),
+                    child: ScaleAnimation(
+                      scale: 0.5,
+                      child: FadeInAnimation(
+                        child: EnhancedTopicCard(
+                          item: items[index],
+                          color: section.primary,
+                        ),
+                      ),
+                    ),
+                  );
+                }, childCount: items.length),
+              ),
+            );
+          }),
 
-            // ── CALL TO ACTION ──
-            SliverToBoxAdapter(
-              child: WMaxWidth(child: _CallToAction(section: section)),
-            ),
+          SliverToBoxAdapter(child: const SizedBox(height: 48)),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 56)),
-          ],
-        ),
+          // CTA Section
+          SliverToBoxAdapter(
+            child: WMaxWidth(child: EnhancedCTA(section: section)),
+          ),
+
+          SliverToBoxAdapter(child: const SizedBox(height: 56)),
+        ],
       ),
     );
   }
 }
 
-// ══════════════════════════════════════════════════════════════
-// ENHANCED WIDGETS
-// ══════════════════════════════════════════════════════════════
-
-class _ParallaxHero extends StatefulWidget {
+/// Animated hero section with floating elements
+class AnimatedHeroSection extends StatefulWidget {
   final WebNavSection section;
-  const _ParallaxHero({required this.section});
+  const AnimatedHeroSection({super.key, required this.section});
 
   @override
-  State<_ParallaxHero> createState() => _ParallaxHeroState();
+  State<AnimatedHeroSection> createState() => _AnimatedHeroSectionState();
 }
 
-class _ParallaxHeroState extends State<_ParallaxHero>
+class _AnimatedHeroSectionState extends State<AnimatedHeroSection>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
 
@@ -198,7 +203,7 @@ class _ParallaxHeroState extends State<_ParallaxHero>
         builder: (context, child) {
           return Stack(
             children: [
-              // Animated background patterns
+              // Floating elements
               Positioned(
                 top: 40 + math.sin(_controller.value * 2 * math.pi) * 15,
                 left: 30,
@@ -222,7 +227,7 @@ class _ParallaxHeroState extends State<_ParallaxHero>
                   child: Transform.rotate(
                     angle: -_controller.value * 2 * math.pi,
                     child: const Icon(
-                      Icons.hexagon,
+                      Icons.star_rounded,
                       size: 90,
                       color: Colors.white,
                     ),
@@ -305,16 +310,19 @@ class _ParallaxHeroState extends State<_ParallaxHero>
   }
 }
 
-class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
-  final WebAirSpaceController controller;
+/// Enhanced search bar delegate
+class EnhancedSearchDelegate extends SliverPersistentHeaderDelegate {
+  final RxString searchQuery;
+  final Function(String) onChanged;
   final Color color;
   @override
   final double minHeight;
   @override
   final double maxHeight;
 
-  _SearchBarDelegate({
-    required this.controller,
+  EnhancedSearchDelegate({
+    required this.searchQuery,
+    required this.onChanged,
     required this.color,
     required this.minHeight,
     required this.maxHeight,
@@ -346,18 +354,18 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
             ],
           ),
           child: TextField(
-            onChanged: controller.setQuery,
+            onChanged: onChanged,
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search, color: color, size: 24),
               suffixIcon: Obx(() {
-                return controller.searchQuery.value.isNotEmpty
+                return searchQuery.value.isNotEmpty
                     ? IconButton(
                         icon: Icon(Icons.clear, color: color),
-                        onPressed: () => controller.setQuery(''),
+                        onPressed: () => onChanged(''),
                       )
                     : const SizedBox();
               }),
-              hintText: 'Search topics in this workspace…',
+              hintText: 'Search topics…',
               hintStyle: TextStyle(
                 color: isDark ? Colors.white38 : Colors.black38,
               ),
@@ -374,7 +382,7 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(_SearchBarDelegate oldDelegate) => false;
+  bool shouldRebuild(EnhancedSearchDelegate oldDelegate) => false;
 
   @override
   // TODO: implement maxExtent
@@ -385,16 +393,17 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => throw UnimplementedError();
 }
 
-class _EnhancedItemCard extends StatefulWidget {
+/// Enhanced topic card with hover effects
+class EnhancedTopicCard extends StatefulWidget {
   final WebNavItem item;
   final Color color;
-  const _EnhancedItemCard({required this.item, required this.color});
+  const EnhancedTopicCard({super.key, required this.item, required this.color});
 
   @override
-  State<_EnhancedItemCard> createState() => _EnhancedItemCardState();
+  State<EnhancedTopicCard> createState() => _EnhancedTopicCardState();
 }
 
-class _EnhancedItemCardState extends State<_EnhancedItemCard>
+class _EnhancedTopicCardState extends State<EnhancedTopicCard>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   bool _isHovered = false;
@@ -433,7 +442,7 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
             offset: Offset(0, -_controller.value * 8),
             child: InkWell(
               borderRadius: BorderRadius.circular(18),
-              onTap: () => _openDetail(context),
+              onTap: () => _showDetailSheet(context),
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -530,7 +539,7 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
                     Row(
                       children: [
                         Text(
-                          'Learn more',
+                          'Explore',
                           style: TextStyle(
                             color: widget.color,
                             fontWeight: FontWeight.w800,
@@ -559,7 +568,7 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
     );
   }
 
-  void _openDetail(BuildContext context) {
+  void _showDetailSheet(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     showModalBottomSheet(
       context: context,
@@ -575,7 +584,6 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Drag handle
             Center(
               child: Container(
                 width: 40,
@@ -646,9 +654,10 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
   }
 }
 
-class _CallToAction extends StatelessWidget {
+/// Enhanced CTA section
+class EnhancedCTA extends StatelessWidget {
   final WebNavSection section;
-  const _CallToAction({required this.section});
+  const EnhancedCTA({super.key, required this.section});
 
   @override
   Widget build(BuildContext context) {
@@ -674,7 +683,7 @@ class _CallToAction extends StatelessWidget {
             Icon(Icons.rocket_launch_rounded, color: section.primary, size: 40),
             const SizedBox(height: 16),
             Text(
-              'Ready to explore more?',
+              'Continue exploring',
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.w900,
@@ -710,7 +719,7 @@ class _CallToAction extends StatelessWidget {
                   ),
                   icon: const Icon(Icons.dashboard_rounded),
                   label: const Text(
-                    'View all workspaces',
+                    'All workspaces',
                     style: TextStyle(fontWeight: FontWeight.w800),
                   ),
                 ),
@@ -727,9 +736,9 @@ class _CallToAction extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  icon: const Icon(Icons.bookmark_add_outlined),
+                  icon: const Icon(Icons.bookmark_border),
                   label: const Text(
-                    'Save for later',
+                    'Bookmark',
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                 ),
