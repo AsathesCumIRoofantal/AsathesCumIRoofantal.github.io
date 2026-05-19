@@ -5,11 +5,15 @@ import 'package:get/get.dart';
 class Vocabulary extends StatelessWidget {
   const Vocabulary({super.key});
 
+  static const String routeName = '/setup-aone/vocabulary';
+
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 700;
 
-    return Scaffold(
+    return WebShell(
+      currentRoute: routeName,
+      child: Scaffold(
       backgroundColor: const Color(0xFF0B1020),
       body: CustomScrollView(
         slivers: [

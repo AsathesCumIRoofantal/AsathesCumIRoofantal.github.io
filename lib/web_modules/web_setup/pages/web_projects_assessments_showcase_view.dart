@@ -5,11 +5,15 @@ import 'package:get/get.dart';
 class ProjectsAssessments extends StatelessWidget {
   const ProjectsAssessments({super.key});
 
+  static const String routeName = '/setup-aone/projects-assessments';
+
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 700;
 
-    return Scaffold(
+    return WebShell(
+      currentRoute: routeName,
+      child: Scaffold(
       backgroundColor: const Color(0xFF0B1020),
       body: CustomScrollView(
         slivers: [
