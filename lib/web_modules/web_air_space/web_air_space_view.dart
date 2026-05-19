@@ -308,9 +308,7 @@ class _ParallaxHeroState extends State<_ParallaxHero>
 class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   final WebAirSpaceController controller;
   final Color color;
-  @override
   final double minHeight;
-  @override
   final double maxHeight;
 
   _SearchBarDelegate({
@@ -377,12 +375,10 @@ class _SearchBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_SearchBarDelegate oldDelegate) => false;
 
   @override
-  // TODO: implement maxExtent
-  double get maxExtent => throw UnimplementedError();
+  double get maxExtent => maxHeight;
 
   @override
-  // TODO: implement minExtent
-  double get minExtent => throw UnimplementedError();
+  double get minExtent => minHeight;
 }
 
 class _EnhancedItemCard extends StatefulWidget {

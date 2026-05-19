@@ -315,9 +315,7 @@ class EnhancedSearchDelegate extends SliverPersistentHeaderDelegate {
   final RxString searchQuery;
   final Function(String) onChanged;
   final Color color;
-  @override
   final double minHeight;
-  @override
   final double maxHeight;
 
   EnhancedSearchDelegate({
@@ -385,12 +383,10 @@ class EnhancedSearchDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(EnhancedSearchDelegate oldDelegate) => false;
 
   @override
-  // TODO: implement maxExtent
-  double get maxExtent => throw UnimplementedError();
+  double get maxExtent => maxHeight;
 
   @override
-  // TODO: implement minExtent
-  double get minExtent => throw UnimplementedError();
+  double get minExtent => minHeight;
 }
 
 /// Enhanced topic card with hover effects
