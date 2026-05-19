@@ -4,11 +4,12 @@ import 'package:get/get.dart';
 import '../../_shared/_web_layout.dart';
 import '../../_shared/web_shell.dart';
 import 'web_category_tree_controller.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 
 class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
   const WebCategoryTreeView({super.key});
 
-  static const String routeName = '/web-setup/category-tree';
+  static const String routeName = WebNavData.setup_categoryTree;
 
   @override
   Widget build(BuildContext context) {
@@ -78,11 +79,19 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primary,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                     icon: const Icon(Icons.add, size: 18),
-                    label: const Text('Add Node', style: TextStyle(fontWeight: FontWeight.bold)),
+                    label: const Text(
+                      'Add Node',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),
@@ -99,7 +108,9 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                       color: isDark ? WColors.cardDark : Colors.white,
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(
-                        color: isDark ? Colors.white12 : Colors.black.withValues(alpha: 0.05),
+                        color: isDark
+                            ? Colors.white12
+                            : Colors.black.withValues(alpha: 0.05),
                       ),
                     ),
                     child: Column(
@@ -122,7 +133,11 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                               isDark: isDark,
                               children: [
                                 _buildLeafNode('Mazeasta Hub', primary, isDark),
-                                _buildLeafNode('Alifiyas Onboarding', primary, isDark),
+                                _buildLeafNode(
+                                  'Alifiyas Onboarding',
+                                  primary,
+                                  isDark,
+                                ),
                               ],
                             ),
                             _buildTreeNode(
@@ -133,8 +148,16 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                               primary: primary,
                               isDark: isDark,
                               children: [
-                                _buildLeafNode('Active Traces', primary, isDark),
-                                _buildLeafNode('Archived Knowledge', primary, isDark),
+                                _buildLeafNode(
+                                  'Active Traces',
+                                  primary,
+                                  isDark,
+                                ),
+                                _buildLeafNode(
+                                  'Archived Knowledge',
+                                  primary,
+                                  isDark,
+                                ),
                               ],
                             ),
                           ],
@@ -172,10 +195,14 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: isExpanded ? primary.withValues(alpha: 0.3) : Colors.transparent,
+                  color: isExpanded
+                      ? primary.withValues(alpha: 0.3)
+                      : Colors.transparent,
                 ),
                 borderRadius: BorderRadius.circular(12),
-                color: isExpanded ? primary.withValues(alpha: 0.05) : Colors.transparent,
+                color: isExpanded
+                    ? primary.withValues(alpha: 0.05)
+                    : Colors.transparent,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -183,7 +210,10 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                   AnimatedRotation(
                     turns: isExpanded ? 0.25 : 0,
                     duration: const Duration(milliseconds: 200),
-                    child: Icon(Icons.chevron_right, color: isDark ? Colors.white54 : Colors.black45),
+                    child: Icon(
+                      Icons.chevron_right,
+                      color: isDark ? Colors.white54 : Colors.black45,
+                    ),
                   ),
                   const SizedBox(width: 8),
                   Container(
@@ -237,7 +267,9 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                 children: children,
               ),
             ),
-            crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            crossFadeState: isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 300),
           ),
         ],
@@ -250,7 +282,9 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       decoration: BoxDecoration(
-        color: isDark ? Colors.white.withValues(alpha: 0.02) : Colors.black.withValues(alpha: 0.02),
+        color: isDark
+            ? Colors.white.withValues(alpha: 0.02)
+            : Colors.black.withValues(alpha: 0.02),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
           color: isDark ? Colors.white12 : Colors.black.withValues(alpha: 0.05),
@@ -259,7 +293,11 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(Icons.horizontal_rule_rounded, size: 16, color: primary.withValues(alpha: 0.5)),
+          Icon(
+            Icons.horizontal_rule_rounded,
+            size: 16,
+            color: primary.withValues(alpha: 0.5),
+          ),
           const SizedBox(width: 12),
           Text(
             title,

@@ -1,3 +1,4 @@
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,7 @@ import 'package:get/get.dart';
 class ScriptStrategy extends StatelessWidget {
   const ScriptStrategy({super.key});
 
-  static const String routeName = '/setup-aone/script-strategy';
+  static const String routeName = WebNavData.setup_scriptStrategy;
 
   @override
   Widget build(BuildContext context) {

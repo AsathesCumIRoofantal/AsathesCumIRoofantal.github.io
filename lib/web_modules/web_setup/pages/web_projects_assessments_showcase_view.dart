@@ -1,3 +1,4 @@
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,7 @@ import 'package:get/get.dart';
 class ProjectsAssessments extends StatelessWidget {
   const ProjectsAssessments({super.key});
 
-  static const String routeName = '/setup-aone/projects-assessments';
+  static const String routeName = WebNavData.setup_projectsAssessments;
 
   @override
   Widget build(BuildContext context) {

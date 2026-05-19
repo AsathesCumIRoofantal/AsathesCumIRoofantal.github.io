@@ -1,11 +1,12 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 
 class Vocabulary extends StatelessWidget {
   const Vocabulary({super.key});
 
-  static const String routeName = '/setup-aone/vocabulary';
+  static const String routeName = WebNavData.setup_vocabulary;
 
   @override
   Widget build(BuildContext context) {

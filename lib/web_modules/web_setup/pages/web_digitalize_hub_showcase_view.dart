@@ -1,11 +1,11 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 
 class ProductRecordDigitalize extends StatelessWidget {
   const ProductRecordDigitalize({super.key});
 
-  static const String routeName = '/setup-aone/digitalize-hub';
+  static const String routeName = WebNavData.setup_digitalizeHub;
 
   @override
   Widget build(BuildContext context) {

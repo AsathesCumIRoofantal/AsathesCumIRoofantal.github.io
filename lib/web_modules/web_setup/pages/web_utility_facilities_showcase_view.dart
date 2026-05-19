@@ -1,11 +1,12 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 
 class UtilityFacilities extends StatelessWidget {
   const UtilityFacilities({super.key});
 
-  static const String routeName = '/setup-aone/utility-facilities';
+  static const String routeName = WebNavData.setup_utilityFacilities;
 
   @override
   Widget build(BuildContext context) {

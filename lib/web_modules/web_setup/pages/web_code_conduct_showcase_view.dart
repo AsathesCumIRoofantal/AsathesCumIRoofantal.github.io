@@ -1,11 +1,12 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 
 class CodeConduct extends StatelessWidget {
   const CodeConduct({super.key});
 
-  static const String routeName = '/setup-aone/code-conduct';
+  static const String routeName = WebNavData.setup_codeConduct;
 
   @override
   Widget build(BuildContext context) {

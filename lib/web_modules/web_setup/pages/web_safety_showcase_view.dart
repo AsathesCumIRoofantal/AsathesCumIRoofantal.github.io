@@ -1,11 +1,12 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 import 'package:get/get.dart';
 
 class Safety extends StatelessWidget {
   const Safety({super.key});
 
-  static const String routeName = '/setup-aone/safety';
+  static const String routeName = WebNavData.setup_safety;
 
   @override
   Widget build(BuildContext context) {

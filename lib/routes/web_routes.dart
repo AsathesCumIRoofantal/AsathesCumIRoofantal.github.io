@@ -255,5 +255,41 @@ class WebRoutes {
       binding: WebAppSettingBinding(),
       transition: Transition.fadeIn,
     ),
+
+    GetPage(
+      name: ProductRecordDigitalize.routeName,
+      page: () => const ProductRecordDigitalize(),
+    ),
+
+    GetPage(
+      name: ProjectsAssessments.routeName,
+      page: () => const ProjectsAssessments(),
+    ),
+
+    GetPage(name: CategoryTree.routeName, page: () => const CategoryTree()),
+
+    GetPage(name: EaseTools.routeName, page: () => const EaseTools()),
+
+    GetPage(name: Vocabulary.routeName, page: () => const Vocabulary()),
+
+    GetPage(name: CodeConduct.routeName, page: () => const CodeConduct()),
+
+    GetPage(name: ScriptStrategy.routeName, page: () => const ScriptStrategy()),
+
+    GetPage(name: Safety.routeName, page: () => const Safety()),
+
+    GetPage(
+      name: HospitalityCare.routeName,
+      page: () => const HospitalityCare(),
+    ),
+
+    GetPage(
+      name: UtilityFacilities.routeName,
+      page: () => const UtilityFacilities(),
+    ),
+
+    GetPage(name: Commerce.routeName, page: () => const Commerce()),
+
+    GetPage(name: Social.routeName, page: () => const Social()),
   ];
 }

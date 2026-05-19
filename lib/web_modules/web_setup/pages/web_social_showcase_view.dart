@@ -1,11 +1,12 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 import 'package:get/get.dart';
 
 class Social extends StatelessWidget {
   const Social({super.key});
 
-  static const String routeName = '/setup-aone/social';
+  static const String routeName = WebNavData.setup_social;
 
   @override
   Widget build(BuildContext context) {

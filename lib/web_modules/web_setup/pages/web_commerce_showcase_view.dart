@@ -1,11 +1,12 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
 import 'package:flutter/material.dart';
+import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 import 'package:get/get.dart';
 
 class Commerce extends StatelessWidget {
   const Commerce({super.key});
 
-  static const String routeName = '/setup-aone/commerce';
+  static const String routeName = WebNavData.setup_commerce;
 
   @override
   Widget build(BuildContext context) {
