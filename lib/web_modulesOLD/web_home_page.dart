@@ -4,7 +4,7 @@
 // Responsive landing page for AIR – All-Space Web
 // ============================================================
 
-import 'package:air_app/web_modules/web_routes.dart';
+import 'package:air_app/routes/web_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -179,7 +179,7 @@ class WebHomePage extends StatelessWidget {
                         color: WColors.emerald,
                       ),
                       WFeatureCard(
-                        routeName: WebRoutes.airVision,
+                        // routeName: WebRoutes.airVision,
                         icon: Icons.hub_rounded,
                         title: "AIR's Aspects",
                         body:

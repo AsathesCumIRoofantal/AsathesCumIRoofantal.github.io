@@ -170,7 +170,7 @@ import 'package:air_app/modules/your_profile_specifics/public_stuff/public_stuff
 import 'package:air_app/modules/your_profile_specifics/rewards_credits/rewards_credits_best_view.dart';
 import 'package:air_app/modules/your_profile_specifics/tracks_traces/tracks_traces_best_view.dart';
 import 'package:air_app/modules/your_profile_specifics/your_business/your_business_best_view.dart';
-import 'package:air_app/web_modules/web_routes.dart';
+import 'package:air_app/routes/web_routes.dart';
 import 'package:get/get.dart';
 
 import '../modules/about_app/about_app_binding.dart';
