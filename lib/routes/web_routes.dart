@@ -89,18 +89,29 @@ class WebRoutes {
   static const motivation_connected = WebGetConnectedView.routeName;
   static const setup = WebSetupView.routeName;
   static const setup_category = WebCategoryTreeView.routeName;
-  static const setup_digitalizeHub = '/setup-aone/digitalize-hub';
-  static const setup_projectsAssessments = '/setup-aone/projects-assessments';
-  static const setup_categoryTree = '/setup-aone/category-tree';
-  static const setup_easeTools = '/setup-aone/ease-tools';
-  static const setup_vocabulary = '/setup-aone/vocabulary';
-  static const setup_codeConduct = '/setup-aone/code-conduct';
-  static const setup_scriptStrategy = '/setup-aone/script-strategy';
-  static const setup_safety = '/setup-aone/safety';
-  static const setup_hospitalityCare = '/setup-aone/hospitality-care';
-  static const setup_utilityFacilities = '/setup-aone/utility-facilities';
-  static const setup_commerce = '/setup-aone/commerce';
-  static const setup_social = '/setup-aone/social';
+  static const setup_digitalizeHub = ProductRecordDigitalize.routeName;
+
+  static const setup_projectsAssessments = ProjectsAssessments.routeName;
+
+  static const setup_categoryTree = CategoryTree.routeName;
+
+  static const setup_easeTools = EaseTools.routeName;
+
+  static const setup_vocabulary = Vocabulary.routeName;
+
+  static const setup_codeConduct = CodeConduct.routeName;
+
+  static const setup_scriptStrategy = ScriptStrategy.routeName;
+
+  static const setup_safety = Safety.routeName;
+
+  static const setup_hospitalityCare = HospitalityCare.routeName;
+
+  static const setup_utilityFacilities = UtilityFacilities.routeName;
+
+  static const setup_commerce = Commerce.routeName;
+
+  static const setup_social = Social.routeName;
 
   static const system = WebSystemView.routeName;
   static const system_setting = WebAppSettingView.routeName;
