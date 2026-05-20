@@ -19,7 +19,7 @@ class Social extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 330,
+              expandedHeight: 280,
               pinned: true,
               backgroundColor: const Color(0xFF111827),
               flexibleSpace: FlexibleSpaceBar(
