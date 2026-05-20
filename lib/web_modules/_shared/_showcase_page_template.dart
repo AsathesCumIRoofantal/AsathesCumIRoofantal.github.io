@@ -92,7 +92,7 @@ class ShowcasePageTemplate extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: WBreak.isMobile(context) ? 320 : 442,
+              expandedHeight: WBreak.isMobile(context) ? 570 : 442,
               pinned: true,
               elevation: 0,
               backgroundColor: section.primary,
