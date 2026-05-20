@@ -671,6 +671,8 @@ class EnhancedCTA extends StatelessWidget {
           width: double.infinity,
           padding: const EdgeInsets.all(32),
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(color: section.primary.withValues(alpha: 0.3)),
             gradient: LinearGradient(
               colors: [
                 section.primary.withValues(alpha: isDark ? 0.2 : 0.12),
@@ -678,12 +680,15 @@ class EnhancedCTA extends StatelessWidget {
               ],
             ),
           ),
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: section.primary.withValues(alpha: 0.3)),
+
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.rocket_launch_rounded, color: section.primary, size: 40),
+              Icon(
+                Icons.rocket_launch_rounded,
+                color: section.primary,
+                size: 40,
+              ),
               const SizedBox(height: 16),
               Text(
                 'Continue exploring',
