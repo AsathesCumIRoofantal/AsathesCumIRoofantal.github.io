@@ -73,12 +73,16 @@ class EnhancedPageTemplate extends StatelessWidget {
           // Section Header
           SliverToBoxAdapter(
             child: WMaxWidth(
-              child: FadeInAnimation(
-                child: WSectionHeader(
-                  eyebrow: '${section.items.length} topics',
-                  title: section.tagline,
-                  subtitle: section.blurb,
-                  accent: section.primary,
+              child: AnimationConfiguration.staggeredList(
+                position: 0,
+                duration: const Duration(milliseconds: 600),
+                child: FadeInAnimation(
+                  child: WSectionHeader(
+                    eyebrow: '${section.items.length} topics',
+                    title: section.tagline,
+                    subtitle: section.blurb,
+                    accent: section.primary,
+                  ),
                 ),
               ),
             ),
@@ -658,89 +662,93 @@ class EnhancedCTA extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return FadeInAnimation(
-      delay: const Duration(milliseconds: 400),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(32),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              section.primary.withValues(alpha: isDark ? 0.2 : 0.12),
-              section.secondary.withValues(alpha: isDark ? 0.15 : 0.08),
-            ],
+    return AnimationConfiguration.staggeredList(
+      position: 0,
+      duration: const Duration(milliseconds: 600),
+      child: FadeInAnimation(
+        delay: const Duration(milliseconds: 400),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(32),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                section.primary.withValues(alpha: isDark ? 0.2 : 0.12),
+                section.secondary.withValues(alpha: isDark ? 0.15 : 0.08),
+              ],
+            ),
           ),
           borderRadius: BorderRadius.circular(24),
           border: Border.all(color: section.primary.withValues(alpha: 0.3)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.rocket_launch_rounded, color: section.primary, size: 40),
-            const SizedBox(height: 16),
-            Text(
-              'Continue exploring',
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w900,
-                color: section.secondary,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              section.blurb,
-              style: TextStyle(
-                fontSize: 14,
-                height: 1.6,
-                color: isDark ? Colors.white70 : Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Wrap(
-              spacing: 12,
-              runSpacing: 12,
-              children: [
-                ElevatedButton.icon(
-                  onPressed: () => Get.toNamed(WebNavData.homeRoute),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: section.primary,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  icon: const Icon(Icons.dashboard_rounded),
-                  label: const Text(
-                    'All workspaces',
-                    style: TextStyle(fontWeight: FontWeight.w800),
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(Icons.rocket_launch_rounded, color: section.primary, size: 40),
+              const SizedBox(height: 16),
+              Text(
+                'Continue exploring',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w900,
+                  color: section.secondary,
                 ),
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    foregroundColor: section.primary,
-                    side: BorderSide(color: section.primary),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 24,
-                      vertical: 16,
-                    ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  icon: const Icon(Icons.bookmark_border),
-                  label: const Text(
-                    'Bookmark',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
+              ),
+              const SizedBox(height: 10),
+              Text(
+                section.blurb,
+                style: TextStyle(
+                  fontSize: 14,
+                  height: 1.6,
+                  color: isDark ? Colors.white70 : Colors.black87,
                 ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(height: 20),
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () => Get.toNamed(WebNavData.homeRoute),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: section.primary,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    icon: const Icon(Icons.dashboard_rounded),
+                    label: const Text(
+                      'All workspaces',
+                      style: TextStyle(fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: section.primary,
+                      side: BorderSide(color: section.primary),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 16,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    icon: const Icon(Icons.bookmark_border),
+                    label: const Text(
+                      'Bookmark',
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

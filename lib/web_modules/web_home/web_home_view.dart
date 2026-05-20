@@ -113,15 +113,18 @@ class WebHomeView extends GetView<WebHomeController> {
             // ── SECTION HEADER ──
             SliverToBoxAdapter(
               child: WMaxWidth(
-                child: FadeInAnimation(
+                child: AnimationConfiguration.staggeredList(
+                  position: 0,
                   duration: const Duration(milliseconds: 800),
-                  child: const WSectionHeader(
-                    eyebrow: 'The Atlas',
-                    title: 'Pick a workspace',
-                    subtitle:
-                        'Each card opens its own page with the full menu, hero, '
-                        'and topic detail. Use the drawer to jump anywhere, anytime.',
-                    accent: WColors.indigo,
+                  child: const FadeInAnimation(
+                    child: WSectionHeader(
+                      eyebrow: 'The Atlas',
+                      title: 'Pick a workspace',
+                      subtitle:
+                          'Each card opens its own page with the full menu, hero, '
+                          'and topic detail. Use the drawer to jump anywhere, anytime.',
+                      accent: WColors.indigo,
+                    ),
                   ),
                 ),
               ),
@@ -285,38 +288,50 @@ class _AnimatedHeroState extends State<_AnimatedHero>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    FadeInAnimation(
-                      delay: const Duration(milliseconds: 200),
-                      child: const Icon(
-                        Icons.public_rounded,
-                        color: Colors.white70,
-                        size: 60,
+                    AnimationConfiguration.staggeredList(
+                      position: 0,
+                      duration: const Duration(milliseconds: 600),
+                      child: const FadeInAnimation(
+                        delay: Duration(milliseconds: 200),
+                        child: Icon(
+                          Icons.public_rounded,
+                          color: Colors.white70,
+                          size: 60,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 20),
-                    FadeInAnimation(
-                      delay: const Duration(milliseconds: 400),
-                      child: const Text(
-                        'Everything in One Space',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 38,
-                          fontWeight: FontWeight.w900,
-                          height: 1.1,
+                    AnimationConfiguration.staggeredList(
+                      position: 1,
+                      duration: const Duration(milliseconds: 600),
+                      child: const FadeInAnimation(
+                        delay: Duration(milliseconds: 400),
+                        child: Text(
+                          'Everything in One Space',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 38,
+                            fontWeight: FontWeight.w900,
+                            height: 1.1,
+                          ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 16),
-                    FadeInAnimation(
-                      delay: const Duration(milliseconds: 600),
-                      child: Text(
-                        'AIR — Alifiyas Integrated Reality — is a living platform where '
-                        'knowledge, identity, creativity, and community converge into a '
-                        'single All-Space. Eleven workspaces, one atlas.',
-                        style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.9),
-                          fontSize: 15,
-                          height: 1.6,
+                    AnimationConfiguration.staggeredList(
+                      position: 2,
+                      duration: const Duration(milliseconds: 600),
+                      child: FadeInAnimation(
+                        delay: const Duration(milliseconds: 600),
+                        child: Text(
+                          'AIR — Alifiyas Integrated Reality — is a living platform where '
+                          'knowledge, identity, creativity, and community converge into a '
+                          'single All-Space. Eleven workspaces, one atlas.',
+                          style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.9),
+                            fontSize: 15,
+                            height: 1.6,
+                          ),
                         ),
                       ),
                     ),
@@ -577,30 +592,38 @@ class _AnimatedFooterState extends State<_AnimatedFooter>
           child: WMaxWidth(
             child: Column(
               children: [
-                ScaleAnimation(
-                  scale: 0.8,
-                  child: FadeInAnimation(
-                    child: const Text(
-                      'Ready to enter All-Space?',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w900,
+                AnimationConfiguration.staggeredList(
+                  position: 0,
+                  duration: const Duration(milliseconds: 600),
+                  child: ScaleAnimation(
+                    scale: 0.8,
+                    child: const FadeInAnimation(
+                      child: Text(
+                        'Ready to enter All-Space?',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w900,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(height: 12),
-                FadeInAnimation(
-                  delay: const Duration(milliseconds: 200),
-                  child: Text(
-                    'Open the drawer, pick a workspace, and start mapping your part of AIR.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.85),
-                      fontSize: 15,
-                      height: 1.6,
+                AnimationConfiguration.staggeredList(
+                  position: 1,
+                  duration: const Duration(milliseconds: 600),
+                  child: FadeInAnimation(
+                    delay: const Duration(milliseconds: 200),
+                    child: Text(
+                      'Open the drawer, pick a workspace, and start mapping your part of AIR.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white.withValues(alpha: 0.85),
+                        fontSize: 15,
+                        height: 1.6,
+                      ),
                     ),
                   ),
                 ),
