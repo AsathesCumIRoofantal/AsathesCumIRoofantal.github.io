@@ -2,6 +2,8 @@
 // Section workspace — unique palette, hero, item grid, and detail.
 
 import 'package:air_app/routes/web_routes.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_digitalize_hub_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_projects_assessments_showcase_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -351,18 +353,18 @@ class _ItemCard extends StatelessWidget {
     if (item.title == 'Category Tree') {
       Get.toNamed(WebNavData.setup_categoryTree);
       return;
-    } else if (item.title == 'Product Record Digitalize') {
-      // Get.toNamed(WebRoutes.setup_product_record);
-
-      return;
-    } else if (item.title == 'Projects Assessments') {
-      // Get.toNamed(WebRoutes.setup_projectsAssessments);
-
-      return;
-    } else if (item.title == 'Ease Tools') {
-      // Get.toNamed(WebRoutes.setup_easeTools);
-      return;
-    } else if (item.title == 'Vocabulary') {
+    } else if (item.title == 'Product & Record (DIGITALIZE)') {
+      Get.toNamed(WebDigitalizeHubShowcaseView.routeName);
+    } else if (item.title == 'Projects & Assessments') {
+      Get.toNamed(WebProjectsAssessmentsShowcaseView.routeName);
+    }
+    // else if (t.title == "Operate with Ease") {
+    //   Get.toNamed("");
+    // } else if (item.title == 'Ease Tools') {
+    // Get.toNamed(WebRoutes.setup_easeTools);
+    //   return;
+    // }
+    else if (item.title == 'Vocabulary') {
       // Get.toNamed(WebRoutes.setup_vocabulary);
       return;
     } else if (item.title == 'Code Conduct') {

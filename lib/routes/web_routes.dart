@@ -55,6 +55,11 @@ import 'package:air_app/web_modules/web_service/web_service_view.dart';
 import 'package:air_app/web_modules/web_service/web_service_binding.dart';
 import 'package:air_app/web_modules/web_service/pages/web_process_view.dart';
 import 'package:air_app/web_modules/web_service/pages/web_process_binding.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_commerce_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_digitalize_hub_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_ease_tools_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_hospitality_care_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_projects_assessments_showcase_view.dart';
 
 import 'package:air_app/web_modules/web_setup/web_setup_view.dart';
 import 'package:air_app/web_modules/web_setup/web_setup_binding.dart';
@@ -272,6 +277,27 @@ class WebRoutes {
       name: WebWisdomInternalView.routeName,
       page: () => const WebWisdomInternalView(),
       binding: WebWisdomInternalBinding(),
+    ),
+
+    GetPage(
+      name: WebCommerceShowcaseView.routeName,
+      page: () => const WebCommerceShowcaseView(),
+    ),
+    GetPage(
+      name: WebDigitalizeHubShowcaseView.routeName,
+      page: () => const WebDigitalizeHubShowcaseView(),
+    ),
+    GetPage(
+      name: WebEaseToolsShowcaseView.routeName,
+      page: () => const WebEaseToolsShowcaseView(),
+    ),
+    GetPage(
+      name: WebHospitalityCareShowcaseView.routeName,
+      page: () => const WebHospitalityCareShowcaseView(),
+    ),
+    GetPage(
+      name: WebProjectsAssessmentsShowcaseView.routeName,
+      page: () => const WebProjectsAssessmentsShowcaseView(),
     ),
   ];
 }
