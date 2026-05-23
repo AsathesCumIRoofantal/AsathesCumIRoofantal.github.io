@@ -125,6 +125,7 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                       ),
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _buildTreeNode(
@@ -197,13 +198,14 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
     return Obx(() {
       final isExpanded = controller.expandedNodes.contains(id);
       return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InkWell(
             onTap: () => controller.toggleNode(id),
             borderRadius: BorderRadius.circular(12),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: isExpanded
@@ -263,8 +265,8 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
           AnimatedCrossFade(
             firstChild: const SizedBox(width: double.infinity, height: 0),
             secondChild: Container(
-              margin: const EdgeInsets.only(left: 32, top: 8, bottom: 8),
-              padding: const EdgeInsets.only(left: 24),
+              margin: const EdgeInsets.only(left: 12, top: 8, bottom: 8),
+              padding: const EdgeInsets.only(left: 12),
               decoration: BoxDecoration(
                 border: Border(
                   left: BorderSide(
@@ -291,7 +293,7 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
   Widget _buildLeafNode(String title, Color primary, bool isDark) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 12),
       decoration: BoxDecoration(
         color: isDark
             ? Colors.white.withValues(alpha: 0.02)
