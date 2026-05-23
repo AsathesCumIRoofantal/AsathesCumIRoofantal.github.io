@@ -3,6 +3,7 @@
 // Responsive shell — side drawer on desktop (collapsible), modal on mobile.
 // ============================================================
 
+import 'package:air_app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,8 +15,8 @@ import 'web_theme_controller.dart';
 class WebDrawerController extends GetxController {
   final isOpen = true.obs;
   void toggle() => isOpen.value = !isOpen.value;
-  void open()   => isOpen.value = true;
-  void close()  => isOpen.value = false;
+  void open() => isOpen.value = true;
+  void close() => isOpen.value = false;
 }
 
 WebDrawerController _getDrawerCtrl() {
@@ -123,7 +124,10 @@ class WebShell extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.menu_rounded, color: Colors.black87),
+                      child: const Icon(
+                        Icons.menu_rounded,
+                        color: Colors.black87,
+                      ),
                     ),
                   ),
                 ),
@@ -249,12 +253,12 @@ class _WebDrawer extends StatelessWidget {
                           },
                           child: Row(
                             children: [
-                              const CircleAvatar(
-                                radius: 22,
-                                backgroundColor: Colors.white,
-                                child: Icon(Icons.air, color: WColors.indigo),
-                              ),
-                              const SizedBox(width: 12),
+                              // const CircleAvatar(
+                              //   radius: 22,
+                              //   backgroundColor: Colors.white,
+                              //   child: Icon(Icons.air, color: WColors.indigo),
+                              // ),
+                              // const SizedBox(width: 12),
                               Expanded(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -271,7 +275,10 @@ class _WebDrawer extends StatelessWidget {
                                     SizedBox(height: 4),
                                     Text(
                                       'Alifiyas-Mazeasta · Web',
-                                      style: TextStyle(color: Colors.white70, fontSize: 11),
+                                      style: TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 11,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -327,7 +334,10 @@ class _WebDrawer extends StatelessWidget {
                       backgroundColor: Colors.white,
                       foregroundColor: WColors.indigo,
                       elevation: 0,
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 12,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -335,9 +345,66 @@ class _WebDrawer extends StatelessWidget {
                     icon: const Icon(Icons.dashboard_rounded, size: 18),
                     label: const Text(
                       'Dashboard',
-                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 13),
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 13,
+                      ),
                     ),
                   ),
+
+                  if (!isDesktop)
+                    Column(
+                      children: [
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton.icon(
+                              onPressed: () {
+                                Get.toNamed("/");
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: WColors.indigo,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 22,
+                                  vertical: 14,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              icon: const Icon(Icons.explore_rounded),
+                              label: const Text(
+                                'Explore Base',
+                                style: TextStyle(fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            OutlinedButton.icon(
+                              onPressed: () {
+                                Get.offNamed(AppRoutes.LOGIN);
+                              },
+                              style: OutlinedButton.styleFrom(
+                                foregroundColor: Colors.white,
+                                side: const BorderSide(color: Colors.white54),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 22,
+                                  vertical: 14,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              icon: const Icon(Icons.login_rounded),
+                              label: const Text(
+                                'Sign In',
+                                style: TextStyle(fontWeight: FontWeight.w600),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ),
@@ -351,7 +418,10 @@ class _WebDrawer extends StatelessWidget {
                   final section = WebNavData.sections[i];
                   final active = currentRoute == section.route;
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 4,
+                    ),
                     child: InkWell(
                       borderRadius: BorderRadius.circular(14),
                       onTap: () {
@@ -362,7 +432,10 @@ class _WebDrawer extends StatelessWidget {
                       },
                       child: AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
                         decoration: BoxDecoration(
                           color: active
                               ? section.primary.withValues(alpha: 0.12)
@@ -380,12 +453,16 @@ class _WebDrawer extends StatelessWidget {
                               width: 38,
                               height: 38,
                               decoration: BoxDecoration(
-                                color: section.primary
-                                    .withValues(alpha: active ? 0.22 : 0.12),
+                                color: section.primary.withValues(
+                                  alpha: active ? 0.22 : 0.12,
+                                ),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Icon(section.icon,
-                                  size: 19, color: section.primary),
+                              child: Icon(
+                                section.icon,
+                                size: 19,
+                                color: section.primary,
+                              ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
