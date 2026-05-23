@@ -1,4 +1,5 @@
 import 'package:air_app/web_modules/_shared/web_shell.dart';
+import 'package:air_app/web_modules/sample_flutter_design_check/flutter_capabilities.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -571,6 +572,7 @@ class WebDigitalizeHubShowcaseView extends StatelessWidget {
                 ),
               ),
             ),
+            ...FlutterCapabilities().slivers,
           ],
         ),
       ),

@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 
-class FlutterCapabilities extends StatefulWidget {
-  const FlutterCapabilities({super.key});
-
-  @override
-  State<FlutterCapabilities> createState() => _FlutterCapabilitiesState();
-}
-
-class _FlutterCapabilitiesState extends State<FlutterCapabilities> {
+class FlutterCapabilities {
   int activeCategory = 0;
 
   final List<Map<String, dynamic>> capabilities = [
@@ -104,180 +98,171 @@ class _FlutterCapabilitiesState extends State<FlutterCapabilities> {
     },
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        // Header
-        SliverAppBar(
-          expandedHeight: 280,
-          floating: false,
-          pinned: true,
-          backgroundColor: Colors.grey[900],
-          flexibleSpace: FlexibleSpaceBar(
-            background: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.grey[900]!,
-                    Colors.blue[900]!.withOpacity(0.7),
-                    Colors.cyan[800]!.withOpacity(0.5),
-                  ],
-                ),
-              ),
-              child: SafeArea(
-                child: Stack(
-                  children: [
-                    // Animated dots
-                    ...List.generate(30, (index) {
-                      return Positioned(
-                        left: (index * 13) % 400,
-                        top: (index * 17) % 280,
-                        child:
-                            Container(
-                                  width: 3,
-                                  height: 3,
-                                  decoration: BoxDecoration(
-                                    color: Colors.cyan.withOpacity(0.4),
-                                    shape: BoxShape.circle,
-                                  ),
-                                )
-                                .animate(
-                                  onPlay: (controller) => controller.repeat(),
-                                )
-                                .fadeOut(
-                                  duration: 3000.ms,
-                                  delay: (index * 100).ms,
-                                )
-                                .fadeIn(
-                                  duration: 3000.ms,
-                                  delay: (index * 100).ms,
-                                )
-                                .scale(
-                                  begin: const Offset(0.5, 0.5),
-                                  end: const Offset(2, 2),
-                                  duration: 3000.ms,
-                                ),
-                      );
-                    }),
-                    // Content
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 8,
-                              ),
+  List<Widget> get slivers => [
+    // Header
+    SliverAppBar(
+      expandedHeight: 280,
+      floating: false,
+      pinned: true,
+      backgroundColor: Colors.grey[900],
+      flexibleSpace: FlexibleSpaceBar(
+        background: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.grey[900]!,
+                Colors.blue[900]!.withOpacity(0.7),
+                Colors.cyan[800]!.withOpacity(0.5),
+              ],
+            ),
+          ),
+          child: SafeArea(
+            child: Stack(
+              children: [
+                // Animated dots
+                ...List.generate(30, (index) {
+                  return Positioned(
+                    left: (index * 13) % 400,
+                    top: (index * 17) % 280,
+                    child:
+                        Container(
+                              width: 3,
+                              height: 3,
                               decoration: BoxDecoration(
-                                color: Colors.cyan.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: Colors.cyan.withOpacity(0.3),
+                                color: Colors.cyan.withOpacity(0.4),
+                                shape: BoxShape.circle,
+                              ),
+                            )
+                            .animate(
+                              onPlay: (controller) => controller.repeat(),
+                            )
+                            .fadeOut(duration: 3000.ms, delay: (index * 100).ms)
+                            .fadeIn(duration: 3000.ms, delay: (index * 100).ms)
+                            .scale(
+                              begin: const Offset(0.5, 0.5),
+                              end: const Offset(2, 2),
+                              duration: 3000.ms,
+                            ),
+                  );
+                }),
+                // Content
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.cyan.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: Colors.cyan.withOpacity(0.3),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.auto_awesome,
+                                color: Colors.cyan[400],
+                                size: 16,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'Flutter 2026',
+                                style: TextStyle(
+                                  color: Colors.cyan[300],
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Icon(
-                                    Icons.auto_awesome,
-                                    color: Colors.cyan[400],
-                                    size: 16,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    'Flutter 2026',
-                                    style: TextStyle(
-                                      color: Colors.cyan[300],
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 16),
-                            Text(
-                              'What Flutter',
-                              style: Theme.of(context).textTheme.headlineLarge
-                                  ?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            ShaderMask(
-                              shaderCallback: (bounds) => LinearGradient(
-                                colors: [Colors.cyan[400]!, Colors.blue[400]!],
-                              ).createShader(bounds),
-                              child: Text(
-                                'Can Do',
-                                style: Theme.of(context).textTheme.headlineLarge
-                                    ?.copyWith(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              'Build beautiful apps for any platform',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.grey[400],
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'What Flutter',
+                          style: Theme.of(Get.context!).textTheme.headlineLarge
+                              ?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                        ),
+                        ShaderMask(
+                          shaderCallback: (bounds) => LinearGradient(
+                            colors: [Colors.cyan[400]!, Colors.blue[400]!],
+                          ).createShader(bounds),
+                          child: Text(
+                            'Can Do',
+                            style: Theme.of(Get.context!)
+                                .textTheme
+                                .headlineLarge
+                                ?.copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          'Build beautiful apps for any platform',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.grey[400],
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           ),
         ),
+      ),
+    ),
 
-        // Capabilities Carousel
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: _buildCapabilitiesPanel(),
-          ),
-        ),
+    // Capabilities Carousel
+    SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: _buildCapabilitiesPanel(),
+      ),
+    ),
 
-        // Feature Stats
-        SliverPadding(
-          padding: const EdgeInsets.all(16),
-          sliver: SliverGrid(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 1.3,
-            ),
-            delegate: SliverChildBuilderDelegate((context, index) {
-              final feature = features[index];
-              return _buildFeatureCard(feature, index);
-            }, childCount: features.length),
-          ),
+    // Feature Stats
+    SliverPadding(
+      padding: const EdgeInsets.all(16),
+      sliver: SliverGrid(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 12,
+          crossAxisSpacing: 12,
+          childAspectRatio: 1.3,
         ),
+        delegate: SliverChildBuilderDelegate((context, index) {
+          final feature = features[index];
+          return _buildFeatureCard(feature, index);
+        }, childCount: features.length),
+      ),
+    ),
 
-        // Code Example
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: _buildCodeExample(),
-          ),
-        ),
-      ],
-    );
-  }
+    // Code Example
+    SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: _buildCodeExample(),
+      ),
+    ),
+  ];
 
   Widget _buildCapabilitiesPanel() {
     return Card(
@@ -291,7 +276,7 @@ class _FlutterCapabilitiesState extends State<FlutterCapabilities> {
           children: [
             Text(
               'One Code, All Platforms',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+              style: Theme.of(Get.context!).textTheme.titleLarge?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
               ),
@@ -306,7 +291,9 @@ class _FlutterCapabilitiesState extends State<FlutterCapabilities> {
 
                 return Expanded(
                   child: GestureDetector(
-                    onTap: () => setState(() => activeCategory = index),
+                    onTap: () {
+                      activeCategory = index;
+                    },
                     child: AnimatedContainer(
                       duration: const Duration(milliseconds: 200),
                       margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -539,7 +526,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext Get.context!) {
     return MaterialApp(
       title: 'Flutter 2026',
       theme: ThemeData(
