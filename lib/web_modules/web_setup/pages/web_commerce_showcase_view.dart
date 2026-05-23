@@ -241,26 +241,58 @@ class _WebCommerceShowcaseViewState extends State<WebCommerceShowcaseView> {
             // Products Grid
             SliverPadding(
               padding: const EdgeInsets.all(16),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 16,
-                  crossAxisSpacing: 16,
-                  childAspectRatio: 0.65,
-                ),
+              sliver: SliverList(
                 delegate: SliverChildBuilderDelegate((context, index) {
-                  final product = products[index];
-                  final isFavorite = favorites.contains(product['id']);
+                  // Each row will contain two products
+                  final firstIndex = index * 2;
+                  final secondIndex = firstIndex + 1;
 
-                  return ProductCard(
-                        product: product,
-                        isFavorite: isFavorite,
-                        onFavoriteToggle: () => toggleFavorite(product['id']),
-                      )
-                      .animate()
-                      .fadeIn(delay: (index * 100).ms)
-                      .slideY(begin: 0.2, end: 0);
-                }, childCount: products.length),
+                  final firstProduct = products[firstIndex];
+                  final isFirstFavorite = favorites.contains(
+                    firstProduct['id'],
+                  );
+
+                  Widget firstCard =
+                      ProductCard(
+                            product: firstProduct,
+                            isFavorite: isFirstFavorite,
+                            onFavoriteToggle: () =>
+                                toggleFavorite(firstProduct['id']),
+                          )
+                          .animate()
+                          .fadeIn(delay: (firstIndex * 100).ms)
+                          .slideY(begin: 0.2, end: 0);
+
+                  Widget? secondCard;
+                  if (secondIndex < products.length) {
+                    final secondProduct = products[secondIndex];
+                    final isSecondFavorite = favorites.contains(
+                      secondProduct['id'],
+                    );
+
+                    secondCard =
+                        ProductCard(
+                              product: secondProduct,
+                              isFavorite: isSecondFavorite,
+                              onFavoriteToggle: () =>
+                                  toggleFavorite(secondProduct['id']),
+                            )
+                            .animate()
+                            .fadeIn(delay: (secondIndex * 100).ms)
+                            .slideY(begin: 0.2, end: 0);
+                  }
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Row(
+                      children: [
+                        Expanded(child: firstCard),
+                        const SizedBox(width: 16),
+                        Expanded(child: secondCard ?? const SizedBox()),
+                      ],
+                    ),
+                  );
+                }, childCount: (products.length / 2).ceil()),
               ),
             ),
           ],
