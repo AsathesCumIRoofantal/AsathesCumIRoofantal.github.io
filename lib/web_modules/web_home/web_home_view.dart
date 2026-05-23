@@ -138,7 +138,7 @@ class WebHomeView extends GetView<WebHomeController> {
               sliver: SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: WBreak.cols(context).toInt(),
-                  childAspectRatio: 0.60,
+                  childAspectRatio: 0.64,
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                 ),
