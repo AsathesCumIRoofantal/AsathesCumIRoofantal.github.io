@@ -320,10 +320,9 @@ class _ChapterRail extends SliverPersistentHeaderDelegate {
   });
 
   @override
-  double get maxExtent => 72;
-
+  double get maxExtent => 88;
   @override
-  double get minExtent => 72;
+  double get minExtent => 88;
 
   @override
   bool shouldRebuild(covariant _ChapterRail oldDelegate) {
@@ -340,56 +339,54 @@ class _ChapterRail extends SliverPersistentHeaderDelegate {
     double shrinkOffset,
     bool overlapsContent,
   ) {
-    return Container(
-      color: bg.withValues(alpha: .92),
-      padding: const EdgeInsets.symmetric(vertical: 14),
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Row(
-          children: [
-            for (var i = 0; i < chapters.length; i++) ...[
-              GestureDetector(
-                onTap: () => onTap(i),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 250),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 18,
-                    vertical: 10,
-                  ),
-                  decoration: BoxDecoration(
-                    color: currentPage == i
-                        ? accent
-                        : accent.withValues(alpha: .12),
-                    borderRadius: BorderRadius.circular(99),
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        chapters[i].roman,
-                        style: TextStyle(
-                          color: currentPage == i ? Colors.white : accent,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
+    return Material(
+      color: bg.withValues(alpha: .95),
+      child: SizedBox.expand(
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          itemCount: chapters.length,
+          separatorBuilder: (_, __) => const SizedBox(width: 10),
+          itemBuilder: (context, i) {
+            final selected = currentPage == i;
 
-                      const SizedBox(width: 8),
-
-                      Text(
-                        chapters[i].title,
-                        style: TextStyle(
-                          color: currentPage == i ? Colors.white : ink,
-                          fontWeight: FontWeight.w600,
-                        ),
+            return GestureDetector(
+              onTap: () => onTap(i),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 250),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 10,
+                ),
+                decoration: BoxDecoration(
+                  color: selected ? accent : accent.withValues(alpha: .12),
+                  borderRadius: BorderRadius.circular(99),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      chapters[i].roman,
+                      style: TextStyle(
+                        color: selected ? Colors.white : accent,
+                        fontWeight: FontWeight.w800,
                       ),
-                    ],
-                  ),
+                    ),
+
+                    const SizedBox(width: 8),
+
+                    Text(
+                      chapters[i].title,
+                      style: TextStyle(
+                        color: selected ? Colors.white : ink,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-
-              const SizedBox(width: 10),
-            ],
-          ],
+            );
+          },
         ),
       ),
     );
