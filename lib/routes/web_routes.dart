@@ -6,6 +6,8 @@ import 'package:air_app/web_modules/web_air_space/pages/web_products_services_bi
 import 'package:air_app/web_modules/web_air_space/pages/web_products_services_view.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_query_discussion_binding.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_query_discussion_view.dart';
+import 'package:air_app/web_modules/web_air_space/pages/web_utilities_guest_binding.dart';
+import 'package:air_app/web_modules/web_air_space/pages/web_utilities_guest_view.dart';
 import 'package:air_app/web_modules/web_air_space/web_air_space_binding.dart';
 import 'package:air_app/web_modules/web_air_space/web_air_space_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_be_part_binding.dart';
@@ -17,6 +19,8 @@ import 'package:air_app/web_modules/web_aspects/web_aspects_view.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_ask_anything_b_binding.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_ask_anything_b_view.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_higher_studies_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_b_binding.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_b_view.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_binding.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_view.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_record_post_binding.dart';
@@ -327,9 +331,15 @@ class WebRoutes {
       transition: Transition.rightToLeft, // Section roots use rightToLeft
     ),
     GetPage(
-      name: WebIdentitiesEarningsView.routeName,
-      page: () => const WebIdentitiesEarningsView(),
-      binding: WebIdentitiesEarningsBinding(),
+      name: WebIdentitiesEarningsBView.routeName,
+      page: () => const WebIdentitiesEarningsBView(),
+      binding: WebIdentitiesEarningsBBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebUtilitiesGuestView.routeName,
+      page: () => const WebUtilitiesGuestView(),
+      binding: WebUtilitiesGuestBinding(),
       transition: Transition.fadeIn,
     ),
   ];

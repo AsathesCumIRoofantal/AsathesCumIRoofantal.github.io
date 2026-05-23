@@ -1,6 +1,8 @@
 // web_modules/web_be_you/web_be_you_view.dart
 // Section workspace — unique palette, hero, item grid, and detail.
 
+import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_b_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -352,6 +354,12 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'Record Your Post') {
       Get.toNamed('/web-be_you/record-post');
+      return;
+    } else if (item.title == 'Identities Cum Earnings') {
+      // THIS IS THE NEWLY IMPLEMENTED ROUTE
+      Get.toNamed(WebIdentitiesEarningsBView.routeName);
+      return;
+      Get.toNamed(WebIdentitiesEarningsView.routeName);
       return;
     }
 

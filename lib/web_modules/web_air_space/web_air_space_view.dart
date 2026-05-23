@@ -2,6 +2,7 @@
 // Section workspace — unique palette, hero, item grid, and detail.
 // ENHANCED: Slivers, pinned header, parallax scrolling, advanced animations
 
+import 'package:air_app/web_modules/web_air_space/pages/web_utilities_guest_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -569,6 +570,9 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
       return;
     } else if (item.title == 'Query & Discussion') {
       Get.toNamed('/web-air_space/query-discussion');
+      return;
+    } else if (item.title == 'Utilities as Guest') {
+      Get.toNamed(WebUtilitiesGuestView.routeName);
       return;
     }
     // else if (item.title == 'Record Your Post') {
