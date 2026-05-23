@@ -4,6 +4,7 @@
 // ============================================================
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '_web_layout.dart';
 
@@ -105,10 +106,12 @@ class _WebExplorePageState extends State<WebExplorePage>
   List<_Track> get _filtered => _search.isEmpty
       ? _tracks
       : _tracks
-          .where((t) =>
-              t.title.toLowerCase().contains(_search.toLowerCase()) ||
-              t.desc.toLowerCase().contains(_search.toLowerCase()))
-          .toList();
+            .where(
+              (t) =>
+                  t.title.toLowerCase().contains(_search.toLowerCase()) ||
+                  t.desc.toLowerCase().contains(_search.toLowerCase()),
+            )
+            .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -141,14 +144,15 @@ class _WebExplorePageState extends State<WebExplorePage>
                   hintText: 'Search learning tracks…',
                   prefixIcon: const Icon(Icons.search_rounded),
                   filled: true,
-                  fillColor:
-                      isDark ? WColors.cardDark : Colors.white,
+                  fillColor: isDark ? WColors.cardDark : Colors.white,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
                   ),
                   contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 14),
+                    horizontal: 20,
+                    vertical: 14,
+                  ),
                 ),
               ),
             ),
@@ -170,8 +174,10 @@ class _WebExplorePageState extends State<WebExplorePage>
                     Center(
                       child: Padding(
                         padding: const EdgeInsets.all(40),
-                        child: Text('No tracks match "$_search"',
-                            style: const TextStyle(color: Colors.grey)),
+                        child: Text(
+                          'No tracks match "$_search"',
+                          style: const TextStyle(color: Colors.grey),
+                        ),
                       ),
                     )
                   else
@@ -187,11 +193,8 @@ class _WebExplorePageState extends State<WebExplorePage>
             // Progress panel
             const SizedBox(height: 40),
             Container(
-              color: isDark
-                  ? const Color(0xFF1C1917)
-                  : const Color(0xFFFFFBEB),
-              padding: const EdgeInsets.symmetric(
-                  vertical: 36, horizontal: 20),
+              color: isDark ? const Color(0xFF1C1917) : const Color(0xFFFFFBEB),
+              padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
               child: WMaxWidth(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -205,22 +208,28 @@ class _WebExplorePageState extends State<WebExplorePage>
                     Row(
                       children: [
                         Expanded(
-                            child: WStatChip(
-                                value: '7',
-                                label: 'Modules\nCompleted',
-                                color: WColors.amber)),
+                          child: WStatChip(
+                            value: '7',
+                            label: 'Modules\nCompleted',
+                            color: WColors.amber,
+                          ),
+                        ),
                         const SizedBox(width: 12),
                         Expanded(
-                            child: WStatChip(
-                                value: '3',
-                                label: 'In\nProgress',
-                                color: WColors.teal)),
+                          child: WStatChip(
+                            value: '3',
+                            label: 'In\nProgress',
+                            color: WColors.teal,
+                          ),
+                        ),
                         const SizedBox(width: 12),
                         Expanded(
-                            child: WStatChip(
-                                value: '94',
-                                label: 'Items\nBookmarked',
-                                color: WColors.violet)),
+                          child: WStatChip(
+                            value: '94',
+                            label: 'Items\nBookmarked',
+                            color: WColors.violet,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -262,105 +271,139 @@ class _TrackCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: isDark ? WColors.cardDark : WColors.cardLight,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: t.color.withValues(alpha: 0.2)),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
-            blurRadius: 12,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: t.color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Icon(t.icon, color: t.color, size: 22),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WBadge(label: t.tag, color: t.color),
-                    const SizedBox(height: 2),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(
-            t.title,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w800,
-              color: isDark ? Colors.white : const Color(0xFF0F172A),
+    return GestureDetector(
+      onTap: () {
+        if (t.title == 'Learn & Fun') {
+          // Get.toNamed('/web-explore/learn-and-fun');
+          //return;
+        } else if (t.title == 'Life Hacks') {
+          Get.toNamed('/web-explore/life-hacks');
+          return;
+        } else {
+          Get.toNamed(
+            '/web-explore/module',
+            arguments: {
+              'title': t.title,
+              'tag': t.tag,
+              'level': t.level,
+              'desc': t.desc,
+              'color': t.color,
+              'lessons': t.lessons,
+            },
+          );
+          return;
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: isDark ? WColors.cardDark : WColors.cardLight,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: t.color.withValues(alpha: 0.2)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
+              blurRadius: 12,
+              offset: const Offset(0, 3),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            t.desc,
-            style: TextStyle(
-              fontSize: 13,
-              height: 1.55,
-              color: isDark ? Colors.white54 : Colors.black54,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Icon(Icons.signal_cellular_alt_rounded,
-                  size: 14,
-                  color: isDark ? Colors.white38 : Colors.grey),
-              const SizedBox(width: 4),
-              Text(
-                t.level,
-                style: TextStyle(
-                    fontSize: 12,
-                    color: isDark ? Colors.white38 : Colors.grey),
-              ),
-              if (t.lessons > 0) ...[
-                const SizedBox(width: 12),
-                Icon(Icons.layers_rounded,
-                    size: 14,
-                    color: isDark ? Colors.white38 : Colors.grey),
-                const SizedBox(width: 4),
-                Text(
-                  '${t.lessons} lessons',
-                  style: TextStyle(
-                      fontSize: 12,
-                      color: isDark ? Colors.white38 : Colors.grey),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: t.color.withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(t.icon, color: t.color, size: 22),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      WBadge(label: t.tag, color: t.color),
+                      const SizedBox(height: 2),
+                    ],
+                  ),
                 ),
               ],
-              const Spacer(),
-              TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  foregroundColor: t.color,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 14, vertical: 6),
-                  minimumSize: Size.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                child: const Text('Open →',
-                    style: TextStyle(fontWeight: FontWeight.w700)),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              t.title,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w800,
+                color: isDark ? Colors.white : const Color(0xFF0F172A),
               ),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(height: 6),
+            Text(
+              t.desc,
+              style: TextStyle(
+                fontSize: 13,
+                height: 1.55,
+                color: isDark ? Colors.white54 : Colors.black54,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Icon(
+                  Icons.signal_cellular_alt_rounded,
+                  size: 14,
+                  color: isDark ? Colors.white38 : Colors.grey,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  t.level,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: isDark ? Colors.white38 : Colors.grey,
+                  ),
+                ),
+                if (t.lessons > 0) ...[
+                  const SizedBox(width: 12),
+                  Icon(
+                    Icons.layers_rounded,
+                    size: 14,
+                    color: isDark ? Colors.white38 : Colors.grey,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${t.lessons} lessons',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: isDark ? Colors.white38 : Colors.grey,
+                    ),
+                  ),
+                ],
+                const Spacer(),
+                TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    foregroundColor: t.color,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 6,
+                    ),
+                    minimumSize: Size.zero,
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  child: const Text(
+                    'Open →',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

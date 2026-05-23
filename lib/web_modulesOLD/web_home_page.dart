@@ -152,7 +152,7 @@ class WebHomePage extends StatelessWidget {
                   WGrid(
                     children: [
                       WFeatureCard(
-                        routeName: WebRoutes.explore,
+                        // routeName: WebRoutes.explore,
                         icon: Icons.lightbulb_outline,
                         title: 'Explore & Learn',
                         body:
@@ -161,7 +161,7 @@ class WebHomePage extends StatelessWidget {
                         color: WColors.amber,
                       ),
                       WFeatureCard(
-                        routeName: WebRoutes.wisdom,
+                        routeName: "", // WebRoutes.wisdom,
                         icon: Icons.gavel_rounded,
                         title: 'Rule & Wisdom',
                         body:
@@ -188,7 +188,7 @@ class WebHomePage extends StatelessWidget {
                         color: WColors.violet,
                       ),
                       WFeatureCard(
-                        routeName: WebRoutes.setup,
+                        // routeName: WebRoutes.setup,
                         icon: Icons.settings_suggest_rounded,
                         title: 'Setup A-One',
                         body:

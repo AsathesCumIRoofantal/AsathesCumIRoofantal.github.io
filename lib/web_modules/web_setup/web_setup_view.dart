@@ -348,45 +348,45 @@ class _ItemCard extends StatelessWidget {
   }
 
   void _openDetail(BuildContext context) {
-    if (item.title == 'Category Tree') {
-      Get.toNamed(WebRoutes.setup_category);
-      return;
-    } else if (item.title == 'Product Record Digitalize') {
-      // Get.toNamed(WebRoutes.setup_product_record);
+    // if (item.title == 'Category Tree') {
+    //   Get.toNamed(WebRoutes.setup_category);
+    //   return;
+    // } else if (item.title == 'Product Record Digitalize') {
+    //   // Get.toNamed(WebRoutes.setup_product_record);
 
-      return;
-    } else if (item.title == 'Projects Assessments') {
-      Get.toNamed(WebRoutes.setup_projectsAssessments);
+    //   return;
+    // } else if (item.title == 'Projects Assessments') {
+    //   Get.toNamed(WebRoutes.setup_projectsAssessments);
 
-      return;
-    } else if (item.title == 'Ease Tools') {
-      Get.toNamed(WebRoutes.setup_easeTools);
-      return;
-    } else if (item.title == 'Vocabulary') {
-      Get.toNamed(WebRoutes.setup_vocabulary);
-      return;
-    } else if (item.title == 'Code Conduct') {
-      Get.toNamed(WebRoutes.setup_codeConduct);
-      return;
-    } else if (item.title == 'Script Strategy') {
-      Get.toNamed(WebRoutes.setup_scriptStrategy);
-      return;
-    } else if (item.title == 'Safety') {
-      Get.toNamed(WebRoutes.setup_safety);
-      return;
-    } else if (item.title == 'Hospitality Care') {
-      Get.toNamed(WebRoutes.setup_hospitalityCare);
-      return;
-    } else if (item.title == 'Utility Facilities') {
-      Get.toNamed(WebRoutes.setup_utilityFacilities);
-      return;
-    } else if (item.title == 'Commerce') {
-      Get.toNamed(WebRoutes.setup_commerce);
-      return;
-    } else if (item.title == 'Social') {
-      Get.toNamed(WebRoutes.setup_social);
-      return;
-    }
+    //   return;
+    // } else if (item.title == 'Ease Tools') {
+    //   Get.toNamed(WebRoutes.setup_easeTools);
+    //   return;
+    // } else if (item.title == 'Vocabulary') {
+    //   Get.toNamed(WebRoutes.setup_vocabulary);
+    //   return;
+    // } else if (item.title == 'Code Conduct') {
+    //   Get.toNamed(WebRoutes.setup_codeConduct);
+    //   return;
+    // } else if (item.title == 'Script Strategy') {
+    //   Get.toNamed(WebRoutes.setup_scriptStrategy);
+    //   return;
+    // } else if (item.title == 'Safety') {
+    //   Get.toNamed(WebRoutes.setup_safety);
+    //   return;
+    // } else if (item.title == 'Hospitality Care') {
+    //   Get.toNamed(WebRoutes.setup_hospitalityCare);
+    //   return;
+    // } else if (item.title == 'Utility Facilities') {
+    //   Get.toNamed(WebRoutes.setup_utilityFacilities);
+    //   return;
+    // } else if (item.title == 'Commerce') {
+    //   Get.toNamed(WebRoutes.setup_commerce);
+    //   return;
+    // } else if (item.title == 'Social') {
+    //   Get.toNamed(WebRoutes.setup_social);
+    //   return;
+    // }
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

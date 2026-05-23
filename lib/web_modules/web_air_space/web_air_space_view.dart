@@ -433,7 +433,7 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
             offset: Offset(0, -_controller.value * 8),
             child: InkWell(
               borderRadius: BorderRadius.circular(18),
-              onTap: () => _openDetail(context),
+              onTap: () => _openDetail(context, widget.item),
               child: Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -559,8 +559,19 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
     );
   }
 
-  void _openDetail(BuildContext context) {
+  void _openDetail(BuildContext context, WebNavItem item) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    if (item.title == 'Products & Services') {
+      Get.toNamed('/web-air_space/products-services');
+      return;
+    } else if (item.title == 'Query & Discussion') {
+      Get.toNamed('/web-air_space/query-discussion');
+      return;
+    }
+    // else if (item.title == 'Record Your Post') {
+    //   Get.toNamed('/web-be_you/record-post');
+    //   return;
+    // }
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

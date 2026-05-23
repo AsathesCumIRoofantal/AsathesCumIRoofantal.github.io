@@ -40,13 +40,23 @@ class _BodyState extends State<_Body> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _shimmerCtrl = AnimationController(vsync: this, duration: const Duration(seconds: 2))..repeat();
-    _entryCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 600))..forward();
+    _shimmerCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat();
+    _entryCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    )..forward();
     _entryAnim = CurvedAnimation(parent: _entryCtrl, curve: Curves.easeOutBack);
   }
 
   @override
-  void dispose() { _shimmerCtrl.dispose(); _entryCtrl.dispose(); super.dispose(); }
+  void dispose() {
+    _shimmerCtrl.dispose();
+    _entryCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,64 +72,111 @@ class _BodyState extends State<_Body> with TickerProviderStateMixin {
             onPressed: () => Get.back(),
           ),
           flexibleSpace: FlexibleSpaceBar(
-            title: const Text('Record Your Post', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16)),
+            title: const Text(
+              'Record Your Post',
+              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+            ),
             background: AnimatedBuilder(
               animation: _shimmerCtrl,
               builder: (_, __) => Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF059669), Color(0xFF047857), Color(0xFF065F46)],
+                    colors: [
+                      Color(0xFF059669),
+                      Color(0xFF047857),
+                      Color(0xFF065F46),
+                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                 ),
-                child: Stack(children: [
-                  Positioned(right: -30, top: 20,
-                    child: Container(width: 200, height: 200,
-                      decoration: BoxDecoration(
-                        gradient: RadialGradient(
-                          colors: [Colors.white.withValues(alpha: 0.08), Colors.transparent],
-                        ),
-                        shape: BoxShape.circle,
-                      ))),
-                  // Shimmer line effect
-                  Positioned(
-                    left: -200 + _shimmerCtrl.value * 600,
-                    top: 0, bottom: 0,
-                    child: Container(
-                      width: 120,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [Colors.transparent, Colors.white.withValues(alpha: 0.06), Colors.transparent],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      right: -30,
+                      top: 20,
+                      child: Container(
+                        width: 200,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          gradient: RadialGradient(
+                            colors: [
+                              Colors.white.withValues(alpha: 0.08),
+                              Colors.transparent,
+                            ],
+                          ),
+                          shape: BoxShape.circle,
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24, 0, 24, 56),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(20),
+                    // Shimmer line effect
+                    Positioned(
+                      left: -200 + _shimmerCtrl.value * 600,
+                      top: 0,
+                      bottom: 0,
+                      child: Container(
+                        width: 120,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.transparent,
+                              Colors.white.withValues(alpha: 0.06),
+                              Colors.transparent,
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
-                          child: const Text('Capture · Log · Share', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600)),
                         ),
-                        const SizedBox(height: 12),
-                        const Text('Record\nYour Story', style: TextStyle(color: Colors.white, fontSize: 30, fontWeight: FontWeight.w900, height: 1.2)),
-                        const SizedBox(height: 8),
-                        Text('Milestones, notes, or experiences — preserved forever in your profile.',
-                          style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 13, height: 1.4)),
-                      ],
+                      ),
                     ),
-                  ),
-                ]),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24, 0, 24, 56),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: const Text(
+                              'Capture · Log · Share',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          const Text(
+                            'Record\nYour Story',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900,
+                              height: 1.2,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'Milestones, notes, or experiences — preserved forever in your profile.',
+                            style: TextStyle(
+                              color: Colors.white.withValues(alpha: 0.85),
+                              fontSize: 13,
+                              height: 1.4,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -134,37 +191,88 @@ class _BodyState extends State<_Body> with TickerProviderStateMixin {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Post Format', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800,
-                    color: widget.isDark ? Colors.white : const Color(0xFF0F172A))),
+                  Text(
+                    'Post Format',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800,
+                      color: widget.isDark
+                          ? Colors.white
+                          : const Color(0xFF0F172A),
+                    ),
+                  ),
                   const SizedBox(height: 12),
-                  Obx(() => Row(
-                    children: widget.controller.types.map((t) {
-                      final sel = widget.controller.postType.value == t;
-                      return Expanded(child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 3),
-                        child: GestureDetector(
-                          onTap: () => widget.controller.postType.value = t,
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
-                              color: sel ? const Color(0xFF059669) : (widget.isDark ? WColors.cardDark : Colors.white),
-                              borderRadius: BorderRadius.circular(12),
-                              boxShadow: sel ? [BoxShadow(color: const Color(0xFF059669).withValues(alpha: 0.35), blurRadius: 10)] : [],
-                            ),
-                            child: Column(children: [
-                              Icon(
-                                t == 'Text' ? Icons.text_fields : t == 'Image' ? Icons.image_outlined : t == 'Audio' ? Icons.mic_outlined : t == 'Video' ? Icons.videocam_outlined : Icons.layers_outlined,
-                                color: sel ? Colors.white : const Color(0xFF059669), size: 18,
+                  Obx(
+                    () => Row(
+                      children: widget.controller.types.map((t) {
+                        final sel = widget.controller.postType.value == t;
+                        return Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 3),
+                            child: GestureDetector(
+                              onTap: () => widget.controller.postType.value = t,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: sel
+                                      ? const Color(0xFF059669)
+                                      : (widget.isDark
+                                            ? WColors.cardDark
+                                            : Colors.white),
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: sel
+                                      ? [
+                                          BoxShadow(
+                                            color: const Color(
+                                              0xFF059669,
+                                            ).withValues(alpha: 0.35),
+                                            blurRadius: 10,
+                                          ),
+                                        ]
+                                      : [],
+                                ),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      t == 'Text'
+                                          ? Icons.text_fields
+                                          : t == 'Image'
+                                          ? Icons.image_outlined
+                                          : t == 'Audio'
+                                          ? Icons.mic_outlined
+                                          : t == 'Video'
+                                          ? Icons.videocam_outlined
+                                          : Icons.layers_outlined,
+                                      color: sel
+                                          ? Colors.white
+                                          : const Color(0xFF059669),
+                                      size: 18,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      t,
+                                      style: TextStyle(
+                                        color: sel
+                                            ? Colors.white
+                                            : (widget.isDark
+                                                  ? Colors.white70
+                                                  : Colors.black54),
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              const SizedBox(height: 4),
-                              Text(t, style: TextStyle(color: sel ? Colors.white : (widget.isDark ? Colors.white70 : Colors.black54), fontSize: 10, fontWeight: FontWeight.w700)),
-                            ]),
+                            ),
                           ),
-                        ),
-                      ));
-                    }).toList(),
-                  )),
+                        );
+                      }).toList(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -180,52 +288,132 @@ class _BodyState extends State<_Body> with TickerProviderStateMixin {
               decoration: BoxDecoration(
                 color: widget.isDark ? WColors.cardDark : Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: const Color(0xFF059669).withValues(alpha: 0.2)),
-                boxShadow: [BoxShadow(color: const Color(0xFF059669).withValues(alpha: 0.08), blurRadius: 20)],
+                border: Border.all(
+                  color: const Color(0xFF059669).withValues(alpha: 0.2),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF059669).withValues(alpha: 0.08),
+                    blurRadius: 20,
+                  ),
+                ],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    Container(width: 8, height: 8, decoration: const BoxDecoration(color: Color(0xFFFF5F56), shape: BoxShape.circle)),
-                    const SizedBox(width: 6),
-                    Container(width: 8, height: 8, decoration: const BoxDecoration(color: Color(0xFFFFBD2E), shape: BoxShape.circle)),
-                    const SizedBox(width: 6),
-                    Container(width: 8, height: 8, decoration: const BoxDecoration(color: Color(0xFF27C93F), shape: BoxShape.circle)),
-                    const Spacer(),
-                    Text('Rich Editor v2.6', style: TextStyle(fontSize: 11, color: widget.isDark ? Colors.white38 : Colors.black38, fontFamily: 'monospace')),
-                  ]),
+                  Row(
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFFF5F56),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFFFBD2E),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFF27C93F),
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text(
+                        'Rich Editor v2.6',
+                        style: TextStyle(
+                          fontSize: 11,
+                          color: widget.isDark
+                              ? Colors.white38
+                              : Colors.black38,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 16),
                   Container(
                     height: 120,
                     decoration: BoxDecoration(
-                      color: widget.isDark ? const Color(0xFF0F172A) : const Color(0xFFF8FAFC),
+                      color: widget.isDark
+                          ? const Color(0xFF0F172A)
+                          : const Color(0xFFF8FAFC),
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.grey.withValues(alpha: 0.15)),
+                      border: Border.all(
+                        color: Colors.grey.withValues(alpha: 0.15),
+                      ),
                     ),
                     padding: const EdgeInsets.all(14),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Start writing your post...', style: TextStyle(color: widget.isDark ? Colors.white24 : Colors.black26, fontSize: 14)),
+                        Text(
+                          'Start writing your post...',
+                          style: TextStyle(
+                            color: widget.isDark
+                                ? Colors.white24
+                                : Colors.black26,
+                            fontSize: 14,
+                          ),
+                        ),
                         const Spacer(),
-                        Row(children: [
-                          const Spacer(),
-                          Text('0 / 2000 words', style: TextStyle(fontSize: 10, color: widget.isDark ? Colors.white38 : Colors.black38)),
-                        ]),
+                        Row(
+                          children: [
+                            const Spacer(),
+                            Text(
+                              '0 / 2000 words',
+                              style: TextStyle(
+                                fontSize: 10,
+                                color: widget.isDark
+                                    ? Colors.white38
+                                    : Colors.black38,
+                              ),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Wrap(spacing: 8, children: [Icons.format_bold, Icons.format_italic, Icons.format_list_bulleted, Icons.link, Icons.image_outlined].map((icon) =>
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF059669).withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Icon(icon, size: 16, color: const Color(0xFF059669)),
-                    )).toList()),
+                  Wrap(
+                    spacing: 8,
+                    children:
+                        [
+                              Icons.format_bold,
+                              Icons.format_italic,
+                              Icons.format_list_bulleted,
+                              Icons.link,
+                              Icons.image_outlined,
+                            ]
+                            .map(
+                              (icon) => Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                  color: const Color(
+                                    0xFF059669,
+                                  ).withValues(alpha: 0.1),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Icon(
+                                  icon,
+                                  size: 16,
+                                  color: const Color(0xFF059669),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                  ),
                 ],
               ),
             ),
@@ -251,28 +439,80 @@ class _BodyState extends State<_Body> with TickerProviderStateMixin {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Row(children: [
-                    Icon(Icons.flutter_dash, color: Colors.white, size: 20),
-                    SizedBox(width: 8),
-                    Text('Flutter 2026 Capabilities', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
-                  ]),
+                  const Row(
+                    children: [
+                      Icon(Icons.flutter_dash, color: Colors.white, size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        'Flutter 2026 Capabilities',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 14),
                   ...[
-                    ('Real-time collaborative editing', 'CRDTs + Flutter Impeller for zero-latency co-authoring'),
-                    ('AI writing assist', 'On-device LLM suggests continuations as you type'),
-                    ('Voice-to-rich-text', 'Speech recognition with punctuation and formatting'),
-                    ('Auto-media processing', 'Images compressed, videos transcribed on upload'),
-                  ].map((e) => Padding(
-                    padding: const EdgeInsets.only(bottom: 10),
-                    child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                      Container(width: 6, height: 6, margin: const EdgeInsets.only(top: 5, right: 10),
-                        decoration: const BoxDecoration(color: Color(0xFF6EE7B7), shape: BoxShape.circle)),
-                      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(e.$1, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 12)),
-                        Text(e.$2, style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 11, height: 1.4)),
-                      ])),
-                    ]),
-                  )),
+                    (
+                      'Real-time collaborative editing',
+                      'CRDTs + Flutter Impeller for zero-latency co-authoring',
+                    ),
+                    (
+                      'AI writing assist',
+                      'On-device LLM suggests continuations as you type',
+                    ),
+                    (
+                      'Voice-to-rich-text',
+                      'Speech recognition with punctuation and formatting',
+                    ),
+                    (
+                      'Auto-media processing',
+                      'Images compressed, videos transcribed on upload',
+                    ),
+                  ].map(
+                    (e) => Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 6,
+                            height: 6,
+                            margin: const EdgeInsets.only(top: 5, right: 10),
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF6EE7B7),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  e.$1,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                Text(
+                                  e.$2,
+                                  style: TextStyle(
+                                    color: Colors.white.withValues(alpha: 0.7),
+                                    fontSize: 11,
+                                    height: 1.4,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -283,43 +523,91 @@ class _BodyState extends State<_Body> with TickerProviderStateMixin {
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-            child: Text('All Be-You Topics', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: widget.isDark ? Colors.white : const Color(0xFF0F172A))),
+            child: Text(
+              'All Be-You Topics',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w900,
+                color: widget.isDark ? Colors.white : const Color(0xFF0F172A),
+              ),
+            ),
           ),
         ),
 
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (ctx, i) {
-                final items = WebNavData.bySlug('be_you').items;
-                if (i >= items.length) return null;
-                final item = items[i];
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Container(
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: widget.isDark ? WColors.cardDark : Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: const Color(0xFF059669).withValues(alpha: 0.15)),
+            delegate: SliverChildBuilderDelegate((ctx, i) {
+              final items = WebNavData.bySlug('be_you').items;
+              if (i >= items.length) return null;
+              final item = items[i];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: widget.isDark ? WColors.cardDark : Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: const Color(0xFF059669).withValues(alpha: 0.15),
                     ),
-                    child: Row(children: [
-                      Container(width: 42, height: 42, decoration: BoxDecoration(color: const Color(0xFF059669).withValues(alpha: 0.12), borderRadius: BorderRadius.circular(12)),
-                        child: Icon(item.icon, color: const Color(0xFF059669), size: 21)),
-                      const SizedBox(width: 14),
-                      Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(item.title, style: TextStyle(fontSize: 13.5, fontWeight: FontWeight.w800, color: widget.isDark ? Colors.white : const Color(0xFF0F172A))),
-                        const SizedBox(height: 3),
-                        Text(item.description, style: TextStyle(fontSize: 11.5, color: widget.isDark ? Colors.white54 : Colors.black45, height: 1.3)),
-                      ])),
-                      const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: Color(0xFF059669)),
-                    ]),
                   ),
-                );
-              },
-              childCount: WebNavData.bySlug('be_you').items.length,
-            ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 42,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0xFF059669,
+                          ).withValues(alpha: 0.12),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Icon(
+                          item.icon,
+                          color: const Color(0xFF059669),
+                          size: 21,
+                        ),
+                      ),
+                      const SizedBox(width: 14),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item.title,
+                              style: TextStyle(
+                                fontSize: 13.5,
+                                fontWeight: FontWeight.w800,
+                                color: widget.isDark
+                                    ? Colors.white
+                                    : const Color(0xFF0F172A),
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            Text(
+                              item.description,
+                              style: TextStyle(
+                                fontSize: 11.5,
+                                color: widget.isDark
+                                    ? Colors.white54
+                                    : Colors.black45,
+                                height: 1.3,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 14,
+                        color: Color(0xFF059669),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }, childCount: WebNavData.bySlug('be_you').items.length),
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 60)),
