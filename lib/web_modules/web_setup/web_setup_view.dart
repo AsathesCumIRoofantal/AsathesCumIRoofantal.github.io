@@ -355,8 +355,10 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'Product & Record (DIGITALIZE)') {
       Get.toNamed(WebDigitalizeHubShowcaseView.routeName);
+      return;
     } else if (item.title == 'Projects & Assessments') {
       Get.toNamed(WebProjectsAssessmentsShowcaseView.routeName);
+      return;
     }
     // else if (t.title == "Operate with Ease") {
     //   Get.toNamed("");
