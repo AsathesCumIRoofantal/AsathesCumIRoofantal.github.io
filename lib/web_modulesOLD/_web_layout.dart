@@ -379,7 +379,7 @@ class WHeroBanner extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
+                          title + "hi",
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 38,

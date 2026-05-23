@@ -108,7 +108,7 @@ class WebHomeView extends GetView<WebHomeController> {
               ),
             ),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 48)),
+            SliverToBoxAdapter(child: const SizedBox(height: 12)),
 
             // ── SECTION HEADER ──
             SliverToBoxAdapter(
@@ -130,7 +130,7 @@ class WebHomeView extends GetView<WebHomeController> {
               ),
             ),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 32)),
+            SliverToBoxAdapter(child: const SizedBox(height: 12)),
 
             // ── ANIMATED GRID ──
             SliverPadding(
@@ -249,7 +249,8 @@ class _AnimatedHeroState extends State<_AnimatedHero>
             children: [
               // Floating circles animation
               Positioned(
-                top: 50 + math.sin(_controller.value * 2 * math.pi) * 20,
+                top:
+                    (50 + math.sin(_controller.value * 2 * math.pi) * 20) - 120,
                 right: 40,
                 child: Opacity(
                   opacity: 0.15,

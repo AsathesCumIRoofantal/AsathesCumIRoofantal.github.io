@@ -4,6 +4,7 @@
 // Responsive landing page for AIR – All-Space Web
 // ============================================================
 
+import 'package:air_app/routes/app_pages.dart';
 import 'package:air_app/routes/web_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,7 @@ class WebHomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: isDark ? WColors.surfaceDark : WColors.surface,
       appBar: WNavBar(
-        title: 'ALL-SPACE  ·  AIR',
+        title: 'ALL-SPACE · AIR',
         color: WColors.indigo,
         actions: [
           TextButton.icon(
@@ -51,7 +52,9 @@ class WebHomePage extends StatelessWidget {
               icon: Icons.public_rounded,
               actions: [
                 ElevatedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed("/");
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: WColors.indigo,
@@ -65,12 +68,14 @@ class WebHomePage extends StatelessWidget {
                   ),
                   icon: const Icon(Icons.explore_rounded),
                   label: const Text(
-                    'Explore AIR',
+                    'Explore AIR Base',
                     style: TextStyle(fontWeight: FontWeight.w700),
                   ),
                 ),
                 OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.offNamed(AppRoutes.LOGIN);
+                  },
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.white54),
