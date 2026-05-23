@@ -320,6 +320,11 @@ class _ItemCard extends StatelessWidget {
       Get.toNamed('/web-system/app-setting');
       return;
     }
+    if (item.title == 'About AIR Organization') {
+      Get.toNamed('/web-system/about-org');
+      return;
+      return;
+    }
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

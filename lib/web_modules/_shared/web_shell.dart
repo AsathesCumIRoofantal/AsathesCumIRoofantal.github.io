@@ -1,6 +1,6 @@
 // ============================================================
 // web_modules/_shared/web_shell.dart
-// Responsive shell — side drawer on desktop, modal drawer on mobile.
+// Responsive shell — side drawer on desktop (collapsible), modal on mobile.
 // ============================================================
 
 import 'package:flutter/material.dart';
@@ -9,6 +9,21 @@ import 'package:get/get.dart';
 import '_web_layout.dart';
 import 'web_nav_data.dart';
 import 'web_theme_controller.dart';
+
+// ── Drawer state controller ───────────────────────────────────
+class WebDrawerController extends GetxController {
+  final isOpen = true.obs;
+  void toggle() => isOpen.value = !isOpen.value;
+  void open()   => isOpen.value = true;
+  void close()  => isOpen.value = false;
+}
+
+WebDrawerController _getDrawerCtrl() {
+  if (!Get.isRegistered<WebDrawerController>()) {
+    return Get.put(WebDrawerController(), permanent: true);
+  }
+  return Get.find<WebDrawerController>();
+}
 
 class WebShell extends StatelessWidget {
   final Widget child;
@@ -19,26 +34,68 @@ class WebShell extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDesktop = WBreak.isDesktop(context);
     final theme = Theme.of(context);
+    final drawerCtrl = _getDrawerCtrl();
 
     if (isDesktop) {
-      return Scaffold(
-        backgroundColor: theme.scaffoldBackgroundColor,
-        body: Row(
-          children: [
-            SizedBox(
-              width: 320,
-              child: _WebDrawer(currentRoute: currentRoute, isDesktop: true),
-            ),
-            Expanded(child: child),
-          ],
-        ),
-      );
+      return Obx(() {
+        final open = drawerCtrl.isOpen.value;
+        return Scaffold(
+          backgroundColor: theme.scaffoldBackgroundColor,
+          body: Row(
+            children: [
+              // ── Animated sidebar ──────────────────────────
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                width: open ? 320 : 0,
+                child: ClipRect(
+                  child: OverflowBox(
+                    alignment: Alignment.topLeft,
+                    maxWidth: 320,
+                    minWidth: 320,
+                    child: SizedBox(
+                      width: 320,
+                      child: _WebDrawer(
+                        currentRoute: currentRoute,
+                        isDesktop: true,
+                        onCollapse: drawerCtrl.close,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              // ── Main body ────────────────────────────────
+              Expanded(
+                child: Stack(
+                  children: [
+                    child,
+                    // Floating hamburger when drawer is closed (desktop)
+                    if (!open)
+                      Positioned(
+                        top: 16,
+                        left: 16,
+                        child: SafeArea(
+                          child: _FloatingMenuButton(onTap: drawerCtrl.open),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      });
     }
 
+    // ── Mobile: modal drawer ──────────────────────────────────
     return Scaffold(
       drawer: Drawer(
         width: 320,
-        child: _WebDrawer(currentRoute: currentRoute, isDesktop: false),
+        child: _WebDrawer(
+          currentRoute: currentRoute,
+          isDesktop: false,
+          onCollapse: null,
+        ),
       ),
       body: Stack(
         children: [
@@ -79,10 +136,84 @@ class WebShell extends StatelessWidget {
   }
 }
 
+// ── Floating menu button (desktop collapsed state) ────────────
+class _FloatingMenuButton extends StatefulWidget {
+  final VoidCallback onTap;
+  const _FloatingMenuButton({required this.onTap});
+
+  @override
+  State<_FloatingMenuButton> createState() => _FloatingMenuButtonState();
+}
+
+class _FloatingMenuButtonState extends State<_FloatingMenuButton>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _scale;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 350),
+    )..forward();
+    _scale = CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut);
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ScaleTransition(
+      scale: _scale,
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: widget.onTap,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              gradient: const LinearGradient(
+                colors: [WColors.indigo, WColors.violet],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: WColors.indigo.withValues(alpha: 0.45),
+                  blurRadius: 20,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: const Icon(
+              Icons.menu_open_rounded,
+              color: Colors.white,
+              size: 22,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Drawer widget ─────────────────────────────────────────────
 class _WebDrawer extends StatelessWidget {
   final String currentRoute;
   final bool isDesktop;
-  const _WebDrawer({required this.currentRoute, required this.isDesktop});
+  final VoidCallback? onCollapse;
+  const _WebDrawer({
+    required this.currentRoute,
+    required this.isDesktop,
+    required this.onCollapse,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -106,45 +237,74 @@ class _WebDrawer extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      if (!isDesktop) Navigator.of(context).pop();
-                      if (currentRoute != WebNavData.homeRoute) {
-                        Get.offAllNamed(WebNavData.homeRoute);
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        const CircleAvatar(
-                          radius: 22,
-                          backgroundColor: Colors.white,
-                          child: Icon(Icons.air, color: WColors.indigo),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'AIR · ALL-SPACE',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w900,
-                                  letterSpacing: 1.2,
-                                ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            if (!isDesktop) Navigator.of(context).pop();
+                            if (currentRoute != WebNavData.homeRoute) {
+                              Get.offAllNamed(WebNavData.homeRoute);
+                            }
+                          },
+                          child: Row(
+                            children: [
+                              const CircleAvatar(
+                                radius: 22,
+                                backgroundColor: Colors.white,
+                                child: Icon(Icons.air, color: WColors.indigo),
                               ),
-                              SizedBox(height: 4),
-                              Text(
-                                'Alifiyas-Mazeasta · Web',
-                                style: TextStyle(color: Colors.white70, fontSize: 11),
+                              const SizedBox(width: 12),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: const [
+                                    Text(
+                                      'AIR · ALL-SPACE',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w900,
+                                        letterSpacing: 1.2,
+                                      ),
+                                    ),
+                                    SizedBox(height: 4),
+                                    Text(
+                                      'Alifiyas-Mazeasta · Web',
+                                      style: TextStyle(color: Colors.white70, fontSize: 11),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
-                        const WebThemeToggle(compact: true),
+                      ),
+                      const WebThemeToggle(compact: true),
+                      // ── Collapse button (desktop only) ──
+                      if (isDesktop) ...[
+                        const SizedBox(width: 6),
+                        Tooltip(
+                          message: 'Collapse sidebar',
+                          child: Material(
+                            color: Colors.white.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(10),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(10),
+                              onTap: onCollapse,
+                              child: const Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Icon(
+                                  Icons.chevron_left_rounded,
+                                  color: Colors.white,
+                                  size: 22,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
-                    ),
+                    ],
                   ),
                   const SizedBox(height: 14),
                   Text(
@@ -200,7 +360,8 @@ class _WebDrawer extends StatelessWidget {
                           Get.offAllNamed(section.route);
                         }
                       },
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
                         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                         decoration: BoxDecoration(
                           color: active
@@ -219,10 +380,12 @@ class _WebDrawer extends StatelessWidget {
                               width: 38,
                               height: 38,
                               decoration: BoxDecoration(
-                                color: section.primary.withValues(alpha: active ? 0.22 : 0.12),
+                                color: section.primary
+                                    .withValues(alpha: active ? 0.22 : 0.12),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Icon(section.icon, size: 19, color: section.primary),
+                              child: Icon(section.icon,
+                                  size: 19, color: section.primary),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
@@ -232,7 +395,9 @@ class _WebDrawer extends StatelessWidget {
                                   Text(
                                     section.title,
                                     style: TextStyle(
-                                      color: isDark ? Colors.white : const Color(0xFF0F172A),
+                                      color: isDark
+                                          ? Colors.white
+                                          : const Color(0xFF0F172A),
                                       fontSize: 12.5,
                                       fontWeight: FontWeight.w800,
                                       letterSpacing: 0.5,
@@ -244,7 +409,9 @@ class _WebDrawer extends StatelessWidget {
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
-                                      color: isDark ? Colors.white60 : Colors.black54,
+                                      color: isDark
+                                          ? Colors.white60
+                                          : Colors.black54,
                                       fontSize: 10.5,
                                     ),
                                   ),

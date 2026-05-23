@@ -320,6 +320,11 @@ class _ItemCard extends StatelessWidget {
       Get.toNamed('/web-motivation/get-connected');
       return;
     }
+    if (item.title == 'A Word of Motivation') {
+      Get.toNamed('/web-motivation/word-of-motivation');
+      return;
+      return;
+    }
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

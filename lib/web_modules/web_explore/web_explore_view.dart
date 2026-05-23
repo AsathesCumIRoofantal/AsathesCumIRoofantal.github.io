@@ -320,6 +320,14 @@ class _ItemCard extends StatelessWidget {
       Get.toNamed('/web-explore/learn-and-fun');
       return;
     }
+    if (item.title == 'Learn Docs (by category)') {
+      Get.toNamed('/web-explore/learn-docs');
+      return;
+    }
+    if (item.title == 'Life Hacks') {
+      Get.toNamed('/web-explore/life-hacks');
+      return;
+    }
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

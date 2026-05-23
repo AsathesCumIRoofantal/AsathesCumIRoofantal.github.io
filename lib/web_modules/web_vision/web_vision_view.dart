@@ -320,6 +320,11 @@ class _ItemCard extends StatelessWidget {
       Get.toNamed('/web-vision/airs-show-case');
       return;
     }
+    if (item.title == "AIR's Mission") {
+      Get.toNamed('/web-vision/airs-mission');
+      return;
+      return;
+    }
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,

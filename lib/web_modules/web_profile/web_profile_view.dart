@@ -320,6 +320,15 @@ class _ItemCard extends StatelessWidget {
       Get.toNamed('/web-profile/tracks-and-traces');
       return;
     }
+    if (item.title == 'Events') {
+      Get.toNamed('/web-profile/events');
+      return;
+    }
+    if (item.title == 'Connect & Collaborate') {
+      Get.toNamed('/web-profile/connect-collaborate');
+      return;
+      return;
+    }
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
