@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class WebHospitalityCareShowcaseView extends StatefulWidget {
   const WebHospitalityCareShowcaseView({super.key});
 
-  static const routeName = '/web-setup//hospitality-care-showcase';
+  static const routeName = '/web-setup/hospitality-care-showcase';
 
   @override
   State<WebHospitalityCareShowcaseView> createState() =>

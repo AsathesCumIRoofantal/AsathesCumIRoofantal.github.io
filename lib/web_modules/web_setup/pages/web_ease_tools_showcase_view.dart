@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 class WebEaseToolsShowcaseView extends StatefulWidget {
   const WebEaseToolsShowcaseView({super.key});
 
-  static const routeName = '/web-setup//ease-tools-showcase';
+  static const routeName = '/web-setup/ease-tools-showcase';
 
   @override
   State<WebEaseToolsShowcaseView> createState() =>

@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class WebCommerceShowcaseView extends StatefulWidget {
   const WebCommerceShowcaseView({super.key});
 
-  static const routeName = '/web-setup//commerce-showcase';
+  static const routeName = '/web-setup/commerce-showcase';
 
   @override
   State<WebCommerceShowcaseView> createState() =>
