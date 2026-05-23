@@ -53,34 +53,45 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
                     child: Icon(Icons.account_tree_rounded, color: primary),
                   ),
                   const SizedBox(width: 16),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Category Tree',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
-                          color: isDark ? Colors.white : Colors.black87,
+                  Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Category Tree',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                            color: isDark ? Colors.white : Colors.black87,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Hierarchical mapping of the AIR system.',
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: isDark ? Colors.white60 : Colors.black54,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Hierarchical mapping of the AIR system.',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: isDark
+                                      ? Colors.white60
+                                      : Colors.black54,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   ElevatedButton.icon(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primary,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
+                        horizontal: 5,
                         vertical: 16,
                       ),
                       shape: RoundedRectangleBorder(
@@ -100,10 +111,10 @@ class WebCategoryTreeView extends GetView<WebCategoryTreeController> {
             // ── TREE MAP VIEW ──
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.all(48),
+                padding: const EdgeInsets.all(10),
                 child: WMaxWidth(
                   child: Container(
-                    padding: const EdgeInsets.all(32),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                       color: isDark ? WColors.cardDark : Colors.white,
                       borderRadius: BorderRadius.circular(24),
