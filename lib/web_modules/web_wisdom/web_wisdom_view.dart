@@ -1,6 +1,7 @@
 // web_modules/web_wisdom/web_wisdom_view.dart
 // Section workspace — unique palette, hero, item grid, and detail.
 
+import 'package:air_app/web_modules/web_wisdom/pages/web_wisdom_b_view.dart';
 import 'package:air_app/web_modules/web_wisdom/pages/web_wisdom_internal_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -349,6 +350,8 @@ class _ItemCard extends StatelessWidget {
 
   void _openDetail(BuildContext context) {
     if (item.title == 'Wisdom') {
+      Get.toNamed(WebWisdomBView.routeName);
+      return;
       Get.toNamed('/web-wisdom/wisdom');
       return;
     } else if (item.title == 'Ask Any Thing') {

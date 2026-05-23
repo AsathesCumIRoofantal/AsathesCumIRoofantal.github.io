@@ -1,18 +1,39 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WebHigherStudiesController extends GetxController {
-  final selectedLevel = 'Undergraduate'.obs;
-  final searchQuery = ''.obs;
   final isLoading = false.obs;
+  final searchQuery = ''.obs;
 
-  final levels = [
-    'Undergraduate',
-    'Postgraduate',
-    'Doctoral',
-    'Post-Doctoral',
-    'Certification',
-  ];
+  // Mock data for academic paths
+  final List<Map<String, dynamic>> studyPaths = [
+    {
+      'title': 'Master of Science (MSc)',
+      'duration': '2 Years',
+      'focus': 'Research & Tech',
+      'icon': Icons.school,
+    },
+    {
+      'title': 'MBA / Management',
+      'duration': '2 Years',
+      'focus': 'Leadership',
+      'icon': Icons.business_center,
+    },
+    {
+      'title': 'Professional Certification',
+      'duration': '6 Months',
+      'focus': 'Skill Acquisition',
+      'icon': Icons.verified,
+    },
+    {
+      'title': 'Post-Grad Diploma',
+      'duration': '1 Year',
+      'focus': 'Specialization',
+      'icon': Icons.architecture,
+    },
+  ].obs;
 
-  void setLevel(String level) => selectedLevel.value = level;
-  void setQuery(String q) => searchQuery.value = q.toLowerCase();
+  void updateSearch(String val) {
+    searchQuery.value = val;
+  }
 }

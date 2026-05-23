@@ -1,91 +1,88 @@
 // web_routes.dart — central GetX route table for all web_modules pages.
 
-import 'package:air_app/web_modules/web_home/web_home_view.dart';
-import 'package:air_app/web_modules/web_home/web_home_binding.dart';
-
-import 'package:air_app/web_modules/web_air_space/web_air_space_view.dart';
-import 'package:air_app/web_modules/web_air_space/web_air_space_binding.dart';
-import 'package:air_app/web_modules/web_air_space/pages/web_knowledge_center_view.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_knowledge_center_binding.dart';
-import 'package:air_app/web_modules/web_air_space/pages/web_products_services_view.dart';
+import 'package:air_app/web_modules/web_air_space/pages/web_knowledge_center_view.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_products_services_binding.dart';
-import 'package:air_app/web_modules/web_air_space/pages/web_query_discussion_view.dart';
+import 'package:air_app/web_modules/web_air_space/pages/web_products_services_view.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_query_discussion_binding.dart';
-
-import 'package:air_app/web_modules/web_aspects/web_aspects_view.dart';
-import 'package:air_app/web_modules/web_aspects/web_aspects_binding.dart';
-import 'package:air_app/web_modules/web_aspects/pages/web_be_part_view.dart';
+import 'package:air_app/web_modules/web_air_space/pages/web_query_discussion_view.dart';
+import 'package:air_app/web_modules/web_air_space/web_air_space_binding.dart';
+import 'package:air_app/web_modules/web_air_space/web_air_space_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_be_part_binding.dart';
-import 'package:air_app/web_modules/web_aspects/pages/web_timeline_of_air_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_be_part_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_timeline_of_air_binding.dart';
-
-import 'package:air_app/web_modules/web_be_you/web_be_you_view.dart';
-import 'package:air_app/web_modules/web_be_you/web_be_you_binding.dart';
-import 'package:air_app/web_modules/web_be_you/pages/web_record_post_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_timeline_of_air_view.dart';
+import 'package:air_app/web_modules/web_aspects/web_aspects_binding.dart';
+import 'package:air_app/web_modules/web_aspects/web_aspects_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_ask_anything_b_binding.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_ask_anything_b_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_higher_studies_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_binding.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_identities_earnings_view.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_record_post_binding.dart';
-import 'package:air_app/web_modules/web_be_you/pages/web_share_experience_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_record_post_view.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_share_experience_binding.dart';
-
-import 'package:air_app/web_modules/web_explore/web_explore_view.dart';
-import 'package:air_app/web_modules/web_explore/web_explore_binding.dart';
-import 'package:air_app/web_modules/web_explore/pages/web_learn_and_fun_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_share_experience_view.dart';
+import 'package:air_app/web_modules/web_be_you/web_be_you_binding.dart';
+import 'package:air_app/web_modules/web_be_you/web_be_you_view.dart';
+import 'package:air_app/web_modules/web_explore/pages/web_doctorate_binding.dart';
+import 'package:air_app/web_modules/web_explore/pages/web_doctorate_view.dart';
+import 'package:air_app/web_modules/web_explore/pages/web_higher_studies_binding.dart';
 import 'package:air_app/web_modules/web_explore/pages/web_learn_and_fun_binding.dart';
-import 'package:air_app/web_modules/web_explore/pages/web_learn_docs_view.dart';
+import 'package:air_app/web_modules/web_explore/pages/web_learn_and_fun_view.dart';
 import 'package:air_app/web_modules/web_explore/pages/web_learn_docs_binding.dart';
-import 'package:air_app/web_modules/web_explore/pages/web_life_hacks_view.dart';
+import 'package:air_app/web_modules/web_explore/pages/web_learn_docs_view.dart';
 import 'package:air_app/web_modules/web_explore/pages/web_life_hacks_binding.dart';
-
-import 'package:air_app/web_modules/web_motivation/web_motivation_view.dart';
-import 'package:air_app/web_modules/web_motivation/web_motivation_binding.dart';
-import 'package:air_app/web_modules/web_motivation/pages/web_get_connected_view.dart';
+import 'package:air_app/web_modules/web_explore/pages/web_life_hacks_view.dart';
+import 'package:air_app/web_modules/web_explore/web_explore_binding.dart';
+import 'package:air_app/web_modules/web_explore/web_explore_view.dart';
+import 'package:air_app/web_modules/web_home/web_home_binding.dart';
+import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:air_app/web_modules/web_motivation/pages/web_get_connected_binding.dart';
-import 'package:air_app/web_modules/web_motivation/pages/web_word_motivation_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_get_connected_view.dart';
 import 'package:air_app/web_modules/web_motivation/pages/web_word_motivation_binding.dart';
-
-import 'package:air_app/web_modules/web_profile/web_profile_view.dart';
-import 'package:air_app/web_modules/web_profile/web_profile_binding.dart';
-import 'package:air_app/web_modules/web_profile/pages/web_connect_collaborate_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_word_motivation_view.dart';
+import 'package:air_app/web_modules/web_motivation/web_motivation_binding.dart';
+import 'package:air_app/web_modules/web_motivation/web_motivation_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_connect_collaborate_binding.dart';
-import 'package:air_app/web_modules/web_profile/pages/web_events_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_connect_collaborate_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_events_binding.dart';
-import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_events_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_binding.dart';
-
-import 'package:air_app/web_modules/web_service/web_service_view.dart';
-import 'package:air_app/web_modules/web_service/web_service_binding.dart';
-import 'package:air_app/web_modules/web_service/pages/web_process_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_view.dart';
+import 'package:air_app/web_modules/web_profile/web_profile_binding.dart';
+import 'package:air_app/web_modules/web_profile/web_profile_view.dart';
 import 'package:air_app/web_modules/web_service/pages/web_process_binding.dart';
+import 'package:air_app/web_modules/web_service/pages/web_process_view.dart';
+import 'package:air_app/web_modules/web_service/web_service_binding.dart';
+import 'package:air_app/web_modules/web_service/web_service_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_category_tree_binding.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_category_tree_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_commerce_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_digitalize_hub_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_ease_tools_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_hospitality_care_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_projects_assessments_showcase_view.dart';
-
-import 'package:air_app/web_modules/web_setup/web_setup_view.dart';
 import 'package:air_app/web_modules/web_setup/web_setup_binding.dart';
-import 'package:air_app/web_modules/web_setup/pages/web_category_tree_view.dart';
-import 'package:air_app/web_modules/web_setup/pages/web_category_tree_binding.dart';
-
-import 'package:air_app/web_modules/web_system/web_system_view.dart';
-import 'package:air_app/web_modules/web_system/web_system_binding.dart';
-import 'package:air_app/web_modules/web_system/pages/web_about_org_view.dart';
+import 'package:air_app/web_modules/web_setup/web_setup_view.dart';
 import 'package:air_app/web_modules/web_system/pages/web_about_org_binding.dart';
-import 'package:air_app/web_modules/web_system/pages/web_app_setting_view.dart';
+import 'package:air_app/web_modules/web_system/pages/web_about_org_view.dart';
 import 'package:air_app/web_modules/web_system/pages/web_app_setting_binding.dart';
-
-import 'package:air_app/web_modules/web_vision/web_vision_view.dart';
-import 'package:air_app/web_modules/web_vision/web_vision_binding.dart';
-import 'package:air_app/web_modules/web_vision/pages/web_airs_mission_view.dart';
+import 'package:air_app/web_modules/web_system/pages/web_app_setting_view.dart';
+import 'package:air_app/web_modules/web_system/web_system_binding.dart';
+import 'package:air_app/web_modules/web_system/web_system_view.dart';
 import 'package:air_app/web_modules/web_vision/pages/web_airs_mission_binding.dart';
-import 'package:air_app/web_modules/web_vision/pages/web_airs_show_case_view.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_airs_mission_view.dart';
 import 'package:air_app/web_modules/web_vision/pages/web_airs_show_case_binding.dart';
-
-import 'package:air_app/web_modules/web_wisdom/web_wisdom_view.dart';
-import 'package:air_app/web_modules/web_wisdom/web_wisdom_binding.dart';
-import 'package:air_app/web_modules/web_wisdom/pages/web_ask_anything_view.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_airs_show_case_view.dart';
+import 'package:air_app/web_modules/web_vision/web_vision_binding.dart';
+import 'package:air_app/web_modules/web_vision/web_vision_view.dart';
 import 'package:air_app/web_modules/web_wisdom/pages/web_ask_anything_binding.dart';
-import 'package:air_app/web_modules/web_wisdom/pages/web_wisdom_internal_view.dart';
+import 'package:air_app/web_modules/web_wisdom/pages/web_ask_anything_view.dart';
 import 'package:air_app/web_modules/web_wisdom/pages/web_wisdom_internal_binding.dart';
+import 'package:air_app/web_modules/web_wisdom/pages/web_wisdom_internal_view.dart';
+import 'package:air_app/web_modules/web_wisdom/web_wisdom_binding.dart';
+import 'package:air_app/web_modules/web_wisdom/web_wisdom_view.dart';
 import 'package:get/get.dart';
 
 class WebRoutes {
@@ -298,6 +295,42 @@ class WebRoutes {
     GetPage(
       name: WebProjectsAssessmentsShowcaseView.routeName,
       page: () => const WebProjectsAssessmentsShowcaseView(),
+    ),
+    GetPage(
+      name: WebIdentitiesEarningsView.routeName,
+      page: () => const WebIdentitiesEarningsView(),
+      binding: WebIdentitiesEarningsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebHigherStudiesView.routeName,
+      page: () => const WebHigherStudiesView(),
+      binding: WebHigherStudiesBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebDoctorateView.routeName,
+      page: () => const WebDoctorateView(),
+      binding: WebDoctorateBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebAskAnythingBView.routeName,
+      page: () => const WebAskAnythingBView(),
+      binding: WebAskAnythingBBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebWisdomView.routeName,
+      page: () => const WebWisdomView(),
+      binding: WebWisdomBinding(),
+      transition: Transition.rightToLeft, // Section roots use rightToLeft
+    ),
+    GetPage(
+      name: WebIdentitiesEarningsView.routeName,
+      page: () => const WebIdentitiesEarningsView(),
+      binding: WebIdentitiesEarningsBinding(),
+      transition: Transition.fadeIn,
     ),
   ];
 }

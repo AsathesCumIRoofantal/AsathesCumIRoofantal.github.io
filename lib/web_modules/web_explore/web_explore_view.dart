@@ -1,6 +1,10 @@
 // web_modules/web_explore/web_explore_view.dart
 // Section workspace — unique palette, hero, item grid, and detail.
 
+import 'package:air_app/web_modules/web_be_you/pages/web_ask_anything_b_view.dart';
+import 'package:air_app/web_modules/web_be_you/pages/web_higher_studies_view.dart';
+import 'package:air_app/web_modules/web_explore/pages/web_doctorate_view.dart';
+import 'package:air_app/web_modules/web_wisdom/pages/web_ask_anything_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +22,9 @@ class WebExploreView extends GetView<WebExploreController> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final bg = isDark ? WColors.surfaceDark : section.accent.withValues(alpha: 0.35);
+    final bg = isDark
+        ? WColors.surfaceDark
+        : section.accent.withValues(alpha: 0.35);
 
     return WebShell(
       currentRoute: routeName,
@@ -49,9 +55,13 @@ class WebExploreView extends GetView<WebExploreController> {
                       final q = controller.searchQuery.value;
                       final items = q.isEmpty
                           ? section.items
-                          : section.items.where((it) =>
-                              it.title.toLowerCase().contains(q) ||
-                              it.description.toLowerCase().contains(q)).toList();
+                          : section.items
+                                .where(
+                                  (it) =>
+                                      it.title.toLowerCase().contains(q) ||
+                                      it.description.toLowerCase().contains(q),
+                                )
+                                .toList();
                       if (items.isEmpty) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 40),
@@ -65,7 +75,10 @@ class WebExploreView extends GetView<WebExploreController> {
                       }
                       return WGrid(
                         children: items
-                            .map((it) => _ItemCard(item: it, color: section.primary))
+                            .map(
+                              (it) =>
+                                  _ItemCard(item: it, color: section.primary),
+                            )
                             .toList(),
                       );
                     }),
@@ -99,10 +112,7 @@ class _SectionHero extends StatelessWidget {
           end: Alignment.bottomRight,
         ),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: isMob ? 64 : 96,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: isMob ? 64 : 96),
       child: WMaxWidth(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +122,10 @@ class _SectionHero extends StatelessWidget {
               runSpacing: 8,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.18),
                     borderRadius: BorderRadius.circular(100),
@@ -135,7 +148,10 @@ class _SectionHero extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.14),
                     borderRadius: BorderRadius.circular(100),
@@ -184,22 +200,38 @@ class _SectionHero extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     foregroundColor: section.primary,
-                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 22,
+                      vertical: 14,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
                   icon: const Icon(Icons.dashboard_rounded),
-                  label: const Text('Back to atlas', style: TextStyle(fontWeight: FontWeight.w800)),
+                  label: const Text(
+                    'Back to atlas',
+                    style: TextStyle(fontWeight: FontWeight.w800),
+                  ),
                 ),
                 OutlinedButton.icon(
                   onPressed: () {},
                   style: OutlinedButton.styleFrom(
                     foregroundColor: Colors.white,
                     side: const BorderSide(color: Colors.white54),
-                    padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 22,
+                      vertical: 14,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
                   icon: const Icon(Icons.bookmark_add_outlined),
-                  label: const Text('Save workspace', style: TextStyle(fontWeight: FontWeight.w700)),
+                  label: const Text(
+                    'Save workspace',
+                    style: TextStyle(fontWeight: FontWeight.w700),
+                  ),
                 ),
               ],
             ),
@@ -230,7 +262,10 @@ class _SearchBar extends StatelessWidget {
           prefixIcon: Icon(Icons.search, color: color),
           hintText: 'Filter topics in this workspace…',
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 16,
+          ),
         ),
       ),
     );
@@ -319,13 +354,23 @@ class _ItemCard extends StatelessWidget {
     if (item.title == 'Learn And Fun') {
       Get.toNamed('/web-explore/learn-and-fun');
       return;
-    }
-    if (item.title == 'Learn Docs (by category)') {
+    } else if (item.title == 'Learn Docs (by category)') {
       Get.toNamed('/web-explore/learn-docs');
       return;
-    }
-    if (item.title == 'Life Hacks') {
+    } else if (item.title == 'Life Hacks') {
       Get.toNamed('/web-explore/life-hacks');
+      return;
+    } else if (item.title == 'Heigher Studies') {
+      // Note: matching typo in handbook 'Heigher'
+      Get.toNamed(WebHigherStudiesView.routeName);
+      return;
+    } else if (item.title == 'Doctorate') {
+      // ADD THIS BLOCK:
+      Get.toNamed(WebDoctorateView.routeName);
+      return;
+    } else if (item.title == 'Ask Anything') {
+      // ADD THIS BLOCK:
+      Get.toNamed(WebAskAnythingBView.routeName);
       return;
     }
     showModalBottomSheet(
@@ -352,11 +397,19 @@ class _ItemCard extends StatelessWidget {
               child: Icon(item.icon, color: color, size: 30),
             ),
             const SizedBox(height: 16),
-            Text(item.title,
-                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900)),
+            Text(
+              item.title,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+            ),
             const SizedBox(height: 10),
-            Text(item.description,
-                style: const TextStyle(fontSize: 14.5, height: 1.6, color: Colors.black87)),
+            Text(
+              item.description,
+              style: const TextStyle(
+                fontSize: 14.5,
+                height: 1.6,
+                color: Colors.black87,
+              ),
+            ),
             const SizedBox(height: 24),
             SizedBox(
               width: double.infinity,
@@ -365,10 +418,17 @@ class _ItemCard extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: color,
                   padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
                 ),
-                child: const Text('Got it',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800)),
+                child: const Text(
+                  'Got it',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 12),
@@ -412,7 +472,11 @@ class _CallToAction extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             section.blurb,
-            style: const TextStyle(fontSize: 14, height: 1.6, color: Colors.black87),
+            style: const TextStyle(
+              fontSize: 14,
+              height: 1.6,
+              color: Colors.black87,
+            ),
           ),
           const SizedBox(height: 16),
           Wrap(
@@ -424,12 +488,19 @@ class _CallToAction extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: section.primary,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 22,
+                    vertical: 14,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                 ),
                 icon: const Icon(Icons.dashboard_rounded),
-                label: const Text('Explore other workspaces',
-                    style: TextStyle(fontWeight: FontWeight.w800)),
+                label: const Text(
+                  'Explore other workspaces',
+                  style: TextStyle(fontWeight: FontWeight.w800),
+                ),
               ),
             ],
           ),
