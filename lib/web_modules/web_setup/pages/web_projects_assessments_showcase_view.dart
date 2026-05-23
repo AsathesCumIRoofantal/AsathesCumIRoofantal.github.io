@@ -20,7 +20,7 @@ class WebProjectsAssessmentsShowcaseView extends StatelessWidget {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              expandedHeight: 320,
+              expandedHeight: 550,
               pinned: true,
               backgroundColor: Colors.transparent,
               flexibleSpace: FlexibleSpaceBar(
@@ -151,110 +151,176 @@ class WebProjectsAssessmentsShowcaseView extends StatelessWidget {
             ),
             SliverPadding(
               padding: const EdgeInsets.all(24),
-              sliver: SliverGrid(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  return TweenAnimationBuilder<double>(
-                    tween: Tween(begin: 0, end: 1),
-                    duration: Duration(milliseconds: 500 + (index * 80)),
-                    builder: (context, value, child) {
-                      return Transform.translate(
-                        offset: Offset(0, 40 * (1 - value)),
-                        child: Opacity(opacity: value, child: child),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate([
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final width = constraints.maxWidth;
+
+                      int columns = 1;
+
+                      if (width > 1600) {
+                        columns = 4;
+                      } else if (width > 1200) {
+                        columns = 3;
+                      } else if (width > 700) {
+                        columns = 2;
+                      }
+
+                      final cardWidth =
+                          (width - ((columns - 1) * 24)) / columns;
+
+                      return Wrap(
+                        spacing: 24,
+                        runSpacing: 24,
+                        children: List.generate(8, (index) {
+                          return TweenAnimationBuilder<double>(
+                            tween: Tween(begin: 0, end: 1),
+                            duration: Duration(
+                              milliseconds: 500 + (index * 80),
+                            ),
+                            curve: Curves.easeOutCubic,
+
+                            builder: (context, value, child) {
+                              return Transform.translate(
+                                offset: Offset(0, 40 * (1 - value)),
+                                child: Opacity(opacity: value, child: child),
+                              );
+                            },
+
+                            child: SizedBox(
+                              width: cardWidth,
+
+                              child: Container(
+                                padding: const EdgeInsets.all(22),
+
+                                decoration: BoxDecoration(
+                                  color: isDark
+                                      ? const Color(0xFF111C2D)
+                                      : Colors.white,
+
+                                  borderRadius: BorderRadius.circular(30),
+
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 30,
+                                      offset: const Offset(0, 12),
+                                      color: Colors.black.withOpacity(0.06),
+                                    ),
+                                  ],
+                                ),
+
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                                  mainAxisSize: MainAxisSize.min,
+
+                                  children: [
+                                    Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 26,
+
+                                          backgroundColor: const Color(
+                                            0xFF5B8CFF,
+                                          ).withOpacity(0.15),
+
+                                          child: const Icon(
+                                            Icons.bolt,
+                                            color: Color(0xFF5B8CFF),
+                                          ),
+                                        ),
+
+                                        const Spacer(),
+
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 12,
+                                            vertical: 6,
+                                          ),
+
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+
+                                            color: Colors.green.withOpacity(
+                                              0.12,
+                                            ),
+                                          ),
+
+                                          child: const Text(
+                                            'Realtime',
+
+                                            style: TextStyle(
+                                              color: Colors.green,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    const SizedBox(height: 24),
+
+                                    Text(
+                                      'Feature Experience #$index',
+
+                                      style: TextStyle(
+                                        color: isDark
+                                            ? Colors.white
+                                            : Colors.black87,
+
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 10),
+
+                                    Text(
+                                      'Flutter enables high-performance sliver layouts, animated dashboards, adaptive web rendering, glassmorphism, AI-ready experiences and silky desktop responsiveness.',
+
+                                      style: TextStyle(
+                                        color: isDark
+                                            ? Colors.white70
+                                            : Colors.black54,
+
+                                        height: 1.6,
+                                      ),
+                                    ),
+
+                                    const SizedBox(height: 24),
+
+                                    LinearProgressIndicator(
+                                      value: (index + 1) / 10,
+                                      borderRadius: BorderRadius.circular(20),
+                                      minHeight: 10,
+                                    ),
+
+                                    const SizedBox(height: 16),
+
+                                    Wrap(
+                                      spacing: 10,
+                                      runSpacing: 10,
+
+                                      children: const [
+                                        Chip(label: Text('Slivers')),
+                                        Chip(label: Text('Animations')),
+                                        Chip(label: Text('Responsive')),
+                                        Chip(label: Text('GetX')),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
                       );
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(22),
-                      decoration: BoxDecoration(
-                        color: isDark ? const Color(0xFF111C2D) : Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 30,
-                            offset: const Offset(0, 12),
-                            color: Colors.black.withOpacity(0.06),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 26,
-                                backgroundColor: const Color(
-                                  0xFF5B8CFF,
-                                ).withOpacity(0.15),
-                                child: const Icon(
-                                  Icons.bolt,
-                                  color: Color(0xFF5B8CFF),
-                                ),
-                              ),
-                              const Spacer(),
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12,
-                                  vertical: 6,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: Colors.green.withOpacity(0.12),
-                                ),
-                                child: const Text(
-                                  'Realtime',
-                                  style: TextStyle(
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          Text(
-                            'Feature Experience #$index',
-                            style: TextStyle(
-                              color: isDark ? Colors.white : Colors.black87,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            'Flutter enables high-performance sliver layouts, animated dashboards, adaptive web rendering, glassmorphism, AI-ready experiences and silky desktop responsiveness.',
-                            style: TextStyle(
-                              color: isDark ? Colors.white70 : Colors.black54,
-                              height: 1.6,
-                            ),
-                          ),
-                          const Spacer(),
-                          LinearProgressIndicator(
-                            value: (index + 1) / 10,
-                            borderRadius: BorderRadius.circular(20),
-                            minHeight: 10,
-                          ),
-                          const SizedBox(height: 16),
-                          Wrap(
-                            spacing: 10,
-                            runSpacing: 10,
-                            children: const [
-                              Chip(label: Text('Slivers')),
-                              Chip(label: Text('Animations')),
-                              Chip(label: Text('Responsive')),
-                              Chip(label: Text('GetX')),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }, childCount: 8),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 24,
-                  crossAxisSpacing: 24,
-                  childAspectRatio: 1.1,
-                ),
+                  ),
+                ]),
               ),
             ),
             SliverToBoxAdapter(
