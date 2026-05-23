@@ -561,7 +561,10 @@ class _EnhancedItemCardState extends State<_EnhancedItemCard>
 
   void _openDetail(BuildContext context, WebNavItem item) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    if (item.title == 'Products & Services') {
+    if (item.title == 'Knowledge Center') {
+      Get.toNamed('/web-air-space/knowledge-center');
+      return;
+    } else if (item.title == 'Products & Services') {
       Get.toNamed('/web-air_space/products-services');
       return;
     } else if (item.title == 'Query & Discussion') {
