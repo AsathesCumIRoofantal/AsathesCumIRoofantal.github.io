@@ -134,21 +134,23 @@ class WebImaginationView extends GetView<WebImaginationController> {
             ),
             SliverPadding(
               padding: const EdgeInsets.all(20),
-              sliver: SliverGrid(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 400,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.8,
+              sliver: Obx(
+                () => SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 400,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 0.8,
+                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final feature = controller.features[index];
+                    return _ImaginationCard(
+                      feature: feature,
+                      index: index,
+                      isDark: isDark,
+                    );
+                  }, childCount: controller.features.length),
                 ),
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  final feature = controller.features[index];
-                  return _ImaginationCard(
-                    feature: feature,
-                    index: index,
-                    isDark: isDark,
-                  );
-                }, childCount: controller.features.length),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 60)),
