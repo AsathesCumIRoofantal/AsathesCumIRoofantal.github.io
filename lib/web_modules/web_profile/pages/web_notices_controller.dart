@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WebNoticesController extends GetxController {
@@ -59,5 +60,12 @@ class WebNoticesController extends GetxController {
         .toList();
   }
 
-  void setCategory(String cat) => selectedCategory.value = cat;
+  void setCategory(String value) {
+    // Delay the state switch until the end of the frame
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      selectedCategory.value = value; // assuming it's an RxString
+      // Your filtering logic here...
+      filteredNotices;
+    });
+  }
 }

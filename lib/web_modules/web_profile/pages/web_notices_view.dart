@@ -48,20 +48,27 @@ class WebNoticesView extends GetView<WebNoticesController> {
                     ),
                   ),
                   child: Center(
-                    child:
-                        Icon(
-                              Icons.notifications_active_rounded,
-                              size: 120,
-                              color: Colors.white.withOpacity(0.2),
-                            )
-                            .animate(onPlay: (c) => c.repeat())
-                            .shake(duration: const Duration(seconds: 1), hz: 5),
+                    // Wrap in a RepaintBoundary to isolate the animation painting pass
+                    child: RepaintBoundary(
+                      child:
+                          const Icon(
+                                Icons.notifications_active_rounded,
+                                size: 120,
+                                color: Colors.white24,
+                              )
+                              .animate(onPlay: (c) => c.repeat())
+                              .shake(
+                                duration: const Duration(seconds: 1),
+                                hz: 5,
+                              ),
+                    ),
                   ),
                 ),
               ),
             ),
             SliverPersistentHeader(
               pinned: true,
+              floating: true,
               delegate: _FilterHeaderDelegate(
                 onFilterSelected: (val) => controller.setCategory(val),
                 selectedCategory: controller.selectedCategory,
@@ -118,11 +125,14 @@ class WebNoticesView extends GetView<WebNoticesController> {
             ),
             SliverPadding(
               padding: const EdgeInsets.all(20),
-              sliver: SliverList(
-                delegate: SliverChildBuilderDelegate((context, index) {
-                  final notice = controller.filteredNotices[index];
-                  return _NoticeCard(notice: notice, isDark: isDark);
-                }, childCount: controller.filteredNotices.length),
+              sliver: Obx(
+                () => SliverList(
+                  // Wrap inside Obx for reactive state
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final notice = controller.filteredNotices[index];
+                    return _NoticeCard(notice: notice, isDark: isDark);
+                  }, childCount: controller.filteredNotices.length),
+                ),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 60)),
@@ -267,6 +277,44 @@ class _NoticeCard extends StatelessWidget {
   }
 }
 
+// class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
+//   final void Function(String) onFilterSelected;
+//   final String? selectedCategory;
+//   final bool isDark;
+
+//   _FilterHeaderDelegate({
+//     required this.onFilterSelected,
+//     required this.selectedCategory,
+//     required this.isDark,
+//   });
+
+//   @override
+//   double get minExtent => 60; // collapsed height
+//   @override
+//   double get maxExtent => 100; // expanded height
+
+//   @override
+//   Widget build(
+//     BuildContext context,
+//     double shrinkOffset,
+//     bool overlapsContent,
+//   ) {
+//     return Container(
+//       height: maxExtent,
+//       color: isDark ? Colors.black : Colors.white,
+//       child: Center(
+//         child: FilterWidget(
+//           onFilterSelected: onFilterSelected,
+//           selectedCategory: selectedCategory ?? '', // avoid null
+//         ),
+//       ),
+//     );
+//   }
+
+//   @override
+//   bool shouldRebuild(covariant _FilterHeaderDelegate oldDelegate) => true;
+// }
+
 class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
   final Function(String) onFilterSelected;
   final RxString selectedCategory;
@@ -309,9 +357,9 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 200;
+  double get maxExtent => 300;
   @override
-  double get minExtent => 200;
+  double get minExtent => 60;
   @override
   bool shouldRebuild(covariant _FilterHeaderDelegate oldDelegate) => true;
 }
