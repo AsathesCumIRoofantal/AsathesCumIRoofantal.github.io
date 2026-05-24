@@ -16,6 +16,8 @@ import 'package:air_app/web_modules/web_aspects/pages/web_anomalies_open_binding
 import 'package:air_app/web_modules/web_aspects/pages/web_anomalies_open_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_be_part_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_be_part_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_communication_binding.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_communication_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_contribute_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_contribute_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_limits_binding.dart';
@@ -461,6 +463,12 @@ class WebRoutes {
       name: WebLimitsView.routeName,
       page: () => const WebLimitsView(),
       binding: WebLimitsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebCommunicationView.routeName,
+      page: () => const WebCommunicationView(),
+      binding: WebCommunicationBinding(),
       transition: Transition.fadeIn,
     ),
   ];

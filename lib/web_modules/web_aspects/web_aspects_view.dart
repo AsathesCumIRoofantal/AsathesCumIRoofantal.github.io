@@ -3,6 +3,7 @@
 
 import 'package:air_app/web_modules/web_aspects/pages/web_anomalies_checked_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_anomalies_open_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_communication_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_contribute_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_limits_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_new_in_air_view.dart';
@@ -378,6 +379,9 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == "Limits (0 or 1)") {
       Get.toNamed(WebLimitsView.routeName);
+      return;
+    } else if (item.title == "Communication") {
+      Get.toNamed(WebCommunicationView.routeName);
       return;
     }
     showModalBottomSheet(
