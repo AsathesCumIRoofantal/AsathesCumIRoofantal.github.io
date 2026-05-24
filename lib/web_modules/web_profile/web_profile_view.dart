@@ -7,6 +7,7 @@ import 'package:air_app/web_modules/web_profile/pages/web_managements_view.dart'
 import 'package:air_app/web_modules/web_profile/pages/web_network_apis_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_private_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_public_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_rewards_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_your_business_view.dart';
 import 'package:flutter/material.dart';
@@ -387,6 +388,9 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'Private/Confidential') {
       Get.toNamed(WebPrivateView.routeName);
+      return;
+    } else if (item.title == 'Public Stuff') {
+      Get.toNamed(WebPublicView.routeName);
       return;
     }
     showModalBottomSheet(

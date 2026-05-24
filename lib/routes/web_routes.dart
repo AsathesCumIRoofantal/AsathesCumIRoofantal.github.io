@@ -64,6 +64,8 @@ import 'package:air_app/web_modules/web_profile/pages/web_notices_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_private_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_private_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_public_binding.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_public_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_rewards_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_rewards_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_binding.dart';
@@ -404,6 +406,12 @@ class WebRoutes {
       name: WebPrivateView.routeName,
       page: () => const WebPrivateView(),
       binding: WebPrivateBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebPublicView.routeName,
+      page: () => const WebPublicView(),
+      binding: WebPublicBinding(),
       transition: Transition.fadeIn,
     ),
   ];
