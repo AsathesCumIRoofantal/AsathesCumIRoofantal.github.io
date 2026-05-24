@@ -141,7 +141,7 @@ class WebReviseView extends GetView<WebReviseController> {
                       .animate()
                       .fadeIn(delay: (100 * index).ms)
                       .slideX(begin: 0.1);
-                }),
+                }, childCount: controller.cycles.length),
               ),
             ),
           ],
