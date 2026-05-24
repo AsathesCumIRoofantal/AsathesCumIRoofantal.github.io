@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 
 class WebSetupMasterView extends GetView<WebSetupMasterController> {
   const WebSetupMasterView({super.key});
-  static const String routeName = WebNavData.setup_scriptStrategy;
+  static const String routeName = "web-setup/setup_aone_master_view";
 
   @override
   Widget build(BuildContext context) {
