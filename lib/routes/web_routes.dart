@@ -58,6 +58,8 @@ import 'package:air_app/web_modules/web_profile/pages/web_maintenance_binding.da
 import 'package:air_app/web_modules/web_profile/pages/web_maintenance_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_managements_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_managements_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_network_apis_binding.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_network_apis_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_rewards_binding.dart';
@@ -388,6 +390,12 @@ class WebRoutes {
       name: WebAppealsView.routeName,
       page: () => const WebAppealsView(),
       binding: WebAppealsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebNetworkApisView.routeName,
+      page: () => const WebNetworkApisView(),
+      binding: WebNetworkApisBinding(),
       transition: Transition.fadeIn,
     ),
   ];
