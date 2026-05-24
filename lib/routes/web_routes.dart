@@ -129,6 +129,12 @@ import 'package:air_app/web_modules/web_vision/pages/web_airs_mission_binding.da
 import 'package:air_app/web_modules/web_vision/pages/web_airs_mission_view.dart';
 import 'package:air_app/web_modules/web_vision/pages/web_airs_show_case_binding.dart';
 import 'package:air_app/web_modules/web_vision/pages/web_airs_show_case_view.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_calendar_binding.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_calendar_view.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_goodgoing_binding.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_goodgoing_view.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_windup_binding.dart';
+import 'package:air_app/web_modules/web_vision/pages/web_windup_view.dart';
 import 'package:air_app/web_modules/web_vision/web_vision_binding.dart';
 import 'package:air_app/web_modules/web_vision/web_vision_view.dart';
 import 'package:air_app/web_modules/web_wisdom/pages/web_ask_anything_binding.dart';
@@ -542,6 +548,31 @@ class WebRoutes {
       name: WebOutcomeView.routeName,
       page: () => const WebOutcomeView(),
       binding: WebOutcomeBinding(),
+      transition: Transition.fadeIn,
+    ),
+
+    GetPage(
+      name: WebVisionView.routeName,
+      page: () => const WebVisionView(),
+      binding: WebVisionBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebWindupView.routeName,
+      page: () => const WebWindupView(),
+      binding: WebWindupBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebCalendarView.routeName,
+      page: () => const WebCalendarView(),
+      binding: WebCalendarBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebGoodGoingView.routeName,
+      page: () => const WebGoodGoingView(),
+      binding: WebGoodGoingBinding(),
       transition: Transition.fadeIn,
     ),
   ];
