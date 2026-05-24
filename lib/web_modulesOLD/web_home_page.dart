@@ -19,6 +19,11 @@ class WebHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bool isMobile = MediaQuery.of(context).size.width < 600;
+    final bool isTablet =
+        MediaQuery.of(context).size.width >= 600 &&
+        MediaQuery.of(context).size.width < 1024;
+    final bool isDesktop = MediaQuery.of(context).size.width >= 1024;
 
     return Scaffold(
       backgroundColor: isDark ? WColors.surfaceDark : WColors.surface,
@@ -51,27 +56,28 @@ class WebHomePage extends StatelessWidget {
               colorB: WColors.violet,
               icon: Icons.public_rounded,
               actions: [
-                ElevatedButton.icon(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.HOME_APP_OLD);
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: WColors.indigo,
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 22,
-                      vertical: 14,
+                if (!isDesktop)
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.HOME_APP_OLD);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: WColors.indigo,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 22,
+                        vertical: 14,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+                    icon: const Icon(Icons.explore_rounded),
+                    label: const Text(
+                      'Explore AIR Base',
+                      style: TextStyle(fontWeight: FontWeight.w700),
                     ),
                   ),
-                  icon: const Icon(Icons.explore_rounded),
-                  label: const Text(
-                    'Explore AIR Base',
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                ),
                 OutlinedButton.icon(
                   onPressed: () {
                     Get.offNamed(AppRoutes.LOGIN);
