@@ -18,13 +18,20 @@ class WebSetupMasterView extends GetView<WebSetupMasterController> {
     final isMobile = MediaQuery.of(context).size.width < 700;
     return WebShell(
       currentRoute: routeName,
-      child: SingleChildScrollView(
-        child: Scaffold(
-          backgroundColor: const Color(0xFFF8FAFC),
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: getContentListWidget(isMobile),
-          ),
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF8FAFC),
+        body: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: getContentListWidget(isMobile),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -42,71 +49,71 @@ class WebSetupMasterView extends GetView<WebSetupMasterController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // HERO SECTION
-          Container(
-            height: 320,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [color, color.withOpacity(.7)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  right: -40,
-                  top: 50,
-                  child: Icon(
-                    data['icon'],
-                    size: 260,
-                    color: Colors.white.withOpacity(.08),
-                  ),
-                ),
+          // Container(
+          //   height: 320,
+          //   width: double.infinity,
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       colors: [color, color.withOpacity(.7)],
+          //       begin: Alignment.topLeft,
+          //       end: Alignment.bottomRight,
+          //     ),
+          //   ),
+          //   child: Stack(
+          //     fit: StackFit.loose,
+          //     children: [
+          //       Positioned(
+          //         right: -40,
+          //         top: 50,
+          //         child: Icon(
+          //           data['icon'],
+          //           size: 260,
+          //           color: Colors.white.withOpacity(.08),
+          //         ),
+          //       ),
 
-                Padding(
-                  padding: const EdgeInsets.all(40),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        radius: 42,
-                        backgroundColor: Colors.white.withOpacity(.15),
-                        child: Icon(
-                          data['icon'],
-                          size: 42,
-                          color: Colors.white,
-                        ),
-                      ),
+          //       // Padding(
+          //       //   padding: const EdgeInsets.all(40),
+          //       //   child: Column(
+          //       //     crossAxisAlignment: CrossAxisAlignment.start,
+          //       //     mainAxisAlignment: MainAxisAlignment.start,
+          //       //     children: [
+          //       //       CircleAvatar(
+          //       //         radius: 42,
+          //       //         backgroundColor: Colors.white.withOpacity(.15),
+          //       //         child: Icon(
+          //       //           data['icon'],
+          //       //           size: 42,
+          //       //           color: Colors.white,
+          //       //         ),
+          //       //       ),
 
-                      const SizedBox(height: 24),
+          //       //       const SizedBox(height: 24),
 
-                      Text(
-                        data['title'],
-                        style: const TextStyle(
-                          fontSize: 42,
-                          fontWeight: FontWeight.w800,
-                          color: Colors.white,
-                        ),
-                      ),
+          //       //       Text(
+          //       //         data['title'],
+          //       //         style: const TextStyle(
+          //       //           fontSize: 42,
+          //       //           fontWeight: FontWeight.w800,
+          //       //           color: Colors.white,
+          //       //         ),
+          //       //       ),
 
-                      const SizedBox(height: 12),
+          //       //       const SizedBox(height: 12),
 
-                      Text(
-                        'Universal Setup Architecture',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(.85),
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-
+          //       //       Text(
+          //       //         'Universal Setup Architecture',
+          //       //         style: TextStyle(
+          //       //           color: Colors.white.withOpacity(.85),
+          //       //           fontSize: 18,
+          //       //         ),
+          //       //       ),
+          //       //     ],
+          //       //   ),
+          //       // ),
+          //     ],
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(24),
             child: isMobile

@@ -2,12 +2,18 @@
 // Section workspace — unique palette, hero, item grid, and detail.
 
 import 'package:air_app/routes/web_routes.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_code_conduct_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_commerce_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_digitalize_hub_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_ease_tools_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_hospitality_care_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_projects_assessments_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_safety_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_script_strategy_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_setup_master_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_social_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_utility_facilities_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_vocabulary_showcase_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -373,22 +379,22 @@ class _ItemCard extends StatelessWidget {
       Get.toNamed(WebHospitalityCareShowcaseView.routeName);
       return;
     } else if (item.title == 'Vocabulary') {
-      Get.toNamed(WebNavData.setup_vocabulary);
+      Get.toNamed(Vocabulary.routeName);
       return;
     } else if (item.title == 'Code Conduct') {
-      Get.toNamed(WebNavData.setup_codeConduct);
+      Get.toNamed(CodeConduct.routeName);
       return;
     } else if (item.title == 'Script Strategy') {
-      Get.toNamed(WebNavData.setup_scriptStrategy);
+      Get.toNamed(ScriptStrategy.routeName);
       return;
     } else if (item.title == 'Safety') {
-      Get.toNamed(WebNavData.setup_safety);
+      Get.toNamed(Safety.routeName);
       return;
     } else if (item.title == 'Utility Facilities') {
-      Get.toNamed(WebNavData.setup_utilityFacilities);
+      Get.toNamed(UtilityFacilities.routeName);
       return;
     } else if (item.title == 'Social') {
-      Get.toNamed(WebNavData.setup_social);
+      Get.toNamed(Social.routeName);
       return;
     } else {
       Get.toNamed(WebSetupMasterView.routeName);
