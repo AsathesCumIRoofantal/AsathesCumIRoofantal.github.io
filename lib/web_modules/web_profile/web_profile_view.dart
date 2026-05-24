@@ -386,7 +386,7 @@ class _ItemCard extends StatelessWidget {
     } else if (item.title == 'Network (APIs) Stuff') {
       Get.toNamed(WebNetworkApisView.routeName);
       return;
-    } else if (item.title == 'Private/Confidential') {
+    } else if (item.title == 'Private/Confidential Stuff') {
       Get.toNamed(WebPrivateView.routeName);
       return;
     } else if (item.title == 'Public Stuff') {

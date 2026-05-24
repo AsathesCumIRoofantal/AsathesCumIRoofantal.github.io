@@ -227,7 +227,7 @@ class WebContributeView extends GetView<WebContributeController> {
                       .animate()
                       .fadeIn(delay: (100 * index).ms)
                       .slideY(begin: 0.2);
-                }),
+                }, childCount: controller.activeMissions.length),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 60)),
