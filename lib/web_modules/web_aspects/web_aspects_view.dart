@@ -1,6 +1,7 @@
 // web_modules/web_aspects/web_aspects_view.dart
 // Section workspace — unique palette, hero, item grid, and detail.
 
+import 'package:air_app/web_modules/web_aspects/pages/web_contribute_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_resume_tour_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -358,6 +359,9 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'Timeline of AIR') {
       Get.toNamed('/web-aspects/timeline-of-air');
+      return;
+    } else if (item.title == "Contribute to AIR") {
+      Get.toNamed(WebContributeView.routeName);
       return;
     }
     showModalBottomSheet(
