@@ -16,273 +16,270 @@ class WebSetupMasterView extends GetView<WebSetupMasterController> {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 700;
-
-    final slug = Get.parameters['slug'] ?? 'research-dev';
-
-    final data =
-        controller.setupData[slug] ?? controller.setupData['research-dev']!;
-
-    final Color color = data['color'];
-
     return WebShell(
       currentRoute: routeName,
-      child: Scaffold(
-        backgroundColor: const Color(0xFFF8FAFC),
-        body: CustomScrollView(
-          slivers: [
-            // HERO
-            SliverAppBar(
-              pinned: true,
-              expandedHeight: 320,
-              backgroundColor: color,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [color, color.withOpacity(.7)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                    ),
-
-                    Positioned(
-                      right: -40,
-                      top: 50,
-                      child: Icon(
-                        data['icon'],
-                        size: 260,
-                        color: Colors.white.withOpacity(.08),
-                      ),
-                    ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(40),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          CircleAvatar(
-                            radius: 42,
-                            backgroundColor: Colors.white.withOpacity(.15),
-                            child: Icon(
-                              data['icon'],
-                              size: 42,
-                              color: Colors.white,
-                            ),
-                          ),
-
-                          const SizedBox(height: 24),
-
-                          Text(
-                            data['title'],
-                            style: const TextStyle(
-                              fontSize: 42,
-                              fontWeight: FontWeight.w800,
-                              color: Colors.white,
-                            ),
-                          ),
-
-                          const SizedBox(height: 12),
-
-                          Text(
-                            'Universal Setup Architecture',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(.85),
-                              fontSize: 18,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // CONTENT
-            SliverPadding(
-              padding: const EdgeInsets.all(24),
-              sliver: SliverToBoxAdapter(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final isMobile = constraints.maxWidth < 900;
-
-                    return Flex(
-                      direction: isMobile ? Axis.vertical : Axis.horizontal,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // FEATURES
-                        Expanded(
-                          flex: 2,
-                          child: Column(
-                            children: [
-                              _buildGlassCard(
-                                color,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'Core Features',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 24),
-
-                                    ...List.generate(data['features'].length, (
-                                      index,
-                                    ) {
-                                      return Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 16,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Icon(
-                                              Icons.check_circle,
-                                              color: color,
-                                            ),
-
-                                            const SizedBox(width: 14),
-
-                                            Expanded(
-                                              child: Text(
-                                                data['features'][index],
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                                  ],
-                                ),
-                              ),
-
-                              const SizedBox(height: 24),
-
-                              _buildGlassCard(
-                                color,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      'Operational Layers',
-                                      style: TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-
-                                    const SizedBox(height: 24),
-
-                                    ...List.generate(data['items'].length, (
-                                      index,
-                                    ) {
-                                      final item = data['items'][index];
-
-                                      return Container(
-                                        margin: const EdgeInsets.only(
-                                          bottom: 16,
-                                        ),
-                                        padding: const EdgeInsets.all(20),
-                                        decoration: BoxDecoration(
-                                          color: color.withOpacity(.06),
-                                          borderRadius: BorderRadius.circular(
-                                            24,
-                                          ),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              width: 54,
-                                              height: 54,
-                                              decoration: BoxDecoration(
-                                                color: color,
-                                                borderRadius:
-                                                    BorderRadius.circular(18),
-                                              ),
-                                              child: const Icon(
-                                                Icons.auto_awesome,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-
-                                            const SizedBox(width: 18),
-
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    item['h'],
-                                                    style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 18,
-                                                    ),
-                                                  ),
-
-                                                  const SizedBox(height: 6),
-
-                                                  Text(
-                                                    item['d'],
-                                                    style: TextStyle(
-                                                      color:
-                                                          Colors.grey.shade700,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    }),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        if (!isMobile) const SizedBox(width: 24),
-
-                        // SIDE PANEL
-                        Expanded(
-                          child: Column(
-                            children: [
-                              _buildAnalyticsCard(color),
-
-                              const SizedBox(height: 24),
-
-                              _buildTimelineCard(color),
-
-                              const SizedBox(height: 24),
-
-                              _buildStatusCard(color),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
+      child: SingleChildScrollView(
+        child: Scaffold(
+          backgroundColor: const Color(0xFFF8FAFC),
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: getContentListWidget(isMobile),
+          ),
         ),
       ),
+    );
+  }
+
+  List<Widget> getContentListWidget(bool isMobile) {
+    final dataItem = controller.setupData;
+    return ((dataItem.entries.map((MapEntry<String, Map<String, dynamic>> e) {
+      final String title = e.key;
+      final Map<String, dynamic> data = e.value;
+      final Color color = data['color'];
+
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // HERO SECTION
+          Container(
+            height: 320,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [color, color.withOpacity(.7)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  right: -40,
+                  top: 50,
+                  child: Icon(
+                    data['icon'],
+                    size: 260,
+                    color: Colors.white.withOpacity(.08),
+                  ),
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      CircleAvatar(
+                        radius: 42,
+                        backgroundColor: Colors.white.withOpacity(.15),
+                        child: Icon(
+                          data['icon'],
+                          size: 42,
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      const SizedBox(height: 24),
+
+                      Text(
+                        data['title'],
+                        style: const TextStyle(
+                          fontSize: 42,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      const SizedBox(height: 12),
+
+                      Text(
+                        'Universal Setup Architecture',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(.85),
+                          fontSize: 18,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: isMobile
+                ? Column(
+                    children: [
+                      // MAIN CONTENT
+                      _buildMainContent(data: data, color: color),
+
+                      const SizedBox(height: 24),
+
+                      // SIDE CONTENT
+                      _buildSidePanel(color),
+                    ],
+                  )
+                : Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: _buildMainContent(data: data, color: color),
+                      ),
+
+                      const SizedBox(width: 24),
+
+                      Expanded(child: _buildSidePanel(color)),
+                    ],
+                  ),
+          ),
+        ],
+      );
+    }).toList()));
+  }
+
+  // ==========================================
+  // MAIN CONTENT
+  // ==========================================
+
+  Widget _buildMainContent({
+    required Map<String, dynamic> data,
+    required Color color,
+  }) {
+    return Column(
+      children: [
+        // FEATURES
+        _buildGlassCard(
+          color,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Core Features',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 24),
+
+              ...List.generate(data['features'].length, (index) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    children: [
+                      Icon(Icons.check_circle, color: color),
+
+                      const SizedBox(width: 14),
+
+                      Expanded(
+                        child: Text(
+                          data['features'][index],
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ],
+          ),
+        ),
+
+        const SizedBox(height: 24),
+
+        // OPERATIONAL LAYERS
+        _buildGlassCard(
+          color,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Operational Layers',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+
+              const SizedBox(height: 24),
+
+              ...List.generate(data['items'].length, (index) {
+                final item = data['items'][index];
+
+                return Container(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(.06),
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 54,
+                        height: 54,
+                        decoration: BoxDecoration(
+                          color: color,
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        child: const Icon(
+                          Icons.auto_awesome,
+                          color: Colors.white,
+                        ),
+                      ),
+
+                      const SizedBox(width: 18),
+
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              item['h'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+
+                            const SizedBox(height: 6),
+
+                            Text(
+                              item['d'],
+                              style: TextStyle(color: Colors.grey.shade700),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  // ==========================================
+  // SIDE PANEL
+  // ==========================================
+
+  Widget _buildSidePanel(Color color) {
+    return Column(
+      children: [
+        _buildAnalyticsCard(color),
+
+        const SizedBox(height: 24),
+
+        _buildTimelineCard(color),
+
+        const SizedBox(height: 24),
+
+        _buildStatusCard(color),
+      ],
     );
   }
 
