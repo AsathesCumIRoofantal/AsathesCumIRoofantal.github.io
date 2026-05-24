@@ -56,6 +56,8 @@ import 'package:air_app/web_modules/web_profile/pages/web_maintenance_binding.da
 import 'package:air_app/web_modules/web_profile/pages/web_maintenance_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_managements_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_managements_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_notices_binding.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_view.dart';
 import 'package:air_app/web_modules/web_profile/web_profile_binding.dart';
@@ -356,6 +358,12 @@ class WebRoutes {
       name: WebMaintenanceView.routeName,
       page: () => const WebMaintenanceView(),
       binding: WebMaintenanceBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebNoticesView.routeName,
+      page: () => const WebNoticesView(),
+      binding: WebNoticesBinding(),
       transition: Transition.fadeIn,
     ),
   ];

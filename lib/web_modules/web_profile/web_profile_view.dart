@@ -3,6 +3,7 @@
 
 import 'package:air_app/web_modules/web_profile/pages/web_maintenance_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_managements_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -363,6 +364,9 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'Connect & Collaborate') {
       Get.toNamed('/web-profile/connect-collaborate');
+      return;
+    } else if (item.title == 'Notices') {
+      Get.toNamed(WebNoticesView.routeName);
       return;
     }
     showModalBottomSheet(
