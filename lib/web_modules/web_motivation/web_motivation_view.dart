@@ -374,7 +374,7 @@ class _ItemCard extends StatelessWidget {
     } else if (item.title == "Share & Care") {
       Get.toNamed(WebShareCareView.routeName);
       return;
-    } else if (item.title == "Finally All is Blessings") {
+    } else if (item.title == "Finnally All is Blessings") {
       Get.toNamed(WebBlessingsView.routeName);
       return;
     } else if (item.title == "Never Give Up") {
@@ -383,7 +383,7 @@ class _ItemCard extends StatelessWidget {
     } else if (item.title == "Innovation is Key") {
       Get.toNamed(WebInnovationView.routeName);
       return;
-    } else if (item.title == "You Got All Accountable") {
+    } else if (item.title == "You Got All of it Accountable") {
       Get.toNamed(WebAccountableView.routeName);
       return;
     } else if (item.title == "Live Life to the Fullest") {

@@ -1,5 +1,6 @@
 // web_routes.dart — central GetX route table for all web_modules pages.
 
+import 'package:air_app/modules/code_conduct/code_conduct_view.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_knowledge_center_binding.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_knowledge_center_view.dart';
 import 'package:air_app/web_modules/web_air_space/pages/web_products_services_binding.dart';
@@ -136,13 +137,19 @@ import 'package:air_app/web_modules/web_service/web_service_binding.dart';
 import 'package:air_app/web_modules/web_service/web_service_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_category_tree_binding.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_category_tree_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_code_conduct_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_commerce_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_digitalize_hub_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_ease_tools_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_hospitality_care_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_projects_assessments_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_safety_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_script_strategy_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_setup_master_binding.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_setup_master_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_social_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_utility_facilities_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_vocabulary_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/web_setup_binding.dart';
 import 'package:air_app/web_modules/web_setup/web_setup_view.dart';
 import 'package:air_app/web_modules/web_system/pages/web_about_org_binding.dart';
@@ -679,5 +686,16 @@ class WebRoutes {
       binding: WebSetupMasterBinding(),
       transition: Transition.fadeIn,
     ),
+
+    GetPage(name: Vocabulary.routeName, page: () => const Vocabulary()),
+    GetPage(name: CodeConduct.routeName, page: () => const CodeConduct()),
+    GetPage(name: ScriptStrategy.routeName, page: () => const ScriptStrategy()),
+    GetPage(name: Safety.routeName, page: () => const Safety()),
+
+    GetPage(
+      name: UtilityFacilities.routeName,
+      page: () => const UtilityFacilities(),
+    ),
+    GetPage(name: Social.routeName, page: () => const Social()),
   ];
 }

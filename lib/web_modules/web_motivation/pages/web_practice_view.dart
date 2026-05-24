@@ -142,7 +142,7 @@ class WebPracticeView extends GetView<WebPracticeController> {
                       ],
                     ),
                   ).animate().fadeIn(delay: (100 * index).ms);
-                }),
+                }, childCount: controller.masteryLevels.length),
               ),
             ),
           ],
