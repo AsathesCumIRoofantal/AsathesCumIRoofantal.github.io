@@ -53,7 +53,7 @@ class WebHomePage extends StatelessWidget {
               actions: [
                 ElevatedButton.icon(
                   onPressed: () {
-                    Get.toNamed("/");
+                    Get.toNamed(AppRoutes.HOME_APP_OLD);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,

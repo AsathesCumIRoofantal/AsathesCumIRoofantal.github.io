@@ -304,7 +304,7 @@ class AppRoutes {
   static const SPLASH = '/splash';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
-  static const HOME = '/';
+  static const HOME_APP_OLD = '/oldAppHome';
   static const SETTINGS = '/settings';
   static const LEARN_FUN = '/learn-fun';
   static const LEARN_DOCS = '/learn-docs';
@@ -490,7 +490,7 @@ class AppPages {
       binding: SignupBinding(),
     ),
     GetPage(
-      name: AppRoutes.HOME,
+      name: AppRoutes.HOME_APP_OLD,
       page: () => HomeView(),
       binding: HomeBinding(),
     ),

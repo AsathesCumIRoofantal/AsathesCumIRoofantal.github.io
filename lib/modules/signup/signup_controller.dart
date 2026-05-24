@@ -1,3 +1,4 @@
+import 'package:air_app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -78,7 +79,7 @@ class SignupController extends GetxController {
 
     AuthService.to.login(usernameController.text, selectedRole.value);
 
-    Get.offAllNamed('/');
+    Get.offAllNamed(AppRoutes.WEB_HOME);
     Get.snackbar(
       'Success',
       'Welcome to AIR, ${usernameController.text}!',

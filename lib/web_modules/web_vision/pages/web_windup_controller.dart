@@ -14,6 +14,5 @@ class WebWindupController extends GetxController {
       backgroundColor: const Color(0xFFD4AF37),
       colorText: Colors.white,
     );
-    // Future.delayed(const Duration(seconds: 2), () => Get.offAllNamed('/'));
   }
 }
