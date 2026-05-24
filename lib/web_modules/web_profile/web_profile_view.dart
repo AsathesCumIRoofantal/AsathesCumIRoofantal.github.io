@@ -4,6 +4,8 @@
 import 'package:air_app/web_modules/web_profile/pages/web_maintenance_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_managements_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_rewards_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_your_business_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -355,6 +357,12 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'Events') {
       Get.toNamed('/web-profile/events');
+      return;
+    } else if (item.title == 'Rewards/Credits') {
+      Get.toNamed(WebRewardsView.routeName);
+      return;
+    } else if (item.title == 'Your Business') {
+      Get.toNamed(WebYourBusinessView.routeName);
       return;
     } else if (item.title == 'Managements') {
       Get.toNamed(WebManagementsView.routeName);

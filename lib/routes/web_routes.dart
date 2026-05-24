@@ -58,8 +58,12 @@ import 'package:air_app/web_modules/web_profile/pages/web_managements_binding.da
 import 'package:air_app/web_modules/web_profile/pages/web_managements_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_rewards_binding.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_rewards_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_tracks_and_traces_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_your_business_binding.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_your_business_view.dart';
 import 'package:air_app/web_modules/web_profile/web_profile_binding.dart';
 import 'package:air_app/web_modules/web_profile/web_profile_view.dart';
 import 'package:air_app/web_modules/web_service/pages/web_process_binding.dart';
@@ -364,6 +368,18 @@ class WebRoutes {
       name: WebNoticesView.routeName,
       page: () => const WebNoticesView(),
       binding: WebNoticesBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebYourBusinessView.routeName,
+      page: () => const WebYourBusinessView(),
+      binding: WebYourBusinessBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebRewardsView.routeName,
+      page: () => const WebRewardsView(),
+      binding: WebRewardsBinding(),
       transition: Transition.fadeIn,
     ),
   ];
