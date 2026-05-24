@@ -7,6 +7,7 @@ import 'package:air_app/web_modules/web_setup/pages/web_digitalize_hub_showcase_
 import 'package:air_app/web_modules/web_setup/pages/web_ease_tools_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_hospitality_care_showcase_view.dart';
 import 'package:air_app/web_modules/web_setup/pages/web_projects_assessments_showcase_view.dart';
+import 'package:air_app/web_modules/web_setup/pages/web_setup_master_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
