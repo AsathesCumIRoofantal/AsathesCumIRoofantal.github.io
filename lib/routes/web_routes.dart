@@ -102,6 +102,10 @@ import 'package:air_app/web_modules/web_profile/pages/web_your_business_binding.
 import 'package:air_app/web_modules/web_profile/pages/web_your_business_view.dart';
 import 'package:air_app/web_modules/web_profile/web_profile_binding.dart';
 import 'package:air_app/web_modules/web_profile/web_profile_view.dart';
+import 'package:air_app/web_modules/web_service/pages/web_input_binding.dart';
+import 'package:air_app/web_modules/web_service/pages/web_input_view.dart';
+import 'package:air_app/web_modules/web_service/pages/web_outcome_binding.dart';
+import 'package:air_app/web_modules/web_service/pages/web_outcome_view.dart';
 import 'package:air_app/web_modules/web_service/pages/web_process_binding.dart';
 import 'package:air_app/web_modules/web_service/pages/web_process_view.dart';
 import 'package:air_app/web_modules/web_service/web_service_binding.dart';
@@ -525,6 +529,19 @@ class WebRoutes {
       name: WebSystemAllView.routeName,
       page: () => const WebSystemAllView(),
       binding: WebSystemAllBinding(),
+      transition: Transition.fadeIn,
+    ),
+
+    GetPage(
+      name: WebInputView.routeName,
+      page: () => const WebInputView(),
+      binding: WebInputBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebOutcomeView.routeName,
+      page: () => const WebOutcomeView(),
+      binding: WebOutcomeBinding(),
       transition: Transition.fadeIn,
     ),
   ];
