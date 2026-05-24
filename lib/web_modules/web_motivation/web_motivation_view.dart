@@ -1,6 +1,18 @@
 // web_modules/web_motivation/web_motivation_view.dart
 // Section workspace — unique palette, hero, item grid, and detail.
 
+import 'package:air_app/web_modules/web_motivation/pages/web_accountable_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_blessings_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_greetings_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_innovation_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_liable_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_livefull_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_nevergiveup_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_onboard_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_practice_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_revise_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_sharecare_view.dart';
+import 'package:air_app/web_modules/web_motivation/pages/web_unison_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -352,6 +364,42 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'A Word of Motivation') {
       Get.toNamed('/web-motivation/word-of-motivation');
+      return;
+    } else if (item.title == "Revise & Improve") {
+      Get.toNamed(WebReviseView.routeName);
+      return;
+    } else if (item.title == "Practice & Expertise") {
+      Get.toNamed(WebPracticeView.routeName);
+      return;
+    } else if (item.title == "Share & Care") {
+      Get.toNamed(WebShareCareView.routeName);
+      return;
+    } else if (item.title == "Finally All is Blessings") {
+      Get.toNamed(WebBlessingsView.routeName);
+      return;
+    } else if (item.title == "Never Give Up") {
+      Get.toNamed(WebNeverGiveUpView.routeName);
+      return;
+    } else if (item.title == "Innovation is Key") {
+      Get.toNamed(WebInnovationView.routeName);
+      return;
+    } else if (item.title == "You Got All Accountable") {
+      Get.toNamed(WebAccountableView.routeName);
+      return;
+    } else if (item.title == "Live Life to the Fullest") {
+      Get.toNamed(WebLiveFullView.routeName);
+      return;
+    } else if (item.title == "Being Together is Unison") {
+      Get.toNamed(WebUnisonView.routeName);
+      return;
+    } else if (item.title == "Great to Have You Onboard") {
+      Get.toNamed(WebOnboardView.routeName);
+      return;
+    } else if (item.title == "All Greetings") {
+      Get.toNamed(WebGreetingsView.routeName);
+      return;
+    } else if (item.title == "Be Liable to Responsibilities") {
+      Get.toNamed(WebLiableView.routeName);
       return;
     }
     showModalBottomSheet(
