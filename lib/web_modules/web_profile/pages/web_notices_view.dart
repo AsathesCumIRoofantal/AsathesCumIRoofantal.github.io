@@ -309,9 +309,9 @@ class _FilterHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 80;
+  double get maxExtent => 200;
   @override
-  double get minExtent => 80;
+  double get minExtent => 200;
   @override
   bool shouldRebuild(covariant _FilterHeaderDelegate oldDelegate) => true;
 }
