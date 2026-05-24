@@ -12,6 +12,8 @@ import 'package:air_app/web_modules/web_air_space/web_air_space_binding.dart';
 import 'package:air_app/web_modules/web_air_space/web_air_space_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_be_part_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_be_part_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_resume_tour_binding.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_resume_tour_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_timeline_of_air_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_timeline_of_air_view.dart';
 import 'package:air_app/web_modules/web_aspects/web_aspects_binding.dart';
@@ -412,6 +414,13 @@ class WebRoutes {
       name: WebPublicView.routeName,
       page: () => const WebPublicView(),
       binding: WebPublicBinding(),
+      transition: Transition.fadeIn,
+    ),
+
+    GetPage(
+      name: WebResumeTourView.routeName,
+      page: () => const WebResumeTourView(),
+      binding: WebResumeTourBinding(),
       transition: Transition.fadeIn,
     ),
   ];
