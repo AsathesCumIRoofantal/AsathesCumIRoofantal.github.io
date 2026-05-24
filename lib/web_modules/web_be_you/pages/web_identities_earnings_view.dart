@@ -181,7 +181,7 @@ class WebIdentitiesEarningsView
                             ),
                             const SizedBox(height: 10),
                             Text(
-                              'id:1',
+                              'id:${data}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
