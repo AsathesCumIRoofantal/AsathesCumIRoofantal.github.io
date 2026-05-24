@@ -48,6 +48,8 @@ import 'package:air_app/web_modules/web_motivation/pages/web_word_motivation_bin
 import 'package:air_app/web_modules/web_motivation/pages/web_word_motivation_view.dart';
 import 'package:air_app/web_modules/web_motivation/web_motivation_binding.dart';
 import 'package:air_app/web_modules/web_motivation/web_motivation_view.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_appeals_binding.dart';
+import 'package:air_app/web_modules/web_profile/pages/web_appeals_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_connect_collaborate_binding.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_connect_collaborate_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_events_binding.dart';
@@ -380,6 +382,12 @@ class WebRoutes {
       name: WebRewardsView.routeName,
       page: () => const WebRewardsView(),
       binding: WebRewardsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebAppealsView.routeName,
+      page: () => const WebAppealsView(),
+      binding: WebAppealsBinding(),
       transition: Transition.fadeIn,
     ),
   ];

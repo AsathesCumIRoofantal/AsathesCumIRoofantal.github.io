@@ -1,6 +1,7 @@
 // web_modules/web_profile/web_profile_view.dart
 // Section workspace — unique palette, hero, item grid, and detail.
 
+import 'package:air_app/web_modules/web_profile/pages/web_appeals_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_maintenance_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_managements_view.dart';
 import 'package:air_app/web_modules/web_profile/pages/web_notices_view.dart';
@@ -375,6 +376,9 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == 'Notices') {
       Get.toNamed(WebNoticesView.routeName);
+      return;
+    } else if (item.title == 'Approval of Appeals') {
+      Get.toNamed(WebAppealsView.routeName);
       return;
     }
     showModalBottomSheet(
