@@ -134,23 +134,21 @@ class WebImaginationView extends GetView<WebImaginationController> {
             ),
             SliverPadding(
               padding: const EdgeInsets.all(20),
-              sliver: Obx(
-                () => SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 400,
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 0.8,
-                  ),
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    final feature = controller.features[index];
-                    return _ImaginationCard(
-                      feature: feature,
-                      index: index,
-                      isDark: isDark,
-                    );
-                  }, childCount: controller.features.length),
+              sliver: SliverGrid(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 400,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 20,
+                  childAspectRatio: 0.8,
                 ),
+                delegate: SliverChildBuilderDelegate((context, index) {
+                  final feature = controller.features[index];
+                  return _ImaginationCard(
+                    feature: feature,
+                    index: index,
+                    isDark: isDark,
+                  );
+                }, childCount: controller.features.length),
               ),
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 60)),
@@ -290,24 +288,22 @@ class _ImaginationCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Obx(
-                    () => Row(
-                      children: [
-                        const Icon(
-                          Icons.thumb_up_rounded,
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.thumb_up_rounded,
+                        color: Colors.grey,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        '${feature['votes']}',
+                        style: const TextStyle(
+                          fontSize: 12,
                           color: Colors.grey,
-                          size: 16,
                         ),
-                        const SizedBox(width: 5),
-                        Text(
-                          '${feature['votes']}',
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   TextButton(
                     onPressed: () => Get.find<WebImaginationController>()
