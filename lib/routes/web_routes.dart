@@ -30,10 +30,18 @@ import 'package:air_app/web_modules/web_aspects/pages/web_limits_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_limits_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_new_in_air_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_new_in_air_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_recorded_rewarded_binding.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_recorded_rewarded_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_resume_tour_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_resume_tour_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_skills_binding.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_skills_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_system_all_binding.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_system_all_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_timeline_of_air_binding.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_timeline_of_air_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_training_binding.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_training_view.dart';
 import 'package:air_app/web_modules/web_aspects/web_aspects_binding.dart';
 import 'package:air_app/web_modules/web_aspects/web_aspects_view.dart';
 import 'package:air_app/web_modules/web_be_you/pages/web_ask_anything_b_binding.dart';
@@ -493,6 +501,30 @@ class WebRoutes {
       name: WebEntertainmentView.routeName,
       page: () => const WebEntertainmentView(),
       binding: WebEntertainmentBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebSkillsView.routeName,
+      page: () => const WebSkillsView(),
+      binding: WebSkillsBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebRecordedRewardedView.routeName,
+      page: () => const WebRecordedRewardedView(),
+      binding: WebRecordedRewardedBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebTrainingView.routeName,
+      page: () => const WebTrainingView(),
+      binding: WebTrainingBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: WebSystemAllView.routeName,
+      page: () => const WebSystemAllView(),
+      binding: WebSystemAllBinding(),
       transition: Transition.fadeIn,
     ),
   ];

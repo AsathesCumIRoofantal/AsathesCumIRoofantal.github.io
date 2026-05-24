@@ -10,7 +10,11 @@ import 'package:air_app/web_modules/web_aspects/pages/web_entertainment_view.dar
 import 'package:air_app/web_modules/web_aspects/pages/web_imagination_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_limits_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_new_in_air_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_recorded_rewarded_view.dart';
 import 'package:air_app/web_modules/web_aspects/pages/web_resume_tour_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_skills_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_system_all_view.dart';
+import 'package:air_app/web_modules/web_aspects/pages/web_training_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -394,6 +398,18 @@ class _ItemCard extends StatelessWidget {
       return;
     } else if (item.title == "Entertainment") {
       Get.toNamed(WebEntertainmentView.routeName);
+      return;
+    } else if (item.title == "Skills & Talents") {
+      Get.toNamed(WebSkillsView.routeName);
+      return;
+    } else if (item.title == "Being Recorded & Rewarded") {
+      Get.toNamed(WebRecordedRewardedView.routeName);
+      return;
+    } else if (item.title == "Training") {
+      Get.toNamed(WebTrainingView.routeName);
+      return;
+    } else if (item.title == "System All Together") {
+      Get.toNamed(WebSystemAllView.routeName);
       return;
     }
     showModalBottomSheet(
