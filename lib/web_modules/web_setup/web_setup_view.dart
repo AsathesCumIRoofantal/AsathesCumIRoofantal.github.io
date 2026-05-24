@@ -371,101 +371,91 @@ class _ItemCard extends StatelessWidget {
     } else if (item.title == 'Hospitality & Care') {
       Get.toNamed(WebHospitalityCareShowcaseView.routeName);
       return;
-    }
-    // else if (t.title == "Operate with Ease") {
-    //   Get.toNamed("");
-    // } else if (item.title == 'Ease Tools') {
-    // Get.toNamed(WebRoutes.setup_easeTools);
-    //   return;
-    // }
-    else if (item.title == 'Vocabulary') {
-      // Get.toNamed(WebRoutes.setup_vocabulary);
+    } else if (item.title == 'Vocabulary') {
+      Get.toNamed(WebNavData.setup_vocabulary);
       return;
     } else if (item.title == 'Code Conduct') {
-      // Get.toNamed(WebRoutes.setup_codeConduct);
+      Get.toNamed(WebNavData.setup_codeConduct);
       return;
     } else if (item.title == 'Script Strategy') {
-      // Get.toNamed(WebRoutes.setup_scriptStrategy);
+      Get.toNamed(WebNavData.setup_scriptStrategy);
       return;
     } else if (item.title == 'Safety') {
-      // Get.toNamed(WebRoutes.setup_safety);
-      return;
-    } else if (item.title == 'Hospitality Care') {
-      // Get.toNamed(WebRoutes.setup_hospitalityCare);
+      Get.toNamed(WebNavData.setup_safety);
       return;
     } else if (item.title == 'Utility Facilities') {
-      // Get.toNamed(WebRoutes.setup_utilityFacilities);
-      return;
-    } else if (item.title == 'Commerce') {
-      // Get.toNamed(WebRoutes.setup_commerce);
+      Get.toNamed(WebNavData.setup_utilityFacilities);
       return;
     } else if (item.title == 'Social') {
-      // Get.toNamed(WebRoutes.setup_social);
+      Get.toNamed(WebNavData.setup_social);
+      return;
+    } else {
+      Get.toNamed(WebSetupMasterView.routeName);
       return;
     }
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (_) => Container(
-        padding: const EdgeInsets.all(24),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color: color.withValues(alpha: 0.12),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Icon(item.icon, color: color, size: 30),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              item.title,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              item.description,
-              style: const TextStyle(
-                fontSize: 14.5,
-                height: 1.6,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () => Navigator.of(context).pop(),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: color,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                ),
-                child: const Text(
-                  'Got it',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 12),
-          ],
-        ),
-      ),
-    );
+    // showModalBottomSheet(
+    //   context: context,
+    //   backgroundColor: Colors.transparent,
+    //   isScrollControlled: true,
+    //   builder: (_) => Container(
+    //     padding: const EdgeInsets.all(24),
+    //     decoration: const BoxDecoration(
+    //       color: Colors.white,
+    //       borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+    //     ),
+    //     child: Column(
+    //       mainAxisSize: MainAxisSize.min,
+    //       crossAxisAlignment: CrossAxisAlignment.start,
+    //       children: [
+    //         Container(
+    //           width: 60,
+    //           height: 60,
+    //           decoration: BoxDecoration(
+    //             color: color.withValues(alpha: 0.12),
+    //             borderRadius: BorderRadius.circular(16),
+    //           ),
+    //           child: Icon(item.icon, color: color, size: 30),
+    //         ),
+    //         const SizedBox(height: 16),
+    //         Text(
+    //           item.title,
+    //           style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w900),
+    //         ),
+    //         const SizedBox(height: 10),
+    //         Text(
+    //           item.description,
+    //           style: const TextStyle(
+    //             fontSize: 14.5,
+    //             height: 1.6,
+    //             color: Colors.black87,
+    //           ),
+    //         ),
+    //         const SizedBox(height: 24),
+    //         SizedBox(
+    //           width: double.infinity,
+    //           child: ElevatedButton(
+    //             onPressed: () => Navigator.of(context).pop(),
+    //             style: ElevatedButton.styleFrom(
+    //               backgroundColor: color,
+    //               padding: const EdgeInsets.symmetric(vertical: 16),
+    //               shape: RoundedRectangleBorder(
+    //                 borderRadius: BorderRadius.circular(14),
+    //               ),
+    //             ),
+    //             child: const Text(
+    //               'Got it',
+    //               style: TextStyle(
+    //                 color: Colors.white,
+    //                 fontWeight: FontWeight.w800,
+    //               ),
+    //             ),
+    //           ),
+    //         ),
+    //         const SizedBox(height: 12),
+    //       ],
+    //     ),
+    //   ),
+    // );
   }
 }
 
