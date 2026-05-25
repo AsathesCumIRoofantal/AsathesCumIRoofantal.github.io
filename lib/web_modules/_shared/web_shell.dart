@@ -247,8 +247,8 @@ class _WebDrawer extends StatelessWidget {
                         child: GestureDetector(
                           onTap: () {
                             if (!isDesktop) Navigator.of(context).pop();
-                            if (currentRoute != WebNavData.homeRoute) {
-                              Get.offAllNamed(WebNavData.homeRoute);
+                            if (currentRoute != WebNavData.homeWebRoute) {
+                              Get.offAllNamed(WebNavData.homeWebRoute);
                             }
                           },
                           child: Row(
@@ -326,8 +326,8 @@ class _WebDrawer extends StatelessWidget {
                   ElevatedButton.icon(
                     onPressed: () {
                       if (!isDesktop) Navigator.of(context).pop();
-                      if (currentRoute != WebNavData.homeRoute) {
-                        Get.offAllNamed(WebNavData.homeRoute);
+                      if (currentRoute != WebNavData.homeWebRoute) {
+                        Get.offAllNamed(WebNavData.homeWebRoute);
                       }
                     },
                     style: ElevatedButton.styleFrom(

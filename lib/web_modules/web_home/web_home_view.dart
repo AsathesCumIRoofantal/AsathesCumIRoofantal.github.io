@@ -15,7 +15,7 @@ import 'web_home_controller.dart';
 class WebHomeView extends GetView<WebHomeController> {
   const WebHomeView({super.key});
 
-  static const String routeName = WebNavData.homeRoute;
+  static const String routeName = WebNavData.homeWebRoute;
 
   @override
   Widget build(BuildContext context) {

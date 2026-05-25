@@ -44,7 +44,7 @@ class WebNavSection {
 class WebNavData {
   WebNavData._();
 
-  static const String homeRoute = '/web-home';
+  static const String homeWebRoute = '/web-home';
   static const String homeWebRtcRoute = '/web-home/web-rtc';
   static const String homeAgoraRoute = '/web-home/agora-rtc';
   static const String homeLivekitRtcRoute = '/web-home/livekit-rtc';

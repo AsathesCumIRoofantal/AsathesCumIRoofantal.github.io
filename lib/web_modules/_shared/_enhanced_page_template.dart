@@ -713,7 +713,7 @@ class EnhancedCTA extends StatelessWidget {
                 runSpacing: 12,
                 children: [
                   ElevatedButton.icon(
-                    onPressed: () => Get.toNamed(WebNavData.homeRoute),
+                    onPressed: () => Get.toNamed(AppRoutes.HOME_APP_OLD),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: section.primary,
                       foregroundColor: Colors.white,
