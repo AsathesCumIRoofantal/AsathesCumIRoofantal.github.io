@@ -1,6 +1,0 @@
-name = "airspacewebnew"
-compatibility_date = "2024-09-23"
-main = "src/worker.js"
-
-[site]
-bucket = "./build/web"
