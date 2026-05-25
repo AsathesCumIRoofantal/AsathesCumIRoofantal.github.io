@@ -27,7 +27,8 @@ dependencies:
   agora_rtc_engine: ^6.5.3
 
   # livekit_client: ^2.7.0
-  livekit_client: ^0.1.1
+  # livekit_client: ^0.1.1
+  livekit_client: ^1.5.0
 
   
   # flutter_webrtc: ^1.4.1
@@ -45,7 +46,7 @@ dev_dependencies:
 
 
 dependency_overrides:
-  flutter_webrtc: ^0.9.48
+  # flutter_webrtc: ^0.9.48
 
 flutter_icons:
   android: true

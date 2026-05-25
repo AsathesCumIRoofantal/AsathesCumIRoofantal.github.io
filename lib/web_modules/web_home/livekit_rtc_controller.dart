@@ -25,6 +25,7 @@ class LiveRtcController extends GetxController {
 
     // await room.localParticipant?.setMicrophoneEnabled(micEnabled.value);# livekit_client: ^2.7.0
     for (var trackPub in room.localParticipant.audioTracks.values) {
+      //# livekit_client: ^0.1.1
       // Access the native WebRTC track underlying the LiveKit wrapper
       if (trackPub.track != null) {
         trackPub.track!.mediaTrack.enabled = micEnabled.value;
@@ -38,6 +39,7 @@ class LiveRtcController extends GetxController {
     // await room.localParticipant?.setCameraEnabled(cameraEnabled.value);# livekit_client: ^2.7.0
 
     for (var trackPub in room.localParticipant.videoTracks.values) {
+      //# livekit_client: ^0.1.1
       if (trackPub.track != null) {
         // Directly tells flutter_webrtc to stop pushing frames
         trackPub.track!.mediaTrack.enabled = cameraEnabled.value;
