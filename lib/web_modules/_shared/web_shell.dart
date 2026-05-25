@@ -248,7 +248,7 @@ class _WebDrawer extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            if (!isNotMobile) Navigator.of(context).pop();
+                            if (!isNotMobile) return;
                             if (currentRoute != WebHomeView.routeName) {
                               Get.offAllNamed(AppRoutes.HOME_APP_OLD);
                             }
@@ -327,7 +327,7 @@ class _WebDrawer extends StatelessWidget {
                   const SizedBox(height: 16),
                   ElevatedButton.icon(
                     onPressed: () {
-                      if (!isNotMobile) Navigator.of(context).pop();
+                      if (!isNotMobile) return;
                       if (currentRoute != WebHomeView.routeName) {
                         Get.offAllNamed(AppRoutes.HOME_APP_OLD);
                       }
