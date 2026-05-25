@@ -1,4 +1,5 @@
 import 'package:air_app/modules/splash/spash_binding.dart';
+import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -59,7 +60,7 @@ class AirApp extends StatelessWidget {
           darkTheme: AppTheme.cosmicDark,
           themeMode:
               ThemeMode.system, // Defaults to system but managed by Settings
-          initialRoute: (kIsWeb) ? AppRoutes.WEB_HOME : AppRoutes.SPLASH,
+          initialRoute: (kIsWeb) ? WebHomeView.routeName : AppRoutes.SPLASH,
           getPages: AppPages.pages,
           initialBinding: SplashBinding(),
           debugShowCheckedModeBanner: false,
