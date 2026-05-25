@@ -35,6 +35,7 @@ class WebShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDesktop = WBreak.isDesktop(context);
+    final isTablet = WBreak.isTablet(context);
     final theme = Theme.of(context);
     final drawerCtrl = _getDrawerCtrl();
 
@@ -59,7 +60,7 @@ class WebShell extends StatelessWidget {
                       width: 320,
                       child: _WebDrawer(
                         currentRoute: currentRoute,
-                        isDesktop: true,
+                        isNotMobile: (isTablet || isDesktop),
                         onCollapse: drawerCtrl.close,
                       ),
                     ),
@@ -95,7 +96,7 @@ class WebShell extends StatelessWidget {
         width: 320,
         child: _WebDrawer(
           currentRoute: currentRoute,
-          isDesktop: false,
+          isNotMobile: false,
           onCollapse: null,
         ),
       ),
@@ -212,11 +213,11 @@ class _FloatingMenuButtonState extends State<_FloatingMenuButton>
 // ── Drawer widget ─────────────────────────────────────────────
 class _WebDrawer extends StatelessWidget {
   final String currentRoute;
-  final bool isDesktop;
+  final bool isNotMobile;
   final VoidCallback? onCollapse;
   const _WebDrawer({
     required this.currentRoute,
-    required this.isDesktop,
+    required this.isNotMobile,
     required this.onCollapse,
   });
 
@@ -247,7 +248,7 @@ class _WebDrawer extends StatelessWidget {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            if (!isDesktop) Navigator.of(context).pop();
+                            if (!isNotMobile) Navigator.of(context).pop();
                             if (currentRoute != WebHomeView.routeName) {
                               Get.offAllNamed(AppRoutes.HOME_APP_OLD);
                             }
@@ -290,7 +291,7 @@ class _WebDrawer extends StatelessWidget {
                       ),
                       const WebThemeToggle(compact: true),
                       // ── Collapse button (desktop only) ──
-                      if (isDesktop) ...[
+                      if (isNotMobile) ...[
                         const SizedBox(width: 6),
                         Tooltip(
                           message: 'Collapse sidebar',
@@ -326,7 +327,7 @@ class _WebDrawer extends StatelessWidget {
                   const SizedBox(height: 16),
                   ElevatedButton.icon(
                     onPressed: () {
-                      if (!isDesktop) Navigator.of(context).pop();
+                      if (!isNotMobile) Navigator.of(context).pop();
                       if (currentRoute != WebHomeView.routeName) {
                         Get.offAllNamed(AppRoutes.HOME_APP_OLD);
                       }
@@ -353,7 +354,7 @@ class _WebDrawer extends StatelessWidget {
                     ),
                   ),
 
-                  if (!isDesktop)
+                  if (!isNotMobile)
                     Column(
                       children: [
                         const SizedBox(height: 16),
@@ -426,7 +427,7 @@ class _WebDrawer extends StatelessWidget {
                     child: InkWell(
                       borderRadius: BorderRadius.circular(14),
                       onTap: () {
-                        if (!isDesktop) Navigator.of(context).pop();
+                        if (!isNotMobile) Navigator.of(context).pop();
                         if (currentRoute != section.route) {
                           Get.offAllNamed(section.route);
                         }
