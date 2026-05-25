@@ -85,28 +85,39 @@ class WebHomeView extends GetView<WebHomeController> {
                               childAnimationBuilder: (widget) => ScaleAnimation(
                                 child: FadeInAnimation(child: widget),
                               ),
-                              children: const [
+                              children: [
                                 Expanded(
-                                  child: WStatChip(
-                                    value: '11',
-                                    label: 'Workspaces',
+                                  child: WebRTCChip(
+                                    value: '1',
+                                    label: 'Custom RTC',
                                     color: WColors.indigo,
+                                    onTap: () {
+                                      Get.toNamed(WebNavData.homeWebRtcRoute);
+                                    },
                                   ),
                                 ),
                                 SizedBox(width: 12),
                                 Expanded(
-                                  child: WStatChip(
-                                    value: '150+',
-                                    label: 'Linked Topics',
+                                  child: WebRTCChip(
+                                    value: '2',
+                                    label: 'Agora',
                                     color: WColors.teal,
+                                    onTap: () {
+                                      Get.toNamed(WebNavData.homeAgoraRoute);
+                                    },
                                   ),
                                 ),
-                                SizedBox(width: 12),
+                                SizedBox(height: 12),
                                 Expanded(
-                                  child: WStatChip(
-                                    value: '∞',
-                                    label: 'Room to Grow',
+                                  child: WebRTCChip(
+                                    value: '3',
+                                    label: 'Livekit',
                                     color: WColors.amber,
+                                    onTap: () {
+                                      Get.toNamed(
+                                        WebNavData.homeLivekitRtcRoute,
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
