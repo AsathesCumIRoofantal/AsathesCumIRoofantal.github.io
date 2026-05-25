@@ -9837,7 +9837,7 @@ k=$.a2
 k.toString
 $.aUG=k;++k.db$
 s=2
-return A.H($.aTy().F8(0,"assets/.env"),$async$aSY)
+return A.H($.aTy().F8(0,".env"),$async$aSY)
 case 2:$.b6j()
 k=$.aG()
 q=t.Wo
