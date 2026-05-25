@@ -329,7 +329,7 @@ class _WebDrawer extends StatelessWidget {
                     onPressed: () {
                       if (!isNotMobile) return;
                       if (currentRoute != WebHomeView.routeName) {
-                        Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+                        Get.offAllNamed(WebHomeView.routeName);
                       }
                     },
                     style: ElevatedButton.styleFrom(
