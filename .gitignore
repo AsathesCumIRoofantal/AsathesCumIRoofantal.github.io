@@ -5,7 +5,7 @@
 *.swp
 .DS_Store
 .atom/
-.build/
+# .build/
 .buildlog/
 .history
 .svn/
@@ -45,5 +45,10 @@ app.*.map.json
 /android/app/release
 
 #env    
-#.env        
+#.env       
+# Ignore build except build/web
+build/
+!build/
+!build/web/
+!build/web/**
 
