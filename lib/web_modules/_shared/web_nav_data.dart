@@ -45,6 +45,9 @@ class WebNavData {
   WebNavData._();
 
   static const String homeRoute = '/web-home';
+  static const String homeWebRtcRoute = '/web-home/web-rtc';
+  static const String homeAgoraRoute = '/web-home/agora-rtc';
+  static const String homeLivekitRtcRoute = '/web-home/livekit-rtc';
 
   static const setup_digitalizeHub = '/setup-aone/digitalize-hub';
   static const setup_projectsAssessments = '/setup-aone/projects-assessments';
