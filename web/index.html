@@ -99,10 +99,14 @@
       }
     }
   </style>
-  //agora
+
+  <!-- Base Agora Native Engine Core for Web Browsers -->
   <script src="https://agora.io"></script>
-  <script src="https://jsdelivr.net"></script>
-  //agora end
+
+  <!-- The Iris Bridge Interop script file you downloaded in Step 1 -->
+  <script src="iris-web-rtc.js" type="application/javascript"></script>
+  <script src="https://jsdelivr.net"></script><!-- agora ends -->
+
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
