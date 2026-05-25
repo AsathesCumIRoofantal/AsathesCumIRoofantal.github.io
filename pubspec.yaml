@@ -45,7 +45,7 @@ dev_dependencies:
 
 
 dependency_overrides:
-  # flutter_webrtc: ^0.9.48
+  flutter_webrtc: ^0.9.48
 
 flutter_icons:
   android: true
