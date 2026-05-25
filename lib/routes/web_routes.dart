@@ -191,12 +191,6 @@ class WebRoutes {
       name: WebHomeView.routeName,
       page: () => const WebHomeView(),
       binding: WebHomeBinding(),
-      transition: Transition.fadeIn,
-    ),
-    GetPage(
-      name: WebHomeView.routeName,
-      page: () => const WebHomeView(),
-      binding: WebHomeBinding(),
     ),
     GetPage(
       name: WebRtcCallView.routeName,
