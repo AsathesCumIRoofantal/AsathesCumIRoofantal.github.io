@@ -86,39 +86,33 @@ class WebHomeView extends GetView<WebHomeController> {
                                 child: FadeInAnimation(child: widget),
                               ),
                               children: [
-                                Expanded(
-                                  child: WebRTCChip(
-                                    value: '1',
-                                    label: 'Custom RTC',
-                                    color: WColors.indigo,
-                                    onTap: () {
-                                      Get.toNamed(WebNavData.homeWebRtcRoute);
-                                    },
-                                  ),
+                                WebRTCChip(
+                                  value: '1',
+                                  label: 'Custom RTC',
+                                  color: WColors.indigo,
+                                  onTap: () {
+                                    Get.toNamed(WebNavData.homeWebRtcRoute);
+                                  },
                                 ),
                                 SizedBox(width: 12),
-                                Expanded(
-                                  child: WebRTCChip(
-                                    value: '2',
-                                    label: 'Agora',
-                                    color: WColors.teal,
-                                    onTap: () {
-                                      Get.toNamed(WebNavData.homeAgoraRoute);
-                                    },
-                                  ),
+                                WebRTCChip(
+                                  value: '2',
+                                  label: 'Agora',
+                                  color: WColors.teal,
+                                  onTap: () {
+                                    Get.toNamed(WebNavData.homeAgoraRoute);
+                                  },
                                 ),
                                 SizedBox(width: 12),
-                                Expanded(
-                                  child: WebRTCChip(
-                                    value: '3',
-                                    label: 'Livekit',
-                                    color: WColors.amber,
-                                    onTap: () {
-                                      // Get.toNamed(
-                                      //   WebNavData.homeLivekitRtcRoute,
-                                      // );
-                                    },
-                                  ),
+                                WebRTCChip(
+                                  value: '3',
+                                  label: 'Livekit',
+                                  color: WColors.amber,
+                                  onTap: () {
+                                    // Get.toNamed(
+                                    //   WebNavData.homeLivekitRtcRoute,
+                                    // );
+                                  },
                                 ),
                               ],
                             ),
@@ -171,28 +165,22 @@ class WebHomeView extends GetView<WebHomeController> {
                                 child: FadeInAnimation(child: widget),
                               ),
                               children: const [
-                                Expanded(
-                                  child: WStatChip(
-                                    value: '11',
-                                    label: 'Workspaces',
-                                    color: WColors.indigo,
-                                  ),
+                                WStatChip(
+                                  value: '11',
+                                  label: 'Workspaces',
+                                  color: WColors.indigo,
                                 ),
                                 SizedBox(width: 12),
-                                Expanded(
-                                  child: WStatChip(
-                                    value: '150+',
-                                    label: 'Linked Topics',
-                                    color: WColors.teal,
-                                  ),
+                                WStatChip(
+                                  value: '150+',
+                                  label: 'Linked Topics',
+                                  color: WColors.teal,
                                 ),
                                 SizedBox(width: 12),
-                                Expanded(
-                                  child: WStatChip(
-                                    value: '∞',
-                                    label: 'Room to Grow',
-                                    color: WColors.amber,
-                                  ),
+                                WStatChip(
+                                  value: '∞',
+                                  label: 'Room to Grow',
+                                  color: WColors.amber,
                                 ),
                               ],
                             ),
