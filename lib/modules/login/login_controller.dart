@@ -81,7 +81,7 @@ class LoginController extends GetxController {
     if (kIsWeb) {
       Get.offAllNamed(AppRoutes.WEB_HOME);
     } else {
-      Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+      Get.offAllNamed(AppRoutes.WEB_HOME);
     }
     Get.snackbar(
       'Success',
