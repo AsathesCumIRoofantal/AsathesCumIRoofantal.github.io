@@ -13,6 +13,8 @@ import 'package:flutter_background/flutter_background.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'dart:js_interop';
+import 'package:web/web.dart' as webHndle;
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -46,8 +48,54 @@ Future<bool> startForegroundService() async {
 // );
 // bool success = await FlutterBackground.initialize(androidConfig: androidConfig);
 
-class AirApp extends StatelessWidget {
+class AirApp extends StatefulWidget {
   AirApp({super.key});
+
+  @override
+  State<AirApp> createState() => _AirAppState();
+}
+
+class _AirAppState extends State<AirApp> {
+  @override
+  void initState() {
+    super.initState();
+    _listenForUpdates();
+  }
+
+  void _listenForUpdates() {
+    webHndle.window.addEventListener(
+      'flutter_version_update',
+      ((webHndle.Event event) {
+            _showUpdateNotification();
+          }).toJS
+          as webHndle.EventListener,
+    );
+  }
+
+  void _showUpdateNotification() {
+    // GetX snackbar runs independently of context, bypassing layout size errors completely
+    Get.snackbar(
+      'Update Available',
+      'A new version of the app has been deployed.',
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.black87,
+      colorText: Colors.white,
+      duration: const Duration(days: 1), // Keeps it open
+      isDismissible: false,
+      mainButton: TextButton(
+        onPressed: () {
+          webHndle.window.location.reload(); // Hard reload browser
+        },
+        child: const Text(
+          'Refresh',
+          style: TextStyle(
+            color: Colors.lightBlueAccent,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
