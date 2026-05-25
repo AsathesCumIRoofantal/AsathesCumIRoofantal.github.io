@@ -13,8 +13,9 @@ import 'package:flutter_background/flutter_background.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+
+import 'package:web/web.dart' as web;
 import 'dart:js_interop';
-import 'package:web/web.dart' as webhandle;
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -63,12 +64,12 @@ class _AirAppState extends State<AirApp> {
   }
 
   void _listenForUpdates() {
-    webhandle.window.addEventListener(
+    web.window.addEventListener(
       'flutter_version_update',
-      ((webhandle.Event event) {
+      ((web.Event event) {
             _showUpdateNotification();
           }).toJS
-          as webhandle.EventListener,
+          as web.EventListener, // Explicitly cast the JS-interop object
     );
   }
 
@@ -77,14 +78,14 @@ class _AirAppState extends State<AirApp> {
     Get.snackbar(
       'Update Available',
       'A new version of the app has been deployed.',
-      snackPosition: SnackPosition.BOTTOM,
+      snackPosition: SnackPosition.TOP,
       backgroundColor: Colors.black87,
       colorText: Colors.white,
-      duration: const Duration(days: 1), // Keeps it open
-      isDismissible: false,
+      duration: const Duration(minutes: 5), // Keeps it open
+      isDismissible: true,
       mainButton: TextButton(
         onPressed: () {
-          webhandle.window.location.reload(); // Hard reload browser
+          web.window.location.reload(); // Hard reload browser
         },
         child: const Text(
           'Refresh',
