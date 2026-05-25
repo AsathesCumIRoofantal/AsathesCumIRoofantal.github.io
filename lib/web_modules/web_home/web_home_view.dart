@@ -73,7 +73,7 @@ class WebHomeView extends GetView<WebHomeController> {
                                   label: 'Livekit',
                                   color: WColors.amber,
                                   onTap: () {
-                                    Get.toNamed(WebNavData.homeLivekitRtcRoute);
+                                    // Get.toNamed(WebNavData.homeLivekitRtcRoute);
                                   },
                                 ),
                               ],
@@ -114,9 +114,9 @@ class WebHomeView extends GetView<WebHomeController> {
                                     label: 'Livekit',
                                     color: WColors.amber,
                                     onTap: () {
-                                      Get.toNamed(
-                                        WebNavData.homeLivekitRtcRoute,
-                                      );
+                                      // Get.toNamed(
+                                      //   WebNavData.homeLivekitRtcRoute,
+                                      // );
                                     },
                                   ),
                                 ),

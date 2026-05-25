@@ -24,11 +24,10 @@ dependencies:
   smooth_page_indicator: ^1.1.0
 
   # agora_rtc_engine: ^6.6.3
-  agora_rtc_engine: ^6.5.3
+  agora_rtc_engine: ^6.5.3 # running
 
   # livekit_client: ^2.7.0
-  # livekit_client: ^0.1.1
-  livekit_client: ^1.5.0
+  # livekit_client: ^1.5.0 #running
 
   
   # flutter_webrtc: ^1.4.1

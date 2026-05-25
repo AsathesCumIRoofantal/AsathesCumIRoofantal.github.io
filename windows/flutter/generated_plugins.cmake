@@ -4,10 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   agora_rtc_engine
-  connectivity_plus
-  flutter_webrtc
   iris_method_channel
-  livekit_client
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST
