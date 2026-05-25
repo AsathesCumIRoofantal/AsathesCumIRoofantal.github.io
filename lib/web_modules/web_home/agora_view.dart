@@ -12,45 +12,49 @@ class AgoraView extends GetView<AgoraRtcController> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return WebShell(
-      currentRoute: routeName,
-      child: Scaffold(
-        appBar: AppBar(title: const Text('Industrial RTC Dashboard')),
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            final isDesktop = constraints.maxWidth > 1100;
-            final isTablet = constraints.maxWidth > 700;
+    return Builder(
+      builder: (context) {
+        return WebShell(
+          currentRoute: routeName,
+          child: Scaffold(
+            appBar: AppBar(title: const Text('Industrial RTC Dashboard')),
+            body: LayoutBuilder(
+              builder: (context, constraints) {
+                final isDesktop = constraints.maxWidth > 1100;
+                final isTablet = constraints.maxWidth > 700;
 
-            return GridView.builder(
-              padding: const EdgeInsets.all(24),
-              itemCount: 8,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: isDesktop
-                    ? 4
-                    : isTablet
-                    ? 2
-                    : 1,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                childAspectRatio: 1.4,
-              ),
-              itemBuilder: (_, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue.withOpacity(.2),
-                        Colors.purple.withOpacity(.2),
-                      ],
-                    ),
+                return GridView.builder(
+                  padding: const EdgeInsets.all(24),
+                  itemCount: 8,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: isDesktop
+                        ? 4
+                        : isTablet
+                        ? 2
+                        : 1,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: 1.4,
                   ),
+                  itemBuilder: (_, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.blue.withOpacity(.2),
+                            Colors.purple.withOpacity(.2),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 );
               },
-            );
-          },
-        ),
-      ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

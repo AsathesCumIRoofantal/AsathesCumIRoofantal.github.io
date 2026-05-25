@@ -14,53 +14,58 @@ class WebRtcCallView extends GetView<WebRtcController> {
     final isDark =
         Theme.of(context).brightness ==
         Brightness.dark; //TODO and Responsive....
-    return WebShell(
-      currentRoute: routeName,
-      child: Scaffold(
-        backgroundColor: const Color(0xff0B1020),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Expanded(
-                child: RTCVideoView(
-                  controller.localRenderer,
-                  mirror: true,
-                  objectFit: RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(20),
-                child: Obx(
-                  () => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: controller.toggleMic,
-                        icon: Icon(
-                          controller.micEnabled.value
-                              ? Icons.mic
-                              : Icons.mic_off,
-                          color: Colors.white,
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      IconButton(
-                        onPressed: controller.toggleCamera,
-                        icon: Icon(
-                          controller.cameraEnabled.value
-                              ? Icons.videocam
-                              : Icons.videocam_off,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
+    return Builder(
+      builder: (context) {
+        return WebShell(
+          currentRoute: routeName,
+          child: Scaffold(
+            backgroundColor: const Color(0xff0B1020),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: RTCVideoView(
+                      controller.localRenderer,
+                      mirror: true,
+                      objectFit:
+                          RTCVideoViewObjectFit.RTCVideoViewObjectFitCover,
+                    ),
                   ),
-                ),
+                  Container(
+                    padding: const EdgeInsets.all(20),
+                    child: Obx(
+                      () => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: controller.toggleMic,
+                            icon: Icon(
+                              controller.micEnabled.value
+                                  ? Icons.mic
+                                  : Icons.mic_off,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(width: 20),
+                          IconButton(
+                            onPressed: controller.toggleCamera,
+                            icon: Icon(
+                              controller.cameraEnabled.value
+                                  ? Icons.videocam
+                                  : Icons.videocam_off,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
