@@ -300,6 +300,7 @@ import 'package:air_app/modules/home/home_view.dart';
 // import '../modules/your_profile_specifics/your_business/your_business_binding.dart';
 
 import 'package:air_app/routes/web_routes.dart';
+import 'package:air_app/web_modules/web_home/zoom_agora/zoom_routes.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -1371,5 +1372,6 @@ class AppPages {
 
     // ── Web Modules (Responsive Flutter Web pages) ─────────
     ...WebRoutes.pages,
+    ...ZoomRoutes.pages,
   ];
 }
