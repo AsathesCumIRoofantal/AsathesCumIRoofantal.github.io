@@ -1,0 +1,10 @@
+{
+    "name": "airspacewebnew",
+    "compatibility_date": "2026-05-25",
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
+    "assets": {
+        "directory": "./build/web"
+    }
+}
