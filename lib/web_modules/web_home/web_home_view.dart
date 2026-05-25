@@ -107,7 +107,7 @@ class WebHomeView extends GetView<WebHomeController> {
                                     },
                                   ),
                                 ),
-                                SizedBox(height: 12),
+                                SizedBox(width: 12),
                                 Expanded(
                                   child: WebRTCChip(
                                     value: '3',
