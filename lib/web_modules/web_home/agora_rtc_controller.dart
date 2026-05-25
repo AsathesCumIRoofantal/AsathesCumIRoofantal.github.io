@@ -6,8 +6,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 // Controller manages Agora SDK state, connections, and hardware toggles
 class AgoraRtcController extends GetxController {
   //Please use your own app id and token
-  String appId = dotenv.env['BASE_URL'] ?? "n/a";
-  String agorraToken = dotenv.env['BASE_URL'] ?? "n/a";
+  String appId = dotenv.env['AppIdAgorra'] ?? "n/a";
+  String agorraToken = dotenv.env['AgorraToken'] ?? "n/a";
   String channelId = "air_space_agorra_industrial_dashboard_stream";
 
   late RtcEngine engine;
