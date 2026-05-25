@@ -24,11 +24,16 @@ class LiveRtcController extends GetxController {
     micEnabled.value = !micEnabled.value;
 
     // await room.localParticipant?.setMicrophoneEnabled(micEnabled.value);# livekit_client: ^2.7.0
-    for (var trackPub in room.localParticipant.audioTracks.values) {
-      //# livekit_client: ^0.1.1
-      // Access the native WebRTC track underlying the LiveKit wrapper
-      if (trackPub.track != null) {
-        trackPub.track!.mediaTrack.enabled = micEnabled.value;
+    // for (var trackPub in room.localParticipant.audioTracks.values) {
+    //   //# livekit_client: ^0.1.1
+    //   // Access the native WebRTC track underlying the LiveKit wrapper
+    //   if (trackPub.track != null) {
+    //     trackPub.track!.mediaTrack.enabled = micEnabled.value;
+    //   }
+    // }
+    for (var trackPub in room.localParticipant!.trackPublications.values) {
+      if (trackPub.kind == TrackType.AUDIO && !micEnabled.value) {
+        await trackPub.mute();
       }
     }
   }
@@ -38,11 +43,16 @@ class LiveRtcController extends GetxController {
 
     // await room.localParticipant?.setCameraEnabled(cameraEnabled.value);# livekit_client: ^2.7.0
 
-    for (var trackPub in room.localParticipant.videoTracks.values) {
-      //# livekit_client: ^0.1.1
-      if (trackPub.track != null) {
-        // Directly tells flutter_webrtc to stop pushing frames
-        trackPub.track!.mediaTrack.enabled = cameraEnabled.value;
+    // for (var trackPub in room.localParticipant.videoTracks.values) {
+    //   //# livekit_client: ^0.1.1
+    //   if (trackPub.track != null) {
+    //     // Directly tells flutter_webrtc to stop pushing frames
+    //     trackPub.track!.mediaTrack.enabled = cameraEnabled.value;
+    //   }
+    // }
+    for (var trackPub in room.localParticipant!.trackPublications.values) {
+      if (trackPub.kind == TrackType.VIDEO && !cameraEnabled.value) {
+        await trackPub.mute();
       }
     }
   }
