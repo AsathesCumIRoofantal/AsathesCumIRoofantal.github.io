@@ -1,12 +1,13 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Controller manages Agora SDK state, connections, and hardware toggles
 class AgoraRtcController extends GetxController {
   //Please use your own app id and token
-  String appId = "YOUR_AGORA_APP_ID";
-  String token = "YOUR_AGORA_CHANNEL_TOKEN_OR_NULL";
+  String appId = dotenv.env['BASE_URL'] ?? "n/a";
+  String agorraToken = dotenv.env['BASE_URL'] ?? "n/a";
   String channelId = "air_space_agorra_industrial_dashboard_stream";
 
   late RtcEngine engine;
@@ -37,7 +38,7 @@ class AgoraRtcController extends GetxController {
     await engine.enableVideo();
     await engine.startPreview();
     await engine.joinChannel(
-      token: token,
+      token: agorraToken,
       channelId: channelId,
       uid: 0,
       options: const ChannelMediaOptions(),
