@@ -20,7 +20,7 @@ void main() async {
 
   await dotenv.load(fileName: ".env");
   Get.put(AuthService());
-  runApp(const AirApp());
+  runApp(AirApp());
 }
 
 // web rtc
@@ -47,7 +47,9 @@ Future<bool> startForegroundService() async {
 // bool success = await FlutterBackground.initialize(androidConfig: androidConfig);
 
 class AirApp extends StatelessWidget {
-  const AirApp({super.key});
+  AirApp({super.key});
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
+      GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class AirApp extends StatelessWidget {
       designSize: const Size(1440, 1024),
       builder: (_, child) {
         return GetMaterialApp(
+          scaffoldMessengerKey: scaffoldMessengerKey,
           title: 'AIR-Space',
           theme: AppTheme.etherealLight,
           darkTheme: AppTheme.cosmicDark,
