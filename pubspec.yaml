@@ -30,7 +30,7 @@ dependencies:
   # livekit_client: ^1.5.0 #running
 
   
-  # flutter_webrtc: ^1.4.1
+  # flutter_webrtc: ^1.4.1 working for live kit that was removed
   flutter_background: ^1.3.1
   flutter_screenutil: ^5.9.3
   responsive_builder: ^0.7.1
@@ -45,11 +45,12 @@ dev_dependencies:
 
 
 dependency_overrides:
-  flutter_webrtc: ^0.10.4  # Matches Flutter 3.33 / 3.41 web engines
+  flutter_webrtc: ^0.10.4 # for agora
+  dart_webrtc: ^1.4.8 # for agora
   # Alternatively: Switch Override to Git (If version conflicts occur)
   # flutter_webrtc:
   #   git:
-  #     url: https://github.com
+  #     url: https://github.com/flutter-webrtc/flutter-webrtc
   #     ref: main  
 
 flutter_icons:
