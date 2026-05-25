@@ -25,7 +25,7 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await dotenv.load(fileName: ".env");
+  await dotenv.load(fileName: "assets/.env");
   GoogleFonts.config.allowRuntimeFetching = false;
   Get.put(AuthService());
   runApp(AirApp());
@@ -120,6 +120,11 @@ class _AirAppState extends State<AirApp> {
           getPages: AppPages.pages,
           initialBinding: SplashBinding(),
           debugShowCheckedModeBanner: false,
+          routingCallback: (routing) {
+            if (routing != null) {
+              FlutterNativeSplash.remove();
+            }
+          },
         );
       },
     );

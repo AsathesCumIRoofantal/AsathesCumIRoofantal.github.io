@@ -45,20 +45,5 @@ app.*.map.json
 /android/app/release
 
 #env    
-.env        
-.codersinflow
-.vscode
-node_modules
-.venv
-.codex
-out
-dist
-*.vsix
-.claude
-CLAUDE.md
-.git
-*.tmp
-__pycache__
-.env.local
-.next
-.github
+#.env        
+

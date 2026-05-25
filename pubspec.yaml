@@ -94,5 +94,5 @@ flutter:
   assets:
     - assets/data/
     - assets/images/
-    - .env
-    - .env.sample
+    - assets/.env
+    - assets/.env.sample
