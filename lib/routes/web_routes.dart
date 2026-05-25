@@ -206,12 +206,12 @@ class WebRoutes {
       binding: AgoraBinding(),
       transition: Transition.fadeIn,
     ),
-    GetPage(
-      name: LivekitRtcView.routeName,
-      page: () => const LivekitRtcView(),
-      binding: LivekitRtcBinding(),
-      transition: Transition.fadeIn,
-    ),
+    // GetPage(
+    //   name: LivekitRtcView.routeName,
+    //   page: () => const LivekitRtcView(),
+    //   binding: LivekitRtcBinding(),
+    //   transition: Transition.fadeIn,
+    // ),
 
     // GetPage(
     //   name: WebAirSpaceView.routeName,

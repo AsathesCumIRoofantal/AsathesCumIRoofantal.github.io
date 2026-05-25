@@ -45,7 +45,12 @@ dev_dependencies:
 
 
 dependency_overrides:
-  flutter_webrtc: ^0.9.48
+  flutter_webrtc: ^0.10.4  # Matches Flutter 3.33 / 3.41 web engines
+  # Alternatively: Switch Override to Git (If version conflicts occur)
+  # flutter_webrtc:
+  #   git:
+  #     url: https://github.com
+  #     ref: main  
 
 flutter_icons:
   android: true
