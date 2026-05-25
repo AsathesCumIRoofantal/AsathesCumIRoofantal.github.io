@@ -1,50 +1,63 @@
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
+// Controller manages Agora SDK state, connections, and hardware toggles
 class AgoraRtcController extends GetxController {
-  late final RtcEngine engine;
+  //Please use your own app id and token
+  String appId = "YOUR_AGORA_APP_ID";
+  String token = "YOUR_AGORA_CHANNEL_TOKEN_OR_NULL";
+  String channelId = "air_space_agorra_industrial_dashboard_stream";
 
-  final isJoined = false.obs;
-  final micEnabled = true.obs;
-  final cameraEnabled = true.obs;
-
-  final remoteUsers = <int>[].obs;
+  late RtcEngine engine;
+  final isLocalJoined = false.obs;
+  final isMuted = false.obs;
+  final isCameraOff = false.obs;
+  final remoteUsers = <int>[].obs; // Tracks remote user IDs
 
   @override
   void onInit() {
     super.onInit();
-    initializeAgora();
+    _initAgoraEngine();
   }
 
-  Future<void> initializeAgora() async {
+  Future<void> _initAgoraEngine() async {
     engine = createAgoraRtcEngine();
-
-    await engine.initialize(const RtcEngineContext(appId: 'YOUR_AGORA_APP_ID'));
-
-    await engine.enableVideo();
+    // Initialize, set up event handlers, and join channel
+    await engine.initialize(RtcEngineContext(appId: appId));
 
     engine.registerEventHandler(
       RtcEngineEventHandler(
-        onJoinChannelSuccess: (connection, elapsed) {
-          isJoined.value = true;
-        },
-        onUserJoined: (connection, remoteUid, elapsed) {
-          remoteUsers.add(remoteUid);
-        },
-        onUserOffline: (connection, remoteUid, reason) {
-          remoteUsers.remove(remoteUid);
-        },
+        onJoinChannelSuccess: (_, __) => isLocalJoined.value = true,
+        onUserJoined: (_, remoteUid, __) => remoteUsers.add(remoteUid),
+        onUserOffline: (_, remoteUid, __) => remoteUsers.remove(remoteUid),
       ),
+    );
+
+    await engine.enableVideo();
+    await engine.startPreview();
+    await engine.joinChannel(
+      token: token,
+      channelId: channelId,
+      uid: 0,
+      options: const ChannelMediaOptions(),
     );
   }
 
-  Future<void> toggleMic() async {
-    micEnabled.value = !micEnabled.value;
-    await engine.muteLocalAudioStream(!micEnabled.value);
+  Future<void> toggleMicrophone() async {
+    await engine.muteLocalAudioStream(!isMuted.value);
+    isMuted.value = !isMuted.value;
   }
 
   Future<void> toggleCamera() async {
-    cameraEnabled.value = !cameraEnabled.value;
-    await engine.muteLocalVideoStream(!cameraEnabled.value);
+    await engine.muteLocalVideoStream(!isCameraOff.value);
+    isCameraOff.value = !isCameraOff.value;
+  }
+
+  @override
+  void onClose() {
+    engine.leaveChannel(); //
+    engine.release(); //
+    super.onClose();
   }
 }

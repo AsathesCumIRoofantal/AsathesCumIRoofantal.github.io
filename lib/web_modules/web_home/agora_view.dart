@@ -1,8 +1,9 @@
+import 'package:agora_rtc_engine/agora_rtc_engine.dart';
 import 'package:air_app/web_modules/_shared/web_nav_data.dart';
 import 'package:air_app/web_modules/_shared/web_shell.dart';
+import 'package:air_app/web_modules/web_home/agora_rtc_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/web_modules/web_home/agora_rtc_controller.dart';
 
 class AgoraView extends GetView<AgoraRtcController> {
   const AgoraView({super.key});
@@ -23,32 +24,33 @@ class AgoraView extends GetView<AgoraRtcController> {
                 final isDesktop = constraints.maxWidth > 1100;
                 final isTablet = constraints.maxWidth > 700;
 
-                return GridView.builder(
-                  padding: const EdgeInsets.all(24),
-                  itemCount: 8,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: isDesktop
-                        ? 4
-                        : isTablet
-                        ? 2
-                        : 1,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 1.4,
-                  ),
-                  itemBuilder: (_, index) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        gradient: LinearGradient(
-                          colors: [
-                            Colors.blue.withOpacity(.2),
-                            Colors.purple.withOpacity(.2),
-                          ],
+                return Obx(
+                  () => GridView.builder(
+                    itemCount: 1 + controller.remoteUsers.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
                         ),
-                      ),
-                    );
-                  },
+                    itemBuilder: (_, index) {
+                      // Local View (index 0) or Remote View (index > 0)
+                      return AgoraVideoView(
+                        controller: index == 0
+                            ? VideoViewController(
+                                rtcEngine: controller.engine,
+                                canvas: const VideoCanvas(uid: 0),
+                              )
+                            : VideoViewController.remote(
+                                rtcEngine: controller.engine,
+                                canvas: VideoCanvas(
+                                  uid: controller.remoteUsers[index - 1],
+                                ),
+                                connection: RtcConnection(
+                                  channelId: controller.channelId,
+                                ),
+                              ),
+                      );
+                    },
+                  ),
                 );
               },
             ),
