@@ -17,8 +17,11 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'package:web/web.dart' as web;
 import 'dart:js_interop';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
+  // 🚀 FIX: Forces standard clean paths instead of fallback hash strategy
+  usePathUrlStrategy();
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
@@ -113,7 +116,7 @@ class _AirAppState extends State<AirApp> {
           darkTheme: AppTheme.cosmicDark,
           themeMode:
               ThemeMode.system, // Defaults to system but managed by Settings
-          initialRoute: kIsWeb ? WebHomeView.routeName : AppRoutes.SPLASH,
+          initialRoute: kIsWeb ? AppRoutes.LOGIN : AppRoutes.SPLASH,
           getPages: AppPages.pages,
           initialBinding: SplashBinding(),
           debugShowCheckedModeBanner: false,
