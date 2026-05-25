@@ -1,6 +1,7 @@
 // web_modules/_shared/_enhanced_page_template.dart
 // Reusable enhanced template for all section pages with advanced animations
 
+import 'package:air_app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
