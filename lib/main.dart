@@ -14,7 +14,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'dart:js_interop';
-import 'package:web/web.dart' as webHndle;
+import 'package:web/web.dart' as webhandle;
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -63,12 +63,12 @@ class _AirAppState extends State<AirApp> {
   }
 
   void _listenForUpdates() {
-    webHndle.window.addEventListener(
+    webhandle.window.addEventListener(
       'flutter_version_update',
-      ((webHndle.Event event) {
+      ((webhandle.Event event) {
             _showUpdateNotification();
           }).toJS
-          as webHndle.EventListener,
+          as webhandle.EventListener,
     );
   }
 
@@ -84,7 +84,7 @@ class _AirAppState extends State<AirApp> {
       isDismissible: false,
       mainButton: TextButton(
         onPressed: () {
-          webHndle.window.location.reload(); // Hard reload browser
+          webhandle.window.location.reload(); // Hard reload browser
         },
         child: const Text(
           'Refresh',
