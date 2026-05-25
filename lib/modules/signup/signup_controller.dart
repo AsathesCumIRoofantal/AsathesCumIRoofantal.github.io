@@ -1,5 +1,6 @@
 import 'package:air_app/routes/app_pages.dart';
 import 'package:air_app/web_modules/web_home/web_home_view.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -80,7 +81,11 @@ class SignupController extends GetxController {
 
     AuthService.to.login(usernameController.text, selectedRole.value);
 
-    Get.offAllNamed(WebHomeView.routeName);
+    if (kIsWeb) {
+      Get.offAllNamed(WebHomeView.routeName);
+    } else {
+      Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+    }
     Get.snackbar(
       'Success',
       'Welcome to AIR, ${usernameController.text}!',
