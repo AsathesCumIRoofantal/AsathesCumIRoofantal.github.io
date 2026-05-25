@@ -2,19 +2,6 @@
 <html>
 
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
   <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
@@ -32,6 +19,17 @@
 
   <title>air_app</title>
   <link rel="manifest" href="manifest.json">
+
+
+
+  <!-- Agora Integration Engine -->
+  <script src="https://agora.io"></script>
+  <script src="iris-web-rtc.js" type="application/javascript"></script>
+  <script src="https://jsdelivr.net"></script>-->
+
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+
+
   <style id="splash-screen-style">
     html {
       height: 100%
@@ -99,14 +97,6 @@
       }
     }
   </style>
-
-  <!-- Base Agora Native Engine Core for Web Browsers -->
-  <script src="https://agora.io"></script>
-
-  <!-- The Iris Bridge Interop script file you downloaded in Step 1 -->
-  <script src="iris-web-rtc.js" type="application/javascript"></script>
-  <script src="https://jsdelivr.net"></script><!-- agora ends -->
-
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
       document.getElementById("splash")?.remove();
@@ -114,7 +104,6 @@
       document.body.style.background = "transparent";
     }
   </script>
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
 </head>
 
 <body>
@@ -127,6 +116,15 @@
       media="(prefers-color-scheme: dark)">
     <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
+
+  <!-- Grant permissions explicitly for Camera & Mic access in standard web apps -->
+  <iframe src="about:blank" allow="camera; microphone" style="display:none"></iframe>
+
+
+  <!-- Clean, un-obstructive static HTML Splash element -->
+
+
+  <!-- Clean, native bootstrap script loader -->
   <script src="flutter_bootstrap.js" async=""></script>
 
 

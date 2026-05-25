@@ -20,266 +20,268 @@ class WebHomeView extends GetView<WebHomeController> {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return WebShell(
       currentRoute: routeName,
       child: Scaffold(
         backgroundColor: isDark ? WColors.surfaceDark : WColors.surface,
-        body: CustomScrollView(
-          controller: controller.scrollController,
-          slivers: [
-            // ── HERO WITH PARALLAX ──
-            SliverAppBar(
-              expandedHeight: WBreak.isMobile(context) ? 320 : 450,
-              pinned: false,
-              flexibleSpace: FlexibleSpaceBar(background: _AnimatedHero()),
-            ),
+        body: Center(child: Text("Air App")),
+        // CustomScrollView(
+        //   controller: controller.scrollController,
+        //   slivers: [
+        //     // ── HERO WITH PARALLAX ──
+        //     SliverAppBar(
+        //       expandedHeight: WBreak.isMobile(context) ? 320 : 450,
+        //       pinned: false,
+        //       flexibleSpace: FlexibleSpaceBar(background: _AnimatedHero()),
+        //     ),
 
-            // ── REAL-TIME CHAT ──
-            SliverToBoxAdapter(
-              child: Container(
-                color: isDark ? WColors.cardDark : Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 28),
-                child: WMaxWidth(
-                  child: AnimationLimiter(
-                    child: WBreak.isMobile(context)
-                        ? Column(
-                            children: AnimationConfiguration.toStaggeredList(
-                              duration: const Duration(milliseconds: 500),
-                              childAnimationBuilder: (widget) => SlideAnimation(
-                                verticalOffset: 30.0,
-                                child: FadeInAnimation(child: widget),
-                              ),
-                              children: [
-                                WebRTCChip(
-                                  value: '1',
-                                  label: 'Custom RTC',
-                                  color: WColors.indigo,
-                                  onTap: () {
-                                    Get.toNamed(WebNavData.homeWebRtcRoute);
-                                  },
-                                ),
-                                SizedBox(height: 12),
-                                WebRTCChip(
-                                  value: '2',
-                                  label: 'Agora',
-                                  color: WColors.teal,
-                                  onTap: () {
-                                    Get.toNamed(WebNavData.homeAgoraRoute);
-                                  },
-                                ),
-                                SizedBox(height: 12),
-                                WebRTCChip(
-                                  value: '3',
-                                  label: 'Livekit',
-                                  color: WColors.amber,
-                                  onTap: () {
-                                    // Get.toNamed(WebNavData.homeLivekitRtcRoute);
-                                  },
-                                ),
-                              ],
-                            ),
-                          )
-                        : Row(
-                            children: AnimationConfiguration.toStaggeredList(
-                              duration: const Duration(milliseconds: 600),
-                              childAnimationBuilder: (widget) => ScaleAnimation(
-                                child: FadeInAnimation(child: widget),
-                              ),
-                              children: [
-                                WebRTCChip(
-                                  value: '1',
-                                  label: 'Custom RTC',
-                                  color: WColors.indigo,
-                                  onTap: () {
-                                    Get.toNamed(WebNavData.homeWebRtcRoute);
-                                  },
-                                ),
-                                SizedBox(width: 12),
-                                WebRTCChip(
-                                  value: '2',
-                                  label: 'Agora',
-                                  color: WColors.teal,
-                                  onTap: () {
-                                    Get.toNamed(WebNavData.homeAgoraRoute);
-                                  },
-                                ),
-                                SizedBox(width: 12),
-                                WebRTCChip(
-                                  value: '3',
-                                  label: 'Livekit',
-                                  color: WColors.amber,
-                                  onTap: () {
-                                    // Get.toNamed(
-                                    //   WebNavData.homeLivekitRtcRoute,
-                                    // );
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                  ),
-                ),
-              ),
-            ),
+        //     // ── REAL-TIME CHAT ──
+        //     SliverToBoxAdapter(
+        //       child: Container(
+        //         color: isDark ? WColors.cardDark : Colors.white,
+        //         padding: const EdgeInsets.symmetric(vertical: 28),
+        //         child: WMaxWidth(
+        //           child: AnimationLimiter(
+        //             child: WBreak.isMobile(context)
+        //                 ? Column(
+        //                     children: AnimationConfiguration.toStaggeredList(
+        //                       duration: const Duration(milliseconds: 500),
+        //                       childAnimationBuilder: (widget) => SlideAnimation(
+        //                         verticalOffset: 30.0,
+        //                         child: FadeInAnimation(child: widget),
+        //                       ),
+        //                       children: [
+        //                         WebRTCChip(
+        //                           value: '1',
+        //                           label: 'Custom RTC',
+        //                           color: WColors.indigo,
+        //                           onTap: () {
+        //                             Get.toNamed(WebNavData.homeWebRtcRoute);
+        //                           },
+        //                         ),
+        //                         SizedBox(height: 12),
+        //                         WebRTCChip(
+        //                           value: '2',
+        //                           label: 'Agora',
+        //                           color: WColors.teal,
+        //                           onTap: () {
+        //                             Get.toNamed(WebNavData.homeAgoraRoute);
+        //                           },
+        //                         ),
+        //                         SizedBox(height: 12),
+        //                         WebRTCChip(
+        //                           value: '3',
+        //                           label: 'Livekit',
+        //                           color: WColors.amber,
+        //                           onTap: () {
+        //                             // Get.toNamed(WebNavData.homeLivekitRtcRoute);
+        //                           },
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   )
+        //                 : Row(
+        //                     children: AnimationConfiguration.toStaggeredList(
+        //                       duration: const Duration(milliseconds: 600),
+        //                       childAnimationBuilder: (widget) => ScaleAnimation(
+        //                         child: FadeInAnimation(child: widget),
+        //                       ),
+        //                       children: [
+        //                         WebRTCChip(
+        //                           value: '1',
+        //                           label: 'Custom RTC',
+        //                           color: WColors.indigo,
+        //                           onTap: () {
+        //                             Get.toNamed(WebNavData.homeWebRtcRoute);
+        //                           },
+        //                         ),
+        //                         SizedBox(width: 12),
+        //                         WebRTCChip(
+        //                           value: '2',
+        //                           label: 'Agora',
+        //                           color: WColors.teal,
+        //                           onTap: () {
+        //                             Get.toNamed(WebNavData.homeAgoraRoute);
+        //                           },
+        //                         ),
+        //                         SizedBox(width: 12),
+        //                         WebRTCChip(
+        //                           value: '3',
+        //                           label: 'Livekit',
+        //                           color: WColors.amber,
+        //                           onTap: () {
+        //                             // Get.toNamed(
+        //                             //   WebNavData.homeLivekitRtcRoute,
+        //                             // );
+        //                           },
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
 
-            // ── STATS WITH ANIMATION ──
-            SliverToBoxAdapter(
-              child: Container(
-                color: isDark ? WColors.cardDark : Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 28),
-                child: WMaxWidth(
-                  child: AnimationLimiter(
-                    child: WBreak.isMobile(context)
-                        ? Column(
-                            children: AnimationConfiguration.toStaggeredList(
-                              duration: const Duration(milliseconds: 500),
-                              childAnimationBuilder: (widget) => SlideAnimation(
-                                verticalOffset: 30.0,
-                                child: FadeInAnimation(child: widget),
-                              ),
-                              children: const [
-                                WStatChip(
-                                  value: '11',
-                                  label: 'Workspaces',
-                                  color: WColors.indigo,
-                                ),
-                                SizedBox(height: 12),
-                                WStatChip(
-                                  value: '150+',
-                                  label: 'Linked Topics',
-                                  color: WColors.teal,
-                                ),
-                                SizedBox(height: 12),
-                                WStatChip(
-                                  value: '∞',
-                                  label: 'Room to Grow',
-                                  color: WColors.amber,
-                                ),
-                              ],
-                            ),
-                          )
-                        : Row(
-                            children: AnimationConfiguration.toStaggeredList(
-                              duration: const Duration(milliseconds: 600),
-                              childAnimationBuilder: (widget) => ScaleAnimation(
-                                child: FadeInAnimation(child: widget),
-                              ),
-                              children: const [
-                                WStatChip(
-                                  value: '11',
-                                  label: 'Workspaces',
-                                  color: WColors.indigo,
-                                ),
-                                SizedBox(width: 12),
-                                WStatChip(
-                                  value: '150+',
-                                  label: 'Linked Topics',
-                                  color: WColors.teal,
-                                ),
-                                SizedBox(width: 12),
-                                WStatChip(
-                                  value: '∞',
-                                  label: 'Room to Grow',
-                                  color: WColors.amber,
-                                ),
-                              ],
-                            ),
-                          ),
-                  ),
-                ),
-              ),
-            ),
+        //     // ── STATS WITH ANIMATION ──
+        //     SliverToBoxAdapter(
+        //       child: Container(
+        //         color: isDark ? WColors.cardDark : Colors.white,
+        //         padding: const EdgeInsets.symmetric(vertical: 28),
+        //         child: WMaxWidth(
+        //           child: AnimationLimiter(
+        //             child: WBreak.isMobile(context)
+        //                 ? Column(
+        //                     children: AnimationConfiguration.toStaggeredList(
+        //                       duration: const Duration(milliseconds: 500),
+        //                       childAnimationBuilder: (widget) => SlideAnimation(
+        //                         verticalOffset: 30.0,
+        //                         child: FadeInAnimation(child: widget),
+        //                       ),
+        //                       children: const [
+        //                         WStatChip(
+        //                           value: '11',
+        //                           label: 'Workspaces',
+        //                           color: WColors.indigo,
+        //                         ),
+        //                         SizedBox(height: 12),
+        //                         WStatChip(
+        //                           value: '150+',
+        //                           label: 'Linked Topics',
+        //                           color: WColors.teal,
+        //                         ),
+        //                         SizedBox(height: 12),
+        //                         WStatChip(
+        //                           value: '∞',
+        //                           label: 'Room to Grow',
+        //                           color: WColors.amber,
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   )
+        //                 : Row(
+        //                     children: AnimationConfiguration.toStaggeredList(
+        //                       duration: const Duration(milliseconds: 600),
+        //                       childAnimationBuilder: (widget) => ScaleAnimation(
+        //                         child: FadeInAnimation(child: widget),
+        //                       ),
+        //                       children: const [
+        //                         WStatChip(
+        //                           value: '11',
+        //                           label: 'Workspaces',
+        //                           color: WColors.indigo,
+        //                         ),
+        //                         SizedBox(width: 12),
+        //                         WStatChip(
+        //                           value: '150+',
+        //                           label: 'Linked Topics',
+        //                           color: WColors.teal,
+        //                         ),
+        //                         SizedBox(width: 12),
+        //                         WStatChip(
+        //                           value: '∞',
+        //                           label: 'Room to Grow',
+        //                           color: WColors.amber,
+        //                         ),
+        //                       ],
+        //                     ),
+        //                   ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 12)),
+        //     SliverToBoxAdapter(child: const SizedBox(height: 12)),
 
-            // ── SECTION HEADER ──
-            SliverToBoxAdapter(
-              child: WMaxWidth(
-                child: AnimationConfiguration.staggeredList(
-                  position: 0,
-                  duration: const Duration(milliseconds: 800),
-                  child: const FadeInAnimation(
-                    child: WSectionHeader(
-                      eyebrow: 'The Atlas',
-                      title: 'Pick a workspace',
-                      subtitle:
-                          'Each card opens its own page with the full menu, hero, '
-                          'and topic detail. Use the drawer to jump anywhere, anytime.',
-                      accent: WColors.indigo,
-                    ),
-                  ),
-                ),
-              ),
-            ),
+        //     // ── SECTION HEADER ──
+        //     SliverToBoxAdapter(
+        //       child: WMaxWidth(
+        //         child: AnimationConfiguration.staggeredList(
+        //           position: 0,
+        //           duration: const Duration(milliseconds: 800),
+        //           child: const FadeInAnimation(
+        //             child: WSectionHeader(
+        //               eyebrow: 'The Atlas',
+        //               title: 'Pick a workspace',
+        //               subtitle:
+        //                   'Each card opens its own page with the full menu, hero, '
+        //                   'and topic detail. Use the drawer to jump anywhere, anytime.',
+        //               accent: WColors.indigo,
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 12)),
+        //     SliverToBoxAdapter(child: const SizedBox(height: 12)),
 
-            // ── ANIMATED GRID ──
-            // SliverPadding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 20),
-            //   sliver: SliverGrid(
-            //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            //       crossAxisCount: WBreak.cols(context).toInt(),
-            //       childAspectRatio: 0.85,
-            //       crossAxisSpacing: 16,
-            //       mainAxisSpacing: 16,
-            //     ),
-            //     delegate: SliverChildListDelegate([
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('explore'),
-            //         index: 0,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('wisdom'),
-            //         index: 1,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('be_you'),
-            //         index: 2,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('air_space'),
-            //         index: 3,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('profile'),
-            //         index: 4,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('aspects'),
-            //         index: 5,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('service'),
-            //         index: 6,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('vision'),
-            //         index: 7,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('motivation'),
-            //         index: 8,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('setup'),
-            //         index: 9,
-            //       ),
-            //       _AnimatedSectionCard(
-            //         section: WebNavData.bySlug('system'),
-            //         index: 10,
-            //       ),
-            //     ]),
-            //   ),
-            // ),
-            SliverToBoxAdapter(child: const SizedBox(height: 56)),
+        //     // ── ANIMATED GRID ──
+        //     // SliverPadding(
+        //     //   padding: const EdgeInsets.symmetric(horizontal: 20),
+        //     //   sliver: SliverGrid(
+        //     //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //     //       crossAxisCount: WBreak.cols(context).toInt(),
+        //     //       childAspectRatio: 0.85,
+        //     //       crossAxisSpacing: 16,
+        //     //       mainAxisSpacing: 16,
+        //     //     ),
+        //     //     delegate: SliverChildListDelegate([
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('explore'),
+        //     //         index: 0,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('wisdom'),
+        //     //         index: 1,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('be_you'),
+        //     //         index: 2,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('air_space'),
+        //     //         index: 3,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('profile'),
+        //     //         index: 4,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('aspects'),
+        //     //         index: 5,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('service'),
+        //     //         index: 6,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('vision'),
+        //     //         index: 7,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('motivation'),
+        //     //         index: 8,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('setup'),
+        //     //         index: 9,
+        //     //       ),
+        //     //       _AnimatedSectionCard(
+        //     //         section: WebNavData.bySlug('system'),
+        //     //         index: 10,
+        //     //       ),
+        //     //     ]),
+        //     //   ),
+        //     // ),
+        //     SliverToBoxAdapter(child: const SizedBox(height: 56)),
 
-            // ── FOOTER CTA ──
-            SliverToBoxAdapter(child: _AnimatedFooter()),
+        //     // ── FOOTER CTA ──
+        //     SliverToBoxAdapter(child: _AnimatedFooter()),
 
-            SliverToBoxAdapter(child: const SizedBox(height: 40)),
-          ],
-        ),
+        //     SliverToBoxAdapter(child: const SizedBox(height: 40)),
+        //   ],
+        // ),
       ),
     );
   }

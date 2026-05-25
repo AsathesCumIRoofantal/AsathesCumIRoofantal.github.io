@@ -3,6 +3,7 @@ import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'core/theme/app_theme.dart';
 import 'data/auth_service.dart';
@@ -22,6 +23,7 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await dotenv.load(fileName: ".env");
+  GoogleFonts.config.allowRuntimeFetching = false;
   Get.put(AuthService());
   runApp(AirApp());
 }
@@ -101,8 +103,10 @@ class _AirAppState extends State<AirApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(1440, 1024),
-      builder: (_, child) {
+      designSize: const Size(1920, 1080), // Desktop Web Standard Base Layout
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
         return GetMaterialApp(
           title: 'AIR-Space',
           theme: AppTheme.etherealLight,
