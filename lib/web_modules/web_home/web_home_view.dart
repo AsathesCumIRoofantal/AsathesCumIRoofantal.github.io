@@ -34,6 +34,89 @@ class WebHomeView extends GetView<WebHomeController> {
               flexibleSpace: FlexibleSpaceBar(background: _AnimatedHero()),
             ),
 
+            // ── REAL-TIME CHAT ──
+            SliverToBoxAdapter(
+              child: Container(
+                color: isDark ? WColors.cardDark : Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 28),
+                child: WMaxWidth(
+                  child: AnimationLimiter(
+                    child: WBreak.isMobile(context)
+                        ? Column(
+                            children: AnimationConfiguration.toStaggeredList(
+                              duration: const Duration(milliseconds: 500),
+                              childAnimationBuilder: (widget) => SlideAnimation(
+                                verticalOffset: 30.0,
+                                child: FadeInAnimation(child: widget),
+                              ),
+                              children: [
+                                WebRTCChip(
+                                  value: '1',
+                                  label: 'Custom RTC',
+                                  color: WColors.indigo,
+                                  onTap: () {
+                                    Get.toNamed(WebNavData.homeWebRtcRoute);
+                                  },
+                                ),
+                                SizedBox(height: 12),
+                                WebRTCChip(
+                                  value: '2',
+                                  label: 'Agora',
+                                  color: WColors.teal,
+                                  onTap: () {
+                                    Get.toNamed(WebNavData.homeAgoraRoute);
+                                  },
+                                ),
+                                SizedBox(height: 12),
+                                WebRTCChip(
+                                  value: '3',
+                                  label: 'Livekit',
+                                  color: WColors.amber,
+                                  onTap: () {
+                                    Get.toNamed(WebNavData.homeLivekitRtcRoute);
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        : Row(
+                            children: AnimationConfiguration.toStaggeredList(
+                              duration: const Duration(milliseconds: 600),
+                              childAnimationBuilder: (widget) => ScaleAnimation(
+                                child: FadeInAnimation(child: widget),
+                              ),
+                              children: const [
+                                Expanded(
+                                  child: WStatChip(
+                                    value: '11',
+                                    label: 'Workspaces',
+                                    color: WColors.indigo,
+                                  ),
+                                ),
+                                SizedBox(width: 12),
+                                Expanded(
+                                  child: WStatChip(
+                                    value: '150+',
+                                    label: 'Linked Topics',
+                                    color: WColors.teal,
+                                  ),
+                                ),
+                                SizedBox(width: 12),
+                                Expanded(
+                                  child: WStatChip(
+                                    value: '∞',
+                                    label: 'Room to Grow',
+                                    color: WColors.amber,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                  ),
+                ),
+              ),
+            ),
+
             // ── STATS WITH ANIMATION ──
             SliverToBoxAdapter(
               child: Container(
