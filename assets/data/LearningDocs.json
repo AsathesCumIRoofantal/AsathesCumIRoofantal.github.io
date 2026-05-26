@@ -1,0 +1,182 @@
+[
+  {
+    "id": "d_001",
+    "categoryId": "lm_001",
+    "title": "The Solar System Origins",
+    "description": "A deep dive into how planets coalesce from stellar dust.",
+    "type": "PDF",
+    "classCategory": "Class 8",
+    "targetAge": "12-14",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_002",
+    "categoryId": "lm_001",
+    "title": "Quantum Physics for Beginners",
+    "description": "Simple diagram explaining photons and waves.",
+    "type": "Image",
+    "classCategory": "Class 10",
+    "targetAge": "15-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_003",
+    "categoryId": "lm_002",
+    "title": "Timeline of the Renaissance",
+    "description": "Text document mapping all major cultural shifts.",
+    "type": "TXT",
+    "classCategory": "Class 7",
+    "targetAge": "10-12",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_004",
+    "categoryId": "lm_003",
+    "title": "Penrose Triangle Model",
+    "description": "Visual artifact of the impossible object.",
+    "type": "Image",
+    "classCategory": "All",
+    "targetAge": "Any",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_005",
+    "categoryId": "lm_001",
+    "title": "Genetics & DNA Transcription",
+    "description": "Complete textbook excerpt on genetic mutation.",
+    "type": "PDF",
+    "classCategory": "Class 12",
+    "targetAge": "16-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_006",
+    "categoryId": "lm_001",
+    "title": "Nuclear Physics: Protons, Neutrons & Mesons",
+    "description": "Comprehensive guide to subatomic particles and nuclear forces in matter.",
+    "type": "PDF",
+    "classCategory": "Class 11-12",
+    "targetAge": "16-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_007",
+    "categoryId": "lm_001",
+    "title": "Atomic Structure and Electron Orbitals",
+    "description": "Understanding electrons, their behavior, and chemical bonding mechanisms.",
+    "type": "PDF",
+    "classCategory": "Class 10-11",
+    "targetAge": "15-17",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_008",
+    "categoryId": "lm_001",
+    "title": "Quark Models and Particle Physics",
+    "description": "Deep dive into the Standard Model and fundamental particle interactions.",
+    "type": "PDF",
+    "classCategory": "Class 12",
+    "targetAge": "17-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_009",
+    "categoryId": "lm_001",
+    "title": "Cellular Biology: Mitochondria and Energy Production",
+    "description": "How cells convert nutrients into usable energy through ATP synthesis.",
+    "type": "PDF",
+    "classCategory": "Class 11",
+    "targetAge": "16-17",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_010",
+    "categoryId": "lm_001",
+    "title": "Proteins, Enzymes & Biochemical Reactions",
+    "description": "The role of proteins and enzymes in catalyzing life processes.",
+    "type": "PDF",
+    "classCategory": "Class 11-12",
+    "targetAge": "16-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_011",
+    "categoryId": "lm_001",
+    "title": "Ribosomes: Protein Synthesis Machines",
+    "description": "Understanding how ribosomes translate genetic code into functional proteins.",
+    "type": "PDF",
+    "classCategory": "Class 11",
+    "targetAge": "16-17",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_012",
+    "categoryId": "lm_004",
+    "title": "Algorithms Fundamentals",
+    "description": "Essential concepts of algorithmic thinking and computational problem-solving.",
+    "type": "PDF",
+    "classCategory": "Class 10-12",
+    "targetAge": "15-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_013",
+    "categoryId": "lm_004",
+    "title": "Data Structures: Arrays, Lists & Trees",
+    "description": "Organizing and accessing data efficiently through proper data structure design.",
+    "type": "PDF",
+    "classCategory": "Class 11-12",
+    "targetAge": "16-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_014",
+    "categoryId": "lm_004",
+    "title": "Network Protocols & Internet Communication",
+    "description": "How computers communicate over networks using standardized protocols.",
+    "type": "PDF",
+    "classCategory": "Class 11-12",
+    "targetAge": "16-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_015",
+    "categoryId": "lm_001",
+    "title": "Electromagnetic Waves Across the Spectrum",
+    "description": "Understanding light, radio waves, X-rays, and the full electromagnetic spectrum.",
+    "type": "PDF",
+    "classCategory": "Class 10-11",
+    "targetAge": "15-17",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_016",
+    "categoryId": "lm_001",
+    "title": "Consciousness & Neural Networks",
+    "description": "Exploring how complex neural systems give rise to consciousness and awareness.",
+    "type": "PDF",
+    "classCategory": "Class 11-12",
+    "targetAge": "16-18",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_017",
+    "categoryId": "lm_002",
+    "title": "History of Scientific Discovery",
+    "description": "Timeline of major scientific breakthroughs and their societal impact.",
+    "type": "PDF",
+    "classCategory": "Class 8-9",
+    "targetAge": "13-15",
+    "url": "local_or_remote_url_here"
+  },
+  {
+    "id": "d_018",
+    "categoryId": "lm_004",
+    "title": "Binary & Number Systems",
+    "description": "Understanding different number bases and binary representation in computers.",
+    "type": "PDF",
+    "classCategory": "Class 9-10",
+    "targetAge": "14-16",
+    "url": "local_or_remote_url_here"
+  }
+]

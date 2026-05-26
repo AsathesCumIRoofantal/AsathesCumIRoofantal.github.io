@@ -1,0 +1,166 @@
+[
+  {
+    "id": "u_001",
+    "name": "Auto-Parts Service Center",
+    "description": "A union of entities organized to repair kinetic transportation machines.",
+    "category": "Service Economy",
+    "unionedEntities": ["Mechanic", "Tools", "Capital", "Vehicles"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_002",
+    "name": "Smartphone",
+    "description": "A complex union of quantum mechanics, computing, and chemistry enabling global instantaneous information transfer.",
+    "category": "Technology Ecosystem",
+    "unionedEntities": ["CPU", "Battery", "Screen", "OS", "Photons"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_003",
+    "name": "Solar System",
+    "description": "A grand gravitational union centering around a nucleosynthetic star.",
+    "category": "Cosmology",
+    "unionedEntities": ["Star", "Planets", "Asteroids", "Gravity"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_004",
+    "name": "The AIR Organization",
+    "description": "The meta-structural entity designed to classify, trace, and manage all lesser entities and unions to ensure absolute operational transparency.",
+    "category": "Governance Framework",
+    "unionedEntities": [
+      "Data Servers",
+      "Analysts",
+      "Regulations",
+      "Users",
+      "Wisdom Nodes"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_005",
+    "name": "Biological Brain",
+    "description": "An intricate union of billions of cells creating localized consciousness.",
+    "category": "Cognitive System",
+    "unionedEntities": [
+      "Neurons",
+      "Synapses",
+      "Neurotransmitters",
+      "Blood Vessels"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_006",
+    "name": "Atomic Nucleus",
+    "description": "A fundamental union of protons and neutrons bound by strong nuclear force, forming the dense core of all atoms.",
+    "category": "Nuclear Physics",
+    "unionedEntities": ["Proton", "Neutron", "Quark", "Meson"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_007",
+    "name": "Living Organism",
+    "description": "A complex union of cells, proteins, and genetic material maintaining homeostasis and exhibiting properties of life.",
+    "category": "Biology",
+    "unionedEntities": [
+      "Biological Cell",
+      "DNA Sequence",
+      "Protein",
+      "Enzyme",
+      "Ribosome",
+      "Mitochondrion"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_008",
+    "name": "Software Application",
+    "description": "A structured union of algorithms, data structures, and scripts creating functional computational systems.",
+    "category": "Software Engineering",
+    "unionedEntities": ["Algorithm", "Data Structure", "Script", "API", "Byte"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_009",
+    "name": "Internet Infrastructure",
+    "description": "A vast distributed union of computers, networks, and protocols enabling global digital communication and data exchange.",
+    "category": "Technology Ecosystem",
+    "unionedEntities": [
+      "Network Protocol",
+      "API",
+      "Data Structure",
+      "Algorithm",
+      "Photons"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_010",
+    "name": "Star System",
+    "description": "A gravitationally bound union of stars, planetary bodies, and electromagnetic radiation perpetually radiating energy.",
+    "category": "Cosmology",
+    "unionedEntities": [
+      "Photon",
+      "Hydrogen Atom",
+      "Electromagnetic Wave",
+      "Nucleon"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_011",
+    "name": "Artificial Intelligence System",
+    "description": "A union of algorithms, neural networks, and data structures simulating cognitive processes and decision-making.",
+    "category": "Artificial Intelligence",
+    "unionedEntities": [
+      "Algorithm",
+      "Neural Network",
+      "Data Structure",
+      "Consciousness"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_012",
+    "name": "Metabolic Pathway",
+    "description": "A biochemical union of enzymes and molecular reactions enabling energy production and nutrient transformation in cells.",
+    "category": "Biochemistry",
+    "unionedEntities": ["Enzyme", "Protein", "Mitochondrion", "DNA Sequence"],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_013",
+    "name": "Knowledge Management System",
+    "description": "An integrated union of data structures, algorithms, and information processing organizing and retrieving knowledge systematically.",
+    "category": "Information Systems",
+    "unionedEntities": [
+      "Data Structure",
+      "Algorithm",
+      "API",
+      "Information Entropy"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_014",
+    "name": "Human Sensory System",
+    "description": "A sophisticated union of neurons, consciousness, and electromagnetic receptors enabling perception and interaction with the environment.",
+    "category": "Neuroscience",
+    "unionedEntities": [
+      "Consciousness",
+      "Photon",
+      "Electromagnetic Wave",
+      "Abstract Thought"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "id": "u_015",
+    "name": "Quantum Computing Device",
+    "description": "An advanced union of quantum mechanics, photons, and computational logic processing information at quantum levels of reality.",
+    "category": "Quantum Technology",
+    "unionedEntities": ["Photon", "Quark", "Algorithm", "Byte", "Electron"],
+    "imageUrl": ""
+  }
+]

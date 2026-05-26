@@ -1,0 +1,30 @@
+[
+  {
+    "id": "lm_001",
+    "title": "Science & Facts",
+    "description": "Discover how the universe works through observation and physics.",
+    "iconIdentifier": "science",
+    "colorHex": "FF9C27B0"
+  },
+  {
+    "id": "lm_002",
+    "title": "Art & History",
+    "description": "Explore the creative expressions and timelines of humanity.",
+    "iconIdentifier": "color_lens",
+    "colorHex": "FFE91E63"
+  },
+  {
+    "id": "lm_003",
+    "title": "Illusion & Facts",
+    "description": "Things aren't always what they seem. Dive into optical logic.",
+    "iconIdentifier": "remove_red_eye",
+    "colorHex": "FF009688"
+  },
+  {
+    "id": "lm_004",
+    "title": "Logic & Math",
+    "description": "Building blocks of numbers, equations, and algorithmic thinking.",
+    "iconIdentifier": "calculate",
+    "colorHex": "FF3F51B5"
+  }
+]

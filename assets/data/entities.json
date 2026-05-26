@@ -1,0 +1,170 @@
+[
+  {
+    "id": "e_001",
+    "name": "Biological Cell",
+    "description": "The fundamental unit of life, capable of replication and maintaining complex organized systems.",
+    "category": "Biology",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Animal_cell_structure_en.svg"
+  },
+  {
+    "id": "e_002",
+    "name": "Hydrogen Atom",
+    "description": "The simplest and most abundant element in the universe, fueling stars and cosmic expansion.",
+    "category": "Physics",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Hydrogen_atom.svg"
+  },
+  {
+    "id": "e_003",
+    "name": "Byte",
+    "description": "A unit of digital information, representing logical truth values and structured data.",
+    "category": "Computing",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ec/8-bit-binary.svg"
+  },
+  {
+    "id": "e_004",
+    "name": "Script",
+    "description": "A sequence of logical instructions determining the flow and operational rules of a subsystem.",
+    "category": "Software",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/2/27/HTML_code.png"
+  },
+  {
+    "id": "e_005",
+    "name": "Photon",
+    "description": "A quantum of light and all other forms of electromagnetic radiation.",
+    "category": "Quantum Mechanics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_006",
+    "name": "Abstract Thought",
+    "description": "An emergent property of complex neural networks, capable of imagining entities that do not physically exist.",
+    "category": "Consciousness",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_007",
+    "name": "DNA Sequence",
+    "description": "The universal information carrier holding the instructions for life's architecture.",
+    "category": "Genetics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_008",
+    "name": "Information Entropy",
+    "description": "The measure of unpredictability and chaos within a structured system.",
+    "category": "Thermodynamics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_009",
+    "name": "Proton",
+    "description": "A subatomic particle with positive charge, constituent of atomic nuclei and essential for matter formation in the nuclear realm.",
+    "category": "Nuclear Physics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_010",
+    "name": "Neutron",
+    "description": "A subatomic particle with neutral charge, stabilizing atomic nuclei and enabling nuclear fusion processes in stars.",
+    "category": "Nuclear Physics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_011",
+    "name": "Electron",
+    "description": "A negatively charged subatomic particle orbiting nuclei, governing chemical bonding and electromagnetic interactions.",
+    "category": "Atomic Physics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_012",
+    "name": "Meson",
+    "description": "A composite subatomic particle composed of quark-antiquark pairs, mediating the strong nuclear force that binds nucleons.",
+    "category": "Nuclear Physics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_013",
+    "name": "Quark",
+    "description": "Fundamental fermion particles that form composite hadrons through strong interactions, never existing as isolated entities.",
+    "category": "Particle Physics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_014",
+    "name": "Nucleon",
+    "description": "A collective term for protons and neutrons forming the atomic nucleus and determining the mass and stability of atoms.",
+    "category": "Nuclear Physics",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_015",
+    "name": "Protein",
+    "description": "A complex biomolecule composed of amino acids, serving as enzymes, structural components, and regulatory molecules in all living systems.",
+    "category": "Molecular Biology",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_016",
+    "name": "Enzyme",
+    "description": "A specialized protein that catalyzes biochemical reactions, enabling metabolic processes and life sustenance at cellular level.",
+    "category": "Biochemistry",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_017",
+    "name": "Ribosome",
+    "description": "A cellular organelle synthesizing proteins from mRNA instructions, bridging genetic information with functional protein production.",
+    "category": "Cell Biology",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_018",
+    "name": "Mitochondrion",
+    "description": "The energy-producing organelle in cells, converting nutrients into ATP and powering all cellular functions and life processes.",
+    "category": "Cell Biology",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_019",
+    "name": "Algorithm",
+    "description": "A step-by-step computational procedure for solving problems, forming the logical foundation of all software and artificial intelligence systems.",
+    "category": "Computer Science",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_020",
+    "name": "Data Structure",
+    "description": "An organized format for storing and accessing data efficiently, determining the performance and scalability of computational systems.",
+    "category": "Computer Science",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_021",
+    "name": "Network Protocol",
+    "description": "A set of rules enabling communication between computers and devices, forming the foundation of the interconnected digital ecosystem.",
+    "category": "Networking",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_022",
+    "name": "Application Programming Interface (API)",
+    "description": "An interface allowing different software systems to communicate, enabling integration, modularity, and ecosystem interconnection.",
+    "category": "Software Engineering",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_023",
+    "name": "Consciousness",
+    "description": "The emergent phenomenon of self-awareness arising from neural complexity, forming the basis of perception, decision-making, and existence.",
+    "category": "Neuroscience",
+    "imageUrl": ""
+  },
+  {
+    "id": "e_024",
+    "name": "Electromagnetic Wave",
+    "description": "A traveling oscillation of electric and magnetic fields carrying energy across space, ranging from radio waves to gamma rays.",
+    "category": "Physics",
+    "imageUrl": ""
+  }
+]

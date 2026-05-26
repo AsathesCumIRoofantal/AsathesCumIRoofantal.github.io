@@ -1,0 +1,167 @@
+[
+  {
+    "id": "q_001",
+    "question": "What is your core response to the chaos of the universe?",
+    "options": [
+      "Analyze and understand it",
+      "Organize and control it",
+      "Observe and accept it",
+      "Create art within it"
+    ],
+    "traitMapped": "Fundamental Reaction"
+  },
+  {
+    "id": "q_002",
+    "question": "If you could manifest as a fundamental entity, what would you be?",
+    "options": [
+      "A stabilizing gravitational field",
+      "A rapidly mutating biological cell",
+      "A burst of pure photon energy",
+      "An abstract sequence of code"
+    ],
+    "traitMapped": "Entity Affinity"
+  },
+  {
+    "id": "q_003",
+    "question": "How do you view your role within the 'AIR Organization'?",
+    "options": [
+      "Establishing foundational laws",
+      "Connecting disparate nodes",
+      "Expanding the boundaries of known space",
+      "Maintaining harmony within the system"
+    ],
+    "traitMapped": "Systemic Function"
+  },
+  {
+    "id": "q_004",
+    "question": "When examining a complex Union (like a Smartphone or a Solar System), what captivates you first?",
+    "options": [
+      "The individual parts that make it up",
+      "The emergent properties of the whole",
+      "Its origin and history",
+      "Its potential future evolution"
+    ],
+    "traitMapped": "Analytical Lens"
+  },
+  {
+    "id": "q_005",
+    "question": "What defines the ultimate version of 'Wisdom' for you?",
+    "options": [
+      "Knowing the precise mechanics of reality",
+      "Experiencing profound emotional connection",
+      "Accepting the unknowable void",
+      "Creating a legacy of information"
+    ],
+    "traitMapped": "Philosophical Zenith"
+  },
+  {
+    "id": "q_006",
+    "question": "At the subatomic level, what quality appeals to you most?",
+    "options": [
+      "The binding force (like strong nuclear force)",
+      "The fundamental particles (protons, neutrons, electrons)",
+      "The quantum probability",
+      "The harmony between elements"
+    ],
+    "traitMapped": "Quantum Perspective"
+  },
+  {
+    "id": "q_007",
+    "question": "How do you process biological information?",
+    "options": [
+      "Through enzymatic catalysis of concepts",
+      "Through cellular organization and replication",
+      "Through protein structure and function",
+      "Through consciousness and abstraction"
+    ],
+    "traitMapped": "Biological Processing"
+  },
+  {
+    "id": "q_008",
+    "question": "In terms of digital existence, where do you find meaning?",
+    "options": [
+      "In elegant algorithms",
+      "In well-structured data",
+      "In network connectivity",
+      "In emergent digital consciousness"
+    ],
+    "traitMapped": "Digital Essence"
+  },
+  {
+    "id": "q_009",
+    "question": "Which union resonates most with your sense of purpose?",
+    "options": [
+      "Atomic Nucleus (binding core elements)",
+      "Living Organism (complex integrated system)",
+      "Software Application (logical functionality)",
+      "Internet Infrastructure (global connectivity)"
+    ],
+    "traitMapped": "Union Resonance"
+  },
+  {
+    "id": "q_010",
+    "question": "How do you view consciousness and awareness?",
+    "options": [
+      "An emergent property of complex systems",
+      "A fundamental force like gravity",
+      "An illusion of interconnected processes",
+      "The ultimate reality beyond matter"
+    ],
+    "traitMapped": "Consciousness Philosophy"
+  },
+  {
+    "id": "q_011",
+    "question": "What role does information entropy play in your worldview?",
+    "options": [
+      "It's inevitable decay to manage",
+      "It's a driver of innovation",
+      "It's the measure of system complexity",
+      "It's evidence of universal freedom"
+    ],
+    "traitMapped": "Entropy Interpretation"
+  },
+  {
+    "id": "q_012",
+    "question": "When you think of energy and transformation, what moves you?",
+    "options": [
+      "Nuclear reactions and stellar fusion",
+      "Biochemical pathways and metabolism",
+      "Digital signal processing",
+      "Consciousness transformation and growth"
+    ],
+    "traitMapped": "Transformation View"
+  },
+  {
+    "id": "q_013",
+    "question": "Which describes your approach to problem-solving?",
+    "options": [
+      "Breaking down to fundamental particles",
+      "Understanding systemic interconnections",
+      "Algorithmic step-by-step analysis",
+      "Holistic integrated thinking"
+    ],
+    "traitMapped": "Problem Solving Style"
+  },
+  {
+    "id": "q_014",
+    "question": "What is your relationship with electromagnetic phenomena?",
+    "options": [
+      "Fascinated by the unified field theory",
+      "Interested in practical applications",
+      "Drawn to the wave-particle duality",
+      "Amazed by the universal nature of radiation"
+    ],
+    "traitMapped": "Electromagnetic Affinity"
+  },
+  {
+    "id": "q_015",
+    "question": "How would you describe your ideal state of existence?",
+    "options": [
+      "Stable like an atomic nucleus",
+      "Adaptive like a living organism",
+      "Connected like the internet",
+      "Aware like consciousness itself"
+    ],
+    "traitMapped": "Ideal State"
+  }
+]
