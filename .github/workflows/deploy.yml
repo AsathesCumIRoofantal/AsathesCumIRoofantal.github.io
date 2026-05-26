@@ -34,8 +34,8 @@ jobs:
           # Get current date in UTC (YYYY-MM-DD)
           TODAY=$(date -u +'%Y-%m-%d')
           
-          # Count how many times deploy.yml ran today
-          RUN_COUNT=$(gh run list --workflow "deploy.yml" --created "$TODAY" --json id --jq '. | length')
+          # Count how many times deploy.yml ran today (using valid databaseId field)
+          RUN_COUNT=$(gh run list --workflow "deploy.yml" --created "$TODAY" --json databaseId --jq '. | length')
           
           echo "Current workflow runs today: $RUN_COUNT"
           
@@ -43,6 +43,7 @@ jobs:
             echo "Error: Daily run limit (10) exceeded!"
             exit 1
           fi
+
 
       # 2. Pull down repository source code
       - name: Checkout repository
