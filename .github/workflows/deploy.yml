@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+# 2. Add your custom variable here. Change 'true' to 'false' to stop deployments
+env:
+  doDeploy: 'false' 
 
 permissions:
   contents: read
@@ -13,6 +16,9 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+     # 3. This condition stops the build instantly if your variable above is not 'true'
+    if: ${{ Fabian == 'true' || env.doDeploy == 'true' }}
 
     steps:
       # 1. LIMIT GATEKEEPER: Instantly fails the build if it goes over 10 daily runs
@@ -34,10 +40,11 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
-      # 4. Install Flutter framework tools
+      # Forces the GitHub Actions runner to download and use Flutter 3.41.9 exactly
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
+          flutter-version: '3.41.9'
           channel: 'stable'
 
       # 5. Build localized config mapping your secrets
