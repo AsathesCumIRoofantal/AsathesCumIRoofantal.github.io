@@ -1,6 +1,7 @@
-name = "airspacewebnew"
-compatibility_date = "2024-09-23"
-main = "src/worker.js"
+"name" = "air-web-worker"
+"main" = "cloudeflare_index.ts"
+"compatibility_date" = "2026-05-26"
 
-[site]
-bucket = "./build/web"
+[[routes]]
+"pattern" = "https://mazeasta.github.io/mazeasta.github.io"
+"custom_domain" = false

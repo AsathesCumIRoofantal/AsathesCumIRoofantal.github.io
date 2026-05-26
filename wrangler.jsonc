@@ -1,10 +1,11 @@
 {
-    "name": "airspacewebnew",
-    "compatibility_date": "2026-05-25",
-    "compatibility_flags": [
-        "nodejs_compat"
-    ],
-    "assets": {
-        "directory": "./build/web"
-    }
+    "name": "air-web-worker",
+    "main": "cloudeflare_index.ts",
+    "compatibility_date": "2026-05-26",
+    "routes": [
+        {
+            "pattern": "https://mazeasta.github.io/mazeasta.github.io",
+            "custom_domain": false
+        }
+    ]
 }
