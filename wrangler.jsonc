@@ -1,6 +1,5 @@
 {
-    "name": "air",
-    "main": "src/index.ts",
+    "name": "liveair",
     "compatibility_date": "2026-05-26",
     "pages_build_output_dir": "./build/web"
 }
