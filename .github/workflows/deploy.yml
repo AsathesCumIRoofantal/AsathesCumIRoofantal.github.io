@@ -29,7 +29,7 @@ jobs:
       - name: Assert daily run limit
         uses: wiry-cow/action-limit-runs@v1
         with:
-          allowed: 11
+          allowed: 10
           time-period: 1d
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
