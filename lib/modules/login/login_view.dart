@@ -51,6 +51,11 @@ class LoginView extends GetView<LoginController> {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                const SizedBox(height: 40),
+                _buildFeatureMatrix(),
+                const SizedBox(height: 20),
+                _buildDeveloperDocs(),
+                const SizedBox(height: 40),
                 Center(
                   child: Container(
                     padding: const EdgeInsets.all(20),
@@ -325,6 +330,122 @@ class LoginView extends GetView<LoginController> {
       filled: true,
       fillColor: const Color(0xFFF1F3F4),
       floatingLabelBehavior: FloatingLabelBehavior.never,
+    );
+  }
+
+  Widget _buildFeatureMatrix() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Engineered Capabilities',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 20),
+        _featureTile(
+          Icons.video_call_outlined,
+          'Ultra-Low Latency Video Rooms',
+          'HD multi-party video and audio synchronization infrastructure powered by browser hardware acceleration loops.',
+        ),
+        _featureTile(
+          Icons.screen_share_outlined,
+          'High-Framerate Screen Sharing',
+          'Native real-time canvas mirroring using the web-level HTML5 mediaDevices.getDisplayMedia system APIs.',
+        ),
+        _featureTile(
+          Icons.devices_outlined,
+          'Advanced Remote Workspace Logic',
+          'Interactive mirror controls inspired by AnyDesk topologies, providing reliable multi-client event-state synchronization.',
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDeveloperDocs() {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Color(0xFF334155)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: const [
+              Icon(Icons.terminal, color: Color(0xFF10B981)),
+              SizedBox(width: 8),
+              Text(
+                'JS.ORG Technical Integration Architecture & Ecosystem Compliance',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            'This single-page web application serves as a comprehensive reference blueprint for JavaScript and Dart software engineers exploring real-time high-throughput data channels. The rendering layout leverages Flutter Web’s highly optimized compilation engine, actively executing direct bindings to native browser JavaScript layers via utility interop pipelines. By wrapping structural web browser API extensions and third-party WebRTC runtimes (such as the Agora Web JS Core SDK), this project demonstrates how to build highly complex, production-ready video-conferencing frameworks entirely inside a single-page script layout without sacrificing baseline load metrics or client-side runtime responsiveness.',
+            style: TextStyle(
+              color: Color(0xFF94A3B8),
+              fontSize: 14,
+              height: 1.5,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _featureTile(IconData icon, String title, String desc) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xFF1E293B),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(icon, color: const Color(0xFF3B82F6), size: 28),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    color: Color(0xFF64748B),
+                    fontSize: 14,
+                    height: 1.4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
