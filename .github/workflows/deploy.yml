@@ -76,7 +76,7 @@ jobs:
 
       # 7. Generate release optimized web build
       - name: Build Web Release
-        run: flutter build web --release --base-href="/" --dart-define-from-file=.env.json
+        run: flutter build web --release --base-href="/mazeasta.github.io/" --dart-define-from-file=.env.json
 
       # 8. Ship build folder up to GitHub pages staging area
       - name: Upload Pages Artifact
