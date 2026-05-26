@@ -1,89 +1,89 @@
-name: Build and Deploy Flutter Web
+# name: Build and Deploy Flutter Web
 
-on:
-  push:
-    branches:
-      - main
-# 2. Add your custom variable here. Change 'true' to 'false' to stop deployments
-env:
-  doDeploy: 'true' 
+# on:
+#   push:
+#     branches:
+#       - main
+# # 2. Add your custom variable here. Change 'true' to 'false' to stop deployments
+# env:
+#   doDeploy: 'false' 
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
 
-    steps:
-      # 1. Check our flag. If it is false, stop the entire pipeline early.
-      # - name: Check deployment flag
-      #   if: ${{ env.doDeploy != 'true' }}
-      #   run: |
-      #     echo "Deployment is disabled (doDeploy is false). Exiting workflow."
-      #     exit 1
+#     steps:
+#       # 1. Check our flag. If it is false, stop the entire pipeline early.
+#       - name: Check deployment flag
+#         if: ${{ env.doDeploy != 'true' }}
+#         run: |
+#           echo "Deployment is disabled (doDeploy is false). Exiting workflow."
+#           exit 1
 
    
-      # 1. LIMIT GATEKEEPER: Instantly fails the build if it goes over 10 daily runs
-      # - name: Assert daily run limit
-      #   env:
-      #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   run: |
-      #     # Get current date in UTC (YYYY-MM-DD)
-      #     TODAY=$(date -u +'%Y-%m-%d')
+#       # 1. LIMIT GATEKEEPER: Instantly fails the build if it goes over 10 daily runs
+#       # - name: Assert daily run limit
+#       #   env:
+#       #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       #   run: |
+#       #     # Get current date in UTC (YYYY-MM-DD)
+#       #     TODAY=$(date -u +'%Y-%m-%d')
           
-      #     # Count how many times deploy.yml ran today (using valid databaseId field)
-      #     RUN_COUNT=$(gh run list --workflow "deploy.yml" --created "$TODAY" --json databaseId --jq '. | length')
+#       #     # Count how many times deploy.yml ran today (using valid databaseId field)
+#       #     RUN_COUNT=$(gh run list --workflow "deploy.yml" --created "$TODAY" --json databaseId --jq '. | length')
           
-      #     echo "Current workflow runs today: $RUN_COUNT"
+#       #     echo "Current workflow runs today: $RUN_COUNT"
           
-      #     if [ "$RUN_COUNT" -gt 10 ]; then
-      #       echo "Error: Daily run limit (10) exceeded!"
-      #       exit 1
-      #     fi
+#       #     if [ "$RUN_COUNT" -gt 10 ]; then
+#       #       echo "Error: Daily run limit (10) exceeded!"
+#       #       exit 1
+#       #     fi
 
 
-      # 2. Pull down repository source code
-      - name: Checkout repository
-        uses: actions/checkout@v4
+#       # 2. Pull down repository source code
+#       - name: Checkout repository
+#         uses: actions/checkout@v4
 
-      # 3. Set up Java environment
-      - name: Set up Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: '17'
+#       # 3. Set up Java environment
+#       - name: Set up Java
+#         uses: actions/setup-java@v4
+#         with:
+#           distribution: 'zulu'
+#           java-version: '17'
 
-      # Forces the GitHub Actions runner to download and use Flutter 3.41.9 exactly
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.41.9'
-          channel: 'stable'
+#       # Forces the GitHub Actions runner to download and use Flutter 3.41.9 exactly
+#       - name: Set up Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: '3.41.9'
+#           channel: 'stable'
 
-      # 5. Build localized config mapping your secrets
-      - name: Create .env.json configuration file
-        run: |
-          echo '{
-            "AppIdAgorra": "${{ secrets.AppIdAgorra }}"
-          }' > .env.json
+#       # 5. Build localized config mapping your secrets
+#       - name: Create .env.json configuration file
+#         run: |
+#           echo '{
+#             "AppIdAgorra": "${{ secrets.AppIdAgorra }}"
+#           }' > .env.json
 
-      # 6. Fetch Flutter target libraries
-      - name: Install dependencies
-        run: flutter pub get
+#       # 6. Fetch Flutter target libraries
+#       - name: Install dependencies
+#         run: flutter pub get
 
-      # 7. Generate release optimized web build
-      - name: Build Web Release
-        run: flutter build web --release --base-href="/" --dart-define-from-file=.env.json
+#       # 7. Generate release optimized web build
+#       - name: Build Web Release
+#         run: flutter build web --release --base-href="/" --dart-define-from-file=.env.json
 
-      # 8. Ship build folder up to GitHub pages staging area
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/web
+#       # 8. Ship build folder up to GitHub pages staging area
+#       - name: Upload Pages Artifact
+#         uses: actions/upload-pages-artifact@v3
+#         with:
+#           path: build/web
 
-      # 9. Trigger deployment target live updates
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+#       # 9. Trigger deployment target live updates
+#       - name: Deploy to GitHub Pages
+#         uses: actions/deploy-pages@v4
