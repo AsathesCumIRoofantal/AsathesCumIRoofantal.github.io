@@ -6,7 +6,7 @@ on:
       - main
 # 2. Add your custom variable here. Change 'true' to 'false' to stop deployments
 env:
-  doDeploy: 'false' 
+  doDeploy: 'true' 
 
 permissions:
   contents: read
