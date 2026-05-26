@@ -19,11 +19,11 @@ jobs:
 
     steps:
       # 1. Check our flag. If it is false, stop the entire pipeline early.
-      - name: Check deployment flag
-        if: ${{ env.doDeploy != 'true' }}
-        run: |
-          echo "Deployment is disabled (doDeploy is false). Exiting workflow."
-          exit 1
+      # - name: Check deployment flag
+      #   if: ${{ env.doDeploy != 'true' }}
+      #   run: |
+      #     echo "Deployment is disabled (doDeploy is false). Exiting workflow."
+      #     exit 1
 
    
       # 1. LIMIT GATEKEEPER: Instantly fails the build if it goes over 10 daily runs
