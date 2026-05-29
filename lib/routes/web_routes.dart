@@ -1,13 +1,13 @@
 // web_routes.dart — central GetX route table for all web_modules pages.
 
-import 'package:air_app/web_modules/web_home/agora_binding.dart';
-import 'package:air_app/web_modules/web_home/agora_view.dart';
-import 'package:air_app/web_modules/web_home/livekit_rtc_binding.dart';
-import 'package:air_app/web_modules/web_home/livekit_rtc_view.dart';
-import 'package:air_app/web_modules/web_home/web_home_binding.dart';
-import 'package:air_app/web_modules/web_home/web_home_view.dart';
-import 'package:air_app/web_modules/web_home/web_rtc_binding.dart';
-import 'package:air_app/web_modules/web_home/web_rtc_call_view.dart';
+import 'package:air_app/web_modules_OLD/web_home/agora_binding.dart';
+import 'package:air_app/web_modules_OLD/web_home/agora_view.dart';
+import 'package:air_app/web_modules_OLD/web_home/livekit_rtc_binding.dart';
+import 'package:air_app/web_modules_OLD/web_home/livekit_rtc_view.dart';
+import 'package:air_app/web_modules_OLD/web_home/web_home_binding.dart';
+import 'package:air_app/web_modules_OLD/web_home/web_home_view.dart';
+import 'package:air_app/web_modules_OLD/web_home/web_rtc_binding.dart';
+import 'package:air_app/web_modules_OLD/web_home/web_rtc_call_view.dart';
 
 // import 'package:air_app/modules/code_conduct/code_conduct_view.dart';
 // import 'package:air_app/web_modules/web_air_space/pages/web_knowledge_center_binding.dart';

@@ -27,7 +27,7 @@ class NewAppLearnFunView extends GetView<NewAppLearnFunController> {
                 ],
               ),
             ),
-            SliverToBoxAdapter(child: _mainContent()),
+            // SliverToBoxAdapter(child: _mainContent()),
             _hero(context),
             _roleStrip(),
             _beginnerToggle(),
@@ -490,7 +490,7 @@ class NewAppLearnFunView extends GetView<NewAppLearnFunController> {
       height: 260,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
+
         children: [
           // Text(
           //   controller.selectedCategory.value ?? "N/A",
