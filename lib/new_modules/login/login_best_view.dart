@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:air_app/modules/login/login_enhanced_view.dart';
+import 'package:air_app/new_modules/login/login_enhanced_view.dart';
 import 'package:flutter/material.dart';
 
 import 'login_view.dart';

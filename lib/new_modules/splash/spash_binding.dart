@@ -1,4 +1,4 @@
-import 'package:air_app/modules/splash/splash_controller.dart';
+import 'package:air_app/new_modules/splash/splash_controller.dart';
 import 'package:get/get.dart';
 
 class SplashBinding extends Bindings {

@@ -158,32 +158,34 @@ class HomeController extends GetxController {
         DrawerActualItem(
           title: 'Learn And Fun',
           icon: Icons.lightbulb_outline,
-          route: AppRoutes.LEARN_FUN,
+          route: true ? AppRoutes.NEW_APP_LEARN_FUN : AppRoutes.LEARN_FUN,
         ),
         DrawerActualItem(
           title: 'Learn Docs (by category)',
           icon: Icons.menu_book_outlined,
-          route: AppRoutes.LEARN_DOCS,
+          route: true ? AppRoutes.NEW_APP_LEARN_DOCS : AppRoutes.LEARN_DOCS,
         ),
         DrawerActualItem(
           title: 'Heigher Studies',
           icon: Icons.school_outlined,
-          route: AppRoutes.HEIGHER_STUDIES,
+          route: true
+              ? AppRoutes.NEW_APP_HEIGHER_STUDIES
+              : AppRoutes.HEIGHER_STUDIES,
         ),
         DrawerActualItem(
           title: 'Doctorate',
           icon: Icons.local_hospital,
-          route: AppRoutes.DOCTORATE,
+          route: true ? AppRoutes.NEW_APP_DOCTORATE : AppRoutes.DOCTORATE,
         ),
         DrawerActualItem(
           title: 'Life Hacks',
           icon: Icons.heat_pump_rounded,
-          route: AppRoutes.LIFE_HACKS,
+          route: true ? AppRoutes.NEW_APP_LIFE_HACKS : AppRoutes.LIFE_HACKS,
         ),
         DrawerActualItem(
           title: 'Ask Any Thing',
           icon: Icons.question_answer,
-          route: AppRoutes.QUERIES,
+          route: true ? AppRoutes.NEW_APP_QUERIES : AppRoutes.QUERIES,
         ),
       ],
     ),

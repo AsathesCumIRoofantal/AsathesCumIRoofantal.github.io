@@ -1,4 +1,4 @@
-import 'package:air_app/modules/splash/spash_binding.dart';
+import 'package:air_app/new_modules/splash/spash_binding.dart';
 import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -1,11 +1,11 @@
-import 'package:air_app/modules/login/login_best_view.dart';
-import 'package:air_app/modules/signup/signup_best_view.dart';
-import 'package:air_app/modules/signup/signup_binding.dart';
-import 'package:air_app/modules/splash/spash_binding.dart';
-import 'package:air_app/modules/splash/splash_screen.dart';
-import 'package:air_app/modules/login/login_binding.dart';
-import 'package:air_app/modules/home/home_binding.dart';
-import 'package:air_app/modules/home/home_view.dart';
+import 'package:air_app/new_modules/login/login_best_view.dart';
+import 'package:air_app/new_modules/signup/signup_best_view.dart';
+import 'package:air_app/new_modules/signup/signup_binding.dart';
+import 'package:air_app/new_modules/splash/spash_binding.dart';
+import 'package:air_app/new_modules/splash/splash_screen.dart';
+import 'package:air_app/new_modules/login/login_binding.dart';
+import 'package:air_app/new_modules/home/home_binding.dart';
+import 'package:air_app/new_modules/home/home_view.dart';
 
 // import 'package:air_app/modules/about_app/about_app_best_view.dart';
 // import 'package:air_app/modules/about_org/about_org_best_view.dart';
@@ -303,6 +303,21 @@ import 'package:air_app/routes/web_routes.dart';
 import 'package:air_app/web_modules/web_home/zoom_agora/zoom_routes.dart';
 import 'package:get/get.dart';
 
+import '../new_modules/learn_fun/new_app_learn_fun_binding.dart';
+import '../new_modules/learn_fun/new_app_learn_fun_view.dart';
+import '../new_modules/learn_docs/new_app_learn_docs_binding.dart';
+import '../new_modules/learn_docs/new_app_learn_docs_view.dart';
+import '../new_modules/heigher_studies/new_app_heigher_studies_binding.dart';
+import '../new_modules/heigher_studies/new_app_heigher_studies_view.dart';
+import '../new_modules/doctorate/new_app_doctorate_binding.dart';
+import '../new_modules/doctorate/new_app_doctorate_view.dart';
+import '../new_modules/life_hacks/new_app_life_hacks_binding.dart';
+import '../new_modules/life_hacks/new_app_life_hacks_view.dart';
+import '../new_modules/queries/new_app_queries_binding.dart';
+import '../new_modules/queries/new_app_queries_view.dart';
+import '../new_modules/wisdom/new_app_wisdom_binding.dart';
+import '../new_modules/wisdom/new_app_wisdom_view.dart';
+
 class AppRoutes {
   static const SPLASH = '/splash';
   static const LOGIN = '/login';
@@ -475,6 +490,14 @@ class AppRoutes {
   static const WEB_COMMUNITY = '/web-community';
   static const WEB_ABOUT = '/web-about';
   static const WEB_SETUP = '/web-setup';
+
+  static const String NEW_APP_LEARN_FUN = '/new-app/learn-fun';
+  static const String NEW_APP_LEARN_DOCS = '/new-app/learn-docs';
+  static const String NEW_APP_HEIGHER_STUDIES = '/new-app/heigher-studies';
+  static const String NEW_APP_DOCTORATE = '/new-app/doctorate';
+  static const String NEW_APP_LIFE_HACKS = '/new-app/life-hacks';
+  static const String NEW_APP_QUERIES = '/new-app/queries';
+  static const String NEW_APP_WISDOM = '/new-app/wisdom';
 }
 
 class AppPages {
@@ -1369,6 +1392,43 @@ class AppPages {
     //   binding: CountingReportsBinding(),
     //   transition: Transition.rightToLeft,
     // ),
+
+    //App New
+    GetPage(
+      name: AppRoutes.NEW_APP_LEARN_FUN,
+      page: () => const NewAppLearnFunView(),
+      binding: NewAppLearnFunBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.NEW_APP_LEARN_DOCS,
+      page: () => const NewAppLearnDocsView(),
+      binding: NewAppLearnDocsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.NEW_APP_HEIGHER_STUDIES,
+      page: () => const NewAppHeigherStudiesView(),
+      binding: NewAppHeigherStudiesBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.NEW_APP_DOCTORATE,
+      page: () => const NewAppDoctorateView(),
+      binding: NewAppDoctorateBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.NEW_APP_LIFE_HACKS,
+      page: () => const NewAppLifeHacksView(),
+      binding: NewAppLifeHacksBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.NEW_APP_QUERIES,
+      page: () => const NewAppQueriesView(),
+      binding: NewAppQueriesBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.NEW_APP_WISDOM,
+      page: () => const NewAppWisdomView(),
+      binding: NewAppWisdomBinding(),
+    ),
 
     // ── Web Modules (Responsive Flutter Web pages) ─────────
     ...WebRoutes.pages,

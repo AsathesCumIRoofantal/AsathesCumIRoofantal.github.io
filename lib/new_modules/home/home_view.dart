@@ -1,4 +1,4 @@
-import 'package:air_app/modules/home/home_best_view.dart';
+import 'package:air_app/new_modules/home/home_best_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
