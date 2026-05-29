@@ -151,19 +151,25 @@ class HomeController extends GetxController {
     "SYSTEM CORE": 9880,
   };
 
-  final List<DrawerActualSection> drawerSections = [
+  RxBool isNewApp = true.obs;
+
+  List<DrawerActualSection> get drawerSections => [
     DrawerActualSection(
       title: "EXPLORE - ALIFIYAS",
       items: [
         DrawerActualItem(
           title: 'Learn And Fun',
           icon: Icons.lightbulb_outline,
-          route: true ? AppRoutes.NEW_APP_LEARN_FUN : AppRoutes.LEARN_FUN,
+          route: isNewApp.value
+              ? AppRoutes.NEW_APP_LEARN_FUN
+              : AppRoutes.LEARN_FUN,
         ),
         DrawerActualItem(
           title: 'Learn Docs (by category)',
           icon: Icons.menu_book_outlined,
-          route: true ? AppRoutes.NEW_APP_LEARN_DOCS : AppRoutes.LEARN_DOCS,
+          route: isNewApp.value
+              ? AppRoutes.NEW_APP_LEARN_DOCS
+              : AppRoutes.LEARN_DOCS,
         ),
         DrawerActualItem(
           title: 'Heigher Studies',
@@ -175,17 +181,21 @@ class HomeController extends GetxController {
         DrawerActualItem(
           title: 'Doctorate',
           icon: Icons.local_hospital,
-          route: true ? AppRoutes.NEW_APP_DOCTORATE : AppRoutes.DOCTORATE,
+          route: isNewApp.value
+              ? AppRoutes.NEW_APP_DOCTORATE
+              : AppRoutes.DOCTORATE,
         ),
         DrawerActualItem(
           title: 'Life Hacks',
           icon: Icons.heat_pump_rounded,
-          route: true ? AppRoutes.NEW_APP_LIFE_HACKS : AppRoutes.LIFE_HACKS,
+          route: isNewApp.value
+              ? AppRoutes.NEW_APP_LIFE_HACKS
+              : AppRoutes.LIFE_HACKS,
         ),
         DrawerActualItem(
           title: 'Ask Any Thing',
           icon: Icons.question_answer,
-          route: true ? AppRoutes.NEW_APP_QUERIES : AppRoutes.QUERIES,
+          route: isNewApp.value ? AppRoutes.NEW_APP_QUERIES : AppRoutes.QUERIES,
         ),
       ],
     ),
