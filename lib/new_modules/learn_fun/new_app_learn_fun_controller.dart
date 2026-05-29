@@ -20,6 +20,57 @@ class NewAppLearnFunController extends GetxController {
   List<String> get specificsForRole =>
       NewAppRoleCatalog.specifics[role.value] ?? const <String>[];
 
+  final selectedCategory = 'Universal Orientation'.obs;
+
+  final categories = [
+    'Universal Orientation',
+    'Knowledge Forest',
+    'Digital World',
+    'Real World',
+    'Life Systems',
+    'AI & Future',
+    'Research',
+    'Wisdom',
+    'Doctorate Paths',
+    'Civilization',
+    'Economics',
+    'Humanity',
+    'Spiritual Balance',
+    'Innovation',
+  ];
+
+  final knowledgeTree = {
+    'Space': [
+      'Galaxy',
+      'Planet',
+      'Civilization',
+      'Human',
+      'Knowledge',
+      'Science',
+      'Technology',
+      'Wisdom',
+    ],
+    'Learning': [
+      'Observe',
+      'Understand',
+      'Practice',
+      'Build',
+      'Teach',
+      'Research',
+      'Innovate',
+    ],
+  }.obs;
+
+  final resourceLinks = [
+    'https://ocw.mit.edu/',
+    'https://developer.mozilla.org/',
+    'https://flutter.dev/',
+    'https://firebase.google.com/',
+    'https://supabase.com/',
+    'https://arxiv.org/',
+    'https://www.nasa.gov/',
+  ];
+
   void switchRole(String r) {
     if (!NewAppRoleCatalog.roles.contains(r)) return;
     role.value = r;

@@ -19,6 +19,15 @@ class NewAppLearnFunView extends GetView<NewAppLearnFunController> {
         () => CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
+            SliverToBoxAdapter(
+              child: Row(
+                children: [
+                  _leftPanel(),
+                  // Expanded(child: _mainContent()),
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(child: _mainContent()),
             _hero(context),
             _roleStrip(),
             _beginnerToggle(),
@@ -453,4 +462,238 @@ class NewAppLearnFunView extends GetView<NewAppLearnFunController> {
       ),
     ),
   );
+
+  Widget _leftPanel() {
+    return Container(
+      width: 280,
+      color: Colors.white10,
+      child: ListView.builder(
+        itemCount: controller.categories.length,
+        itemBuilder: (_, index) {
+          final item = controller.categories[index];
+          final selected = controller.selectedCategory.value == item;
+
+          return ListTile(
+            selected: selected,
+            title: Text(item, style: const TextStyle(color: Colors.white)),
+            onTap: () {
+              controller.selectedCategory.value = item;
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _mainContent() {
+    return SizedBox(
+      height: 260,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Text(
+          //   controller.selectedCategory.value ?? "N/A",
+          //   style: const TextStyle(
+          //     fontSize: 36,
+          //     fontWeight: FontWeight.bold,
+          //     color: Colors.white,
+          //   ),
+          // ),
+          // const SizedBox(height: 20),
+          // _heroCard(),
+
+          // const SizedBox(height: 24),
+
+          // _knowledgeTree(),
+
+          // const SizedBox(height: 24),
+
+          // _realVsDigital(),
+
+          // const SizedBox(height: 24),
+
+          // _wisdomGuide(),
+
+          // const SizedBox(height: 24),
+
+          // _resourceSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget _heroCard() {
+    return Container(
+      padding: const EdgeInsets.all(24),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(24),
+        color: Colors.white10,
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Universal Beginner Orientation',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 12),
+          Text(
+            'This module helps an offspring beginner understand the real world, digital world, AI era, learning systems, wisdom, civilization structures, research paths, and future possibilities.',
+            style: TextStyle(color: Colors.white70, height: 1.6),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _knowledgeTree() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Knowledge Forest',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 20),
+
+        ...controller.knowledgeTree.entries.map(
+          (entry) => Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: Colors.white10,
+              borderRadius: BorderRadius.circular(18),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  entry.key,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: entry.value
+                      .map((e) => Chip(label: Text(e)))
+                      .toList(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _realVsDigital() {
+    final items = [
+      ['Real World', 'Communication, Survival, Leadership, Humanity'],
+      ['Digital World', 'AI, Web, Cloud, Research, Networks'],
+      ['Balanced Human', 'Wisdom + Technology + Ethics'],
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Real Space vs Virtual Space',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 20),
+
+        ...items.map(
+          (e) => Card(
+            child: ListTile(title: Text(e[0]), subtitle: Text(e[1])),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _wisdomGuide() {
+    final guide = [
+      'Learn how to learn',
+      'Do not blindly follow trends',
+      'Use AI ethically',
+      'Understand systems',
+      'Build discipline',
+      'Research before believing',
+      'Balance logic and humanity',
+      'Respect knowledge',
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Do’s & Don’ts',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        ...guide.map(
+          (e) => Padding(
+            padding: const EdgeInsets.only(bottom: 12),
+            child: Row(
+              children: [
+                const Icon(Icons.auto_awesome, color: Colors.white),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(e, style: const TextStyle(color: Colors.white70)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _resourceSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Resources',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+
+        const SizedBox(height: 16),
+
+        ...controller.resourceLinks.map(
+          (e) => Card(child: ListTile(title: Text(e))),
+        ),
+      ],
+    );
+  }
 }
