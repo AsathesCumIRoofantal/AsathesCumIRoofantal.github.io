@@ -1044,7 +1044,7 @@ class WebNavData {
     ),
     WebNavSection(
       slug: 'system',
-      title: 'SYSTEM CORE1',
+      title: 'SYSTEM CORE',
       tagline: 'Preferences, transparency, and a safe exit',
       blurb:
           'Preferences, transparency about the app and organisation, and a safe sign-out. Review About entries before asking others — many answers already live here.',
