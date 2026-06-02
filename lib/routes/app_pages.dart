@@ -1,3 +1,5 @@
+import 'package:air_app/new_modules/considerations/engage_entry_binding.dart';
+import 'package:air_app/new_modules/considerations/engage_entry_view.dart';
 import 'package:air_app/new_modules/login/login_best_view.dart';
 import 'package:air_app/new_modules/signup/signup_best_view.dart';
 import 'package:air_app/new_modules/signup/signup_binding.dart';
@@ -1440,6 +1442,12 @@ class AppPages {
       name: AppRoutes.NEW_APP_WISDOM,
       page: () => const NewAppWisdomView(),
       binding: NewAppWisdomBinding(),
+    ),
+
+    GetPage(
+      name: AppRoutes.CONSIDERATIONS_ENGAGE_ENTRY,
+      page: () => const EngageEntryView(),
+      binding: EngageEntryBinding(),
     ),
 
     // GetPage(
