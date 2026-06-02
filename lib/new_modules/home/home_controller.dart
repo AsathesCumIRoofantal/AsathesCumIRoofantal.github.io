@@ -149,6 +149,7 @@ class HomeController extends GetxController {
     "MOTIVATION & CONNECTIVITY": 7460,
     "SETUP A-ONE": 9460,
     "SYSTEM CORE": 9880,
+    "CONSIDERATIONS FOR TRADE": 9920,
   };
 
   RxBool isNewApp = true.obs;

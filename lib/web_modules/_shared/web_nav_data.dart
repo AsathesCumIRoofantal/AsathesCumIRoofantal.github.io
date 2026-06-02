@@ -1044,7 +1044,7 @@ class WebNavData {
     ),
     WebNavSection(
       slug: 'system',
-      title: 'SYSTEM CORE',
+      title: 'SYSTEM CORE1',
       tagline: 'Preferences, transparency, and a safe exit',
       blurb:
           'Preferences, transparency about the app and organisation, and a safe sign-out. Review About entries before asking others — many answers already live here.',
@@ -1088,7 +1088,7 @@ class WebNavData {
       primary: Color(0xF8221B69),
       secondary: Color(0xF8331C23),
       accent: Color(0xF8E2E8F0),
-      icon: Icons.tune_rounded,
+      icon: Icons.money,
       route: "AppRoutes.CONSIDERATIONS_ENGAGE",
       items: [
         WebNavItem(
