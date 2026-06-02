@@ -498,6 +498,18 @@ class AppRoutes {
   static const String NEW_APP_LIFE_HACKS = '/new-app/life-hacks';
   static const String NEW_APP_QUERIES = '/new-app/queries';
   static const String NEW_APP_WISDOM = '/new-app/wisdom';
+
+  static const String CONSIDERATIONS_ENGAGE_ENTRY =
+      '/considerations/engage-entry';
+  static const String CONSIDERATIONS_ENGAGE_REPORTS =
+      '/considerations/engage-reports';
+  static const String CONSIDERATIONS_NEGOTIATION =
+      '/considerations/negotiation';
+  static const String CONSIDERATIONS_IMPOSEMENTS =
+      '/considerations/imposements';
+  static const String CONSIDERATIONS_NOTIFY = '/considerations/notify';
+  static const String CONSIDERATIONS_FEED = '/considerations/feed';
+  static const String CONSIDERATIONS_PLAY_GAMES = '/considerations/play-games';
 }
 
 class AppPages {
@@ -1429,6 +1441,32 @@ class AppPages {
       page: () => const NewAppWisdomView(),
       binding: NewAppWisdomBinding(),
     ),
+
+    // GetPage(
+    //   name: AppRoutes.CONSIDERATIONS_ENGAGE_ENTRY,
+    //   page: () => const ConsiderationsEngageEntryView(),
+    //   binding: ConsiderationsEngageEntryBinding(),
+    // ),
+    // GetPage(
+    //   name: AppRoutes.CONSIDERATIONS_ENGAGE_REPORTS,
+    //   page: () => const ConsiderationsEngageReportsView(),
+    //   binding: ConsiderationsEngageReportsBinding(),
+    // ),
+    // GetPage(
+    //   name: AppRoutes.CONSIDERATIONS_NEGOTIATION,
+    //   page: () => const ConsiderationsNegotiationView(),
+    //   binding: ConsiderationsNegotiationBinding(),
+    // ),
+    // GetPage(
+    //   name: AppRoutes.CONSIDERATIONS_IMPOSEMENTS,
+    //   page: () => const ConsiderationsImposementsView(),
+    //   binding: ConsiderationsImposementsBinding(),
+    // ),
+    // GetPage(
+    //   name: AppRoutes.CONSIDERATIONS_NOTIFY,
+    //   page: () => const ConsiderationsNotifyView(),
+    //   binding: ConsiderationsNotifyBinding(),
+    // ),
 
     // ── Web Modules (Responsive Flutter Web pages) ─────────
     ...WebRoutes.pages,

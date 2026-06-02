@@ -940,5 +940,45 @@ class HomeController extends GetxController {
         ),
       ],
     ),
+    DrawerActualSection(
+      title: "CONSIDERATIONS FOR TRADE",
+      items: [
+        DrawerActualItem(
+          title: 'Engage Entry',
+          icon: Icons.task,
+          route: AppRoutes.CONSIDERATIONS_ENGAGE_ENTRY,
+        ),
+        DrawerActualItem(
+          title: 'Engage Reports',
+          icon: Icons.task_alt,
+          route: AppRoutes.CONSIDERATIONS_ENGAGE_REPORTS,
+        ),
+        DrawerActualItem(
+          title: 'Negotiation',
+          icon: Icons.headset_mic_rounded,
+          route: AppRoutes.CONSIDERATIONS_NEGOTIATION,
+        ),
+        DrawerActualItem(
+          title: 'Imposements',
+          icon: Icons.abc,
+          route: AppRoutes.CONSIDERATIONS_IMPOSEMENTS,
+        ),
+        DrawerActualItem(
+          title: 'Notify',
+          icon: Icons.notifications,
+          route: AppRoutes.CONSIDERATIONS_NOTIFY,
+        ),
+        DrawerActualItem(
+          title: 'Feedback',
+          icon: Icons.feed,
+          route: AppRoutes.CONSIDERATIONS_FEED,
+        ),
+        DrawerActualItem(
+          title: 'Play Games',
+          icon: Icons.videogame_asset,
+          route: AppRoutes.CONSIDERATIONS_PLAY_GAMES,
+        ),
+      ],
+    ),
   ];
 }

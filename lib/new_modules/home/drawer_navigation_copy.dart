@@ -47,6 +47,8 @@ class DrawerNavigationCopy {
     'SYSTEM CORE':
         'Preferences, transparency about the app and organisation, and a safe sign-out. '
         'Review About entries before asking others—many answers already live here.',
+    'CONSIDERATIONS FOR TRADE':
+        'Engage With Caution.\nConsider for All-Space-Trade and Service-Product Cycles.',
   };
 
   /// Subtitle under each drawer [ListTile] title.
@@ -192,8 +194,7 @@ class DrawerNavigationCopy {
         'Version, credits, and behaviour of this AIR mobile client.',
     AppRoutes.ABOUT_ORG:
         'Background on the AIR Organisation itself—charter and contact posture.',
-    AppRoutes.LOGOUT:
-        'End this session securely on this device.',
+    AppRoutes.LOGOUT: 'End this session securely on this device.',
     AppRoutes.digitalize_records:
         'Digitise products and records—templates, scans, and structured capture.',
     AppRoutes.projects_assessments:

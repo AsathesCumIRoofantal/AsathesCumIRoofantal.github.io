@@ -1079,6 +1079,55 @@ class WebNavData {
         ),
       ],
     ),
+    WebNavSection(
+      title: "CONSIDERATIONS FOR TRADE",
+      slug: 'consider',
+      tagline: 'trade and engagement module',
+      blurb:
+          'Trade and engagement module is used to manage the trade and engagement activities.',
+      primary: Color(0xF8221B69),
+      secondary: Color(0xF8331C23),
+      accent: Color(0xF8E2E8F0),
+      icon: Icons.tune_rounded,
+      route: "AppRoutes.CONSIDERATIONS_ENGAGE",
+      items: [
+        WebNavItem(
+          title: 'Engage Entry',
+          icon: Icons.task,
+          description: "Engage Entry",
+        ),
+        WebNavItem(
+          title: 'Engage Reports',
+          icon: Icons.task_alt,
+          description: "Engage Reports",
+        ),
+        WebNavItem(
+          title: 'Negotiation',
+          icon: Icons.headset_mic_rounded,
+          description: "Negotiation",
+        ),
+        WebNavItem(
+          title: 'Imposements',
+          icon: Icons.abc,
+          description: "Imposements",
+        ),
+        WebNavItem(
+          title: 'Notify',
+          icon: Icons.notifications,
+          description: "Notify",
+        ),
+        WebNavItem(
+          title: 'Feedback',
+          icon: Icons.feed,
+          description: "Feedback",
+        ),
+        WebNavItem(
+          title: 'Play Games',
+          icon: Icons.videogame_asset,
+          description: "Play Games",
+        ),
+      ],
+    ),
   ];
 
   static WebNavSection bySlug(String slug) =>
