@@ -270,7 +270,7 @@ class LoginView extends GetView<LoginController> {
                     GestureDetector(
                       onTap: () => Get.toNamed(AppRoutes.SIGNUP),
                       child: Text(
-                        "Request Identity",
+                        "Request Identity!",
                         style: TextStyle(
                           color: tertiary,
                           fontWeight: FontWeight.bold,
