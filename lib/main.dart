@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'core/theme/app_theme.dart';
 import 'data/auth_service.dart';
@@ -30,12 +31,12 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  // ── Environment variables ───────────────────────────────────
-  try {
-    await dotenv.load(fileName: '.env');
-  } catch (_) {
-    debugPrint('⚠️  .env not found – running in dummy mode');
-  }
+  // // ── Environment variables ───────────────────────────────────
+  // try {
+  //   await dotenv.load(fileName: '.env');
+  // } catch (_) {
+  //   debugPrint('⚠️  .env not found – running in dummy mode');
+  // }
 
   // ── Lock orientation on phones only (allow all on tablet/web) ──
   await SystemChrome.setPreferredOrientations([
@@ -54,10 +55,6 @@ void main() async {
     ),
   );
 
-  // ── Core services (must init before app runs) ───────────────
-  final localStorage = await LocalStorage().init();
-  Get.put(localStorage, permanent: true);
-
   // await dotenv.load(fileName: ".env");
   GoogleFonts.config.allowRuntimeFetching = false;
 
@@ -68,10 +65,16 @@ void main() async {
   };
 
   Get.put(AuthService());
-  runZonedGuarded(() => runApp(AirApp()), (error, stack) {
-    debugPrint('ERROR: $error');
-    debugPrint(stack.toString());
-  });
+  await SentryFlutter.init(
+    (options) {
+      options.dsn =
+          "https://github.com/getsentry/sentry-wizard/releases/download/v4.0.1/sentry-wizard-win-x64.exe";
+    },
+    appRunner: () => runZonedGuarded(() => runApp(AirApp()), (error, stack) {
+      debugPrint('ERROR: $error');
+      debugPrint(stack.toString());
+    }),
+  );
 }
 
 // web rtc
