@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:air_app/app/routes/air_routes.dart';
 import 'package:air_app/core/storage/local_storage.dart';
 import 'package:air_app/new_modules/splash/spash_binding.dart';
@@ -58,8 +60,18 @@ void main() async {
 
   // await dotenv.load(fileName: ".env");
   GoogleFonts.config.allowRuntimeFetching = false;
+
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.presentError(details);
+    debugPrint(details.exceptionAsString());
+    debugPrint(details.stack.toString());
+  };
+
   Get.put(AuthService());
-  runApp(AirApp());
+  runZonedGuarded(() => runApp(AirApp()), (error, stack) {
+    debugPrint('ERROR: $error');
+    debugPrint(stack.toString());
+  });
 }
 
 // web rtc
