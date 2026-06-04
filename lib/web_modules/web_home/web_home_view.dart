@@ -31,7 +31,7 @@ class WebHomeView extends GetView<WebHomeController> {
           slivers: [
             // ── HERO WITH PARALLAX ──
             SliverAppBar(
-              expandedHeight: WBreak.isMobile(context) ? 320 : 450,
+              expandedHeight: WBreak.isMobile(context) ? 330 : 450,
               pinned: false,
               flexibleSpace: FlexibleSpaceBar(background: _AnimatedHero()),
             ),
