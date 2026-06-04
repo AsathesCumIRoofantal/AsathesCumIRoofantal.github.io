@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import '../../data/auth_service.dart';
 
@@ -83,6 +84,30 @@ class LoginController extends GetxController {
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 2));
     isLoading.value = false;
+
+    // TODO: await Sentry.configureScope((scope) {
+    //   scope.setUser(SentryUser(id: user.id, email: user.email));
+    // });
+    // await Sentry.configureScope((scope) {
+    //   scope.setTag('module', 'meeting');
+    //   scope.setTag('meetingId', meetingId);
+    // });
+    // await Sentry.configureScope((scope) {
+    //   scope.setTag('platform', kIsWeb ? 'web' : 'mobile');
+    //   scope.setTag('app', 'air-space');
+    // });
+    // try {
+    //   await joinMeeting();
+    // } catch (e, s) {
+    //   await Sentry.captureException(
+    //     e,
+    //     stackTrace: s,
+    //     withScope: (scope) {
+    //       scope.setTag('module', 'meeting');
+    //       scope.setExtra('roomId', roomId);
+    //     },
+    //   );
+    // }
 
     AuthService.to.login(
       usernameController.text,

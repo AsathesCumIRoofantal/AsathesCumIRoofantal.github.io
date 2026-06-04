@@ -67,6 +67,8 @@ void main() async {
   Get.put(AuthService());
   await SentryFlutter.init(
     (options) {
+      //TODO: ADD Latest Version
+      // options.release = "air-web@1.0.23";
       options.dsn =
           "https://github.com/getsentry/sentry-wizard/releases/download/v4.0.1/sentry-wizard-win-x64.exe";
     },
