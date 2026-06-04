@@ -61,24 +61,26 @@ class AppTheme {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: Colors.white.withOpacity(0.06)),
+        side: BorderSide(color: Colors.white.withValues(alpha: 0.06)),
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: _surfaceDark,
-      indicatorColor: _primary.withOpacity(0.2),
+      indicatorColor: _primary.withValues(alpha: 0.2),
       surfaceTintColor: Colors.transparent,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
     ),
     navigationRailTheme: NavigationRailThemeData(
       backgroundColor: _surfaceDark,
-      indicatorColor: _primary.withOpacity(0.2),
+      indicatorColor: _primary.withValues(alpha: 0.2),
       selectedIconTheme: const IconThemeData(color: _primary),
-      unselectedIconTheme: IconThemeData(color: Colors.white.withOpacity(0.5)),
+      unselectedIconTheme: IconThemeData(
+        color: Colors.white.withValues(alpha: 0.5),
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.white.withOpacity(0.06),
+      fillColor: Colors.white.withValues(alpha: 0.06),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
         borderSide: BorderSide.none,
@@ -87,7 +89,10 @@ class AppTheme {
         borderRadius: BorderRadius.circular(14),
         borderSide: const BorderSide(color: _primary, width: 1.5),
       ),
-      hintStyle: TextStyle(color: Colors.white.withOpacity(0.35), fontSize: 14),
+      hintStyle: TextStyle(
+        color: Colors.white.withValues(alpha: 0.35),
+        fontSize: 14,
+      ),
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
@@ -107,22 +112,25 @@ class AppTheme {
       ),
     ),
     chipTheme: ChipThemeData(
-      backgroundColor: Colors.white.withOpacity(0.06),
-      selectedColor: _primary.withOpacity(0.25),
-      labelStyle: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.8)),
+      backgroundColor: Colors.white.withValues(alpha: 0.06),
+      selectedColor: _primary.withValues(alpha: 0.25),
+      labelStyle: TextStyle(
+        fontSize: 12,
+        color: Colors.white.withValues(alpha: 0.8),
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: Colors.white.withOpacity(0.1)),
+        side: BorderSide(color: Colors.white.withValues(alpha: 0.1)),
       ),
     ),
-    dividerTheme: DividerThemeData(color: Colors.white.withOpacity(0.08)),
+    dividerTheme: DividerThemeData(color: Colors.white.withValues(alpha: 0.08)),
     switchTheme: SwitchThemeData(
       thumbColor: WidgetStateProperty.resolveWith(
         (s) => s.contains(WidgetState.selected) ? _primary : Colors.grey,
       ),
       trackColor: WidgetStateProperty.resolveWith(
         (s) => s.contains(WidgetState.selected)
-            ? _primary.withOpacity(0.4)
+            ? _primary.withValues(alpha: 0.4)
             : Colors.white12,
       ),
     ),
@@ -157,18 +165,18 @@ class AppTheme {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: Colors.black.withOpacity(0.06)),
+        side: BorderSide(color: Colors.black.withValues(alpha: 0.06)),
       ),
     ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: _surfaceLight,
-      indicatorColor: _primary.withOpacity(0.15),
+      indicatorColor: _primary.withValues(alpha: 0.15),
       surfaceTintColor: Colors.transparent,
       labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
     ),
     inputDecorationTheme: InputDecorationTheme(
       filled: true,
-      fillColor: Colors.black.withOpacity(0.04),
+      fillColor: Colors.black.withValues(alpha: 0.04),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(14),
         borderSide: BorderSide.none,
@@ -188,13 +196,13 @@ class AppTheme {
       ),
     ),
     chipTheme: ChipThemeData(
-      selectedColor: _primary.withOpacity(0.15),
+      selectedColor: _primary.withValues(alpha: 0.15),
       labelStyle: const TextStyle(fontSize: 12),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
-        side: BorderSide(color: Colors.black.withOpacity(0.1)),
+        side: BorderSide(color: Colors.black.withValues(alpha: 0.1)),
       ),
     ),
-    dividerTheme: DividerThemeData(color: Colors.black.withOpacity(0.08)),
+    dividerTheme: DividerThemeData(color: Colors.black.withValues(alpha: 0.08)),
   );
 }

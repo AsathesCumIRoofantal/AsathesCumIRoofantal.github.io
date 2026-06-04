@@ -26,11 +26,20 @@ class ChatListView extends StatelessWidget {
           SliverAppBar(
             floating: true,
             snap: true,
-            title: Text('Chats', style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w700)),
+            title: Text(
+              'Chats',
+              style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.w700),
+            ),
             actions: [
               // ── Search toggle ──────────────────────────
-              IconButton(icon: const Icon(Icons.search_rounded), onPressed: () {}),
-              IconButton(icon: const Icon(Icons.more_vert_rounded), onPressed: () {}),
+              IconButton(
+                icon: const Icon(Icons.search_rounded),
+                onPressed: () {},
+              ),
+              IconButton(
+                icon: const Icon(Icons.more_vert_rounded),
+                onPressed: () {},
+              ),
             ],
           ),
           SliverPersistentHeader(
@@ -47,11 +56,15 @@ class ChatListView extends StatelessWidget {
               padding: EdgeInsets.only(top: 4.h, bottom: 80.h),
               itemCount: ctrl.filtered.length,
               separatorBuilder: (_, __) => Divider(
-                height: 1, indent: 72.w, endIndent: 16.w,
-                color: theme.dividerColor.withOpacity(0.5),
+                height: 1,
+                indent: 72.w,
+                endIndent: 16.w,
+                color: theme.dividerColor.withValues(alpha: 0.5),
               ),
-              itemBuilder: (ctx, i) =>
-                  _ChatTile(room: ctrl.filtered[i], index: i).fadeSlideIn(delay: i * 30),
+              itemBuilder: (ctx, i) => _ChatTile(
+                room: ctrl.filtered[i],
+                index: i,
+              ).fadeSlideIn(delay: i * 30),
             ),
           );
         }),
@@ -67,11 +80,11 @@ class ChatListView extends StatelessWidget {
   Widget _buildSkeleton() => ListView.builder(
     itemCount: 8,
     itemBuilder: (_, __) => Shimmer.fromColors(
-      baseColor:  Colors.grey.shade800,
+      baseColor: Colors.grey.shade800,
       highlightColor: Colors.grey.shade600,
       child: ListTile(
         leading: CircleAvatar(radius: 24.r, backgroundColor: Colors.grey),
-        title:   Container(height: 14.h, width: 120.w, color: Colors.grey),
+        title: Container(height: 14.h, width: 120.w, color: Colors.grey),
         subtitle: Container(height: 12.h, width: 200.w, color: Colors.grey),
       ),
     ),
@@ -81,9 +94,16 @@ class ChatListView extends StatelessWidget {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.chat_bubble_outline_rounded, size: 64.r, color: theme.hintColor),
+        Icon(
+          Icons.chat_bubble_outline_rounded,
+          size: 64.r,
+          color: theme.hintColor,
+        ),
         SizedBox(height: 16.h),
-        Text('No chats yet', style: TextStyle(color: theme.hintColor, fontSize: 16.sp)),
+        Text(
+          'No chats yet',
+          style: TextStyle(color: theme.hintColor, fontSize: 16.sp),
+        ),
       ],
     ),
   );
@@ -95,28 +115,33 @@ class _FilterBarDelegate extends SliverPersistentHeaderDelegate {
   final ThemeData theme;
   const _FilterBarDelegate({required this.ctrl, required this.theme});
 
-  @override double get minExtent => 48;
-  @override double get maxExtent => 48;
-  @override bool shouldRebuild(_) => false;
+  @override
+  double get minExtent => 48;
+  @override
+  double get maxExtent => 48;
+  @override
+  bool shouldRebuild(_) => false;
 
   @override
   Widget build(BuildContext ctx, double shrinkOffset, bool overlapsContent) {
     return Container(
       color: theme.scaffoldBackgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
-      child: Obx(() => Row(
-        children: ['all', 'unread', 'groups'].map((f) {
-          final active = ctrl.activeFilter.value == f;
-          return Padding(
-            padding: EdgeInsets.only(right: 8.w),
-            child: FilterChip(
-              label:    Text(f[0].toUpperCase() + f.substring(1)),
-              selected: active,
-              onSelected: (_) => ctrl.setFilter(f),
-            ),
-          );
-        }).toList(),
-      )),
+      child: Obx(
+        () => Row(
+          children: ['all', 'unread', 'groups'].map((f) {
+            final active = ctrl.activeFilter.value == f;
+            return Padding(
+              padding: EdgeInsets.only(right: 8.w),
+              child: FilterChip(
+                label: Text(f[0].toUpperCase() + f.substring(1)),
+                selected: active,
+                onSelected: (_) => ctrl.setFilter(f),
+              ),
+            );
+          }).toList(),
+        ),
+      ),
     );
   }
 }
@@ -136,46 +161,65 @@ class _ChatTile extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           CircleAvatar(
-            radius:          24.r,
+            radius: 24.r,
             backgroundColor: theme.colorScheme.primaryContainer,
             child: Text(
               room.name.substring(0, 1).toUpperCase(),
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600,
-                color: theme.colorScheme.onPrimaryContainer),
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: theme.colorScheme.onPrimaryContainer,
+              ),
             ),
           ),
           if (room.type == ChatRoomType.group)
             Positioned(
-              bottom: -2, right: -2,
+              bottom: -2,
+              right: -2,
               child: Container(
                 padding: EdgeInsets.all(2.r),
                 decoration: BoxDecoration(
-                  color:  theme.scaffoldBackgroundColor,
-                  shape:  BoxShape.circle,
+                  color: theme.scaffoldBackgroundColor,
+                  shape: BoxShape.circle,
                 ),
-                child: Icon(Icons.group_rounded, size: 14.r, color: theme.colorScheme.primary),
+                child: Icon(
+                  Icons.group_rounded,
+                  size: 14.r,
+                  color: theme.colorScheme.primary,
+                ),
               ),
             ),
           if (room.isPinned)
             Positioned(
-              top: -4, right: -4,
-              child: Icon(Icons.push_pin_rounded, size: 12.r, color: theme.colorScheme.secondary),
+              top: -4,
+              right: -4,
+              child: Icon(
+                Icons.push_pin_rounded,
+                size: 12.r,
+                color: theme.colorScheme.secondary,
+              ),
             ),
         ],
       ),
       title: Row(
         children: [
           Expanded(
-            child: Text(room.name,
+            child: Text(
+              room.name,
               style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15.sp),
-              overflow: TextOverflow.ellipsis),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           if (room.lastMessageAt != null)
             Text(
-              timeago.format(DateTime.fromMillisecondsSinceEpoch(room.lastMessageAt!)),
+              timeago.format(
+                DateTime.fromMillisecondsSinceEpoch(room.lastMessageAt!),
+              ),
               style: TextStyle(
                 fontSize: 11.sp,
-                color: room.unreadCount > 0 ? theme.colorScheme.primary : theme.hintColor,
+                color: room.unreadCount > 0
+                    ? theme.colorScheme.primary
+                    : theme.hintColor,
               ),
             ),
         ],
@@ -193,18 +237,24 @@ class _ChatTile extends StatelessWidget {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
               decoration: BoxDecoration(
-                color:  theme.colorScheme.primary,
+                color: theme.colorScheme.primary,
                 borderRadius: BorderRadius.circular(12.r),
               ),
               child: Text(
                 '${room.unreadCount}',
-                style: TextStyle(fontSize: 11.sp, color: Colors.white, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                  fontSize: 11.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
         ],
       ),
-      onTap: () => Get.to(() => ChatRoomView(room: room),
-          transition: Transition.rightToLeft),
+      onTap: () => Get.to(
+        () => ChatRoomView(room: room),
+        transition: Transition.rightToLeft,
+      ),
     );
   }
 }

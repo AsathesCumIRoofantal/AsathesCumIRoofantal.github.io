@@ -71,7 +71,7 @@ class NewAppHeigherStudiesView extends GetView<NewAppHeigherStudiesController> {
                 child: Icon(
                   Icons.school,
                   size: 220,
-                  color: Colors.white.withOpacity(.10),
+                  color: Colors.white.withValues(alpha: .10),
                 ),
               ),
               Padding(
@@ -83,7 +83,7 @@ class NewAppHeigherStudiesView extends GetView<NewAppHeigherStudiesController> {
                     Text(
                       'ALIFIYAS · BEGINNER LANE',
                       style: TextStyle(
-                        color: Colors.white.withOpacity(.85),
+                        color: Colors.white.withValues(alpha: .85),
                         fontSize: 12,
                         letterSpacing: 3,
                         fontWeight: FontWeight.w700,
@@ -287,11 +287,11 @@ class NewAppHeigherStudiesView extends GetView<NewAppHeigherStudiesController> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
-          colors: [_c1.withOpacity(.85), _c2.withOpacity(.75)],
+          colors: [_c1.withValues(alpha: .85), _c2.withValues(alpha: .75)],
         ),
         boxShadow: [
           BoxShadow(
-            color: _c2.withOpacity(.25),
+            color: _c2.withValues(alpha: .25),
             blurRadius: 24,
             offset: const Offset(0, 10),
           ),
@@ -395,7 +395,7 @@ class NewAppHeigherStudiesView extends GetView<NewAppHeigherStudiesController> {
                 margin: const EdgeInsets.only(bottom: 8),
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(.05),
+                  color: Colors.white.withValues(alpha: .05),
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(color: Colors.white12),
                 ),
@@ -405,7 +405,7 @@ class NewAppHeigherStudiesView extends GetView<NewAppHeigherStudiesController> {
                       width: 38,
                       height: 38,
                       decoration: BoxDecoration(
-                        color: _c2.withOpacity(.25),
+                        color: _c2.withValues(alpha: .25),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(Icons.bolt, color: Colors.white),

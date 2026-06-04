@@ -113,8 +113,8 @@ class FlutterCapabilities {
               end: Alignment.bottomRight,
               colors: [
                 Colors.grey[900]!,
-                Colors.blue[900]!.withOpacity(0.7),
-                Colors.cyan[800]!.withOpacity(0.5),
+                Colors.blue[900]!.withValues(alpha: 0.7),
+                Colors.cyan[800]!.withValues(alpha: 0.5),
               ],
             ),
           ),
@@ -131,7 +131,7 @@ class FlutterCapabilities {
                               width: 3,
                               height: 3,
                               decoration: BoxDecoration(
-                                color: Colors.cyan.withOpacity(0.4),
+                                color: Colors.cyan.withValues(alpha: 0.4),
                                 shape: BoxShape.circle,
                               ),
                             )
@@ -160,10 +160,10 @@ class FlutterCapabilities {
                             vertical: 8,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.cyan.withOpacity(0.2),
+                            color: Colors.cyan.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
-                              color: Colors.cyan.withOpacity(0.3),
+                              color: Colors.cyan.withValues(alpha: 0.3),
                             ),
                           ),
                           child: Row(

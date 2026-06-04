@@ -42,8 +42,8 @@
 //                         borderRadius: BorderRadius.circular(24),
 //                         gradient: LinearGradient(
 //                           colors: [
-//                             Colors.blue.withOpacity(.2),
-//                             Colors.purple.withOpacity(.2),
+//                             Colors.blue.withValues(alpha:.2),
+//                             Colors.purple.withValues(alpha:.2),
 //                           ],
 //                         ),
 //                       ),

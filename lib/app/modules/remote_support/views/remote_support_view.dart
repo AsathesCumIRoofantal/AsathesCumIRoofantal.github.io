@@ -83,7 +83,7 @@ class _ConnectPanel extends StatelessWidget {
       borderRadius: BorderRadius.circular(20.r),
       boxShadow: [
         BoxShadow(
-          color: theme.colorScheme.primary.withOpacity(0.35),
+          color: theme.colorScheme.primary.withValues(alpha: 0.35),
           blurRadius: 20,
           offset: const Offset(0, 8),
         ),
@@ -285,7 +285,7 @@ class _DeviceCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: theme.dividerColor.withOpacity(0.3)),
+        border: Border.all(color: theme.dividerColor.withValues(alpha: 0.3)),
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -303,7 +303,7 @@ class _DeviceCard extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10.r),
                   decoration: BoxDecoration(
-                    color: stColor.withOpacity(0.12),
+                    color: stColor.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: Icon(
@@ -490,7 +490,7 @@ class _SessionCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(color: stColor.withOpacity(0.3)),
+        border: Border.all(color: stColor.withValues(alpha: 0.3)),
         boxShadow: [
           BoxShadow(
             color: Colors.black12,

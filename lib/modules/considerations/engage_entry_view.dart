@@ -132,7 +132,7 @@ class _T {
   Color get primary => const Color(0xFF6366F1);
   Color get accent =>
       isDark ? const Color(0xFF818CF8) : const Color(0xFF4F46E5);
-  Color get primarySoft => primary.withOpacity(isDark ? 0.18 : 0.10);
+  Color get primarySoft => primary.withValues(alpha: isDark ? 0.18 : 0.10);
   Color get text1 => isDark ? const Color(0xFFF1F5F9) : const Color(0xFF0F172A);
   Color get text2 => isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
   Color get text3 => isDark ? const Color(0xFF64748B) : const Color(0xFF94A3B8);
@@ -140,19 +140,19 @@ class _T {
   List<BoxShadow> get cardShadow => isDark
       ? [
           BoxShadow(
-            color: Colors.black.withOpacity(0.30),
+            color: Colors.black.withValues(alpha: 0.30),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
         ]
       : [
           BoxShadow(
-            color: const Color(0xFF6366F1).withOpacity(0.07),
+            color: const Color(0xFF6366F1).withValues(alpha: 0.07),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -252,7 +252,7 @@ class _MobileTabletLayout extends StatelessWidget {
                         Text(
                           'Submit the form to see entries here',
                           style: TextStyle(
-                            color: t.text3.withOpacity(0.6),
+                            color: t.text3.withValues(alpha: 0.6),
                             fontSize: s.f12,
                           ),
                         ),
@@ -307,7 +307,7 @@ class _EntriesColumn extends StatelessWidget {
               Text(
                 'Submit the form to see entries here',
                 style: TextStyle(
-                  color: t.text3.withOpacity(0.6),
+                  color: t.text3.withValues(alpha: 0.6),
                   fontSize: s.f12,
                 ),
               ),
@@ -422,7 +422,7 @@ class _AppBarSliver extends StatelessWidget {
                   borderRadius: BorderRadius.circular(s.r14),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF6366F1).withOpacity(0.35),
+                      color: const Color(0xFF6366F1).withValues(alpha: 0.35),
                       blurRadius: 14,
                       offset: const Offset(0, 5),
                     ),
@@ -469,7 +469,7 @@ class _AppBarSliver extends StatelessWidget {
                           color: t.primarySoft,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
-                            color: t.primary.withOpacity(0.25),
+                            color: t.primary.withValues(alpha: 0.25),
                           ),
                         ),
                         child: Text(
@@ -776,7 +776,7 @@ class _SectionTitlePicker extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: sel
-                          ? cfg.color.withOpacity(t.isDark ? 0.18 : 0.10)
+                          ? cfg.color.withValues(alpha: t.isDark ? 0.18 : 0.10)
                           : t.card,
                       borderRadius: BorderRadius.circular(s.r14),
                       border: Border.all(
@@ -786,7 +786,7 @@ class _SectionTitlePicker extends StatelessWidget {
                       boxShadow: sel
                           ? [
                               BoxShadow(
-                                color: cfg.color.withOpacity(0.2),
+                                color: cfg.color.withValues(alpha: 0.2),
                                 blurRadius: 10,
                                 offset: const Offset(0, 3),
                               ),
@@ -798,7 +798,9 @@ class _SectionTitlePicker extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.all(s.sp6),
                           decoration: BoxDecoration(
-                            color: cfg.color.withOpacity(sel ? 0.22 : 0.12),
+                            color: cfg.color.withValues(
+                              alpha: sel ? 0.22 : 0.12,
+                            ),
                             borderRadius: BorderRadius.circular(s.r8),
                           ),
                           child: Icon(cfg.icon, color: cfg.color, size: s.ic16),
@@ -889,7 +891,7 @@ class _SectionTabRow extends StatelessWidget {
                               BoxShadow(
                                 color: const Color(
                                   0xFF6366F1,
-                                ).withOpacity(0.35),
+                                ).withValues(alpha: 0.35),
                                 blurRadius: 10,
                                 offset: const Offset(0, 4),
                               ),
@@ -1003,7 +1005,7 @@ class _CriteriaPicker extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: sel
-                    ? cfg.color.withOpacity(t.isDark ? 0.15 : 0.10)
+                    ? cfg.color.withValues(alpha: t.isDark ? 0.15 : 0.10)
                     : t.cardAlt,
                 borderRadius: BorderRadius.circular(s.r30),
                 border: Border.all(
@@ -1013,7 +1015,7 @@ class _CriteriaPicker extends StatelessWidget {
                 boxShadow: sel
                     ? [
                         BoxShadow(
-                          color: cfg.color.withOpacity(0.18),
+                          color: cfg.color.withValues(alpha: 0.18),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -1094,10 +1096,10 @@ class _AttachmentPicker extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: s.sp12, vertical: s.sp8),
             decoration: BoxDecoration(
-              color: const Color(0xFF3B82F6).withOpacity(0.12),
+              color: const Color(0xFF3B82F6).withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(s.r10),
               border: Border.all(
-                color: const Color(0xFF3B82F6).withOpacity(0.3),
+                color: const Color(0xFF3B82F6).withValues(alpha: 0.3),
               ),
             ),
             child: Row(
@@ -1155,7 +1157,7 @@ class _AttachmentPicker extends StatelessWidget {
                     Text(
                       'PDF · Images · Docs · Videos',
                       style: TextStyle(
-                        color: t.text3.withOpacity(0.6),
+                        color: t.text3.withValues(alpha: 0.6),
                         fontSize: s.f11,
                       ),
                     ),
@@ -1210,7 +1212,7 @@ class _AttachTile extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(s.sp8),
           decoration: BoxDecoration(
-            color: file.iconColor.withOpacity(0.12),
+            color: file.iconColor.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(s.r8),
           ),
           child: Icon(file.icon, color: file.iconColor, size: s.ic18),
@@ -1241,7 +1243,7 @@ class _AttachTile extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-              color: Colors.red.withOpacity(0.10),
+              color: Colors.red.withValues(alpha: 0.10),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -1332,10 +1334,10 @@ class _AssigneePicker extends StatelessWidget {
                               vertical: s.sp4,
                             ),
                             decoration: BoxDecoration(
-                              color: a.avatarColor.withOpacity(0.14),
+                              color: a.avatarColor.withValues(alpha: 0.14),
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
-                                color: a.avatarColor.withOpacity(0.35),
+                                color: a.avatarColor.withValues(alpha: 0.35),
                               ),
                             ),
                             child: Row(
@@ -1453,11 +1455,11 @@ class _AssigneeTile extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: s.sp12, vertical: s.sp10),
         decoration: BoxDecoration(
           color: sel
-              ? a.avatarColor.withOpacity(t.isDark ? 0.12 : 0.08)
+              ? a.avatarColor.withValues(alpha: t.isDark ? 0.12 : 0.08)
               : t.cardAlt,
           borderRadius: BorderRadius.circular(s.r12),
           border: Border.all(
-            color: sel ? a.avatarColor.withOpacity(0.5) : t.border,
+            color: sel ? a.avatarColor.withValues(alpha: 0.5) : t.border,
             width: sel ? 1.5 : 1,
           ),
         ),
@@ -1550,7 +1552,7 @@ class _SubmitButton extends StatelessWidget {
               ? null
               : [
                   BoxShadow(
-                    color: const Color(0xFF6366F1).withOpacity(0.38),
+                    color: const Color(0xFF6366F1).withValues(alpha: 0.38),
                     blurRadius: 18,
                     offset: const Offset(0, 7),
                   ),
@@ -1679,10 +1681,10 @@ class _EntryCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: t.card,
         borderRadius: BorderRadius.circular(s.r20),
-        border: Border.all(color: sc.color.withOpacity(0.28)),
+        border: Border.all(color: sc.color.withValues(alpha: 0.28)),
         boxShadow: [
           BoxShadow(
-            color: sc.color.withOpacity(t.isDark ? 0.08 : 0.05),
+            color: sc.color.withValues(alpha: t.isDark ? 0.08 : 0.05),
             blurRadius: 20,
             offset: const Offset(0, 5),
           ),
@@ -1698,8 +1700,8 @@ class _EntryCard extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  sc.color.withOpacity(t.isDark ? 0.18 : 0.10),
-                  sc.color.withOpacity(0.03),
+                  sc.color.withValues(alpha: t.isDark ? 0.18 : 0.10),
+                  sc.color.withValues(alpha: 0.03),
                 ],
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
@@ -1714,7 +1716,7 @@ class _EntryCard extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(s.sp6),
                   decoration: BoxDecoration(
-                    color: sc.color.withOpacity(0.20),
+                    color: sc.color.withValues(alpha: 0.20),
                     borderRadius: BorderRadius.circular(s.r8),
                   ),
                   child: Icon(sc.icon, color: sc.color, size: s.ic14),
@@ -1732,7 +1734,7 @@ class _EntryCard extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 7, vertical: 2),
                   decoration: BoxDecoration(
-                    color: t.bg.withOpacity(0.7),
+                    color: t.bg.withValues(alpha: 0.7),
                     borderRadius: BorderRadius.circular(s.r6),
                   ),
                   child: Row(
@@ -1758,7 +1760,7 @@ class _EntryCard extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
-                      color: Colors.red.withOpacity(0.10),
+                      color: Colors.red.withValues(alpha: 0.10),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -1786,10 +1788,10 @@ class _EntryCard extends StatelessWidget {
                       vertical: s.sp5,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF22D3EE).withOpacity(0.08),
+                      color: const Color(0xFF22D3EE).withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(s.r8),
                       border: Border.all(
-                        color: const Color(0xFF22D3EE).withOpacity(0.2),
+                        color: const Color(0xFF22D3EE).withValues(alpha: 0.2),
                       ),
                     ),
                     child: Row(
@@ -1851,10 +1853,10 @@ class _EntryCard extends StatelessWidget {
                       vertical: s.sp8,
                     ),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF59E0B).withOpacity(0.08),
+                      color: const Color(0xFFF59E0B).withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(s.r10),
                       border: Border.all(
-                        color: const Color(0xFFF59E0B).withOpacity(0.2),
+                        color: const Color(0xFFF59E0B).withValues(alpha: 0.2),
                       ),
                     ),
                     child: Row(
@@ -1894,9 +1896,11 @@ class _EntryCard extends StatelessWidget {
                           vertical: s.sp4,
                         ),
                         decoration: BoxDecoration(
-                          color: cfg.color.withOpacity(0.12),
+                          color: cfg.color.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: cfg.color.withOpacity(0.3)),
+                          border: Border.all(
+                            color: cfg.color.withValues(alpha: 0.3),
+                          ),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -1951,7 +1955,7 @@ class _EntryCard extends StatelessWidget {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: f.iconColor.withOpacity(0.12),
+                                  color: f.iconColor.withValues(alpha: 0.12),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text(
@@ -2136,7 +2140,7 @@ class _FieldLabel extends StatelessWidget {
       Container(
         padding: EdgeInsets.all(s.sp5),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.12),
+          color: color.withValues(alpha: 0.12),
           borderRadius: BorderRadius.circular(s.r6),
         ),
         child: Icon(icon, color: color, size: s.ic13),
@@ -2165,7 +2169,7 @@ class _IconBadge extends StatelessWidget {
   Widget build(BuildContext context) => Container(
     padding: EdgeInsets.all(s.sp6),
     decoration: BoxDecoration(
-      color: color.withOpacity(0.15),
+      color: color.withValues(alpha: 0.15),
       borderRadius: BorderRadius.circular(s.r9),
     ),
     child: Icon(icon, color: color, size: s.ic16),
