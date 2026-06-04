@@ -238,7 +238,27 @@ class _MobileTabletLayout extends StatelessWidget {
         SliverToBoxAdapter(
           child: Obx(
             () => ctrl.entries.isEmpty
-                ? const SizedBox.shrink()
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.inbox_rounded, size: s.ic56, color: t.text3),
+                        const SizedBox(height: 12),
+                        Text(
+                          'No entries yet',
+                          style: TextStyle(color: t.text3, fontSize: s.f15),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          'Submit the form to see entries here',
+                          style: TextStyle(
+                            color: t.text3.withOpacity(0.6),
+                            fontSize: s.f12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 : _SectionDivider(count: ctrl.entries.length, t: t, s: s),
           ),
         ),
@@ -252,6 +272,9 @@ class _MobileTabletLayout extends StatelessWidget {
           ),
         ),
         const SliverToBoxAdapter(child: SizedBox(height: 48)),
+        // const SliverToBoxAdapter(
+        //   child: _EntriesColumn(ctrl: ctrl, t: t),
+        // ),
       ],
     );
   }
