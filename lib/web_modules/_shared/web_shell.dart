@@ -354,16 +354,19 @@ class _WebDrawer extends StatelessWidget {
                     ),
                   ),
 
-                  if (!isNotMobile)
-                    Column(
-                      children: [
-                        const SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton.icon(
+                  Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Opacity(
+                            opacity: isNotMobile ? 1 : 1,
+                            child: ElevatedButton.icon(
                               onPressed: () {
+                                // if (!isNotMobile) {
                                 Get.toNamed(AppRoutes.HOME_APP_OLD);
+                                // }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
@@ -382,31 +385,32 @@ class _WebDrawer extends StatelessWidget {
                                 style: TextStyle(fontWeight: FontWeight.w700),
                               ),
                             ),
-                            OutlinedButton.icon(
-                              onPressed: () {
-                                Get.offNamed(AppRoutes.LOGIN);
-                              },
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                side: const BorderSide(color: Colors.white54),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 22,
-                                  vertical: 14,
-                                ),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
+                          ),
+                          OutlinedButton.icon(
+                            onPressed: () {
+                              Get.offNamed(AppRoutes.LOGIN);
+                            },
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              side: const BorderSide(color: Colors.white54),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 22,
+                                vertical: 14,
                               ),
-                              icon: const Icon(Icons.login_rounded),
-                              label: const Text(
-                                'Sign In',
-                                style: TextStyle(fontWeight: FontWeight.w600),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                            icon: const Icon(Icons.login_rounded),
+                            label: const Text(
+                              'Sign In',
+                              style: TextStyle(fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
