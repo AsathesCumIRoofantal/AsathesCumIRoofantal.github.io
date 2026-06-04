@@ -43,7 +43,7 @@ class LearnFunView extends GetView<LearnFunController> {
           );
         }
         return SizedBox(
-          height: MediaQuery.of(context).size.height * 0.87,
+          // height: MediaQuery.of(context).size.height * 0.87,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,

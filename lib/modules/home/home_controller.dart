@@ -152,7 +152,7 @@ class HomeController extends GetxController {
     "CONSIDERATIONS FOR TRADE": 9920,
   };
 
-  RxBool isNewApp = true.obs;
+  RxBool isNewApp = false.obs;
 
   List<DrawerActualSection> get drawerSections => [
     DrawerActualSection(
