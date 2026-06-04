@@ -53,8 +53,8 @@ class LoginView extends GetView<LoginController> {
               children: [
                 const SizedBox(height: 40),
                 _buildFeatureMatrix(),
-                const SizedBox(height: 20),
-                _buildDeveloperDocs(),
+                // const SizedBox(height: 20),
+                // _buildDeveloperDocs(),
                 const SizedBox(height: 40),
                 Center(
                   child: Container(
