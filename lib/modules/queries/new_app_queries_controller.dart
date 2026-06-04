@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import '../../new_modules/new_app_role_catalog.dart';
+import '../../modules/new_app_role_catalog.dart';
 
 class NewAppQueriesController extends GetxController {
   final String title = "Ask Any Thing";

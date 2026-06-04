@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'contribute_to_air_controller.dart';
 
 class ContributeToAirView extends GetView<ContributeToAirController> {

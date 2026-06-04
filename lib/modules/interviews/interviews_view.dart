@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'interviews_controller.dart';
 
 class InterviewsView extends GetView<InterviewsController> {
@@ -69,6 +69,3 @@ class InterviewsView extends GetView<InterviewsController> {
     );
   }
 }
-
-
-

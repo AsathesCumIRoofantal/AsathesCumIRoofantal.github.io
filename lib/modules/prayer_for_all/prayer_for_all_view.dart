@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'prayer_for_all_controller.dart';
 
 class PrayerForAllView extends GetView<PrayerForAllController> {
@@ -69,6 +69,3 @@ class PrayerForAllView extends GetView<PrayerForAllController> {
     );
   }
 }
-
-
-

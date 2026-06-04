@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'statistics_controller.dart';
 
 class StatisticsView extends GetView<StatisticsController> {
@@ -69,6 +69,3 @@ class StatisticsView extends GetView<StatisticsController> {
     );
   }
 }
-
-
-

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../new_modules/new_app_role_catalog.dart';
+import '../../modules/new_app_role_catalog.dart';
 import 'new_app_heigher_studies_controller.dart';
 
 /// Higher Studies — alifiyas (beginner) lane.

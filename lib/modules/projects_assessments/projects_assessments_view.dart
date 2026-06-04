@@ -1,5 +1,5 @@
 import 'package:air_app/modules/projects_assessments/projects_assessments_best_view.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
+import 'package:air_app/widgets_specific/air_home_context_strip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'trade_import_export_controller.dart';
 
 class TradeImportExportView extends GetView<TradeImportExportController> {
@@ -69,6 +69,3 @@ class TradeImportExportView extends GetView<TradeImportExportController> {
     );
   }
 }
-
-
-

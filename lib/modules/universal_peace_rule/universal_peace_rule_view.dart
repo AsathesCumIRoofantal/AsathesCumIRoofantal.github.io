@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'universal_peace_rule_controller.dart';
 
 class UniversalPeaceRuleView extends GetView<UniversalPeaceRuleController> {
@@ -69,6 +69,3 @@ class UniversalPeaceRuleView extends GetView<UniversalPeaceRuleController> {
     );
   }
 }
-
-
-

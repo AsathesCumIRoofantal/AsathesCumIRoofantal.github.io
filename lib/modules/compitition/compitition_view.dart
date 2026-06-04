@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'compitition_controller.dart';
 
 class CompititionView extends GetView<CompititionController> {
@@ -61,6 +61,3 @@ class CompititionView extends GetView<CompititionController> {
     );
   }
 }
-
-
-

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'empathy_sympathy_controller.dart';
 
 class EmpathySympathyView extends GetView<EmpathySympathyController> {
@@ -61,6 +61,3 @@ class EmpathySympathyView extends GetView<EmpathySympathyController> {
     );
   }
 }
-
-
-

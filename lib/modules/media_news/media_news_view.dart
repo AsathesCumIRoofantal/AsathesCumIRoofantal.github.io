@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'media_news_controller.dart';
 
 class MediaNewsView extends GetView<MediaNewsController> {
@@ -69,6 +69,3 @@ class MediaNewsView extends GetView<MediaNewsController> {
     );
   }
 }
-
-
-

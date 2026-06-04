@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'court_cases_controller.dart';
 
 class CourtCasesView extends GetView<CourtCasesController> {
@@ -62,6 +62,3 @@ class CourtCasesView extends GetView<CourtCasesController> {
     );
   }
 }
-
-
-

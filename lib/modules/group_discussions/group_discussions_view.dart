@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'group_discussions_controller.dart';
 
 class GroupDiscussionsView extends GetView<GroupDiscussionsController> {
@@ -62,6 +62,3 @@ class GroupDiscussionsView extends GetView<GroupDiscussionsController> {
     );
   }
 }
-
-
-

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'control_coordination_controller.dart';
 
 class ControlCoordinationView extends GetView<ControlCoordinationController> {
@@ -69,6 +69,3 @@ class ControlCoordinationView extends GetView<ControlCoordinationController> {
     );
   }
 }
-
-
-

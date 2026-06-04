@@ -1,6 +1,6 @@
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
 import 'be_part_of_air_controller.dart';
 
 class BePartOfAirView extends GetView<BePartOfAirController> {

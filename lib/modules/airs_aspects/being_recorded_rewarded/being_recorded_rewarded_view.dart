@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'being_recorded_rewarded_controller.dart';
 
-class BeingRecordedRewardedView extends GetView<BeingRecordedRewardedController> {
+class BeingRecordedRewardedView
+    extends GetView<BeingRecordedRewardedController> {
   const BeingRecordedRewardedView({super.key});
 
   @override

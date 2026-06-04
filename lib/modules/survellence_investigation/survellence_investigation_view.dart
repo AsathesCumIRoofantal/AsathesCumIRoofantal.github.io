@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'survellence_investigation_controller.dart';
 
 class SurvellenceInvestigationView
@@ -70,6 +70,3 @@ class SurvellenceInvestigationView
     );
   }
 }
-
-
-

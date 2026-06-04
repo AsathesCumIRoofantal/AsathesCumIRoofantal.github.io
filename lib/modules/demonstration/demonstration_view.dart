@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 import 'demonstration_controller.dart';
 
 class DemonstrationView extends GetView<DemonstrationController> {
@@ -62,6 +62,3 @@ class DemonstrationView extends GetView<DemonstrationController> {
     );
   }
 }
-
-
-

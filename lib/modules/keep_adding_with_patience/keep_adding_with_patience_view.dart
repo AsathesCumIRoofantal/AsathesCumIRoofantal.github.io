@@ -1,7 +1,7 @@
 import 'package:air_app/modules/keep_adding_with_patience/keep_adding_with_patiencecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/sample_content_page.dart';
+import 'package:air_app/widgets_specific/sample_content_page.dart';
 
 class KeepAddingWithPatienceView
     extends GetView<KeepAddingWithPatienceController> {
@@ -70,6 +70,3 @@ class KeepAddingWithPatienceView
     );
   }
 }
-
-
-

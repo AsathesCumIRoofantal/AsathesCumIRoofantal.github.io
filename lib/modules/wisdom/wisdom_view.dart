@@ -1,7 +1,7 @@
 import 'package:air_app/modules/wisdom/wisdom_best_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:air_app/widgets/air_home_context_strip.dart';
+import 'package:air_app/widgets_specific/air_home_context_strip.dart';
 import 'wisdom_controller.dart';
 
 class WisdomView extends GetView<WisdomController> {

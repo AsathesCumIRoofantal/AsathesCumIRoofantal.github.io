@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:air_app/app/routes/air_routes.dart';
-import 'package:air_app/core/storage/local_storage.dart';
-import 'package:air_app/new_modules/splash/spash_binding.dart';
-import 'package:air_app/web_modules_OLD/web_home/web_home_view.dart';
+import 'package:air_app/modules/splash/spash_binding.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../new_modules/new_app_role_catalog.dart';
+import '../../modules/new_app_role_catalog.dart';
 import 'new_app_life_hacks_controller.dart';
 
 /// Life Hacks — alifiyas (beginner) lane.
