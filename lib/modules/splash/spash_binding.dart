@@ -1,0 +1,10 @@
+import 'package:air_app/new_modules/splash/splash_controller.dart';
+import 'package:get/get.dart';
+
+class SplashBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.lazyPut<SplashController>(() => SplashController());
+    // ── Core services (must init before app runs) ───────────────
+  }
+}
