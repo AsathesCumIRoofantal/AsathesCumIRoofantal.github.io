@@ -730,13 +730,13 @@ class _SectionTitlePicker extends StatelessWidget {
         s,
       ),
       SizedBox(height: s.sp10),
-      Obx(
-        () => LayoutBuilder(
-          builder: (ctx, box) {
-            final cols = s.sectionCols;
-            final gap = 8.0;
-            final chipW = (box.maxWidth - gap * (cols - 1)) / cols;
-            return Wrap(
+      LayoutBuilder(
+        builder: (ctx, box) {
+          final cols = s.sectionCols;
+          final gap = 8.0;
+          final chipW = (box.maxWidth - gap * (cols - 1)) / cols;
+          return Obx(
+            () => Wrap(
               spacing: gap,
               runSpacing: 8,
               children: EntrySection.values.map((sec) {
@@ -804,9 +804,9 @@ class _SectionTitlePicker extends StatelessWidget {
                   ),
                 );
               }).toList(),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     ],
   );
