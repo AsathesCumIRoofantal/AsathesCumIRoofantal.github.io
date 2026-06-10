@@ -199,8 +199,8 @@ class _NotFoundPage extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           FilledButton(
-            onPressed: () => Get.offAllNamed(AirRoutes.dashboard),
-            child: const Text('Go Home'),
+            onPressed: () => Get.offAllNamed(AppRoutes.LOGIN),
+            child: const Text('Go to Login'),
           ),
         ],
       ),
