@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:html' as html;
+
 import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:air_app/web_modules/web_home/zoom_agora/services/agora_rtc_service.dart';
+import 'package:air_app/web_modules/web_home/zoom_agora/services/token_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AgoraRtcController extends GetxController {
   // ── Credentials ─────────────────────────────────────────────────────────
@@ -77,8 +80,16 @@ class AgoraRtcController extends GetxController {
   // ENGINE INIT
   // ─────────────────────────────────────────────────────────────────────────
   Future<void> _initAgoraEngine() async {
-    if (appId.isEmpty) {
-      _log('⚠ Agora App ID missing in .env file.');
+    var effectiveAppId = appId;
+    if (effectiveAppId.isEmpty && kIsWeb) {
+      try {
+        final w = html.window.localStorage;
+        final v = w['APP_ID'] ?? "";
+        if (v is String && v.isNotEmpty) effectiveAppId = v;
+      } catch (_) {}
+    }
+    if (effectiveAppId.isEmpty) {
+      _log('⚠ Agora App ID missing in .env file or window.APP_ID.');
       return;
     }
     try {
@@ -161,8 +172,21 @@ class AgoraRtcController extends GetxController {
 
       await engine.setClientRole(role: ClientRoleType.clientRoleBroadcaster);
 
+      // Prefer fetching a token from the token server if available.
+      String token = agorraToken;
+      try {
+        final t = await TokenService.fetchRtcToken(
+          channel: channelId,
+          uid: 0,
+          role: 'publisher',
+        );
+        token = t.token;
+      } catch (_) {
+        // fallback to env token
+      }
+
       await engine.joinChannel(
-        token: agorraToken,
+        token: token,
         channelId: channelId,
         uid: 0,
         options: const ChannelMediaOptions(
@@ -227,19 +251,31 @@ class AgoraRtcController extends GetxController {
   /// 🖥️ Toggle screen share
   Future<void> toggleScreenShare() async {
     try {
-      if (!isScreenSharing.value) {
-        await engine.startScreenCapture(
-          const ScreenCaptureParameters2(
-            captureAudio: true,
-            captureVideo: true,
-          ),
-        );
-        isScreenSharing.value = true;
-        _log('🖥️ Screen sharing started.');
+      if (kIsWeb) {
+        if (!isScreenSharing.value) {
+          await AgoraRtcService().startScreenShare();
+          isScreenSharing.value = true;
+          _log('🖥️ Screen sharing started (web).');
+        } else {
+          await AgoraRtcService().stopScreenShare();
+          isScreenSharing.value = false;
+          _log('🖥️ Screen sharing stopped (web).');
+        }
       } else {
-        await engine.stopScreenCapture();
-        isScreenSharing.value = false;
-        _log('🖥️ Screen sharing stopped.');
+        if (!isScreenSharing.value) {
+          await engine.startScreenCapture(
+            const ScreenCaptureParameters2(
+              captureAudio: true,
+              captureVideo: true,
+            ),
+          );
+          isScreenSharing.value = true;
+          _log('🖥️ Screen sharing started.');
+        } else {
+          await engine.stopScreenCapture();
+          isScreenSharing.value = false;
+          _log('🖥️ Screen sharing stopped.');
+        }
       }
     } catch (e) {
       _log('Screen share error: $e');
