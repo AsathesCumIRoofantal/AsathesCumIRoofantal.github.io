@@ -264,7 +264,7 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<bool> signinWithEmail({
+  Future<bool> signupWithEmail({
     required String email,
     required String password,
   }) async {
@@ -273,7 +273,7 @@ class AuthService extends GetxService {
 
       isLoading.value = true;
 
-      final response = await Supabase.instance.client.auth.signInWithPassword(
+      final response = await Supabase.instance.client.auth.signUp(
         email: email,
         password: password,
       );
