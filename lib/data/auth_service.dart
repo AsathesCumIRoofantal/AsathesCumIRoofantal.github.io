@@ -279,9 +279,12 @@ class AuthService extends GetxService {
         password: password,
       );
 
-      final user = Supabase.instance.client.auth.currentUser;
+      if (response.user == null) return false;
+      // await Supabase.instance.client.auth.confirm;
 
-      if (user == null) return false;
+      // final user = Supabase.instance.client.auth.currentUser;
+
+      // if (user == null) return false;
 
       return true;
     } catch (e) {
