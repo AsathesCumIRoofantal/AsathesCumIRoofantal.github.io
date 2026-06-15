@@ -203,6 +203,28 @@ class SignupView extends GetView<SignupController> {
                 const SizedBox(height: 40),
                 Obx(
                   () => (!controller.showLoadingForOtpSignup.value)
+                      ? Center()
+                      : TextField(
+                          controller: controller.otpSignupController,
+                          obscureText: controller.isObscure.value,
+                          decoration: _inputDecoration(
+                            'Secret OTP',
+                            Icons.lock_outline,
+                            context,
+                            suffix: IconButton(
+                              icon: Icon(
+                                controller.isObscure.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: theme.dividerColor,
+                              ),
+                              onPressed: controller.toggleObscure,
+                            ),
+                          ),
+                        ),
+                ),
+                Obx(
+                  () => (!controller.showLoadingForOtpSignup.value)
                       ? SizedBox(
                           width: double.infinity,
                           height: 56,

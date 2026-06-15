@@ -27,62 +27,51 @@ import 'package:flutter_web_plugins/url_strategy.dart';
 void main() async {
   runZonedGuarded(
     () async {
-      await SentryFlutter.init(
-        (options) {
-          //TODO: ADD Latest Version
-          // options.release = "air-web@1.0.23";
-          options.dsn =
-              "https://github.com/getsentry/sentry-wizard/releases/download/v4.0.1/sentry-wizard-win-x64.exe";
-        },
-        appRunner: () async {
-          // 🚀 FIX: Forces standard clean paths instead of fallback hash strategy
-          usePathUrlStrategy();
-          WidgetsBinding widgetsBinding =
-              WidgetsFlutterBinding.ensureInitialized();
-          FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-          await Supabase.initialize(
-            url: 'https://rndteatqickvnqzbawkc.supabase.co',
-            anonKey:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZHRlYXRxaWNrdm5xemJhd2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNDM3MzQsImV4cCI6MjA5NTYxOTczNH0.JhSTlfigDdquHGpCZ1Y0_82RoT9Sm-c0mszbJxmNXEY",
-            // publishableKey: "sb_publishable_IcdZ2n2igkGMbeni2Aw_ZA_kZ__3RZ2",
-          );
-          Get.put(AuthService());
-
-          // // ── Environment variables ───────────────────────────────────
-          // try {
-          //   await dotenv.load(fileName: '.env');
-          // } catch (_) {
-          //   debugPrint('⚠️  .env not found – running in dummy mode');
-          // }
-
-          // ── Lock orientation on phones only (allow all on tablet/web) ──
-          await SystemChrome.setPreferredOrientations([
-            DeviceOrientation.portraitUp,
-            DeviceOrientation.portraitDown,
-            DeviceOrientation.landscapeLeft,
-            DeviceOrientation.landscapeRight,
-          ]);
-
-          // ── Status bar style ────────────────────────────────────────
-          SystemChrome.setSystemUIOverlayStyle(
-            const SystemUiOverlayStyle(
-              statusBarColor: Colors.transparent,
-              statusBarIconBrightness: Brightness.light,
-              statusBarBrightness: Brightness.dark,
-            ),
-          );
-
-          // await dotenv.load(fileName: ".env");
-          GoogleFonts.config.allowRuntimeFetching = false;
-
-          FlutterError.onError = (FlutterErrorDetails details) {
-            FlutterError.presentError(details);
-            debugPrint(details.exceptionAsString());
-            debugPrint(details.stack.toString());
-          };
-          return runApp(AirApp());
-        },
+      // 🚀 FIX: Forces standard clean paths instead of fallback hash strategy
+      usePathUrlStrategy();
+      WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+      FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+      await Supabase.initialize(
+        url: 'https://rndteatqickvnqzbawkc.supabase.co',
+        anonKey:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZHRlYXRxaWNrdm5xemJhd2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNDM3MzQsImV4cCI6MjA5NTYxOTczNH0.JhSTlfigDdquHGpCZ1Y0_82RoT9Sm-c0mszbJxmNXEY",
+        // publishableKey: "sb_publishable_IcdZ2n2igkGMbeni2Aw_ZA_kZ__3RZ2",
       );
+      Get.put(AuthService());
+
+      // // ── Environment variables ───────────────────────────────────
+      // try {
+      //   await dotenv.load(fileName: '.env');
+      // } catch (_) {
+      //   debugPrint('⚠️  .env not found – running in dummy mode');
+      // }
+
+      // ── Lock orientation on phones only (allow all on tablet/web) ──
+      await SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+
+      // ── Status bar style ────────────────────────────────────────
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+        ),
+      );
+
+      // await dotenv.load(fileName: ".env");
+      GoogleFonts.config.allowRuntimeFetching = false;
+
+      FlutterError.onError = (FlutterErrorDetails details) {
+        FlutterError.presentError(details);
+        debugPrint(details.exceptionAsString());
+        debugPrint(details.stack.toString());
+      };
+      return runApp(AirApp());
     },
     (error, stack) {
       debugPrint('ERROR: $error');

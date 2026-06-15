@@ -19,6 +19,7 @@ class SignupController extends GetxController {
   final usernameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final otpSignupController = TextEditingController();
 
   final selectedRole = 'Alifiyas'.obs;
   final roles = [
@@ -88,7 +89,7 @@ class SignupController extends GetxController {
 
     final responseBool = await authService.signupWithEmail(
       email: emailController.text,
-      password: passwordController.text,
+      password: otpSignupController.text,
     );
     if (!responseBool) {
       Get.snackbar(
@@ -98,6 +99,8 @@ class SignupController extends GetxController {
         backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
         colorText: Colors.redAccent,
       );
+      isLoading.value = false;
+      showLoadingForOtpSignup.value = false;
       return;
     } else {
       showLoadingForOtpSignup.value = true;
@@ -130,6 +133,7 @@ class SignupController extends GetxController {
         backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
         colorText: Colors.redAccent,
       );
+      isLoadingForOtpSignup.value = false;
       showLoadingForOtpSignup.value = true;
       return;
     }
