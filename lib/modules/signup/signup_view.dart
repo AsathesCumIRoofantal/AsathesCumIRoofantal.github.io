@@ -202,33 +202,65 @@ class SignupView extends GetView<SignupController> {
                 ),
                 const SizedBox(height: 40),
                 Obx(
-                  () => SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: ElevatedButton(
-                      onPressed: controller.isLoading.value
-                          ? null
-                          : controller.signup,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: tertiary,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        elevation: 8,
-                        shadowColor: tertiary.withValues(alpha: 0.5),
-                      ),
-                      child: controller.isLoading.value
-                          ? const CircularProgressIndicator(color: Colors.white)
-                          : const Text(
-                              'REQUEST IDENTITY',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                letterSpacing: 2,
+                  () => (controller.showLoadingForOtpSignup.value)
+                      ? SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: controller.isLoading.value
+                                ? null
+                                : controller.signup,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: tertiary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
                               ),
+                              elevation: 8,
+                              shadowColor: tertiary.withValues(alpha: 0.5),
                             ),
-                    ),
-                  ),
+                            child: controller.isLoading.value
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : const Text(
+                                    'REQUEST IDENTITY',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      letterSpacing: 2,
+                                    ),
+                                  ),
+                          ),
+                        )
+                      : SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: ElevatedButton(
+                            onPressed: controller.isLoadingForOtpSignup.value
+                                ? null
+                                : controller.getUserEmailSignupOtp,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: tertiary,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              elevation: 8,
+                              shadowColor: tertiary.withValues(alpha: 0.5),
+                            ),
+                            child: controller.isLoadingForOtpSignup.value
+                                ? const CircularProgressIndicator(
+                                    color: Colors.white,
+                                  )
+                                : const Text(
+                                    'OTP to Verify',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                      letterSpacing: 2,
+                                    ),
+                                  ),
+                          ),
+                        ),
                 ),
                 const SizedBox(height: 40),
                 Center(

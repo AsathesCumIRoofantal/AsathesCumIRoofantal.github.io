@@ -11,6 +11,8 @@ import '../../data/auth_service.dart';
 
 class SignupController extends GetxController {
   final isLoading = false.obs;
+  final showLoadingForOtpSignup = false.obs;
+  final isLoadingForOtpSignup = false.obs;
   final isObscure = true.obs;
 
   final profileSpecificNameController = TextEditingController();
@@ -81,7 +83,6 @@ class SignupController extends GetxController {
 
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 1));
-    isLoading.value = false;
 
     AuthService authService = AuthService();
 
@@ -92,11 +93,44 @@ class SignupController extends GetxController {
     if (!responseBool) {
       Get.snackbar(
         'Error',
-        'Invalid or duplicate email',
+        'Invalid or duplicate email or else',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
         colorText: Colors.redAccent,
       );
+      return;
+    } else {
+      showLoadingForOtpSignup.value = true;
+      Get.snackbar(
+        'Good',
+        'Check your email and verify your OTP',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.greenAccent.withValues(alpha: 0.1),
+        colorText: Colors.greenAccent,
+      );
+    }
+    isLoading.value = false;
+  }
+
+  Future<void> getUserEmailSignupOtp() async {
+    // isLoading.value = true;
+    isLoadingForOtpSignup.value = true;
+    final responseOtp = await Supabase.instance.client.auth.verifyOTP(
+      type: OtpType.signup,
+      email: emailController.text.trim(),
+      token: passwordController.text.trim(),
+    );
+    if (responseOtp.user == null ||
+        responseOtp.user!.emailConfirmedAt == null ||
+        responseOtp.user!.emailConfirmedAt!.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Invalid or duplicate email or else',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
+        colorText: Colors.redAccent,
+      );
+      showLoadingForOtpSignup.value = true;
       return;
     }
 
@@ -120,6 +154,9 @@ class SignupController extends GetxController {
       'Welcome to AIR, ${usernameController.text}!',
       snackPosition: SnackPosition.BOTTOM,
     );
+    // isLoading.value = false;
+    isLoadingForOtpSignup.value = false;
+    showLoadingForOtpSignup.value = false;
   }
 
   @override
