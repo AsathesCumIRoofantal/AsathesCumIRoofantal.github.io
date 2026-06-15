@@ -109,12 +109,19 @@ class LoginController extends GetxController {
     //   );
     // }
 
-    final loginResponse = await AuthService.to.loginWithUserID(
+    final loginResponseBool = await AuthService.to.loginWithUserID(
       userID: userIdController.text,
       password: passwordController.text,
     );
 
-    if (!loginResponse) {
+    if (!loginResponseBool) {
+      Get.snackbar(
+        'Error',
+        'Invalid username or password',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
+        colorText: Colors.redAccent,
+      );
       return;
     }
 
