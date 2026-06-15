@@ -38,6 +38,21 @@ class AuthRepository {
     return AirUser.fromJson(response);
   }
 
+  Future<AirUser?> getUserByUserID(String userID) async {
+    final response = await _client
+        .from(table)
+        .select()
+        .eq('user_id', userID)
+        .eq("isMember", 1)
+        .maybeSingle();
+
+    if (response == null) {
+      return null;
+    }
+
+    return AirUser.fromJson(response);
+  }
+
   Future<List<AirUser>> getUsers({int page = 1, int limit = 20}) async {
     final from = (page - 1) * limit;
 
@@ -67,6 +82,12 @@ class AuthRepository {
         .insert(user.toJson())
         .select()
         .single();
+
+    return AirUser.fromJson(response);
+  }
+
+  Future<AirUser> createUserByMap(Map<String, dynamic> user) async {
+    final response = await _client.from(table).insert(user).select().single();
 
     return AirUser.fromJson(response);
   }

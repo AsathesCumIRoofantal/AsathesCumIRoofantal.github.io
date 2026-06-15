@@ -12,7 +12,7 @@ class LoginController extends GetxController {
   final isLoading = false.obs;
   final isObscure = true.obs;
 
-  final usernameController = TextEditingController();
+  final userIdController = TextEditingController();
   final passwordController = TextEditingController();
 
   Rx<String?> selectedRole = (null).obs; // Default role
@@ -70,7 +70,7 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    if (usernameController.text.isEmpty || passwordController.text.isEmpty) {
+    if (userIdController.text.isEmpty || passwordController.text.isEmpty) {
       Get.snackbar(
         'Error',
         'Please enter username and password',
@@ -109,10 +109,15 @@ class LoginController extends GetxController {
     //   );
     // }
 
-    AuthService.to.login(
-      usernameController.text,
-      selectedRole.value ?? 'guest',
+    final loginResponse = await AuthService.to.loginWithUserID(
+      userID: userIdController.text,
+      password: passwordController.text,
     );
+
+    if (!loginResponse) {
+      return;
+    }
+
     if (kIsWeb) {
       Get.offAllNamed(WebHomeView.routeName);
     } else {
@@ -120,14 +125,14 @@ class LoginController extends GetxController {
     }
     Get.snackbar(
       'Success',
-      'Welcome back, ${usernameController.text} (${selectedRole.value})!',
+      'Welcome back, ${userIdController.text} (${selectedRole.value})!',
       snackPosition: SnackPosition.BOTTOM,
     );
   }
 
   @override
   void onClose() {
-    usernameController.dispose();
+    userIdController.dispose();
     passwordController.dispose();
     super.onClose();
   }

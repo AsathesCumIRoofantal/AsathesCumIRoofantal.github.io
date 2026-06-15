@@ -150,7 +150,10 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<bool> login({required String mobile, required String password}) async {
+  Future<bool> loginWithPhone({
+    required String mobile,
+    required String password,
+  }) async {
     try {
       authState.value = AuthState.loading;
 
@@ -203,6 +206,120 @@ class AuthService extends GetxService {
       isLoading.value = false;
     }
   }
+
+  Future<bool> loginWithUserID({
+    required String userID,
+    required String password,
+  }) async {
+    try {
+      authState.value = AuthState.loading;
+
+      isLoading.value = true;
+
+      final user = await _repo.getUserByUserID(userID);
+
+      if (user == null) {
+        errorMessage.value = 'User not found';
+
+        authState.value = AuthState.error;
+
+        return false;
+      }
+
+      if (user.password != password) {
+        errorMessage.value = 'Invalid password';
+
+        authState.value = AuthState.error;
+
+        return false;
+      }
+
+      if (user.isBlocked == 1) {
+        authState.value = AuthState.blocked;
+
+        return false;
+      }
+
+      if (user.isApproved == 0) {
+        authState.value = AuthState.unapproved;
+
+        return false;
+      }
+
+      currentUser.value = user;
+
+      await _saveSession(user.userId);
+
+      authState.value = AuthState.authenticated;
+
+      return true;
+    } catch (e) {
+      errorMessage.value = e.toString();
+
+      authState.value = AuthState.error;
+
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // Future<bool> loginWithEmail({
+  //   required String email,
+  //   required String password,
+  // }) async {
+  //   try {
+  //     authState.value = AuthState.loading;
+
+  //     isLoading.value = true;
+
+  //     final user = await _repo.getUserByEmail(email);
+
+  //     if (user == null) {
+  //       errorMessage.value = 'User not found';
+
+  //       authState.value = AuthState.error;
+
+  //       return false;
+  //     }
+
+  //     if (user.password != password) {
+  //       errorMessage.value = 'Invalid password';
+
+  //       authState.value = AuthState.error;
+
+  //       return false;
+  //     }
+
+  //     if (user.isBlocked == 1) {
+  //       authState.value = AuthState.blocked;
+
+  //       return false;
+  //     }
+
+  //     if (user.isApproved == 0) {
+  //       authState.value = AuthState.unapproved;
+
+  //       return false;
+  //     }
+
+  //     currentUser.value = user;
+
+  //     await _saveSession(user.userId);
+
+  //     authState.value = AuthState.authenticated;
+
+  //     return true;
+  //   } catch (e) {
+  //     errorMessage.value = e.toString();
+
+  //     authState.value = AuthState.error;
+
+  //     return false;
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
 
   // ==========================================================
   // OTP LOGIN

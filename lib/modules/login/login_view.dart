@@ -184,7 +184,7 @@ class LoginView extends GetView<LoginController> {
 
                 const SizedBox(height: 32),
                 TextField(
-                  controller: controller.usernameController,
+                  controller: controller.userIdController,
                   decoration: _inputDecoration(
                     'Username / Identity ID',
                     Icons.person_outline,

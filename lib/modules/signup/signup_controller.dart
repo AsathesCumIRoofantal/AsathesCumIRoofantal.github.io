@@ -1,8 +1,11 @@
+import 'package:air_app/data/auth_repository.dart';
+import 'package:air_app/data/models/user_model.dart';
 import 'package:air_app/routes/app_pages.dart';
 import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../data/auth_service.dart';
 
@@ -61,6 +64,7 @@ class SignupController extends GetxController {
   void setRole(String role) => selectedRole.value = role;
 
   void signup() async {
+    usernameController.text = usernameController.text.trim();
     if (profileSpecificNameController.text.isEmpty ||
         usernameController.text.isEmpty ||
         emailController.text.isEmpty ||
@@ -78,8 +82,14 @@ class SignupController extends GetxController {
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 2));
     isLoading.value = false;
-
-    AuthService.to.login(usernameController.text, selectedRole.value);
+    AuthRepository repository = AuthRepository(Supabase.instance.client);
+    final userResponse = await repository.createUserByMap({
+      "name": usernameController.text,
+      "password": passwordController.text,
+      // "mobile": mobileController.text,
+      "email": emailController.text,
+      // "user_role": selectedRole.value,
+    });
 
     if (kIsWeb) {
       Get.offAllNamed(WebHomeView.routeName);
