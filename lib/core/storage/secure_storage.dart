@@ -11,33 +11,44 @@ class SecureStorage extends GetxService {
   final _storage = const FlutterSecureStorage(aOptions: _opts);
 
   // ── Keys ─────────────────────────────────────────────────
-  static const _kJwt         = 'jwt_token';
-  static const _kRefresh     = 'refresh_token';
-  static const _kDeviceId    = 'device_id';
-  static const _kPinHash     = 'pin_hash';
+  static const _kJwt = 'jwt_token';
+  static const _kRefresh = 'refresh_token';
+  static const _kDeviceId = 'device_id';
+  static const _kPinHash = 'pin_hash';
+  static const _kSupabaseUID = "kSupabaseUID";
 
   // ── JWT ──────────────────────────────────────────────────
-  Future<void>   saveJwt(String token)     => _storage.write(key: _kJwt, value: token);
-  Future<String?> readJwt()                => _storage.read(key: _kJwt);
-  Future<void>   deleteJwt()               => _storage.delete(key: _kJwt);
+  Future<void> saveJwt(String token) =>
+      _storage.write(key: _kJwt, value: token);
+  Future<String?> readJwt() => _storage.read(key: _kJwt);
+  Future<void> deleteJwt() => _storage.delete(key: _kJwt);
+
+  Future<void> saveSupabaseUID(String token) =>
+      _storage.write(key: _kSupabaseUID, value: token);
+  Future<String?> readSupabaseUID() => _storage.read(key: _kSupabaseUID);
+  Future<void> deleteSupabaseUID() => _storage.delete(key: _kSupabaseUID);
 
   // ── Refresh ──────────────────────────────────────────────
-  Future<void>   saveRefresh(String token) => _storage.write(key: _kRefresh, value: token);
-  Future<String?> readRefresh()            => _storage.read(key: _kRefresh);
+  Future<void> saveRefresh(String token) =>
+      _storage.write(key: _kRefresh, value: token);
+  Future<String?> readRefresh() => _storage.read(key: _kRefresh);
 
   // ── Device ID ────────────────────────────────────────────
-  Future<void>   saveDeviceId(String id)   => _storage.write(key: _kDeviceId, value: id);
-  Future<String?> readDeviceId()           => _storage.read(key: _kDeviceId);
+  Future<void> saveDeviceId(String id) =>
+      _storage.write(key: _kDeviceId, value: id);
+  Future<String?> readDeviceId() => _storage.read(key: _kDeviceId);
 
   // ── App PIN ──────────────────────────────────────────────
-  Future<void>   savePinHash(String hash)  => _storage.write(key: _kPinHash, value: hash);
-  Future<String?> readPinHash()            => _storage.read(key: _kPinHash);
+  Future<void> savePinHash(String hash) =>
+      _storage.write(key: _kPinHash, value: hash);
+  Future<String?> readPinHash() => _storage.read(key: _kPinHash);
 
   // ── Generic ──────────────────────────────────────────────
-  Future<void>   write(String key, String value) => _storage.write(key: key, value: value);
-  Future<String?> read(String key)               => _storage.read(key: key);
-  Future<void>   delete(String key)              => _storage.delete(key: key);
+  Future<void> write(String key, String value) =>
+      _storage.write(key: key, value: value);
+  Future<String?> read(String key) => _storage.read(key: key);
+  Future<void> delete(String key) => _storage.delete(key: key);
 
   // ── Full wipe (logout) ───────────────────────────────────
-  Future<void>   clearAll()                      => _storage.deleteAll();
+  Future<void> clearAll() => _storage.deleteAll();
 }

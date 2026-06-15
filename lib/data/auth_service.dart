@@ -1,15 +1,290 @@
+import 'package:air_app/core/storage/secure_storage.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'auth_repository.dart';
+import 'models/user_model.dart';
+
+enum AuthState {
+  initial,
+  loading,
+  authenticated,
+  unauthenticated,
+  blocked,
+  unapproved,
+  error,
+}
 
 class AuthService extends GetxService {
-  static AuthService get to => Get.find();
-  
-  final userRole = 'Alifiyas'.obs; // Default to Alifiyas
-  final userName = ''.obs;
+  static AuthService get to => Get.find<AuthService>();
 
-  void login(String name, String role) {
-    userName.value = name;
-    userRole.value = role;
+  late final AuthRepository _repo;
+
+  final authState = AuthState.initial.obs;
+
+  final currentUser = Rxn<AirUser>();
+
+  final isLoading = false.obs;
+
+  final errorMessage = ''.obs;
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+
+    _repo = AuthRepository(Supabase.instance.client);
+
+    await restoreSession();
   }
 
-  bool get isExpert => userRole.value == 'Mazeasta';
+  // ==========================================================
+  // Current User Helpers
+  // ==========================================================
+
+  bool get isLoggedIn => currentUser.value != null;
+
+  String get userId => currentUser.value?.userId ?? '';
+
+  String get mobile => currentUser.value?.mobile ?? '';
+
+  String get userName => currentUser.value?.name ?? '';
+
+  int get roleId => currentUser.value?.userRole ?? 0;
+
+  bool get isSuperAdmin => currentUser.value?.isSuperAdmin ?? false;
+
+  bool get isAdmin => currentUser.value?.isAdmin ?? false;
+
+  bool get isManager => currentUser.value?.isManager ?? false;
+
+  bool get isAgent => currentUser.value?.isAgent ?? false;
+
+  bool get isMember => currentUser.value?.isMemberRole ?? false;
+
+  // ==========================================================
+  // Login
+  // ==========================================================
+
+  Future<bool> login({required String mobile, required String password}) async {
+    try {
+      authState.value = AuthState.loading;
+
+      isLoading.value = true;
+
+      final user = await _repo.getUserByMobile(mobile);
+
+      if (user == null) {
+        errorMessage.value = 'User not found';
+
+        authState.value = AuthState.error;
+
+        return false;
+      }
+
+      if (user.password != password) {
+        errorMessage.value = 'Invalid password';
+
+        authState.value = AuthState.error;
+
+        return false;
+      }
+
+      if (user.isBlocked == 1) {
+        authState.value = AuthState.blocked;
+
+        return false;
+      }
+
+      if (user.isApproved == 0) {
+        authState.value = AuthState.unapproved;
+
+        return false;
+      }
+
+      currentUser.value = user;
+
+      await _saveSession(user.userId);
+
+      authState.value = AuthState.authenticated;
+
+      return true;
+    } catch (e) {
+      errorMessage.value = e.toString();
+
+      authState.value = AuthState.error;
+
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  // ==========================================================
+  // OTP LOGIN
+  // ==========================================================
+
+  Future<void> sendOtp(String mobile) async {
+    // TODO:
+    // Twilio
+    // MSG91
+    // Firebase Auth
+    // Supabase OTP
+  }
+
+  Future<bool> verifyOtp({required String mobile, required String otp}) async {
+    // TODO
+    return false;
+  }
+
+  // ==========================================================
+  // Forgot Password
+  // ==========================================================
+
+  Future<void> forgotPassword(String mobile) async {
+    // TODO
+
+    // send sms
+
+    // send email
+
+    // generate reset token
+  }
+
+  Future<void> resetPassword({
+    required String userId,
+    required String password,
+  }) async {
+    final user = await _repo.getUserById(userId);
+
+    if (user == null) return;
+    user.password = password;
+    await _repo.updateUser(user);
+  }
+
+  // ==========================================================
+  // Session
+  // ==========================================================
+
+  Future<void> restoreSession() async {
+    try {
+      final box = Get.find<SecureStorage>();
+
+      final String? uid = await box.readSupabaseUID();
+
+      if (uid == null) {
+        authState.value = AuthState.unauthenticated;
+
+        return;
+      }
+
+      final user = await _repo.getUserById(uid);
+
+      if (user == null) {
+        authState.value = AuthState.unauthenticated;
+
+        return;
+      }
+
+      currentUser.value = user;
+
+      authState.value = AuthState.authenticated;
+    } catch (_) {
+      authState.value = AuthState.unauthenticated;
+    }
+  }
+
+  Future<void> logout() async {
+    final box = Get.find<SecureStorage>();
+
+    await box.deleteSupabaseUID();
+
+    currentUser.value = null;
+
+    authState.value = AuthState.unauthenticated;
+  }
+
+  Future<void> _saveSession(String uid) async {
+    final box = Get.find<SecureStorage>();
+
+    await box.saveSupabaseUID(uid);
+  }
+
+  // ==========================================================
+  // Profile
+  // ==========================================================
+
+  Future<void> refreshProfile() async {
+    if (!isLoggedIn) return;
+
+    final user = await _repo.getUserById(userId);
+
+    if (user != null) {
+      currentUser.value = user;
+    }
+  }
+
+  Future<void> updateProfile(AirUser user) async {
+    final updated = await _repo.updateUser(user);
+
+    currentUser.value = updated;
+  }
+
+  // ==========================================================
+  // FCM
+  // ==========================================================
+
+  Future<void> updateFcmToken(String token) async {
+    if (!isLoggedIn) return;
+
+    await _repo.updateFcmToken(userId: userId, token: token);
+  }
+
+  // ==========================================================
+  // LOCATION
+  // ==========================================================
+
+  Future<void> updateLocation({
+    required double latitude,
+    required double longitude,
+  }) async {
+    if (!isLoggedIn) return;
+
+    await _repo.updateLocation(
+      userId: userId,
+      latitude: latitude,
+      longitude: longitude,
+    );
+  }
+
+  // ==========================================================
+  // Presence
+  // ==========================================================
+
+  Future<void> markOnline() async {
+    // TODO
+  }
+
+  Future<void> markOffline() async {
+    // TODO
+  }
+
+  // ==========================================================
+  // Audit Logs
+  // ==========================================================
+
+  Future<void> logAction(String action) async {
+    // TODO
+  }
+
+  // ==========================================================
+  // Device Tracking
+  // ==========================================================
+
+  Future<void> registerDevice() async {
+    // TODO
+  }
+
+  Future<void> unregisterDevice() async {
+    // TODO
+  }
 }

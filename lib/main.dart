@@ -24,56 +24,63 @@ import 'dart:js_interop';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
-  // 🚀 FIX: Forces standard clean paths instead of fallback hash strategy
-  usePathUrlStrategy();
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  runZonedGuarded(
+    () async {
+      await SentryFlutter.init(
+        (options) {
+          //TODO: ADD Latest Version
+          // options.release = "air-web@1.0.23";
+          options.dsn =
+              "https://github.com/getsentry/sentry-wizard/releases/download/v4.0.1/sentry-wizard-win-x64.exe";
+        },
+        appRunner: () async {
+          // 🚀 FIX: Forces standard clean paths instead of fallback hash strategy
+          usePathUrlStrategy();
+          WidgetsBinding widgetsBinding =
+              WidgetsFlutterBinding.ensureInitialized();
+          FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+          Get.put(AuthService());
 
-  // // ── Environment variables ───────────────────────────────────
-  // try {
-  //   await dotenv.load(fileName: '.env');
-  // } catch (_) {
-  //   debugPrint('⚠️  .env not found – running in dummy mode');
-  // }
+          // // ── Environment variables ───────────────────────────────────
+          // try {
+          //   await dotenv.load(fileName: '.env');
+          // } catch (_) {
+          //   debugPrint('⚠️  .env not found – running in dummy mode');
+          // }
 
-  // ── Lock orientation on phones only (allow all on tablet/web) ──
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-  ]);
+          // ── Lock orientation on phones only (allow all on tablet/web) ──
+          await SystemChrome.setPreferredOrientations([
+            DeviceOrientation.portraitUp,
+            DeviceOrientation.portraitDown,
+            DeviceOrientation.landscapeLeft,
+            DeviceOrientation.landscapeRight,
+          ]);
 
-  // ── Status bar style ────────────────────────────────────────
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-      statusBarBrightness: Brightness.dark,
-    ),
-  );
+          // ── Status bar style ────────────────────────────────────────
+          SystemChrome.setSystemUIOverlayStyle(
+            const SystemUiOverlayStyle(
+              statusBarColor: Colors.transparent,
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.dark,
+            ),
+          );
 
-  // await dotenv.load(fileName: ".env");
-  GoogleFonts.config.allowRuntimeFetching = false;
+          // await dotenv.load(fileName: ".env");
+          GoogleFonts.config.allowRuntimeFetching = false;
 
-  FlutterError.onError = (FlutterErrorDetails details) {
-    FlutterError.presentError(details);
-    debugPrint(details.exceptionAsString());
-    debugPrint(details.stack.toString());
-  };
-
-  Get.put(AuthService());
-  await SentryFlutter.init(
-    (options) {
-      //TODO: ADD Latest Version
-      // options.release = "air-web@1.0.23";
-      options.dsn =
-          "https://github.com/getsentry/sentry-wizard/releases/download/v4.0.1/sentry-wizard-win-x64.exe";
+          FlutterError.onError = (FlutterErrorDetails details) {
+            FlutterError.presentError(details);
+            debugPrint(details.exceptionAsString());
+            debugPrint(details.stack.toString());
+          };
+          return runApp(AirApp());
+        },
+      );
     },
-    appRunner: () => runZonedGuarded(() => runApp(AirApp()), (error, stack) {
+    (error, stack) {
       debugPrint('ERROR: $error');
       debugPrint(stack.toString());
-    }),
+    },
   );
 }
 

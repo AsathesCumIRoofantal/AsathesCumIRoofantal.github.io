@@ -47,6 +47,8 @@ dependencies:
 
   sentry_flutter: ^9.21.0
 
+  supabase_flutter: ^2.14.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
