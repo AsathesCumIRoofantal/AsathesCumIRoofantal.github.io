@@ -273,6 +273,7 @@ class AuthService extends GetxService {
       authState.value = AuthState.loading;
 
       isLoading.value = true;
+      await Supabase.instance.client.auth.signOut();
       if (Supabase.instance.client.auth.currentSession != null) {
         Get.snackbar(
           'Error',
@@ -285,7 +286,6 @@ class AuthService extends GetxService {
         // Add your navigation router logic here to skip the form
         return false;
       }
-      await Supabase.instance.client.auth.signOut();
 
       final response = await Supabase.instance.client.auth.signUp(
         email: email,
