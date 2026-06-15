@@ -85,7 +85,7 @@ class SignupController extends GetxController {
 
     AuthService authService = AuthService();
 
-    final responseBool = await authService.loginWithEmail(
+    final responseBool = await authService.signinWithEmail(
       email: emailController.text,
       password: passwordController.text,
     );

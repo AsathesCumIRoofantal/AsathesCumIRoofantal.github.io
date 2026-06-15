@@ -264,7 +264,7 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<bool> loginWithEmail({
+  Future<bool> signinWithEmail({
     required String email,
     required String password,
   }) async {
