@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../zoom_routes.dart';
 import '../widgets/zoom_theme.dart';
+import '../widgets/backend_toggle.dart';
+
+
 import '../widgets/reconnect_banner.dart';
 import '../widgets/reaction_overlay.dart';
 import '../widgets/shortcuts_overlay.dart';
@@ -94,6 +97,8 @@ class _TopChrome extends GetView<ZoomMeetingController> {
           const SizedBox(width: 6),
           Text('${controller.stats.rxKbps.value} kbps', style: ZoomTheme.muted),
         ])),
+        const SizedBox(width: 12),
+        const BackendToggle(compact: true),
         const SizedBox(width: 12),
         FilledButton.icon(
           onPressed: () => Get.offAllNamed(ZoomRoutes.home),

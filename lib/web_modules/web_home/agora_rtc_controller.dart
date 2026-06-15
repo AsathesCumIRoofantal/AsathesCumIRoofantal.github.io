@@ -9,8 +9,11 @@ import 'package:get/get.dart';
 
 class AgoraRtcController extends GetxController {
   // ── Credentials ─────────────────────────────────────────────────────────
-  final String appId = String.fromEnvironment('AppIdAgorra', defaultValue: '');
-  final String agorraToken = String.fromEnvironment(
+  static final String appId = String.fromEnvironment(
+    'AppIdAgorra',
+    defaultValue: '',
+  );
+  static final String agorraToken = String.fromEnvironment(
     'AgorraToken1234567890',
     defaultValue: '',
   );

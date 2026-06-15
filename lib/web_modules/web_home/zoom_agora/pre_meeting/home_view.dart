@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../zoom_routes.dart';
 import '../widgets/zoom_theme.dart';
+import '../widgets/backend_toggle.dart';
 
 /// Polished, responsive home screen for the Zoom-parity module.
 /// Adapts from a single column on mobile to a 2-column hero layout on desktop.
@@ -60,6 +61,8 @@ class _TopBar extends StatelessWidget {
     const SizedBox(width: 12),
     Text('AIR Meet', style: ZoomTheme.h3),
     const Spacer(),
+    const BackendToggle(),
+    const SizedBox(width: 12),
     IconButton(onPressed: () {}, icon: const Icon(Icons.help_outline, color: ZoomTheme.textMuted)),
     IconButton(onPressed: () => Get.toNamed(ZoomRoutes.settings),
       icon: const Icon(Icons.settings_outlined, color: ZoomTheme.textMuted)),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../in_meeting/zoom_meeting_controller.dart';
+import '../widgets/backend_toggle.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -28,6 +29,9 @@ class SettingsView extends StatelessWidget {
             trailing: DropdownButton<String>(value: ctl.theme.value,
               items: const ['dark','light','system'].map((e)=>DropdownMenuItem(value:e, child: Text(e))).toList(),
               onChanged:(v)=>ctl.theme.value=v!))),
+          const Divider(color: Colors.white24, height: 32),
+          const ListTile(title: Text('Real-time engine', style: TextStyle(color: Colors.white))),
+          const Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: BackendToggle()),
         ])),
       ]));
   }
