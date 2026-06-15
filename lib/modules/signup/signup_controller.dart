@@ -80,9 +80,28 @@ class SignupController extends GetxController {
     }
 
     isLoading.value = true;
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     isLoading.value = false;
+
+    AuthService authService = AuthService();
+
+    final responseBool = await authService.loginWithEmail(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+    if (!responseBool) {
+      Get.snackbar(
+        'Error',
+        'Invalid or duplicate email',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
+        colorText: Colors.redAccent,
+      );
+      return;
+    }
+
     AuthRepository repository = AuthRepository(Supabase.instance.client);
+
     final userResponse = await repository.createUserByMap({
       "name": usernameController.text,
       "password": passwordController.text,

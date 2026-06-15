@@ -119,8 +119,8 @@ class LoginController extends GetxController {
         'Error',
         'Invalid username or password',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
-        colorText: Colors.redAccent,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+        colorText: Colors.white,
       );
       return;
     }
