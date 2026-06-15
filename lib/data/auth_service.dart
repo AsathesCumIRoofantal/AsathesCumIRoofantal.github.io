@@ -272,6 +272,7 @@ class AuthService extends GetxService {
       authState.value = AuthState.loading;
 
       isLoading.value = true;
+      await Supabase.instance.client.auth.signOut();
 
       final response = await Supabase.instance.client.auth.signUp(
         email: email,
