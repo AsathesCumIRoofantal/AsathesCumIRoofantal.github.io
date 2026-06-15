@@ -202,7 +202,7 @@ class SignupView extends GetView<SignupController> {
                 ),
                 const SizedBox(height: 40),
                 Obx(
-                  () => (controller.showLoadingForOtpSignup.value)
+                  () => (!controller.showLoadingForOtpSignup.value)
                       ? SizedBox(
                           width: double.infinity,
                           height: 56,
