@@ -65,6 +65,91 @@ class AuthService extends GetxService {
   // Login
   // ==========================================================
 
+  Future<bool> loginWithGoogle() async {
+    try {
+      authState.value = AuthState.loading;
+      isLoading.value = true;
+
+      final responseBool = await Supabase.instance.client.auth.signInWithOAuth(
+        OAuthProvider.google,
+      );
+
+      if (!responseBool) {
+        authState.value = AuthState.error;
+        errorMessage.value = 'Google login failed';
+        return false;
+      }
+
+      final user = Supabase.instance.client.auth.currentUser;
+
+      if (user == null) {
+        errorMessage.value = 'User not found in database';
+        authState.value = AuthState.error;
+        return false;
+      }
+
+      final userModel = await _repo.getUserById(user.id);
+
+      if (userModel == null) {
+        errorMessage.value = 'User not found in database';
+        authState.value = AuthState.error;
+        return false;
+      }
+
+      currentUser.value = userModel;
+      await _saveSession(user.id);
+
+      authState.value = AuthState.authenticated;
+      return true;
+    } catch (e) {
+      errorMessage.value = e.toString();
+      authState.value = AuthState.error;
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<bool> loginWithApple() async {
+    try {
+      authState.value = AuthState.loading;
+      isLoading.value = true;
+
+      final responseBool = await Supabase.instance.client.auth.signInWithOAuth(
+        OAuthProvider.apple,
+      );
+
+      final user = Supabase.instance.client.auth.currentUser;
+
+      if (user == null) {
+        errorMessage.value = 'User not found in database';
+        authState.value = AuthState.error;
+        return false;
+      }
+
+      final userModel = await _repo.getUserById(user.id);
+
+      if (userModel == null) {
+        errorMessage.value = 'User not found in database';
+        authState.value = AuthState.error;
+        return false;
+      }
+
+      currentUser.value = userModel;
+      await _saveSession(user.id);
+
+      authState.value = AuthState.authenticated;
+
+      return true;
+    } catch (e) {
+      errorMessage.value = e.toString();
+      authState.value = AuthState.error;
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   Future<bool> login({required String mobile, required String password}) async {
     try {
       authState.value = AuthState.loading;
