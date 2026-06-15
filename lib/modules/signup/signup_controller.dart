@@ -134,8 +134,10 @@ class SignupController extends GetxController {
         colorText: Colors.redAccent,
       );
       isLoadingForOtpSignup.value = false;
-      showLoadingForOtpSignup.value = true;
+      showLoadingForOtpSignup.value = false;
       return;
+    } else {
+      showLoadingForOtpSignup.value = true;
     }
 
     AuthRepository repository = AuthRepository(Supabase.instance.client);
