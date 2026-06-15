@@ -1,4 +1,5 @@
 import 'package:air_app/core/storage/secure_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -272,6 +273,18 @@ class AuthService extends GetxService {
       authState.value = AuthState.loading;
 
       isLoading.value = true;
+      if (Supabase.instance.client.auth.currentSession != null) {
+        Get.snackbar(
+          'Error',
+          'User is already logged in! May redirecting to home screen...',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
+          colorText: Colors.redAccent,
+        );
+        print("User is already logged in! Redirecting to home screen...");
+        // Add your navigation router logic here to skip the form
+        return false;
+      }
       await Supabase.instance.client.auth.signOut();
 
       final response = await Supabase.instance.client.auth.signUp(

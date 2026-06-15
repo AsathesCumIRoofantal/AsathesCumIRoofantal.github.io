@@ -44,7 +44,7 @@ void main() async {
             url: 'https://rndteatqickvnqzbawkc.supabase.co',
             anonKey:
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZHRlYXRxaWNrdm5xemJhd2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNDM3MzQsImV4cCI6MjA5NTYxOTczNH0.JhSTlfigDdquHGpCZ1Y0_82RoT9Sm-c0mszbJxmNXEY",
-            publishableKey: "sb_publishable_IcdZ2n2igkGMbeni2Aw_ZA_kZ__3RZ2",
+            // publishableKey: "sb_publishable_IcdZ2n2igkGMbeni2Aw_ZA_kZ__3RZ2",
           );
           Get.put(AuthService());
 
