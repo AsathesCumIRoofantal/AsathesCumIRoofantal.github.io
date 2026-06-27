@@ -13,9 +13,9 @@ class AuthRepository {
 
   Future<AirUser?> getUserById(String userId) async {
     final response = await _client
-        .from(table)
+        .from("user_table")
         .select()
-        .eq('user_id', userId)
+        .eq('id', userId)
         .maybeSingle();
 
     if (response == null) {
