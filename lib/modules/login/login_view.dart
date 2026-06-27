@@ -51,11 +51,11 @@ class LoginView extends GetView<LoginController> {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 40),
-                _buildFeatureMatrix(),
-                // const SizedBox(height: 20),
-                // _buildDeveloperDocs(),
-                const SizedBox(height: 40),
+                // const SizedBox(height: 40),
+                // _buildFeatureMatrix(),
+                // // const SizedBox(height: 20),
+                // // _buildDeveloperDocs(),
+                // const SizedBox(height: 40),
                 Center(
                   child: Container(
                     padding: const EdgeInsets.all(20),
@@ -192,17 +192,16 @@ class LoginView extends GetView<LoginController> {
                 //   ),
                 // ),
                 // const SizedBox(height: 20),
-                Obx(
-                  () => TextField(
-                    controller: controller.emailController,
-                    // obscureText: controller.isObscure.value,
-                    decoration: _inputDecoration(
-                      'Email',
-                      Icons.email_sharp,
-                      context,
-                    ),
+                TextField(
+                  controller: controller.emailController,
+                  // obscureText: controller.isObscure.value,
+                  decoration: _inputDecoration(
+                    'Email',
+                    Icons.email_sharp,
+                    context,
                   ),
                 ),
+
                 const SizedBox(height: 20),
                 Obx(
                   () => TextField(
