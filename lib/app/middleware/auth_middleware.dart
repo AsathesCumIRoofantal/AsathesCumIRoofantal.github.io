@@ -3,29 +3,38 @@
 // ============================================================
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../core/storage/local_storage.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../../data/auth_service.dart';
+import '../../routes/app_pages.dart';
 
 class AuthMiddleware extends GetMiddleware {
   @override
   int? get priority => 1;
 
+  /// Routes that do NOT require authentication.
+  static const _public = [
+    AppRoutes.SPLASH,
+    AppRoutes.LOGIN,
+    AppRoutes.SIGNUP,
+  ];
+
   @override
   RouteSettings? redirect(String? route) {
-    final hasSession = LocalStorage.to.hasSession;
-
-    // Protected routes
-    const protected = ['/dashboard', '/profile', '/settings'];
-    // Auth routes
-    const authOnly  = ['/login', '/signup', '/otp'];
-
-    if (protected.any((p) => route?.startsWith(p) == true) && !hasSession) {
-      return const RouteSettings(name: '/login');
+    // Allow public routes through without any check.
+    if (route != null && _public.any((p) => route.startsWith(p))) {
+      return null;
     }
 
-    if (authOnly.contains(route) && hasSession) {
-      return const RouteSettings(name: '/dashboard');
+    // Guard: user must be fully authenticated.
+    final auth = AuthService.to;
+    if (auth.isLoggedIn.value &&
+        auth.currentUser.value != null &&
+        Supabase.instance.client.auth.currentUser != null) {
+      return null; // ✅ Allowed
     }
 
-    return null;
+    // Not authenticated → force logout & redirect to login.
+    auth.logout();
+    return const RouteSettings(name: '/login');
   }
 }

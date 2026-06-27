@@ -13,6 +13,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'core/theme/app_theme.dart';
 import 'data/auth_service.dart';
 import 'routes/app_pages.dart';
+import 'app/middleware/auth_middleware.dart';
 
 import 'package:flutter_background/flutter_background.dart';
 // import 'package:flutter_webrtc_example/src/capture_frame_sample.dart';
@@ -173,6 +174,16 @@ class _AirAppState extends State<AirApp> {
           routingCallback: (routing) {
             if (routing != null) {
               FlutterNativeSplash.remove();
+
+              // ── Global auth guard ──
+              final redirect =
+                  AuthMiddleware().redirect(routing.current);
+              if (redirect != null) {
+                // Defer to avoid navigating during build
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  Get.offAllNamed(redirect.name!);
+                });
+              }
             }
           },
           unknownRoute: GetPage(

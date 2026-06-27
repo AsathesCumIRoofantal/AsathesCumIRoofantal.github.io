@@ -1,6 +1,7 @@
 // ============================================================
 //  AIR App – Enhanced Auth Service  (Supabase + Dummy mode)
 // ============================================================
+import 'package:air_app/modules/splash/splash_controller.dart';
 import 'package:get/get.dart';
 import '../constants/app_constants.dart';
 import '../models/user_model.dart';
@@ -12,7 +13,7 @@ class AirAuthService extends GetxService {
 
   final Rx<UserModel?> currentUser = Rx<UserModel?>(null);
   final RxBool isLoggedIn = false.obs;
-  final RxBool isLoading  = false.obs;
+  final RxBool isLoading = false.obs;
 
   @override
   void onInit() {
@@ -25,7 +26,7 @@ class AirAuthService extends GetxService {
     if (AppConstants.isDummyMode) {
       if (LocalStorage.to.hasSession) {
         currentUser.value = UserModel.dummy;
-        isLoggedIn.value  = true;
+        isLoggedIn.value = true;
       }
       return;
     }
@@ -91,7 +92,10 @@ class AirAuthService extends GetxService {
   }
 
   // ── Login (email + password fallback) ────────────────────
-  Future<bool> loginWithPassword({required String email, required String password}) async {
+  Future<bool> loginWithPassword({
+    required String email,
+    required String password,
+  }) async {
     isLoading.value = true;
     try {
       if (AppConstants.isDummyMode) {
@@ -108,7 +112,11 @@ class AirAuthService extends GetxService {
   }
 
   // ── Signup ────────────────────────────────────────────────
-  Future<bool> signup({required String name, required String mobile, required String email}) async {
+  Future<bool> signup({
+    required String name,
+    required String mobile,
+    required String email,
+  }) async {
     isLoading.value = true;
     try {
       if (AppConstants.isDummyMode) {
@@ -128,13 +136,14 @@ class AirAuthService extends GetxService {
   Future<void> logout() async {
     isLoading.value = true;
     try {
-      if (!AppConstants.isDummyMode) {
-        // Real: await supabase.auth.signOut();
-      }
-      currentUser.value = null;
-      isLoggedIn.value  = false;
-      await LocalStorage.to.clearSession();
-      await SecureStorage.to.clearAll();
+      // if (!AppConstants.isDummyMode) {
+      //   final splashController = Get.find<SplashController>();
+      //   await splashController.getLogOutWorkDone();
+      //   // Real: await supabase.auth.signOut();
+      // }
+      final splashController = Get.find<SplashController>();
+      await splashController.getLogOutWorkDone();
+
       Get.offAllNamed('/login');
     } finally {
       isLoading.value = false;
@@ -144,10 +153,10 @@ class AirAuthService extends GetxService {
   // ── Dummy session helper ──────────────────────────────────
   Future<void> _setDummySession() async {
     currentUser.value = UserModel.dummy;
-    isLoggedIn.value  = true;
-    LocalStorage.to.userId       = UserModel.dummy.userId;
-    LocalStorage.to.accessToken  = 'dummy_jwt_token';
+    isLoggedIn.value = true;
+    LocalStorage.to.userId = UserModel.dummy.userId;
+    LocalStorage.to.accessToken = 'dummy_jwt_token';
     LocalStorage.to.refreshToken = 'dummy_refresh_token';
-    LocalStorage.to.userRole     = UserModel.dummy.userRole;
+    LocalStorage.to.userRole = UserModel.dummy.userRole;
   }
 }
