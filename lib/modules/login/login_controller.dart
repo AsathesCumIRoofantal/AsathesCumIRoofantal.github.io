@@ -81,12 +81,12 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    if (userIdController.text.isEmpty ||
-        passwordController.text.isEmpty ||
-        !emailController.text.isEmail) {
+    if (
+    // userIdController.text.isEmpty ||
+    passwordController.text.isEmpty || !emailController.text.isEmail) {
       Get.snackbar(
         'Error',
-        'Please enter userID, password and valid email',
+        'Please enter password and valid email',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
         colorText: Colors.redAccent,
@@ -122,15 +122,15 @@ class LoginController extends GetxController {
     //   );
     // }
 
-    final loginResponseBool = await AuthService.to.loginWithUserID(
-      userID: userIdController.text,
+    final loginResponseBool = await AuthService.to.loginWithEmailPassword(
+      email: emailController.text,
       password: passwordController.text,
     );
 
     if (!loginResponseBool) {
       Get.snackbar(
         'Error',
-        'Invalid username or password',
+        'Invalid email or password',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
         colorText: Colors.white,

@@ -265,6 +265,83 @@ class AuthService extends GetxService {
     }
   }
 
+  Future<bool> loginWithEmailPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      authState.value = AuthState.loading;
+
+      isLoading.value = true;
+
+      final user = await Supabase.instance.client.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+
+      if (user.user?.id == null) {
+        errorMessage.value = 'User not found';
+
+        authState.value = AuthState.error;
+
+        return false;
+      }
+
+      final userModel = await _repo.getUserById(user.user!.id);
+
+      if (userModel == null) {
+        errorMessage.value = 'User not found';
+
+        authState.value = AuthState.error;
+
+        return false;
+      }
+
+      if (userModel.password != password) {
+        errorMessage.value = 'Invalid admin approved password';
+
+        authState.value = AuthState.error;
+
+        return false;
+      }
+
+      if (userModel.isBlocked == 1) {
+        authState.value = AuthState.blocked;
+
+        return false;
+      }
+
+      if (userModel.isApproved == 0) {
+        authState.value = AuthState.unapproved;
+
+        return false;
+      }
+
+      currentUser.value = userModel;
+
+      await _saveSession(userModel.userId);
+
+      authState.value = AuthState.authenticated;
+
+      return true;
+    } catch (e) {
+      errorMessage.value = e.toString();
+
+      authState.value = AuthState.error;
+
+      return false;
+    } finally {
+      isLoading.value = false;
+      Get.snackbar(
+        'Error',
+        '${errorMessage.value}\nPlease contact admin for approval or try again shortly.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+        colorText: Colors.white,
+      );
+    }
+  }
+
   Future<bool> signupWithEmail({
     required String email,
     required String password,
