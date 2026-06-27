@@ -334,7 +334,7 @@ class AuthService extends GetxService {
       isLoading.value = false;
       Get.snackbar(
         'Error',
-        '${errorMessage.value}\nPlease contact admin for approval(if needed) or try again shortly.',
+        '${errorMessage.value}\nPlease contact admin for approval (if needed) or try again shortly.',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
         colorText: Colors.white,
