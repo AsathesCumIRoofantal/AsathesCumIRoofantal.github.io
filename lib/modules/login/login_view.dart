@@ -195,11 +195,7 @@ class LoginView extends GetView<LoginController> {
                 TextField(
                   controller: controller.emailController,
                   // obscureText: controller.isObscure.value,
-                  decoration: _inputDecoration(
-                    'Email',
-                    Icons.email_sharp,
-                    context,
-                  ),
+                  decoration: _inputDecoration('Email', Icons.email, context),
                 ),
 
                 const SizedBox(height: 20),

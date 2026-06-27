@@ -306,12 +306,14 @@ class AuthService extends GetxService {
       }
 
       if (userModel.isBlocked == 1) {
+        errorMessage.value = 'User is blocked';
         authState.value = AuthState.blocked;
 
         return false;
       }
 
       if (userModel.isApproved == 0) {
+        errorMessage.value = 'User is not approved';
         authState.value = AuthState.unapproved;
 
         return false;
@@ -326,12 +328,6 @@ class AuthService extends GetxService {
       return true;
     } catch (e) {
       errorMessage.value = e.toString();
-
-      authState.value = AuthState.error;
-
-      return false;
-    } finally {
-      isLoading.value = false;
       Get.snackbar(
         'Error',
         '${errorMessage.value}\nPlease contact admin for approval (if needed) or try again shortly.',
@@ -339,6 +335,12 @@ class AuthService extends GetxService {
         backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
         colorText: Colors.white,
       );
+
+      authState.value = AuthState.error;
+
+      return false;
+    } finally {
+      isLoading.value = false;
     }
   }
 
