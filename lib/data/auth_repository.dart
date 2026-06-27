@@ -1,4 +1,5 @@
 import 'package:air_app/data/models/user_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'models/user_model.dart';
@@ -53,6 +54,20 @@ class AuthRepository {
     return AirUser.fromJson(response);
   }
 
+  Future<String?> getSignupToken() async {
+    final response = await _client
+        .from("user_signup_token_for_today")
+        .select("title")
+        // .eq('date', DateTime.now().toString().split(" ")[0])
+        .maybeSingle();
+
+    if (response == null) {
+      return null;
+    }
+
+    return response['title'];
+  }
+
   Future<List<AirUser>> getUsers({int page = 1, int limit = 20}) async {
     final from = (page - 1) * limit;
 
@@ -76,6 +91,25 @@ class AuthRepository {
     return response.map<AirUser>((e) => AirUser.fromJson(e)).toList();
   }
 
+  Future<bool> createLoginLogsWithFunctionHitByMap(
+    Map<String, dynamic> dict,
+  ) async {
+    try {
+      final response = await Supabase.instance.client.functions.invoke(
+        'createLoginLogsWithFunctionHitByMap',
+        body: dict,
+      );
+      if (response == null) {
+        return false;
+      }
+      debugPrint("=============> ${response.data}");
+      return true;
+    } catch (e) {
+      debugPrint("=============> ${e.toString()}");
+      return false;
+    }
+  }
+
   Future<AirUser> createUser(AirUser user) async {
     final response = await _client
         .from(table)
@@ -87,7 +121,11 @@ class AuthRepository {
   }
 
   Future<AirUser> createUserByMap(Map<String, dynamic> user) async {
-    final response = await _client.from(table).insert(user).select().single();
+    final response = await _client
+        .from("user_table")
+        .insert(user)
+        .select()
+        .single();
 
     return AirUser.fromJson(response);
   }

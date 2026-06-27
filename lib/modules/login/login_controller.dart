@@ -1,10 +1,20 @@
+import 'dart:convert';
+
+import 'package:air_app/app/models/geo_location_logged_model.dart';
+import 'package:air_app/app/models/system_platform_logged_model.dart';
+import 'package:air_app/data/auth_repository.dart';
 import 'package:air_app/routes/app_pages.dart';
 import 'package:air_app/web_modules/web_home/web_home_view.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:universal_platform/universal_platform.dart';
 
 import '../../data/auth_service.dart';
 
@@ -14,6 +24,7 @@ class LoginController extends GetxController {
 
   final userIdController = TextEditingController();
   final passwordController = TextEditingController();
+  final emailController = TextEditingController();
 
   Rx<String?> selectedRole = (null).obs; // Default role
   final roles = [
@@ -70,10 +81,12 @@ class LoginController extends GetxController {
   }
 
   void login() async {
-    if (userIdController.text.isEmpty || passwordController.text.isEmpty) {
+    if (userIdController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        !emailController.text.isEmail) {
       Get.snackbar(
         'Error',
-        'Please enter username and password',
+        'Please enter userID, password and valid email',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
         colorText: Colors.redAccent,
@@ -124,6 +137,108 @@ class LoginController extends GetxController {
       );
       return;
     }
+    final logInBool = await AuthService.to.getLoggedIn(
+      userID: userIdController.text,
+      password: passwordController.text,
+      email: emailController.text,
+    );
+
+    if (!logInBool) {
+      Get.snackbar(
+        'Error',
+        'Invalid userid or password or email',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+        colorText: Colors.white,
+      );
+      return;
+    }
+    AuthRepository repository = AuthRepository(Supabase.instance.client);
+    final deviceInfo = DeviceInfoPlugin();
+    final packageInfo = await PackageInfo.fromPlatform();
+
+    String device = "";
+    String model = "";
+    String os = "";
+    String osVersion = "";
+    String manufacturer = "";
+    String brand = "";
+    String cpu = "";
+
+    if (kIsWeb) {
+      final info = await deviceInfo.webBrowserInfo;
+
+      device = "Web";
+      model = info.browserName.name;
+      os = info.platform ?? "";
+      osVersion = "";
+      manufacturer = "";
+      brand = "";
+      cpu = "";
+    } else if (UniversalPlatform.isAndroid) {
+      final info = await deviceInfo.androidInfo;
+
+      device = "Phone";
+      model = info.model;
+      os = "Android";
+      osVersion = info.version.release;
+      manufacturer = info.manufacturer;
+      brand = info.brand;
+      cpu = info.supportedAbis.join(", ");
+    } else if (UniversalPlatform.isIOS) {
+      final info = await deviceInfo.iosInfo;
+
+      device = "iPhone";
+      model = info.utsname.machine;
+      os = "iOS";
+      osVersion = info.systemVersion;
+      manufacturer = "Apple";
+      brand = "Apple";
+      cpu = "";
+    }
+
+    bool isAndroid = UniversalPlatform.isAndroid;
+    bool isIOS = UniversalPlatform.isIOS;
+    bool isWeb = kIsWeb;
+
+    SystemPlatformLoggedModel system = SystemPlatformLoggedModel(
+      device: device,
+      model: model,
+      os: os,
+      osVersion: osVersion,
+      manufacturer: manufacturer,
+      brand: brand,
+      cpuArchitecture: cpu,
+      appVersion: packageInfo.version,
+      buildNumber: packageInfo.buildNumber,
+      ipAddress: await _getPublicIP(),
+    );
+
+    final GeoLocationLoggedModel? geoLocation =
+        await GeoLocationLoggedModel.loadLocation();
+    if (geoLocation == null) {
+      Get.snackbar(
+        'Warning',
+        'We are unable to get your current location. Please enable location services and try again.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    final userResponse = await repository.createLoginLogsWithFunctionHitByMap({
+      "user_id": Supabase.instance.client.auth.currentUser!.id,
+      "system_platform_logged": system.toJson(),
+      "is_from_android": isAndroid ? 1 : 0,
+      "is_from_ios": isIOS ? 1 : 0,
+      "is_from_web": isWeb ? 1 : 0,
+      "ip_address": system.ipAddress,
+      "app_version": system.appVersion, //TODO
+
+      "geo_location_logged": geoLocation.toJson(),
+      "is_login": 1,
+    });
 
     if (kIsWeb) {
       Get.offAllNamed(WebHomeView.routeName);
@@ -135,6 +250,20 @@ class LoginController extends GetxController {
       'Welcome back, ${userIdController.text} (${selectedRole.value})!',
       snackPosition: SnackPosition.BOTTOM,
     );
+  }
+
+  Future<String> _getPublicIP() async {
+    try {
+      final res = await http.get(
+        Uri.parse("https://api.ipify.org?format=json"),
+      );
+
+      if (res.statusCode == 200) {
+        return jsonDecode(res.body)["ip"];
+      }
+    } catch (_) {}
+
+    return "";
   }
 
   @override

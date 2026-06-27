@@ -274,6 +274,7 @@ class AuthService extends GetxService {
 
       isLoading.value = true;
       await Supabase.instance.client.auth.signOut();
+      await Future.delayed(const Duration(seconds: 1));
       if (Supabase.instance.client.auth.currentSession != null) {
         Get.snackbar(
           'Error',
@@ -299,6 +300,39 @@ class AuthService extends GetxService {
       // final user = Supabase.instance.client.auth.currentUser;
 
       // if (user == null) return false;
+
+      return true;
+    } catch (e) {
+      errorMessage.value = e.toString();
+
+      authState.value = AuthState.error;
+
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<bool> getLoggedIn({
+    required String userID,
+    required String password,
+    required String email,
+  }) async {
+    try {
+      authState.value = AuthState.loading;
+      isLoading.value = true;
+
+      final response = await Supabase.instance.client.auth.verifyOTP(
+        type: OtpType.signup,
+        email: email,
+        token: password,
+      );
+
+      if (response.user == null) return false;
+
+      await _saveSession(response.user!.id);
+
+      authState.value = AuthState.authenticated;
 
       return true;
     } catch (e) {

@@ -50,6 +50,18 @@ dependencies:
   supabase_flutter: ^2.14.2
   provider: ^6.1.5+1
 
+
+  device_info_plus: ^11.5.0
+  package_info_plus: ^8.3.0
+  universal_io: ^2.2.2
+  universal_platform: ^1.1.0
+  network_info_plus: ^6.1.4
+
+  geolocator: ^13.0.2
+  geocoding: ^2.0.5
+
+  http: ^1.4.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

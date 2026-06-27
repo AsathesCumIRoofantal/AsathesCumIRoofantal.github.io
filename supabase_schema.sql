@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS user_table (
   is_paid                                SMALLINT     NOT NULL DEFAULT 0,
   is_member                              SMALLINT     NOT NULL DEFAULT 0,
   time_slot_for_batch_chat_allow_1_to_48 SMALLINT     NOT NULL DEFAULT 1 CHECK (time_slot_for_batch_chat_allow_1_to_48 BETWEEN 1 AND 48),
-  user_last_login_logs_id                UUID,
+  user_last_login_logs_id                UUID NOT NULL FOREIGN KEY (id) REFERENCES user_logging_data(user_last_login_logs_id),
   fcm_token                              TEXT,
   created_at                             BIGINT       NOT NULL DEFAULT now_epoch(),
   created_by                             UUID,
@@ -542,3 +542,105 @@ ON CONFLICT DO NOTHING;
 -- ════════════════════════════════════════════════════════════
 --  END OF SCHEMA
 -- ════════════════════════════════════════════════════════════
+-- Edge Fuctions
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+serve(async (req) => {
+  try {
+    const body = await req.json();
+
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      {
+        global: {
+          headers: {
+            Authorization: req.headers.get("Authorization") ?? "",
+          },
+        },
+      },
+    );
+
+    // Validate logged in user
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return new Response(
+        JSON.stringify({
+          success: false,
+          message: "Unauthorized",
+        }),
+        {
+          status: 401,
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    }
+
+    // Insert login log
+    const { data: log, error: logError } = await supabase
+      .from("user_logging_data")
+      .insert({
+        user_id: user.id,
+        system_platform_logged: body.system_platform_logged,
+        geo_location_logged: body.geo_location_logged,
+        is_from_android: body.is_from_android,
+        is_from_ios: body.is_from_ios,
+        is_from_web: body.is_from_web,
+        ip_address: body.ip_address,
+        app_version: body.app_version,
+        is_login: body.is_login,
+      })
+      .select()
+      .single();
+
+    if (logError) throw logError;
+
+    // Update user_table
+    const { error: updateError } = await supabase
+      .from("user_table")
+      .update({
+        user_last_login_logs_id: log.user_logging_data_id,
+        last_login_at: new Date().toISOString(),
+      })
+      .eq("user_id", user.id);
+
+    if (updateError) throw updateError;
+
+    // Return updated AirUser
+    const { data: airUser, error: userError } = await supabase
+      .from("user_table")
+      .select("*")
+      .eq("user_id", user.id)
+      .single();
+
+    if (userError) throw userError;
+
+    return new Response(
+      JSON.stringify(airUser),
+      {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  } catch (e) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: e instanceof Error ? e.message : "Unknown error",
+      }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+  }
+});

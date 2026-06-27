@@ -65,16 +65,40 @@ class SignupController extends GetxController {
 
   void toggleObscure() => isObscure.value = !isObscure.value;
   void setRole(String role) => selectedRole.value = role;
+  Future<String?> getSignupToken() async {
+    final String? specialToken = await AuthRepository(
+      Supabase.instance.client,
+    ).getSignupToken();
+    return specialToken;
+  }
 
   void signup() async {
     usernameController.text = usernameController.text.trim();
+    profileSpecificNameController.text = profileSpecificNameController.text
+        .trim();
+    emailController.text = emailController.text.trim();
+    passwordController.text = passwordController.text.trim();
+    String? specialToken = await getSignupToken();
+    if (specialToken == null ||
+        profileSpecificNameController.text != specialToken) {
+      Get.snackbar(
+        'Info',
+        'Contact Admin to get Profile Specific Name for Signup Token, That Will Be Needed to Signup',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.blue.withValues(alpha: 0.1),
+        colorText: Colors.blue,
+      );
+      return;
+    }
+
     if (profileSpecificNameController.text.isEmpty ||
         usernameController.text.isEmpty ||
         emailController.text.isEmpty ||
-        passwordController.text.isEmpty) {
+        passwordController.text.isEmpty ||
+        passwordController.text.length < 8) {
       Get.snackbar(
         'Error',
-        'Please fill all fields',
+        'Please fill all fields & Password Must Be Atleast 8 Characters Long',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.redAccent.withValues(alpha: 0.1),
         colorText: Colors.redAccent,
@@ -89,7 +113,7 @@ class SignupController extends GetxController {
 
     final responseBool = await authService.signupWithEmail(
       email: emailController.text,
-      password: otpSignupController.text,
+      password: passwordController.text,
     );
     if (!responseBool) {
       Get.snackbar(
@@ -103,13 +127,34 @@ class SignupController extends GetxController {
       showLoadingForOtpSignup.value = false;
       return;
     } else {
-      showLoadingForOtpSignup.value = true;
+      // showLoadingForOtpSignup.value = true;
       Get.snackbar(
         'Good',
-        'Check your email and verify your OTP',
+        "Contact Admin For Approval!",
+        // 'Check your email and verify your OTP',
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.greenAccent.withValues(alpha: 0.1),
         colorText: Colors.greenAccent,
+      );
+      AuthRepository repository = AuthRepository(Supabase.instance.client);
+
+      final userResponse = await repository.createUserByMap({
+        "name": usernameController.text,
+        "password": passwordController.text,
+        // "mobile": mobileController.text,
+        "email": emailController.text,
+        // "user_role": selectedRole.value,
+      });
+
+      if (kIsWeb) {
+        Get.offAllNamed(WebHomeView.routeName);
+      } else {
+        Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+      }
+      Get.snackbar(
+        'Success',
+        'Welcome to AIR, ${usernameController.text}!',
+        snackPosition: SnackPosition.BOTTOM,
       );
     }
     isLoading.value = false;
