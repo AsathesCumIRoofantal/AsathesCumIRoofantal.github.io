@@ -96,7 +96,7 @@ class AuthRepository {
   ) async {
     try {
       final response = await Supabase.instance.client.functions.invoke(
-        'createLoginLogsWithFunctionHitByMap',
+        'createLoginLogsWithFunctionHitByMapOnLogin-out',
         body: dict,
       );
       if (response == null) {
