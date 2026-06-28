@@ -275,21 +275,21 @@ class SignupController extends GetxController {
       );
       return;
     }
-    final logInBool = await AuthService.to.getLoggedIn(
-      password: passwordController.text,
-      email: emailController.text,
-    );
+    //TODO Later final logInBool = await AuthService.to.getLoggedIn(
+    //   password: passwordController.text,
+    //   email: emailController.text,
+    // );
 
-    if (!logInBool) {
-      Get.snackbar(
-        'Error',
-        'Invalid userid or password or email',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
-        colorText: Colors.white,
-      );
-      return;
-    }
+    // if (!logInBool) {
+    //   Get.snackbar(
+    //     'Error',
+    //     'Invalid userid or password or email',
+    //     snackPosition: SnackPosition.BOTTOM,
+    //     backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+    //     colorText: Colors.white,
+    //   );
+    //   return;
+    // }
     AuthRepository repository = AuthRepository(Supabase.instance.client);
     final deviceInfo = DeviceInfoPlugin();
     final packageInfo = await PackageInfo.fromPlatform();

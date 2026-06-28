@@ -100,7 +100,7 @@ class AirUser {
       userRoleTitle: json['user_role_title'],
       userRoleSubTitle: json['user_role_sub_title'],
       isCanInsertInDb: json['is_can_insert_in_db'] ?? 0,
-      isActive: json['is_active'] ?? 1,
+      isActive: json['is_active'] ?? 0,
       isBlocked: json['is_blocked'] ?? 0,
       isApproved: json['is_approved'] ?? 0,
       isPaid: json['is_paid'] ?? 0,
