@@ -138,7 +138,6 @@ class LoginController extends GetxController {
       return;
     }
     final logInBool = await AuthService.to.getLoggedIn(
-      userID: userIdController.text,
       password: passwordController.text,
       email: emailController.text,
     );

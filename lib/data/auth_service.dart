@@ -393,7 +393,6 @@ class AuthService extends GetxService {
   }
 
   Future<bool> getLoggedIn({
-    required String userID,
     required String password,
     required String email,
   }) async {
