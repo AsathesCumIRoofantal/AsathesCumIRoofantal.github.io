@@ -40,9 +40,6 @@ void main() async {
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZHRlYXRxaWNrdm5xemJhd2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNDM3MzQsImV4cCI6MjA5NTYxOTczNH0.JhSTlfigDdquHGpCZ1Y0_82RoT9Sm-c0mszbJxmNXEY",
         // publishableKey: "sb_publishable_IcdZ2n2igkGMbeni2Aw_ZA_kZ__3RZ2",
       );
-      Get.put(() => SplashController());
-      Get.put(() => SecureStorage());
-      Get.put(AuthService());
 
       // // ── Environment variables ───────────────────────────────────
       // try {
@@ -171,7 +168,7 @@ class _AirAppState extends State<AirApp> {
           darkTheme: AppTheme.cosmicDark,
           themeMode:
               ThemeMode.system, // Defaults to system but managed by Settings
-          initialRoute: kIsWeb ? AppRoutes.LOGIN : AppRoutes.SPLASH,
+          initialRoute: getInitialRouteAndWork(),
           getPages: AppPages.pages,
           initialBinding: SplashBinding(),
           debugShowCheckedModeBanner: false,
@@ -197,6 +194,13 @@ class _AirAppState extends State<AirApp> {
       },
     );
   }
+}
+
+Future<String> getInitialRouteAndWork() async {
+  Get.put(() => SplashController());
+  Get.put(() => SecureStorage());
+  Get.put(AuthService());
+  return kIsWeb ? AppRoutes.LOGIN : AppRoutes.SPLASH;
 }
 
 // ── 404 Page ──────────────────────────────────────────────
