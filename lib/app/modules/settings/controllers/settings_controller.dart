@@ -62,16 +62,17 @@ class SettingsController extends GetxController {
         style: TextStyle(fontSize: 14),
       ),
       textConfirm: 'Log Out',
-      textCancel: 'Cancel',
+      // textCancel: 'Cancel',
       confirmTextColor: Colors.white,
       buttonColor: Colors.red,
       onConfirm: () {
         Get.back(result: true);
       },
-      onCancel: () {
-        Get.back();
-      },
+      // onCancel: () {
+      //   Get.back();
+      // },
     );
+    Get.lazyPut(() => AirAuthService());
     if (confirmed == true) await AirAuthService.to.logout();
   }
 

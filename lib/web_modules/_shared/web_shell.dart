@@ -396,17 +396,18 @@ class _WebDrawer extends StatelessWidget {
                                   style: TextStyle(fontSize: 14),
                                 ),
                                 textConfirm: 'Log Out',
-                                textCancel: 'Cancel',
+                                // textCancel: 'Cancel',
                                 confirmTextColor: Colors.white,
                                 buttonColor: Colors.red,
                                 onConfirm: () {
                                   Get.back(result: true);
                                 },
-                                onCancel: () {
-                                  Get.back();
-                                },
+                                // onCancel: () {
+                                //   Get.back();
+                                // },
                               );
                               if (confirmed == true) {
+                                Get.lazyPut(() => AirAuthService());
                                 await AirAuthService.to.logout();
                               }
                             },

@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:air_app/app/routes/air_routes.dart';
+import 'package:air_app/core/storage/secure_storage.dart';
 import 'package:air_app/modules/splash/spash_binding.dart';
+import 'package:air_app/modules/splash/splash_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,6 +40,8 @@ void main() async {
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJuZHRlYXRxaWNrdm5xemJhd2tjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwNDM3MzQsImV4cCI6MjA5NTYxOTczNH0.JhSTlfigDdquHGpCZ1Y0_82RoT9Sm-c0mszbJxmNXEY",
         // publishableKey: "sb_publishable_IcdZ2n2igkGMbeni2Aw_ZA_kZ__3RZ2",
       );
+      Get.put(() => SplashController());
+      Get.lazyPut(() => SecureStorage());
       Get.put(AuthService());
 
       // // ── Environment variables ───────────────────────────────────
@@ -176,8 +180,7 @@ class _AirAppState extends State<AirApp> {
               FlutterNativeSplash.remove();
 
               // ── Global auth guard ──
-              final redirect =
-                  AuthMiddleware().redirect(routing.current);
+              final redirect = AuthMiddleware().redirect(routing.current);
               if (redirect != null) {
                 // Defer to avoid navigating during build
                 WidgetsBinding.instance.addPostFrameCallback((_) {
