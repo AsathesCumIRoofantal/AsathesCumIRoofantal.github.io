@@ -195,7 +195,7 @@ class _AirAppState extends State<AirApp> {
                   if (authService.isLoggedIn.value &&
                       authService.currentUser.value != null &&
                       Supabase.instance.client.auth.currentUser != null) {
-                    Get.offAllNamed(redirect.name!);
+                    Get.toNamed(redirect.name!);
                   } else {
                     Get.offAllNamed(AppRoutes.LOGIN);
                     // await authService.logout();
