@@ -364,20 +364,10 @@ class _WebDrawer extends StatelessWidget {
                           Opacity(
                             opacity: isNotMobile ? 1 : 1,
                             child: ElevatedButton.icon(
-                              onPressed: () async {
-                                final confirmed = await Get.defaultDialog<bool>(
-                                  title: 'Log Out',
-                                  content: Text(
-                                    'Are you sure you want to log out?',
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  textConfirm: 'Log Out',
-                                  textCancel: 'Cancel',
-                                  confirmTextColor: Colors.white,
-                                  buttonColor: Colors.red,
-                                );
-                                if (confirmed == true)
-                                  await AirAuthService.to.logout();
+                              onPressed: () {
+                                // if (!isNotMobile) {
+                                Get.toNamed(AppRoutes.HOME_APP_OLD);
+                                // }
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
@@ -398,8 +388,21 @@ class _WebDrawer extends StatelessWidget {
                             ),
                           ),
                           OutlinedButton.icon(
-                            onPressed: () {
-                              Get.offNamed(AppRoutes.LOGIN);
+                            onPressed: () async {
+                              final confirmed = await Get.defaultDialog<bool>(
+                                title: 'Log Out',
+                                content: Text(
+                                  'Are you sure you want to log out?',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                                textConfirm: 'Log Out',
+                                textCancel: 'Cancel',
+                                confirmTextColor: Colors.white,
+                                buttonColor: Colors.red,
+                              );
+                              if (confirmed == true) {
+                                await AirAuthService.to.logout();
+                              }
                             },
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.white,
