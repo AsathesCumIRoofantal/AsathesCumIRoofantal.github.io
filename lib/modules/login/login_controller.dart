@@ -121,7 +121,7 @@ class LoginController extends GetxController {
     //     },
     //   );
     // }
-
+    Get.put(() => AuthService());
     final loginResponseBool = await AuthService.to.loginWithEmailPassword(
       email: emailController.text,
       password: passwordController.text,
