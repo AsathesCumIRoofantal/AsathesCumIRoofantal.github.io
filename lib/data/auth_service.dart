@@ -284,7 +284,7 @@ class AuthService extends GetxService {
 
         authState.value = AuthState.error;
 
-        return false;
+        getErrorSnackBar(errorMessage.value);
       }
 
       final userModel = await _repo.getUserById(user.user!.id);
@@ -293,38 +293,34 @@ class AuthService extends GetxService {
         errorMessage.value = 'User not found';
 
         authState.value = AuthState.error;
+        getErrorSnackBar(errorMessage.value);
+      } else {
+        if (userModel.password != password) {
+          errorMessage.value = 'Invalid admin approved password';
 
-        return false;
+          authState.value = AuthState.error;
+          getErrorSnackBar(errorMessage.value);
+        }
+
+        if (userModel.isBlocked == 1) {
+          errorMessage.value = 'User is blocked';
+          authState.value = AuthState.blocked;
+          getErrorSnackBar(errorMessage.value);
+        }
+
+        if (userModel.isApproved == 0) {
+          errorMessage.value = 'User is not approved';
+          authState.value = AuthState.unapproved;
+
+          getErrorSnackBar(errorMessage.value);
+        }
+
+        currentUser.value = userModel;
+
+        await _saveSession(userModel.userId);
+
+        authState.value = AuthState.authenticated;
       }
-
-      if (userModel.password != password) {
-        errorMessage.value = 'Invalid admin approved password';
-
-        authState.value = AuthState.error;
-
-        return false;
-      }
-
-      if (userModel.isBlocked == 1) {
-        errorMessage.value = 'User is blocked';
-        authState.value = AuthState.blocked;
-
-        return false;
-      }
-
-      if (userModel.isApproved == 0) {
-        errorMessage.value = 'User is not approved';
-        authState.value = AuthState.unapproved;
-
-        return false;
-      }
-
-      currentUser.value = userModel;
-
-      await _saveSession(userModel.userId);
-
-      authState.value = AuthState.authenticated;
-
       return true;
     } catch (e) {
       errorMessage.value = e.toString();
@@ -342,6 +338,17 @@ class AuthService extends GetxService {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  getErrorSnackBar(String message) {
+    Get.snackbar(
+      'Error',
+      message,
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+      colorText: Colors.white,
+    );
+    return false;
   }
 
   Future<bool> signupWithEmail({

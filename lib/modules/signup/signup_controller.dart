@@ -103,7 +103,7 @@ class SignupController extends GetxController {
         usernameController.text.isEmpty ||
         emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
-        passwordController.text.length < 8) {
+        passwordController.text.length < 6) {
       Get.snackbar(
         'Error',
         'Please fill all fields & Password Must Be Atleast 8 Characters Long',
