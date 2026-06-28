@@ -197,9 +197,9 @@ class _AirAppState extends State<AirApp> {
 }
 
 Future<void> getFirstPage() async {
-  Get.put(() => SplashController());
-  Get.put(() => SecureStorage());
-  Get.put(AuthService());
+  Get.put(() => SplashController(), permanent: true);
+  Get.put(() => SecureStorage(), permanent: true);
+  Get.put(() => AuthService(), permanent: true);
 
   await Future.delayed(const Duration(milliseconds: 300));
 
