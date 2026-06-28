@@ -3,6 +3,7 @@
 // Responsive shell — side drawer on desktop (collapsible), modal on mobile.
 // ============================================================
 
+import 'package:air_app/app/services/auth_service_new.dart';
 import 'package:air_app/routes/app_pages.dart';
 import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:flutter/material.dart';
@@ -363,10 +364,20 @@ class _WebDrawer extends StatelessWidget {
                           Opacity(
                             opacity: isNotMobile ? 1 : 1,
                             child: ElevatedButton.icon(
-                              onPressed: () {
-                                // if (!isNotMobile) {
-                                Get.toNamed(AppRoutes.HOME_APP_OLD);
-                                // }
+                              onPressed: () async {
+                                final confirmed = await Get.defaultDialog<bool>(
+                                  title: 'Log Out',
+                                  content: Text(
+                                    'Are you sure you want to log out?',
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  textConfirm: 'Log Out',
+                                  textCancel: 'Cancel',
+                                  confirmTextColor: Colors.white,
+                                  buttonColor: Colors.red,
+                                );
+                                if (confirmed == true)
+                                  await AirAuthService.to.logout();
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
