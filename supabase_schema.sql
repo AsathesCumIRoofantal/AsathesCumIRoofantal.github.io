@@ -622,7 +622,7 @@ serve(async (req) => {
     const { error: updateError } = await supabase
       .from("user_table")
       .update({
-        user_last_login_logs_id: log.user_logging_data_id,
+        user_last_login_logs_id: log.id,
         -- last_login_at: new Date().toISOString(),
       })
       .eq("auth_user_id", user.id);

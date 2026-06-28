@@ -17,7 +17,7 @@ class AuthMiddleware extends GetMiddleware {
   @override
   RouteSettings? redirect(String? route) {
     // Allow public routes through without any check.
-    if (route != null && _public.any((p) => route.startsWith(p))) {
+    if (route != null && _public.any((p) => route == p)) {
       return null;
     }
 

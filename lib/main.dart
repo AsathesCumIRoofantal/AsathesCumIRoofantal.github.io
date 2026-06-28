@@ -191,6 +191,8 @@ class _AirAppState extends State<AirApp> {
                     Get.offAllNamed(AppRoutes.LOGIN);
                   }
                 });
+              } else {
+                Get.offAllNamed(AppRoutes.LOGIN);
               }
             }
           },
