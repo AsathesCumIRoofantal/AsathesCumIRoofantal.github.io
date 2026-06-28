@@ -196,7 +196,7 @@ class _AirAppState extends State<AirApp> {
   }
 }
 
-Future<String> getInitialRouteAndWork() async {
+String getInitialRouteAndWork() {
   Get.put(() => SplashController());
   Get.put(() => SecureStorage());
   Get.put(AuthService());
