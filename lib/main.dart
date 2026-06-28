@@ -1,31 +1,26 @@
 import 'dart:async';
+import 'dart:js_interop';
 
-import 'package:air_app/app/routes/air_routes.dart';
 import 'package:air_app/core/storage/secure_storage.dart';
 import 'package:air_app/modules/splash/spash_binding.dart';
 import 'package:air_app/modules/splash/splash_controller.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_background/flutter_background.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+// import 'package:flutter_webrtc_example/src/capture_frame_sample.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:web/web.dart' as web;
 
+import 'app/middleware/auth_middleware.dart';
 import 'core/theme/app_theme.dart';
 import 'data/auth_service.dart';
 import 'routes/app_pages.dart';
-import 'app/middleware/auth_middleware.dart';
-
-import 'package:flutter_background/flutter_background.dart';
-// import 'package:flutter_webrtc_example/src/capture_frame_sample.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-
-import 'package:web/web.dart' as web;
-import 'dart:js_interop';
-import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
   runZonedGuarded(
@@ -181,24 +176,19 @@ class _AirAppState extends State<AirApp> {
               if (redirect != null) {
                 // Defer to avoid navigating during build
                 WidgetsBinding.instance.addPostFrameCallback((_) async {
-                  Get.put(() => SplashController(), permanent: true);
-                  Get.put(() => SecureStorage(), permanent: true);
-                  Get.put(() => AuthService(), permanent: true);
-
                   await Future.delayed(const Duration(milliseconds: 300));
 
                   // throw StateError('This is test exception');//For Tracing
 
                   // Navigate to the login screen after the delay
 
-                  AuthService authService = AuthService();
-                  if (authService.isLoggedIn.value &&
+                  final authService = AuthService.to;
+                  if (authService.isLoggedIn &&
                       authService.currentUser.value != null &&
                       Supabase.instance.client.auth.currentUser != null) {
                     Get.toNamed(redirect.name!);
                   } else {
                     Get.offAllNamed(AppRoutes.LOGIN);
-                    // await authService.logout();
                   }
                 });
               }
@@ -221,18 +211,13 @@ Future<void> getFirstPage() async {
 
   await Future.delayed(const Duration(milliseconds: 300));
 
-  // throw StateError('This is test exception');//For Tracing
-
-  // Navigate to the login screen after the delay
-
-  AuthService authService = AuthService();
-  if (authService.isLoggedIn.value &&
+  final authService = AuthService.to;
+  if (authService.isLoggedIn &&
       authService.currentUser.value != null &&
       Supabase.instance.client.auth.currentUser != null) {
     Get.offAllNamed(AppRoutes.HOME_APP_OLD);
   } else {
     Get.offAllNamed(AppRoutes.LOGIN);
-    // await authService.logout();
   }
 }
 

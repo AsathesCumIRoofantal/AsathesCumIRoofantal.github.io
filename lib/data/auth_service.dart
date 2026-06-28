@@ -42,7 +42,7 @@ class AuthService extends GetxService {
   // Current User Helpers
   // ==========================================================
 
-  Rx<bool> get isLoggedIn => (currentUser.value != null).obs;
+  bool get isLoggedIn => currentUser.value != null;
 
   String get userId => currentUser.value?.userId ?? '';
 
@@ -526,7 +526,7 @@ class AuthService extends GetxService {
   // ==========================================================
 
   Future<void> refreshProfile() async {
-    if (!isLoggedIn.value) return;
+    if (!isLoggedIn) return;
 
     final user = await _repo.getUserById(userId);
 
@@ -546,7 +546,7 @@ class AuthService extends GetxService {
   // ==========================================================
 
   Future<void> updateFcmToken(String token) async {
-    if (!isLoggedIn.value) return;
+    if (!isLoggedIn) return;
 
     await _repo.updateFcmToken(userId: userId, token: token);
   }
@@ -559,7 +559,7 @@ class AuthService extends GetxService {
     required double latitude,
     required double longitude,
   }) async {
-    if (!isLoggedIn.value) return;
+    if (!isLoggedIn) return;
 
     await _repo.updateLocation(
       userId: userId,

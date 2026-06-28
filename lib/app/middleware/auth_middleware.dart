@@ -12,11 +12,7 @@ class AuthMiddleware extends GetMiddleware {
   int? get priority => 1;
 
   /// Routes that do NOT require authentication.
-  static const _public = [
-    AppRoutes.SPLASH,
-    AppRoutes.LOGIN,
-    AppRoutes.SIGNUP,
-  ];
+  static const _public = [AppRoutes.SPLASH, AppRoutes.LOGIN, AppRoutes.SIGNUP];
 
   @override
   RouteSettings? redirect(String? route) {
@@ -27,7 +23,7 @@ class AuthMiddleware extends GetMiddleware {
 
     // Guard: user must be fully authenticated.
     final auth = AuthService.to;
-    if (auth.isLoggedIn.value &&
+    if (auth.isLoggedIn &&
         auth.currentUser.value != null &&
         Supabase.instance.client.auth.currentUser != null) {
       return null; // ✅ Allowed

@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:air_app/app/models/geo_location_logged_model.dart';
 import 'package:air_app/app/models/system_platform_logged_model.dart';
 import 'package:air_app/data/auth_repository.dart';
-import 'package:air_app/data/models/user_model.dart';
 import 'package:air_app/routes/app_pages.dart';
 import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -117,7 +116,7 @@ class SignupController extends GetxController {
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 1));
 
-    AuthService authService = AuthService();
+    final authService = AuthService.to;
 
     final responseBool = await authService.signupWithEmail(
       email: emailController.text,

@@ -33,14 +33,13 @@ class SplashController extends GetxController {
     // Navigate to the login screen after the delay
     final localStorage = await LocalStorage().init();
     Get.put(localStorage, permanent: true);
-    AuthService authService = AuthService();
-    if (authService.isLoggedIn.value &&
+    final authService = AuthService.to;
+    if (authService.isLoggedIn &&
         authService.currentUser.value != null &&
         Supabase.instance.client.auth.currentUser != null) {
       Get.offAllNamed(AppRoutes.HOME_APP_OLD);
     } else {
       Get.offAllNamed(AppRoutes.LOGIN);
-      // await authService.logout();
     }
   }
 
@@ -134,10 +133,8 @@ class SplashController extends GetxController {
       "is_login": 0,
     });
     await Supabase.instance.client.auth.signOut();
-    AuthService authService = AuthService();
-    authService.authState.value = AuthState.unauthenticated;
-    authService.currentUser.value = null;
-    authService.isLoggedIn.value = false;
+    final authService = AuthService.to;
+    await authService.logout();
     await localStorage.clearSession();
     await secureStorage.clearAll();
     Get.offAllNamed(AppRoutes.LOGIN);
