@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:air_app/data/models/user_model.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'models/user_model.dart';
@@ -95,17 +99,29 @@ class AuthRepository {
     Map<String, dynamic> dict,
   ) async {
     try {
+      // print("DICT = $dict");
+      // print("JSON = ${jsonEncode(dict)}");
       final response = await Supabase.instance.client.functions.invoke(
         'createLoginLogsWithFunctionHitByMapOnLogin-out',
-        body: dict,
+        body: jsonEncode(dict),
+        headers: {'Content-Type': 'application/json'},
       );
-      if (response == null) {
-        return false;
-      }
+      print(response.status);
+      print(response.data);
+
       debugPrint("=============> ${response.data}");
       return true;
     } catch (e) {
       debugPrint("=============> ${e.toString()}");
+
+      // Get.snackbar(
+      //   'Error',
+      //   '${e.toString()}',
+      //   snackPosition: SnackPosition.BOTTOM,
+      //   backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+      //   colorText: Colors.white,
+      // );
+
       return false;
     }
   }

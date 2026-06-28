@@ -607,7 +607,7 @@ serve(async (req) => {
         user_last_login_logs_id: log.user_logging_data_id,
         last_login_at: new Date().toISOString(),
       })
-      .eq("user_id", user.id);
+      .eq("auth_user_id", user.id);
 
     if (updateError) throw updateError;
 
@@ -615,7 +615,7 @@ serve(async (req) => {
     const { data: airUser, error: userError } = await supabase
       .from("user_table")
       .select("*")
-      .eq("user_id", user.id)
+      .eq("auth_user_id", user.id)
       .single();
 
     if (userError) throw userError;
@@ -630,6 +630,20 @@ serve(async (req) => {
       },
     );
   } catch (e) {
+    console.log("Here");
+    console.log(e);
+    const raw = await req.text();
+
+-- not here or other error check when needed... console.log("RAW:", raw);
+
+-- let body = {};
+
+-- if (raw.trim().length > 0) {
+--   body = JSON.parse(raw);
+-- }
+
+-- console.log(body);
+
     return new Response(
       JSON.stringify({
         success: false,
