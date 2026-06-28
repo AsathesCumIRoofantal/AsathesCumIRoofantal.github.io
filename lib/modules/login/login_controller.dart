@@ -238,6 +238,16 @@ class LoginController extends GetxController {
       "geo_location_logged": geoLocation.toJson(),
       "is_login": 1,
     });
+    if (!userResponse) {
+      Get.snackbar(
+        'Error',
+        'We are unable to process your login-logs request. Please try again later.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.redAccent.withValues(alpha: 0.6),
+        colorText: Colors.white,
+      );
+      return;
+    }
 
     if (kIsWeb) {
       Get.offAllNamed(WebHomeView.routeName);
@@ -246,7 +256,7 @@ class LoginController extends GetxController {
     }
     Get.snackbar(
       'Success',
-      'Welcome back, ${userIdController.text} (${selectedRole.value})!',
+      'Welcome back!',
       snackPosition: SnackPosition.BOTTOM,
     );
   }
