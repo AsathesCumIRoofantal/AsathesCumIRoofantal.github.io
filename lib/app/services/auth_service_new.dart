@@ -143,8 +143,6 @@ class AirAuthService extends GetxService {
       // }
       final splashController = Get.find<SplashController>();
       await splashController.getLogOutWorkDone();
-
-      Get.offAllNamed('/login');
     } finally {
       isLoading.value = false;
     }

@@ -10,15 +10,16 @@ import '../../../constants/app_constants.dart';
 class SettingsController extends GetxController {
   static SettingsController get to => Get.find();
 
-  final RxString themeMode        = 'system'.obs; // system | light | dark
-  final RxBool   notificationsOn  = true.obs;
-  final RxBool   biometricEnabled = false.obs;
-  final RxBool   isAgoraEngine    = (!AppConstants.isAgoraNotUsed).obs;
-  final RxString language         = 'en'.obs;
-  final RxBool   isDummyMode      = AppConstants.isDummyMode.obs;
+  final RxString themeMode = 'system'.obs; // system | light | dark
+  final RxBool notificationsOn = true.obs;
+  final RxBool biometricEnabled = false.obs;
+  final RxBool isAgoraEngine = (!AppConstants.isAgoraNotUsed).obs;
+  final RxString language = 'en'.obs;
+  final RxBool isDummyMode = AppConstants.isDummyMode.obs;
 
   // Video engine label
-  String get engineLabel => isAgoraEngine.value ? 'Agora RTC' : 'Flutter WebRTC';
+  String get engineLabel =>
+      isAgoraEngine.value ? 'Agora RTC' : 'Flutter WebRTC';
 
   @override
   void onInit() {
@@ -27,17 +28,22 @@ class SettingsController extends GetxController {
   }
 
   void setTheme(String mode) {
-    themeMode.value        = mode;
+    themeMode.value = mode;
     LocalStorage.to.themeMode = mode;
     switch (mode) {
-      case 'dark':   Get.changeThemeMode(ThemeMode.dark);   break;
-      case 'light':  Get.changeThemeMode(ThemeMode.light);  break;
-      default:       Get.changeThemeMode(ThemeMode.system);
+      case 'dark':
+        Get.changeThemeMode(ThemeMode.dark);
+        break;
+      case 'light':
+        Get.changeThemeMode(ThemeMode.light);
+        break;
+      default:
+        Get.changeThemeMode(ThemeMode.system);
     }
   }
 
   void toggleNotifications() => notificationsOn.value = !notificationsOn.value;
-  void toggleBiometric()      => biometricEnabled.value = !biometricEnabled.value;
+  void toggleBiometric() => biometricEnabled.value = !biometricEnabled.value;
 
   void toggleEngine() {
     isAgoraEngine.value = !isAgoraEngine.value;
@@ -49,33 +55,47 @@ class SettingsController extends GetxController {
   }
 
   Future<void> logout() async {
-    final confirmed = await Get.defaultDialog<bool>(
-      title:   'Log Out',
-      content: Text('Are you sure you want to log out?',
-          style: TextStyle(fontSize: 14)),
+    bool? confirmed = await Get.defaultDialog<bool>(
+      title: 'Log Out',
+      content: Text(
+        'Are you sure you want to log out?',
+        style: TextStyle(fontSize: 14),
+      ),
       textConfirm: 'Log Out',
-      textCancel:  'Cancel',
+      textCancel: 'Cancel',
       confirmTextColor: Colors.white,
-      buttonColor:      Colors.red,
+      buttonColor: Colors.red,
+      onConfirm: () {
+        Get.back(result: true);
+      },
+      onCancel: () {
+        Get.back();
+      },
     );
     if (confirmed == true) await AirAuthService.to.logout();
   }
 
   void clearCache() {
-    Get.snackbar('Cache Cleared', 'All cached data has been removed.',
-        snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar(
+      'Cache Cleared',
+      'All cached data has been removed.',
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 
   void showAppInfo() {
     Get.defaultDialog(
-      title:   'AIR-Space',
-      content: Column(mainAxisSize: MainAxisSize.min, children: [
-        Text('Version: ${AppConstants.appVersion}'),
-        const SizedBox(height: 8),
-        Text('Dummy mode: ${AppConstants.isDummyMode}'),
-        const SizedBox(height: 8),
-        Text('Flutter + GetX + Supabase'),
-      ]),
+      title: 'AIR-Space',
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('Version: ${AppConstants.appVersion}'),
+          const SizedBox(height: 8),
+          Text('Dummy mode: ${AppConstants.isDummyMode}'),
+          const SizedBox(height: 8),
+          Text('Flutter + GetX + Supabase'),
+        ],
+      ),
       textConfirm: 'Close',
       confirmTextColor: Colors.white,
     );

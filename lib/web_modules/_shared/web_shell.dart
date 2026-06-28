@@ -399,13 +399,16 @@ class _WebDrawer extends StatelessWidget {
                                 textCancel: 'Cancel',
                                 confirmTextColor: Colors.white,
                                 buttonColor: Colors.red,
-                                onConfirm: () async {
-                                  await AirAuthService.to.logout();
+                                onConfirm: () {
+                                  Get.back(result: true);
                                 },
                                 onCancel: () {
                                   Get.back();
                                 },
                               );
+                              if (confirmed == true) {
+                                await AirAuthService.to.logout();
+                              }
                             },
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.white,
