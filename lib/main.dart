@@ -192,7 +192,7 @@ class _AirAppState extends State<AirApp> {
                   }
                 });
               } else {
-                Get.offAllNamed(AppRoutes.LOGIN);
+                Get.toNamed(routing.current);
               }
             }
           },
