@@ -546,9 +546,24 @@ ON CONFLICT DO NOTHING;
 import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers":
+    "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+};
+
 serve(async (req) => {
+  if (req.method === "OPTIONS") {
+    return new Response("ok", {
+      headers: corsHeaders,
+    });
+  }
   try {
     const body = await req.json();
+    -- throw new Error("I AM HERE");
+    -- return new Response("NAVIN");
+    console.log(req.method);
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -605,7 +620,7 @@ serve(async (req) => {
       .from("user_table")
       .update({
         user_last_login_logs_id: log.user_logging_data_id,
-        last_login_at: new Date().toISOString(),
+        -- last_login_at: new Date().toISOString(),
       })
       .eq("auth_user_id", user.id);
 

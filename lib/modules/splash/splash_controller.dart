@@ -128,8 +128,8 @@ class SplashController extends GetxController {
       "is_from_ios": isIOS ? 1 : 0,
       "is_from_web": isWeb ? 1 : 0,
       "ip_address": system.ipAddress,
-      "app_version": system.appVersion,
 
+      // "app_version": system.appVersion,
       "geo_location_logged": geoLocation.toJson(),
       "is_login": 0,
     });

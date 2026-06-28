@@ -103,7 +103,7 @@ class AuthRepository {
       // print("JSON = ${jsonEncode(dict)}");
       final response = await Supabase.instance.client.functions.invoke(
         'createLoginLogsWithFunctionHitByMapOnLogin-out',
-        body: jsonEncode(dict),
+        body: dict, // jsonEncode(dict),
         headers: {'Content-Type': 'application/json'},
       );
       print(response.status);
