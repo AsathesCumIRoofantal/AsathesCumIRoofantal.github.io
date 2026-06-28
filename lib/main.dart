@@ -168,7 +168,7 @@ class _AirAppState extends State<AirApp> {
           darkTheme: AppTheme.cosmicDark,
           themeMode:
               ThemeMode.system, // Defaults to system but managed by Settings
-          initialRoute: getInitialRouteAndWork(),
+          initialRoute: kIsWeb ? AppRoutes.LOGIN : AppRoutes.SPLASH,
           getPages: AppPages.pages,
           initialBinding: SplashBinding(),
           debugShowCheckedModeBanner: false,
@@ -196,11 +196,26 @@ class _AirAppState extends State<AirApp> {
   }
 }
 
-String getInitialRouteAndWork() {
+Future<void> getFirstPage() async {
   Get.put(() => SplashController());
   Get.put(() => SecureStorage());
   Get.put(AuthService());
-  return kIsWeb ? AppRoutes.LOGIN : AppRoutes.SPLASH;
+
+  await Future.delayed(const Duration(milliseconds: 300));
+
+  // throw StateError('This is test exception');//For Tracing
+
+  // Navigate to the login screen after the delay
+
+  AuthService authService = AuthService();
+  if (authService.isLoggedIn.value &&
+      authService.currentUser.value != null &&
+      Supabase.instance.client.auth.currentUser != null) {
+    Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+  } else {
+    Get.offAllNamed(AppRoutes.LOGIN);
+    // await authService.logout();
+  }
 }
 
 // ── 404 Page ──────────────────────────────────────────────
