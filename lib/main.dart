@@ -41,7 +41,7 @@ void main() async {
         // publishableKey: "sb_publishable_IcdZ2n2igkGMbeni2Aw_ZA_kZ__3RZ2",
       );
       Get.put(() => SplashController());
-      Get.lazyPut(() => SecureStorage());
+      Get.put(() => SecureStorage());
       Get.put(AuthService());
 
       // // ── Environment variables ───────────────────────────────────
