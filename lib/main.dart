@@ -180,8 +180,26 @@ class _AirAppState extends State<AirApp> {
               final redirect = AuthMiddleware().redirect(routing.current);
               if (redirect != null) {
                 // Defer to avoid navigating during build
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  Get.offAllNamed(redirect.name!);
+                WidgetsBinding.instance.addPostFrameCallback((_) async {
+                  Get.put(() => SplashController(), permanent: true);
+                  Get.put(() => SecureStorage(), permanent: true);
+                  Get.put(() => AuthService(), permanent: true);
+
+                  await Future.delayed(const Duration(milliseconds: 300));
+
+                  // throw StateError('This is test exception');//For Tracing
+
+                  // Navigate to the login screen after the delay
+
+                  AuthService authService = AuthService();
+                  if (authService.isLoggedIn.value &&
+                      authService.currentUser.value != null &&
+                      Supabase.instance.client.auth.currentUser != null) {
+                    Get.offAllNamed(redirect.name!);
+                  } else {
+                    Get.offAllNamed(AppRoutes.LOGIN);
+                    // await authService.logout();
+                  }
                 });
               }
             }
