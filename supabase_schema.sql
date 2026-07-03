@@ -559,11 +559,26 @@ serve(async (req) => {
       headers: corsHeaders,
     });
   }
+
+  console.log("A--------------");
+  
   try {
-    const body = await req.json();
-    -- throw new Error("I AM HERE");
-    -- return new Response("NAVIN");
+    // throw new Error("I AM HERE");
+    // return new Response("NAVIN");
+
     console.log(req.method);
+    const body = await req.json();
+//      const raw = await req.text();
+
+// console.log("RAW:", raw);
+
+// let body = {};
+
+// if (raw.trim().length > 0) {
+//   body = JSON.parse(raw);
+// }
+
+// console.log(body);
 
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -571,14 +586,14 @@ serve(async (req) => {
       {
         global: {
           headers: {
-            ...corsHeaders,
             Authorization: req.headers.get("Authorization") ?? "",
           },
         },
       },
     );
 
-    // Validate logged in user
+    // // Validate logged in user
+    if (body.isLogin == true) {
     const {
       data: { user },
       error: authError,
@@ -592,12 +607,14 @@ serve(async (req) => {
         }),
         {
           status: 401,
-          headers: { 
-            ...corsHeaders,
+          headers: { ...corsHeaders,
             "Content-Type": "application/json" },
         },
       );
     }
+  }
+
+   
 
     // Insert login log
     const { data: log, error: logError } = await supabase
@@ -611,7 +628,7 @@ serve(async (req) => {
         is_from_web: body.is_from_web,
         ip_address: body.ip_address,
         app_version: body.app_version,
-        is_login: body.is_login,
+        is_login: body.is_login,        
       })
       .select()
       .single();
@@ -623,7 +640,7 @@ serve(async (req) => {
       .from("user_table")
       .update({
         user_last_login_logs_id: log.id,
-        -- last_login_at: new Date().toISOString(),
+        // last_login_at: new Date().toISOString(),
       })
       .eq("auth_user_id", user.id);
 
@@ -643,26 +660,15 @@ serve(async (req) => {
       {
         status: 200,
         headers: {
-          "Content-Type": "application/json",
           ...corsHeaders,
+          "Content-Type": "application/json",
         },
       },
     );
   } catch (e) {
     console.log("Here");
     console.log(e);
-    const raw = await req.text();
-
--- not here or other error check when needed... console.log("RAW:", raw);
-
--- let body = {};
-
--- if (raw.trim().length > 0) {
---   body = JSON.parse(raw);
--- }
-
--- console.log(body);
-
+   
     return new Response(
       JSON.stringify({
         success: false,
@@ -671,6 +677,7 @@ serve(async (req) => {
       {
         status: 500,
         headers: {
+          ...corsHeaders,
           "Content-Type": "application/json",
         },
       },

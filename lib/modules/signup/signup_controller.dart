@@ -375,6 +375,7 @@ class SignupController extends GetxController {
       // "app_version": system.appVersion, //TODO
       "geo_location_logged": geoLocation.toJson(),
       "is_login": 1,
+      "isLogin": false,
     });
 
     if (kIsWeb) {

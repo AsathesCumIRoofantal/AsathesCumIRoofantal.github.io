@@ -131,6 +131,7 @@ class SplashController extends GetxController {
       // "app_version": system.appVersion,
       "geo_location_logged": geoLocation.toJson(),
       "is_login": 0,
+      "isLogin": false,
     });
     await Supabase.instance.client.auth.signOut();
     final authService = AuthService.to;
