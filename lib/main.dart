@@ -168,32 +168,21 @@ class _AirAppState extends State<AirApp> {
           initialBinding: SplashBinding(),
           debugShowCheckedModeBanner: false,
           routingCallback: (routing) {
-            if (routing != null) {
-              FlutterNativeSplash.remove();
+            if (routing == null) return;
 
-              // ── Global auth guard ──
-              final redirect = AuthMiddleware().redirect(routing.current);
-              if (redirect != null) {
-                // Defer to avoid navigating during build
-                WidgetsBinding.instance.addPostFrameCallback((_) async {
-                  await Future.delayed(const Duration(milliseconds: 300));
+            FlutterNativeSplash.remove();
 
-                  // throw StateError('This is test exception');//For Tracing
-
-                  // Navigate to the login screen after the delay
-
-                  final authService = AuthService.to;
-                  if (authService.isLoggedIn &&
-                      authService.currentUser.value != null &&
-                      Supabase.instance.client.auth.currentUser != null) {
-                    Get.toNamed(routing.current);
-                  } else {
-                    Get.offAllNamed(AppRoutes.LOGIN);
-                  }
-                });
-              } else {
-                Get.toNamed(routing.current);
-              }
+            // Only redirect unauthenticated users to login.
+            final redirect = AuthMiddleware().redirect(routing.current);
+            if (redirect != null && Get.currentRoute != AppRoutes.LOGIN) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Get.offAllNamed(AppRoutes.LOGIN);
+              });
+            }
+            if (redirect == null) {
+              Get.toNamed(routing.current);
+            } else {
+              // Get.toNamed(routing.current);
             }
           },
           unknownRoute: GetPage(
