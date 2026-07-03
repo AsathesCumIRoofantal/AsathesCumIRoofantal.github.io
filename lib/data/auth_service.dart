@@ -208,7 +208,7 @@ class AuthService extends GetxService {
     }
   }
 
-  Future<bool> loginWithUserID({
+  Future<AirUser?> loginWithUserID({
     required String userID,
     required String password,
   }) async {
@@ -224,7 +224,7 @@ class AuthService extends GetxService {
 
         authState.value = AuthState.error;
 
-        return false;
+        return null;
       }
 
       if (user.password != password) {
@@ -232,19 +232,19 @@ class AuthService extends GetxService {
 
         authState.value = AuthState.error;
 
-        return false;
+        return null;
       }
 
       if (user.isBlocked == 1) {
         authState.value = AuthState.blocked;
 
-        return false;
+        return null;
       }
 
       if (user.isApproved == 0) {
         authState.value = AuthState.unapproved;
 
-        return false;
+        return null;
       }
 
       currentUser.value = user;
@@ -253,13 +253,13 @@ class AuthService extends GetxService {
 
       authState.value = AuthState.authenticated;
 
-      return true;
+      return user;
     } catch (e) {
       errorMessage.value = e.toString();
 
       authState.value = AuthState.error;
 
-      return false;
+      return null;
     } finally {
       isLoading.value = false;
     }
@@ -280,6 +280,19 @@ class AuthService extends GetxService {
       );
 
       if (user.user?.id == null) {
+        errorMessage.value = 'User not found';
+
+        authState.value = AuthState.error;
+
+        getErrorSnackBar(errorMessage.value);
+      }
+
+      final userResponseBool = await loginWithUserID(
+        userID: user.user!.id,
+        password: password,
+      );
+
+      if (userResponseBool == null) {
         errorMessage.value = 'User not found';
 
         authState.value = AuthState.error;

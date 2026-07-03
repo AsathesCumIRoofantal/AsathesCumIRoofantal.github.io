@@ -150,6 +150,7 @@ class SignupController extends GetxController {
         "password": passwordController.text,
         // "mobile": mobileController.text,
         "email": emailController.text,
+        "auth_user_id": Supabase.instance.client.auth.currentUser?.id,
         // "user_role": selectedRole.value,
       });
 

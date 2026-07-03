@@ -48,7 +48,7 @@ class AuthRepository {
         .from(table)
         .select()
         .eq('user_id', userID)
-        .eq("isMember", 1)
+        .eq("is_member", 1)
         .maybeSingle();
 
     if (response == null) {
