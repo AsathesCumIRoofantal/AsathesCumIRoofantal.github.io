@@ -47,7 +47,7 @@ class AuthRepository {
     final response = await _client
         .from(table)
         .select()
-        .eq('user_id', userID)
+        .eq('id', userID)
         .eq("is_member", 1)
         .maybeSingle();
 
