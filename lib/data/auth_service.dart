@@ -246,6 +246,11 @@ class AuthService extends GetxService {
 
         return null;
       }
+      if (user.isMember == 0) {
+        authState.value = AuthState.unapproved;
+
+        return null;
+      }
 
       currentUser.value = user;
 
