@@ -53,7 +53,8 @@ class _SplashScreenState extends State<SplashScreen>
       if (kIsWeb) {
         Get.offAllNamed(WebHomeView.routeName);
       } else {
-        Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+        Get.offAllNamed(WebHomeView.routeName);
+        // Get.offAllNamed(AppRoutes.HOME_APP_OLD);
       }
     });
   }

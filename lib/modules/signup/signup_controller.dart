@@ -157,7 +157,8 @@ class SignupController extends GetxController {
       if (kIsWeb) {
         Get.offAllNamed(WebHomeView.routeName);
       } else {
-        Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+        Get.offAllNamed(WebHomeView.routeName);
+        // Get.offAllNamed(AppRoutes.HOME_APP_OLD);
       }
       Get.snackbar(
         'Success',
@@ -381,7 +382,8 @@ class SignupController extends GetxController {
     if (kIsWeb) {
       await Get.offAllNamed(WebHomeView.routeName);
     } else {
-      await Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+      Get.offAllNamed(WebHomeView.routeName);
+      // await Get.offAllNamed(AppRoutes.HOME_APP_OLD);
     }
     Get.snackbar('Success', 'Welcome!', snackPosition: SnackPosition.BOTTOM);
   }

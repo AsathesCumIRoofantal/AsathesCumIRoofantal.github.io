@@ -44,18 +44,22 @@ class AuthRepository {
   }
 
   Future<AirUser?> getUserByUserID(String userID) async {
-    final response = await _client
-        .from(table)
-        .select()
-        .eq('auth_user_id', userID)
-        // .eq("is_member", 1)
-        .maybeSingle();
+    try {
+      final response = await _client
+          .from("user_table")
+          .select()
+          .eq('auth_user_id', userID)
+          // .eq("is_member", 1)
+          .maybeSingle();
 
-    if (response == null) {
+      if (response == null) {
+        return null;
+      }
+
+      return AirUser.fromJson(response);
+    } catch (e) {
       return null;
     }
-
-    return AirUser.fromJson(response);
   }
 
   Future<String?> getSignupToken() async {

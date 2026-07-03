@@ -2,6 +2,7 @@
 // Reusable enhanced template for all section pages with advanced animations
 
 import 'package:air_app/routes/app_pages.dart';
+import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -714,7 +715,7 @@ class EnhancedCTA extends StatelessWidget {
                 runSpacing: 12,
                 children: [
                   ElevatedButton.icon(
-                    onPressed: () => Get.toNamed(AppRoutes.HOME_APP_OLD),
+                    onPressed: () => Get.offAllNamed(WebHomeView.routeName),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: section.primary,
                       foregroundColor: Colors.white,

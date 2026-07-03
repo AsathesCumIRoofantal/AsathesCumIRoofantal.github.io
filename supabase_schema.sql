@@ -592,14 +592,15 @@ serve(async (req) => {
       },
     );
 
-   var user=null;
-    if (body.isLogin == true) {
+
+  
+   // Validate logged in user
     const {
-      data: { userIn },
+      data: { user },
       error: authError,
     } = await supabase.auth.getUser();
 
-    if (authError || !userIn) {
+    if (authError || !user) {
       return new Response(
         JSON.stringify({
           success: false,
@@ -612,8 +613,6 @@ serve(async (req) => {
         },
       );
     }
-    user=userIn;
-  }
 
    
 

@@ -195,22 +195,22 @@ class _AirAppState extends State<AirApp> {
   }
 }
 
-Future<void> getFirstPage() async {
-  Get.put(() => SplashController(), permanent: true);
-  Get.put(() => SecureStorage(), permanent: true);
-  Get.put(() => AuthService(), permanent: true);
+// Future<void> getFirstPage() async {
+//   Get.put(() => SplashController(), permanent: true);
+//   Get.put(() => SecureStorage(), permanent: true);
+//   Get.put(() => AuthService(), permanent: true);
 
-  await Future.delayed(const Duration(milliseconds: 300));
+//   await Future.delayed(const Duration(milliseconds: 300));
 
-  final authService = AuthService.to;
-  if (authService.isLoggedIn &&
-      authService.currentUser.value != null &&
-      Supabase.instance.client.auth.currentUser != null) {
-    Get.offAllNamed(AppRoutes.HOME_APP_OLD);
-  } else {
-    Get.offAllNamed(AppRoutes.LOGIN);
-  }
-}
+//   final authService = AuthService.to;
+//   if (authService.isLoggedIn &&
+//       authService.currentUser.value != null &&
+//       Supabase.instance.client.auth.currentUser != null) {
+//     Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+//   } else {
+//     Get.offAllNamed(AppRoutes.LOGIN);
+//   }
+// }
 
 // ── 404 Page ──────────────────────────────────────────────
 class _NotFoundPage extends StatelessWidget {

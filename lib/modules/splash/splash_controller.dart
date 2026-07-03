@@ -7,6 +7,7 @@ import 'package:air_app/core/storage/secure_storage.dart';
 import 'package:air_app/data/auth_repository.dart';
 import 'package:air_app/data/auth_service.dart';
 import 'package:air_app/routes/app_pages.dart';
+import 'package:air_app/web_modules/web_home/web_home_view.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class SplashController extends GetxController {
     if (authService.isLoggedIn &&
         authService.currentUser.value != null &&
         Supabase.instance.client.auth.currentUser != null) {
-      Get.offAllNamed(AppRoutes.HOME_APP_OLD);
+      Get.offAllNamed(WebHomeView.routeName);
     } else {
       Get.offAllNamed(AppRoutes.LOGIN);
     }
