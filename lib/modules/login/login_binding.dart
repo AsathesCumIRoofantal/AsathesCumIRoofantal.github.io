@@ -7,9 +7,9 @@ import 'login_controller.dart';
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<LoginController>(() => LoginController());
-    Get.lazyPut<AuthService>(() => AuthService());
-    Get.lazyPut<SplashController>(() => SplashController());
-    Get.lazyPut<SecureStorage>(() => SecureStorage());
+    Get.put<LoginController>(LoginController(), permanent: true);
+    Get.put<AuthService>(AuthService(), permanent: true);
+    Get.put<SplashController>(SplashController(), permanent: true);
+    Get.put<SecureStorage>(SecureStorage(), permanent: true);
   }
 }
