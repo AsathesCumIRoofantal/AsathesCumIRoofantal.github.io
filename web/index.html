@@ -14,6 +14,9 @@
   <meta name="apple-mobile-web-app-title" content="air_app">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
+  <!-- <meta name="permissions-policy" content="geolocation=*"> -->
+  <meta name="permissions-policy" content="geolocation=(self)">
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
 
@@ -108,7 +111,10 @@
 
 <body>
   <!-- Global hardware permissions policy wrapper for modern browser environments -->
-  <iframe src="about:blank" allow="camera; microphone; display-capture" style="display:none"></iframe>
+
+  <!-- <iframe src="about:blank" allow="camera; microphone; display-capture" style="display:none"></iframe> -->
+
+  <iframe src="about:blank" allow="camera; microphone; display-capture; geolocation" style="display:none"></iframe>
 
   <picture id="splash">
     <source
