@@ -46,6 +46,30 @@ class RtcConfig {
     this.demoMode = false,
   });
 
+  /// Builds an [RtcConfig] with a TURN relay appended after the public
+  /// STUN servers, so calls still connect when direct P2P is blocked by
+  /// strict NAT / corporate firewalls. See WEBRTC_SETUP.md for a
+  /// self-hosted coturn docker-compose (free) or the Metered.ca free tier.
+  factory RtcConfig.withTurn({
+    required String channelId,
+    required int uid,
+    required String turnUrl, // e.g. 'turn:your.server.com:3478'
+    required String turnUsername,
+    required String turnCredential,
+    bool enableRemoteControl = true,
+  }) =>
+      RtcConfig(
+        backend: RtcBackend.webrtc,
+        channelId: channelId,
+        uid: uid,
+        enableRemoteControl: enableRemoteControl,
+        iceServers: [
+          {'urls': 'stun:stun.l.google.com:19302'},
+          {'urls': 'stun:stun1.l.google.com:19302'},
+          {'urls': turnUrl, 'username': turnUsername, 'credential': turnCredential},
+        ],
+      );
+
   /// Read credentials from dart-define env vars (matching existing pattern).
   factory RtcConfig.fromEnvironment({
     RtcBackend backend = RtcBackend.agora,

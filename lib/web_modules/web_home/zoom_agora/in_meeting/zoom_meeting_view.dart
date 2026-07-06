@@ -10,6 +10,7 @@ import '../widgets/reaction_overlay.dart';
 import '../widgets/shortcuts_overlay.dart';
 import '../mock/mock_data.dart';
 import 'zoom_meeting_controller.dart';
+import 'remote_control_overlay.dart';
 import 'chat_panel.dart';
 import 'participants_panel.dart';
 import 'captions_overlay.dart';
@@ -42,11 +43,11 @@ class ZoomMeetingView extends GetView<ZoomMeetingController> {
               _TopChrome(),
               Expanded(
                 child: Row(children: [
-                  Expanded(child: Stack(children: const [
+                  Expanded(child: RemoteControlOverlay(child: Stack(children: const [
                     _VideoStage(),
                     CaptionsOverlay(),
                     ReactionOverlay(),
-                  ])),
+                  ]))),
                   if (wide)
                     Obx(() => AnimatedSize(
                       duration: const Duration(milliseconds: 220),
@@ -101,7 +102,10 @@ class _TopChrome extends GetView<ZoomMeetingController> {
         const BackendToggle(compact: true),
         const SizedBox(width: 12),
         FilledButton.icon(
-          onPressed: () => Get.offAllNamed(ZoomRoutes.home),
+          onPressed: () async {
+            await controller.leaveLiveMeeting();
+            Get.offAllNamed(ZoomRoutes.home);
+          },
           style: FilledButton.styleFrom(
             backgroundColor: ZoomTheme.danger,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -166,11 +170,52 @@ class _Tile extends StatelessWidget {
   const _Tile({required this.p, this.big = false});
   final dynamic p; // Participant
   final bool big;
+
+  /// If we've been granted control of this (shared-screen) tile, forward
+  /// local taps/drags as normalised (0-1) mouse events over the data
+  /// channel. This only ever reaches the app on the far end — see
+  /// WEBRTC_SETUP.md for why that's the honest scope of in-app control.
+  Widget _withControlForwarding(BuildContext c, Widget child) {
+    if (!big) return child;
+    final controller = Get.find<ZoomMeetingController>();
+    final rc = controller.remoteControl;
+    if (rc == null) return child;
+    return Obx(() {
+      if (rc.controllingUid.value != p.uid) return child;
+      return LayoutBuilder(builder: (ctx, box) {
+        void sendAt(Offset local, {bool isClick = false}) {
+          final nx = (local.dx / box.maxWidth).clamp(0.0, 1.0);
+          final ny = (local.dy / box.maxHeight).clamp(0.0, 1.0);
+          if (isClick) {
+            rc.sendMouseClick(controller.localUid, nx, ny);
+          } else {
+            rc.sendMouseMove(controller.localUid, nx, ny);
+          }
+        }
+        return MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTapDown: (d) => sendAt(d.localPosition, isClick: true),
+            onPanUpdate: (d) => sendAt(d.localPosition),
+            child: Stack(fit: StackFit.expand, children: [
+              child,
+              Positioned(top: 8, left: 8, child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(color: ZoomTheme.primary, borderRadius: BorderRadius.circular(20)),
+                child: const Text('Controlling', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w700)),
+              )),
+            ]),
+          ),
+        );
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext c) {
     final color = MockMeetingSim.colorFor(p.uid);
     final isSpeaking = p.isSpeaking == true;
-    return AnimatedContainer(
+    return _withControlForwarding(c, AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         color: ZoomTheme.surface2,
@@ -185,12 +230,24 @@ class _Tile extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(big ? 18 : 12),
         child: Stack(fit: StackFit.expand, children: [
-          // "Video" — gradient backdrop standing in for a real camera feed.
-          DecoratedBox(decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft, end: Alignment.bottomRight,
-              colors: [Color(color).withOpacity(.85), Color(color).withOpacity(.35), const Color(0xFF14171F)],
-            ))),
+          Builder(builder: (ctx) {
+            final controller = Get.find<ZoomMeetingController>();
+            final engine = controller.engine;
+            if (engine != null && p.videoOff != true) {
+              // Real feed: local uid renders the camera/screen preview,
+              // any other uid renders that peer's incoming WebRTC stream.
+              return p.uid == controller.localUid
+                  ? engine.buildLocalVideoView()
+                  : engine.buildRemoteVideoView(p.uid);
+            }
+            // Demo mode (no engine attached) or camera off — gradient
+            // backdrop stands in for a real feed.
+            return DecoratedBox(decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft, end: Alignment.bottomRight,
+                colors: [Color(color).withOpacity(.85), Color(color).withOpacity(.35), const Color(0xFF14171F)],
+              )));
+          }),
           if (p.videoOff == true)
             Center(child: InitialsAvatar(name: p.name, colorHex: color, size: big ? 96 : 48)),
           // Bottom label bar
@@ -218,7 +275,7 @@ class _Tile extends StatelessWidget {
             const Positioned(top: 8, right: 8, child: Icon(Icons.push_pin, color: Colors.white, size: 14)),
         ]),
       ),
-    );
+    ));
   }
 }
 
@@ -278,19 +335,29 @@ class _Toolbar extends GetView<ZoomMeetingController> {
         scrollDirection: Axis.horizontal,
         child: Row(children: [
           Obx(() {
-            final me = controller.participants[0];
+            final me = controller.participants[controller.localUid];
             final muted = me?.audioMuted ?? false;
             return _btn(muted ? Icons.mic_off : Icons.mic, muted ? 'Unmute' : 'Mute',
-              danger: muted, onTap: () { me?.audioMuted = !muted; controller.participants.refresh(); });
+              danger: muted, onTap: controller.toggleLocalAudio);
           }),
           Obx(() {
-            final me = controller.participants[0];
+            final me = controller.participants[controller.localUid];
             final off = me?.videoOff ?? false;
             return _btn(off ? Icons.videocam_off : Icons.videocam, off ? 'Start video' : 'Stop video',
-              danger: off, onTap: () { me?.videoOff = !off; controller.participants.refresh(); });
+              danger: off, onTap: controller.toggleLocalVideo);
           }),
-          _btn(Icons.screen_share_outlined, 'Share',
-            onTap: () => Get.dialog(const ScreenSharePicker())),
+          Obx(() {
+            final sharing = controller.participants[controller.localUid]?.isScreenSharing ?? false;
+            return _btn(Icons.screen_share_outlined, sharing ? 'Stop share' : 'Share',
+              danger: sharing,
+              onTap: () async {
+                if (sharing) { await controller.toggleScreenShare(); return; }
+                final choice = await Get.dialog<String>(const ScreenSharePicker());
+                if (choice == null) return;
+                if (choice == 'whiteboard') { _openPane(c, 'whiteboard', const WhiteboardView()); return; }
+                await controller.toggleScreenShare();
+              });
+          }),
           _btn(Icons.chat_bubble_outline, 'Chat',
             badge: controller.chat.length,
             onTap: () => _openPane(c, 'chat', const ChatPanel())),
@@ -314,11 +381,35 @@ class _Toolbar extends GetView<ZoomMeetingController> {
               builder: (_) => const Padding(padding: EdgeInsets.all(16), child: ReactionsBar()));
           }),
           _btn(Icons.image_outlined, 'Background',
-            onTap: () => Get.dialog(const VirtualBgPicker())),
+            onTap: () async {
+              final choice = await Get.dialog<String>(const VirtualBgPicker());
+              if (choice == null || choice == 'None') return;
+              await controller.engine?.enableVirtualBackground(true);
+              Get.snackbar('Not available yet',
+                'Virtual backgrounds need an ML segmentation model that '
+                "isn't wired up yet — see enableVirtualBackground() in "
+                'webrtc_service.dart.');
+            }),
+          Obx(() {
+            final raised = controller.participants[controller.localUid]?.handRaised ?? false;
+            return _btn(Icons.pan_tool_alt_outlined, raised ? 'Lower hand' : 'Raise hand',
+              active: raised, onTap: controller.toggleHandRaise);
+          }),
           _btn(Icons.bar_chart_outlined, 'Stats',
             onTap: () => _openPane(c, 'stats', const StatsPanel())),
           _btn(Icons.fiber_manual_record, 'Record', danger: true,
-            onTap: controller.startCloudRecording),
+            onTap: () => Get.dialog(AlertDialog(
+              backgroundColor: ZoomTheme.surface2,
+              title: const Text('Cloud recording not connected', style: TextStyle(color: Colors.white)),
+              content: const Text(
+                'Cloud recording needs a paid server-side service (e.g. Agora '
+                'Cloud Recording) wired up in services/recording_service.dart — '
+                'it isn\'t connected yet, so this button intentionally does '
+                'nothing rather than pretend to record.',
+                style: TextStyle(color: ZoomTheme.textMuted),
+              ),
+              actions: [FilledButton(onPressed: Get.back, child: const Text('Got it'))],
+            ))),
         ]),
       ),
     );

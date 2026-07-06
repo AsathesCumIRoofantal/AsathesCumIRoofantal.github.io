@@ -3,6 +3,61 @@ import 'package:get/get.dart';
 import '../zoom_routes.dart';
 import '../widgets/zoom_theme.dart';
 import '../widgets/backend_toggle.dart';
+import '../services/meeting_service.dart';
+import '../services/current_user.dart';
+
+/// Actually creates a meeting row and hands its channel_name off to
+/// device preview -> the live meeting, instead of the old mock args.
+Future<void> _startInstantMeeting() async {
+  if (!CurrentUser.isSignedIn) {
+    Get.snackbar('Sign in required', 'Log in before starting a meeting.');
+    return;
+  }
+  try {
+    await CurrentUser.ensureProfileLoaded();
+    final meeting = await MeetingService().createMeeting(
+      hostId: CurrentUser.id,
+      hostName: CurrentUser.name,
+      title: 'Instant meeting',
+    );
+    await MeetingService().markLive(meeting.id);
+    Get.toNamed(ZoomRoutes.devicePreview, arguments: {
+      'mode': 'instant',
+      'channelId': meeting.channelName,
+      'meetingRowId': meeting.id,
+      'displayName': CurrentUser.name,
+      'demoMode': false,
+    });
+  } catch (e) {
+    Get.snackbar('Could not start meeting', e.toString());
+  }
+}
+
+/// Same idea for joining a meeting straight from the recents list — looks
+/// the meeting up for real instead of trusting the mock id blindly.
+Future<void> _joinFromRecents(String channelOrId) async {
+  if (!CurrentUser.isSignedIn) {
+    Get.snackbar('Sign in required', 'Log in before joining a meeting.');
+    return;
+  }
+  try {
+    await CurrentUser.ensureProfileLoaded();
+    final meeting = await MeetingService().findJoinable(channelOrId);
+    if (meeting == null) {
+      Get.snackbar('Meeting not found', 'It may have ended or been cancelled.');
+      return;
+    }
+    Get.toNamed(ZoomRoutes.devicePreview, arguments: {
+      'mode': 'join',
+      'channelId': meeting.channelName,
+      'meetingRowId': meeting.id,
+      'displayName': CurrentUser.name,
+      'demoMode': false,
+    });
+  } catch (e) {
+    Get.snackbar('Could not join meeting', e.toString());
+  }
+}
 
 /// Polished, responsive home screen for the Zoom-parity module.
 /// Adapts from a single column on mobile to a 2-column hero layout on desktop.
@@ -93,7 +148,7 @@ class _Hero extends StatelessWidget {
         const SizedBox(height: 20),
         Wrap(spacing: 12, runSpacing: 12, children: [
           _heroBtn(Icons.videocam_rounded, 'New meeting', Colors.white, Colors.black,
-            () => Get.toNamed(ZoomRoutes.devicePreview, arguments: {'mode':'instant'})),
+            _startInstantMeeting),
           _heroBtn(Icons.add_box_outlined, 'Join', Colors.white24, Colors.white,
             () => Get.toNamed(ZoomRoutes.join)),
           _heroBtn(Icons.event_outlined, 'Schedule', Colors.white24, Colors.white,
@@ -147,7 +202,7 @@ class _UpcomingList extends StatelessWidget {
             Text(m['meta']!, style: ZoomTheme.muted),
           ])),
           FilledButton(
-            onPressed: () => Get.toNamed(ZoomRoutes.devicePreview, arguments: {'mode':'join','meetingId':m['id']}),
+            onPressed: () => _joinFromRecents(m['id']!),
             style: FilledButton.styleFrom(
               backgroundColor: ZoomTheme.primary,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

@@ -25,4 +25,21 @@ class ChatMessage {
     this.edited = false,
     this.deleted = false,
   }) : reactions = reactions ?? {};
+
+  Map<String, dynamic> toJson() => {
+    'id': id, 'fromUid': fromUid, 'fromName': fromName, 'toUid': toUid,
+    'scope': scope.name, 'text': text, 'sentAt': sentAt.millisecondsSinceEpoch,
+    'attachments': attachments,
+  };
+
+  factory ChatMessage.fromJson(Map<String, dynamic> j) => ChatMessage(
+    id: j['id'] as String,
+    fromUid: j['fromUid'] as int,
+    fromName: j['fromName'] as String,
+    toUid: j['toUid'] as int?,
+    scope: ChatScope.values.firstWhere((s) => s.name == j['scope'], orElse: () => ChatScope.everyone),
+    text: j['text'] as String,
+    sentAt: DateTime.fromMillisecondsSinceEpoch(j['sentAt'] as int),
+    attachments: (j['attachments'] as List?)?.cast<String>() ?? const [],
+  );
 }

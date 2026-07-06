@@ -1,8 +1,10 @@
-/// Wrap Agora Interactive Whiteboard or tldraw web view.
+/// Free, in-app collaborative whiteboard. Strokes themselves live in
+/// `ZoomMeetingController.whiteboardStrokes` and sync over the same
+/// WebRTC data channel used for chat/control (see `_sendApp('wb_...')`)
+/// — no Agora Interactive Whiteboard license, no separate server. This
+/// service just tracks whether the panel is open.
 class WhiteboardService {
   bool isOpen = false;
-  String? roomToken;
-  Future<void> open() async { /* TODO: createRoom + token */ isOpen = true; }
-  Future<void> close() async { isOpen = false; }
-  Future<String> exportPng() async => 'TODO_url';
+  Future<void> open() async => isOpen = true;
+  Future<void> close() async => isOpen = false;
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../zoom_routes.dart';
 import '../widgets/zoom_theme.dart';
+import '../services/meeting_service.dart';
+import '../services/current_user.dart';
 
 /// Pre-meeting join screen — recent meetings on the left, form on the right.
 class ZoomJoinView extends StatefulWidget {
@@ -74,10 +76,7 @@ class _S extends State<ZoomJoinView> {
       ),
       const SizedBox(height: 12),
       FilledButton(
-        onPressed: () => Get.toNamed(ZoomRoutes.devicePreview, arguments: {
-          'mode': 'join', 'meetingId': id.text, 'passcode': pass.text, 'name': name.text,
-          'joinAudio': joinAudio, 'joinVideo': joinVideo,
-        }),
+        onPressed: () => _submit(c),
         style: FilledButton.styleFrom(
           backgroundColor: ZoomTheme.primary,
           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -87,6 +86,44 @@ class _S extends State<ZoomJoinView> {
       ),
     ]),
   );
+
+  bool _submitting = false;
+
+  Future<void> _submit(BuildContext c) async {
+    if (_submitting) return;
+    if (!CurrentUser.isSignedIn) {
+      Get.snackbar('Sign in required', 'Log in before joining a meeting.');
+      return;
+    }
+    if (id.text.trim().isEmpty) {
+      Get.snackbar('Meeting ID required', 'Paste an invite link or enter the meeting ID.');
+      return;
+    }
+    setState(() => _submitting = true);
+    try {
+      await CurrentUser.ensureProfileLoaded();
+      final meeting = await MeetingService().findJoinable(id.text.trim(), passcode: pass.text.trim());
+      if (meeting == null) {
+        Get.snackbar('Meeting not found', "It may have ended, been cancelled, or the ID is wrong.");
+        return;
+      }
+      Get.toNamed(ZoomRoutes.devicePreview, arguments: {
+        'mode': 'join',
+        'channelId': meeting.channelName,
+        'meetingRowId': meeting.id,
+        'displayName': name.text.trim().isEmpty ? CurrentUser.name : name.text.trim(),
+        'demoMode': false,
+        'joinAudio': joinAudio,
+        'joinVideo': joinVideo,
+      });
+    } on MeetingPasscodeException {
+      Get.snackbar('Wrong passcode', 'Check the passcode and try again.');
+    } catch (e) {
+      Get.snackbar('Could not join', e.toString());
+    } finally {
+      if (mounted) setState(() => _submitting = false);
+    }
+  }
 
   Widget _input(TextEditingController c, String label, {IconData? icon, bool obscure = false}) =>
     TextField(

@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 
 import '../models/meeting.dart';
 import '../services/calendar_service.dart';
+import '../services/meeting_service.dart' as db;
+import '../services/current_user.dart';
+import '../zoom_routes.dart';
 
 class ScheduleView extends StatefulWidget {
   const ScheduleView({super.key});
@@ -65,39 +68,80 @@ class _ScheduleViewState extends State<ScheduleView> {
     });
   }
 
-  void _saveMeeting() {
-    final m = Meeting(
-      id: DateTime.now().millisecondsSinceEpoch.toString().substring(0, 11),
-      title: titleController.text.trim(),
-      hostUid: 'me',
-      startAt: when,
-      duration: duration,
-      passcode: passController.text.trim().isEmpty
-          ? null
-          : passController.text.trim(),
-      waitingRoom: waiting,
-      muteOnEntry: muteOnEntry,
-      recordOnStart: record,
-      isWebinar: webinar,
-    );
+  bool _saving = false;
 
-    final ics = CalendarService().toIcs(m);
+  Future<void> _saveMeeting() async {
+    if (_saving) return;
+    if (!CurrentUser.isSignedIn) {
+      Get.snackbar('Sign in required', 'Log in before scheduling a meeting.');
+      return;
+    }
+    setState(() => _saving = true);
+    try {
+      await CurrentUser.ensureProfileLoaded();
+      final row = await db.MeetingService().createMeeting(
+        hostId: CurrentUser.id,
+        hostName: CurrentUser.name,
+        title: titleController.text.trim().isEmpty ? 'New Meeting' : titleController.text.trim(),
+        passcode: passController.text.trim().isEmpty ? null : passController.text.trim(),
+        scheduledAt: when,
+        waitingRoomEnabled: waiting,
+      );
 
-    Get.dialog(
-      AlertDialog(
-        title: const Text('Meeting Scheduled'),
-        content: SizedBox(
-          width: 500,
-          child: SingleChildScrollView(
-            child: SelectableText(
-              'Share Link:\n${m.shareLink}\n\n'
-              'ICS File:\n\n$ics',
+      // Local mock Meeting is still used purely for the .ics text/share
+      // link format — now built from the real channel_name so the link
+      // people actually get points at a meeting that exists.
+      final m = Meeting(
+        id: row.channelName,
+        title: row.title,
+        hostUid: CurrentUser.id,
+        startAt: when,
+        duration: duration,
+        passcode: row.passcode,
+        waitingRoom: waiting,
+        muteOnEntry: muteOnEntry,
+        recordOnStart: record,
+        isWebinar: webinar,
+      );
+      final ics = CalendarService().toIcs(m);
+
+      if (!mounted) return;
+      Get.dialog(
+        AlertDialog(
+          title: const Text('Meeting Scheduled'),
+          content: SizedBox(
+            width: 500,
+            child: SingleChildScrollView(
+              child: SelectableText(
+                'Share Link:\n${m.shareLink}\n\n'
+                'ICS File:\n\n$ics',
+              ),
             ),
           ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Get.back(); // close dialog
+                await db.MeetingService().markLive(row.id);
+                Get.toNamed(ZoomRoutes.devicePreview, arguments: {
+                  'mode': 'instant',
+                  'channelId': row.channelName,
+                  'meetingRowId': row.id,
+                  'displayName': CurrentUser.name,
+                  'demoMode': false,
+                });
+              },
+              child: const Text('Start now'),
+            ),
+            FilledButton(onPressed: Get.back, child: const Text('Done')),
+          ],
         ),
-        actions: [FilledButton(onPressed: Get.back, child: const Text('Done'))],
-      ),
-    );
+      );
+    } catch (e) {
+      Get.snackbar('Could not schedule meeting', e.toString());
+    } finally {
+      if (mounted) setState(() => _saving = false);
+    }
   }
 
   @override

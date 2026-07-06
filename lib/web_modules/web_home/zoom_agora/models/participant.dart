@@ -12,6 +12,7 @@ class Participant {
   bool isSpeaking;
   bool isPinned;
   bool isSpotlighted;
+  bool isScreenSharing;
   int networkQuality; // 0..6, see Agora QualityType
   String? breakoutRoomId;
   String? reaction; // emoji currently displayed
@@ -28,6 +29,7 @@ class Participant {
     this.isSpeaking = false,
     this.isPinned = false,
     this.isSpotlighted = false,
+    this.isScreenSharing = false,
     this.networkQuality = 5,
     this.breakoutRoomId,
     this.reaction,

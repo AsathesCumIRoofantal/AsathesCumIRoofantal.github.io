@@ -21,21 +21,18 @@ class ChatPanel extends GetView<ZoomMeetingController> {
         return ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           itemCount: msgs.length,
-          itemBuilder: (_, i) => _Bubble(m: msgs[i], isMe: msgs[i].fromUid == 0),
+          itemBuilder: (_, i) => _Bubble(m: msgs[i], isMe: msgs[i].fromUid == controller.localUid),
         );
       })),
-      _Composer(input: input, scope: scope, onSend: () {
-        final t = input.text.trim();
-        if (t.isEmpty) return;
-        final m = ChatMessage(
-          id: '${DateTime.now().millisecondsSinceEpoch}',
-          fromUid: 0, fromName: 'You',
-          text: t, sentAt: DateTime.now(), scope: scope.value,
-        );
-        controller.chat.add(m);
-        controller.rtm.sendMessage(m);
-        input.clear();
-      }),
+      _Composer(
+        input: input,
+        scope: scope,
+        onChanged: controller.notifyTyping,
+        onSend: () {
+          controller.sendChatMessage(input.text, scope: scope.value);
+          input.clear();
+        },
+      ),
     ]);
   }
 }
@@ -122,10 +119,11 @@ class _Bubble extends StatelessWidget {
 }
 
 class _Composer extends StatelessWidget {
-  const _Composer({required this.input, required this.scope, required this.onSend});
+  const _Composer({required this.input, required this.scope, required this.onSend, this.onChanged});
   final TextEditingController input;
   final Rx<ChatScope> scope;
   final VoidCallback onSend;
+  final VoidCallback? onChanged;
   @override
   Widget build(BuildContext c) => Container(
     padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
@@ -155,6 +153,7 @@ class _Composer extends StatelessWidget {
           controller: input,
           style: const TextStyle(color: ZoomTheme.text),
           textInputAction: TextInputAction.send,
+          onChanged: (_) => onChanged?.call(),
           onSubmitted: (_) => onSend(),
           decoration: InputDecoration(
             hintText: 'Message everyone…',

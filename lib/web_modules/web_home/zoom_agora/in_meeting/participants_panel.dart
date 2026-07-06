@@ -175,14 +175,19 @@ class _Row extends GetView<ZoomMeetingController> {
                 case 'co':   controller.makeCoHost(p.uid); break;
                 case 'host': controller.transferHost(p.uid); break;
                 case 'kick': controller.removeParticipant(p.uid); break;
+                case 'reqctrl':
+                  controller.remoteControl?.requestControl(p.uid, controller.localUid);
+                  break;
               }
             },
-            itemBuilder: (_) => const [
-              PopupMenuItem(value: 'pin',  child: Text('Pin',                style: TextStyle(color: Colors.white))),
-              PopupMenuItem(value: 'spot', child: Text('Spotlight for all',  style: TextStyle(color: Colors.white))),
-              PopupMenuItem(value: 'co',   child: Text('Make co-host',       style: TextStyle(color: Colors.white))),
-              PopupMenuItem(value: 'host', child: Text('Make host',          style: TextStyle(color: Colors.white))),
-              PopupMenuItem(value: 'kick', child: Text('Remove from meeting',style: TextStyle(color: Color(0xFFFF5C7A)))),
+            itemBuilder: (_) => [
+              const PopupMenuItem(value: 'pin',  child: Text('Pin',                style: TextStyle(color: Colors.white))),
+              const PopupMenuItem(value: 'spot', child: Text('Spotlight for all',  style: TextStyle(color: Colors.white))),
+              if (p.isScreenSharing && p.uid != controller.localUid)
+                const PopupMenuItem(value: 'reqctrl', child: Text('Request control of screen', style: TextStyle(color: Colors.white))),
+              const PopupMenuItem(value: 'co',   child: Text('Make co-host',       style: TextStyle(color: Colors.white))),
+              const PopupMenuItem(value: 'host', child: Text('Make host',          style: TextStyle(color: Colors.white))),
+              const PopupMenuItem(value: 'kick', child: Text('Remove from meeting',style: TextStyle(color: Color(0xFFFF5C7A)))),
             ],
           ),
         ]),

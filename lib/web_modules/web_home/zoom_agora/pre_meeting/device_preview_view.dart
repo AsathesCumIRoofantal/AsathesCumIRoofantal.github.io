@@ -171,7 +171,11 @@ class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
       ),
       const SizedBox(height: 8),
       FilledButton(
-        onPressed: () => Get.toNamed(ZoomRoutes.inMeeting, arguments: Get.arguments),
+        onPressed: () => Get.toNamed(ZoomRoutes.inMeeting, arguments: {
+          ...(Get.arguments as Map? ?? const {}),
+          'joinMuted': !micOn,
+          'joinVideoOff': !videoOn,
+        }),
         style: FilledButton.styleFrom(
           backgroundColor: ZoomTheme.primary,
           padding: const EdgeInsets.symmetric(vertical: 14),
