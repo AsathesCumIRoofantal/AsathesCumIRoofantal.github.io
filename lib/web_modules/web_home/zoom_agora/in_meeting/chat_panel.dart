@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import '../models/chat_message.dart';
 import '../widgets/zoom_theme.dart';
 import '../mock/mock_data.dart';
 import 'zoom_meeting_controller.dart';
+import '../services/r2_upload_service.dart';
 
 /// Polished chat with grouped bubbles, timestamps, scope chips, and quick reactions.
 class ChatPanel extends GetView<ZoomMeetingController> {
@@ -13,6 +16,7 @@ class ChatPanel extends GetView<ZoomMeetingController> {
   Widget build(BuildContext c) {
     final input = TextEditingController();
     final scope = ChatScope.everyone.obs;
+    final replyTo = Rxn<ChatMessage>();
 
     return Column(children: [
       _Header(),
@@ -21,16 +25,50 @@ class ChatPanel extends GetView<ZoomMeetingController> {
         return ListView.builder(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           itemCount: msgs.length,
-          itemBuilder: (_, i) => _Bubble(m: msgs[i], isMe: msgs[i].fromUid == controller.localUid),
+          itemBuilder: (_, i) => _Bubble(
+            m: msgs[i],
+            isMe: msgs[i].fromUid == controller.localUid,
+            onReply: () => replyTo.value = msgs[i],
+          ),
         );
       })),
+      Obx(() {
+        final r = replyTo.value;
+        if (r == null) return const SizedBox.shrink();
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: const BoxDecoration(
+            color: ZoomTheme.surface2,
+            border: Border(top: BorderSide(color: ZoomTheme.stroke)),
+          ),
+          child: Row(children: [
+            Container(width: 3, height: 34, color: ZoomTheme.primary, margin: const EdgeInsets.only(right: 10)),
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text('Replying to ${r.fromUid == controller.localUid ? 'You' : r.fromName}',
+                    style: const TextStyle(color: ZoomTheme.primary, fontSize: 11, fontWeight: FontWeight.w700)),
+                Text(r.text, style: ZoomTheme.muted.copyWith(fontSize: 12), overflow: TextOverflow.ellipsis),
+              ]),
+            ),
+            IconButton(
+              icon: const Icon(Icons.close, size: 18, color: ZoomTheme.textMuted),
+              onPressed: () => replyTo.value = null,
+            ),
+          ]),
+        );
+      }),
       _Composer(
         input: input,
         scope: scope,
         onChanged: controller.notifyTyping,
         onSend: () {
-          controller.sendChatMessage(input.text, scope: scope.value);
+          controller.sendChatMessage(
+            input.text,
+            scope: scope.value,
+            replyToId: replyTo.value?.id,
+          );
           input.clear();
+          replyTo.value = null;
         },
       ),
     ]);
@@ -58,9 +96,10 @@ class _Header extends StatelessWidget {
 }
 
 class _Bubble extends StatelessWidget {
-  const _Bubble({required this.m, required this.isMe});
+  const _Bubble({required this.m, required this.isMe, required this.onReply});
   final ChatMessage m;
   final bool isMe;
+  final VoidCallback onReply;
   String _time(DateTime d) {
     final h = d.hour.toString().padLeft(2,'0');
     final mm = d.minute.toString().padLeft(2,'0');
@@ -108,8 +147,42 @@ class _Bubble extends StatelessWidget {
                     bottomRight: Radius.circular(isMe ? 4 : 14),
                   ),
                 ),
-                child: Text(m.text, style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.35)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (m.attachments.isNotEmpty)
+                      ...m.attachments.map((u) => Padding(
+                        padding: const EdgeInsets.only(bottom: 6),
+                        child: InkWell(
+                          onTap: () {},
+                          child: Row(mainAxisSize: MainAxisSize.min, children: [
+                            const Icon(Icons.attach_file, size: 14, color: Colors.white),
+                            const SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                u,
+                                style: const TextStyle(color: Colors.white, fontSize: 12, decoration: TextDecoration.underline),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ]),
+                        ),
+                      )),
+                    if (m.text.isNotEmpty)
+                      Text(m.text, style: const TextStyle(color: Colors.white, fontSize: 14, height: 1.35)),
+                  ],
+                ),
               ),
+              if (!isMe)
+                TextButton(
+                  onPressed: onReply,
+                  style: TextButton.styleFrom(
+                    minimumSize: Size.zero,
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    foregroundColor: ZoomTheme.textMuted,
+                  ),
+                  child: const Text('Reply', style: TextStyle(fontSize: 11)),
+                ),
             ],
           )),
         ],
@@ -147,8 +220,50 @@ class _Composer extends StatelessWidget {
       ])),
       const SizedBox(height: 6),
       Row(children: [
-        IconButton(onPressed: () {}, icon: const Icon(Icons.attach_file, color: ZoomTheme.textMuted)),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.emoji_emotions_outlined, color: ZoomTheme.textMuted)),
+        IconButton(
+          onPressed: () async {
+            final controller = Get.find<ZoomMeetingController>();
+            final result = await FilePicker.platform.pickFiles(withData: true);
+            if (result == null || result.files.isEmpty) return;
+            final f = result.files.single;
+            if (f.bytes == null) return;
+            final up = await R2UploadService().uploadFile(
+              roomId: controller.meetingId.value,
+              filename: f.name,
+              bytes: f.bytes!,
+              contentType: f.mimeType ?? 'application/octet-stream',
+            );
+            await controller.sendChatMessage(
+              '',
+              scope: scope.value,
+              attachments: [up.url],
+            );
+          },
+          icon: const Icon(Icons.attach_file, color: ZoomTheme.textMuted),
+        ),
+        IconButton(
+          onPressed: () {
+            showModalBottomSheet(
+              context: c,
+              backgroundColor: ZoomTheme.surface2,
+              builder: (_) => SizedBox(
+                height: 320,
+                child: EmojiPicker(
+                  onEmojiSelected: (_, e) {
+                    input.text += e.emoji;
+                    input.selection = TextSelection.fromPosition(
+                      TextPosition(offset: input.text.length),
+                    );
+                  },
+                  config: const Config(
+                    bottomActionBarConfig: BottomActionBarConfig(enabled: false),
+                  ),
+                ),
+              ),
+            );
+          },
+          icon: const Icon(Icons.emoji_emotions_outlined, color: ZoomTheme.textMuted),
+        ),
         Expanded(child: TextField(
           controller: input,
           style: const TextStyle(color: ZoomTheme.text),

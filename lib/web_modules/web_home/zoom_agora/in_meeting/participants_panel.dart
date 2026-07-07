@@ -92,26 +92,38 @@ class ParticipantsPanel extends GetView<ZoomMeetingController> {
       Container(
         padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
         decoration: const BoxDecoration(border: Border(top: BorderSide(color: ZoomTheme.stroke))),
-        child: Row(children: [
-          Expanded(child: OutlinedButton.icon(
-            onPressed: controller.muteAll,
-            icon: const Icon(Icons.mic_off, size: 16),
-            label: const Text('Mute all'),
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          Row(children: [
+            Expanded(child: OutlinedButton.icon(
+              onPressed: controller.muteAll,
+              icon: const Icon(Icons.mic_off, size: 16),
+              label: const Text('Mute all'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: ZoomTheme.text,
+                side: const BorderSide(color: ZoomTheme.stroke),
+              ),
+            )),
+            const SizedBox(width: 8),
+            Obx(() => Expanded(child: OutlinedButton.icon(
+              onPressed: () => controller.lockMeeting(!controller.isLocked.value),
+              icon: Icon(controller.isLocked.value ? Icons.lock : Icons.lock_open, size: 16),
+              label: Text(controller.isLocked.value ? 'Unlock' : 'Lock'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: ZoomTheme.text,
+                side: const BorderSide(color: ZoomTheme.stroke),
+              ),
+            ))),
+          ]),
+          const SizedBox(height: 6),
+          SizedBox(width: double.infinity, child: OutlinedButton.icon(
+            onPressed: controller.lowerAllHands,
+            icon: const Icon(Icons.pan_tool_alt_outlined, size: 16),
+            label: const Text('Lower all hands'),
             style: OutlinedButton.styleFrom(
               foregroundColor: ZoomTheme.text,
               side: const BorderSide(color: ZoomTheme.stroke),
             ),
           )),
-          const SizedBox(width: 8),
-          Obx(() => Expanded(child: OutlinedButton.icon(
-            onPressed: () => controller.lockMeeting(!controller.isLocked.value),
-            icon: Icon(controller.isLocked.value ? Icons.lock : Icons.lock_open, size: 16),
-            label: Text(controller.isLocked.value ? 'Unlock' : 'Lock'),
-            style: OutlinedButton.styleFrom(
-              foregroundColor: ZoomTheme.text,
-              side: const BorderSide(color: ZoomTheme.stroke),
-            ),
-          ))),
         ]),
       ),
     ]);
@@ -170,11 +182,37 @@ class _Row extends GetView<ZoomMeetingController> {
             color: ZoomTheme.surface2,
             onSelected: (v) {
               switch (v) {
-                case 'pin':  controller.togglePin(p.uid); break;
-                case 'spot': controller.toggleSpotlight(p.uid); break;
-                case 'co':   controller.makeCoHost(p.uid); break;
-                case 'host': controller.transferHost(p.uid); break;
-                case 'kick': controller.removeParticipant(p.uid); break;
+                case 'pin':        controller.togglePin(p.uid); break;
+                case 'spot':       controller.toggleSpotlight(p.uid); break;
+                case 'co':         controller.makeCoHost(p.uid); break;
+                case 'host':       controller.transferHost(p.uid); break;
+                case 'kick':       controller.removeParticipant(p.uid); break;
+                case 'force_mute': controller.engine?.muteRemoteAudio(p.uid, true); break;
+                case 'force_video_off': controller.forceVideoOff(p.uid); break;
+                case 'rename':
+                  final nameCtrl = TextEditingController(text: p.name);
+                  Get.dialog(AlertDialog(
+                    backgroundColor: ZoomTheme.surface2,
+                    title: const Text('Rename participant', style: TextStyle(color: Colors.white)),
+                    content: TextField(
+                      controller: nameCtrl, autofocus: true,
+                      style: const TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        filled: true, fillColor: ZoomTheme.surface,
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide.none),
+                      ),
+                    ),
+                    actions: [
+                      TextButton(onPressed: Get.back, child: const Text('Cancel')),
+                      FilledButton(onPressed: () {
+                        if (nameCtrl.text.trim().isNotEmpty) {
+                          controller.renameParticipant(p.uid, nameCtrl.text.trim());
+                        }
+                        Get.back();
+                      }, child: const Text('Rename')),
+                    ],
+                  ));
+                  break;
                 case 'reqctrl':
                   controller.remoteControl?.requestControl(p.uid, controller.localUid);
                   break;
@@ -183,6 +221,9 @@ class _Row extends GetView<ZoomMeetingController> {
             itemBuilder: (_) => [
               const PopupMenuItem(value: 'pin',  child: Text('Pin',                style: TextStyle(color: Colors.white))),
               const PopupMenuItem(value: 'spot', child: Text('Spotlight for all',  style: TextStyle(color: Colors.white))),
+              const PopupMenuItem(value: 'force_mute', child: Text('Force mute',   style: TextStyle(color: Colors.white))),
+              const PopupMenuItem(value: 'force_video_off', child: Text('Turn off video', style: TextStyle(color: Colors.white))),
+              const PopupMenuItem(value: 'rename', child: Text('Rename',           style: TextStyle(color: Colors.white))),
               if (p.isScreenSharing && p.uid != controller.localUid)
                 const PopupMenuItem(value: 'reqctrl', child: Text('Request control of screen', style: TextStyle(color: Colors.white))),
               const PopupMenuItem(value: 'co',   child: Text('Make co-host',       style: TextStyle(color: Colors.white))),

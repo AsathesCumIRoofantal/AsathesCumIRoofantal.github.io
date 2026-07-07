@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'rtc_engine_interface.dart';
+import 'web_input_injector.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // CONTROL EVENT TYPES
@@ -247,6 +249,7 @@ class ControlEvent {
 class RemoteControlService {
   RemoteControlService(this._engine);
   final RtcEngineInterface _engine;
+  final _injector = const WebInputInjector();
 
   // ── Observable state ──────────────────────────────────────────────────
 
@@ -274,13 +277,18 @@ class RemoteControlService {
 
   StreamSubscription? _dataSub;
   DateTime _lastMouseMoveSent = DateTime.now();
+  Timer? _heartbeatTimer;
+  Timer? _watchdogTimer;
+  DateTime _lastHeartbeat = DateTime.fromMillisecondsSinceEpoch(0);
+  int _localUid = 0;
 
   /// Minimum interval between mouse-move sends (≈60 fps cap).
   static const _mouseMoveThrottleMs = 16;
 
   // ── Lifecycle ─────────────────────────────────────────────────────────
 
-  void start() {
+  void start({required int localUid}) {
+    _localUid = localUid;
     _dataSub = _engine.events
         .where((e) => e.type == RtcEventType.dataMessageReceived)
         .listen(_handleDataMessage);
@@ -288,6 +296,8 @@ class RemoteControlService {
 
   void stop() {
     _dataSub?.cancel();
+    _heartbeatTimer?.cancel();
+    _watchdogTimer?.cancel();
     controllingUid.value = null;
     controlledByUid.value = null;
     pendingRequestFromUid.value = null;
@@ -310,6 +320,15 @@ class RemoteControlService {
     final evt = ControlEvent.grant(localUid, requesterUid);
     await _engine.sendDataMessage(evt.toBytes());
     debugPrint('🎮 Granted control to UID $requesterUid');
+
+    _lastHeartbeat = DateTime.now();
+    _watchdogTimer?.cancel();
+    _watchdogTimer = Timer.periodic(const Duration(seconds: 10), (_) async {
+      if (!isBeingControlled) return;
+      if (DateTime.now().difference(_lastHeartbeat).inSeconds > 15) {
+        await revokeControl(_localUid);
+      }
+    });
   }
 
   /// Deny a pending control request.
@@ -326,6 +345,8 @@ class RemoteControlService {
     controllingUid.value = null;
     controlledByUid.value = null;
     showRemoteCursor.value = false;
+    _heartbeatTimer?.cancel();
+    _watchdogTimer?.cancel();
     final evt = ControlEvent.revoke(localUid, targetUid);
     await _engine.sendDataMessage(evt.toBytes());
     debugPrint('🎮 Revoked control');
@@ -428,6 +449,18 @@ class RemoteControlService {
       case ControlEventType.controlGrant:
         controllingUid.value = ctrl.fromUid;
         debugPrint('🎮 Control granted by UID ${ctrl.fromUid}');
+        _heartbeatTimer?.cancel();
+        _heartbeatTimer = Timer.periodic(const Duration(seconds: 5), (_) {
+          final target = controllingUid.value;
+          if (target == null) return;
+          final hb = ControlEvent(
+            type: ControlEventType.heartbeat,
+            fromUid: _localUid,
+            toUid: target,
+            timestamp: DateTime.now().millisecondsSinceEpoch,
+          );
+          _engine.sendDataMessage(hb.toBytes());
+        });
         break;
       case ControlEventType.controlDeny:
         debugPrint('🎮 Control denied by UID ${ctrl.fromUid}');
@@ -436,27 +469,41 @@ class RemoteControlService {
         controllingUid.value = null;
         controlledByUid.value = null;
         showRemoteCursor.value = false;
+        _heartbeatTimer?.cancel();
+        _watchdogTimer?.cancel();
         debugPrint('🎮 Control revoked by UID ${ctrl.fromUid}');
         break;
       case ControlEventType.mouseMove:
         remoteCursorX.value = ctrl.x ?? 0;
         remoteCursorY.value = ctrl.y ?? 0;
         showRemoteCursor.value = true;
-        // TODO(native): inject actual cursor movement on this device
+        _injector.mouseMove(remoteCursorX.value, remoteCursorY.value);
         break;
       case ControlEventType.mouseClick:
-        // TODO(native): inject click at (ctrl.x, ctrl.y)
+        _injector.mouseClick(ctrl.x ?? 0, ctrl.y ?? 0);
         break;
       case ControlEventType.mouseScroll:
-        // TODO(native): inject scroll
+        _injector.mouseScroll(ctrl.scrollDx ?? 0, ctrl.scrollDy ?? 0);
         break;
       case ControlEventType.keyEvent:
-        // TODO(native): inject key event
+        _injector.keyEvent(
+          ctrl.keyCode ?? 0,
+          modifiers: ctrl.modifiers ?? 0,
+          action: (ctrl.keyAction == InputEventAction.down)
+              ? 'down'
+              : (ctrl.keyAction == InputEventAction.up ? 'up' : 'tap'),
+        );
         break;
       case ControlEventType.clipboardSync:
-        // TODO(native): set system clipboard
+        final t = ctrl.clipboardText;
+        if (t != null) {
+          Clipboard.setData(ClipboardData(text: t));
+          // Web may also need Clipboard API explicitly.
+          _injector.clipboardWrite(t);
+        }
         break;
       case ControlEventType.heartbeat:
+        _lastHeartbeat = DateTime.now();
         break;
     }
     _eventCtrl.add(ctrl);

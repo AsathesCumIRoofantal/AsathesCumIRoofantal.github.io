@@ -9,6 +9,7 @@ import '../models/poll.dart';
 import '../models/breakout_room.dart';
 import '../models/qa_item.dart';
 import '../models/whiteboard_stroke.dart';
+import '../models/whiteboard_text.dart';
 import '../zoom_routes.dart';
 import '../models/rtc_config.dart';
 import '../services/rtc_backend_manager.dart';
@@ -65,7 +66,7 @@ class ZoomMeetingController extends GetxController {
     _meetingRowId = meetingRowId;
 
     engine = backendManager.engine;
-    remoteControl = RemoteControlService(engine!)..start();
+    remoteControl = RemoteControlService(engine!)..start(localUid: localUid);
 
     _engineSub = engine!.events.listen(_onEngineEvent);
 
@@ -263,6 +264,17 @@ class ZoomMeetingController extends GetxController {
         break;
       case 'wb_clear':
         whiteboardStrokes.clear();
+        whiteboardTexts.clear();
+        break;
+      case 'wb_text':
+        whiteboardTexts.add(WhiteboardText.fromJson(payload));
+        break;
+      case 'wb_text_delete':
+        whiteboardTexts.removeWhere((t) => t.id == payload['id']);
+        whiteboardTexts.refresh();
+        break;
+      case 'wb_lock':
+        whiteboardLocked.value = payload['locked'] == true;
         break;
       case 'poll_launch':
         polls.add(Poll.fromJson(payload));
@@ -308,7 +320,51 @@ class ZoomMeetingController extends GetxController {
         Get.snackbar('Removed', 'The host removed you from the meeting.');
         leaveLiveMeeting().then((_) => Get.offAllNamed(ZoomRoutes.home));
         break;
+      case 'force_video':
+        if (payload['off'] == true) {
+          participants[localUid]?.videoOff = true;
+          participants.refresh();
+          await engine?.muteLocalVideo(true);
+        }
+        break;
+      case 'rename':
+        final newName = payload['name'] as String?;
+        if (newName != null && newName.isNotEmpty) {
+          localName = newName;
+          participants[localUid]?.name = newName;
+          participants.refresh();
+          await _broadcastName();
+        }
+        break;
+      case 'lower_all_hands':
+        participants[localUid]?.handRaised = false;
+        participants.refresh();
+        break;
+      case 'media_render':
+        final targetAll = payload['targetAll'] == true;
+        final targets = (payload['targetUids'] as List?)?.cast<int>() ?? const [];
+        if (targetAll || targets.contains(localUid)) {
+          activeMedia.value = payload;
+        }
+        break;
     }
+  }
+
+  Future<void> renderMediaToParticipants({
+    required String type, // pdf|video|short|image|file
+    required String url,
+    String? name,
+    List<int> targetUids = const [],
+    bool targetAll = false,
+  }) async {
+    await _sendApp('media_render', {
+      'type': type,
+      'url': url,
+      if (name != null) 'name': name,
+      'targetUids': targetUids,
+      'targetAll': targetAll,
+      'ts': DateTime.now().millisecondsSinceEpoch,
+    });
   }
 
   /// Flips the local mic. Safe to call in demo mode too — with no [engine]
@@ -369,7 +425,9 @@ class ZoomMeetingController extends GetxController {
   }
 
   // ── meeting meta ──────────────────────────────────────────────────────
-  final meetingId  = ''.obs;
+  final meetingId    = ''.obs;
+  final meetingTitle = 'Meeting'.obs;
+  final viewMode     = 'speaker'.obs; // 'speaker' | 'gallery'
   final isLocked   = false.obs;
   final isMuteAllOn= false.obs;
   final allowAttendeeUnmute = true.obs;
@@ -385,6 +443,9 @@ class ZoomMeetingController extends GetxController {
   final hideNonVideo = false.obs;
   final activeSpeakerUid = Rxn<int>();
   final selfHidden = false.obs;
+
+  // ── media render (shorts/videos/docs) ─────────────────────────────────
+  final activeMedia = Rxn<Map<String, dynamic>>();
 
   // ── chat / waiting room ───────────────────────────────────────────────
   final chat       = <ChatMessage>[].obs;
@@ -425,8 +486,13 @@ class ZoomMeetingController extends GetxController {
   /// Builds the message, adds it locally, and broadcasts it — chat used
   /// to just add to the local list and call a no-op RTM stub, which
   /// meant remote participants never actually saw it.
-  Future<void> sendChatMessage(String text, {ChatScope scope = ChatScope.everyone}) async {
-    if (text.trim().isEmpty) return;
+  Future<void> sendChatMessage(
+    String text, {
+    ChatScope scope = ChatScope.everyone,
+    List<String> attachments = const [],
+    String? replyToId,
+  }) async {
+    if (text.trim().isEmpty && attachments.isEmpty) return;
     final m = ChatMessage(
       id: '${localUid}_${DateTime.now().microsecondsSinceEpoch}',
       fromUid: localUid,
@@ -434,6 +500,7 @@ class ZoomMeetingController extends GetxController {
       text: text.trim(),
       sentAt: DateTime.now(),
       scope: scope,
+      attachments: attachments,
     );
     chat.add(m);
     await _sendApp('chat', m.toJson());
@@ -441,13 +508,35 @@ class ZoomMeetingController extends GetxController {
 
   // ── whiteboard ───────────────────────────────────────────────────────
   final whiteboardStrokes = <WhiteboardStroke>[].obs;
+  final whiteboardTexts   = <WhiteboardText>[].obs;
+  final whiteboardLocked  = false.obs;
+
   void addWhiteboardStroke(WhiteboardStroke s, {bool broadcast = true}) {
+    if (whiteboardLocked.value && participants[localUid]?.role == ParticipantRole.attendee) return;
     whiteboardStrokes.add(s);
     if (broadcast) _sendApp('wb_stroke', s.toJson());
   }
+
   void clearWhiteboard({bool broadcast = true}) {
     whiteboardStrokes.clear();
+    whiteboardTexts.clear();
     if (broadcast) _sendApp('wb_clear', {});
+  }
+
+  void addWhiteboardText(WhiteboardText t, {bool broadcast = true}) {
+    if (whiteboardLocked.value && participants[localUid]?.role == ParticipantRole.attendee) return;
+    whiteboardTexts.add(t);
+    if (broadcast) _sendApp('wb_text', t.toJson());
+  }
+
+  void deleteWhiteboardText(String id, {bool broadcast = true}) {
+    whiteboardTexts.removeWhere((t) => t.id == id);
+    if (broadcast) _sendApp('wb_text_delete', {'id': id});
+  }
+
+  void toggleWhiteboardLock() {
+    whiteboardLocked.toggle();
+    _sendApp('wb_lock', {'locked': whiteboardLocked.value});
   }
 
   // ── breakouts / polls / qa ────────────────────────────────────────────
@@ -510,12 +599,40 @@ class ZoomMeetingController extends GetxController {
     participants.refresh();
   }
 
+  /// Force another participant's camera off (mesh: sends a request their device acts on).
+  Future<void> forceVideoOff(int uid) async {
+    participants[uid]?.videoOff = true;
+    participants.refresh();
+    if (uid != localUid) await _sendAppTo(uid, 'force_video', {'off': true});
+  }
+
+  /// Ask a participant to rename themselves (they confirm on their own device).
+  Future<void> renameParticipant(int uid, String newName) async {
+    participants[uid]?.name = newName;
+    participants.refresh();
+    await _sendAppTo(uid, 'rename', {'name': newName});
+  }
+
+  /// Lowers every participant's raised hand at once.
+  Future<void> lowerAllHands() async {
+    for (final p in participants.values) { p.handRaised = false; }
+    participants.refresh();
+    await _sendApp('lower_all_hands', {});
+  }
+
   // ── pinning / spotlight ───────────────────────────────────────────────
   void togglePin(int uid)       { pinnedUids.contains(uid)?pinnedUids.remove(uid):pinnedUids.add(uid); }
   void toggleSpotlight(int uid) { spotlightUids.contains(uid)?spotlightUids.remove(uid):spotlightUids.add(uid); }
 
   // ── recording ─────────────────────────────────────────────────────────
-  Future<void> startCloudRecording() async { await recording.start(meetingId.value, 0); update(); }
+  Future<void> startCloudRecording() async {
+    await recording.start(
+      meetingId.value,
+      0,
+      meetingId: _meetingRowId,
+    );
+    update();
+  }
   Future<void> pauseRecording()    async { await recording.pause();  update(); }
   Future<void> resumeRecording()   async { await recording.resume(); update(); }
   Future<void> stopRecording()     async { await recording.stop();   update(); }

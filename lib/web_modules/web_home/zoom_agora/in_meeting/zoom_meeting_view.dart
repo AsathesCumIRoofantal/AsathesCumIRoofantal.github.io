@@ -83,9 +83,9 @@ class _TopChrome extends GetView<ZoomMeetingController> {
         const SizedBox(width: 8),
         const Text('Live', style: TextStyle(color: ZoomTheme.danger, fontWeight: FontWeight.w600, fontSize: 12)),
         const SizedBox(width: 16),
-        Flexible(child: Text('Product weekly sync',
+        Flexible(child: Obx(() => Text(controller.meetingTitle.value,
           overflow: TextOverflow.ellipsis,
-          style: ZoomTheme.h3.copyWith(fontWeight: FontWeight.w600))),
+          style: ZoomTheme.h3.copyWith(fontWeight: FontWeight.w600)))),
         const SizedBox(width: 12),
         Obx(() => Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),

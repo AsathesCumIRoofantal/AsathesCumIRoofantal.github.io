@@ -5,11 +5,13 @@ import 'package:get/get.dart';
 import '../zoom_routes.dart';
 import '../widgets/zoom_theme.dart';
 
-/// Animated mic-meter + simulated camera preview so users can "test" devices
-/// before joining the meeting.
+/// Lobby screen: camera/mic preview, device selection, network check,
+/// pre-join checklist, and a "Join now" button that only enables once
+/// the checklist is satisfied (or the user taps "Join anyway").
 class DevicePreviewView extends StatefulWidget {
   const DevicePreviewView({super.key});
-  @override State<DevicePreviewView> createState() => _S();
+  @override
+  State<DevicePreviewView> createState() => _S();
 }
 
 class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
@@ -22,6 +24,14 @@ class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
   double micLevel = 0;
   Timer? _t;
 
+  // Checklist state
+  bool _speakerTested  = false;
+  bool _micEverActive  = false;
+  String _networkStatus = 'checking'; // 'checking' | 'good' | 'poor'
+
+  bool get _checklistDone =>
+      videoOn && _micEverActive && _speakerTested && _networkStatus != 'checking';
+
   static const _cameras = ['FaceTime HD Camera', 'Logitech C920', 'OBS Virtual Camera'];
   static const _mics    = ['MacBook Pro Microphone', 'AirPods Pro', 'Blue Yeti'];
   static const _spks    = ['External Speakers', 'AirPods Pro', 'Studio Display'];
@@ -32,12 +42,27 @@ class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
     final rng = Random();
     _t = Timer.periodic(const Duration(milliseconds: 140), (_) {
       if (!mounted) return;
-      setState(() => micLevel = micOn ? (rng.nextDouble() * .8 + .1) : 0);
+      setState(() {
+        micLevel = micOn ? (rng.nextDouble() * .8 + .1) : 0;
+        if (micOn && micLevel > 0.05) _micEverActive = true;
+      });
+    });
+    // Simulate network check after 1.5 s
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      if (mounted) setState(() => _networkStatus = 'good');
     });
   }
 
   @override
   void dispose() { _t?.cancel(); super.dispose(); }
+
+  void _join() {
+    Get.toNamed(ZoomRoutes.inMeeting, arguments: {
+      ...(Get.arguments as Map? ?? const {}),
+      'joinMuted':    !micOn,
+      'joinVideoOff': !videoOn,
+    });
+  }
 
   @override
   Widget build(BuildContext c) => Scaffold(
@@ -158,7 +183,7 @@ class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
       const SizedBox(height: 16),
       _dropdown('Speaker', spk, _spks, (v) => setState(() => spk = v)),
       Align(alignment: Alignment.centerLeft,
-        child: TextButton.icon(onPressed: () {},
+        child: TextButton.icon(onPressed: () => setState(() => _speakerTested = true),
           icon: const Icon(Icons.play_circle_outline, size: 18),
           label: const Text('Test speaker'),
           style: TextButton.styleFrom(foregroundColor: ZoomTheme.primary))),
@@ -169,13 +194,19 @@ class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
         value: mirror, activeColor: ZoomTheme.primary,
         onChanged: (v) => setState(() => mirror = v),
       ),
-      const SizedBox(height: 8),
+      const SizedBox(height: 12),
+      // ── Pre-join checklist ────────────────────────────────────────
+      _ChecklistRow(label: 'Camera',      done: videoOn),
+      _ChecklistRow(label: 'Microphone',  done: _micEverActive),
+      _ChecklistRow(label: 'Speaker',     done: _speakerTested),
+      _ChecklistRow(label: 'Network',
+        done: _networkStatus == 'good',
+        pending: _networkStatus == 'checking',
+        pendingLabel: 'Checking…',
+      ),
+      const SizedBox(height: 12),
       FilledButton(
-        onPressed: () => Get.toNamed(ZoomRoutes.inMeeting, arguments: {
-          ...(Get.arguments as Map? ?? const {}),
-          'joinMuted': !micOn,
-          'joinVideoOff': !videoOn,
-        }),
+        onPressed: _checklistDone ? _join : null,
         style: FilledButton.styleFrom(
           backgroundColor: ZoomTheme.primary,
           padding: const EdgeInsets.symmetric(vertical: 14),
@@ -183,6 +214,13 @@ class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
           minimumSize: const Size(double.infinity, 0),
         ),
         child: const Text('Join now', style: TextStyle(fontWeight: FontWeight.w700)),
+      ),
+      const SizedBox(height: 8),
+      Center(
+        child: TextButton(
+          onPressed: _join,
+          child: const Text('Join anyway', style: TextStyle(color: ZoomTheme.textMuted, fontSize: 12)),
+        ),
       ),
     ]),
   );
@@ -205,4 +243,51 @@ class _S extends State<DevicePreviewView> with SingleTickerProviderStateMixin {
         ),
       ),
     ]);
+}
+
+/// One row in the pre-join checklist — green tick when done, amber spinner
+/// while pending, grey dot when not yet satisfied.
+class _ChecklistRow extends StatelessWidget {
+  const _ChecklistRow({
+    required this.label,
+    required this.done,
+    this.pending = false,
+    this.pendingLabel,
+  });
+  final String label;
+  final bool done;
+  final bool pending;
+  final String? pendingLabel;
+
+  @override
+  Widget build(BuildContext context) {
+    final Widget icon;
+    final Color labelColor;
+
+    if (done) {
+      icon = const Icon(Icons.check_circle_rounded, color: ZoomTheme.success, size: 16);
+      labelColor = ZoomTheme.success;
+    } else if (pending) {
+      icon = const SizedBox(
+        width: 16, height: 16,
+        child: CircularProgressIndicator(strokeWidth: 2, color: ZoomTheme.warn),
+      );
+      labelColor = ZoomTheme.warn;
+    } else {
+      icon = const Icon(Icons.radio_button_unchecked, color: ZoomTheme.textMuted, size: 16);
+      labelColor = ZoomTheme.textMuted;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3),
+      child: Row(children: [
+        icon,
+        const SizedBox(width: 8),
+        Text(
+          done ? label : (pending ? (pendingLabel ?? label) : label),
+          style: TextStyle(color: labelColor, fontSize: 12),
+        ),
+      ]),
+    );
+  }
 }

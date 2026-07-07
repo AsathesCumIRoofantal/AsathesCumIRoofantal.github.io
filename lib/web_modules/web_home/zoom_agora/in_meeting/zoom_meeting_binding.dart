@@ -32,10 +32,15 @@ class ZoomMeetingBinding extends Bindings {
       final args = Get.arguments as Map? ?? const {};
       final channelId = (args['channelId'] as String?) ?? 'air_space_default_channel';
       final localName = (args['displayName'] as String?) ?? 'Guest';
+      final title = (args['title'] as String?) ??
+          (args['meetingTitle'] as String?) ??
+          'Meeting';
       final demoMode = (args['demoMode'] as bool?) ?? true;
       final meetingRowId = args['meetingRowId'] as String?;
       final joinMuted = args['joinMuted'] as bool? ?? false;
       final joinVideoOff = args['joinVideoOff'] as bool? ?? false;
+
+      c.meetingTitle.value = title;
 
       if (demoMode) {
         final sim = MockMeetingSim(c)..seed();

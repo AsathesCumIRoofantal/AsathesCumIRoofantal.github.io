@@ -182,6 +182,17 @@ class MeetingService {
         .limit(limit);
     return (rows as List).map((r) => Meeting.fromRow(r as Map<String, dynamic>)).toList();
   }
+
+  /// Recent recordings (meetings with recording_url present).
+  Future<List<Map<String, dynamic>>> recentRecordings({int limit = 5}) async {
+    final rows = await _client
+        .from('meetings')
+        .select('id,title,recording_url,ended_at,started_at')
+        .not('recording_url', 'is', null)
+        .order('ended_at', ascending: false)
+        .limit(limit);
+    return (rows as List).cast<Map<String, dynamic>>();
+  }
 }
 
 class MeetingPasscodeException implements Exception {

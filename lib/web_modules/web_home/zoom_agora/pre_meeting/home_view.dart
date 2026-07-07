@@ -171,11 +171,45 @@ class _Hero extends StatelessWidget {
 }
 
 class _UpcomingList extends StatelessWidget {
-  static final _items = <Map<String, String>>[
-    {'time':'10:00', 'title':'Product weekly sync',   'meta':'8 invitees · Recurring',  'id':'824-731-9056'},
-    {'time':'12:30', 'title':'1:1 with Priya',         'meta':'2 invitees',              'id':'901-118-2003'},
-    {'time':'16:00', 'title':'Q3 roadmap review',      'meta':'12 invitees · Webinar',   'id':'553-220-7711'},
-  ];
+  @override
+  Widget build(BuildContext c) => const _UpcomingListBody();
+}
+
+class _UpcomingListBody extends StatefulWidget {
+  const _UpcomingListBody();
+  @override
+  State<_UpcomingListBody> createState() => _UpcomingListBodyState();
+}
+
+class _UpcomingListBodyState extends State<_UpcomingListBody> {
+  final _svc = MeetingService();
+  final _items = <Meeting>[].obs;
+  final _loading = false.obs;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    if (!CurrentUser.isSignedIn) return;
+    _loading.value = true;
+    try {
+      final list = await _svc.recentFor(CurrentUser.id, limit: 5);
+      _items.assignAll(list);
+    } finally {
+      _loading.value = false;
+    }
+  }
+
+  String _timeOf(int epochSeconds) {
+    final dt = DateTime.fromMillisecondsSinceEpoch(epochSeconds * 1000);
+    final h = dt.hour.toString().padLeft(2, '0');
+    final m = dt.minute.toString().padLeft(2, '0');
+    return '$h:$m';
+  }
+
   @override
   Widget build(BuildContext c) => Container(
     padding: const EdgeInsets.all(20),
@@ -184,32 +218,66 @@ class _UpcomingList extends StatelessWidget {
       Row(children: [
         Text('Upcoming', style: ZoomTheme.h3),
         const Spacer(),
-        TextButton(onPressed: (){}, child: const Text('View all', style: TextStyle(color: ZoomTheme.primary))),
+        IconButton(
+          onPressed: _load,
+          icon: const Icon(Icons.refresh_rounded, color: ZoomTheme.textMuted, size: 18),
+        ),
       ]),
       const SizedBox(height: 8),
-      ..._items.map((m) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(children: [
-          Container(width:54, padding: const EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(color: ZoomTheme.surface2,
-              borderRadius: BorderRadius.circular(10)),
-            alignment: Alignment.center,
-            child: Text(m['time']!, style: const TextStyle(color: ZoomTheme.text, fontWeight: FontWeight.w600))),
-          const SizedBox(width: 14),
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(m['title']!, style: ZoomTheme.body.copyWith(fontWeight: FontWeight.w600)),
-            const SizedBox(height: 2),
-            Text(m['meta']!, style: ZoomTheme.muted),
-          ])),
-          FilledButton(
-            onPressed: () => _joinFromRecents(m['id']!),
-            style: FilledButton.styleFrom(
-              backgroundColor: ZoomTheme.primary,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            ),
-            child: const Text('Start')),
-        ]),
-      )),
+      Obx(() {
+        if (_loading.value && _items.isEmpty) {
+          return const Padding(
+            padding: EdgeInsets.all(24),
+            child: Center(child: CircularProgressIndicator(color: ZoomTheme.primary)),
+          );
+        }
+        if (_items.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(20),
+            child: Text('No upcoming meetings yet.', style: ZoomTheme.muted),
+          );
+        }
+        return Column(
+          children: _items.map((m) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(children: [
+              Container(
+                width: 54,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                decoration: BoxDecoration(
+                  color: ZoomTheme.surface2,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  _timeOf(m.scheduledAt),
+                  style: const TextStyle(
+                    color: ZoomTheme.text,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(m.title, style: ZoomTheme.body.copyWith(fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 2),
+                  Text('Hosted by ${m.hostName}', style: ZoomTheme.muted),
+                ],
+              )),
+              FilledButton(
+                onPressed: () => _joinFromRecents(m.channelName),
+                style: FilledButton.styleFrom(
+                  backgroundColor: ZoomTheme.primary,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                ),
+                child: const Text('Start'),
+              ),
+            ]),
+          )).toList(),
+        );
+      }),
     ]),
   );
 }
@@ -257,33 +325,90 @@ class _Tile { final IconData icon; final String label; final int color; final St
   _Tile(this.icon, this.label, this.color, this.route, {this.args}); }
 
 class _RecentRecordings extends StatelessWidget {
-  static const _items = [
-    ('Design crit · v4',     '47 min', 'Yesterday'),
-    ('Customer interview',   '32 min', '2 days ago'),
-    ('All-hands · January',  '58 min', 'Last week'),
-  ];
+  @override
+  Widget build(BuildContext c) => const _RecentRecordingsBody();
+}
+
+class _RecentRecordingsBody extends StatefulWidget {
+  const _RecentRecordingsBody();
+  @override
+  State<_RecentRecordingsBody> createState() => _RecentRecordingsBodyState();
+}
+
+class _RecentRecordingsBodyState extends State<_RecentRecordingsBody> {
+  final _svc = MeetingService();
+  final _rows = <Map<String, dynamic>>[].obs;
+  final _loading = false.obs;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    _loading.value = true;
+    try {
+      final list = await _svc.recentRecordings(limit: 5);
+      _rows.assignAll(list);
+    } finally {
+      _loading.value = false;
+    }
+  }
+
   @override
   Widget build(BuildContext c) => Container(
     padding: const EdgeInsets.all(20),
     decoration: ZoomTheme.card(),
     child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Text('Recent recordings', style: ZoomTheme.h3),
+      Row(children: [
+        Text('Recent recordings', style: ZoomTheme.h3),
+        const Spacer(),
+        IconButton(
+          onPressed: _load,
+          icon: const Icon(Icons.refresh_rounded, color: ZoomTheme.textMuted, size: 18),
+        ),
+      ]),
       const SizedBox(height: 12),
-      ..._items.map((r) => Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        child: Row(children: [
-          Container(width: 64, height: 40,
-            decoration: BoxDecoration(gradient: ZoomTheme.heroGradient,
-              borderRadius: BorderRadius.circular(8)),
-            child: const Icon(Icons.play_arrow_rounded, color: Colors.white)),
-          const SizedBox(width: 14),
-          Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(r.$1, style: ZoomTheme.body.copyWith(fontWeight: FontWeight.w600)),
-            Text('${r.$2} · ${r.$3}', style: ZoomTheme.muted),
-          ])),
-          IconButton(onPressed: (){}, icon: const Icon(Icons.more_horiz, color: ZoomTheme.textMuted)),
-        ]),
-      )),
+      Obx(() {
+        if (_loading.value && _rows.isEmpty) {
+          return const Padding(
+            padding: EdgeInsets.all(24),
+            child: Center(child: CircularProgressIndicator(color: ZoomTheme.primary)),
+          );
+        }
+        if (_rows.isEmpty) {
+          return Text('No recordings yet.', style: ZoomTheme.muted);
+        }
+        return Column(
+          children: _rows.map((r) => Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: Row(children: [
+              Container(
+                width: 64,
+                height: 40,
+                decoration: BoxDecoration(
+                  gradient: ZoomTheme.heroGradient,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(Icons.play_arrow_rounded, color: Colors.white),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text(r['title'] as String? ?? 'Recording',
+                      style: ZoomTheme.body.copyWith(fontWeight: FontWeight.w600)),
+                  Text('Tap to open', style: ZoomTheme.muted),
+                ]),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.more_horiz, color: ZoomTheme.textMuted),
+              ),
+            ]),
+          )).toList(),
+        );
+      }),
     ]),
   );
 }
