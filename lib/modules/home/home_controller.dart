@@ -981,7 +981,7 @@ class HomeController extends GetxController {
         ),
         DrawerActualItem(
           title: '2-D Games',
-          icon: Icons.lists,
+          icon: Icons.menu_book_outlined,
           route:AppRoutes.CONSIDERATIONS_PLAY_GAMES
         ),
         DrawerActualItem(
