@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   agora_rtc_engine
   app_links
+  emoji_picker_flutter
   flutter_secure_storage_windows
   flutter_webrtc
   geolocator_windows
