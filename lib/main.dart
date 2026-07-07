@@ -68,6 +68,7 @@ void main() async {
         debugPrint(details.exceptionAsString());
         debugPrint(details.stack.toString());
       };
+      Get.put(AuthService());
       return runApp(AirApp());
     },
     (error, stack) {
