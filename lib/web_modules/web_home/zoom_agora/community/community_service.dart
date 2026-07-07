@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// Powers the WhatsApp-style community / group / DM module.
 class CommunityService {
   CommunityService({SupabaseClient? client})
-      : _db = client ?? Supabase.instance.client;
+    : _db = client ?? Supabase.instance.client;
 
   final SupabaseClient _db;
 
@@ -25,19 +25,23 @@ class CommunityService {
   /// Creates a new individual / group / broadcast room.
   Future<Map<String, dynamic>> createRoom({
     required String name,
-    required String type,          // 'individual' | 'group' | 'broadcast'
+    required String type, // 'individual' | 'group' | 'broadcast'
     required List<String> memberIds,
     required String createdBy,
     String? avatarUrl,
   }) async {
-    final row = await _db.from('chat_rooms').insert({
-      'type':       type,
-      'name':       name,
-      'member_ids': memberIds,
-      'admin_ids':  [createdBy],
-      'avatar_url': avatarUrl,
-      'created_by': createdBy,
-    }).select().single();
+    final row = await _db
+        .from('chat_rooms')
+        .insert({
+          'type': type,
+          'name': name,
+          'member_ids': memberIds,
+          'admin_ids': [createdBy],
+          'avatar_url': avatarUrl,
+          'created_by': createdBy,
+        })
+        .select()
+        .single();
     return row as Map<String, dynamic>;
   }
 
@@ -65,11 +69,9 @@ class CommunityService {
         .select()
         .eq('chat_id', roomId)
         .eq('is_deleted', 0)
+        .lt('created_at', before ?? _now())
         .order('created_at', ascending: false)
         .limit(limit);
-    if (before != null) {
-      query = query.lt('created_at', before);
-    }
     final rows = await query;
     return (rows as List).cast<Map<String, dynamic>>().reversed.toList();
   }
@@ -80,43 +82,51 @@ class CommunityService {
     required String senderId,
     required String senderName,
     String? senderAvatar,
-    String type = 'text',          // text | image | video | audio | file | location
+    String type = 'text', // text | image | video | audio | file | location
     String? text,
     String? mediaUrl,
     String? mediaName,
     int? mediaSize,
     String? replyToId,
   }) async {
-    final row = await _db.from('chat_messages').insert({
-      'chat_id':       roomId,
-      'sender_id':     senderId,
-      'sender_name':   senderName,
-      'sender_avatar': senderAvatar,
-      'type':          type,
-      'content':       text,
-      'media_url':     mediaUrl,
-      'media_name':    mediaName,
-      'media_size':    mediaSize,
-      'reply_to_id':   replyToId,
-      'status':        'sent',
-    }).select().single();
+    final row = await _db
+        .from('chat_messages')
+        .insert({
+          'chat_id': roomId,
+          'sender_id': senderId,
+          'sender_name': senderName,
+          'sender_avatar': senderAvatar,
+          'type': type,
+          'content': text,
+          'media_url': mediaUrl,
+          'media_name': mediaName,
+          'media_size': mediaSize,
+          'reply_to_id': replyToId,
+          'status': 'sent',
+        })
+        .select()
+        .single();
     return row as Map<String, dynamic>;
   }
 
   /// Soft-deletes a message (sets is_deleted = 1).
   Future<void> deleteMessage(String messageId) =>
-      _db.from('chat_messages')
-          .update({'is_deleted': 1}).eq('id', messageId);
+      _db.from('chat_messages').update({'is_deleted': 1}).eq('id', messageId);
 
   /// Edits a message — saves old content to `chat_message_edits` first.
-  Future<void> editMessage(String messageId, String newContent, String editorId) async {
+  Future<void> editMessage(
+    String messageId,
+    String newContent,
+    String editorId,
+  ) async {
     // Fetch current content
     final row = await _db
         .from('chat_messages')
         .select('content')
         .eq('id', messageId)
         .single();
-    final oldContent = (row as Map<String, dynamic>)['content'] as String? ?? '';
+    final oldContent =
+        (row as Map<String, dynamic>)['content'] as String? ?? '';
 
     // Archive old version
     await _db.from('chat_message_edits').insert({
@@ -127,8 +137,10 @@ class CommunityService {
     });
 
     // Apply edit
-    await _db.from('chat_messages')
-        .update({'content': newContent, 'is_edited': 1}).eq('id', messageId);
+    await _db
+        .from('chat_messages')
+        .update({'content': newContent, 'is_edited': 1})
+        .eq('id', messageId);
   }
 
   /// Returns the edit history for a message.

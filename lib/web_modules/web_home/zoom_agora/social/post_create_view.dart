@@ -60,22 +60,48 @@ class _PostCreateViewState extends State<PostCreateView> {
         final bytes = f.bytes;
         if (bytes == null) continue;
 
+        final contentType = _getContentType(f.name);
         final upload = await R2UploadService().uploadFile(
           roomId: 'social_posts',
           filename: f.name,
           bytes: bytes,
-          contentType: f.mimeType ?? 'application/octet-stream',
+          contentType: contentType,
         );
 
         setState(() {
           _mediaUrls.add(upload.url);
-          _mediaTypes.add(f.mimeType?.startsWith('video') == true ? 'video' : 'image');
+          _mediaTypes.add(contentType.startsWith('video') ? 'video' : 'image');
         });
       }
     } catch (e) {
       Get.snackbar('Upload failed', e.toString());
     } finally {
       if (mounted) setState(() => _uploading = false);
+    }
+  }
+
+  String _getContentType(String filename) {
+    final ext = filename.split('.').last.toLowerCase();
+    switch (ext) {
+      case 'jpg':
+      case 'jpeg':
+        return 'image/jpeg';
+      case 'png':
+        return 'image/png';
+      case 'gif':
+        return 'image/gif';
+      case 'webp':
+        return 'image/webp';
+      case 'mp4':
+        return 'video/mp4';
+      case 'mov':
+        return 'video/quicktime';
+      case 'avi':
+        return 'video/x-msvideo';
+      case 'webm':
+        return 'video/webm';
+      default:
+        return 'application/octet-stream';
     }
   }
 
@@ -109,7 +135,7 @@ class _PostCreateViewState extends State<PostCreateView> {
       // Author row
       Row(children: [
         CircleAvatar(
-          radius: 22, backgroundColor: ZoomTheme.primary.withOpacity(.2),
+          radius: 22, backgroundColor: ZoomTheme.primary.withValues(alpha: 0.2),
           child: Text(
             CurrentUser.isSignedIn ? CurrentUser.name[0].toUpperCase() : 'G',
             style: const TextStyle(color: ZoomTheme.primary, fontWeight: FontWeight.bold),
@@ -125,7 +151,7 @@ class _PostCreateViewState extends State<PostCreateView> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
-                color: ZoomTheme.primary.withOpacity(.15),
+                color: ZoomTheme.primary.withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(mainAxisSize: MainAxisSize.min, children: [

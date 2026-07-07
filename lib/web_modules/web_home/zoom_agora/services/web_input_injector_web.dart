@@ -1,13 +1,20 @@
 // Web-only implementation.
+// ignore: deprecated_member_use
 import 'dart:html' as html;
 
 class WebInputInjector {
   const WebInputInjector();
 
   html.Element? _elementAt(double xNorm, double yNorm) {
-    final x = (xNorm * html.window.innerWidth!).clamp(0, html.window.innerWidth!.toDouble());
-    final y = (yNorm * html.window.innerHeight!).clamp(0, html.window.innerHeight!.toDouble());
-    return html.document.elementFromPoint(x, y);
+    final x = (xNorm * html.window.innerWidth!).clamp(
+      0,
+      html.window.innerWidth!.toDouble(),
+    );
+    final y = (yNorm * html.window.innerHeight!).clamp(
+      0,
+      html.window.innerHeight!.toDouble(),
+    );
+    return html.document.elementFromPoint(x.toInt(), y.toInt());
   }
 
   void mouseMove(double x, double y) {
@@ -34,7 +41,7 @@ class WebInputInjector {
     // keyCode is legacy; still acceptable for basic key interactions.
     final evt = html.KeyboardEvent(
       action == 'down' ? 'keydown' : 'keyup',
-      keyCode: keyCode,
+      keyLocation: keyCode,
       shiftKey: (modifiers & 1) != 0,
       ctrlKey: (modifiers & 2) != 0,
       altKey: (modifiers & 4) != 0,
@@ -42,14 +49,16 @@ class WebInputInjector {
     );
     el.dispatchEvent(evt);
     if (action == 'tap') {
-      el.dispatchEvent(html.KeyboardEvent(
-        'keyup',
-        keyCode: keyCode,
-        shiftKey: (modifiers & 1) != 0,
-        ctrlKey: (modifiers & 2) != 0,
-        altKey: (modifiers & 4) != 0,
-        metaKey: (modifiers & 8) != 0,
-      ));
+      el.dispatchEvent(
+        html.KeyboardEvent(
+          'keyup',
+          keyLocation: keyCode,
+          shiftKey: (modifiers & 1) != 0,
+          ctrlKey: (modifiers & 2) != 0,
+          altKey: (modifiers & 4) != 0,
+          metaKey: (modifiers & 8) != 0,
+        ),
+      );
     }
   }
 
@@ -61,4 +70,3 @@ class WebInputInjector {
     }
   }
 }
-

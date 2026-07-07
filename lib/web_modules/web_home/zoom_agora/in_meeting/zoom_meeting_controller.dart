@@ -29,9 +29,9 @@ import '../services/current_user.dart';
 /// reflect real [RtcEngineInterface] events instead of the mock simulator.
 class ZoomMeetingController extends GetxController {
   // ── services ───────────────────────────────────────────────────────────
-  final recording  = RecordingService();
-  final stt        = SttService();
-  final stats      = StatsService();
+  final recording = RecordingService();
+  final stt = SttService();
+  final stats = StatsService();
   final whiteboard = WhiteboardService();
 
   // ── live RTC wiring ────────────────────────────────────────────────────
@@ -40,7 +40,8 @@ class ZoomMeetingController extends GetxController {
   int localUid = 0;
   String localName = 'Me';
   String? _meetingRowId; // `meetings.id` — null until connectToLiveMeeting
-  String? _mainChannelId; // the top-level meeting channel, for returning from breakouts
+  String?
+  _mainChannelId; // the top-level meeting channel, for returning from breakouts
   final _meetingService = MeetingService();
   StreamSubscription<RtcEvent>? _engineSub;
   bool get isLive => engine != null;
@@ -112,11 +113,15 @@ class ZoomMeetingController extends GetxController {
 
   Future<void> _broadcastName() async {
     if (engine == null) return;
-    final payload = jsonEncode({'_name': true, 'uid': localUid, 'name': localName});
+    final payload = jsonEncode({
+      '_name': true,
+      'uid': localUid,
+      'name': localName,
+    });
     await engine!.sendDataMessage(Uint8List.fromList(utf8.encode(payload)));
   }
 
-  void _onEngineEvent(RtcEvent e) {
+  Future<void> _onEngineEvent(RtcEvent e) async {
     switch (e.type) {
       case RtcEventType.userJoined:
         if (e.uid == null) return;
@@ -131,16 +136,20 @@ class ZoomMeetingController extends GetxController {
         if (e.uid != null) participants.remove(e.uid);
         break;
       case RtcEventType.userMuteAudio:
-        if (e.uid != null) participants[e.uid]?.audioMuted = e.data['muted'] == true;
+        if (e.uid != null)
+          participants[e.uid]?.audioMuted = e.data['muted'] == true;
         participants.refresh();
         break;
       case RtcEventType.userMuteVideo:
-        if (e.uid != null) participants[e.uid]?.videoOff = e.data['muted'] == true;
+        if (e.uid != null)
+          participants[e.uid]?.videoOff = e.data['muted'] == true;
         participants.refresh();
         break;
       case RtcEventType.screenShareStarted:
         final uid = e.uid ?? localUid;
-        for (final p in participants.values) { p.isScreenSharing = false; }
+        for (final p in participants.values) {
+          p.isScreenSharing = false;
+        }
         participants[uid]?.isScreenSharing = true;
         participants.refresh();
         break;
@@ -150,14 +159,16 @@ class ZoomMeetingController extends GetxController {
         participants.refresh();
         break;
       case RtcEventType.connectionStateChanged:
-        connection.value = (e.data['state']?.toString().contains('Failed') ?? false)
-            ? 'reconnecting' : 'connected';
+        connection.value =
+            (e.data['state']?.toString().contains('Failed') ?? false)
+            ? 'reconnecting'
+            : 'connected';
         break;
       case RtcEventType.statsUpdated:
         _applyStats(e.data);
         break;
       case RtcEventType.dataMessageReceived:
-        _handleAppData(e);
+        await _handleAppData(e);
         break;
       default:
         break;
@@ -178,20 +189,24 @@ class ZoomMeetingController extends GetxController {
     if (_lastStatsAt != null && _lastTxBytes != null && _lastRxBytes != null) {
       final seconds = now.difference(_lastStatsAt!).inMilliseconds / 1000.0;
       if (seconds > 0) {
-        stats.txKbps.value = (((tx - _lastTxBytes!) * 8 / 1000) / seconds).round();
-        stats.rxKbps.value = (((rx - _lastRxBytes!) * 8 / 1000) / seconds).round();
+        stats.txKbps.value = (((tx - _lastTxBytes!) * 8 / 1000) / seconds)
+            .round();
+        stats.rxKbps.value = (((rx - _lastRxBytes!) * 8 / 1000) / seconds)
+            .round();
       }
     }
     _lastTxBytes = tx;
     _lastRxBytes = rx;
     _lastStatsAt = now;
 
-    stats.packetLossPct.value = (data['packetLossPct'] as num?)?.toDouble() ?? 0.0;
-    stats.lastResolution.value = data['resolution'] as String? ?? stats.lastResolution.value;
+    stats.packetLossPct.value =
+        (data['packetLossPct'] as num?)?.toDouble() ?? 0.0;
+    stats.lastResolution.value =
+        data['resolution'] as String? ?? stats.lastResolution.value;
     stats.codec.value = data['codec'] as String? ?? stats.codec.value;
   }
 
-  void _handleAppData(RtcEvent e) {
+  Future<void> _handleAppData(RtcEvent e) async {
     final bytes = e.data['bytes'] as Uint8List?;
     if (bytes == null) return;
     try {
@@ -211,9 +226,11 @@ class ZoomMeetingController extends GetxController {
         return;
       }
       if (decoded['_app'] == true) {
-        _handleAppEnvelope(
+        await _handleAppEnvelope(
           decoded['kind'] as String?,
-          decoded['payload'] is Map ? Map<String, dynamic>.from(decoded['payload'] as Map) : null,
+          decoded['payload'] is Map
+              ? Map<String, dynamic>.from(decoded['payload'] as Map)
+              : null,
         );
       }
     } catch (_) {
@@ -234,20 +251,31 @@ class ZoomMeetingController extends GetxController {
 
   /// Same envelope, but to exactly one peer — used for breakout-room
   /// assignment, where only the assigned participant should act on it.
-  Future<void> _sendAppTo(int uid, String kind, Map<String, dynamic> payload) async {
+  Future<void> _sendAppTo(
+    int uid,
+    String kind,
+    Map<String, dynamic> payload,
+  ) async {
     if (engine == null) return;
     final msg = jsonEncode({'_app': true, 'kind': kind, 'payload': payload});
     await engine!.sendDataMessageTo(uid, Uint8List.fromList(utf8.encode(msg)));
   }
 
-  void _handleAppEnvelope(String? kind, Map<String, dynamic>? payload) {
+  Future<void> _handleAppEnvelope(
+    String? kind,
+    Map<String, dynamic>? payload,
+  ) async {
     if (kind == null || payload == null) return;
     switch (kind) {
       case 'chat':
         chat.add(ChatMessage.fromJson(payload));
         break;
       case 'reaction':
-        react(payload['uid'] as int, payload['emoji'] as String, broadcast: false);
+        react(
+          payload['uid'] as int,
+          payload['emoji'] as String,
+          broadcast: false,
+        );
         break;
       case 'hand':
         final uid = payload['uid'] as int;
@@ -294,7 +322,11 @@ class ZoomMeetingController extends GetxController {
         qa.insert(0, QAItem.fromJson(payload));
         break;
       case 'qa_answer':
-        answerQuestion(payload['id'] as String, payload['text'] as String, broadcast: false);
+        answerQuestion(
+          payload['id'] as String,
+          payload['text'] as String,
+          broadcast: false,
+        );
         break;
       case 'qa_upvote':
         toggleUpvoteQuestion(payload['id'] as String, broadcast: false);
@@ -302,7 +334,9 @@ class ZoomMeetingController extends GetxController {
       case 'caption':
         final uid = payload['uid'] as int;
         final text = payload['text'] as String? ?? '';
-        final speaker = uid == localUid ? localName : (participants[uid]?.name ?? 'Someone');
+        final speaker = uid == localUid
+            ? localName
+            : (participants[uid]?.name ?? 'Someone');
         liveCaption.value = '$speaker: $text';
         if (payload['final'] == true && text.trim().isNotEmpty) {
           transcript.add('$speaker: $text');
@@ -311,7 +345,8 @@ class ZoomMeetingController extends GetxController {
       case 'breakout_assign':
         final channelId = payload['channelId'] as String?;
         final roomId = payload['roomId'] as String?;
-        if (channelId != null && roomId != null) _joinBreakoutChannel(channelId, roomId);
+        if (channelId != null && roomId != null)
+          _joinBreakoutChannel(channelId, roomId);
         break;
       case 'breakout_end':
         _returnToMainRoom();
@@ -342,7 +377,8 @@ class ZoomMeetingController extends GetxController {
         break;
       case 'media_render':
         final targetAll = payload['targetAll'] == true;
-        final targets = (payload['targetUids'] as List?)?.cast<int>() ?? const [];
+        final targets =
+            (payload['targetUids'] as List?)?.cast<int>() ?? const [];
         if (targetAll || targets.contains(localUid)) {
           activeMedia.value = payload;
         }
@@ -425,21 +461,21 @@ class ZoomMeetingController extends GetxController {
   }
 
   // ── meeting meta ──────────────────────────────────────────────────────
-  final meetingId    = ''.obs;
+  final meetingId = ''.obs;
   final meetingTitle = 'Meeting'.obs;
-  final viewMode     = 'speaker'.obs; // 'speaker' | 'gallery'
-  final isLocked   = false.obs;
-  final isMuteAllOn= false.obs;
+  final viewMode = 'speaker'.obs; // 'speaker' | 'gallery'
+  final isLocked = false.obs;
+  final isMuteAllOn = false.obs;
   final allowAttendeeUnmute = true.obs;
-  final allowChat  = true.obs;
-  final allowRename= true.obs;
+  final allowChat = true.obs;
+  final allowRename = true.obs;
   final allowAttendeeVideo = true.obs;
   final connection = 'connected'.obs; // connected | reconnecting | failed
 
   // ── participants ──────────────────────────────────────────────────────
   final participants = <int, Participant>{}.obs;
-  final pinnedUids   = <int>{}.obs;       // multi-pin
-  final spotlightUids= <int>{}.obs;       // spotlight for everyone
+  final pinnedUids = <int>{}.obs; // multi-pin
+  final spotlightUids = <int>{}.obs; // spotlight for everyone
   final hideNonVideo = false.obs;
   final activeSpeakerUid = Rxn<int>();
   final selfHidden = false.obs;
@@ -448,16 +484,18 @@ class ZoomMeetingController extends GetxController {
   final activeMedia = Rxn<Map<String, dynamic>>();
 
   // ── chat / waiting room ───────────────────────────────────────────────
-  final chat       = <ChatMessage>[].obs;
-  final waiting    = <Participant>[].obs;   // pending admit
-  final typing     = <int>{}.obs;
+  final chat = <ChatMessage>[].obs;
+  final waiting = <Participant>[].obs; // pending admit
+  final typing = <int>{}.obs;
 
   // ── reactions / hand ──────────────────────────────────────────────────
   final floatingReactions = <(int uid, String emoji, int ts)>[].obs;
   void react(int uid, String emoji, {bool broadcast = true}) {
     floatingReactions.add((uid, emoji, DateTime.now().millisecondsSinceEpoch));
     Future.delayed(const Duration(seconds: 10), () {
-      floatingReactions.removeWhere((r)=>r.$3 < DateTime.now().millisecondsSinceEpoch-9500);
+      floatingReactions.removeWhere(
+        (r) => r.$3 < DateTime.now().millisecondsSinceEpoch - 9500,
+      );
     });
     if (broadcast) _sendApp('reaction', {'uid': uid, 'emoji': emoji});
   }
@@ -474,6 +512,7 @@ class ZoomMeetingController extends GetxController {
   }
 
   DateTime _lastTypingSent = DateTime.fromMillisecondsSinceEpoch(0);
+
   /// Call on every keystroke in the chat composer — throttled so it
   /// doesn't spam the data channel on every character.
   Future<void> notifyTyping() async {
@@ -508,11 +547,13 @@ class ZoomMeetingController extends GetxController {
 
   // ── whiteboard ───────────────────────────────────────────────────────
   final whiteboardStrokes = <WhiteboardStroke>[].obs;
-  final whiteboardTexts   = <WhiteboardText>[].obs;
-  final whiteboardLocked  = false.obs;
+  final whiteboardTexts = <WhiteboardText>[].obs;
+  final whiteboardLocked = false.obs;
 
   void addWhiteboardStroke(WhiteboardStroke s, {bool broadcast = true}) {
-    if (whiteboardLocked.value && participants[localUid]?.role == ParticipantRole.attendee) return;
+    if (whiteboardLocked.value &&
+        participants[localUid]?.role == ParticipantRole.attendee)
+      return;
     whiteboardStrokes.add(s);
     if (broadcast) _sendApp('wb_stroke', s.toJson());
   }
@@ -524,7 +565,9 @@ class ZoomMeetingController extends GetxController {
   }
 
   void addWhiteboardText(WhiteboardText t, {bool broadcast = true}) {
-    if (whiteboardLocked.value && participants[localUid]?.role == ParticipantRole.attendee) return;
+    if (whiteboardLocked.value &&
+        participants[localUid]?.role == ParticipantRole.attendee)
+      return;
     whiteboardTexts.add(t);
     if (broadcast) _sendApp('wb_text', t.toJson());
   }
@@ -541,8 +584,8 @@ class ZoomMeetingController extends GetxController {
 
   // ── breakouts / polls / qa ────────────────────────────────────────────
   final breakouts = <BreakoutRoom>[].obs;
-  final polls     = <Poll>[].obs;
-  final qa        = <QAItem>[].obs;
+  final polls = <Poll>[].obs;
+  final qa = <QAItem>[].obs;
 
   // ── recording / captions ──────────────────────────────────────────────
   final captionsOn = false.obs;
@@ -554,15 +597,18 @@ class ZoomMeetingController extends GetxController {
   final originalSound = false.obs;
   final noiseSuppression = 'auto'.obs; // off | auto | low | med | high
   final hdVideo = false.obs;
-  final mirror  = true.obs;
+  final mirror = true.obs;
   final touchUp = 0.0.obs;
   final lowLightFix = false.obs;
   final theme = 'dark'.obs;
 
   // ── host controls ─────────────────────────────────────────────────────
-  Future<void> muteAll({bool allowUnmute=true}) async {
-    isMuteAllOn.value = true; allowAttendeeUnmute.value = allowUnmute;
-    for (final p in participants.values) { p.audioMuted = true; }
+  Future<void> muteAll({bool allowUnmute = true}) async {
+    isMuteAllOn.value = true;
+    allowAttendeeUnmute.value = allowUnmute;
+    for (final p in participants.values) {
+      p.audioMuted = true;
+    }
     participants.refresh();
     if (engine == null) return;
     // Mesh has no server sitting on anyone's mic, so "mute all" is really
@@ -576,11 +622,15 @@ class ZoomMeetingController extends GetxController {
       }
     }
   }
+
   Future<void> lockMeeting(bool v) async => isLocked.value = v;
   Future<void> admit(int uid) async {
-    final p = waiting.firstWhereOrNull((p)=>p.uid==uid); if (p==null) return;
-    waiting.remove(p); participants[uid]=p;
+    final p = waiting.firstWhereOrNull((p) => p.uid == uid);
+    if (p == null) return;
+    waiting.remove(p);
+    participants[uid] = p;
   }
+
   Future<void> denyAll() async => waiting.clear();
   Future<void> removeParticipant(int uid) async {
     participants.remove(uid);
@@ -590,10 +640,12 @@ class ZoomMeetingController extends GetxController {
     // device acts on — not something the host can force from outside.
     await _sendAppTo(uid, 'kick', {});
   }
-  Future<void> makeCoHost(int uid) async => participants[uid]?.role = ParticipantRole.coHost;
+
+  Future<void> makeCoHost(int uid) async =>
+      participants[uid]?.role = ParticipantRole.coHost;
   Future<void> transferHost(int uid) async {
     for (final p in participants.values) {
-      if (p.role==ParticipantRole.host) p.role = ParticipantRole.coHost;
+      if (p.role == ParticipantRole.host) p.role = ParticipantRole.coHost;
     }
     participants[uid]?.role = ParticipantRole.host;
     participants.refresh();
@@ -615,27 +667,44 @@ class ZoomMeetingController extends GetxController {
 
   /// Lowers every participant's raised hand at once.
   Future<void> lowerAllHands() async {
-    for (final p in participants.values) { p.handRaised = false; }
+    for (final p in participants.values) {
+      p.handRaised = false;
+    }
     participants.refresh();
     await _sendApp('lower_all_hands', {});
   }
 
   // ── pinning / spotlight ───────────────────────────────────────────────
-  void togglePin(int uid)       { pinnedUids.contains(uid)?pinnedUids.remove(uid):pinnedUids.add(uid); }
-  void toggleSpotlight(int uid) { spotlightUids.contains(uid)?spotlightUids.remove(uid):spotlightUids.add(uid); }
+  void togglePin(int uid) {
+    pinnedUids.contains(uid) ? pinnedUids.remove(uid) : pinnedUids.add(uid);
+  }
+
+  void toggleSpotlight(int uid) {
+    spotlightUids.contains(uid)
+        ? spotlightUids.remove(uid)
+        : spotlightUids.add(uid);
+  }
 
   // ── recording ─────────────────────────────────────────────────────────
   Future<void> startCloudRecording() async {
-    await recording.start(
-      meetingId.value,
-      0,
-      meetingId: _meetingRowId,
-    );
+    await recording.start(meetingId.value, 0, meetingId: _meetingRowId);
     update();
   }
-  Future<void> pauseRecording()    async { await recording.pause();  update(); }
-  Future<void> resumeRecording()   async { await recording.resume(); update(); }
-  Future<void> stopRecording()     async { await recording.stop();   update(); }
+
+  Future<void> pauseRecording() async {
+    await recording.pause();
+    update();
+  }
+
+  Future<void> resumeRecording() async {
+    await recording.resume();
+    update();
+  }
+
+  Future<void> stopRecording() async {
+    await recording.stop();
+    update();
+  }
 
   // ── captions ──────────────────────────────────────────────────────────
   StreamSubscription? _captionSub;
@@ -644,7 +713,9 @@ class ZoomMeetingController extends GetxController {
     if (captionsOn.value) {
       await stt.start(channel: meetingId.value, uid: localUid);
       _captionSub = stt.onCaption.listen((e) {
-        final speaker = e.uid == localUid ? localName : (participants[e.uid]?.name ?? 'Someone');
+        final speaker = e.uid == localUid
+            ? localName
+            : (participants[e.uid]?.name ?? 'Someone');
         liveCaption.value = '$speaker: ${e.text}';
         if (e.isFinal && e.text.trim().isNotEmpty) {
           transcript.add('$speaker: ${e.text}');
@@ -661,6 +732,7 @@ class ZoomMeetingController extends GetxController {
       _captionSub = null;
     }
   }
+
   Future<String> generateSummary() => stt.summarize(transcript);
 
   // ── breakouts ─────────────────────────────────────────────────────────
@@ -673,12 +745,14 @@ class ZoomMeetingController extends GetxController {
   // that uid) — only the assigned device acts on it.
   final currentBreakoutRoomId = RxnString();
 
-  void createBreakouts(int count, {bool auto=true}) {
+  void createBreakouts(int count, {bool auto = true}) {
     breakouts.clear();
-    for (var i=0;i<count;i++) breakouts.add(BreakoutRoom(id:'br$i', name:'Room ${i+1}'));
+    for (var i = 0; i < count; i++)
+      breakouts.add(BreakoutRoom(id: 'br$i', name: 'Room ${i + 1}'));
     if (auto) {
       final uids = participants.keys.toList()..shuffle();
-      for (var i=0;i<uids.length;i++) breakouts[i%count].participants.add(uids[i]);
+      for (var i = 0; i < uids.length; i++)
+        breakouts[i % count].participants.add(uids[i]);
       _dispatchBreakoutAssignments();
     }
     breakouts.refresh();
@@ -696,7 +770,10 @@ class ZoomMeetingController extends GetxController {
         if (uid == localUid) {
           _joinBreakoutChannel(roomChannelId, room.id);
         } else {
-          _sendAppTo(uid, 'breakout_assign', {'channelId': roomChannelId, 'roomId': room.id});
+          _sendAppTo(uid, 'breakout_assign', {
+            'channelId': roomChannelId,
+            'roomId': room.id,
+          });
         }
       }
     }
@@ -707,7 +784,11 @@ class ZoomMeetingController extends GetxController {
     currentBreakoutRoomId.value = roomId;
     await engine!.leaveChannel();
     participants.clear();
-    participants[localUid] = Participant(uid: localUid, name: localName, role: ParticipantRole.attendee);
+    participants[localUid] = Participant(
+      uid: localUid,
+      name: localName,
+      role: ParticipantRole.attendee,
+    );
     meetingId.value = channelId;
     await engine!.joinChannel(channelId: channelId, token: '', uid: localUid);
     await _broadcastName();
@@ -716,7 +797,7 @@ class ZoomMeetingController extends GetxController {
   /// Broadcasts a "come back to the main room" message to everyone
   /// currently assigned to a breakout, then moves the local device back
   /// too if it's the one that's in a breakout right now.
-  void closeBreakouts({Duration warning = const Duration(seconds:60)}) {
+  void closeBreakouts({Duration warning = const Duration(seconds: 60)}) {
     for (final room in breakouts) {
       for (final uid in room.participants) {
         if (uid != localUid) _sendAppTo(uid, 'breakout_end', {});
@@ -733,9 +814,17 @@ class ZoomMeetingController extends GetxController {
     currentBreakoutRoomId.value = null;
     await engine!.leaveChannel();
     participants.clear();
-    participants[localUid] = Participant(uid: localUid, name: localName, role: ParticipantRole.attendee);
+    participants[localUid] = Participant(
+      uid: localUid,
+      name: localName,
+      role: ParticipantRole.attendee,
+    );
     meetingId.value = _mainChannelId!;
-    await engine!.joinChannel(channelId: _mainChannelId!, token: '', uid: localUid);
+    await engine!.joinChannel(
+      channelId: _mainChannelId!,
+      token: '',
+      uid: localUid,
+    );
     await _broadcastName();
   }
 
@@ -746,7 +835,9 @@ class ZoomMeetingController extends GetxController {
   /// hopping into each breakout channel or a lightweight side-channel
   /// alongside the WebRTC signaling. Flagging rather than faking it.
   void broadcastToBreakouts(String text) {
-    debugPrint('broadcastToBreakouts: not wired yet — see the comment above this method.');
+    debugPrint(
+      'broadcastToBreakouts: not wired yet — see the comment above this method.',
+    );
   }
 
   // ── polls / qa ────────────────────────────────────────────────────────
@@ -755,40 +846,55 @@ class ZoomMeetingController extends GetxController {
     polls.add(p);
     _sendApp('poll_launch', p.toJson());
   }
+
   void closePoll(String id, {bool broadcast = true}) {
-    polls.firstWhereOrNull((p)=>p.id==id)?.closed=true;
+    polls.firstWhereOrNull((p) => p.id == id)?.closed = true;
     polls.refresh();
     if (broadcast) _sendApp('poll_close', {'id': id});
   }
-  void answerPoll(String pollId, int uid, List<String> answer, {bool broadcast = true}) {
-    final poll = polls.firstWhereOrNull((p)=>p.id==pollId);
+
+  void answerPoll(
+    String pollId,
+    int uid,
+    List<String> answer, {
+    bool broadcast = true,
+  }) {
+    final poll = polls.firstWhereOrNull((p) => p.id == pollId);
     if (poll == null) return;
     poll.answers[uid] = answer;
     _recomputePollVotes(poll);
     polls.refresh();
-    if (broadcast) _sendApp('poll_answer', {'pollId': pollId, 'uid': uid, 'answer': answer});
+    if (broadcast)
+      _sendApp('poll_answer', {'pollId': pollId, 'uid': uid, 'answer': answer});
   }
+
   void _recomputePollVotes(Poll poll) {
-    for (final o in poll.options) { o.votes = 0; }
+    for (final o in poll.options) {
+      o.votes = 0;
+    }
     for (final answer in poll.answers.values) {
       for (final optId in answer) {
         poll.options.firstWhereOrNull((o) => o.id == optId)?.votes++;
       }
     }
   }
+
   void submitQuestion(QAItem q) {
-    qa.insert(0,q);
+    qa.insert(0, q);
     _sendApp('qa_submit', q.toJson());
   }
+
   void answerQuestion(String id, String text, {bool broadcast = true}) {
-    qa.firstWhereOrNull((q)=>q.id==id)?.answerText = text;
+    qa.firstWhereOrNull((q) => q.id == id)?.answerText = text;
     qa.refresh();
     if (broadcast) _sendApp('qa_answer', {'id': id, 'text': text});
   }
+
   void toggleUpvoteQuestion(String id, {bool broadcast = true}) {
-    final q = qa.firstWhereOrNull((q)=>q.id==id);
+    final q = qa.firstWhereOrNull((q) => q.id == id);
     if (q == null) return;
-    if (!q.upvotes.add(localUid)) q.upvotes.remove(localUid); // toggle off if already upvoted
+    if (!q.upvotes.add(localUid))
+      q.upvotes.remove(localUid); // toggle off if already upvoted
     qa.refresh();
     if (broadcast) _sendApp('qa_upvote', {'id': id, 'uid': localUid});
   }
@@ -801,15 +907,21 @@ class ZoomMeetingController extends GetxController {
   Timer? _tokenTimer;
   void scheduleTokenRenewal(DateTime expiresAt) {
     _tokenTimer?.cancel();
-    final lead = expiresAt.difference(DateTime.now()) - const Duration(minutes: 2);
+    final lead =
+        expiresAt.difference(DateTime.now()) - const Duration(minutes: 2);
     _tokenTimer = Timer(lead.isNegative ? Duration.zero : lead, () async {
-      final t = await TokenService.fetchRtcToken(channel: meetingId.value, uid: 0, role: 'publisher');
+      final t = await TokenService.fetchRtcToken(
+        channel: meetingId.value,
+        uid: 0,
+        role: 'publisher',
+      );
       // Agora-only: engine.renewToken(t.token) on the Agora engine impl.
       scheduleTokenRenewal(t.expiresAt);
     });
   }
 
-  @override void onClose() {
+  @override
+  void onClose() {
     _tokenTimer?.cancel();
     _captionSub?.cancel();
     if (engine?.isJoined ?? false) {

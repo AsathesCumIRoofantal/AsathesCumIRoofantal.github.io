@@ -70,11 +70,12 @@ class _CommunityRoomViewState extends State<CommunityRoomView> {
       }
       final filename = f.name;
 
+      final contentType = _getContentType(filename);
       final upload = await R2UploadService().uploadFile(
         roomId: roomId,
         filename: filename,
         bytes: bytes,
-        contentType: f.mimeType ?? 'application/octet-stream',
+        contentType: contentType,
       );
 
       await _c.sendMessage(
@@ -95,6 +96,46 @@ class _CommunityRoomViewState extends State<CommunityRoomView> {
       Get.snackbar('Upload failed', e.toString());
     } finally {
       if (mounted) setState(() => _uploading = false);
+    }
+  }
+
+  String _getContentType(String filename) {
+    final ext = filename.split('.').last.toLowerCase();
+    switch (ext) {
+      case 'jpg':
+      case 'jpeg':
+        return 'image/jpeg';
+      case 'png':
+        return 'image/png';
+      case 'gif':
+        return 'image/gif';
+      case 'webp':
+        return 'image/webp';
+      case 'pdf':
+        return 'application/pdf';
+      case 'doc':
+      case 'docx':
+        return 'application/msword';
+      case 'xls':
+      case 'xlsx':
+        return 'application/vnd.ms-excel';
+      case 'ppt':
+      case 'pptx':
+        return 'application/vnd.ms-powerpoint';
+      case 'mp4':
+        return 'video/mp4';
+      case 'mov':
+        return 'video/quicktime';
+      case 'avi':
+        return 'video/x-msvideo';
+      case 'mp3':
+        return 'audio/mpeg';
+      case 'wav':
+        return 'audio/wav';
+      case 'zip':
+        return 'application/zip';
+      default:
+        return 'application/octet-stream';
     }
   }
 
@@ -191,22 +232,6 @@ class _CommunityRoomViewState extends State<CommunityRoomView> {
                   TextPosition(offset: _input.text.length),
                 );
               },
-              config: Config(
-                columns: 7,
-                emojiSizeMax: 32,
-                verticalSpacing: 0,
-                horizontalSpacing: 0,
-                gridPadding: EdgeInsets.zero,
-                initCategory: Category.RECENT,
-                bgColor: const Color(0xFFF2F2F2),
-                indicatorColor: ZoomTheme.primary,
-                iconColor: Colors.grey,
-                iconColorSelected: ZoomTheme.primary,
-                backspaceColor: ZoomTheme.primary,
-                skinToneConfig: const SkinToneConfig(),
-                categoryIcons: const CategoryIcons(),
-                buttonMode: ButtonMode.MATERIAL,
-              ),
             ),
           ),
       ]),
@@ -247,7 +272,7 @@ class _MessageBubble extends StatelessWidget {
           children: [
             if (!isMe) ...[
               CircleAvatar(radius: 14,
-                backgroundColor: ZoomTheme.primary.withOpacity(.2),
+                backgroundColor: ZoomTheme.primary.withValues(alpha: 0.2),
                 child: Text(name[0].toUpperCase(),
                     style: const TextStyle(color: ZoomTheme.primary, fontSize: 11))),
               const SizedBox(width: 6),
