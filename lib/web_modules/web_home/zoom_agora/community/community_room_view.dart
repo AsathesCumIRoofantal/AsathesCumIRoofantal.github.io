@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:get/get.dart';
 import 'community_controller.dart';
 import '../widgets/zoom_theme.dart';
@@ -22,6 +23,7 @@ class _CommunityRoomViewState extends State<CommunityRoomView> {
   String? _replyPreview;
   String? _editingMsgId;
   bool _uploading = false;
+  bool _showEmojiPicker = false;
 
   late final CommunityController _c;
 
@@ -173,8 +175,40 @@ class _CommunityRoomViewState extends State<CommunityRoomView> {
           controller: _input,
           onSend: _send,
           onAttach: _pickAndSendFile,
+          onEmojiToggle: () => setState(() => _showEmojiPicker = !_showEmojiPicker),
           uploading: _uploading,
+          showEmojiPicker: _showEmojiPicker,
         ),
+        // Emoji picker
+        if (_showEmojiPicker)
+          Container(
+            height: 280,
+            color: ZoomTheme.surface2,
+            child: EmojiPicker(
+              onEmojiSelected: (Category? category, Emoji emoji) {
+                _input.text += emoji.emoji;
+                _input.selection = TextSelection.fromPosition(
+                  TextPosition(offset: _input.text.length),
+                );
+              },
+              config: Config(
+                columns: 7,
+                emojiSizeMax: 32,
+                verticalSpacing: 0,
+                horizontalSpacing: 0,
+                gridPadding: EdgeInsets.zero,
+                initCategory: Category.RECENT,
+                bgColor: const Color(0xFFF2F2F2),
+                indicatorColor: ZoomTheme.primary,
+                iconColor: Colors.grey,
+                iconColorSelected: ZoomTheme.primary,
+                backspaceColor: ZoomTheme.primary,
+                skinToneConfig: const SkinToneConfig(),
+                categoryIcons: const CategoryIcons(),
+                buttonMode: ButtonMode.MATERIAL,
+              ),
+            ),
+          ),
       ]),
     );
   }
@@ -324,12 +358,16 @@ class _Composer extends StatelessWidget {
     required this.controller,
     required this.onSend,
     required this.onAttach,
+    required this.onEmojiToggle,
     required this.uploading,
+    required this.showEmojiPicker,
   });
   final TextEditingController controller;
   final VoidCallback onSend;
   final VoidCallback onAttach;
+  final VoidCallback onEmojiToggle;
   final bool uploading;
+  final bool showEmojiPicker;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -345,7 +383,13 @@ class _Composer extends StatelessWidget {
         ),
         onPressed: uploading ? null : onAttach,
       ),
-      IconButton(icon: const Icon(Icons.emoji_emotions_outlined, color: ZoomTheme.textMuted), onPressed: () {}),
+      IconButton(
+        icon: Icon(
+          Icons.emoji_emotions_outlined,
+          color: showEmojiPicker ? ZoomTheme.primary : ZoomTheme.textMuted,
+        ),
+        onPressed: onEmojiToggle,
+      ),
       IconButton(icon: const Icon(Icons.mic_none_rounded, color: ZoomTheme.textMuted), onPressed: () {}),
       Expanded(child: TextField(
         controller: controller,

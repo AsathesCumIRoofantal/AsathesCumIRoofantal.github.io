@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'social_controller.dart';
 import '../widgets/zoom_theme.dart';
 import '../services/current_user.dart';
+import '../services/r2_upload_service.dart';
 
 class PostCreateView extends StatefulWidget {
   const PostCreateView({super.key});
@@ -14,25 +16,74 @@ class _PostCreateViewState extends State<PostCreateView> {
   final _content = TextEditingController();
   String _audience = 'public';
   bool _posting = false;
+  final List<String> _mediaUrls = [];
+  final List<String> _mediaTypes = [];
+  bool _uploading = false;
 
   @override
   void dispose() { _content.dispose(); super.dispose(); }
 
   Future<void> _post() async {
     if (_posting) return;
-    if (_content.text.trim().isEmpty) {
-      Get.snackbar('Empty post', 'Write something first.');
+    if (_content.text.trim().isEmpty && _mediaUrls.isEmpty) {
+      Get.snackbar('Empty post', 'Write something or add media first.');
       return;
     }
     setState(() => _posting = true);
     try {
-      await Get.find<SocialController>().createPost(content: _content.text);
+      await Get.find<SocialController>().createPost(
+        content: _content.text,
+        mediaUrls: _mediaUrls,
+        mediaTypes: _mediaTypes,
+      );
       Get.back();
     } catch (e) {
       Get.snackbar('Error', e.toString());
     } finally {
       if (mounted) setState(() => _posting = false);
     }
+  }
+
+  Future<void> _pickMedia() async {
+    if (_uploading) return;
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.media,
+      withData: true,
+      allowMultiple: true,
+    );
+    if (result == null || result.files.isEmpty) return;
+
+    setState(() => _uploading = true);
+    try {
+      for (final f in result.files) {
+        if (_mediaUrls.length >= 10) break;
+        final bytes = f.bytes;
+        if (bytes == null) continue;
+
+        final upload = await R2UploadService().uploadFile(
+          roomId: 'social_posts',
+          filename: f.name,
+          bytes: bytes,
+          contentType: f.mimeType ?? 'application/octet-stream',
+        );
+
+        setState(() {
+          _mediaUrls.add(upload.url);
+          _mediaTypes.add(f.mimeType?.startsWith('video') == true ? 'video' : 'image');
+        });
+      }
+    } catch (e) {
+      Get.snackbar('Upload failed', e.toString());
+    } finally {
+      if (mounted) setState(() => _uploading = false);
+    }
+  }
+
+  void _removeMedia(int index) {
+    setState(() {
+      _mediaUrls.removeAt(index);
+      _mediaTypes.removeAt(index);
+    });
   }
 
   @override
@@ -104,6 +155,53 @@ class _PostCreateViewState extends State<PostCreateView> {
         ),
       ),
       const SizedBox(height: 16),
+      // Media preview
+      if (_mediaUrls.isNotEmpty)
+        Container(
+          height: 120,
+          margin: const EdgeInsets.only(bottom: 16),
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: _mediaUrls.length,
+            itemBuilder: (_, i) => Stack(
+              children: [
+                Container(
+                  width: 120,
+                  margin: const EdgeInsets.only(right: 8),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: ZoomTheme.surface2,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: _mediaTypes[i] == 'video'
+                        ? Container(
+                            color: Colors.black,
+                            child: const Center(
+                              child: Icon(Icons.play_circle_outline, color: Colors.white, size: 32),
+                            ),
+                          )
+                        : Image.network(_mediaUrls[i], fit: BoxFit.cover),
+                  ),
+                ),
+                Positioned(
+                  top: 4, right: 12,
+                  child: GestureDetector(
+                    onTap: () => _removeMedia(i),
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.black54,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(Icons.close, color: Colors.white, size: 16),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       // Media actions row
       Container(
         padding: const EdgeInsets.all(12),
@@ -111,8 +209,11 @@ class _PostCreateViewState extends State<PostCreateView> {
         child: Row(children: [
           const Text('Add to your post', style: TextStyle(color: ZoomTheme.text, fontWeight: FontWeight.w600)),
           const Spacer(),
-          IconButton(icon: const Icon(Icons.photo_outlined,  color: Colors.green),  onPressed: () {}),
-          IconButton(icon: const Icon(Icons.videocam_outlined, color: Colors.red),  onPressed: () {}),
+          IconButton(
+            icon: Icon(_uploading ? Icons.cloud_upload : Icons.photo_outlined, color: Colors.green),
+            onPressed: _uploading ? null : _pickMedia,
+          ),
+          IconButton(icon: const Icon(Icons.videocam_outlined, color: Colors.red), onPressed: () {}),
           IconButton(icon: const Icon(Icons.location_on_outlined, color: Colors.blue), onPressed: () {}),
           IconButton(icon: const Icon(Icons.emoji_emotions_outlined, color: Colors.amber), onPressed: () {}),
         ]),

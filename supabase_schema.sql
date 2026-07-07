@@ -1082,7 +1082,7 @@ $$;
 -- ────────────────────────────────────────────────────────────
 --  5) Realtime publications
 -- ────────────────────────────────────────────────────────────
--- Enable these when you want realtime feed/comments:
--- ALTER PUBLICATION supabase_realtime ADD TABLE social_posts;
--- ALTER PUBLICATION supabase_realtime ADD TABLE social_comments;
--- ALTER PUBLICATION supabase_realtime ADD TABLE chat_messages;
+-- Enable realtime for social feed and chat
+ALTER PUBLICATION supabase_realtime ADD TABLE social_posts;
+ALTER PUBLICATION supabase_realtime ADD TABLE social_comments;
+ALTER PUBLICATION supabase_realtime ADD TABLE chat_messages;
