@@ -12,51 +12,42 @@ class EntitiesView extends GetView<EntitiesController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (controller.isLoading.value) {
-        return Center(
-          child: CircularProgressIndicator(
-            color: Theme.of(context).colorScheme.primary,
+    return SingleChildScrollView(
+      physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: AirHomeContextStrip(
+              compact: true,
+              placement: AirHomeContextPlacement.homeTab,
+              extraLine:
+                  'ENTITIES tab: catalogue discrete nodes first; UNIONS and IDENTITY explain how they connect and who observes them.',
+            ),
           ),
-        );
-      }
-      return SingleChildScrollView(
-        physics: isEmbedded ? const NeverScrollableScrollPhysics() : null,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: AirHomeContextStrip(
-                compact: true,
-                placement: AirHomeContextPlacement.homeTab,
-                extraLine:
-                    'ENTITIES tab: catalogue discrete nodes first; UNIONS and IDENTITY explain how they connect and who observes them.',
-              ),
+          _buildCollapsibleHeader(context),
+          _buildEntitiesInfoCard(context),
+          Obx(
+            () => AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: controller.isEntitiesExpanded.value
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.only(top: 12, bottom: 80),
+                      itemCount: controller.entities.length,
+                      itemBuilder: (context, index) {
+                        final entity = controller.entities[index];
+                        return _buildEntityCard(context, entity);
+                      },
+                    )
+                  : const SizedBox.shrink(),
             ),
-            _buildCollapsibleHeader(context),
-            _buildEntitiesInfoCard(context),
-            Obx(
-              () => AnimatedSize(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                child: controller.isEntitiesExpanded.value
-                    ? ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(top: 12, bottom: 80),
-                        itemCount: controller.entities.length,
-                        itemBuilder: (context, index) {
-                          final entity = controller.entities[index];
-                          return _buildEntityCard(context, entity);
-                        },
-                      )
-                    : const SizedBox.shrink(),
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+          ),
+        ],
+      ),
+    );
   }
 
   void _showAddEntityModal(BuildContext context) {
@@ -284,7 +275,10 @@ class EntitiesView extends GetView<EntitiesController> {
     return Obx(() {
       final isExpanded = controller.isEntitiesExpanded.value;
       return GestureDetector(
-        onTap: () => controller.isEntitiesExpanded.toggle(),
+        onTap: () {
+          controller.isEntitiesExpanded.toggle();
+          controller.isEntitiesExpanded.refresh();
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -507,28 +501,26 @@ class EntitiesView extends GetView<EntitiesController> {
           ),
           child: Icon(Icons.hub, color: Theme.of(context).colorScheme.primary),
         ),
-        title: Obx(
-          () => Text(
-            ContentReviser.reviseTitle(entity.name),
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: Theme.of(context).textTheme.bodyLarge?.color,
-            ),
+        title: Text(
+          ContentReviser.reviseTitle(entity.name),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
           ),
         ),
+
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 8),
-            Obx(
-              () => Text(
-                ContentReviser.revise(entity.description),
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyMedium?.color,
-                ),
+            Text(
+              ContentReviser.revise(entity.description),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyMedium?.color,
               ),
             ),
+
             const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),

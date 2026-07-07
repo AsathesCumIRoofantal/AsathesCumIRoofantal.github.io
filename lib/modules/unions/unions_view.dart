@@ -13,63 +13,54 @@ class UnionsView extends GetView<UnionsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      if (controller.isLoading.value) {
-        return Center(
-          child: CircularProgressIndicator(
-            color: Theme.of(context).colorScheme.secondary,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          FloatingActionButton.extended(
+            onPressed: () => _showAddUnionModal(context),
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            icon: const Icon(Icons.group_add_rounded, color: Colors.white),
+            label: const Text(
+              "Catalogue Union",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1,
+              ),
+            ),
           ),
-        );
-      }
-      return SingleChildScrollView(
-        child: Column(
-          children: [
-            FloatingActionButton.extended(
-              onPressed: () => _showAddUnionModal(context),
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              icon: const Icon(Icons.group_add_rounded, color: Colors.white),
-              label: const Text(
-                "Catalogue Union",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1,
-                ),
-              ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+            child: AirHomeContextStrip(
+              compact: true,
+              placement: AirHomeContextPlacement.homeTab,
+              extraLine:
+                  'UNIONS tab: record bindings between entities; keep names consistent with the ENTITIES tab and your IDENTITY map.',
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-              child: AirHomeContextStrip(
-                compact: true,
-                placement: AirHomeContextPlacement.homeTab,
-                extraLine:
-                    'UNIONS tab: record bindings between entities; keep names consistent with the ENTITIES tab and your IDENTITY map.',
-              ),
+          ),
+          _buildCollapsibleHeader(context),
+          _buildUnionsInfoCard(context),
+          Obx(
+            () => AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: controller.isUnionsExpanded.value
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.only(top: 12, bottom: 80),
+                      itemCount: controller.unions.length,
+                      itemBuilder: (context, index) {
+                        final union = controller.unions[index];
+                        return _buildUnionCard(context, union);
+                      },
+                    )
+                  : const SizedBox.shrink(),
             ),
-            _buildCollapsibleHeader(context),
-            _buildUnionsInfoCard(context),
-            Obx(
-              () => AnimatedSize(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                child: controller.isUnionsExpanded.value
-                    ? ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(top: 12, bottom: 80),
-                        itemCount: controller.unions.length,
-                        itemBuilder: (context, index) {
-                          final union = controller.unions[index];
-                          return _buildUnionCard(context, union);
-                        },
-                      )
-                    : const SizedBox.shrink(),
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+          ),
+        ],
+      ),
+    );
   }
 
   void _showAddUnionModal(BuildContext context) {
@@ -344,7 +335,10 @@ class UnionsView extends GetView<UnionsController> {
     return Obx(() {
       final isExpanded = controller.isUnionsExpanded.value;
       return GestureDetector(
-        onTap: () => controller.isUnionsExpanded.toggle(),
+        onTap: () {
+          controller.isUnionsExpanded.toggle();
+          controller.isUnionsExpanded.refresh();
+        },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
           margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
@@ -563,29 +557,25 @@ class UnionsView extends GetView<UnionsController> {
                 Icon(Icons.bubble_chart, color: secondary, size: 28),
                 const SizedBox(width: 12),
                 Expanded(
-                  child: Obx(
-                    () => Text(
-                      ContentReviser.reviseTitle(union.name),
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: theme.textTheme.bodyLarge?.color,
-                        letterSpacing: 1,
-                      ),
+                  child: Text(
+                    ContentReviser.reviseTitle(union.name),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: theme.textTheme.bodyLarge?.color,
+                      letterSpacing: 1,
                     ),
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 12),
-            Obx(
-              () => Text(
-                ContentReviser.revise(union.description),
-                style: TextStyle(
-                  color: theme.textTheme.bodyMedium?.color,
-                  fontSize: 14,
-                  height: 1.4,
-                ),
+            Text(
+              ContentReviser.revise(union.description),
+              style: TextStyle(
+                color: theme.textTheme.bodyMedium?.color,
+                fontSize: 14,
+                height: 1.4,
               ),
             ),
             const SizedBox(height: 16),
