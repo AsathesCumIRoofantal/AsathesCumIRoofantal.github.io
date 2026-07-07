@@ -386,6 +386,8 @@ CREATE TABLE IF NOT EXISTS otp_tokens (
 CREATE INDEX IF NOT EXISTS idx_otp_contact  ON otp_tokens(contact);
 CREATE INDEX IF NOT EXISTS idx_otp_expires  ON otp_tokens(expires_at);
 
+
+DROP TRIGGER IF EXISTS trg_otp_upd ON otp_tokens;
 CREATE TRIGGER  trg_otp_upd
   BEFORE UPDATE ON otp_tokens
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
@@ -408,20 +410,26 @@ ALTER TABLE temp_files         ENABLE ROW LEVEL SECURITY;
 ALTER TABLE otp_tokens         ENABLE ROW LEVEL SECURITY;
 
 -- Users: can read own row; admins can read all
+DROP POLICY IF EXISTS user_select_own ON user_table;
 CREATE POLICY user_select_own ON user_table
   FOR SELECT USING (auth.uid()::uuid = user_id);
 
+DROP POLICY IF EXISTS user_update_own ON user_table;
 CREATE POLICY user_update_own ON user_table
   FOR UPDATE USING (auth.uid()::uuid = user_id);
 
 -- Chat rooms: only members can see/modify
+DROP POLICY IF EXISTS chat_rooms_member_select ON chat_rooms;
 CREATE POLICY chat_rooms_member_select ON chat_rooms
   FOR SELECT USING (auth.uid()::uuid = ANY(member_ids));
 
+DROP POLICY IF EXISTS chat_rooms_member_update ON chat_rooms;
 CREATE POLICY chat_rooms_member_update ON chat_rooms
   FOR UPDATE USING (auth.uid()::uuid = ANY(admin_ids));
 
 -- Chat messages: only room members
+
+DROP POLICY IF EXISTS chat_msg_select ON chat_messages;
 CREATE POLICY chat_msg_select ON chat_messages
   FOR SELECT USING (
     EXISTS (
@@ -431,40 +439,52 @@ CREATE POLICY chat_msg_select ON chat_messages
     )
   );
 
+DROP POLICY IF EXISTS chat_msg_insert ON chat_messages;
 CREATE POLICY chat_msg_insert ON chat_messages
   FOR INSERT WITH CHECK (auth.uid()::uuid = sender_id);
 
+DROP POLICY IF EXISTS chat_msg_update_own ON chat_messages;
 CREATE POLICY chat_msg_update_own ON chat_messages
   FOR UPDATE USING (auth.uid()::uuid = sender_id);
 
 -- Meetings: authenticated users can see all; only host updates
+DROP POLICY IF EXISTS meetings_select ON meetings;
 CREATE POLICY meetings_select ON meetings
   FOR SELECT USING (auth.uid() IS NOT NULL);
 
+DROP POLICY IF EXISTS meetings_insert ON meetings;
 CREATE POLICY meetings_insert ON meetings
   FOR INSERT WITH CHECK (auth.uid()::uuid = host_id);
 
+DROP POLICY IF EXISTS meetings_update ON meetings;
 CREATE POLICY meetings_update ON meetings
   FOR UPDATE USING (auth.uid()::uuid = host_id);
 
 -- Remote devices: owner only
+DROP POLICY IF EXISTS remote_devices_select ON remote_devices;
 CREATE POLICY remote_devices_select ON remote_devices
   FOR SELECT USING (auth.uid()::uuid = assigned_to_user_id);
 
+DROP POLICY IF EXISTS remote_devices_update ON remote_devices;
 CREATE POLICY remote_devices_update ON remote_devices
   FOR UPDATE USING (auth.uid()::uuid = assigned_to_user_id);
 
 -- Remote sessions: requester or device owner
+DROP POLICY IF EXISTS remote_sessions_select ON remote_sessions;
 CREATE POLICY remote_sessions_select ON remote_sessions
   FOR SELECT USING (auth.uid()::uuid = requester_id);
 
 -- Temp files: owner only
+DROP POLICY IF EXISTS temp_files_select ON temp_files;
 CREATE POLICY temp_files_select ON temp_files
   FOR SELECT USING (auth.uid()::uuid = user_id);
 
+
+DROP POLICY IF EXISTS temp_files_insert ON temp_files;
 CREATE POLICY temp_files_insert ON temp_files
   FOR INSERT WITH CHECK (auth.uid()::uuid = user_id);
 
+DROP POLICY IF EXISTS temp_files_delete ON temp_files;
 CREATE POLICY temp_files_delete ON temp_files
   FOR DELETE USING (auth.uid()::uuid = user_id);
 
@@ -763,7 +783,7 @@ END; $$;
 -- Drop old trigger if it exists under a different name from a
 -- previous migration, then re-create.
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-CREATE OR REPLACE on_auth_user_created
+CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION handle_new_auth_user();
 
