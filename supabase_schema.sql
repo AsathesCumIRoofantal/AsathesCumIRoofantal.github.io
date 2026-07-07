@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS user_role_title (
   updated_at  BIGINT       NOT NULL DEFAULT now_epoch()
 );
 
+DROP TRIGGER IF EXISTS trg_user_role_title_upd ON user_role_title;
+
 CREATE TRIGGER trg_user_role_title_upd
   BEFORE UPDATE ON user_role_title
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
@@ -89,6 +91,8 @@ CREATE INDEX IF NOT EXISTS idx_user_table_role    ON user_table(user_role);
 CREATE INDEX IF NOT EXISTS idx_user_table_active  ON user_table(is_active);
 CREATE INDEX IF NOT EXISTS idx_user_table_auth_user ON user_table(auth_user_id);
 
+DROP TRIGGER IF EXISTS trg_user_table_upd ON user_table;
+
 CREATE TRIGGER trg_user_table_upd
   BEFORE UPDATE ON user_table
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
@@ -111,6 +115,8 @@ CREATE TABLE IF NOT EXISTS user_logging_data (
 
 CREATE INDEX IF NOT EXISTS idx_user_logging_user ON user_logging_data(user_id);
 CREATE INDEX IF NOT EXISTS idx_user_logging_time ON user_logging_data(created_at DESC);
+
+DROP TRIGGER IF EXISTS trg_user_logging_upd ON user_logging_data;
 
 CREATE TRIGGER trg_user_logging_upd
   BEFORE UPDATE ON user_logging_data
@@ -139,6 +145,8 @@ CREATE TABLE IF NOT EXISTS chat_rooms (
 
 CREATE INDEX IF NOT EXISTS idx_chat_rooms_members   ON chat_rooms USING GIN(member_ids);
 CREATE INDEX IF NOT EXISTS idx_chat_rooms_last_msg  ON chat_rooms(last_message_at DESC NULLS LAST);
+
+DROP TRIGGER IF EXISTS trg_chat_rooms_upd ON chat_rooms;
 
 CREATE TRIGGER trg_chat_rooms_upd
   BEFORE UPDATE ON chat_rooms
@@ -173,6 +181,8 @@ CREATE INDEX IF NOT EXISTS idx_chat_messages_chat    ON chat_messages(chat_id, c
 CREATE INDEX IF NOT EXISTS idx_chat_messages_sender  ON chat_messages(sender_id);
 CREATE INDEX IF NOT EXISTS idx_chat_messages_status  ON chat_messages(status);
 
+DROP TRIGGER IF EXISTS trg_chat_messages_upd ON chat_messages;
+
 CREATE TRIGGER trg_chat_messages_upd
   BEFORE UPDATE ON chat_messages
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
@@ -188,6 +198,10 @@ BEGIN
   WHERE id = NEW.chat_id;
   RETURN NEW;
 END; $$;
+
+DROP TRIGGER IF EXISTS trg_sync_room_on_message ON chat_messages;
+
+DROP TRIGGER IF EXISTS trg_sync_room_on_message ON chat_messages;
 
 CREATE TRIGGER trg_sync_room_on_message
   AFTER INSERT ON chat_messages
@@ -235,6 +249,8 @@ CREATE INDEX IF NOT EXISTS idx_meetings_host       ON meetings(host_id);
 CREATE INDEX IF NOT EXISTS idx_meetings_status     ON meetings(status);
 CREATE INDEX IF NOT EXISTS idx_meetings_scheduled  ON meetings(scheduled_at DESC);
 
+DROP TRIGGER IF EXISTS trg_meetings_upd ON meetings;
+
 CREATE TRIGGER trg_meetings_upd
   BEFORE UPDATE ON meetings
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
@@ -264,6 +280,8 @@ CREATE TABLE IF NOT EXISTS meeting_participants (
 CREATE INDEX IF NOT EXISTS idx_mp_meeting ON meeting_participants(meeting_id);
 CREATE INDEX IF NOT EXISTS idx_mp_user    ON meeting_participants(user_id);
 
+DROP TRIGGER IF EXISTS trg_meeting_participants_upd ON meeting_participants;
+
 CREATE TRIGGER trg_meeting_participants_upd
   BEFORE UPDATE ON meeting_participants
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
@@ -288,6 +306,8 @@ CREATE TABLE IF NOT EXISTS remote_devices (
 CREATE INDEX IF NOT EXISTS idx_remote_devices_user   ON remote_devices(assigned_to_user_id);
 CREATE INDEX IF NOT EXISTS idx_remote_devices_status ON remote_devices(status);
 CREATE INDEX IF NOT EXISTS idx_remote_devices_code   ON remote_devices(device_code);
+
+DROP TRIGGER IF EXISTS trg_remote_devices_upd ON remote_devices;
 
 CREATE TRIGGER trg_remote_devices_upd
   BEFORE UPDATE ON remote_devices
@@ -315,6 +335,8 @@ CREATE TABLE IF NOT EXISTS remote_sessions (
 CREATE INDEX IF NOT EXISTS idx_remote_sessions_requester ON remote_sessions(requester_id);
 CREATE INDEX IF NOT EXISTS idx_remote_sessions_device    ON remote_sessions(target_device_id);
 CREATE INDEX IF NOT EXISTS idx_remote_sessions_status    ON remote_sessions(status);
+
+DROP TRIGGER IF EXISTS trg_remote_sessions_upd ON remote_sessions;
 
 CREATE TRIGGER trg_remote_sessions_upd
   BEFORE UPDATE ON remote_sessions
@@ -364,7 +386,7 @@ CREATE TABLE IF NOT EXISTS otp_tokens (
 CREATE INDEX IF NOT EXISTS idx_otp_contact  ON otp_tokens(contact);
 CREATE INDEX IF NOT EXISTS idx_otp_expires  ON otp_tokens(expires_at);
 
-CREATE TRIGGER trg_otp_upd
+CREATE trg_otp_upd
   BEFORE UPDATE ON otp_tokens
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -580,6 +602,7 @@ ON CONFLICT DO NOTHING;
 -- ────────────────────────────────────────────────────────────
 ALTER TABLE user_table
   ADD COLUMN IF NOT EXISTS auth_user_id UUID UNIQUE;  -- links to auth.users.id
+  
 
 CREATE INDEX IF NOT EXISTS idx_user_table_auth_user
   ON user_table(auth_user_id);
@@ -740,7 +763,7 @@ END; $$;
 -- Drop old trigger if it exists under a different name from a
 -- previous migration, then re-create.
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-CREATE TRIGGER on_auth_user_created
+CREATE OR REPLACE on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION handle_new_auth_user();
 
@@ -809,11 +832,7 @@ BEGIN
 END; $$;
 
 DROP TRIGGER IF EXISTS trg_queue_r2_delete ON meetings;
-CREATE TRIGGER trg_queue_r2_delete
-  AFTER DELETE ON meetings
-  FOR EACH ROW EXECUTE FUNCTION queue_r2_delete_on_meeting_delete();
 
--- Hourly cron: invoke cleanup_r2_files Edge Function to process the queue.
 INSERT INTO cron.job (jobname, schedule, command, nodename, nodeport, database, username, status)
 VALUES (
   'cleanup-r2-pending-deletes',
@@ -931,7 +950,7 @@ CREATE TABLE IF NOT EXISTS social_posts (
   updated_at    BIGINT NOT NULL DEFAULT now_epoch()
 );
 
-CREATE TRIGGER trg_social_posts_upd
+CREATE trg_social_posts_upd
   BEFORE UPDATE ON social_posts
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -958,7 +977,7 @@ CREATE TABLE IF NOT EXISTS social_comments (
   updated_at  BIGINT NOT NULL DEFAULT now_epoch()
 );
 
-CREATE TRIGGER trg_social_comments_upd
+CREATE trg_social_comments_upd
   BEFORE UPDATE ON social_comments
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
