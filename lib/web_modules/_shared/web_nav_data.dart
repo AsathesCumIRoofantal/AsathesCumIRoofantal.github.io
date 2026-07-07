@@ -1128,7 +1128,7 @@ class WebNavData {
         ),
         WebNavItem(
           title: '2-D Games',
-          icon: Icons.lists,
+          icon: Icons.menu_book_outlined,
           description: "2-D Games",
         ),
         WebNavItem(
