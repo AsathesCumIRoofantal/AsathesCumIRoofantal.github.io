@@ -386,7 +386,7 @@ CREATE TABLE IF NOT EXISTS otp_tokens (
 CREATE INDEX IF NOT EXISTS idx_otp_contact  ON otp_tokens(contact);
 CREATE INDEX IF NOT EXISTS idx_otp_expires  ON otp_tokens(expires_at);
 
-CREATE trg_otp_upd
+CREATE TRIGGER  trg_otp_upd
   BEFORE UPDATE ON otp_tokens
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -950,7 +950,7 @@ CREATE TABLE IF NOT EXISTS social_posts (
   updated_at    BIGINT NOT NULL DEFAULT now_epoch()
 );
 
-CREATE trg_social_posts_upd
+CREATE TRIGGER  trg_social_posts_upd
   BEFORE UPDATE ON social_posts
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -977,7 +977,7 @@ CREATE TABLE IF NOT EXISTS social_comments (
   updated_at  BIGINT NOT NULL DEFAULT now_epoch()
 );
 
-CREATE trg_social_comments_upd
+CREATE TRIGGER  trg_social_comments_upd
   BEFORE UPDATE ON social_comments
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
