@@ -814,17 +814,25 @@ CREATE TRIGGER trg_queue_r2_delete
   FOR EACH ROW EXECUTE FUNCTION queue_r2_delete_on_meeting_delete();
 
 -- Hourly cron: invoke cleanup_r2_files Edge Function to process the queue.
-SELECT cron.schedule(
+INSERT INTO cron.job (jobname, schedule, command, nodename, nodeport, database, username, status)
+VALUES (
   'cleanup-r2-pending-deletes',
-  '0 * * * *',   -- every hour
+  '0 * * * *',
   $$
     SELECT net.http_post(
-      url    := current_setting('app.supabase_url') || '/functions/v1/cleanup_r2_files',
-      headers := '{"Authorization": "Bearer ' || current_setting('app.service_role_key') || '", "Content-Type": "application/json"}'::jsonb,
-      body   := '{}'::jsonb
+      url     := current_setting('app.supabase_url') || '/functions/v1/cleanup_r2_files',
+      headers := ('{"Authorization": "Bearer ' || current_setting('app.service_role_key') || '", "Content-Type": "application/json"}')::jsonb,
+      body    := '{}'::jsonb
     );
-  $$
-) ON CONFLICT (jobname) DO NOTHING;
+  $$,
+  'localhost',
+  5432,
+  current_database(),
+  current_user,
+  'active'
+)
+ON CONFLICT (jobname) DO NOTHING;
+
 
 -- END OF PATCH 2026-07-06 17:45 IST
 
