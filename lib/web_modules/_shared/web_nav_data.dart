@@ -1121,27 +1121,27 @@ class WebNavData {
           icon: Icons.feed,
           description: "Feedback",
         ),       
-        DrawerActualItem(
+        WebNavItem(
           title: 'Play(Real & Virtual) Games',
           icon: Icons.videogame_asset,
           route: AppRoutes.CONSIDERATIONS_PLAY_GAMES,
         ),
-        DrawerActualItem(
+        WebNavItem(
           title: '2-D Games',
           icon: Icons.task,
           route: "",
         ),
-        DrawerActualItem(
+        WebNavItem(
           title: '3-D Games',
           icon: Icons.task_alt,
           route: "",
         ),
-        DrawerActualItem(
+        WebNavItem(
           title: 'Fixed Games',
           icon: Icons.headset_mic_rounded,
           route: "",
         ),
-        DrawerActualItem(
+        WebNavItem(
           title: 'Customizable Games',
           icon: Icons.abc,
           route: "",
