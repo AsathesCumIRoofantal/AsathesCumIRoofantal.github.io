@@ -1120,11 +1120,31 @@ class WebNavData {
           title: 'Feedback',
           icon: Icons.feed,
           description: "Feedback",
-        ),
-        WebNavItem(
-          title: 'Play Games',
+        ),       
+        DrawerActualItem(
+          title: 'Play(Real & Virtual) Games',
           icon: Icons.videogame_asset,
-          description: "Play Games",
+          route: AppRoutes.CONSIDERATIONS_PLAY_GAMES,
+        ),
+        DrawerActualItem(
+          title: '2-D Games',
+          icon: Icons.task,
+          route: "",
+        ),
+        DrawerActualItem(
+          title: '3-D Games',
+          icon: Icons.task_alt,
+          route: "",
+        ),
+        DrawerActualItem(
+          title: 'Fixed Games',
+          icon: Icons.headset_mic_rounded,
+          route: "",
+        ),
+        DrawerActualItem(
+          title: 'Customizable Games',
+          icon: Icons.abc,
+          route: "",
         ),
       ],
     ),

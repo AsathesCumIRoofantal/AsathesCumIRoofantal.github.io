@@ -975,11 +975,32 @@ class HomeController extends GetxController {
           route: AppRoutes.CONSIDERATIONS_FEED,
         ),
         DrawerActualItem(
-          title: 'Play Games',
+          title: 'Play(Real & Virtual) Games',
           icon: Icons.videogame_asset,
           route: AppRoutes.CONSIDERATIONS_PLAY_GAMES,
         ),
+        DrawerActualItem(
+          title: '2-D Games',
+          icon: Icons.task,
+          route: "",
+        ),
+        DrawerActualItem(
+          title: '3-D Games',
+          icon: Icons.task_alt,
+          route: "",
+        ),
+        DrawerActualItem(
+          title: 'Fixed Games',
+          icon: Icons.headset_mic_rounded,
+          route: "",
+        ),
+        DrawerActualItem(
+          title: 'Customizable Games',
+          icon: Icons.abc,
+          route: "",
+        ),
       ],
     ),
+   
   ];
 }
