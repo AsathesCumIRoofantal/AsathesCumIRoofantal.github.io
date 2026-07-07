@@ -72,10 +72,10 @@ class WebHomeView extends GetView<WebHomeController> {
                                 SizedBox(height: 12),
                                 WebRTCChip(
                                   value: '3',
-                                  label: 'Livekit',
+                                  label: 'Air-Zoom',
                                   color: WColors.amber,
                                   onTap: () {
-                                    Get.toNamed(ZoomMeetingView.routeName);
+                                    Get.toNamed(ZoomJoinView.routeName);
                                   },
                                 ),
                               ],
@@ -108,10 +108,10 @@ class WebHomeView extends GetView<WebHomeController> {
                                 SizedBox(width: 12),
                                 WebRTCChip(
                                   value: '3',
-                                  label: 'Livekit',
+                                  label: 'Air-Zoom',
                                   color: WColors.amber,
                                   onTap: () {
-                                    Get.toNamed(ZoomMeetingView.routeName);
+                                    Get.toNamed(ZoomJoinView.routeName);
                                   },
                                 ),
                               ],
