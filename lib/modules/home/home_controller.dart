@@ -981,23 +981,23 @@ class HomeController extends GetxController {
         ),
         DrawerActualItem(
           title: '2-D Games',
-          icon: Icons.task,
-          route: "",
+          icon: Icons.lists,
+          route:AppRoutes.CONSIDERATIONS_PLAY_GAMES
         ),
         DrawerActualItem(
           title: '3-D Games',
           icon: Icons.task_alt,
-          route: "",
+          route:AppRoutes.CONSIDERATIONS_PLAY_GAMES
         ),
         DrawerActualItem(
           title: 'Fixed Games',
-          icon: Icons.headset_mic_rounded,
-          route: "",
+          icon: Icons.checkroom,
+          route:AppRoutes.CONSIDERATIONS_PLAY_GAMES
         ),
         DrawerActualItem(
           title: 'Customizable Games',
-          icon: Icons.abc,
-          route: "",
+          icon: Icons.edit,
+          route: AppRoutes.CONSIDERATIONS_PLAY_GAMES
         ),
       ],
     ),
