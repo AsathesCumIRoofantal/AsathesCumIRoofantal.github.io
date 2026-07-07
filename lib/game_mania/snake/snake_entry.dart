@@ -22,7 +22,9 @@ class _SnakeController extends GetxController {
 
   void setDir(_Dir d) {
     if ((d == _Dir.up && dir == _Dir.down) || (d == _Dir.down && dir == _Dir.up) ||
-        (d == _Dir.left && dir == _Dir.right) || (d == _Dir.right && dir == _Dir.left)) return;
+        (d == _Dir.left && dir == _Dir.right) || (d == _Dir.right && dir == _Dir.left)) {
+      return;
+    }
     _next = d;
   }
 
@@ -63,15 +65,16 @@ class SnakeEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final c = Get.put(_SnakeController());
-    return RawKeyboardListener(
+    return KeyboardListener(
       autofocus: true,
       focusNode: FocusNode(),
-      onKey: (e) {
-        if (e is! RawKeyDownEvent) return;
-        if (e.logicalKey == LogicalKeyboardKey.arrowUp)    c.setDir(_Dir.up);
-        if (e.logicalKey == LogicalKeyboardKey.arrowDown)  c.setDir(_Dir.down);
-        if (e.logicalKey == LogicalKeyboardKey.arrowLeft)  c.setDir(_Dir.left);
-        if (e.logicalKey == LogicalKeyboardKey.arrowRight) c.setDir(_Dir.right);
+      onKeyEvent: (e) {
+        if (e is KeyDownEvent) {
+          if (e.logicalKey == LogicalKeyboardKey.arrowUp) c.setDir(_Dir.up);
+          if (e.logicalKey == LogicalKeyboardKey.arrowDown) c.setDir(_Dir.down);
+          if (e.logicalKey == LogicalKeyboardKey.arrowLeft) c.setDir(_Dir.left);
+          if (e.logicalKey == LogicalKeyboardKey.arrowRight) c.setDir(_Dir.right);
+        }
       },
       child: Scaffold(
         backgroundColor: const Color(0xFF052E16),
@@ -135,7 +138,7 @@ class SnakeEntry extends StatelessWidget {
       width: 48, height: 48,
       decoration: BoxDecoration(
         color: const Color(0xFF166534), borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF22C55E).withOpacity(.5)),
+        border: Border.all(color: const Color(0xFF22C55E).withValues(alpha: 0.5)),
       ),
       child: Icon(icon, color: const Color(0xFF22C55E)),
     ),
@@ -152,9 +155,13 @@ class _SnakePainter extends CustomPainter {
     final cw = s.width  / _SnakeController._cols;
     final ch = s.height / _SnakeController._rows;
     // Grid
-    final gridP = Paint()..color = const Color(0xFF14532D).withOpacity(.4)..style = PaintingStyle.stroke..strokeWidth = .5;
-    for (var x = 0; x <= _SnakeController._cols; x++) c.drawLine(Offset(x * cw, 0), Offset(x * cw, s.height), gridP);
-    for (var y = 0; y <= _SnakeController._rows; y++) c.drawLine(Offset(0, y * ch), Offset(s.width, y * ch), gridP);
+    final gridP = Paint()..color = const Color(0xFF14532D).withValues(alpha: 0.4)..style = PaintingStyle.stroke..strokeWidth = .5;
+    for (var x = 0; x <= _SnakeController._cols; x++) {
+      c.drawLine(Offset(x * cw, 0), Offset(x * cw, s.height), gridP);
+    }
+    for (var y = 0; y <= _SnakeController._rows; y++) {
+      c.drawLine(Offset(0, y * ch), Offset(s.width, y * ch), gridP);
+    }
     // Food
     c.drawCircle(Offset((food.x + .5) * cw, (food.y + .5) * ch), cw * .4,
       Paint()..color = const Color(0xFFEF4444)

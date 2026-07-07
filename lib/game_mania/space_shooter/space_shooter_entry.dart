@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'dart:async';
 import 'dart:math';
 
 // ── GetX state ───────────────────────────────────────────────────────────────
@@ -202,22 +201,24 @@ class _ShooterCanvasState extends State<_ShooterCanvas>
       _px = size.width / 2;
       _py = size.height - 80;
       _initialized = true;
-      for (var i = 0; i < 60; i++)
+      for (var i = 0; i < 60; i++) {
         _stars.add(
           Offset(
             _rng.nextDouble() * size.width,
             _rng.nextDouble() * size.height,
           ),
         );
+      }
     }
 
     // Player movement
-    if (_keys.contains(LogicalKeyboardKey.arrowLeft))
+    if (_keys.contains(LogicalKeyboardKey.arrowLeft)) {
       _vx = -300;
-    else if (_keys.contains(LogicalKeyboardKey.arrowRight))
+    } else if (_keys.contains(LogicalKeyboardKey.arrowRight)) {
       _vx = 300;
-    else
+    } else {
       _vx *= 0.85;
+    }
     _px = (_px + _vx * dt).clamp(_pW / 2, size.width - _pW / 2);
 
     // Move bullets
@@ -303,8 +304,10 @@ class _ShooterPainter extends CustomPainter {
         ).createShader(Rect.fromLTWH(0, 0, s.width, s.height)),
     );
     // Stars
-    final starP = Paint()..color = Colors.white.withOpacity(.6);
-    for (final st in stars) c.drawCircle(st, 1, starP);
+    final starP = Paint()..color = Colors.white.withValues(alpha: 0.6);
+    for (final st in stars) {
+      c.drawCircle(st, 1, starP);
+    }
     // Player ship (triangle)
     final shipP = Paint()..color = const Color(0xFF6366F1);
     final path = Path()
@@ -319,18 +322,19 @@ class _ShooterPainter extends CustomPainter {
       Offset(px, py + 14),
       6,
       Paint()
-        ..color = Colors.blueAccent.withOpacity(.7)
+        ..color = Colors.blueAccent.withValues(alpha: 0.7)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 8),
     );
     // Bullets
     final bulletP = Paint()
       ..color = const Color(0xFFFCD34D)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 3);
-    for (final b in bullets)
+    for (final b in bullets) {
       c.drawRRect(
         RRect.fromRectAndRadius(b, const Radius.circular(3)),
         bulletP,
       );
+    }
     // Enemies
     final enemyP = Paint()..color = const Color(0xFFEF4444);
     for (final e in enemies) {
@@ -339,7 +343,7 @@ class _ShooterPainter extends CustomPainter {
         e.center,
         6,
         Paint()
-          ..color = Colors.orangeAccent.withOpacity(.8)
+          ..color = Colors.orangeAccent.withValues(alpha: 0.8)
           ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6),
       );
     }

@@ -9,8 +9,6 @@ class GameManiaHome extends StatelessWidget {
   static const _games = [
     _GameCard('Space Shooter', '👾', 'Dodge and destroy enemies', Color(0xFF0F172A), Color(0xFF6366F1), GameManiaRoutes.spaceShooter),
     _GameCard('Snake Classic',  '🐍', 'Eat and grow — avoid yourself', Color(0xFF052E16), Color(0xFF22C55E), GameManiaRoutes.snake),
-    _GameCard('Bounce Ball',    '🏀', 'Keep the ball from falling', Color(0xFF1C0A00), Color(0xFFF97316), GameManiaRoutes.bounceBall),
-    _GameCard('Planet 3D',      '🪐', 'Shader-rendered spinning planet', Color(0xFF0B1120), Color(0xFF38BDF8), GameManiaRoutes.planet3d),
   ];
 
   @override
@@ -71,8 +69,8 @@ class _GameCard {
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: accent.withOpacity(.3)),
-        boxShadow: [BoxShadow(color: accent.withOpacity(.15), blurRadius: 20, offset: const Offset(0, 8))],
+        border: Border.all(color: accent.withValues(alpha: 0.3)),
+        boxShadow: [BoxShadow(color: accent.withValues(alpha: 0.15), blurRadius: 20, offset: const Offset(0, 8))],
       ),
       padding: const EdgeInsets.all(20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,7 +79,7 @@ class _GameCard {
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(title, style: TextStyle(color: accent, fontWeight: FontWeight.w800, fontSize: 18)),
           const SizedBox(height: 4),
-          Text(desc, style: TextStyle(color: accent.withOpacity(.6), fontSize: 12)),
+          Text(desc, style: TextStyle(color: accent.withValues(alpha: 0.6), fontSize: 12)),
         ]),
       ]),
     )
