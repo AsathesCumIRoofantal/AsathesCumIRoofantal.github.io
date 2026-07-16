@@ -167,6 +167,7 @@ class SignupController extends GetxController {
       );
     }
     isLoading.value = false;
+    isLoading.refresh();
   }
 
   Future<void> getUserEmailSignupOtp() async {
