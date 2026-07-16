@@ -147,9 +147,13 @@ class ZoomMeetingController extends GetxController {
         break;
       case RtcEventType.screenShareStarted:
         final uid = e.uid ?? localUid;
-        for (final p in participants.values) {
-          p.isScreenSharing = false;
-        }
+        // Multiple people can share at once now (up to
+        // [maxConcurrentScreenShares]) — this used to force-clear every
+        // other participant's flag here, which silently killed everyone
+        // else's share the moment a second person started. The cap itself
+        // is enforced where a share is *initiated* (toggleScreenShare), not
+        // here — by the time an event arrives the share has already
+        // started, so the honest move is to reflect it, not fight it.
         participants[uid]?.isScreenSharing = true;
         participants.refresh();
         break;
@@ -421,24 +425,52 @@ class ZoomMeetingController extends GetxController {
     await engine?.muteLocalVideo(newOff);
   }
 
+  /// How many people can have a screen shared at the same time. Raise or
+  /// lower to taste — it's a soft app-level limit, not a hard engine one.
+  /// NOTE on scaling: this caps *presenters*, not viewers. Every presenter
+  /// still uploads one encoded copy of their screen per *other* person in
+  /// the meeting (mesh has no media server to fan it out), so total upload
+  /// cost per presenter scales with total participant count, not just with
+  /// how many are also sharing. Raising this past ~10 concurrent sharers
+  /// in a room of any real size will visibly hurt everyone's video quality
+  /// before it hurts anything else. See WEBRTC_SETUP.md §5 and §8.
+  static const int maxConcurrentScreenShares = 10;
+
+  /// Everyone currently sharing their screen, in the order they started.
+  List<Participant> get activeScreenShares =>
+      participants.values.where((p) => p.isScreenSharing).toList();
+
   /// Starts/stops screen share via the engine. [participants]' isScreenSharing
   /// flag updates itself from the resulting engine event, not from here.
-  Future<void> toggleScreenShare() async {
+  /// Returns false (and shows a snackbar) if the concurrent-share cap is
+  /// already reached and this call would have started a new share.
+  Future<bool> toggleScreenShare() async {
     final sharing = participants[localUid]?.isScreenSharing ?? false;
+
+    if (!sharing && activeScreenShares.length >= maxConcurrentScreenShares) {
+      Get.snackbar(
+        'Screen-share limit reached',
+        'Up to $maxConcurrentScreenShares people can share a screen at '
+            'once in this meeting. Ask someone to stop sharing first.',
+        snackPosition: SnackPosition.TOP,
+      );
+      return false;
+    }
+
     if (engine == null) {
       // Demo mode: no engine to drive the track swap — just flip the flag.
+      // Other participants keep whatever share state they already had, so
+      // this correctly demos multiple simultaneous "sharers" too.
       participants[localUid]?.isScreenSharing = !sharing;
-      for (final p in participants.values) {
-        if (p.uid != localUid) p.isScreenSharing = false;
-      }
       participants.refresh();
-      return;
+      return true;
     }
     if (sharing) {
       await engine!.stopScreenShare();
     } else {
       await engine!.startScreenShare();
     }
+    return true;
   }
 
   Future<void> leaveLiveMeeting() async {

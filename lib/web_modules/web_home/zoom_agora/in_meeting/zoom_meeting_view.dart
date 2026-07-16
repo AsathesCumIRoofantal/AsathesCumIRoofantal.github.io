@@ -118,13 +118,22 @@ class _TopChrome extends GetView<ZoomMeetingController> {
   }
 }
 
-// ─── Mock video stage with adaptive grid + speaker spotlight ────────────────
+// ─── Video stage: adaptive grid + speaker spotlight, or a screen-share ──────
+// grid whenever one or more people are presenting. Up to
+// ZoomMeetingController.maxConcurrentScreenShares people can share at once —
+// see that constant's doc comment for the honest bandwidth caveat.
 class _VideoStage extends GetView<ZoomMeetingController> {
   const _VideoStage();
   @override
   Widget build(BuildContext c) {
     return Obx(() {
       final all = controller.participants.values.toList();
+      final shares = controller.activeScreenShares;
+
+      if (shares.isNotEmpty) {
+        return _ScreenShareStage(shares: shares, all: all);
+      }
+
       final speakerUid = controller.activeSpeakerUid.value;
       final speaker = all.firstWhere((p) => p.uid == speakerUid,
         orElse: () => all.isNotEmpty ? all.first : all.first);
@@ -162,6 +171,84 @@ class _VideoStage extends GetView<ZoomMeetingController> {
               ]),
         );
       });
+    });
+  }
+}
+
+/// Shown whenever ≥1 participant is screen sharing. One sharer gets a big
+/// single stage (classic screen-share look); 2+ sharers get an even grid so
+/// no single presenter is arbitrarily favoured. Camera tiles for everyone
+/// else collapse into a thin strip so shared screens keep the room.
+class _ScreenShareStage extends StatelessWidget {
+  const _ScreenShareStage({required this.shares, required this.all});
+  final List<dynamic> shares; // List<Participant>
+  final List<dynamic> all;    // List<Participant>
+
+  @override
+  Widget build(BuildContext c) {
+    final shareUids = shares.map((p) => p.uid).toSet();
+    final cameraOnly = all.where((p) => !shareUids.contains(p.uid)).toList();
+
+    return LayoutBuilder(builder: (c, cons) {
+      final wide = cons.maxWidth >= 900;
+      final shareArea = shares.length == 1
+        ? _Tile(p: shares.first, big: true)
+        : GridView.builder(
+            padding: EdgeInsets.zero,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: shares.length <= 2 ? 1 : (shares.length <= 6 ? 2 : 3),
+              mainAxisSpacing: 10, crossAxisSpacing: 10, childAspectRatio: 16 / 9,
+            ),
+            itemCount: shares.length,
+            itemBuilder: (_, i) => _Tile(p: shares[i], big: true),
+          );
+
+      final cameraStrip = cameraOnly.isEmpty
+        ? const SizedBox.shrink()
+        : (wide
+            ? SizedBox(
+                width: 200,
+                child: ListView.separated(
+                  itemCount: cameraOnly.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  itemBuilder: (_, i) => SizedBox(height: 120, child: _Tile(p: cameraOnly[i])),
+                ),
+              )
+            : SizedBox(
+                height: 90,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: cameraOnly.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 10),
+                  itemBuilder: (_, i) => AspectRatio(aspectRatio: 16 / 10, child: _Tile(p: cameraOnly[i])),
+                ),
+              ));
+
+      return Padding(
+        padding: const EdgeInsets.all(12),
+        child: Column(children: [
+          if (shares.length > 1)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Align(alignment: Alignment.centerLeft, child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(color: ZoomTheme.surface2, borderRadius: BorderRadius.circular(8)),
+                child: Text('${shares.length} people sharing their screen', style: ZoomTheme.muted),
+              )),
+            ),
+          Expanded(
+            child: wide
+              ? Row(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                  Expanded(flex: 4, child: shareArea),
+                  if (cameraOnly.isNotEmpty) ...[const SizedBox(width: 12), cameraStrip],
+                ])
+              : Column(children: [
+                  Expanded(flex: 4, child: shareArea),
+                  if (cameraOnly.isNotEmpty) ...[const SizedBox(height: 10), cameraStrip],
+                ]),
+          ),
+        ]),
+      );
     });
   }
 }
@@ -348,10 +435,24 @@ class _Toolbar extends GetView<ZoomMeetingController> {
           }),
           Obx(() {
             final sharing = controller.participants[controller.localUid]?.isScreenSharing ?? false;
-            return _btn(Icons.screen_share_outlined, sharing ? 'Stop share' : 'Share',
+            final activeCount = controller.activeScreenShares.length;
+            // Small live count once more than one person is presenting, so
+            // it's obvious this isn't a single-presenter tool anymore.
+            return _btn(Icons.screen_share_outlined,
+              sharing ? 'Stop share' : (activeCount > 0 ? 'Share ($activeCount/${ZoomMeetingController.maxConcurrentScreenShares})' : 'Share'),
               danger: sharing,
               onTap: () async {
                 if (sharing) { await controller.toggleScreenShare(); return; }
+                if (activeCount >= ZoomMeetingController.maxConcurrentScreenShares) {
+                  // Same message toggleScreenShare would show — surfaced
+                  // here too so we don't even bother opening the OS-level
+                  // picker dialog for a share that's guaranteed to be
+                  // rejected.
+                  Get.snackbar('Screen-share limit reached',
+                    'Up to ${ZoomMeetingController.maxConcurrentScreenShares} people can share at once. '
+                    'Ask someone to stop sharing first.', snackPosition: SnackPosition.TOP);
+                  return;
+                }
                 final choice = await Get.dialog<String>(const ScreenSharePicker());
                 if (choice == null) return;
                 if (choice == 'whiteboard') { _openPane(c, 'whiteboard', const WhiteboardView()); return; }

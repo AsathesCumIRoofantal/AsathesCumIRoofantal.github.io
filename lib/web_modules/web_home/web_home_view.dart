@@ -2,7 +2,8 @@
 // Landing page — hero + grid of section cards, each linking to a dedicated page.
 // ENHANCED: Advanced animations, slivers, parallax effects
 
-import 'package:air_app/web_modules/web_home/zoom_agora/in_meeting/zoom_meeting_view.dart';
+import 'package:air_app/web_modules/web_home/zoom_agora/pre_meeting/home_view.dart';
+import 'package:air_app/web_modules/web_home/zoom_agora/zoom_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -75,7 +76,7 @@ class WebHomeView extends GetView<WebHomeController> {
                                   label: 'Air-Zoom',
                                   color: WColors.amber,
                                   onTap: () {
-                                    Get.toNamed(ZoomJoinView.routeName);
+                                    Get.toNamed(ZoomRoutes.home);
                                   },
                                 ),
                               ],
@@ -111,7 +112,7 @@ class WebHomeView extends GetView<WebHomeController> {
                                   label: 'Air-Zoom',
                                   color: WColors.amber,
                                   onTap: () {
-                                    Get.toNamed(ZoomJoinView.routeName);
+                                    Get.toNamed(ZoomRoutes.home);
                                   },
                                 ),
                               ],

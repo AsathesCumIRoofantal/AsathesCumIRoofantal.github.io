@@ -404,6 +404,11 @@ class WebRtcService implements RtcEngineInterface {
       if (_screenSharing) stopScreenShare();
     };
 
+    // This only ever touches *this* user's own peer connections/senders, so
+    // several different people can independently call startScreenShare() at
+    // the same time with no interference at this layer — the app-level cap
+    // on how many can share at once lives in ZoomMeetingController
+    // (maxConcurrentScreenShares), not here.
     for (final peer in _peers.values) {
       if (peer.pc == null) continue;
       final senders = await peer.pc!.getSenders();

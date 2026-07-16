@@ -388,7 +388,7 @@ CREATE INDEX IF NOT EXISTS idx_otp_expires  ON otp_tokens(expires_at);
 
 
 DROP TRIGGER IF EXISTS trg_otp_upd ON otp_tokens;
-CREATE TRIGGER  trg_otp_upd
+CREATE OR REPLACE TRIGGER  trg_otp_upd
   BEFORE UPDATE ON otp_tokens
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -492,9 +492,10 @@ CREATE POLICY temp_files_delete ON temp_files
 --  15.  REALTIME SUBSCRIPTIONS (enable via Supabase dashboard)
 -- ════════════════════════════════════════════════════════════
 -- Run these in the Supabase SQL Editor to enable realtime:
--- ALTER PUBLICATION supabase_realtime ADD TABLE chat_messages;
--- ALTER PUBLICATION supabase_realtime ADD TABLE meeting_participants;
--- ALTER PUBLICATION supabase_realtime ADD TABLE remote_sessions;
+-- -- create publication supabase_realtime for tables in schema public;
+-- -- ALTER PUBLICATION supabase_realtime ADD TABLE chat_messages;
+-- -- ALTER PUBLICATION supabase_realtime ADD TABLE meeting_participants;
+-- -- ALTER PUBLICATION supabase_realtime ADD TABLE remote_sessions;
 -- (Uncomment when ready – only add tables you need realtime on)
 
 -- ════════════════════════════════════════════════════════════
@@ -560,45 +561,45 @@ SELECT cron.schedule(
 -- │ validate_device_code       │ Verify 9-digit pairing code & return device info │
 -- └────────────────────────────┴──────────────────────────────────────────────────┘
 
--- ════════════════════════════════════════════════════════════
---  18.  SAMPLE DATA  (dummy seed – remove before production)
--- ════════════════════════════════════════════════════════════
-INSERT INTO user_table (user_id, user_role, name, mobile, user_role_title, is_active, is_approved, is_member)
-VALUES
-  ('00000000-0000-0000-0000-000000000001', 1, 'Super Admin',  '+910000000001', 'Super Admin',  1, 1, 1),
-  ('00000000-0000-0000-0000-000000000002', 2, 'Admin User',   '+910000000002', 'Admin',        1, 1, 1),
-  ('00000000-0000-0000-0000-000000000003', 5, 'Demo Member',  '+910000000003', 'Member',       1, 1, 1)
-ON CONFLICT DO NOTHING;
+-- -- ════════════════════════════════════════════════════════════
+-- --  18.  SAMPLE DATA  (dummy seed – remove before production)
+-- -- ════════════════════════════════════════════════════════════
+-- INSERT INTO user_table (user_id, user_role, name, mobile, user_role_title, is_active, is_approved, is_member)
+-- VALUES
+--   ('00000000-0000-0000-0000-000000000001', 1, 'Super Admin',  '+910000000001', 'Super Admin',  1, 1, 1),
+--   ('00000000-0000-0000-0000-000000000002', 2, 'Admin User',   '+910000000002', 'Admin',        1, 1, 1),
+--   ('00000000-0000-0000-0000-000000000003', 5, 'Demo Member',  '+910000000003', 'Member',       1, 1, 1)
+-- ON CONFLICT DO NOTHING;
 
-INSERT INTO chat_rooms (id, type, name, member_ids, admin_ids, created_by)
-VALUES
-  ('aaaaaaaa-0000-0000-0000-000000000001', 'individual', 'Admin ↔ Demo',
-    ARRAY['00000000-0000-0000-0000-000000000002'::uuid, '00000000-0000-0000-0000-000000000003'::uuid],
-    ARRAY['00000000-0000-0000-0000-000000000002'::uuid],
-    '00000000-0000-0000-0000-000000000002'),
-  ('aaaaaaaa-0000-0000-0000-000000000002', 'group', 'AIR Team',
-    ARRAY['00000000-0000-0000-0000-000000000001'::uuid,
-          '00000000-0000-0000-0000-000000000002'::uuid,
-          '00000000-0000-0000-0000-000000000003'::uuid],
-    ARRAY['00000000-0000-0000-0000-000000000001'::uuid],
-    '00000000-0000-0000-0000-000000000001')
-ON CONFLICT DO NOTHING;
+-- INSERT INTO chat_rooms (id, type, name, member_ids, admin_ids, created_by)
+-- VALUES
+--   ('aaaaaaaa-0000-0000-0000-000000000001', 'individual', 'Admin ↔ Demo',
+--     ARRAY['00000000-0000-0000-0000-000000000002'::uuid, '00000000-0000-0000-0000-000000000003'::uuid],
+--     ARRAY['00000000-0000-0000-0000-000000000002'::uuid],
+--     '00000000-0000-0000-0000-000000000002'),
+--   ('aaaaaaaa-0000-0000-0000-000000000002', 'group', 'AIR Team',
+--     ARRAY['00000000-0000-0000-0000-000000000001'::uuid,
+--           '00000000-0000-0000-0000-000000000002'::uuid,
+--           '00000000-0000-0000-0000-000000000003'::uuid],
+--     ARRAY['00000000-0000-0000-0000-000000000001'::uuid],
+--     '00000000-0000-0000-0000-000000000001')
+-- ON CONFLICT DO NOTHING;
 
-INSERT INTO meetings (id, title, host_id, host_name, channel_name, status, scheduled_at)
-VALUES
-  ('bbbbbbbb-0000-0000-0000-000000000001', 'Team Standup',
-    '00000000-0000-0000-0000-000000000002', 'Admin User',
-    'standup_ch_001', 'scheduled',
-    EXTRACT(EPOCH FROM (NOW() + INTERVAL '1 hour'))::BIGINT * 1000)
-ON CONFLICT DO NOTHING;
+-- INSERT INTO meetings (id, title, host_id, host_name, channel_name, status, scheduled_at)
+-- VALUES
+--   ('bbbbbbbb-0000-0000-0000-000000000001', 'Team Standup',
+--     '00000000-0000-0000-0000-000000000002', 'Admin User',
+--     'standup_ch_001', 'scheduled',
+--     EXTRACT(EPOCH FROM (NOW() + INTERVAL '1 hour'))::BIGINT * 1000)
+-- ON CONFLICT DO NOTHING;
 
-INSERT INTO remote_devices (id, device_name, device_code, platform, status, assigned_to_user_id)
-VALUES
-  ('cccccccc-0000-0000-0000-000000000001', 'Office PC – Room 3', '123 456 789', 'desktop', 'online',
-    '00000000-0000-0000-0000-000000000002'),
-  ('cccccccc-0000-0000-0000-000000000002', 'Manager Tablet',     '987 654 321', 'android', 'offline',
-    '00000000-0000-0000-0000-000000000002')
-ON CONFLICT DO NOTHING;
+-- INSERT INTO remote_devices (id, device_name, device_code, platform, status, assigned_to_user_id)
+-- VALUES
+--   ('cccccccc-0000-0000-0000-000000000001', 'Office PC – Room 3', '123 456 789', 'desktop', 'online',
+--     '00000000-0000-0000-0000-000000000002'),
+--   ('cccccccc-0000-0000-0000-000000000002', 'Manager Tablet',     '987 654 321', 'android', 'offline',
+--     '00000000-0000-0000-0000-000000000002')
+-- ON CONFLICT DO NOTHING;
 
 -- ════════════════════════════════════════════════════════════
 --  END OF SCHEMA
@@ -792,6 +793,9 @@ CREATE TRIGGER on_auth_user_created
 --      (meeting_participants drives the in-meeting participant
 --       list; meetings drives home-screen status badges)
 -- ────────────────────────────────────────────────────────────
+
+DROP PUBLICATION IF EXISTS supabase_realtime;
+create publication supabase_realtime for tables in schema public;
 ALTER PUBLICATION supabase_realtime ADD TABLE meeting_participants;
 ALTER PUBLICATION supabase_realtime ADD TABLE meetings;
 -- chat_messages and remote_sessions were already in the comment block above;
@@ -853,8 +857,99 @@ END; $$;
 
 DROP TRIGGER IF EXISTS trg_queue_r2_delete ON meetings;
 
-INSERT INTO cron.job (jobname, schedule, command, nodename, nodeport, database, username, status)
-VALUES (
+--BAD 
+-- DELETE FROM cron.job
+-- WHERE jobname = 'cleanup-r2-pending-deletes';
+
+-- SELECT cron.unschedule('cleanup-r2-pending-deletes');
+
+--OLD WAY SUPABASE
+-- INSERT  INTO cron.job (jobname, schedule, command, nodename, nodeport, database, username, status)
+-- VALUES (
+--   'cleanup-r2-pending-deletes',
+--   '0 * * * *',
+--   $$
+--     SELECT net.http_post(
+--       url     := current_setting('app.supabase_url') || '/functions/v1/cleanup_r2_files',
+--       headers := ('{"Authorization": "Bearer ' || current_setting('app.service_role_key') || '", "Content-Type": "application/json"}')::jsonb,
+--       body    := '{}'::jsonb
+--     );
+--   $$,
+--   'localhost',
+--   5432,
+--   current_database(),
+--   current_user,
+--   'active'
+-- )
+-- ON CONFLICT (jobname) DO NOTHING;
+
+-- DELETE FROM cron.job
+-- WHERE jobname = 'cleanup-r2-pending-deletes';
+
+-- INSERT INTO cron.job (
+--     jobname,
+--     schedule,
+--     command,
+--     nodename,
+--     nodeport,
+--     database,
+--     username,
+--     status
+-- )
+-- VALUES (
+--     'cleanup-r2-pending-deletes',
+--     '0 * * * *',
+--     $$...$$,
+--     'localhost',
+--     5432,
+--     current_database(),
+--     current_user,
+--     'active'
+-- );
+
+-- INSERT INTO cron.job (
+--     jobname,
+--     schedule,
+--     command,
+--     nodename,
+--     nodeport,
+--     database,
+--     username,
+--     status
+-- )
+-- VALUES (
+--     'cleanup-r2-pending-deletes',
+--     '0 * * * *',
+--     $$
+--     SELECT net.http_post(
+--       url     := current_setting('app.supabase_url') || '/functions/v1/cleanup_r2_files',
+--       headers := (
+--         '{"Authorization": "Bearer '
+--         || current_setting('app.service_role_key')
+--         || '", "Content-Type": "application/json"}'
+--       )::jsonb,
+--       body := '{}'::jsonb
+--     );
+--     $$,
+--     'localhost',
+--     5432,
+--     current_database(),
+--     current_user,
+--     'active'
+-- )
+-- ON CONFLICT (jobname)
+-- DO UPDATE SET
+--     schedule = EXCLUDED.schedule,
+--     command  = EXCLUDED.command,
+--     nodename = EXCLUDED.nodename,
+--     nodeport = EXCLUDED.nodeport,
+--     database = EXCLUDED.database,
+--     username = EXCLUDED.username,
+--     status   = EXCLUDED.status;
+
+
+
+SELECT cron.schedule(
   'cleanup-r2-pending-deletes',
   '0 * * * *',
   $$
@@ -863,14 +958,8 @@ VALUES (
       headers := ('{"Authorization": "Bearer ' || current_setting('app.service_role_key') || '", "Content-Type": "application/json"}')::jsonb,
       body    := '{}'::jsonb
     );
-  $$,
-  'localhost',
-  5432,
-  current_database(),
-  current_user,
-  'active'
-)
-ON CONFLICT (jobname) DO NOTHING;
+  $$
+);
 
 
 -- END OF PATCH 2026-07-06 17:45 IST
@@ -970,7 +1059,7 @@ CREATE TABLE IF NOT EXISTS social_posts (
   updated_at    BIGINT NOT NULL DEFAULT now_epoch()
 );
 
-CREATE TRIGGER  trg_social_posts_upd
+CREATE OR REPLACE TRIGGER  trg_social_posts_upd
   BEFORE UPDATE ON social_posts
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -997,7 +1086,7 @@ CREATE TABLE IF NOT EXISTS social_comments (
   updated_at  BIGINT NOT NULL DEFAULT now_epoch()
 );
 
-CREATE TRIGGER  trg_social_comments_upd
+CREATE OR REPLACE TRIGGER  trg_social_comments_upd
   BEFORE UPDATE ON social_comments
   FOR EACH ROW EXECUTE FUNCTION set_updated_at();
 
@@ -1133,3 +1222,115 @@ $$;
 ALTER PUBLICATION supabase_realtime ADD TABLE social_posts;
 ALTER PUBLICATION supabase_realtime ADD TABLE social_comments;
 ALTER PUBLICATION supabase_realtime ADD TABLE chat_messages;
+
+-- ════════════════════════════════════════════════════════════
+--  PATCH 2026-07-16 — Multi-screen-share support + cron fixes
+--  Run this block ONCE in the Supabase SQL Editor. Idempotent.
+-- ════════════════════════════════════════════════════════════
+
+-- ────────────────────────────────────────────────────────────
+--  A. Hard cap on concurrent screen shares, enforced in the
+--     database — not just in the Flutter app.
+--
+--     The app (ZoomMeetingController.maxConcurrentScreenShares)
+--     already refuses to start a share past 10 concurrent
+--     sharers per meeting, but that's a client-side check only:
+--     it protects one honest client, not a modified one, and
+--     doesn't protect against two clients racing to grab the
+--     10th/11th slot at the same instant. This trigger makes
+--     the limit real at the data layer, where it can't be
+--     bypassed by editing the app.
+-- ────────────────────────────────────────────────────────────
+CREATE OR REPLACE FUNCTION enforce_screen_share_limit()
+  RETURNS TRIGGER LANGUAGE plpgsql AS $$
+DECLARE
+  active_count INT;
+BEGIN
+  IF NEW.is_screen_share = 1 AND (OLD IS NULL OR OLD.is_screen_share IS DISTINCT FROM 1) THEN
+    SELECT COUNT(*) INTO active_count
+    FROM meeting_participants
+    WHERE meeting_id = NEW.meeting_id
+      AND is_screen_share = 1
+      AND id <> NEW.id;
+
+    IF active_count >= 10 THEN
+      RAISE EXCEPTION 'screen_share_limit_reached: up to 10 people can share a screen at once in this meeting';
+    END IF;
+  END IF;
+  RETURN NEW;
+END; $$;
+
+DROP TRIGGER IF EXISTS trg_enforce_screen_share_limit ON meeting_participants;
+CREATE TRIGGER trg_enforce_screen_share_limit
+  BEFORE INSERT OR UPDATE ON meeting_participants
+  FOR EACH ROW EXECUTE FUNCTION enforce_screen_share_limit();
+
+-- ────────────────────────────────────────────────────────────
+--  B. Fix: the R2-recording-cleanup trigger was declared with
+--     DROP TRIGGER IF EXISTS but the matching CREATE TRIGGER
+--     was missing from the 2026-07-06 patch — the function
+--     queue_r2_delete_on_meeting_delete() existed but was never
+--     actually wired to fire, so deleted meetings' R2 recording
+--     keys were never queued for cleanup.
+-- ────────────────────────────────────────────────────────────
+DROP TRIGGER IF EXISTS trg_queue_r2_delete ON meetings;
+CREATE TRIGGER trg_queue_r2_delete
+  BEFORE DELETE ON meetings
+  FOR EACH ROW EXECUTE FUNCTION queue_r2_delete_on_meeting_delete();
+
+-- ────────────────────────────────────────────────────────────
+--  C. Fix: the 2026-07-06 patch scheduled the R2 cleanup cron
+--     job with a raw INSERT INTO cron.job(...). That bypasses
+--     cron.schedule()'s own validation/permission handling and
+--     — on most Supabase projects — fails outright because the
+--     `nodename`/`nodeport` columns it filled in are for
+--     pg_cron's *remote* execution mode, not the local mode
+--     Supabase runs. Re-created with cron.schedule(), matching
+--     every other job in this file, and made idempotent by
+--     unscheduling first (cron.schedule() upserts by jobname on
+--     recent pg_cron versions, but older ones don't — this is
+--     safe either way).
+--
+--     REQUIRES two database settings this file can't set for
+--     you (they need your project's actual project ref / key —
+--     see "things to do on your side" in WEBRTC_SETUP.md):
+--       ALTER DATABASE postgres SET app.supabase_url = 'https://YOUR_PROJECT.supabase.co';
+--       ALTER DATABASE postgres SET app.service_role_key = 'YOUR_SERVICE_ROLE_KEY';
+--     Without those two lines this job will error every time it
+--     runs (visible in Database → Cron → job run history), not
+--     silently do nothing.
+-- ────────────────────────────────────────────────────────────
+DO $$
+BEGIN
+  IF EXISTS (SELECT 1 FROM cron.job WHERE jobname = 'cleanup-r2-pending-deletes') THEN
+    PERFORM cron.unschedule('cleanup-r2-pending-deletes');
+  END IF;
+END $$;
+
+SELECT cron.schedule(
+  'cleanup-r2-pending-deletes',
+  '0 * * * *',
+  $$
+    SELECT net.http_post(
+      url     := current_setting('app.supabase_url') || '/functions/v1/cleanup_r2_files',
+      headers := ('{"Authorization": "Bearer ' || current_setting('app.service_role_key') || '", "Content-Type": "application/json"}')::jsonb,
+      body    := '{}'::jsonb
+    );
+  $$
+);
+
+-- ────────────────────────────────────────────────────────────
+--  D. Note (not a code change): meetings_select currently lets
+--     ANY authenticated user SELECT every row in `meetings`
+--     (title, host, schedule) — see section 14 above. That was
+--     already true before this patch; flagging it here because
+--     it's directly relevant if you're now hosting meetings
+--     with many presenters/viewers and don't want meeting
+--     titles/hosts visible to unrelated signed-in users. Left
+--     unchanged since narrowing it could break your "browse/
+--     join public meetings" flow if you rely on that — decide
+--     and tell me if you want it scoped to invited participants
+--     only.
+-- ────────────────────────────────────────────────────────────
+
+-- END OF PATCH 2026-07-16

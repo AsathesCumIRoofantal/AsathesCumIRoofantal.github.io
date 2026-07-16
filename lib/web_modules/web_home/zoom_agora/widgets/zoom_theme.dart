@@ -33,6 +33,101 @@ class ZoomTheme {
   static TextStyle body = const TextStyle(color: text, fontSize: 14, fontWeight: FontWeight.w400, height: 1.4);
   static TextStyle muted= const TextStyle(color: textMuted, fontSize: 13);
   static TextStyle mono = const TextStyle(color: text, fontFamily: 'monospace', fontSize: 14, letterSpacing: 1.2);
+
+  /// Forces this module's own dark palette on every screen inside it,
+  /// regardless of what ThemeData the host app around it uses.
+  ///
+  /// Why this exists: this module is dropped into *someone else's*
+  /// GetMaterialApp. Every widget that doesn't set an explicit color reads
+  /// from the ambient Theme instead — DropdownButton's selected-item text,
+  /// unstyled TextButton/ElevatedButton labels, default AppBar backgrounds,
+  /// Slider tracks, Switch colors, and so on. If the host app happens to be
+  /// a light theme, several of those ambient defaults land at or near
+  /// black — and rendered on this module's near-black backgrounds (`bg`,
+  /// `surface`), the result is text and controls that are technically
+  /// there but effectively invisible. Wrapping every route in this
+  /// ThemeData (see zoom_routes.dart) fixes that at the root instead of
+  /// hunting down each individual unstyled widget one at a time.
+  static ThemeData get themeData {
+    final base = ThemeData(brightness: Brightness.dark, useMaterial3: true);
+    return base.copyWith(
+      scaffoldBackgroundColor: bg,
+      canvasColor: surface,
+      cardColor: surface,
+      dividerColor: stroke,
+      colorScheme: base.colorScheme.copyWith(
+        brightness: Brightness.dark,
+        surface: surface,
+        onSurface: text,
+        primary: primary,
+        onPrimary: Colors.white,
+        secondary: accent,
+        onSecondary: Colors.white,
+        error: danger,
+        onError: Colors.white,
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: surface,
+        foregroundColor: text,
+        elevation: 0,
+        iconTheme: IconThemeData(color: text),
+      ),
+      textTheme: base.textTheme.apply(
+        bodyColor: text,
+        displayColor: text,
+      ),
+      iconTheme: const IconThemeData(color: text),
+      dropdownMenuTheme: DropdownMenuThemeData(
+        textStyle: const TextStyle(color: text),
+        menuStyle: MenuStyle(
+          backgroundColor: WidgetStateProperty.all(surface2),
+        ),
+      ),
+      popupMenuTheme: PopupMenuThemeData(
+        color: surface2,
+        textStyle: body,
+      ),
+      // Note: dialogTheme is intentionally left out — its expected type
+      // (DialogTheme vs. DialogThemeData) changed between recent Flutter
+      // versions, and every AlertDialog/showDialog call in this module
+      // already sets an explicit backgroundColor, so a theme-level default
+      // isn't load-bearing here. Same story for bottomSheetTheme.
+      bottomSheetTheme: const BottomSheetThemeData(backgroundColor: surface),
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith((s) =>
+          s.contains(WidgetState.selected) ? primary : textMuted),
+        trackColor: WidgetStateProperty.resolveWith((s) =>
+          s.contains(WidgetState.selected) ? primary.withOpacity(.5) : stroke),
+      ),
+      sliderTheme: SliderThemeData(
+        activeTrackColor: primary,
+        inactiveTrackColor: stroke,
+        thumbColor: primary,
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(foregroundColor: primary),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: primary, foregroundColor: Colors.white),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: primary, foregroundColor: Colors.white),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(foregroundColor: primary),
+      ),
+      listTileTheme: const ListTileThemeData(
+        textColor: text, iconColor: text,
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        labelStyle: const TextStyle(color: textMuted),
+        hintStyle: const TextStyle(color: textMuted),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: stroke)),
+      ),
+    );
+  }
 }
 
 /// Responsive helpers — use these to decide layout (mobile / tablet / desktop).

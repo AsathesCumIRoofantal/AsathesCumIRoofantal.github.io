@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'pre_meeting/home_view.dart';
 import 'pre_meeting/join_view.dart';
@@ -7,6 +8,13 @@ import 'pre_meeting/waiting_room_view.dart';
 import 'in_meeting/zoom_meeting_view.dart';
 import 'in_meeting/zoom_meeting_binding.dart';
 import 'settings/settings_view.dart';
+import 'widgets/zoom_theme.dart';
+
+/// Forces this module's own dark ThemeData on every route it owns, so
+/// buttons/dropdowns/etc. never silently inherit an invisible color combo
+/// from whatever ThemeData the host app's GetMaterialApp is using. See
+/// ZoomTheme.themeData's doc comment for the full explanation.
+Widget _themed(Widget child) => Theme(data: ZoomTheme.themeData, child: child);
 
 abstract class ZoomRoutes {
   static const home          = '/zoom';
@@ -18,12 +26,12 @@ abstract class ZoomRoutes {
   static const settings      = '/zoom/settings';
 
   static final pages = <GetPage>[
-    GetPage(name: home,          page: () => const ZoomHomeView()),
-    GetPage(name: join,          page: () => const ZoomJoinView()),
-    GetPage(name: devicePreview, page: () => const DevicePreviewView()),
-    GetPage(name: schedule,      page: () => const ScheduleView()),
-    GetPage(name: waiting,       page: () => const WaitingRoomView()),
-    GetPage(name: settings,      page: () => const SettingsView()),
-    GetPage(name: inMeeting,     page: () => const ZoomMeetingView(), binding: ZoomMeetingBinding()),
+    GetPage(name: home,          page: () => _themed(const ZoomHomeView())),
+    GetPage(name: join,          page: () => _themed(const ZoomJoinView())),
+    GetPage(name: devicePreview, page: () => _themed(const DevicePreviewView())),
+    GetPage(name: schedule,      page: () => _themed(const ScheduleView())),
+    GetPage(name: waiting,       page: () => _themed(const WaitingRoomView())),
+    GetPage(name: settings,      page: () => _themed(const SettingsView())),
+    GetPage(name: inMeeting,     page: () => _themed(const ZoomMeetingView()), binding: ZoomMeetingBinding()),
   ];
 }
