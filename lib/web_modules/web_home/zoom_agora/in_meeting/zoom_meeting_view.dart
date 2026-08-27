@@ -498,19 +498,59 @@ class _Toolbar extends GetView<ZoomMeetingController> {
           }),
           _btn(Icons.bar_chart_outlined, 'Stats',
             onTap: () => _openPane(c, 'stats', const StatsPanel())),
-          _btn(Icons.fiber_manual_record, 'Record', danger: true,
-            onTap: () => Get.dialog(AlertDialog(
-              backgroundColor: ZoomTheme.surface2,
-              title: const Text('Cloud recording not connected', style: TextStyle(color: Colors.white)),
-              content: const Text(
-                'Cloud recording needs a paid server-side service (e.g. Agora '
-                'Cloud Recording) wired up in services/recording_service.dart — '
-                'it isn\'t connected yet, so this button intentionally does '
-                'nothing rather than pretend to record.',
-                style: TextStyle(color: ZoomTheme.textMuted),
-              ),
-              actions: [FilledButton(onPressed: Get.back, child: const Text('Got it'))],
-            ))),
+          Obx(() => _btn(
+            controller.isLocalRecording.value || controller.isCloudRecording.value
+              ? Icons.stop_circle_outlined : Icons.fiber_manual_record,
+            controller.isLocalRecording.value || controller.isCloudRecording.value
+              ? 'Stop rec' : 'Record',
+            danger: true,
+            active: controller.isLocalRecording.value || controller.isCloudRecording.value,
+            onTap: () async {
+              if (controller.isLocalRecording.value) {
+                final path = await controller.stopLocalRecording();
+                Get.snackbar('Recording saved',
+                  path == null ? 'Recording stopped.' : 'Saved to $path');
+                return;
+              }
+              if (controller.isCloudRecording.value) {
+                await controller.stopRecording();
+                Get.snackbar('Cloud recording stopped', 'Upload finalizing.');
+                return;
+              }
+              final choice = await Get.dialog<String>(AlertDialog(
+                backgroundColor: ZoomTheme.surface2,
+                title: const Text('Start recording', style: TextStyle(color: Colors.white)),
+                content: const Text(
+                  'Local: saves a file on this device, free, no server. '
+                  'Cloud: uploads to your Supabase-brokered R2 bucket so '
+                  'everyone can access it after the call — needs the '
+                  'recording_manager Edge Function deployed (see '
+                  'supabase/functions/recording_manager).',
+                  style: TextStyle(color: ZoomTheme.textMuted)),
+                actions: [
+                  TextButton(onPressed: () => Get.back(result: 'local'), child: const Text('Local')),
+                  TextButton(onPressed: () => Get.back(result: 'cloud'), child: const Text('Cloud')),
+                  TextButton(onPressed: () => Get.back(result: null), child: const Text('Cancel')),
+                ],
+              ));
+              if (choice == 'local') {
+                await controller.startLocalRecording();
+                if (controller.localRecordingError.value != null) {
+                  Get.snackbar('Recording failed', controller.localRecordingError.value!,
+                    duration: const Duration(seconds: 6));
+                } else {
+                  Get.snackbar('Recording started', 'Saving locally on this device.');
+                }
+              } else if (choice == 'cloud') {
+                try {
+                  await controller.startCloudRecording();
+                  Get.snackbar('Cloud recording started', 'Uploading to R2.');
+                } catch (e) {
+                  Get.snackbar('Cloud recording failed', e.toString(),
+                    duration: const Duration(seconds: 6));
+                }
+              }
+            })),
         ]),
       ),
     );

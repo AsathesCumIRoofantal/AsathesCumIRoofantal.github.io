@@ -16,6 +16,8 @@ import '../services/rtc_backend_manager.dart';
 import '../services/rtc_engine_interface.dart';
 import '../services/remote_control_service.dart';
 import '../services/recording_service.dart';
+import '../services/local_recording_service.dart';
+import '../services/file_chunk_reader.dart';
 import '../services/stt_service.dart';
 import '../services/stats_service.dart';
 import '../services/whiteboard_service.dart';
@@ -30,6 +32,9 @@ import '../services/current_user.dart';
 class ZoomMeetingController extends GetxController {
   // ── services ───────────────────────────────────────────────────────────
   final recording = RecordingService();
+  final localRecording = LocalRecordingService();
+  final isLocalRecording = false.obs;
+  final localRecordingError = RxnString();
   final stt = SttService();
   final stats = StatsService();
   final whiteboard = WhiteboardService();
@@ -718,8 +723,54 @@ class ZoomMeetingController extends GetxController {
   }
 
   // ── recording ─────────────────────────────────────────────────────────
+  // Rx mirror of RecordingService.isRecording so Obx() widgets (used by
+  // the Record button, see zoom_meeting_view.dart) update reactively —
+  // RecordingService itself intentionally stays a plain service class,
+  // not GetX-aware, so it has no framework dependency.
+  final isCloudRecording = false.obs;
+
+  // The cloud-recording capture uses its own LocalRecordingService
+  // instance (separate from `localRecording`, which is the pure "save on
+  // this device" one) so a user can't accidentally have both a local
+  // save and a cloud upload fighting over the same MediaRecorder/ffmpeg
+  // process.
+  final _cloudCapture = LocalRecordingService();
+
   Future<void> startCloudRecording() async {
+    localRecordingError.value = null;
     await recording.start(meetingId.value, 0, meetingId: _meetingRowId);
+    isCloudRecording.value = recording.isRecording;
+
+    try {
+      if (kIsWeb) {
+        // Web: every MediaRecorder chunk streams straight into
+        // RecordingService.uploadChunk() as it's produced — no local
+        // file is ever written, no browser download triggered.
+        await _cloudCapture.start(
+          suggestedFileName: 'cloud-capture.webm',
+          onChunk: (bytes) => recording.uploadChunk(Uint8List.fromList(bytes)),
+        );
+      } else {
+        // Desktop: onChunk isn't streamed live by the ffmpeg-based
+        // capture (see local_recording_service_io.dart) — ffmpeg owns
+        // the file while writing it. Instead we let it record to a
+        // local temp file, then read that whole file back in chunks and
+        // upload it once recording stops — see stopRecording() below.
+        // Mobile has no capture implementation yet either way (see
+        // LocalRecordingService.isSupported), so this will throw there,
+        // which is caught and surfaced below rather than silently no-op'ing.
+        await _cloudCapture.start(suggestedFileName: 'cloud-capture.mp4');
+      }
+    } catch (e) {
+      // Capture failed to start (e.g. no ffmpeg, unsupported platform) —
+      // abort the R2 multipart upload we already created so it doesn't
+      // sit orphaned, and surface the real error instead of pretending
+      // to be recording.
+      localRecordingError.value = e.toString();
+      await recording.stop(meetingId: _meetingRowId);
+      isCloudRecording.value = false;
+      rethrow;
+    }
     update();
   }
 
@@ -734,8 +785,63 @@ class ZoomMeetingController extends GetxController {
   }
 
   Future<void> stopRecording() async {
-    await recording.stop();
+    String? finishedLocalFilePath;
+    try {
+      finishedLocalFilePath = await _cloudCapture.stop();
+    } catch (_) {
+      // Capture may never have started (e.g. it failed and was already
+      // handled in startCloudRecording) — nothing more to do here.
+    }
+
+    // Desktop path: the file ffmpeg wrote is now complete on disk — read
+    // it back in chunks and upload each one, since it couldn't be
+    // streamed live while ffmpeg held the file open.
+    if (!kIsWeb && finishedLocalFilePath != null) {
+      try {
+        await uploadFileInChunksThenDelete(
+          finishedLocalFilePath,
+          (bytes) => recording.uploadChunk(bytes),
+        );
+      } catch (e) {
+        localRecordingError.value = 'Recorded locally but upload failed: $e';
+      }
+    }
+
+    final url = await recording.stop(meetingId: _meetingRowId);
+    isCloudRecording.value = recording.isRecording;
+    if (url != null) lastCloudRecordingUrl.value = url;
     update();
+  }
+
+  final lastCloudRecordingUrl = RxnString();
+
+  // ── local recording (free, no server — see LocalRecordingService) ──────
+  Future<void> startLocalRecording() async {
+    localRecordingError.value = null;
+    try {
+      final name = 'meeting-${meetingId.value.isEmpty ? DateTime.now().millisecondsSinceEpoch : meetingId.value}-'
+          '${DateTime.now().millisecondsSinceEpoch}.${_localRecordingExt}';
+      await localRecording.start(suggestedFileName: name);
+      isLocalRecording.value = true;
+    } catch (e) {
+      localRecordingError.value = e.toString();
+      isLocalRecording.value = false;
+    }
+  }
+
+  /// Web saves .webm via browser download; desktop saves .mp4 via ffmpeg.
+  String get _localRecordingExt => localRecording.isSupported && !kIsWeb ? 'mp4' : 'webm';
+
+  Future<String?> stopLocalRecording() async {
+    try {
+      final path = await localRecording.stop();
+      isLocalRecording.value = false;
+      return path;
+    } catch (e) {
+      localRecordingError.value = e.toString();
+      isLocalRecording.value = false;
+      return null;
+    }
   }
 
   // ── captions ──────────────────────────────────────────────────────────

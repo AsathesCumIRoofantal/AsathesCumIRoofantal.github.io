@@ -23,7 +23,11 @@ class ZoomMeetingBinding extends Bindings {
   void dependencies() {
     if (!Get.isRegistered<RtcBackendManager>()) {
       final mgr = Get.put(RtcBackendManager(), permanent: true);
-      mgr.init(RtcConfig.fromEnvironment(backend: RtcBackend.webrtc));
+      // Default backend is decided once, from --dart-define=RtcBackend
+      // (or Agora if an App ID is present, else WebRTC) — see
+      // RtcConfig.fromEnvironment. After this, BackendToggle can still
+      // hot-swap it at runtime via mgr.toggle()/mgr.backend.value.
+      mgr.init(RtcConfig.fromEnvironment());
     }
 
     Get.lazyPut<ZoomMeetingController>(() {
@@ -47,7 +51,13 @@ class ZoomMeetingBinding extends Bindings {
         Future.microtask(sim.start);
       } else {
         final uid = DateTime.now().millisecondsSinceEpoch.remainder(1 << 20);
-        final config = RtcConfig(backend: RtcBackend.webrtc, channelId: channelId, uid: uid);
+        // Carry whatever backend is currently active in the manager (set
+        // by RtcConfig.fromEnvironment above, or since flipped by the
+        // BackendToggle UI) — and keep the Agora appId/token that came
+        // from --dart-define, so a live join actually authenticates
+        // against Agora when that's the selected engine.
+        final envConfig = RtcConfig.fromEnvironment(backend: mgr.backend.value);
+        final config = envConfig.copyWith(channelId: channelId, uid: uid);
         Future.microtask(() async {
           try {
             await CurrentUser.ensureProfileLoaded();

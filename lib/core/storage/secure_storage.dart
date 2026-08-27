@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class SecureStorage extends GetxService {
   static SecureStorage get to => Get.find();
 
-  static const _opts = AndroidOptions(encryptedSharedPreferences: true);
+  static const _opts = AndroidOptions();
   final _storage = const FlutterSecureStorage(aOptions: _opts);
 
   // ── Keys ─────────────────────────────────────────────────

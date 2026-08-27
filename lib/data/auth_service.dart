@@ -289,7 +289,7 @@ class AuthService extends GetxService {
 
         authState.value = AuthState.error;
 
-        getErrorSnackBar(errorMessage.value);
+        return getErrorSnackBar(errorMessage.value);
       }
 
       final userResponseBool = await loginWithUserID(
@@ -302,7 +302,7 @@ class AuthService extends GetxService {
 
         authState.value = AuthState.error;
 
-        getErrorSnackBar(errorMessage.value);
+        return getErrorSnackBar(errorMessage.value);
       }
 
       final userModel = await _repo.getUserById(user.user!.id);
@@ -311,26 +311,26 @@ class AuthService extends GetxService {
         errorMessage.value = 'User not found';
 
         authState.value = AuthState.error;
-        getErrorSnackBar(errorMessage.value);
+        return getErrorSnackBar(errorMessage.value);
       } else {
         if (userModel.password != password) {
           errorMessage.value = 'Invalid admin approved password';
 
           authState.value = AuthState.error;
-          getErrorSnackBar(errorMessage.value);
+          return getErrorSnackBar(errorMessage.value);
         }
 
         if (userModel.isBlocked == 1) {
           errorMessage.value = 'User is blocked';
           authState.value = AuthState.blocked;
-          getErrorSnackBar(errorMessage.value);
+          return getErrorSnackBar(errorMessage.value);
         }
 
         if (userModel.isApproved == 0) {
           errorMessage.value = 'User is not approved';
           authState.value = AuthState.unapproved;
 
-          getErrorSnackBar(errorMessage.value);
+          return getErrorSnackBar(errorMessage.value);
         }
 
         currentUser.value = userModel;

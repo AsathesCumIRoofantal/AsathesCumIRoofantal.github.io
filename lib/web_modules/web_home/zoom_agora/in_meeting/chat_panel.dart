@@ -347,18 +347,17 @@ class _Composer extends StatelessWidget {
             IconButton(
               onPressed: () async {
                 final controller = Get.find<ZoomMeetingController>();
-                final result = await FilePicker.platform.pickFiles(
-                  withData: true,
-                );
-                if (result == null || result.files.isEmpty) return;
-                final f = result.files.single;
-                if (f.bytes == null) return;
+                final result = await FilePicker.pickFiles();
+                if (result == null || result.isEmpty) return;
+                final f = result.first;
+                // if (f.bytes == null) return;
                 final up = await R2UploadService().uploadFile(
                   roomId: controller.meetingId.value,
                   filename: f.name,
-                  bytes: f.bytes!,
+                  bytes: await f.readAsBytes(),
                   contentType:
-                      f.readStream?.toString() ?? 'application/octet-stream',
+                      f.readAsByteStream()?.toString() ??
+                      'application/octet-stream',
                 );
                 await controller.sendChatMessage(
                   '',

@@ -86,10 +86,10 @@ class GeoLocationLoggedModel {
       }
 
       // Mobile
-      final placemarks = await placemarkFromCoordinates(
-        lat,
-        lng,
-      ).timeout(const Duration(seconds: 10));
+      final Geocoding geocoding = Geocoding();
+      final placemarks = await geocoding
+          .placemarkFromCoordinates(lat, lng)
+          .timeout(const Duration(seconds: 10));
 
       if (placemarks.isEmpty) return 'unavailable';
 

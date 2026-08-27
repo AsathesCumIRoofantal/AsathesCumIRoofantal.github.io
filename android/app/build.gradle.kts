@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.air_app"
     compileSdk = 36
-   ndkVersion = "28.2.13676358"
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -24,7 +24,7 @@ android {
         applicationId = "com.example.air_app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = 24
+        minSdk = 34
         targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
