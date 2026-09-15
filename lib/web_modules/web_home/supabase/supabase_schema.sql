@@ -397,8 +397,8 @@ CREATE OR REPLACE TRIGGER  trg_otp_upd
 -- ════════════════════════════════════════════════════════════
 
 -- ── user_table ─────────────────────────────────────────────
--- ALTER TABLE user_table         ENABLE ROW LEVEL SECURITY;
--- ALTER TABLE user_logging_data  ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_table         ENABLE ROW LEVEL SECURITY;
+ALTER TABLE user_logging_data  ENABLE ROW LEVEL SECURITY;
 ALTER TABLE chat_rooms         ENABLE ROW LEVEL SECURITY;
 ALTER TABLE chat_messages      ENABLE ROW LEVEL SECURITY;
 ALTER TABLE meetings           ENABLE ROW LEVEL SECURITY;

@@ -39,6 +39,18 @@
 //       so the client's pause/resume buttons have something to call and
 //       so is_recording/is_paused stay accurate in the meetings row for
 //       every other participant's UI to reflect.
+//
+//   { action: "upload_file", roomId, filename, contentType, dataBase64 }
+//     → ADDED 2026-08-27. R2UploadService.uploadFile() (Community room
+//       attach, Social post media, in-meeting chat attach) already called
+//       this action — it was simply missing from this function, so every
+//       attach/upload in the app 400'd with "Unknown action: upload_file"
+//       until now. Single-shot PUT (base64 body, decoded here), not a
+//       multipart upload — fine for chat/community/post attachments;
+//       large video recordings should keep using start/getPartUrl/complete
+//       above. Also inserts a `temp_files` row so the existing R2 cleanup
+//       cron (see supabase_schema.sql §16 / PATCH 2026-07-06 §H) can purge
+//       it later. Response: { url, r2Key }
 import { serve } from 'https://deno.land/std@0.224.0/http/server.ts';
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.45.4';
 import { AwsClient } from 'https://esm.sh/aws4fetch@1.0.20';
@@ -188,6 +200,52 @@ serve(async (req) => {
           await supabase.from('meetings').update({ is_recording: 0 }).eq('id', meetingId);
         }
         return json({ ok: true });
+      }
+
+      case 'upload_file': {
+        const { roomId, filename, contentType, dataBase64 } = body;
+        if (!filename || !dataBase64) {
+          return json({ error: 'filename, dataBase64 required' }, 400);
+        }
+
+        // Decode base64 -> raw bytes (Deno has no Buffer; atob + charCode
+        // walk is the standard edge-runtime-safe way to do this).
+        const binary = atob(dataBase64 as string);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+
+        const safeName = (filename as string).replace(/[^a-zA-Z0-9._-]/g, '_');
+        const r2Key = `files/${roomId ?? 'misc'}/${crypto.randomUUID()}/${safeName}`;
+
+        const putRes = await r2.fetch(`${R2_ENDPOINT}/${BUCKET}/${r2Key}`, {
+          method: 'PUT',
+          body: bytes,
+          headers: { 'Content-Type': (contentType as string) ?? 'application/octet-stream' },
+        });
+        if (!putRes.ok) {
+          return json({ error: `R2 upload failed: ${await putRes.text()}` }, 502);
+        }
+
+        const url = `${PUBLIC_BASE_URL}/${r2Key}`;
+
+        // Track for cleanup — mirrors the temp_files contract in
+        // supabase_schema.sql (30-day expiry, purged by the existing
+        // r2_pending_deletes cron). Best-effort: don't fail the upload
+        // if this insert has a problem, the file is already live.
+        try {
+          await supabase.from('temp_files').insert({
+            user_id: (
+              await supabase.from('user_table').select('user_id').eq('auth_user_id', uid).single()
+            ).data?.user_id,
+            r2_key: r2Key,
+            file_size: bytes.byteLength,
+            expires_at: Date.now() + 30 * 24 * 60 * 60 * 1000,
+          });
+        } catch (_e) {
+          // non-fatal
+        }
+
+        return json({ url, r2Key });
       }
 
       case 'pause': {

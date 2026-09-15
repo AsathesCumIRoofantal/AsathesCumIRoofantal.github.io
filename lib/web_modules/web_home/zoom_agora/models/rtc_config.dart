@@ -1,5 +1,14 @@
-/// Backend selector — switch between Agora (default) and raw WebRTC.
-enum RtcBackend { agora, webrtc }
+/// Backend selector — switch between raw WebRTC (default) and Agora.
+///
+/// CHANGED 2026-08-29: default flipped from `agora` to `webrtc`. The
+/// integration this module ships with (GetX + Supabase auth/realtime/
+/// triggers/edge-functions + R2) never mentions an Agora account, and
+/// WebRTC signaling here rides entirely on Supabase Realtime (see
+/// `signaling_service.dart`) — zero extra infra, works the moment
+/// Supabase is configured. Agora is still fully wired and one tap away
+/// via `widgets/backend_toggle.dart` for anyone who *does* have an Agora
+/// App ID and wants its managed SFU instead of P2P WebRTC.
+enum RtcBackend { webrtc, agora }
 
 /// Immutable configuration that every RTC service reads at init time.
 /// Passed through route arguments so each meeting can choose its backend.
@@ -32,7 +41,7 @@ class RtcConfig {
   final bool demoMode;
 
   const RtcConfig({
-    this.backend = RtcBackend.agora,
+    this.backend = RtcBackend.webrtc,
     this.appId = '',
     this.token = '',
     this.channelId = 'air_space_default_channel',
@@ -72,7 +81,7 @@ class RtcConfig {
 
   /// Read credentials from dart-define env vars (matching existing pattern).
   factory RtcConfig.fromEnvironment({
-    RtcBackend backend = RtcBackend.agora,
+    RtcBackend backend = RtcBackend.webrtc,
     String channelId = 'air_space_agorra_industrial_dashboard_stream1',
     bool enableRemoteControl = true,
   }) {

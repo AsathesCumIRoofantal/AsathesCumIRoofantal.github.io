@@ -12,7 +12,7 @@ import 'rtc_engine_interface.dart';
 ///   final mgr = Get.find<RtcBackendManager>();
 ///   mgr.backend.value = RtcBackend.webrtc; // triggers hot-swap
 class RtcBackendManager extends GetxService {
-  final Rx<RtcBackend> backend = RtcBackend.agora.obs;
+  final Rx<RtcBackend> backend = RtcBackend.webrtc.obs;
   RtcEngineInterface? _engine;
   RtcConfig _config = const RtcConfig();
   final _swapCtrl = StreamController<RtcBackend>.broadcast();

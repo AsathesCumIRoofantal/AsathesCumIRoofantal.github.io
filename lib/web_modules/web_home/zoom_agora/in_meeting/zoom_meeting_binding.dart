@@ -23,10 +23,11 @@ class ZoomMeetingBinding extends Bindings {
   void dependencies() {
     if (!Get.isRegistered<RtcBackendManager>()) {
       final mgr = Get.put(RtcBackendManager(), permanent: true);
-      // Default backend is decided once, from --dart-define=RtcBackend
-      // (or Agora if an App ID is present, else WebRTC) — see
-      // RtcConfig.fromEnvironment. After this, BackendToggle can still
-      // hot-swap it at runtime via mgr.toggle()/mgr.backend.value.
+      // Default backend is WebRTC (see RtcConfig.fromEnvironment / CHANGED
+      // 2026-08-29) — needs nothing but Supabase, since signaling rides on
+      // Supabase Realtime. Pass backend: RtcBackend.agora explicitly (and
+      // --dart-define=AppIdAgorra=...) to use Agora instead. After this,
+      // BackendToggle can still hot-swap it at runtime via mgr.toggle().
       mgr.init(RtcConfig.fromEnvironment());
     }
 
