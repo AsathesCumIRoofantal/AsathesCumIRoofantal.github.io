@@ -749,44 +749,44 @@ CREATE POLICY mp_update_host ON meeting_participants
 --      without requiring the app to POST a separate
 --      "create profile" request.
 -- ────────────────────────────────────────────────────────────
-CREATE OR REPLACE FUNCTION handle_new_auth_user()
-  RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER AS $$
-BEGIN
-  INSERT INTO public.user_table (
-    user_id,
-    auth_user_id,
-    name,
-    mobile,
-    user_role,
-    is_active,
-    is_approved,
-    is_member
-  )
-  VALUES (
-    uuid_generate_v4(),
-    NEW.id,
-    COALESCE(
-      NEW.raw_user_meta_data->>'name',
-      NEW.email,
-      NEW.phone,
-      'New User'
-    ),
-    COALESCE(NEW.phone, ''),
-    5,   -- default role: Member
-    1,
-    0,
-    0
-  )
-  ON CONFLICT (auth_user_id) DO NOTHING;
-  RETURN NEW;
-END; $$;
+-- CREATE OR REPLACE FUNCTION handle_new_auth_user()
+--   RETURNS TRIGGER LANGUAGE plpgsql SECURITY DEFINER AS $$
+-- BEGIN
+--   INSERT INTO public.user_table (
+--     user_id,
+--     auth_user_id,
+--     name,
+--     mobile,
+--     user_role,
+--     is_active,
+--     is_approved,
+--     is_member
+--   )
+--   VALUES (
+--     uuid_generate_v4(),
+--     NEW.id,
+--     COALESCE(
+--       NEW.raw_user_meta_data->>'name',
+--       NEW.email,
+--       NEW.phone,
+--       'New User'
+--     ),
+--     COALESCE(NEW.phone, ''),
+--     5,   -- default role: Member
+--     1,
+--     0,
+--     0
+--   )
+--   ON CONFLICT (auth_user_id) DO NOTHING;
+--   RETURN NEW;
+-- END; $$;
 
--- Drop old trigger if it exists under a different name from a
--- previous migration, then re-create.
-DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-CREATE TRIGGER on_auth_user_created
-  AFTER INSERT ON auth.users
-  FOR EACH ROW EXECUTE FUNCTION handle_new_auth_user();
+-- -- Drop old trigger if it exists under a different name from a
+-- -- previous migration, then re-create.
+-- DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+-- CREATE TRIGGER on_auth_user_created
+--   AFTER INSERT ON auth.users
+--   FOR EACH ROW EXECUTE FUNCTION handle_new_auth_user();
 
 -- ────────────────────────────────────────────────────────────
 --  F.  Realtime: enable tables required by zoom_agora
