@@ -93,6 +93,8 @@ class LoginController extends GetxController {
       );
       return;
     }
+    Get.offAllNamed(WebHomeView.routeName);
+    return;
 
     isLoading.value = true;
     await Future.delayed(const Duration(seconds: 2));
