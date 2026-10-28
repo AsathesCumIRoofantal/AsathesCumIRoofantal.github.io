@@ -173,14 +173,12 @@ class _AirAppState extends State<AirApp> {
 
             FlutterNativeSplash.remove();
 
+            //remove it for supabase
+            Get.toNamed(routing.current);
+            return;
+
             // Only redirect unauthenticated users to login.
             final redirect = AuthMiddleware().redirect(routing.current);
-
-            //remove it for supabase
-            if (redirect == null) {
-              Get.toNamed(routing.current);
-              return;
-            }
 
             if (redirect != null && Get.currentRoute != AppRoutes.LOGIN) {
               WidgetsBinding.instance.addPostFrameCallback((_) {
